@@ -45,18 +45,22 @@ export default function WorldMapDemo() {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+        viewport={{ once: true, margin: "0px", amount: 0.3 }}
       >
         <WorldMap
           dots={[
-            { start: { lat: 64.2008, lng: -149.4937 }, end: { lat: 34.0522, lng: -118.2437 } }, // Alaska → LA
-            { start: { lat: 64.2008, lng: -149.4937 }, end: { lat: -15.7975, lng: -47.8919 } }, // Alaska → Brazil
-            { start: { lat: -15.7975, lng: -47.8919 }, end: { lat: 38.7223, lng: -9.1393 } },   // Brazil → Lisbon
-            { start: { lat: 51.5074, lng: -0.1278 }, end: { lat: 28.6139, lng: 77.209 } },     // London → New Delhi
-            { start: { lat: 28.6139, lng: 77.209 }, end: { lat: 43.1332, lng: 131.9113 } },    // New Delhi → Vladivostok
-            { start: { lat: 28.6139, lng: 77.209 }, end: { lat: -1.2921, lng: 36.8219 } },     // New Delhi → Nairobi
-          ]}
+            
+            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 52.5200, lng: 13.4050 } },  // Albania → Germany (Berlin)
+            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 10.7167, lng: -10.5677 } }, // Albania → Senegal (Dakar)
+            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 40.7128, lng: -74.0060 } }, // Albania → New York City
+            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 48.8566, lng: 2.3522 } }  ,  // Albania → France (Paris)
+            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat:  -14.2350, lng: -47.8828 } } ,
+            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: -35.2820, lng: 149.1287 } } ,
+            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 39.9042, lng: 116.4074 } } 
+
+          
+        ]}
         />
       </motion.div>
     </div>

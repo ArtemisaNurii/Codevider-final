@@ -17,7 +17,7 @@ export default function AboutTeamCulture() {
       opacity: 1,
       filter: "blur(0px)",
       transition: {
-        delay: 1.5 + (i * 0.2), 
+        delay: 1.0 + (i * 0.2), 
         duration: 0.5,
       },
     }),

@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-// --- Import your components as before ---
 import CaseStudiesSection from "./components/CaseStudies";
 import Faq from "./components/Faq";
 import Hero from "./components/HeroSection";
@@ -31,16 +30,12 @@ export default function Home() {
         )}
       </AnimatePresence>
       
-      {/* 
-        Render the main content OUTSIDE the AnimatePresence logic for the loader.
-        This content will mount instantly when `isLoading` becomes false.
-        We pass a prop `isReady` to Hero to trigger its internal GSAP animation.
-      */}
+
       {!isLoading && (
         <>
           <Header />
           <main id="home">
-            <Hero isReady={!isLoading} /> {/* Pass the ready signal */}
+            <Hero /> 
             
             {/* The rest of your content remains the same */}
             <ScrollReveal delay={0.1}><Metrics /></ScrollReveal>

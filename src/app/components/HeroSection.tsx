@@ -151,7 +151,7 @@ const StatCardContent = ({ value, label, trend, trendColor = 'text-sky-400' }: {
 );
 
 // --- MAIN COMPONENT ---
-const Hero = ({ isReady }: { isReady: boolean }) => {
+const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const dashboardRef = useRef<HTMLDivElement>(null);
 
@@ -164,44 +164,9 @@ const Hero = ({ isReady }: { isReady: boolean }) => {
     return () => clearInterval(intervalId);
   }, []);
 
-  useLayoutEffect(() => {
-    // GUARD CLAUSE: Do not run any animations if the component isn't ready.
-    if (!isReady) return;
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        // Add a slight delay to allow the loader's fade-out to start, creating a smoother visual transition.
-        delay: 0.2, 
-        defaults: { ease: 'power3.out', duration: 0.8 }
-      });
-
-      // The rest of your perfected GSAP timeline remains the same
-      tl.fromTo('.hero-text',
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.1, duration: 1 }
-      );
-      
-      tl.fromTo('.hero-button',
-        { y: 20, opacity: 0, scale: 0.9 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.6 },
-        "-=0.8"
-      );
-
-      tl.fromTo(dashboardRef.current,
-        { y: 100, opacity: 0, scale: 0.95, rotationX: -10 },
-        { y: 0, opacity: 1, scale: 1, rotationX: 0, duration: 1.2, ease: 'power3.inOut' },
-        "-=0.6"
-      );
-
-      // ... The rest of the ScrollTrigger/mouse-move effect remains the same
-    }, containerRef);
-    
-    return () => ctx.revert();
-    
-    // CRITICAL: Add `isReady` to the dependency array.
-    // This tells React to re-run this effect when `isReady` changes from false to true.
-  }, [isReady]);
-
+  // ==================================================================
+  // === TOP-TIER ANIMATION REFACTOR using GSAP TIMELINE              ===
+  // ==================================================================
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -380,7 +345,7 @@ const Hero = ({ isReady }: { isReady: boolean }) => {
                       </div>
                       <span className="text-white text-right">€2,500</span>
                       <span className="text-sky-400 text-right">Complete</span>
-                    </div>
+            ss        </div>
                     <div className="grid grid-cols-3 items-center gap-2 p-1 rounded bg-white/5">
                       <div className="flex items-center gap-2">
                         <RefreshCw size={10} className="text-yellow-400"/>

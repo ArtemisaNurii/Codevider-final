@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronLeft, ChevronRight, Cloud } from "lucide-react"
+import { Cloud } from "lucide-react"
 
 export default function Industries() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -9,98 +9,80 @@ export default function Industries() {
 
   const slides = [
     {
-      title: "Series A/B Start‑ups",
+      title: "Series A/B Start-ups",
       description:
-        "Empowering Series A & B Startups You're growing fast and expectations are higher than ever. At CodeVider, we specialize in supporting Series A and B startups with agile, high-performance development teams that match your momentum. Whether you're launching new features, expanding platforms, or building MVPs into full-scale products, we help you scale without the growing pains. Fast delivery. Flexible teams. Proven tech expertise.",
+        "Empowering Series A & B Startups. You're growing fast and expectations are higher than ever. At CodeVider, we support Series A and B startups with agile, high-performance teams that match your momentum. Launch features faster, scale platforms, and turn MVPs into full-scale products—without the growing pains.",
     },
     {
       title: "Enterprise Modernisation",
       description:
-        "Legacy systems are holding you back. At CodeVider, we help enterprises modernize with confidence, transforming outdated architectures into agile, cloud-native, AI-powered ecosystems that drive growth and innovation. Whether you need to refactor a monolith, migrate to the cloud, integrate intelligent automation, or revamp your user experience, we deliver scalable solutions that reduce technical debt, boost performance, and unlock new business value.",
+        "Legacy systems slow you down. We modernize with cloud-native, AI-ready architectures. From monolith refactors and cloud migrations to automation and UX revamps, we reduce tech debt, boost performance, and unlock new business value.",
     },
     {
-      title: "CRM‑Centric Orgs",
+      title: "CRM-Centric Orgs",
       description:
-        "Your business is unique, your software should be too. Our expertise lies in building powerful, tailor-made CRM and HR platforms that adapt to your operations, scale seamlessly, and drive performance. Whether you're a fast-growing company or an established enterprise, we create intelligent, user-centric platforms that streamline operations, improve employee and customer experiences, and centralize your data in one powerful system.",
+        "Your operations are unique—your platform should be too. We build tailored CRM/HR systems that streamline workflows, improve employee and customer experiences, and centralize data for scale and performance.",
     },
     {
       title: "Custom Solutions",
       description:
-        "Customized solutions for your unique needs. Seamless scaling and integration. Scalable architecture to grow with your business. We build exactly what you need, when you need it, with the flexibility to evolve as your business grows.",
+        "We deliver exactly what you need—scalable, integrated solutions that evolve with your business. Flexible scopes, clean architecture, and measurable outcomes.",
     },
   ]
 
-  // Determine which card should be dark
-  const getDarkCard = () => {
-    return hoveredCard !== null ? hoveredCard : 0 // First card dark by default, or hovered card
-  }
+  const getDarkCard = () => (hoveredCard !== null ? hoveredCard : 0)
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index)
-  }
+  const goToSlide = (index: number) => setCurrentSlide(index)
 
   return (
-    <section className="bg-white py-16 md:px-24 max-sm:px-4">
-      <div className="">
-        {/* Header */}
-        <div className="mb-12">
-          <p className="text-[#0a61cb] font-medium text-sm mb-2 uppercase tracking-wide"></p>
-          <h2 className="text-4xl md:text-5xl font-bold text-center font-sans text-gray-900 leading-tight ">
+    <section className="bg-white py-12 md:py-16 md:px-20 max-sm:px-4">
+      <div>
+        <div className="mb-8 md:mb-12">
+          <h2 className="text-3xl md:text-5xl font-bold text-center text-gray-900 leading-tight">
             We Empower Tech Startups, SMEs & Global Brands
           </h2>
         </div>
 
         <div className="relative">
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6">
             {slides.map((slide, index) => {
               const isDark = getDarkCard() === index
               return (
                 <div
                   key={index}
-                  className={`p-8 rounded-3xl transition-all duration-300 cursor-pointer ${
+                  className={`flex flex-col p-4 md:p-5 rounded-2xl transition-all duration-300 cursor-pointer h-full ${
                     isDark ? "bg-slate-900 text-white" : "bg-gray-100 text-gray-900"
-                  } ${currentSlide === index ? "ring-2 ring-[#0a61cb] shadow-lg scale-105" : "hover:shadow-md"}`}
+                  } ${currentSlide === index ? "ring-2 ring-[#0a61cb] shadow-md md:shadow-lg scale-[1.02]" : "hover:shadow-md"}`}
                   onClick={() => goToSlide(index)}
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  {/* Icon */}
-                  <div className="mb-6">
-                    <Cloud className={`w-12 h-12 ${isDark ? "text-blue-400" : "text-[#0a61cb]"}`} />
+                  <div className="mb-4">
+                    <Cloud className={`w-9 h-9 md:w-10 md:h-10 ${isDark ? "text-blue-400" : "text-[#0a61cb]"}`} />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold mb-4">{slide.title}</h3>
+                  <h3 className="text-lg md:text-xl font-bold mb-2 leading-snug">{slide.title}</h3>
 
-                  {/* Description */}
-                  <p className={`text-sm leading-relaxed mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}>
-                    {slide.description.length > 150 ? `${slide.description.substring(0, 150)}...` : slide.description}
+                  <p
+                    className={`text-xs md:text-sm leading-relaxed ${
+                      isDark ? "text-gray-300" : "text-gray-600"
+                    }`}
+                    style={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 6, // clamp to keep content inside the card
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                    }}
+                    title={slide.description}
+                  >
+                    {slide.description}
                   </p>
-
-         
                 </div>
               )
             })}
           </div>
-
-          {/* Navigation */}
-          <div className="flex items-center justify-between">
-            {/* Dots */}
-            
-
-         
-          </div>
         </div>
-        <div className="p-20" ></div>
+        <div className="py-10" />
       </div>
     </section>
   )

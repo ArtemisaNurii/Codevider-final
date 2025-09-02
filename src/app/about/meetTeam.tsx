@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const teamMembers = [
@@ -109,21 +109,42 @@ const teamMembers = [
 
 ]
 
-const companyLogos = [
-  { name: "Logoipsum", color: "bg-purple-100", icon: "⚡" },
-  { name: "Logoipsum", color: "bg-blue-100", icon: "〰️" },
-  { name: "Logoipsum", color: "bg-red-100", icon: "⚡" },
-  { name: "Logoipsum", color: "bg-orange-100", icon: "✦" },
-]
+// const companyLogos = [
+//   { name: "Logoipsum", color: "bg-purple-100", icon: "⚡" },
+//   { name: "Logoipsum", color: "bg-blue-100", icon: "〰️" },
+//   { name: "Logoipsum", color: "bg-red-100", icon: "⚡" },
+//   { name: "Logoipsum", color: "bg-orange-100", icon: "✦" },
+// ]
 
 export default function MeetTeamSection() {
-  const [imagesLoaded, setImagesLoaded] = useState(false)
+  const [loadedImages, setLoadedImages] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [cardsPerView, setCardsPerView] = useState(1)
   const carouselRef = useRef<HTMLDivElement>(null)
 
+  // Calculate cards per view based on screen size
+  const updateCardsPerView = () => {
+    const width = window.innerWidth
+    if (width >= 1024) setCardsPerView(4)      // Desktop: 4 cards
+    else if (width >= 768) setCardsPerView(3)  // Tablet: 3 cards  
+    else if (width >= 640) setCardsPerView(2)  // Small tablet: 2 cards
+    else setCardsPerView(1)                    // Mobile: 1 card
+  }
+
+  // Set up responsive behavior
+  useEffect(() => {
+    updateCardsPerView()
+    window.addEventListener('resize', updateCardsPerView)
+    return () => window.removeEventListener('resize', updateCardsPerView)
+  }, [])
+
+  const imagesLoaded = loadedImages >= Math.min(8, teamMembers.length) // Wait for first 8 images
+
   const scrollToIndex = (index: number) => {
-    if (carouselRef.current) {
-      const cardWidth = 280 // Card width + gap
+    if (carouselRef.current && imagesLoaded) {
+      // Calculate card width based on screen size and gap
+      const gap = window.innerWidth >= 768 ? 24 : 16 // md:gap-6 vs gap-4
+      const cardWidth = window.innerWidth >= 640 ? 256 + gap : 288 + gap // sm:w-64 vs w-72
       carouselRef.current.scrollTo({
         left: index * cardWidth,
         behavior: "smooth",
@@ -133,14 +154,20 @@ export default function MeetTeamSection() {
   }
 
   const nextSlide = () => {
-    const maxIndex = Math.max(0, teamMembers.length - 4) // Show 4 cards at once
+    if (!imagesLoaded) return // Don't allow navigation until images load
+    const maxIndex = Math.max(0, teamMembers.length - cardsPerView)
     const newIndex = Math.min(currentIndex + 1, maxIndex)
     scrollToIndex(newIndex)
   }
 
   const prevSlide = () => {
+    if (!imagesLoaded) return // Don't allow navigation until images load
     const newIndex = Math.max(currentIndex - 1, 0)
     scrollToIndex(newIndex)
+  }
+
+  const handleImageLoad = () => {
+    setLoadedImages(prev => prev + 1)
   }
 
   return (
@@ -161,13 +188,18 @@ export default function MeetTeamSection() {
       <div className="relative">
         {/* Navigation Buttons */}
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-xl font-semibold">Our Team</h3>
+          <h3 className="text-xl font-semibold">
+            Our Team 
+            {!imagesLoaded && (
+              <span className="text-sm text-gray-500 ml-2">Loading...</span>
+            )}
+          </h3>
           <div className="flex gap-2">
             <Button
               variant="outline"
               size="sm"
               onClick={prevSlide}
-              disabled={currentIndex === 0}
+              disabled={!imagesLoaded || currentIndex === 0}
               className="p-2 bg-transparent"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -176,7 +208,7 @@ export default function MeetTeamSection() {
               variant="outline"
               size="sm"
               onClick={nextSlide}
-              disabled={currentIndex >= teamMembers.length - 4}
+              disabled={!imagesLoaded || currentIndex >= teamMembers.length - cardsPerView}
               className="p-2"
             >
               <ChevronRight className="w-4 h-4" />
@@ -188,16 +220,16 @@ export default function MeetTeamSection() {
         <div className="overflow-hidden">
           <div
             ref={carouselRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth"
+            className="flex gap-4 md:gap-6 overflow-x-auto scrollbar-hide scroll-smooth"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {teamMembers.map((member, index) => (
               <div
                 key={index}
-                className={`flex-shrink-0 w-64 text-center transition-opacity duration-500 ${
+                className={`flex-shrink-0 w-72 sm:w-64 text-center transition-opacity duration-500 ${
                   imagesLoaded ? "opacity-100" : "opacity-0"
                 }`}
-                style={{ transitionDelay: `${(index % 4) * 100}ms` }}
+                style={{ transitionDelay: `${(index % cardsPerView) * 100}ms` }}
               >
                 <div className="relative mb-4 overflow-hidden rounded-lg bg-gray-100">
                   <Image
@@ -206,10 +238,8 @@ export default function MeetTeamSection() {
                     width={400}
                     height={400}
                     className="w-full h-80 object-cover"
-                    onLoad={() => {
-                      if (index === 0) setImagesLoaded(true)
-                    }}
-                    priority={index < 4}
+                    onLoad={handleImageLoad}
+                    priority={index < 8}
                   />
                 </div>
                 <h3 className="font-semibold text-lg text-foreground mb-1">{member.name}</h3>
@@ -219,17 +249,11 @@ export default function MeetTeamSection() {
           </div>
         </div>
 
-        {/* Carousel Indicators */}
-        <div className="flex justify-center mt-6 gap-2">
-          {Array.from({ length: Math.ceil(teamMembers.length / 4) }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollToIndex(index * 4)}
-              className={`w-2 h-2 rounded-full transition-colors ${
-                Math.floor(currentIndex / 4) === index ? "bg-blue-500/20" : "bg-gray-300"
-              }`}
-            />
-          ))}
+
+
+        {/* Progress indicator */}
+        <div className="text-center mt-4 text-sm text-gray-500">
+          {currentIndex + 1} - {Math.min(currentIndex + cardsPerView, teamMembers.length)} of {teamMembers.length} team members
         </div>
       </div>
     </section>

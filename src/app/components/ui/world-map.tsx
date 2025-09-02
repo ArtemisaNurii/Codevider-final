@@ -62,15 +62,15 @@ export default function WorldMap({ dots = [], lineColor = "#0a61cb" }: MapProps)
   d={createCurvedPath(startPoint, endPoint)}
   fill="none"
   stroke="url(#path-gradient)"
-  strokeWidth="1"
+  strokeWidth="2"
   initial={{ pathLength: 0 }}
   whileInView={{ pathLength: 1 }}
   transition={{
-    duration: 1,
-    delay: 0.5 * i,
+    duration: 1.5,
+    delay: 0.3 * i,
     ease: "easeOut",
   }}
-  viewport={{ once: true, margin: "-50px" }} // 👈 ensures it triggers only when in view
+  viewport={{ once: true, margin: "0px" }}
 />
 
             </g>
@@ -92,17 +92,17 @@ export default function WorldMap({ dots = [], lineColor = "#0a61cb" }: MapProps)
               <circle
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="2"
+                r="3"
                 fill={lineColor}
               />
               <circle
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="2"
+                r="3"
                 fill={lineColor}
                 opacity="0.5"
               >
-                <animate attributeName="r" from="2" to="8" dur="1.5s" begin="0s" repeatCount="indefinite" />
+                <animate attributeName="r" from="3" to="10" dur="1.5s" begin="0s" repeatCount="indefinite" />
                 <animate attributeName="opacity" from="0.5" to="0" dur="1.5s" begin="0s" repeatCount="indefinite" />
               </circle>
             </g>
@@ -110,17 +110,17 @@ export default function WorldMap({ dots = [], lineColor = "#0a61cb" }: MapProps)
               <circle
                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="2"
+                r="3"
                 fill={lineColor}
               />
               <circle
                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="2"
+                r="3"
                 fill={lineColor}
                 opacity="0.5"
               >
-                <animate attributeName="r" from="2" to="8" dur="1.5s" begin="0s" repeatCount="indefinite" />
+                <animate attributeName="r" from="3" to="10" dur="1.5s" begin="0s" repeatCount="indefinite" />
                 <animate attributeName="opacity" from="0.5" to="0" dur="1.5s" begin="0s" repeatCount="indefinite" />
               </circle>
             </g>
