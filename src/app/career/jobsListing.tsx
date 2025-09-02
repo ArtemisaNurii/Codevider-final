@@ -125,10 +125,10 @@ export default function JobsListing() {
       <div className="max-w-4xl mx-auto px-4 py-16">
         <div className="text-center">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            No Open Positions Currently
+            Sorry, there is no openings at the moment
           </h2>
           <p className="text-gray-600 mb-8">
-            We don&apos;t have any open positions at the moment, but we&apos;re always interested in hearing from talented individuals.
+            We don&apos;t have any open positions right now, but we&apos;re always interested in hearing from talented individuals.
           </p>
           <Button
             asChild

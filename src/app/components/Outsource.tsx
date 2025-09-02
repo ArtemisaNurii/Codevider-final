@@ -69,7 +69,7 @@ const Outsource: React.FC = () => {
               <TextAnimation
                 as="h2"
                 text="Outsource Your Engineering, Accelerate Growth"
-                classname="mt-2 text-4xl sm:text-5xl font-semibold leading-tight text-gray-900"
+                classname="mt-2 text-4xl sm:text-5xl font-bold leading-tight text-gray-900"
               />
             </motion.div>
 

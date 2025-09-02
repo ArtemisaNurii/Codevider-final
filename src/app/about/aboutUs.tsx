@@ -69,7 +69,6 @@ export default function AboutSection3() {
             </svg>
           </TimelineContent>
 
-          {/* Stats */}
           <div className="flex flex-wrap items-center py-3 text-sm justify-start md:justify-between lg:justify-start">
             <TimelineContent
               as="div"
@@ -99,7 +98,7 @@ export default function AboutSection3() {
                 className="flex lg:text-4xl sm:text-base text-xs items-center gap-2 mb-2 text-left"
                 once={true}
               >
-                <span className="text-slate-900 font-semibold">100+</span>
+                <span className="text-slate-900 font-semibold">10+</span>
                 <span className="text-gray-600 uppercase">clients</span>
               </TimelineContent>
               <TimelineContent
@@ -110,8 +109,8 @@ export default function AboutSection3() {
                 className="flex items-center gap-2 mb-2 sm:text-base text-xs text-left"
                 once={true}
               >
-                <span className="text-slate-900 font-bold">92%</span>
-                <span className="text-gray-600">renewal rate</span>
+                <span className="text-slate-900 font-bold"></span>
+                <span className="text-gray-600">Global Partners</span>
                 <span className="text-gray-300 lg:hidden block">|</span>
               </TimelineContent>
             </div>
@@ -135,7 +134,7 @@ export default function AboutSection3() {
                   delay: 0.8,
                 }}
               >
-                Engineering Digital Solutions That Scale.
+                Who Are We
               </VerticalCutReveal>
             </h1>
 
@@ -156,9 +155,10 @@ export default function AboutSection3() {
                 once={true}
               >
                 <p className="leading-relaxed">
-                  Codevider specializes in building scalable software solutions that help businesses innovate faster.
-                  From cloud-native applications to enterprise-grade platforms, we combine modern technologies with
-                  proven practices.
+                Founded in 2019 in Tirana, Albania, CodeVider delivers high-performance, cost-efficient software development solutions for startups, SMEs, and enterprises across Europe and beyond. We specialize in nearshore web and mobile development, cloud-native microservices, and AI-powered integrations, helping you accelerate time-to-market and cut development costs by up to 60%.
+
+
+
                 </p>
               </TimelineContent>
               <TimelineContent
@@ -170,8 +170,8 @@ export default function AboutSection3() {
                 once={true}
               >
                 <p className="leading-relaxed">
-                  Our approach blends technical expertise with business strategy. We work closely with clients to design
-                  systems that are robust, secure, and tailored to real-world needs.
+               Our team of 25+ senior developers excels in today’s most advanced tech stacks. We integrate directly into your workflow using agile, sprint-based methodologies that keep you informed and in control, every step of the way.With a focus on quality, agility, and long-term partnership, we turn your ideas into scalable, future-ready digital products.
+
                 </p>
               </TimelineContent>
             </TimelineContent>
@@ -197,7 +197,7 @@ export default function AboutSection3() {
                 className="text-gray-600 text-sm mb-8 text-left md:text-right"
                 once={true}
               >
-                Software Development Partner
+                Albania-based software company
               </TimelineContent>
 
               <TimelineContent
@@ -209,12 +209,15 @@ export default function AboutSection3() {
                 once={true}
               >
                 <p className="text-gray-900 font-medium mb-4">
-                  Ready to accelerate your digital transformation?
+                  Let’s turn your roadmap into shipped features-on time.
                 </p>
               </TimelineContent>
 
               <TimelineContent
                 as="button"
+                onClick={() => {
+                  window.location.href = "mailto:info@codevider.com";
+                }}
                 animationNum={14}
                 timelineRef={heroRef}
                 customVariants={revealVariants}

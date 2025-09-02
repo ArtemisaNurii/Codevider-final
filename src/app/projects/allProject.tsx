@@ -1,11 +1,10 @@
 "use client"
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useEffect, useRef, memo, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
 export interface CaseStudyCardProps {
@@ -13,77 +12,81 @@ export interface CaseStudyCardProps {
   title: string;
   description: string;
   imageUrl: string;
-  layout?: 'image-top' | 'text-top'; // Optional prop with a default
-  bgColor: string;                   // e.g., 'bg-white'
-  textColor: string;                 // e.g., 'text-gray-900'
-  tagBgColor: string;                // e.g., 'bg-blue-500'
-  tagTextColor: string;              // e.g., 'text-white'
+  layout?: 'image-top' | 'text-top';
+  bgColor: string;
+  textColor: string;
+  tagBgColor: string;
+  tagTextColor: string;
   border: string;
 }
 
-// Extend the card props to include a unique ID for the data array
 export interface CaseStudy extends CaseStudyCardProps {
   id: number;
 }
 
-// Static data to prevent recreation on each render
-const leftColumnCases: CaseStudy[] = [
+const allCaseStudies: CaseStudy[] = [
   {
     id: 1,
-    tag: 'PRODUCT DESIGN',
-    title: "Streamline remote hiring with Pangea.ai's marketplace",
-    description: "Struggling to find the perfect software development partner? Pangea.ai cuts through the noise. The platform connects businesses with elite development firms, ensuring a perfect match for your project.",
-    imageUrl: 'https://images.unsplash.com/photo-1589361580298-73eaccc5fd96?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Using an exact crop from your image
+    tag: 'HRTech',
+    title: 'Simplitime — User & Employment Management Platform',
+    description:
+      "Simplitime centralizes the employee lifecycle: onboarding, contracts, time tracking, leave, and role-based permissions. Built for growing teams that need clean workflows and audit-ready records.",
+    imageUrl:
+      'https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1470&auto=format&fit=crop',
     layout: 'image-top',
-    bgColor: 'bg-cyan-900',
+    bgColor: 'bg-blue-200',
     textColor: 'text-white',
-    tagBgColor: 'bg-sky-200',
-    tagTextColor: 'text-cyan-900',
-    border: 'border-md'
+    tagBgColor: 'bg-white/30',
+    tagTextColor: 'text-blue-900',
+    border: 'border-md',
   },
   {
     id: 2,
-    tag: 'PRODUCT DESIGN',
-    title: 'Java SDK for Security-Sensitive Products',
-    description: 'The project focused on the development of a specialized and security-sensitive Java Software Development Kit (SDK). The SDK\'s primary purpose was to expose APIs for various functions while...',
-    imageUrl: 'https://images.unsplash.com/photo-1589361580298-73eaccc5fd96?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Using an exact crop from your image
-    layout: 'image-top',
-    bgColor: 'bg-blue-200',
-    textColor: 'text-gray-900',
-    tagBgColor: 'bg-sky-900',
-    tagTextColor: 'text-white',
-    border: 'border-md'
-  },
-];
-
-const rightColumnCases: CaseStudy[] = [
-  {
-    id: 4,
-    tag: 'PRODUCT DESIGN',
-    title: 'The Imperative of Security',
-    description: 'A deep dive into the security protocols and measures essential for modern software applications, ensuring data integrity and user trust from the ground up.',
-    imageUrl: 'https://images.unsplash.com/photo-1542744095-70fccefd4b65?q=80&w=1401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Cropped image, but a placeholder could work better
+    tag: 'ClimateTech',
+    title: 'Straatos — Forest Carbon (CO₂) Management Platform',
+    description:
+      "Straatos streamlines MRV for forest carbon projects: satellite data ingestion, biomass estimations, credit tracking, and verification dashboards—helping teams quantify, report, and reduce CO₂ at scale.",
+    imageUrl:
+      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1470&auto=format&fit=crop',
     layout: 'text-top',
-    bgColor: 'bg-sky-200',
-    textColor: 'text-cyan-800',
-    tagBgColor: 'bg-green-100',
-    tagTextColor: 'text-green-800',
-    border: 'rounded-md'
+    bgColor: 'bg-emerald-100',
+    textColor: 'text-gray-900',
+    tagBgColor: 'bg-emerald-200',
+    tagTextColor: 'text-emerald-900',
+    border: 'border-md',
   },
   {
     id: 3,
-    tag: 'PRODUCT DESIGN',
-    title: 'Empowering Access to Fresh Produce: Building a Mobile App for Source.ag',
-    description: "Source.ag is an Amsterdam-based agtech startup that is revolutionizing access to fresh produce using cutting-edge AI-powered greenhouses. By enabling efficient operations for growers through pioneering...",
-    imageUrl: 'https://images.unsplash.com/photo-1542744095-0d53267d353e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Using an exact crop from your image
+    tag: 'Fintech',
+    title: 'Memcoin — Investing & Portfolio Platform',
+    description:
+      "Memcoin gives retail investors pro-grade tools: curated portfolios, risk scoring, real-time performance, and simple funding/withdrawals—wrapped in a compliant, user-friendly experience.",
+    imageUrl:
+      'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1470&auto=format&fit=crop',
     layout: 'text-top',
-    bgColor: 'bg-emerald-200',
-    textColor: 'text-green-800',
-    tagBgColor: 'bg-sky-100',
-    tagTextColor: 'text-green-800',
-    border: 'border-md'
+    bgColor: 'bg-slate-900',
+    textColor: 'text-white',
+    tagBgColor: 'bg-slate-200',
+    tagTextColor: 'text-slate-900',
+    border: 'border-md',
+  },
+  {
+    id: 4,
+    tag: 'Enterprise AI',
+    title: 'Noname — AI Policy Compliance Assistant',
+    description:
+      "Noname parses internal policies, answers employee questions in natural language, and flags outdated or conflicting docs—reducing HR/legal workload and improving compliance clarity.",
+    imageUrl:
+      'https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=1470&auto=format&fit=crop',
+    layout: 'image-top',
+    bgColor: 'bg-sky-200',
+    textColor: 'text-cyan-900',
+    tagBgColor: 'bg-cyan-900',
+    tagTextColor: 'text-white',
+    border: 'rounded-md',
   },
 ];
+
 
 const CaseStudyCard: React.FC<CaseStudyCardProps> = memo(({
   tag,
@@ -103,7 +106,6 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = memo(({
     const cardElement = cardRef.current;
     if (!cardElement) return;
 
-    // Simplified animation - only animate opacity and transform
     gsap.fromTo(cardElement,
       {
         opacity: 0,
@@ -118,12 +120,11 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = memo(({
           trigger: cardElement,
           start: "top 90%",
           toggleActions: "play none none none",
-          once: true, // Only animate once for performance
+          once: true,
         }
       }
     );
 
-    // Cleanup
     return () => {
       ScrollTrigger.getAll().forEach(trigger => {
         if (trigger.trigger === cardElement) {
@@ -136,7 +137,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = memo(({
   const TextComponent = (
     <div className={`p-8 md:p-10 ${bgColor} ${textColor}`}>
       <span 
-        className={`inline-block text-xs font-bold  tracking-wider uppercase px-3 py-1 rounded-full mb-4 ${tagBgColor} ${tagTextColor}`}
+        className={`inline-block text-xs font-bold tracking-wider uppercase px-3 py-1 rounded-full mb-4 ${tagBgColor} ${tagTextColor}`}
       >
         {tag}
       </span>
@@ -147,7 +148,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = memo(({
         {description}
       </p>
       <Link 
-        href="/projects/1" 
+        href={`/projects/${title.toLowerCase().replace(/\s+/g, '-')}`} 
         className={`font-bold text-sm tracking-widest group ${textColor}`}
       >
         READ MORE{' '}
@@ -200,23 +201,30 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = memo(({
   );
 });
 
-// Add display name for better debugging
 CaseStudyCard.displayName = 'CaseStudyCard';
 
 const ProjectPage: React.FC = memo(() => {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const categoriesRef = useRef<HTMLDivElement>(null);
+
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const categories = ['All', ...Array.from(new Set(allCaseStudies.map(c => c.tag)))];
+
+  const filteredStudies = selectedCategory === 'All'
+    ? allCaseStudies
+    : allCaseStudies.filter(study => study.tag === selectedCategory);
+  
+  const leftColumnCases = filteredStudies.filter((_, index) => index % 2 === 0);
+  const rightColumnCases = filteredStudies.filter((_, index) => index % 2 !== 0);
 
   useEffect(() => {
-    // Scroll to top on mount
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
   useEffect(() => {
-    // Simplified animations for better performance
-    if (titleRef.current && subtitleRef.current) {
-      // Use a single timeline for better performance
+    if (titleRef.current && subtitleRef.current && categoriesRef.current) {
       const tl = gsap.timeline({ delay: 0.1 });
       
       tl.fromTo(titleRef.current,
@@ -226,11 +234,15 @@ const ProjectPage: React.FC = memo(() => {
       .fromTo(subtitleRef.current,
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+        "-=0.4"
+      )
+      .fromTo(categoriesRef.current.children,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.1 },
         "-=0.3"
       );
     }
 
-    // Cleanup
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
@@ -242,26 +254,41 @@ const ProjectPage: React.FC = memo(() => {
       <div ref={containerRef} className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <h1 
           ref={titleRef} 
-          className="text-5xl pt-10 font-bold text-gray-900 mb-16 sm:mb-24 will-change-transform"
+          className="text-5xl pt-10 font-bold text-gray-900 mb-6 will-change-transform"
         >
           Case Studies
         </h1>
         <p 
           ref={subtitleRef} 
-          className="text-gray-700 pb-10 will-change-transform"
+          className="text-gray-700 max-w-3xl will-change-transform"
         >
           Dive into our case studies to see how we have tackled unique challenges, crafted tailored strategies, and delivered impactful results across industries. Each story highlights our process from insight and design to execution and measurable success.
         </p>
+
+        <div ref={categoriesRef} className="flex flex-wrap gap-3 my-12">
+          {categories.map(category => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-4 py-2 text-sm font-semibold rounded-full transition-all duration-300 ease-out border-2 ${
+                selectedCategory === category
+                  ? 'bg-gray-900 text-white border-gray-900'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-gray-900 hover:text-gray-900'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {/* Left Column */}
           <div className="space-y-8 md:space-y-12">
             {leftColumnCases.map((study) => (
               <CaseStudyCard key={study.id} {...study} />
             ))}
           </div>
 
-          {/* Right Column (Staggered to create the masonry effect) */}
-          <div className="space-y-8 md:space-y-12 md:mt-24">
+          <div className="space-y-8 md:space-y-12 md:mt-0 lg:mt-24">
             {rightColumnCases.map((study) => (
               <CaseStudyCard key={study.id} {...study} />
             ))}
@@ -272,7 +299,6 @@ const ProjectPage: React.FC = memo(() => {
   );
 });
 
-// Add display name for better debugging
 ProjectPage.displayName = 'ProjectPage';
 
 export default ProjectPage;

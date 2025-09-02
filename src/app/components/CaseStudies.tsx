@@ -426,13 +426,13 @@ const SolutionPillars: React.FC = () => {
       <main className="grid grid-cols-1 max-w-7xl mx-auto lg:grid-cols-10 gap-8">
         <div className="lg:col-span-5 flex flex-col gap-8">
           <div className="main-title">
-            <div className="text-5xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
+            <div className="text-5xl max-sm:text-3xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
               {splitTextIntoWords(pageData.mainTitle.part1)}
             </div>
-            <div className="text-5xl max-sm:text-3xl font-semibold leading-tight tracking-tighter bg- px-2 rounded-lg word-animate-parent transform-gpu">
+            <div className="text-5xl pl-2 max-sm:text-3xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
               {splitTextIntoWords(pageData.mainTitle.highlight)}
             </div>
-            <div className="text-5xl max-sm:text-3xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
+            <div className="text-5xl max-sm:text-3xl pl-2 font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
               {splitTextIntoWords(pageData.mainTitle.part2)}
             </div>
           </div>
@@ -470,7 +470,7 @@ const SolutionPillars: React.FC = () => {
 
       <section className="py-16 max-w-7xl mx-auto md:py-24">
         <div className="text-center mb-12">
-          <div className="text-4xl md:text-5xl font- leading-tight tracking-tighter word-animate-parent transform-gpu">
+          <div className="text-4xl md:text-5xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
             {splitTextIntoWords("More Case Studies")}
           </div>
           <p className="mt-4 text-lg text-gray-700 max-w-2xl mx-auto case-study-desc transform-gpu">

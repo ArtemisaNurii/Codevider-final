@@ -12,7 +12,7 @@ export default function WorldMapDemo() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true, margin: "-100px" }}
       >
-        <p className="font-bold font-sans text-xl md:text-4xl dark:text-white text-black">
+        <p className="font-bold font-sans text-2xl md:text-5xl dark:text-white text-gray-900">
           Global{" "}
           <span className="text-neutral-400">
             {"Partnerships".split("").map((word, idx) => (
