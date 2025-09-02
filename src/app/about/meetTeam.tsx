@@ -147,7 +147,7 @@ export default function MeetTeamSection() {
     <section className="py-16 px-4 bg-white max-w-7xl mx-auto">
       {/* Header Section */}
       <div className="text-center mb-12">
-        <p className="text-sm font-medium text-muted-foreground mb-2">Pure talent</p>
+        <p className="text-sm font-medium text-muted-foreground mb-2">Behind The Codes</p>
         <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Meet our team</h2>
         <p className="text-lg text-muted-foreground mb-8 max-w-md mx-auto">
           Unleashing creativity, our team of design visionaries turns ordinary spaces into extraordinary experiences
@@ -161,7 +161,7 @@ export default function MeetTeamSection() {
       <div className="relative">
         {/* Navigation Buttons */}
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-xl font-semibold">Our Team ({teamMembers.length} members)</h3>
+          <h3 className="text-xl font-semibold">Our Team</h3>
           <div className="flex gap-2">
             <Button
               variant="outline"

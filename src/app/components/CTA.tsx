@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
@@ -30,78 +31,140 @@ export const Footer: React.FC = () => {
   return (
     <footer
     id="contact"
-    className="relative z-10 py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-slate-50 text-gray-900"
+    className="relative z-10 py-8 sm:py-12 lg:py-16 px-6 sm:px-6 lg:px-8 bg-slate-50 text-gray-900"
   >
     <div className="max-w-6xl mx-auto">
       {/* --- Main Links Section --- */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-start">
-        
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 text-left">
         {/* Column 1: Company Links */}
         <div className="space-y-4">
-          <p className="font-bold text-base text-gray-900">Company</p>
+          <p className="font-bold text-lg sm:text-base text-gray-900">Company</p>
           <ul className="space-y-3 text-gray-700">
-            <li><a href="#about" className="hover:text-blue-600 transition-colors">About Us</a></li>
-            <li><a href="#services" className="hover:text-blue-600 transition-colors">Services</a></li>
-            <li><a href="#projects" className="hover:text-blue-600 transition-colors">Projects</a></li>
+            <li>
+              <Link href="/about" className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link href="/services" className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1">
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link href="/projects" className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1">
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link href="/career" className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1">
+                Careers
+              </Link>
+            </li>
           </ul>
         </div>
-        
+
         {/* Column 2 (DESKTOP ONLY): Address */}
-        {/* This is hidden on mobile and appears in the grid on desktop */}
         <div className="hidden md:block space-y-4">
           <p className="font-bold text-base text-gray-900">Address</p>
-          <address className="space-y-2 text-gray-700 not-italic">
+          <address className="space-y-2 text-gray-700 not-italic leading-6">
             <p>Codevider</p>
             <p>Barrikada Street</p>
             <p>Tirana, Albania 1001</p>
           </address>
         </div>
-        
+
         {/* Column 3: Contact */}
-        <div className="space-y-4">
-          <p className="font-bold text-base text-gray-900">Contact</p>
-          <ul className="space-y-3 text-gray-700">
-            <li><a href="mailto:hr@codevider.com" className="hover:text-blue-600 transition-colors break-all">hr@codevider.com</a></li>
-            <li><a href="tel:+355695877742" className="hover:text-blue-600 transition-colors">+355 695877742</a></li>
-            <li><a href="tel:+12247880689" className="hover:text-blue-600 transition-colors">+1 224-788-0689</a></li>
+        <div className="space-y-4 sm:col-span-2 md:col-span-1">
+          <p className="font-bold text-lg sm:text-base text-gray-900">Contact</p>
+          <ul className="space-y-4 text-gray-700">
+            <li>
+              <a
+                href="mailto:hr@codevider.com"
+                className="hover:text-blue-600 transition-colors break-words text-base sm:text-sm block py-1 font-medium"
+              >
+                hr@codevider.com
+              </a>
+            </li>
+            <li>
+              <a 
+                href="tel:+355695877742" 
+                className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1 font-medium"
+              >
+                +355 695 877 742
+              </a>
+            </li>
+            <li>
+              <a 
+                href="tel:+12247880689" 
+                className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1 font-medium"
+              >
+                +1 224 788 0689
+              </a>
+            </li>
           </ul>
         </div>
       </div>
 
       {/* --- Bottom Section --- */}
-      <div className="mt-12 pt-8 border-t border-gray-200">
-        <div className="flex flex-col md:flex-row md:justify-between items-center gap-8">
-          
-          {/* Left Side: Logo, Tagline, and Mobile-Only Address */}
-          <div className="text-center md:text-left">
-            <Image 
-              src="/images/logo/blue.png" 
-              alt="Codevider Logo" 
+      <div className="mt-10 pt-6 border-t border-gray-200">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
+          {/* Left: Logo, Tagline, and Mobile-Only Address */}
+          <div className="text-left">
+            <Image
+              src="/images/logo/blue.png"
+              alt="Codevider Logo"
               width={120}
               height={32}
-              className="h-8 w-auto mx-auto md:mx-0"
+              className="h-10 sm:h-8 w-auto"
+              priority
             />
-            <p className="mt-4 text-gray-600 text-sm max-w-md">
+            <p className="mt-4 text-gray-600 text-sm sm:text-xs max-w-md leading-relaxed">
               Stay updated on our latest developments, insights, and opportunities by following us.
             </p>
-            
+
             {/* Address for MOBILE VIEW ONLY */}
-            {/* This is visible on mobile and hidden on desktop */}
-            <address className="mt-4 text-xs text-gray-500 not-italic block md:hidden">
-              Barrikada Street, Tirana, Albania 1001
+            <address className="mt-4 text-sm sm:text-xs text-gray-500 not-italic md:hidden leading-relaxed">
+              <strong>Codevider</strong><br />
+              Barrikada Street<br />
+              Tirana, Albania 1001
             </address>
           </div>
-          
-          {/* Right Side: Social Icons */}
-          <div className="flex items-center justify-center gap-6">
-            <a href="https://www.instagram.com/codevider/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-500 hover:text-blue-600 transition-colors"><Instagram className="w-6 h-6" /></a>
-            <a href="https://www.facebook.com/codevider/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-500 hover:text-blue-600 transition-colors"><Facebook className="w-6 h-6" /></a>
-            <a href="https://al.linkedin.com/company/codevider" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-500 hover:text-blue-600 transition-colors"><Linkedin className="w-6 h-6" /></a>
+
+          {/* Right: Social Icons */}
+          <div className="flex items-center justify-center md:justify-end gap-4 mt-4 md:mt-0">
+            <p className="text-sm text-gray-600 mr-2 hidden sm:block">Follow us:</p>
+            <a
+              href="https://www.instagram.com/codevider/?hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="text-gray-500 hover:text-blue-600 transition-colors p-2 hover:bg-blue-50 rounded-full"
+            >
+              <Instagram className="w-6 h-6" />
+            </a>
+            <a
+              href="https://www.facebook.com/codevider/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="text-gray-500 hover:text-blue-600 transition-colors p-2 hover:bg-blue-50 rounded-full"
+            >
+              <Facebook className="w-6 h-6" />
+            </a>
+            <a
+              href="https://al.linkedin.com/company/codevider"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="text-gray-500 hover:text-blue-600 transition-colors p-2 hover:bg-blue-50 rounded-full"
+            >
+              <Linkedin className="w-6 h-6" />
+            </a>
           </div>
         </div>
-        
-        {/* Copyright notice */}
-        <p className="mt-8 text-xs text-gray-500 text-center">
+
+        {/* Copyright */}
+        <p className="mt-6 pt-4 border-t border-gray-100 text-xs text-gray-500 text-center">
           © {new Date().getFullYear()} Codevider. All rights reserved.
         </p>
       </div>

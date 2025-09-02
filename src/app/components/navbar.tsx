@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation"
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Service", href: "/services" },
+  { name: "Services", href: "/services" },
   { name: "Projects", href: "/projects" },
   { name: "Career", href: "/career" },
 ]
@@ -20,6 +20,7 @@ const Header = () => {
   const [isSolid, setIsSolid] = useState(!isHomePage)
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(v => !v)
+  const closeMobileMenu = () => setIsMobileMenuOpen(false)
 
   // Lock page scroll when mobile menu is open
   useEffect(() => {
@@ -162,13 +163,16 @@ const Header = () => {
           }`}
           style={{ height: "100dvh" }}
           onClick={(e) => {
-            if (e.currentTarget === e.target) setIsMobileMenuOpen(false)
+            if (e.currentTarget === e.target) closeMobileMenu()
           }}
         >
           {/* Close button INSIDE overlay (always visible) */}
           <button
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="absolute top-4 right-4 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition"
+            onClick={(e) => {
+              e.stopPropagation()
+              closeMobileMenu()
+            }}
+            className="absolute top-4 right-4 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition z-10"
             aria-label="Close menu"
           >
             <X size={20} />
@@ -186,7 +190,7 @@ const Header = () => {
                   key={link.name}
                   href={link.href}
                   className="text-2xl font-medium text-white hover:text-gray-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={closeMobileMenu}
                 >
                   {link.name}
                 </Link>

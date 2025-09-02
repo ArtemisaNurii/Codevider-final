@@ -38,7 +38,7 @@ export default function AboutSection3() {
   }
 
   return (
-    <section id="about" className="py-8 px-4 bg-white" ref={heroRef}>
+    <section id="about" className="py-8 px-4 bg-white md:mt-10" ref={heroRef}>
       <div className="max-w-6xl mx-auto">
         <div className="relative">
           {/* Hero Image */}
@@ -221,7 +221,7 @@ export default function AboutSection3() {
                 animationNum={14}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="bg-neutral-900 hover:bg-neutral-950 shadow-lg shadow-neutral-900 border border-neutral-700 flex w-fit md:ml-auto ml-0 gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold"
+                className="bg-neutral-900 hover:bg-neutral-950 border border-neutral-700 flex w-fit md:ml-auto ml-0 gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold"
                 once={true}
               >
                 LETS BUILD TOGETHER <ArrowRight />

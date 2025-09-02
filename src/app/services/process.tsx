@@ -114,7 +114,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ step, title, description, del
 
 const Processes = () => {
   return (
-    <section id="process" className="font-sans  text-gray-900  bg-white max-sm:pt-10  pb-20">
+    <section id="process" className="font-sans  text-gray-900 p-6  bg-white max-sm:pt-10  pb-20">
       <div className='p-10 max-sm:p-0'></div>
       <div className="container mx-auto  max-w-7xl">
         

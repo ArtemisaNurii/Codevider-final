@@ -21,7 +21,7 @@ const siteUrl = new URL("https://www.example.com");
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: {
-    default: "Codevider — Software Development Company",
+    default: "Codevider",
     template: "%s | Codevider",
   },
   description:

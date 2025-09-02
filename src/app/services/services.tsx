@@ -198,7 +198,7 @@ export default function ServicesPage() {
       {/* Header */}
       <header className="border-b border-slate-200">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-          <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">
+          <p className="text-sm font-semibold uppercase tracking-widest mt-10 text-slate-500">
             Our Capabilities
           </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">

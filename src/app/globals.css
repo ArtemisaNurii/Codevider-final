@@ -183,3 +183,18 @@
 .animate-marquee {
   animation: marquee 20s linear infinite;
 }
+@keyframes squeeze {
+  /* use --pad so blocks never hit container edges → no cut at the end */
+  0%   { inset: var(--pad) var(--gap) var(--gap) var(--pad); }
+  12.5%{ inset: var(--pad) var(--gap) var(--pad) var(--pad); }
+  25%  { inset: var(--gap) var(--gap) var(--pad) var(--pad); }
+  37.5%{ inset: var(--gap) var(--pad) var(--pad) var(--pad); }
+  50%  { inset: var(--gap) var(--pad) var(--pad) var(--gap); }
+  62.5%{ inset: var(--pad) var(--pad) var(--pad) var(--gap); }
+  75%  { inset: var(--pad) var(--pad) var(--gap) var(--gap); }
+  87.5%{ inset: var(--pad) var(--pad) var(--gap) var(--pad); }
+  100% { inset: var(--pad) var(--gap) var(--gap) var(--pad); }
+}
+@keyframes loader-spin {
+  to { transform: rotate(-360deg); }
+}

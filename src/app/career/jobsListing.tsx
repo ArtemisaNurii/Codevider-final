@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { ArrowRight, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Job } from "./jobs"
+import { Job } from "./jobs" // Assuming your Job type is defined here
 
 const jobs: Job[] = [
   {
@@ -56,62 +56,86 @@ const jobs: Job[] = [
   },
 ];
 
-// Individual Job Card Component
+// Individual Job Card Component - NOW RESPONSIVE
 function JobCard({ job }: { job: Job }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-      <div className="flex items-start justify-between gap-6">
+    // CHANGE: Added responsive padding (p-4 on small, sm:p-6 on larger)
+    <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+      {/* 
+        CHANGE: Main container stacks vertically on mobile and becomes a row on medium screens up.
+        This is the core of the responsive change.
+      */}
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+        
+        {/* Left side: Job Details */}
         <div className="flex-1">
           {job.tag && (
             <p className="text-sm text-slate-800 font-medium mb-2">{job.tag}</p>
           )}
-          <h3 className="text-2xl font-semibold text-slate-800 mb-4">
+          {/* CHANGE: Responsive font size for the title */}
+          <h3 className="text-xl md:text-2xl font-semibold text-slate-800 mb-3">
             {job.title}
           </h3>
 
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+          {/* 
+            Meta info like type, salary. `flex-wrap` is great for responsiveness as it wraps
+            items to the next line on smaller screens.
+            CHANGE: Added vertical gap (gap-y-1) for better spacing when wrapped.
+          */}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-600">
             <span>{job.type}</span>
-            <span>•</span>
+            <span className="text-gray-300">•</span>
             <span>{job.salaryRange ?? "Competitive"}</span>
-            <span>•</span>
+            <span className="text-gray-300">•</span>
             <span>{job.location}</span>
             {job.department && (
               <>
-                <span>•</span>
+                <span className="text-gray-300">•</span>
                 <span>{job.department}</span>
               </>
             )}
           </div>
 
-          {/* Collapsible content */}
+          {/* Collapsible description */}
           {open && job.description && (
-            <div className="mt-4 text-gray-700 leading-relaxed">
+            // CHANGE: Added a border-top for visual separation when expanded.
+            <div className="mt-4 pt-4 border-t border-gray-100 text-gray-700 leading-relaxed">
               {job.description}
             </div>
           )}
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
+        {/* 
+          Right side: Action Buttons. 
+          CHANGE: Aligns to the end of the card on mobile (`self-end`) and resets on desktop.
+        */}
+        <div className="flex items-center gap-2 shrink-0 self-end md:self-auto">
           <button
-            aria-label={open ? "Collapse" : "Expand"}
+            aria-label={open ? "Collapse description" : "Expand description"}
             onClick={() => setOpen((s) => !s)}
-            className={`transition-transform ${open ? "rotate-180" : ""}`}
+            // CHANGE: Improved styling and added smooth rotation transition.
+            className={`p-2 rounded-full hover:bg-gray-100 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
           >
-            <ChevronDown className="w-5 h-5 text-gray-400" />
+            <ChevronDown className="w-5 h-5 text-gray-500" />
           </button>
 
+          {/* 
+            CHANGE: This button was fixed. 
+            - It now correctly uses the `job.applyUrl`.
+            - It uses standard `variant` and `size` props for clean styling.
+            - The text "Apply" is hidden on small screens to save space.
+          */}
           <Button
             asChild
-            className="bg-white text-gray-800 border border-gray-300 hover:bg-gray-50"
+            variant="outline"
+            size="sm"
           >
-                     <a
-                href="/about"
-                className="inline-flex items-center gap-2 bg-white text-gray-900 font-semibold px-6 py-3 rounded-lg shadow-md hover:gap-4 transition-all duration-300"
-              >
-               Apply Now <ArrowRight className="w-5 h-5" />
-              </a>
+            <a href={job.applyUrl} className="flex items-center gap-2">
+              <span className="hidden sm:inline">Apply</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </Button>
         </div>
       </div>
@@ -122,17 +146,19 @@ function JobCard({ job }: { job: Job }) {
 export default function JobsListing() {
   if (jobs.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      // CHANGE: Added responsive padding and vertical spacing
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="text-center">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Sorry, there is no openings at the moment
+          {/* CHANGE: Responsive font size */}
+          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+            Sorry, there are no openings at the moment
           </h2>
           <p className="text-gray-600 mb-8">
             We don&apos;t have any open positions right now, but we&apos;re always interested in hearing from talented individuals.
           </p>
           <Button
             asChild
-            className="bg-slate-800 text-white hover:bg-blue-700"
+            className="bg-slate-800 text-white hover:bg-slate-700"
           >
             <a href="mailto:hr@codevider.com">
               Send Us Your Resume
@@ -144,17 +170,21 @@ export default function JobsListing() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+    // CHANGE: Added responsive padding and vertical spacing
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      {/* CHANGE: Added responsive bottom margin */}
+      <div className="mb-10 sm:mb-12">
+        {/* CHANGE: Responsive font size */}
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
           Open Positions
         </h2>
-        <p className="text-gray-600">
+        <p className="text-lg text-gray-600">
           Join our team and help us build the future of software development.
         </p>
       </div>
 
-      <div className="space-y-6">
+      {/* CHANGE: Responsive vertical spacing between job cards */}
+      <div className="space-y-4 sm:space-y-6">
         {jobs.map((job) => (
           <JobCard key={job.id} job={job} />
         ))}

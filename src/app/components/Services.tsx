@@ -121,24 +121,20 @@ const Services: NextPage = () => {
               >
                 {service.isHighlighted ? (
                   <div
-                    className={`w-12 h-12 flex items-center justify-center ${getHighlightedIconBg()} rounded-lg transition-colors duration-300`}
+                    className={`w-12 h-12 flex items-center justify-center bg-slate-900 rounded-lg transition-colors duration-300`}
                   >
                     <Icon
-                      className={`${getHighlightedIconColor()} transition-colors duration-300`}
+                      className={`text-white bg-slate-900 duration-300`}
                       size={28}
                       aria-hidden="true"
                     />
                   </div>
                 ) : (
                   <div
-                    className={`w-12 h-12 flex items-center justify-center ${
-                      isHovered ? "bg-slate-900" : "bg-gray-200"
-                    } rounded-lg transition-colors duration-300`}
+                    className={`w-12 h-12 flex items-center justify-center bg-slate-900 rounded-lg transition-colors duration-300`}
                   >
                     <Icon
-                      className={`${
-                        isHovered ? "text-white" : "text-[#0a61cb]"
-                      } transition-colors duration-300`}
+                      className={`text-white transition-colors duration-300`}
                       size={28}
                       aria-hidden="true"
                     />
