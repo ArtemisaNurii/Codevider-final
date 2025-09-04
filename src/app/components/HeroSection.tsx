@@ -1,8 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ArrowUpRight, BarChart2, Bell, Search, TrendingUp, DollarSign, Users, Truck,
   Settings, ChevronDown, LayoutDashboard, Target, Zap, Clock, ShieldCheck,
@@ -10,9 +8,6 @@ import {
 } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
-gsap.registerPlugin(ScrollTrigger);
-
-// --- OPTIMIZED STYLES ---
 const componentStyles = `
   @keyframes shine {
     0% { background-position: -200% 0; }
@@ -49,56 +44,46 @@ const componentStyles = `
     opacity: 1;
     border-radius: 0 0 1px 1px;
   }
-  /* Performance optimizations */
-  .hero-text, .hero-button {
-    will-change: transform, opacity;
-    /* We'll set the initial visibility state via JS to prevent FOUC */
-    opacity: 0;
-  }
-  .dashboard-container {
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    perspective: 1000px;
-    /* We'll set the initial visibility state via JS */
-    opacity: 0;
-  }
 `;
 
-// --- OPTIMIZED CONSTANTS ---
 const PHRASES = [
+  "Digital Transformation",
   "Blockchain Apps",
   "Fintech",
   "AI Integrations",
-  "A/B Startups"
-
+  "A/B Startups",
+  "Cloud Solutions",
+  "Smart Automation",
 ];
+type Props = { phrases: string[]; interval?: number };
 
-// --- HeroHeadline Component ---
-const HeroHeadline = ({ phrases, activeIndex }: { phrases: string[]; activeIndex: number }) => (
-  <div className="text-center pt-16 sm:pt-24 h-auto md:pt-32 mb-4 sm:mb-6 lg:mb-8">
-    <h1 className="hero-text text-3xl font-spectral font-sans sm:text-5xl md:text-7xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
-      Your Strategic Partner in
-    </h1>
-    <div className="relative h-14 sm:h-20 md:h-24 overflow-hidden">
-      <div
-        className="absolute inset-0 transition-transform duration-700 ease-in-out"
-        style={{ transform: `translateY(-${activeIndex * 100}%)` }}
-      >
-        {phrases.map((phrase, index) => (
-          <h1
-            key={phrase + index}
-            className="hero-text text-3xl sm:text-5xl md:text-7xl font-sans font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80 h-14 sm:h-20 md:h-24 flex items-center justify-center"
-          >
-            <span className="text-sky-400">{phrase}</span>
-          </h1>
-        ))}
+export function HeroHeadline({ phrases, interval = 2500 }: Props) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (phrases.length <= 1) return;
+    const id = setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % phrases.length);
+    }, interval);
+    return () => clearTimeout(id);
+  }, [phrases, interval, currentIndex]);
+
+  return (
+    <div className="text-center pt-16 sm:pt-24 h-auto md:pt-32 mb-4 sm:mb-6 lg:mb-8">
+      <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
+        Your Strategic Partner in
+      </h1>
+      <div className="relative h-14 sm:h-20 md:h-24 flex items-center justify-center overflow-hidden">
+        <h1
+          key={phrases[currentIndex]}
+          className="text-3xl sm:text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80 absolute animate-fade"
+        >
+          <span className="text-sky-400">{phrases[currentIndex]}</span>
+        </h1>
       </div>
     </div>
-  </div>
-);
-
-
-// --- DASHBOARD SUB-COMPONENTS (RESTORED TO FULL CODE) ---
+  );
+}
 const Sidebar = () => {
   const navItems = [
     { icon: LayoutDashboard, tooltip: 'Welcome', active: true },
@@ -131,6 +116,7 @@ const Sidebar = () => {
     </aside>
   );
 };
+
 const DashboardCard = ({ title, icon: Icon, children, className = '' }: { title: string, icon: React.ElementType, children: React.ReactNode, className?: string }) => (
   <div className={`dashboard-item bg-black/40 backdrop-blur-sm rounded-md sm:rounded-lg lg:rounded-xl p-1.5 sm:p-3 lg:p-4 flex flex-col border border-white/10 ${className}`}>
     <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2 lg:mb-3">
@@ -140,6 +126,7 @@ const DashboardCard = ({ title, icon: Icon, children, className = '' }: { title:
     {children}
   </div>
 );
+
 const StatCardContent = ({ value, label, trend, trendColor = 'text-sky-400' }: { value: string, label: string, trend: string, trendColor?: string }) => (
   <div className="mt-auto">
     <p className="text-gray-400 text-xs">{label}</p>
@@ -150,142 +137,38 @@ const StatCardContent = ({ value, label, trend, trendColor = 'text-sky-400' }: {
   </div>
 );
 
-// --- MAIN COMPONENT ---
 const Hero = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const dashboardRef = useRef<HTMLDivElement>(null);
-
-  const [phraseIndex, setPhraseIndex] = useState(0);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setPhraseIndex((prevIndex) => (prevIndex + 1) % PHRASES.length);
-    }, 2500);
-    return () => clearInterval(intervalId);
-  }, []);
-
-  // ==================================================================
-  // === TOP-TIER ANIMATION REFACTOR using GSAP TIMELINE              ===
-  // ==================================================================
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        defaults: { ease: 'power3.out', duration: 0.8 }
-      });
-
-      tl.fromTo('.hero-text',
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.1, duration: 1 }
-      );
-      
-      tl.fromTo('.hero-button',
-        { y: 20, opacity: 0, scale: 0.9 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.6 },
-        "-=0.8"
-      );
-
-      tl.fromTo(dashboardRef.current,
-        { y: 100, opacity: 0, scale: 0.95, rotationX: -10 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          rotationX: 0,
-          duration: 1.2,
-          ease: 'power3.inOut'
-        },
-        "-=0.6"
-      );
-
-      let throttleTimer: NodeJS.Timeout | null = null;
-      ScrollTrigger.matchMedia({
-        "(min-width: 1024px)": () => {
-          const dashboard = dashboardRef.current;
-          if (!dashboard) return;
-          
-          const onMouseMove = (e: MouseEvent) => {
-            if (throttleTimer) return;
-            
-            throttleTimer = setTimeout(() => {
-              throttleTimer = null;
-              const rect = dashboard.getBoundingClientRect();
-              const x = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
-              const y = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-              
-              gsap.to(dashboard, { 
-                duration: 0.8, 
-                rotateY: x * 2.5, 
-                rotateX: -y * 2.5, 
-                ease: 'power2.out' 
-              });
-            }, 16);
-          };
-
-          const onMouseLeave = () => {
-            gsap.to(dashboard, { 
-              duration: 1, 
-              rotateX: 0, 
-              rotateY: 0, 
-              ease: 'elastic.out(1, 0.5)' 
-            });
-          };
-
-          containerRef.current?.addEventListener('mousemove', onMouseMove);
-          containerRef.current?.addEventListener('mouseleave', onMouseLeave);
-          
-          return () => {
-            containerRef.current?.removeEventListener('mousemove', onMouseMove);
-            containerRef.current?.removeEventListener('mouseleave', onMouseLeave);
-            if (throttleTimer) clearTimeout(throttleTimer);
-          };
-        },
-      });
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id='hero' ref={containerRef} style={{ fontFamily: "var(--font-manrope), " }}
-      className="section-hero relative w-full min-h-screen text-gray-100 font-sans overflow-hidden bg-gradient-to-b from-black via-black/80 to-sky-300/70">
+    <section id="hero" style={{ fontFamily: "var(--font-manrope)" }}
+      className="relative w-full min-h-screen text-gray-100 overflow-hidden bg-gradient-to-br from-black via-slate-900 to-sky-800">
       
       <style>{componentStyles}</style>
       <div className="absolute inset-0 z-0 bg-dot-grid-white/[0.07] [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"></div>
-      
+
       <div className="relative z-10 container mx-auto flex flex-col min-h-screen px-4">
         <div className="flex-1 flex flex-col justify-center items-center">
-          
-          <HeroHeadline phrases={PHRASES} activeIndex={phraseIndex} />
-
-          <div className="flex flex-col items-center gap-6 mb-8 sm:mb-12 lg:mb-16">
-            <button onClick={() => {
-              document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="hero-button bg-[#67c1dd] text-black font-semibold py-3 px-6 rounded-full flex items-center gap-2 transform transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(56,189,248,0.5)] hover:shadow-[0_0_25px_rgba(56,189,248,0.7)]">
+          <HeroHeadline phrases={PHRASES} />
+          <div className="flex flex-col items-center gap-6 mb-12">
+            <button
+              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-[#67c1dd] text-black font-semibold py-3 px-6 rounded-full flex items-center gap-2 shadow-lg hover:scale-105 transition"
+            >
               Our Services <ArrowUpRight size={20} strokeWidth={2.5} />
             </button>
           </div>
         </div>
-
         <div 
-          ref={dashboardRef} 
-          style={{ transformStyle: 'preserve-3d' }}
-          className="
-            dashboard-container
-            relative w-full max-w-7xl mx-auto pb-4 sm:pb-8 lg:pb-16
+          className="dashboard-container relative w-full max-w-7xl mx-auto pb-4 sm:pb-8 lg:pb-16
             bg-gradient-to-b from-black/60 via-[#121212]/40 to-[#0a0a0a]/60 
             backdrop-blur-xl rounded-t-lg sm:rounded-t-xl lg:rounded-t-2xl 
-            shadow-2xl shadow-black/60 
-            flex overflow-hidden shine-border
-            transform-gpu transition-transform duration-300
+            shadow-2xl shadow-black/60 flex overflow-hidden shine-border
             [mask-image:linear-gradient(to_bottom,white_70%,transparent_100%)]
-            sm:[mask-image:linear-gradient(to_bottom,white_80%,transparent_100%)]
-          "
+            sm:[mask-image:linear-gradient(to_bottom,white_80%,transparent_100%)]"
         >
           <Sidebar />
-
           <main className="flex-1 p-1.5 sm:p-4 lg:p-6 relative">
             <div className="flex justify-between items-center mb-2 sm:mb-4 lg:mb-6">
-              <h1 className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white font-sans font-semibold">Welcome</h1>
+              <h1 className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white font-semibold">Welcome</h1>
               <div className="flex items-center gap-1 sm:gap-3 lg:gap-4">
                 <Search className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5 hidden sm:block" />
                 <Bell className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5" />
@@ -298,7 +181,6 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-1.5 sm:gap-3 lg:gap-4">
               <DashboardCard title="Performance" icon={BarChart2}>
                 <StatCardContent value="€1.25M" label="Total Revenue" trend="+1.8%" />
@@ -328,14 +210,12 @@ const Hero = () => {
                     </div>
                   </div>
               </DashboardCard>
-              
               <DashboardCard title="Status" icon={Zap} className="hidden lg:block lg:col-span-2">
                  <div className="flex items-center justify-center gap-2 sm:gap-3 h-full">
                     <ShieldCheck size={18} className="text-sky-400 sm:w-6 sm:h-6"/>
                     <p className="text-sm sm:text-base lg:text-lg font-semibold text-white">All Systems Operational</p>
                  </div>
               </DashboardCard>
-
               <DashboardCard title="Transactions" icon={Clock} className="hidden sm:block col-span-2 lg:col-span-4">
                   <div className="space-y-1 sm:space-y-2 text-xs">
                     <div className="grid grid-cols-3 items-center gap-2 p-1 rounded bg-white/5">
@@ -345,7 +225,7 @@ const Hero = () => {
                       </div>
                       <span className="text-white text-right">€2,500</span>
                       <span className="text-sky-400 text-right">Complete</span>
-            ss        </div>
+                    </div>
                     <div className="grid grid-cols-3 items-center gap-2 p-1 rounded bg-white/5">
                       <div className="flex items-center gap-2">
                         <RefreshCw size={10} className="text-yellow-400"/>
@@ -357,11 +237,11 @@ const Hero = () => {
                   </div>
               </DashboardCard>
             </div>
-            
           </main>
         </div>
       </div>
     </section>
   );
 };
- export default Hero;
+
+export default Hero;

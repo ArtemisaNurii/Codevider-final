@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Cloud } from "lucide-react"
 
 export default function Industries() {
-  const [currentSlide, setCurrentSlide] = useState(0)
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 
   const slides = [
@@ -32,8 +31,6 @@ export default function Industries() {
 
   const getDarkCard = () => (hoveredCard !== null ? hoveredCard : 0)
 
-  const goToSlide = (index: number) => setCurrentSlide(index)
-
   return (
     <section className="bg-white py-12 md:py-16 md:px-20 max-sm:px-4">
       <div>
@@ -50,10 +47,9 @@ export default function Industries() {
               return (
                 <div
                   key={index}
-                  className={`flex flex-col p-4 md:p-5 rounded-2xl transition-all duration-300 cursor-pointer h-full ${
+                  className={`flex flex-col p-4 md:p-5 rounded-2xl transition-all duration-300 h-full ${
                     isDark ? "bg-slate-900 text-white" : "bg-gray-100 text-gray-900"
-                  } ${currentSlide === index ? "ring-2 ring-[#0a61cb] shadow-md md:shadow-lg scale-[1.02]" : "hover:shadow-md"}`}
-                  onClick={() => goToSlide(index)}
+                  } ${hoveredCard === index ? "ring-2 ring-[#0a61cb] shadow-md md:shadow-lg scale-[1.02]" : "hover:shadow-md"}`}
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >

@@ -106,7 +106,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${manrope.variable} ${spectral.variable} antialiased bg-black`}
+        className={`${manrope.variable} ${spectral.variable} antialiased bg-white`}
         suppressHydrationWarning
       >
         {children}

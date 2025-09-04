@@ -1,0 +1,1 @@
+export const RECRUIT_JOBS_ENDPOINT = 'recruit-jobs/open'

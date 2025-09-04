@@ -1,10 +1,9 @@
 "use client";
 import type { NextPage } from "next";
 import Link from "next/link";
-import { PieChart, Atom, Users, Code } from "lucide-react";
+import { PieChart, Atom, Users, Code, Brain } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-
 const serviceData = [
   {
     icon: Code,
@@ -28,10 +27,10 @@ const serviceData = [
     isHighlighted: false,
   },
   {
-    icon: PieChart,
-    title: "UI/UX & Front-End",
+    icon: Brain, // <- Lucide-react Brain icon for AI
+    title: "AI Integrations",
     description:
-      "High-performance interfaces with React, Next.js, Tailwind, and motion—optimized for accessibility, SEO, and conversions.",
+      "Supercharge products with AI: custom LLM apps, intelligent chatbots, process automation, and data-driven insights integrated seamlessly into your systems.",
     isHighlighted: false,
   },
 ];
@@ -41,8 +40,9 @@ const readMoreHref: Record<string, string> = {
   "Product Engineering": "/services#01-custom-software-development",
   "Dedicated Pod Teams": "/services#09-team-augmentation",
   "Cloud & DevOps": "/services#04-cloud-computing",
-  "UI/UX & Front-End": "/services#02-web-application-development",
+  "AI Integrations": "/services#10-ai-integration",
 };
+
 
 const gridContainerVariants = {
   hidden: { opacity: 0 },

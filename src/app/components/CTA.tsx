@@ -34,9 +34,7 @@ export const Footer: React.FC = () => {
     className="relative z-10 py-8 sm:py-12 lg:py-16 px-6 sm:px-6 lg:px-8 bg-slate-50 text-gray-900"
   >
     <div className="max-w-6xl mx-auto">
-      {/* --- Main Links Section --- */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 text-left">
-        {/* Column 1: Company Links */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:justify-between gap-x-6 gap-y-8 text-left">
         <div className="space-y-4">
           <p className="font-bold text-lg sm:text-base text-gray-900">Company</p>
           <ul className="space-y-3 text-gray-700">
@@ -82,7 +80,7 @@ export const Footer: React.FC = () => {
                 href="mailto:hr@codevider.com"
                 className="hover:text-blue-600 transition-colors break-words text-base sm:text-sm block py-1 font-medium"
               >
-                hr@codevider.com
+                info@codevider.com
               </a>
             </li>
             <li>
@@ -209,7 +207,7 @@ const Contact: React.FC = () => {
       <div id="contact" className="relative overflow-hidden text-white">
         <section
           ref={sectionRef}
-          className="relative z-10 py-20 sm:py-28 bg-gradient-to-br from-black via-[#050a08] to-[#0ea5e9] px-4 sm:px-6 lg:px-8"
+          className="relative z-10 py-20 sm:py-28 bg-gradient-to-br from-black via-slate-900 to-sky-800 px-4 sm:px-6 lg:px-8"
         >
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 lg:gap-16 items-stretch">
             <div className="text-center lg:text-left mb-12 lg:mb-0 flex flex-col justify-center">
@@ -225,7 +223,6 @@ const Contact: React.FC = () => {
                 form, or reach out to us directly.
               </p>
 
-              {/* Alternative Contact Methods */}
               <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
                 <a
                   href="mailto:hello@codevider.com"
@@ -236,7 +233,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <p className="font-semibold">Email Us Directly</p>
-                    <p className="text-sm text-gray-400">hello@codevider.com</p>
+                    <p className="text-sm text-gray-400">info@codevider.com</p>
                   </div>
                 </a>
                 <a
@@ -254,12 +251,11 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: The Form */}
             <div className="w-full flex flex-col justify-center">
               <form ref={formRef} action={handleSubmit} className="space-y-4 pt-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-gray-400">
+                    <Label htmlFor="name" className="text-gray-200">
                       Full Name
                     </Label>
                     <Input
@@ -272,7 +268,7 @@ const Contact: React.FC = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-gray-400">
+                    <Label htmlFor="email" className="text-gray-200">
                       Email Address
                     </Label>
                     <Input
@@ -286,7 +282,7 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="description" className="text-gray-400">
+                  <Label htmlFor="description" className="text-gray-300">
                     Tell us about your project
                   </Label>
                   <Textarea
@@ -294,11 +290,11 @@ const Contact: React.FC = () => {
                     name="description"
                     placeholder="I'm looking to build a new web application that..."
                     required
-                    className="bg-transparent border-gray-604 min-h-[120px] focus-visible:ring-offset-0 focus-visible:ring-sky-400"
+                    className="bg-transparent  border-gray-604 min-h-[120px] focus-visible:ring-offset-0 focus-visible:ring-sky-400"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="budget" className="text-gray-400">
+                  <Label htmlFor="budget" className="text-gray-300">
                     What&apos;s your budget?
                   </Label>
                   <Select

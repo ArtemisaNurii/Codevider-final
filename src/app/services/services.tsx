@@ -1,13 +1,23 @@
+
 'use client'
 
 import React, { useEffect, useMemo, useState } from 'react'
+
+// ---- Utility Functions ----
+const slugify = (str: string): string => {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/[\s_-]+/g, '-') // Replace spaces, underscores, and multiple hyphens with single hyphen
+    .replace(/^-+|-+$/g, '') // Remove leading and trailing hyphens
+}
 
 // ---- Types ----
 type ServiceItem = {
   title: string
   description: string
 }
-// ✨ Client-friendly, SEO-optimized service copy
 const services: ServiceItem[] = [
   {
     title: 'Custom Software Development',
@@ -51,102 +61,92 @@ const services: ServiceItem[] = [
   },
 ]
 
-// keep your slugify as-is
-const slugify = (s: string) =>
-  s
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .trim()
-    .replace(/\s+/g, '-')
-
-// ✅ Aligned keys with `services` titles. Language simplified for non-technical readers.
-const highlightsMap: Record<string, string[]> = {
+// ✅ Replace highlights & deliverables with value-oriented content
+const whyItMattersMap: Record<string, string[]> = {
   'Custom Software Development': [
-    'Clear plan: discovery → roadmap & milestones',
-    'Built to scale with your growth',
-    'Security-first, compliance-ready',
+    'Turn complex ideas into working products',
+    'Reduce manual processes and save costs',
+    'Future-proof systems for long-term growth',
   ],
   'Web Application Development': [
-    'Fast single-page apps or server-rendered sites',
-    'Accessible for all users (WCAG AA)',
-    'Built-in monitoring & error tracking',
+    'Delight users with speed and responsiveness',
+    'Work on any device with consistent quality',
+    'Drive higher engagement and conversions',
   ],
   'Mobile Application Development': [
-    'Native (Swift/Kotlin) or cross-platform',
-    'Offline-first with reliable sync & push',
-    'App Store / Play submission & CI/CD',
+    'Reach customers directly on their phones',
+    'Offer seamless offline & online experiences',
+    'Build loyalty with intuitive mobile design',
   ],
   Automation: [
-    'Deployment pipelines that prevent regressions',
-    'Automated tests you can trust',
-    'RPA for repetitive back-office tasks',
+    'Cut down on repetitive tasks',
+    'Improve accuracy and reliability',
+    'Give teams more time for strategic work',
   ],
   'Systems Integration': [
-    'Unified APIs & workflow orchestration',
-    'Reliable data syncs with clear contracts',
-    'Single Sign-On & role-based access',
+    'Stop data silos from slowing your business',
+    'Ensure real-time information across tools',
+    'Boost collaboration with unified systems',
   ],
   'Software Prototyping': [
-    'Wireframes → clickable demo',
-    'MVP in weeks with real user feedback',
-    'Validate scope & reduce risk early',
+    'Validate concepts before heavy investment',
+    'Gather user insights early',
+    'Reduce risk of building the wrong product',
   ],
   'Cloud Infrastructure': [
-    'Infrastructure as Code & GitOps',
-    'Kubernetes/Serverless ready',
-    'Proactive security & policy as code',
+    'Scale smoothly with business demand',
+    'Cut costs by paying only for what you use',
+    'Increase reliability with built-in redundancy',
   ],
   'Team Augmentation': [
-    'Dedicated team that feels in-house',
-    'Onboard in days, not months',
-    'Timezone overlap & weekly demos',
+    'Fill skill gaps quickly',
+    'Stay flexible with team sizes',
+    'Keep delivery on schedule without long hiring cycles',
   ],
 }
 
-// ✅ Deliverables written as tangible outcomes clients expect at handoff
-const deliverablesMap: Record<string, string[]> = {
+const useCasesMap: Record<string, string[]> = {
   'Custom Software Development': [
-    'Product spec, technical design & roadmap',
-    'Incremental releases with acceptance criteria',
-    'Production rollout with monitoring',
+    'ERP and workflow tools',
+    'Customer-facing SaaS platforms',
+    'Specialized industry software',
   ],
   'Web Application Development': [
-    'Responsive UI and reusable design system',
-    'API layer, state management & docs',
-    'Performance & accessibility reports',
+    'E-commerce platforms',
+    'Client dashboards',
+    'Internal portals',
   ],
   'Mobile Application Development': [
-    'Signed app binaries & store listings',
-    'Crash reporting & analytics in place',
-    'Release plan with staged rollouts',
+    'Consumer lifestyle apps',
+    'Enterprise mobile tools',
+    'On-demand delivery apps',
   ],
   Automation: [
-    'Reusable CI/CD templates',
-    'Automated test suites & coverage report',
-    'RPA bots with step-by-step SOPs',
+    'Continuous Integration pipelines',
+    'Automated QA testing',
+    'Robotic process automation for finance/HR',
   ],
   'Systems Integration': [
-    'Integration diagrams & flow contracts',
-    'Data maps with sync schedules',
-    'SSO/IAM configuration documentation',
+    'CRM + ERP connections',
+    'Marketing automation syncs',
+    'Data lakes and analytics hubs',
   ],
   'Software Prototyping': [
-    'Clickable prototype & MVP backlog',
-    'User test insights and metrics',
-    'Go/No-Go plan with next steps',
+    'Clickable startup pitch demos',
+    'MVPs for market validation',
+    'Stakeholder concept approvals',
   ],
   'Cloud Infrastructure': [
-    'IaC repo (Terraform/CDK) with modules',
-    'K8s/Serverless deployment guides',
-    'Security & compliance checklist',
+    'Migration from on-prem to AWS/Azure/GCP',
+    'High-traffic e-commerce platforms',
+    'Secure fintech & health apps',
   ],
   'Team Augmentation': [
-    'Skill matrix & team charter',
-    'Sprint cadence and reporting pack',
-    'Shared roadmap & demo notes',
+    'Scaling quickly during funding rounds',
+    'Temporary specialist roles',
+    'Extending in-house team capacity',
   ],
 }
-
 
 // ---- Component ----
 export default function ServicesPage() {
@@ -158,8 +158,8 @@ export default function ServicesPage() {
         ...s,
         slug: `${String(i + 1).padStart(2, '0')}-${slugify(s.title)}`,
         idx: i + 1,
-        highlights: highlightsMap[s.title] || [],
-        deliverables: deliverablesMap[s.title] || [],
+        whyItMatters: whyItMattersMap[s.title] || [],
+        useCases: useCasesMap[s.title] || [],
       })),
     []
   )
@@ -173,7 +173,6 @@ export default function ServicesPage() {
         }
       },
       {
-  
         rootMargin: '-25% 0px -40% 0px',
         threshold: 0,
       }
@@ -196,15 +195,15 @@ export default function ServicesPage() {
   return (
     <main className="bg-white text-slate-900">
       {/* Header */}
-      <header className="border-b border-slate-200">
+      <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-          <p className="text-sm font-semibold uppercase tracking-widest mt-10 text-slate-500">
+          <p className="text-sm font-semibold uppercase tracking-widest mt-10 text-white">
             Our Capabilities
           </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
             Services that Move Your Roadmap Forward
           </h1>
-          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-slate-600">
+          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-white">
             Explore how we design, build, and scale reliable products. We focus
             on clean typography, clear sections, and an index you can scan at a
             glance.
@@ -272,7 +271,6 @@ export default function ServicesPage() {
               <section
                 key={it.slug}
                 id={it.slug}
-                // Offsets scrolling to account for a sticky header
                 className="scroll-mt-24"
               >
                 <header className="max-w-3xl">
@@ -290,26 +288,26 @@ export default function ServicesPage() {
                 <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2">
                   <div>
                     <h3 className="text-base font-semibold tracking-wide">
-                      Highlights
+                      Why It Matters
                     </h3>
                     <ul className="mt-3 space-y-2 text-base text-slate-700">
-                      {it.highlights.map((h, idx) => (
+                      {it.whyItMatters.map((w, idx) => (
                         <li key={idx} className="flex items-start gap-3">
                           <span className="mt-2 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#0a61cb]" />
-                          <span>{h}</span>
+                          <span>{w}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
                     <h3 className="text-base font-semibold tracking-wide">
-                      Deliverables
+                      Use Cases
                     </h3>
                     <ul className="mt-3 space-y-2 text-base text-slate-700">
-                      {it.deliverables.map((d, idx) => (
+                      {it.useCases.map((u, idx) => (
                         <li key={idx} className="flex items-start gap-3">
                           <span className="mt-2 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#0a61cb]" />
-                          <span>{d}</span>
+                          <span>{u}</span>
                         </li>
                       ))}
                     </ul>
@@ -326,10 +324,6 @@ export default function ServicesPage() {
               We tailor engagements to fit your roadmap. Tell us about your use
               case and we’ll suggest the most effective path forward.
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
-     
-        
-            </div>
           </div>
         </div>
       </div>

@@ -1,212 +1,189 @@
-"use client"
+'use client'
 
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { useState } from "react"
-import { ArrowRight, Upload } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Briefcase, MapPin, FileText, CheckSquare, Trophy, BadgeDollarSign, Upload } from "lucide-react"
+import Header from "../components/navbar"
+import { Job } from "./jobs"
 
-const positions = [
-  "Frontend Developer",
-  "Backend Developer", 
-  "Full Stack Developer",
-  "UI/UX Designer",
-  "DevOps Engineer",
-  "Product Manager",
-  "QA Engineer",
-  "Other"
-]
+// A reusable component for the job detail items to keep the code DRY and clean.
+const JobDetailItem = ({ icon: Icon, title, value }: { icon: React.ElementType, title: string, value: string }) => (
+  <li className="flex items-start gap-4">
+    <div className="flex-shrink-0 mt-1 text-slate-600">
+      <Icon size={20} strokeWidth={1.5} />
+    </div>
+    <div>
+      <h4 className="font-semibold text-gray-800">{title}</h4>
+      <p className="text-gray-500 text-sm">{value}</p>
+    </div>
+  </li>
+)
 
-export default function CareerForm() {
+type JobApplicationPageProps = {
+  job: Job
+}
+
+export default function JobApplicationPage({ job }: JobApplicationPageProps) {
+  // State to manage form inputs
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     phone: "",
-    position: "",
-    experience: "",
-    coverLetter: "",
-    resume: null as File | null
+    address: "",
+    country: "",
+    title: job.title, // Auto-populate with the job title
+    cv: null as File | null,
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  // Handler for text-based input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
+  // Handler for select/dropdown changes
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  // Handler for file uploads
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null
-    setFormData(prev => ({ ...prev, resume: file }))
+    const { name, files } = e.target
+    if (files && files[0]) {
+      setFormData((prev) => ({ ...prev, [name]: files[0] }))
+    }
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Form submission handler
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    console.log("Form submitted:", formData)
-    alert("Thank you for your application! We'll be in touch soon.")
-    
-    // Reset form
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      position: "",
-      experience: "",
-      coverLetter: "",
-      resume: null
-    })
-    
-    setIsSubmitting(false)
+    console.log("Submitting application:", formData)
+    // TODO: Add API call to submit form data to the backend
+    alert("Application submitted successfully! (Check console for data)")
   }
 
   return (
-    <div className="bg-white rounded-2xl p-8 shadow-lg">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <Label htmlFor="fullName">Full Name *</Label>
-            <Input
-              id="fullName"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleInputChange}
-              required
-              placeholder="John Doe"
-              className="bg-white"
-            />
+    <div className="bg-white font-sans">
+      <Header />
+      <header className="pt-24 bg-gradient-to-br from-black via-slate-900 to-sky-800  text-white" >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+   
+
+          <div className="py-20 md:py-28 text-center">
+            <h2 className="text-5xl md:text-7xl font-extrabold">{job.title}</h2>
+            <p className="mt-4 text-lg text-gray-300">
+              <a href="/career" className="text-slate-500 hover:underline">Careers</a> / {job.title}
+            </p>
           </div>
+        </div>
+      </header>
+
+      <main className="max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           
-          <div className="space-y-2">
-            <Label htmlFor="email">Email Address *</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-              placeholder="john@example.com"
-              className="bg-white"
-            />
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <Label htmlFor="phone">Phone Number</Label>
-            <Input
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleInputChange}
-              placeholder="+1 (555) 123-4567"
-              className="bg-white"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="position">Position of Interest *</Label>
-            <select
-              id="position"
-              name="position"
-              value={formData.position}
-              onChange={(e) => setFormData(prev => ({ ...prev, position: e.target.value }))}
-              required
-              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">Select a position</option>
-              {positions.map(position => (
-                <option key={position} value={position}>{position}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="experience">Years of Experience *</Label>
-          <select
-            id="experience"
-            name="experience"
-            value={formData.experience}
-            onChange={(e) => setFormData(prev => ({ ...prev, experience: e.target.value }))}
-            required
-            className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option value="">Select experience level</option>
-            <option value="0-1">0-1 years</option>
-            <option value="2-3">2-3 years</option>
-            <option value="4-5">4-5 years</option>
-            <option value="6-10">6-10 years</option>
-            <option value="10+">10+ years</option>
-          </select>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="resume">Resume/CV *</Label>
-          <div className="flex items-center justify-center w-full">
-            <label htmlFor="resume" className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white hover:bg-gray-50">
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <Upload className="w-8 h-8 mb-4 text-gray-500" />
-                <p className="mb-2 text-sm text-gray-500">
-                  <span className="font-semibold">Click to upload</span> or drag and drop
-                </p>
-                <p className="text-xs text-gray-500">PDF, DOC, DOCX (MAX. 5MB)</p>
-                {formData.resume && (
-                  <p className="mt-2 text-sm text-blue-600 font-medium">
-                    {formData.resume.name}
+          {/* --- Form --- */}
+          <div className="lg:col-span-2">
+            <h3 className="text-3xl font-bold text-gray-900">Apply Now</h3>
+            <p className="mt-4 text-gray-600 leading-relaxed">
+              Please fill out the form below to apply for the {job.title} position.
+            </p>
+{job.job_description && <div className="mt-4 text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: job.job_description }} />}
+            <form onSubmit={handleSubmit} className="mt-10 space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <Input name="name" placeholder="Name*" required value={formData.name} onChange={handleChange} />
+                <Input name="email" type="email" placeholder="Email" required value={formData.email} onChange={handleChange} />
+              </div>
+              <div>
+                <Input name="phone" placeholder="Phone Number" required value={formData.phone} onChange={handleChange} />
+              </div>
+              <div>
+                <Textarea name="address" placeholder="Address, City, State, Zip Code" className="min-h-[140px]" value={formData.address} onChange={handleChange} />
+              </div>
+              <div>
+                 <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+                   Position Applied For
+                 </label>
+                 <Input
+                   id="title"
+                   name="title"
+                   value={formData.title}
+                   readOnly
+                   className="bg-gray-50 text-gray-600 cursor-not-allowed"
+                   placeholder="Position title"
+                 />
+               </div>
+              {/* CV Upload Field */}
+              <div>
+                <label htmlFor="cv" className="block text-sm font-medium text-gray-700 mb-2">
+                  Upload CV/Resume *
+                </label>
+                <div className="flex items-center gap-3 p-3 border border-gray-300 rounded-md hover:border-gray-400 transition-colors">
+                  <Upload className="w-5 h-5 text-gray-400" />
+                  <input
+                    id="cv"
+                    name="cv"
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    required
+                    onChange={handleFileChange}
+                    className="flex-1 text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100"
+                  />
+                </div>
+                {formData.cv && (
+                  <p className="mt-1 text-sm text-green-600">
+                    Selected: {formData.cv.name}
                   </p>
                 )}
               </div>
-              <input
-                id="resume"
-                name="resume"
-                type="file"
-                className="hidden"
-                onChange={handleFileChange}
-                accept=".pdf,.doc,.docx"
-                required
-              />
-            </label>
+              
+              {/* Using shadcn/ui Select for dropdowns */}
+              <Select name="country" onValueChange={(value) => handleSelectChange('country', value)}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="United States" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="us">United States</SelectItem>
+                  <SelectItem value="uk">United Kingdom</SelectItem>
+                  <SelectItem value="ca">Canada</SelectItem>
+                </SelectContent>
+              </Select>
+         
+              <Button type="submit" className="w-full !mt-8 bg-slate-600 text-white hover:bg-slate-700 py-3 text-lg font-semibold rounded-md transition-colors">
+                Apply Now
+              </Button>
+            </form>
           </div>
-        </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="coverLetter">Cover Letter</Label>
-          <Textarea
-            id="coverLetter"
-            name="coverLetter"
-            value={formData.coverLetter}
-            onChange={handleInputChange}
-            placeholder="Tell us why you'd be a great fit for our team..."
-            rows={5}
-            className="bg-white resize-none"
-          />
+          {/* --- Job Details Sidebar --- */}
+          <aside className="space-y-6">
+            <div className="border border-gray-200 rounded-lg p-6">
+              <h3 className="text-xl font-bold text-gray-900">Job Details</h3>
+              <hr className="my-4" />
+              <ul className="space-y-6">
+                <JobDetailItem icon={Briefcase} title="Position" value={job.title} />
+                <JobDetailItem icon={MapPin} title="Location" value={`Location #${job.location_id}`} />
+                <JobDetailItem icon={FileText} title="Job Type" value={job.job_type} />
+                <JobDetailItem icon={CheckSquare} title="Qualifications" value={job.qualifications || "See description"} />
+                <JobDetailItem icon={Trophy} title="Experience" value={job.experience || "See description"} />
+                <JobDetailItem 
+                  icon={BadgeDollarSign} 
+                  title="Offered Salary" 
+                  value={
+                    job.start_amount && job.end_amount 
+                      ? `${job.start_amount} - ${job.end_amount} ${job.pay_according}` 
+                      : job.start_amount 
+                      ? `${job.start_amount} ${job.pay_according}` 
+                      : "Competitive"
+                  } 
+                />
+              </ul>
+            </div>
+          </aside>
         </div>
-
-        <div className="pt-4">
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg font-semibold flex items-center justify-center gap-2"
-          >
-            {isSubmitting ? "Submitting..." : "Submit Application"}
-            {!isSubmitting && <ArrowRight className="w-5 h-5" />}
-          </Button>
-        </div>
-
-        <div className="text-sm text-gray-500 text-center md:text-left">
-          <p>* Required fields</p>
-          <p className="mt-1">
-            We respect your privacy. Your information will only be used for recruitment purposes.
-          </p>
-        </div>
-      </form>
+      </main>
     </div>
   )
 }
