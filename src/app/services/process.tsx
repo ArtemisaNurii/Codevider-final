@@ -104,7 +104,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ step, title, description, del
       }}
     >
       <p className="text-sm md:text-base lg:text-lg font-semibold text-sky-700 tracking-[0.2em] uppercase">{step}</p>
-      <h3 className="text-base md:text-lg lg:text-lg font-semibold text-gray-700 uppercase tracking-wider mt-4 mb-3">{title}</h3>
+      <h3 className="text-base md:text-lg lg:text-lg font-bold text-gray-900 uppercase tracking-wider mt-4 mb-3">{title}</h3>
       {/* The short blue divider line */}
       <div className="border-b border-[#38bdf8] w-1/4 mb-4"></div>
       <p className="text-gray-700 text-sm md:text-base lg:text-md leading-relaxed">{description}</p>

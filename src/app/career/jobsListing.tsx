@@ -70,8 +70,8 @@ export default async function JobsListing() {
           ))}
         </div>
       </section>
-      <section className="bg-white py-20 px-4 sm:px-6 lg:px-8">
-      <section className="bg-white py-20 px-4 sm:px-6 lg:px-8">
+      <section className="bg-white py-10 px-4 sm:px-6 lg:px-8">
+      <section className="bg-white py-10 px-4 sm:px-6 lg:px-8">
   <div className="max-w-5xl mx-auto text-center">
     <h2 className="text-3xl font-bold text-gray-900 mb-12">
       What to Expect Next
