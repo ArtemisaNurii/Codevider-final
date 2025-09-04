@@ -87,7 +87,7 @@ const Services: NextPage = () => {
 
         {/* Service Cards Grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:max-w-7xl mx-auto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -113,7 +113,7 @@ const Services: NextPage = () => {
             return (
               <motion.div
                 key={index}
-                className="bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col"
+                className="bg-gray-50  p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col"
                 variants={cardVariants}
                 transition={{ duration: 0.5, ease: "easeOut", type: "tween" }}
                 onMouseEnter={() => setHoveredCard(index)}

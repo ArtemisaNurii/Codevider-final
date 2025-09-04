@@ -21,9 +21,9 @@ export default function WorldMap({ dots = [], lineColor = "#0a61cb" }: MapProps)
 
   const svgMap = map.getSVG({
     radius: 0.22,
-    color: theme === "dark" ? "#FFFFFF40" : "#00000040",
+    color: theme === "dark" ? "#FFFFFF40" : "#FFFFFF60",
     shape: "circle",
-    backgroundColor: theme === "dark" ? "black" : "white",
+    backgroundColor: "transparent",
   })
 
   const projectPoint = (lat: number, lng: number) => {
@@ -39,7 +39,7 @@ export default function WorldMap({ dots = [], lineColor = "#0a61cb" }: MapProps)
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto aspect-[2/1] dark:bg-black bg-white rounded-lg relative font-sans">
+    <div className="w-full lg:w-auto xl:max-w-7xl mx-auto aspect-[2/1] bg-transparent relative font-sans">
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"

@@ -4,7 +4,7 @@ import WorldMap from "./ui/world-map";
 
 export default function WorldMapDemo() {
   return (
-    <div className="py-40 dark:bg-black bg-white w-full">
+    <div className="py-20 dark:bg-black bg-gradient-to-br from-black via-slate-900 to-sky-800  w-full">
       <motion.div 
         className="max-w-7xl mx-auto text-center"
         initial={{ opacity: 0, y: 50 }}
@@ -12,7 +12,7 @@ export default function WorldMapDemo() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true, margin: "-100px" }}
       >
-        <p className="font-bold font-sans text-2xl md:text-5xl dark:text-white text-gray-900">
+        <p className="font-bold font-sans text-4xl md:text-6xl dark:text-white text-white">
           Global{" "}
           <span className="text-neutral-400">
             {"Partnerships".split("").map((word, idx) => (
@@ -30,7 +30,7 @@ export default function WorldMapDemo() {
           </span>
         </p>
         <motion.p 
-          className="text-sm md:text-lg text-neutral-500 max-w-2xl font-sans mx-auto py-4"
+          className="text-sm md:text-lg text-neutral-200 max-w-2xl font-sans mx-auto py-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
@@ -55,9 +55,9 @@ export default function WorldMapDemo() {
             { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 10.7167, lng: -10.5677 } }, // Albania → Senegal (Dakar)
             { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 40.7128, lng: -74.0060 } }, // Albania → New York City
             { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 48.8566, lng: 2.3522 } }  ,  // Albania → France (Paris)
-            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat:  -14.2350, lng: -47.8828 } } ,
-            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: -35.2820, lng: 149.1287 } } ,
-            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 39.9042, lng: 116.4074 } } 
+            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat:  -14.2350, lng: -57.8828 } } ,
+            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: -35.2820, lng: 139.1287 } } ,
+            { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 39.9042, lng: 106.4074 } } 
 
           
         ]}

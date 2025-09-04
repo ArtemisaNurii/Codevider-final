@@ -41,7 +41,7 @@ export default function Industries() {
         </div>
 
         <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:max-w-7xl xl:mx-auto mb-6">
             {slides.map((slide, index) => {
               const isDark = getDarkCard() === index
               return (
