@@ -51,7 +51,7 @@ export default async function JobsListing() {
     <div>
       <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-24 text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-sky-300">
+          <p className="text-sm pt-10 font-semibold uppercase tracking-widest text-sky-300">
             Careers
           </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
