@@ -1,250 +1,185 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import { TimelineContent } from "./animation"
-import VerticalCutReveal from "./vertical"
-import { ArrowRight, BookOpen, Globe, Handshake, Lightbulb } from "lucide-react"
-import MeetTeamSection from "./meetTeam"
-import Image from "next/image"
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, Users, Handshake, Sparkles, Heart, Globe2, Target, Star, Trophy, Scale, Lightbulb, Rocket } from "lucide-react";
+import Image from "next/image";
+import MeetTeamSection from "./meetTeam";
+// ---- Types ----
+interface Pillar {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
 
-export default function AboutTeamCulture() {
-  const sectionRef = useRef<HTMLDivElement>(null)
+interface Stat {
+  label: string;
+  value: string;
+  note?: string;
+}
 
-  const revealVariants = {
-    visible: (i: number) => ({
-      y: 0,
-      opacity: 1,
-      filter: "blur(0px)",
-      transition: {
-        delay: 1.0 + i * 0.2,
-        duration: 0.5,
-      },
-    }),
-    hidden: {
-      filter: "blur(10px)",
-      y: 20,
-      opacity: 0,
-    },
-  }
+interface TimelineItem {
+  year: string;
+  title: string;
+  text: string;
+}
 
+// ---- Data ----
+const pillars: Pillar[] = [
+  {
+    icon: <Users className="h-6 w-6" aria-hidden />,
+    title: "People First",
+    description:
+      "We design our processes around humans—clear goals, honest feedback, flexible work, and space to grow.",
+  },
+
+
+  {
+    icon: <Lightbulb className="h-6 w-6" aria-hidden />,
+    title: "Always Learning",
+    description:
+      "Weeklies for demos, monthlies for postmortems, and a culture of sharing what we discover.",
+  },
+  {
+    icon: <Scale className="h-6 w-6" aria-hidden />,
+    title: "Do Right",
+    description:
+      "Ethical software, candid communication, and long‑term partnerships over short‑term wins.",
+  },
+];
+
+
+
+// ---- Helpers ----
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const card = "rounded-2xl border bg-gradient-to-r from-black to-slate-800 border-slate-200  shadow-sm hover:shadow-md transition-shadow";
+
+// ---- Component ----
+export default function CodeviderCulturePage() {
   return (
-    <section id="team-culture" className="py-28 px-6 bg-white" ref={sectionRef}>
-      <div className="max-w-7xl mx-auto space-y-28">
-        <div className="text-center px-10">
-          <h1 className="sm:text-4xl md:text-5xl text-2xl leading-tight font-semibold text-gray-900  text-left md:text-left">
-            <VerticalCutReveal
-              splitBy="words"
-              staggerDuration={0.1}
-              staggerFrom="first"
-              reverse={false}
-              once={true}
-              transition={{ type: "spring", stiffness: 250, damping: 30, delay: 1 }}
-            >
-              Our Team & Culture
-            </VerticalCutReveal>
-          </h1>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-20 items-stretch">
-          <TimelineContent
-            as="div"
-            animationNum={0}
-            timelineRef={sectionRef}
-            customVariants={revealVariants}
-            once={true}
+    <main className="bg-white text-slate-900">
+      {/* Hero */}
+      <section className="relative overflow-hidden ">
+        <div className="pointer-events-none absolute inset-0 max-w-7xl " />
+        <div className="container mx-auto px-6 py-24 md:py-32">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl"
           >
-            <div className="bg-transparent p-10 h-full flex flex-col justify-center space-y-8 ">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center">
-                  <Lightbulb className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-3xl font-bold text-gray-900">Culture That Inspires</h3>
-              </div>
-              <p className="text-lg leading-relaxed text-gray-600">
-                At Codevider, culture is how we collaborate, innovate, and grow together. We foster an environment where creativity thrives, challenges are embraced, and every idea matters.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                <div className="flex items-center gap-3 p-4 bg-white rounded-xl shadow-sm">
-                  <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center">
-                    <Lightbulb className="w-5 h-5 text-slate-700" />
-                  </div>
-                  <span className="font-medium text-gray-800">Innovation at every level</span>
-                </div>
-                <div className="flex items-center gap-3 p-4 bg-white rounded-xl shadow-sm">
-                  <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center">
-                    <Handshake className="w-5 h-5 text-slate-700" />
-                  </div>
-                  <span className="font-medium text-gray-800">Collaboration across teams</span>
-                </div>
-                <div className="flex items-center gap-3 p-4 bg-white rounded-xl shadow-sm">
-                  <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center">
-                    <Globe className="w-5 h-5 text-slate-700" />
-                  </div>
-                  <span className="font-medium text-gray-800">Diversity and inclusion</span>
-                </div>
-                <div className="flex items-center gap-3 p-4 bg-white rounded-xl shadow-sm">
-                  <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center">
-                    <BookOpen className="w-5 h-5 text-slate-700" />
-                  </div>
-                  <span className="font-medium text-gray-800">Continuous learning</span>
-                </div>
-              </div>
-            </div>
-          </TimelineContent>
-
-          <TimelineContent
-            as="div"
-            animationNum={1}
-            timelineRef={sectionRef}
-            customVariants={revealVariants}
-            once={true}
-          >
-            <div className="bg-transparent p-10 h-full flex flex-col justify-center space-y-8 ">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center">
-                  <Handshake className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-3xl font-bold text-gray-900">The Codevider Team</h3>
-              </div>
-              <div className="space-y-6">
-                <p className="text-lg leading-relaxed text-gray-600">
-                  Our people are at the heart of every solution we build. With engineers, designers, and strategists from diverse backgrounds, we combine global expertise with local insight to deliver impactful software.
-                </p>
-                <div className="bg-white rounded-xl p-6 shadow-sm border-l-4 border-slate-900">
-                  <p className="text-lg leading-relaxed text-gray-600">
-                    From brainstorming sessions to weekly demos, we keep collaboration transparent and outcomes measurable. Together, we make software development a true team sport.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </TimelineContent>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <TimelineContent
-            as="div"
-            animationNum={2}
-            timelineRef={sectionRef}
-            customVariants={revealVariants}
-            once={true}
-          >
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <h3 className="text-4xl lg:text-4xl font-bold text-gray-900 leading-tight">
-                  Open Communication & Culture of Freedom
-                </h3>
-                <p className="text-xl text-gray-600 leading-relaxed">
-                  We maintain a flexible work environment focused on results. While we have our headquarters, we encourage harmony between remote work and in-person collaboration to foster creativity and well-being.
-                </p>
-              </div>
-              <div className="bg-slate-50 rounded-2xl p-8 border-l-6 border-slate-900">
-                <blockquote className="text-xl italic text-gray-700 leading-relaxed">
-                  &ldquo;True innovation comes from giving brilliant people the freedom to be brilliant.&rdquo;
-                </blockquote>
-                <div className="mt-4 flex items-center gap-3">
-                  <div className="w-2 h-2 bg-slate-900 rounded-full"></div>
-                  <span className="text-sm font-medium text-slate-700">Company Philosophy</span>
-                </div>
-              </div>
-            </div>
-          </TimelineContent>
-
-          <TimelineContent
-            as="div"
-            animationNum={3}
-            timelineRef={sectionRef}
-            customVariants={revealVariants}
-            once={true}
-          >
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden ">
-                <Image src="/images/teamMember/2member.jpg" alt="People talking at office" width={1000} height={1000} className="object-cover w-full h-full" />
-              </div>
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-slate-900 rounded-2xl "></div>
-            </div>
-          </TimelineContent>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <TimelineContent
-            as="div"
-            animationNum={4}
-            timelineRef={sectionRef}
-            customVariants={revealVariants}
-            once={true}
-            className="lg:order-1"
-          >
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden ">
-                <Image src="/images/teamMember/member1.jpg" alt="People talking at office" width={1000} height={1000} className="object-cover w-full h-full" />
-              </div>
-              <div className="absolute -top-6 -right-6 w-16 h-16 bg-gray-200 rounded-2xl "></div>
-            </div>
-          </TimelineContent>
-
-          <TimelineContent
-            as="div"
-            animationNum={5}
-            timelineRef={sectionRef}
-            customVariants={revealVariants}
-            once={true}
-            className="lg:order-2"
-          >
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <h3 className="text-4xl lg:text-4xl font-bold text-gray-900 leading-tight">
-                  Fostering Creativity and Driving Innovation
-                </h3>
-                <p className="text-xl text-gray-600 leading-relaxed">
-                  Our process is built on trust and autonomy. We provide the tools and support our team needs to tackle complex challenges and push the boundaries of what&apos;s possible.
-                </p>
-              </div>
-              <div className="bg-gradient-to-br from-slate-50 to-gray-100 rounded-2xl p-8 shadow-sm border border-gray-200">
-                <div className="flex items-start space-x-6">
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center shadow-lg">
-                      <span className="text-white font-bold text-2xl">P</span>
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <blockquote className="text-lg text-gray-700 italic leading-relaxed mb-4">
-                      &ldquo;We believe in empowering our team to think outside the box and challenge conventional approaches.&rdquo;
-                    </blockquote>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-slate-900 rounded-full"></div>
-                      <p className="text-sm font-semibold text-slate-900">Pasho Toska, Founder & CEO</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </TimelineContent>
-        </div>
-
-        <MeetTeamSection />
-
-        <div className="relative mt-32 bg-gradient-to-br from-black via-slate-900 to-sky-800 text-white rounded-3xl p-12 shadow-2xl overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-16 translate-x-16"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12"></div>
-          <div className="relative z-10 grid md:grid-cols-3 gap-10 items-center">
-            <div className="md:col-span-2 space-y-6 text-center md:text-left">
-              <h3 className="text-4xl lg:text-5xl font-bold leading-tight">Join Our Journey</h3>
-              <p className="max-w-2xl mx-auto md:mx-0 text-gray-300 leading-relaxed text-lg">
-                We&apos;re always looking for passionate, talented people who want to shape the future of software with us. Explore open roles and become part of our growing team.
-              </p>
-            </div>
-            <div className="md:col-span-1 flex justify-center md:justify-end">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-600">Our Culture</p>
+            <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight md:text-5xl">
+              How we build at <span className="bg-gradient-to-r from-sky-600 to-slate-900 bg-clip-text text-transparent">Codevider</span>
+            </h1>
+            <p className="mt-5 text-lg text-slate-600 md:text-xl">
+            At the heart of our company is a culture built on collaboration, creativity, and accountability. We value open communication, celebrate diverse perspectives, and empower every team member to take ownership of their work. Growth and learning are part of our daily journey, and we believe success comes from working together with passion and purpose.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="/career"
-                className="group inline-flex items-center gap-3 bg-white text-gray-900 font-semibold px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-black via-slate-900 to-sky-800 hover:gap-4 px-5 py-3 text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+                aria-label="Explore open roles"
               >
-                See Open Roles 
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              Join the team
+                <ArrowRight className="h-4 w-4" aria-hidden />
               </a>
+
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Values / Pillars */}
+      <section id="principles" className="container mx-auto px-6 py-8 ">
+        <div className="mx-auto mb-10 max-w-2xl text-center">
+          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Principles we live by</h2>
+          <p className="mt-3 text-slate-600">Clear ideas. Clean code. Considerate collaboration.</p>
+        </div>
+        <div className="grid grid-cols-1 gap-6 text-white sm:grid-cols-2 lg:grid-cols-3">
+          {pillars.map((p, i) => (
+            <motion.article
+              key={p.title}
+              
+              className={`${card} p-6`}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: i * 0.05 }}
+            >
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl  text-sky-700">
+                {p.icon}
+              </div>
+              <h3 className="text-lg font-semibold">{p.title}</h3>
+              <p className="mt-2 text-white">{p.description}</p>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      <section className="container mx-auto px-6 py-16 md:py-24">
+        <div className="grid items-start gap-10 lg:grid-cols-2">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
+            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Working at Codevider</h2>
+            <p className="mt-4 text-slate-600">
+              We balance autonomy with support. Small, senior‑leaning teams ship frequently, maintain standards, and
+              demo progress every week. Managers remove blockers. Engineers mentor through pairing, reviews, and docs.
+            </p>
+            <ul className="mt-6 space-y-3 text-slate-700">
+              <li className="flex items-start gap-3"><Sparkles className="mt-1 h-5 w-5 text-sky-600" /> Focus time over needless meetings.</li>
+              <li className="flex items-start gap-3"><Trophy className="mt-1 h-5 w-5 text-sky-600" /> Outcome‑based roadmaps and success metrics.</li>
+              <li className="flex items-start gap-3"><Heart className="mt-1 h-5 w-5 text-sky-600" /> Wellness stipend, learning budget, and flexible hours.</li>
+            </ul>
+          </motion.div>
+
+          {/* Gallery Placeholder (drop your images) */}
+          <div className="grid grid-cols-2 gap-4">
+            <Image src="/images/teamMember/2member.jpg" alt="Team" width={500} height={500} />
+            <Image src="/images/teamMember/member1.jpg" alt="Team" width={500} height={500} />
+            <Image src="/images/office/zyra9.jpg" alt="Team" width={500} height={500} />
+            <Image src="/images/office/zyra10.jpg" alt="Team" width={500} height={500} />
+
+           
+          </div>
+        </div>
+      </section>
+
+<MeetTeamSection/>
+
+      <section id="open-roles" className="relative overflow-hidden border-t border-slate-200">
+        <div className="container mx-auto px-6 h-1/2 py-16 md:py-24">
+          <div className="grid items-center gap-10 rounded-3xl bg-gradient-to-br from-black via-slate-950 to-sky-800 p-8 text-white md:grid-cols-2 md:p-12">
+            <div>
+              <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Join Our Journey</h2>
+              <p className="mt-3 text-sky-100">                We&apos;re always looking for passionate, talented people who want to shape the future of software with us. Explore open roles and become part of our growing team.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 md:justify-end">
+              <a
+                href="/career"
+                className="inline-flex items-center hover:gap-4 gap-2 rounded-xl bg-white px-5 py-3 text-slate-900 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                aria-label="See open roles"
+              >
+                See open roles
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </a>
+              {/* <a
+                href="/about"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-transparent px-5 py-3 text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                aria-label="Learn more about Codevider"
+              >
+                Learn more
+              </a> */}
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  )
+      </section>
+
+    </main>
+  );
 }

@@ -5,9 +5,9 @@ import VerticalCutReveal from "./vertical"
 export default function AboutSection3() {
 
   return (
-    <section id="about" className=" bg-white md:mt-10">
+    <section id="about" className=" bg-white md:mt-10 ">
              <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-24 text-start">
+        <div className="mx-auto max-w-7xl  py-16 md:py-24 text-start">
           <p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
               About Us
           </p>
@@ -17,10 +17,10 @@ export default function AboutSection3() {
           Strategy, design, and engineering under one roof to move your roadmap forward.          </p>
         </div>
       </header>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[80%] mx-auto">
         <div className="relative">
  
-          <div className="flex flex-wrap items-center py-3 px-6 mt-6 text-sm justify-start md:justify-between lg:justify-start">
+          <div className="flex flex-wrap items-center py-3  mt-6 text-sm justify-start md:justify-between  lg:justify-start">
             <div className="flex gap-4 justify-start">
               <div className="flex items-center gap-2 mb-2 sm:text-base text-xs text-left">
                 <span className="text-slate-900 font-bold">10+</span>
@@ -48,7 +48,7 @@ export default function AboutSection3() {
         </div>
 
         {/* Main Content */}
-        <div className="grid md:grid-cols-3  sm:px-6 px-0 gap-8">
+        <div className="grid md:grid-cols-3  gap-8">
           <div className="md:col-span-2">
             <h1 className="sm:text-4xl md:text-5xl text-2xl !leading-[110%] font-semibold text-gray-900 mb-8 text-left md:text-left">
               <VerticalCutReveal

@@ -11,7 +11,7 @@ type NavLink = { name: string; href: Route };
 export const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Expertise", href: "/services" },
+  { name: "Services", href: "/services" },
   // { name: "Projects", href: "/projects" },
   { name: "Career", href: "/career" },
 ] as const satisfies readonly NavLink[];
@@ -130,29 +130,29 @@ const Header = () => {
           {/* Mobile Hamburger (animated burger → X using lines) */}
           <button
             onClick={toggleMobileMenu}
-            className={`md:hidden backdrop-blur-md p-3 rounded-full transition-all duration-300 ${
+            className={`md:hidden backdrop-blur-md p-2 rounded-full transition-all duration-300 ${
               isSolid ? "bg-black/10 text-black hover:bg-black/20" : "bg-white/10 text-white hover:bg-white/20"
             }`}
             aria-label="Toggle mobile menu"
             aria-expanded={isMobileMenuOpen}
           >
-            <span className="relative block w-6 h-4">
+            <span className="relative block w-4 h-4">
               {/* top line */}
               <span
-                className={`absolute left-0 top-0 h-[2px] w-6 bg-current transition-all duration-300 ease-in-out ${
-                  isMobileMenuOpen ? "translate-y-[7px] rotate-45" : "translate-y-0 rotate-0"
+                className={`absolute left-0 top-0 h-[1px] w-4 bg-current transition-all duration-300 ease-in-out ${
+                  isMobileMenuOpen ? "translate-y-[6px] rotate-45" : "translate-y-0 rotate-0"
                 }`}
               />
               {/* middle line */}
               <span
-                className={`absolute left-0 top-1/2 h-[2px] w-6 bg-current transition-all duration-300 ease-in-out -translate-y-1/2 ${
+                className={`absolute left-0 top-1/2 h-[1px] w-4 bg-current transition-all duration-300 ease-in-out -translate-y-1/2 ${
                   isMobileMenuOpen ? "opacity-0" : "opacity-100"
                 }`}
               />
               {/* bottom line */}
               <span
-                className={`absolute left-0 bottom-0 h-[2px] w-6 bg-current transition-all duration-300 ease-in-out ${
-                  isMobileMenuOpen ? "-translate-y-[7px] -rotate-45" : "translate-y-0 rotate-0"
+                className={`absolute left-0 bottom-0 h-[1px] w-4 bg-current transition-all duration-300 ease-in-out ${
+                  isMobileMenuOpen ? "-translate-y-[6px] -rotate-45" : "translate-y-0 rotate-0"
                 }`}
               />
             </span>

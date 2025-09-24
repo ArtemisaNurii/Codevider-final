@@ -425,7 +425,7 @@ const SolutionPillars: React.FC = () => {
       <main className="grid grid-cols-1 max-w-7xl mx-auto lg:grid-cols-10 gap-8">
         <div className="lg:col-span-5 flex flex-col gap-8">
           <div className="main-title">
-            <div className="text-5xl max-sm:text-3xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
+            <div className="text-5xl max-sm:text-3xl pl-2 font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
               {splitTextIntoWords(pageData.mainTitle.part1)}
             </div>
             <div className="text-5xl pl-2 max-sm:text-3xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
