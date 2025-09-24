@@ -197,13 +197,13 @@ export default function ServicesPage() {
       {/* Header */}
       <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-          <p className="text-sm font-semibold uppercase tracking-widest mt-10 text-white">
+          <p className="text-sm font-semibold uppercase tracking-widest mt-10 text-sky-300">
             Our Capabilities
           </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
             Services that Move Your Roadmap Forward
           </h1>
-          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-white">
+          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-300">
             Explore how we design, build, and scale reliable products. We focus
             on clean typography, clear sections, and an index you can scan at a
             glance.
