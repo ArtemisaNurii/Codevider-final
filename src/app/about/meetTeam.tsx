@@ -81,7 +81,7 @@ const teamMembers = [
 
   {
     name: "Fjona Rira",
-    role: "Data Analyst",
+    role: "Frontend Developer",
     image: "/images/teamMember/fjona.png",
   },
   {
@@ -97,7 +97,7 @@ const teamMembers = [
 
   {
     name: "Amanda ",
-    role: "Quality Assurance",
+    role: "Backend Developer",
     image: "/images/teamMember/amanda.png",
   },
 
@@ -175,7 +175,7 @@ export default function MeetTeamSection() {
       {/* Header Section */}
       <div className="text-center mb-12">
         <p className="text-sm font-medium text-muted-foreground mb-2">Behind The Codes</p>
-        <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Meet our team</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Meet the team</h2>
         <p className="text-lg text-muted-foreground mb-8 max-w-md mx-auto">
           Unleashing creativity, our team of design visionaries turns ordinary spaces into extraordinary experiences
         </p>
@@ -226,12 +226,12 @@ export default function MeetTeamSection() {
             {teamMembers.map((member, index) => (
               <div
                 key={index}
-                className={`flex-shrink-0 w-72 sm:w-64 text-center transition-opacity duration-500 ${
+                className={`flex-shrink-0 w-72 sm:w-64text-center transition-opacity duration-500 ${
                   imagesLoaded ? "opacity-100" : "opacity-0"
                 }`}
                 style={{ transitionDelay: `${(index % cardsPerView) * 100}ms` }}
               >
-                <div className="relative mb-4 overflow-hidden rounded-lg bg-gray-100">
+                <div className="relative  mb-4 overflow-hidden rounded-lg bg-gray-100">
                   <Image
                     src={member.image || "/placeholder.svg"}
                     alt={member.name}

@@ -17,16 +17,16 @@ const featuresData = [
   {
     id: 2,
     icon: ChartSpline,
-    title: "Scalable Resourcing",
+    title: "Legal Protection",
     description:
-      "Tap into our vetted global talent pool to scale your engineering capacity up or down on demand—delivering specialized expertise and cost-efficient staffing exactly when you need it.",
+      "Our developers build applications for clients only. This guarantees that clients always own the intellectual property rights to their software 100% of the time. We also sign non-disclosure and non-competition agreements for full legal protection..",
   },
   {
     id: 3,
     icon: ShieldCheck,
-    title: "Secure Development",
+    title: "Cost-Effective Development",
     description:
-      "We apply industry-leading security protocols, strict access controls, and compliance standards to safeguard your codebase and sensitive data throughout our outsourced engagement.",
+      "Outsourcing Projects and development tasks to Eastern Europe saves you cash, without sacrificing code quality. CodeVider is headquartered in Tirana-Albania, which is a well-known hub for finding talented web app developers at budget-friendly prices",
   },
 ] as const;
 
@@ -117,6 +117,7 @@ const Outsource: React.FC = () => {
             </div>
           </motion.div>
         </div>
+        <div className="p-4"></div>
       </section>
     </div>
   );

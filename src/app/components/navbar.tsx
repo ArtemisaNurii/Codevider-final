@@ -2,16 +2,19 @@
 import { ArrowUpRight, X } from "lucide-react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import Link from "next/link"
+import Link from "next/link";
 import { usePathname } from "next/navigation"
+import type { Route } from "next";
 
-const navLinks = [
+type NavLink = { name: string; href: Route };
+
+export const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
-  { name: "Projects", href: "/projects" },
+  { name: "Expertise", href: "/services" },
+  // { name: "Projects", href: "/projects" },
   { name: "Career", href: "/career" },
-]
+] as const satisfies readonly NavLink[];
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)

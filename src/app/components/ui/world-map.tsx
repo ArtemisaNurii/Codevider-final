@@ -62,7 +62,7 @@ export default function WorldMap({ dots = [], lineColor = "#0a61cb" }: MapProps)
   d={createCurvedPath(startPoint, endPoint)}
   fill="none"
   stroke="url(#path-gradient)"
-  strokeWidth="2"
+  strokeWidth="1.1"
   initial={{ pathLength: 0 }}
   whileInView={{ pathLength: 1 }}
   transition={{

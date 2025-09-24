@@ -1,11 +1,20 @@
-import { Job } from "./jobs"
 import { Button } from "@/components/ui/button"
 import { getJobs } from "./action"
 import JobCard from "./JobCard"
+import PaginationControls from "./PaginationControls"
+import { Job } from "./jobs"
 
-export default async function JobsListing() {
-  const jobs: Job[] = await getJobs()
-  console.log(jobs)
+interface JobsListingProps {
+  page: number
+  limit: number
+}
+
+export default async function JobsListing({ page, limit }: JobsListingProps) {
+  const jobsResponse = await getJobs({ page, limit })
+  const { jobs, pagination } = jobsResponse
+  
+  console.log("Jobs response:", jobsResponse)
+  console.log("Pagination info:", pagination)
 
   if (!jobs || jobs.length === 0) {
     return (
@@ -26,23 +35,37 @@ export default async function JobsListing() {
         </header>
 
         <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-    No Open Positions at the Moment
-  </h2>
-  <p className="text-base sm:text-lg text-gray-600 mb-10">
-    We may not have active openings right now, but we’re always eager to connect 
-    with talented professionals. Share your resume with us, and we’ll be in touch 
-    when a role that matches your skills and ambitions becomes available.
-  </p>
-  <Button
-    asChild
-    size="lg"
-    className="bg-white text-slate-900 hover:bg-slate-900 hover:text-white px-6 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition"
-  >
-    <a href="mailto:hr@codevider.com">Send Us Your Resume</a>
-  </Button>
-</section>
-
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            {pagination.totalCount === 0 ? "No Open Positions at the Moment" : "No Jobs Found on This Page"}
+          </h2>
+          <p className="text-base sm:text-lg text-gray-600 mb-10">
+            {pagination.totalCount === 0 
+              ? "We may not have active openings right now, but we're always eager to connect with talented professionals. Share your resume with us, and we'll be in touch when a role that matches your skills and ambitions becomes available."
+              : `Showing page ${pagination.currentPage} of ${pagination.totalPages}. Try going back to page 1 or adjusting your pagination settings.`
+            }
+          </p>
+          
+          {pagination.totalCount === 0 ? (
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-slate-900 hover:bg-slate-900 hover:text-white px-6 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition"
+            >
+              <a href="mailto:hr@codevider.com">Send Us Your Resume</a>
+            </Button>
+          ) : (
+            <div className="mt-8">
+              <PaginationControls
+                currentPage={pagination.currentPage}
+                totalPages={pagination.totalPages}
+                totalCount={pagination.totalCount}
+                limit={pagination.limit}
+                hasNext={pagination.hasNext}
+                hasPrev={pagination.hasPrev}
+              />
+            </div>
+          )}
+        </section>
       </div>
     )
   }
@@ -65,12 +88,23 @@ export default async function JobsListing() {
 
       <section className="mx-auto items-center px-4 sm:px-6 bg-white lg:px-8 py-20">
         <div className="grid gap-6 max-w-4xl mx-auto items-center sm:gap-8">
-          {jobs.map((job) => (
+          {jobs.map((job: Job) => (
             <JobCard key={job.id} job={job} />
           ))}
         </div>
+        
+        {/* Pagination Controls */}
+        <div className="max-w-4xl mx-auto mt-8">
+          <PaginationControls
+            currentPage={pagination.currentPage}
+            totalPages={pagination.totalPages}
+            totalCount={pagination.totalCount}
+            limit={pagination.limit}
+            hasNext={pagination.hasNext}
+            hasPrev={pagination.hasPrev}
+          />
+        </div>
       </section>
-      <section className="bg-white py-10 px-4 sm:px-6 lg:px-8">
       <section className="bg-white py-10 px-4 sm:px-6 lg:px-8">
   <div className="max-w-5xl mx-auto text-center">
     <h2 className="text-3xl font-bold text-gray-900 mb-12">
@@ -121,9 +155,7 @@ export default async function JobsListing() {
       </div>
     </div>
   </div>
-</section>
-
-</section>
+      </section>
 
 
     </div>

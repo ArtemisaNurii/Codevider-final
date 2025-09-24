@@ -1,13 +1,10 @@
-import Header from "@/app/components/navbar";
-import ProjectProfile from "./profile"
-import { Footer } from "@/app/components/CTA";
-
 export default function ProjectDetailPage() {
   return (
-    <main>
-      <Header/>
-      <ProjectProfile />
-      <Footer/>
-    </main>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold text-gray-800 mb-4">Project Details Coming Soon</h1>
+        <p className="text-gray-600">This page is temporarily unavailable.</p>
+      </div>
+    </div>
   );
 }

@@ -7,6 +7,7 @@ import { Job } from "./jobs"
 
 export default function JobCard({ job }: { job: Job }) {
   const [open, setOpen] = useState(false)
+  const applyHref = `/career/apply/${job.id}`
 
   return (
     <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -17,13 +18,11 @@ export default function JobCard({ job }: { job: Job }) {
           </h3>
 
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-600">
-            <span className="capitalize">{job.job_type}</span>
-            {/* <span className="text-gray-300">•</span> */}
-            {/* <span>{salary}</span> */}
+            <span className="capitalize">{job.job_type.job_type}</span>
             <span className="text-gray-300">•</span>
-            <span>Location #{job.location_id}</span>
+            <span>{job.addresses?.[0]?.address?.location || "Location not specified"}</span>
             <span className="text-gray-300">•</span>
-            <span>Department #{job.department_id}</span>
+            <span>{job.department.name}</span>
           </div>
 
           {open && job.job_description && (
@@ -44,7 +43,7 @@ export default function JobCard({ job }: { job: Job }) {
           </button>
 
           <Button asChild variant="outline" size="sm">
-            <a href={`/career/apply/${job.id}`} className="flex items-center gap-2">
+            <a href={applyHref} className="flex items-center gap-2">
               <span className="hidden sm:inline">Apply</span>
               <ArrowRight className="w-4 h-4" />
             </a>

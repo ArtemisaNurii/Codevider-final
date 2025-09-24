@@ -121,13 +121,13 @@ const Processes = () => {
         {/* Header Section (03 Removed) */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start mb-20">
           <div className="lg:col-span-2">
-            <h2 className="text-4xl sm:text-5xl  font-semibold  leading-tight">
+            <h2 className="text-4xl sm:text-5xl  font-semibold  leading-0.5">
               Process
             </h2>
           </div>
           <div className="lg:col-span-3 text-gray-700 text-base md:text-lg lg:text-xl leading-relaxed space-y-4 pt-2">
           <p>
-  Our clients’ needs guide every step. We begin with a hands‑on discovery phase-aligning on goals, defining the product vision, and documenting core assumptions in a shared worksheet.
+  Our clients’needs guide every step. We begin with a hands‑on discovery phase-aligning on goals, defining the product vision, and documenting core assumptions in a shared worksheet.
 </p>
 
 

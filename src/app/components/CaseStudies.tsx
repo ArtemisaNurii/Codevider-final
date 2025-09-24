@@ -4,7 +4,7 @@ import React, { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
-import { ArrowRight } from "lucide-react";
+import { AlignEndHorizontal, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 // Register GSAP plugins (safe on client)
@@ -89,17 +89,18 @@ const ViewAllButton = () => {
     <div className="flex justify-center mt-10 md:mt-24">
       <button
         ref={buttonRef}
-        onClick={() => router.push("/projects")}
+        onClick={() => router.push("/services")} // Changed to a relevant route
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="group flex items-center gap-3 px-8 py-4 border-2 border-gray-700 rounded-full text-gray-900 font-semibold text-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transform-gpu"
+        className="group flex items-center gap-3 px-8 py-4 border-2 border-gray-700 rounded-full text-gray-900 font-semibold text-lg transition-colors duration-300 focus:outline-none hover:bg-gradient-to-br from-black to-sky-900 hover:text-white  transform-gpu"
       >
-        <span>View All Projects</span>
+        {/* UPDATED BUTTON TEXT */}
+        <span>View More of Our Services</span>
         <span
           ref={arrowRef}
           className="transform transition-transform duration-300"
         >
-          <ArrowRight className="text-xl" />
+           <ArrowRight className="text-xl" />
         </span>
       </button>
     </div>
@@ -172,14 +173,14 @@ const MiniCaseStudyCard = ({
   metric: { value: string; label: string };
   description: string;
 }) => (
-  <div className="mini-case-study bg-slate-50 p-6 rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col group cursor-pointer transform-gpu">
+  <div className="mini-case-study bg-slate-50 p-6 rounded-3xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col group cursor-pointer transform-gpu">
     <div className="flex justify-between items-start mb-4">
       <span className="text-gray-700 px-4 py-1 rounded-full sky font-semibold text-xs uppercase tracking-wider">
-        {tag}
+        {/* {tag} */}
       </span>
       <div className="text-right flex-shrink-0 ml-4">
         <p className="metric-number text-4xl font-semibold text-[#0a61cb]">
-          {metric.value}
+          {/* {metric.value} */}
         </p>
         <p className="text-sm text-gray-700">{metric.label}</p>
       </div>
@@ -192,7 +193,7 @@ const MiniCaseStudyCard = ({
     </p>
     <div className="flex justify-end mt-6">
       <div className="w-12 h-12 bg-gradient-to-br from-black to-sky-900 rounded-full flex items-center justify-center transform group-hover:scale-110 group-hover:bg-gray-800 transition-all duration-300">
-        <ArrowIcon className="stroke-white text-white" />
+        <AlignEndHorizontal className="stroke-white text-white" />
       </div>
     </div>
   </div>
@@ -202,57 +203,54 @@ const MiniCaseStudyCard = ({
 const SolutionPillars: React.FC = () => {
   const mainRef = useRef<HTMLDivElement | null>(null);
 
-  // --- DATA (Centralized) ---
+  // --- DATA (Centralized & Adapted) ---
   const pageData = {
     mainTitle: {
-      part1: " Case Studies",
-      highlight: "Shows That We Are ",
-      part2: "Trustful",
+      part1: "Unlock Your",
+      highlight: "Potential With",
+      part2: "Our Expertise",
     },
     infoCard: {
-      tag: " Growth Success",
-      features: ["Accelerated Adoption", "Scalable Insights", "Growth-Driven UI"],
+      tag: "Our Value Proposition",
+      features: ["Efficiency", "Flexibility", "Expertise"],
       subtitle:
-        "Built a dashboard that fueled 50% user growth and continuous momentum",
+        "We deliver more than code providing a strategic partnership designed for growth.",
     },
-    metric1: { value: "75%", label: "Average User Growth" },
+    metric1: { value: "100%", label: "Flexibility & Control" },
     metric2: {
-      value: "40+",
-      label: "Growth Initiatives Deployed",
-      countries: [
-        "Market Expansion",
-        "Product Enhancements",
-        "Customer Success",
-        "Platform Optimizations",
-      ],
+      value: "10+",
+      label: "Years of Experience",
+      // Repurposed 'countries' to 'skills' for the pills
+      skills: ["USA", "Germany", "Africa", "Europe"],
     },
   } as const;
 
-  const caseStudiesData = [
+  // REPURPOSED 'caseStudiesData' to 'whyUsData' for your new content
+  const whyUsData = [
     {
-      tag: "CRM Orgs",
-      title: "Simplitime",
-      metric: { value: "+45%", label: "Conversion Growth" },
+      tag: "Advantage 01",
+      title: "Significant Cost & Time Savings",
+      metric: { value: "", label: "Avg. Savings" },
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Bypass expensive hiring and training. Our streamlined process gets you to market faster, saving crucial time and resources.",
     },
     {
-      tag: "SaaS",
-      title: "Straatos",
-      metric: { value: "3x", label: "Performance Boost" },
+      tag: "Advantage 02",
+      title: "Total Flexibility & Control",
+      metric: { value: "", label: "Platform Access" },
       description:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "Scale your team on-demand for single or multiple projects, and monitor progress anytime through our transparent online platform.",
     },
     {
-      tag: "Blockchain",
-      title: "MemeCoin",
-      metric: { value: "-70%", label: "Security Incidents" },
+      tag: "Advantage 03",
+      title: "Creative Expertise on Demand",
+      metric: { value: "", label: "Perspectives" },
       description:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "Instantly access a pool of highly motivated, creative professionals who bring fresh perspectives and innovative solutions to the table.",
     },
   ] as const;
 
-  // --- MASTER ANIMATION LOGIC ---
+  // --- MASTER ANIMATION LOGIC (UNCHANGED) ---
   useLayoutEffect(() => {
     if (!mainRef.current) return;
 
@@ -321,8 +319,8 @@ const SolutionPillars: React.FC = () => {
           toggleActions: "play none none reverse",
         },
       });
-      animateWords(infoCard.querySelector(".info-features"), 0.4);
-      animateWords(infoCard.querySelector(".info-subtitle"), 0.6);
+      // animateWords(infoCard.querySelector(".info-features"), 0.4);
+      // animateWords(infoCard.querySelector(".info-subtitle"), 0.2);
       gsap.from(infoCard.querySelector(".arrow-icon") as HTMLElement, {
         opacity: 0,
         scale: 0,
@@ -423,6 +421,7 @@ const SolutionPillars: React.FC = () => {
       ref={mainRef}
       className="bg-white text-gray-900 min-h-screen p-6 sm:p-8 lg:p-12 font-sans"
     >
+      <div className="p-4"></div>
       <main className="grid grid-cols-1 max-w-7xl mx-auto lg:grid-cols-10 gap-8">
         <div className="lg:col-span-5 flex flex-col gap-8">
           <div className="main-title">
@@ -439,11 +438,11 @@ const SolutionPillars: React.FC = () => {
           <InfoCard {...pageData.infoCard} />
         </div>
 
-        <div className="lg:col-span-2 metric-card">
+        <div className="lg:col-span-2 metric-card ">
           <MetricCard {...pageData.metric1}>
-            <div className="w-full h-full min-h={[250]} flex items-center justify-center rounded-lg">
-              <p className="text-gray-700 font-medium">
-                A testament to our success in driving rapid adoption
+            <div className="w-full h-full min-h-[250px] flex items-center justify-center rounded-lg">
+              <p className="text-gray-700 font-medium text-center p-4">
+                You can manage and be in control of your outsourced project at all times.
               </p>
             </div>
           </MetricCard>
@@ -457,12 +456,14 @@ const SolutionPillars: React.FC = () => {
             textColor="text-white"
           >
             <div className="grid grid-cols-2 gap-3 mb-6">
-              {pageData.metric2.countries.map((country) => (
-                <Pill key={country} text={country} />
+              {pageData.metric2.skills.map((skill) => (
+                <Pill key={skill} text={skill} />
               ))}
             </div>
             <div className="w-full h-full min-h-[150px]  flex items-center justify-center rounded-lg">
-              <p className="text-white font-medium">New Market Entries</p>
+              <p className="text-white font-medium text-center p-4">
+                Profit from our teams new perspectives and out-of-the-box thinking.
+              </p>
             </div>
           </MetricCard>
         </div>
@@ -470,17 +471,19 @@ const SolutionPillars: React.FC = () => {
 
       <section className="py-16 max-w-7xl mx-auto md:py-24">
         <div className="text-center mb-12">
+          {/* UPDATED SECTION TITLE */}
           <div className="text-4xl md:text-5xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
-            {splitTextIntoWords("More Case Studies")}
+            {splitTextIntoWords("Why Our Clients Choose Us")}
           </div>
+          {/* UPDATED SECTION DESCRIPTION */}
           <p className="mt-4 text-lg text-gray-700 max-w-2xl mx-auto case-study-desc transform-gpu">
-            A glimpse into other challenges we&apos;ve successfully navigated for our
-            clients.
+            Our partnership model is built on three pillars: efficiency, flexibility, and deep expertise.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {caseStudiesData.map((study, index) => (
-            <MiniCaseStudyCard key={index} {...study} />
+          {/* Mapped the new "Why Us" data */}
+          {whyUsData.map((item, index) => (
+            <MiniCaseStudyCard key={index} {...item} />
           ))}
         </div>
       </section>

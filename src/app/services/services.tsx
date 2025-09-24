@@ -32,7 +32,7 @@ const services: ServiceItem[] = [
   {
     title: 'Mobile Application Development',
     description:
-      'iOS and Android apps your users love—built native or cross-platform. Smooth UX, offline support, and seamless releases to App Store and Google Play.',
+      'iOS and Android apps users love,built native or cross-platform. Smooth UX, offline support, and seamless releases to App Store and Google Play.',
   },
   {
     title: 'Automation',
@@ -44,107 +44,107 @@ const services: ServiceItem[] = [
     description:
       'Connect your tools into one reliable flow. We unify apps and data, remove silos, and make information available where your teams need it.',
   },
-  {
-    title: 'Software Prototyping',
-    description:
-      'Validate ideas fast with clickable prototypes and an MVP. Get user feedback in weeks, de-risk scope, and secure stakeholder buy-in before full build.',
-  },
+  // {
+  //   title: 'Software Prototyping',
+  //   description:
+  //     'Validate ideas fast with clickable prototypes and an MVP. Get user feedback in weeks, de-risk scope, and secure stakeholder buy-in before full build.',
+  // },
   {
     title: 'Cloud Infrastructure',
     description:
-      'A secure, scalable cloud foundation—built with Infrastructure as Code. We optimize for performance, uptime, and cost so you only pay for what you use.',
+      'A secure, scalable cloud foundation,built with Infrastructure as Code. We optimize for performance, uptime, and cost so you only pay for what you use.',
   },
   {
     title: 'Team Augmentation',
     description:
-      'Add vetted engineers and product talent that plug into your process. Scale up quickly, keep momentum, and deliver more—without long hiring cycles.',
+      'Add vetted engineers and product talent that plug into your process. Scale up quickly, keep momentum, and deliver more,without long hiring cycles.',
   },
 ]
 
-// ✅ Replace highlights & deliverables with value-oriented content
-const whyItMattersMap: Record<string, string[]> = {
+const solution: Record<string, string[]> = {
   'Custom Software Development': [
-    'Turn complex ideas into working products',
-    'Reduce manual processes and save costs',
-    'Future-proof systems for long-term growth',
+    'Tailored platforms built around your exact workflows',
+    'Long-term scalability with clean, maintainable code',
+    'Seamless integration with existing business systems',
   ],
   'Web Application Development': [
-    'Delight users with speed and responsiveness',
-    'Work on any device with consistent quality',
-    'Drive higher engagement and conversions',
+    'Responsive portals optimized for performance',
+    'Real-time dashboards with actionable insights',
+    'Secure and intuitive customer-facing web solutions',
   ],
   'Mobile Application Development': [
-    'Reach customers directly on their phones',
-    'Offer seamless offline & online experiences',
-    'Build loyalty with intuitive mobile design',
+    'Cross-platform apps with consistent UX on iOS & Android',
+    'Offline-first design for reliability in all conditions',
+    'Easy deployment and updates through app stores',
   ],
   Automation: [
-    'Cut down on repetitive tasks',
-    'Improve accuracy and reliability',
-    'Give teams more time for strategic work',
+    'Fully automated deployment pipelines',
+    'QA processes that run with zero human intervention',
+    'Workflow automations tailored to business rules',
   ],
   'Systems Integration': [
-    'Stop data silos from slowing your business',
-    'Ensure real-time information across tools',
-    'Boost collaboration with unified systems',
+    'Unified data across departments and platforms',
+    'Seamless syncs between CRM, ERP, and third-party tools',
+    'Centralized reporting for faster decision-making',
   ],
-  'Software Prototyping': [
-    'Validate concepts before heavy investment',
-    'Gather user insights early',
-    'Reduce risk of building the wrong product',
-  ],
+  // 'Software Prototyping': [
+  //   'Clickable MVPs ready for user testing',
+  //   'Rapid iteration with stakeholder feedback loops',
+  //   'Validated features before investing in full builds',
+  // ],
   'Cloud Infrastructure': [
-    'Scale smoothly with business demand',
-    'Cut costs by paying only for what you use',
-    'Increase reliability with built-in redundancy',
+    'Infrastructure as Code for repeatable deployments',
+    'Optimized workloads with cost-efficient scaling',
+    'High availability and disaster recovery setups',
   ],
   'Team Augmentation': [
-    'Fill skill gaps quickly',
-    'Stay flexible with team sizes',
-    'Keep delivery on schedule without long hiring cycles',
+    'Specialized engineers embedded in your workflow',
+    'Flexible engagement-scale teams up or down',
+    'Immediate capacity without long recruitment cycles',
   ],
 }
 
-const useCasesMap: Record<string, string[]> = {
+
+const outcomes: Record<string, string[]> ={
   'Custom Software Development': [
-    'ERP and workflow tools',
-    'Customer-facing SaaS platforms',
-    'Specialized industry software',
+    'Reduced operational overhead',
+    'Higher employee productivity',
+    'Future-proof technology aligned with growth plans',
   ],
   'Web Application Development': [
-    'E-commerce platforms',
-    'Client dashboards',
-    'Internal portals',
+    'Improved customer engagement and conversions',
+    'Lower bounce rates due to faster load times',
+    'Streamlined internal processes via custom portals',
   ],
   'Mobile Application Development': [
-    'Consumer lifestyle apps',
-    'Enterprise mobile tools',
-    'On-demand delivery apps',
+    'Stronger brand presence on mobile devices',
+    'Increased customer retention and loyalty',
+    'Faster go-to-market with scalable mobile apps',
   ],
   Automation: [
-    'Continuous Integration pipelines',
-    'Automated QA testing',
-    'Robotic process automation for finance/HR',
+    'Fewer manual errors across departments',
+    'Accelerated delivery timelines',
+    'Increased focus on revenue-driving activities',
   ],
   'Systems Integration': [
-    'CRM + ERP connections',
-    'Marketing automation syncs',
-    'Data lakes and analytics hubs',
+    'Better collaboration with unified tools',
+    'Real-time insights across business units',
+    'Faster execution of company-wide initiatives',
   ],
-  'Software Prototyping': [
-    'Clickable startup pitch demos',
-    'MVPs for market validation',
-    'Stakeholder concept approvals',
-  ],
+  // 'Software Prototyping': [
+  //   'Lower investment risk',
+  //   'Quick validation of product-market fit',
+  //   'Stakeholder confidence with tangible demos',
+  // ],
   'Cloud Infrastructure': [
-    'Migration from on-prem to AWS/Azure/GCP',
-    'High-traffic e-commerce platforms',
-    'Secure fintech & health apps',
+    'Reduced downtime with resilient systems',
+    'Lower infrastructure costs through scaling',
+    'Faster time-to-deploy for new products',
   ],
   'Team Augmentation': [
-    'Scaling quickly during funding rounds',
-    'Temporary specialist roles',
-    'Extending in-house team capacity',
+    'On-time delivery of critical projects',
+    'Increased innovation with diverse skillsets',
+    'Faster response to shifting business needs',
   ],
 }
 
@@ -158,8 +158,8 @@ export default function ServicesPage() {
         ...s,
         slug: `${String(i + 1).padStart(2, '0')}-${slugify(s.title)}`,
         idx: i + 1,
-        whyItMatters: whyItMattersMap[s.title] || [],
-        useCases: useCasesMap[s.title] || [],
+        whyItMatters: solution[s.title] || [],
+        useCases: outcomes[s.title] || [],
       })),
     []
   )
@@ -275,7 +275,7 @@ export default function ServicesPage() {
               >
                 <header className="max-w-3xl">
                   <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">
-                    Service / {String(it.idx).padStart(2, '0')}
+                     {String(it.idx).padStart(2, '0')}
                   </p>
                   <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">
                     {it.title}
@@ -288,8 +288,7 @@ export default function ServicesPage() {
                 <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2">
                   <div>
                     <h3 className="text-base font-semibold tracking-wide">
-                      Why It Matters
-                    </h3>
+Our Solutions                    </h3>
                     <ul className="mt-3 space-y-2 text-base text-slate-700">
                       {it.whyItMatters.map((w, idx) => (
                         <li key={idx} className="flex items-start gap-3">
@@ -301,7 +300,7 @@ export default function ServicesPage() {
                   </div>
                   <div>
                     <h3 className="text-base font-semibold tracking-wide">
-                      Use Cases
+                        Outcomes
                     </h3>
                     <ul className="mt-3 space-y-2 text-base text-slate-700">
                       {it.useCases.map((u, idx) => (

@@ -74,7 +74,7 @@ const Metrics: NextPage = () => {
 
           {/* Right Column: Stats Cards */}
           <div className="grid grid-cols-2 gap-6">
-            <div className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-slate-900 p-8 text-white shadow-xl border border-slate-700/50">
+            <div className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-gradient-to-br from-black via-slate-900 to-sky-800  p-8 text-white shadow-xl border border-slate-700/50">
               <div>
                 <p className="text-5xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
                   10+
@@ -88,7 +88,7 @@ const Metrics: NextPage = () => {
               </div>
             </div>
 
-            <div className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-slate-900 p-8 text-white shadow-xl border border-slate-700/50">
+            <div className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-gradient-to-br from-black via-slate-900 to-sky-800  p-8 text-white shadow-xl border border-slate-700/50">
               <div>
                 <p className="text-5xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
                   60%
@@ -102,7 +102,7 @@ const Metrics: NextPage = () => {
               </div>
             </div>
 
-            <div className="col-span-2 flex flex-col justify-between rounded-3xl bg-slate-900  p-8 text-white shadow-xl border border-slate-700/50">
+            <div className="col-span-2 flex flex-col justify-between rounded-3xl bg-gradient-to-br from-black via-slate-900 to-sky-800 p-8 text-white shadow-xl border border-slate-700/50">
               <div>
                 <p className="text-5xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
                   25+

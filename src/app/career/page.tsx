@@ -9,7 +9,7 @@ export default function CareerPage() {
       <section className="">
 
         
-        <JobsListing />
+        <JobsListing page={1} limit={10} />
       </section>
       <Footer/>
     </main>

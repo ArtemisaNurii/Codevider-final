@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaSass, FaVuejs, FaAngular, FaPython,
-  FaPhp, FaLaravel, FaDocker, FaAws, FaGitAlt, FaJenkins, FaSlack, FaPaypal, FaStripe
+  FaPhp, FaLaravel, FaDocker, FaAws, FaGitAlt, FaJenkins, FaSlack, FaPaypal, FaStripe,FaMicrosoft,FaCloudflare, 
 } from 'react-icons/fa';
 import {
-  SiNextdotjs, SiMongodb, SiPostgresql, SiTypescript, SiJavascript, SiJquery,
-  SiExpress, SiDjango, SiFlask, SiRedis, SiGraphql, SiSocketdotio,
-  SiGo, SiMysql, SiFigma, SiOpenai
+  SiNextdotjs, SiMongodb, SiPostgresql, SiTypescript, SiJavascript, SiJquery,SiNestjs,
+  SiExpress, SiDjango, SiFlask, SiGraphql, SiSocketdotio,
+  SiGo, SiMysql, SiFigma, SiOpenai, SiKubernetes, SiVercel
 } from 'react-icons/si';
 import { GrAndroid, GrApple } from 'react-icons/gr';
 import { CgArrowsExchange } from 'react-icons/cg';
@@ -54,7 +54,8 @@ const technologies: TechnologyCategoryType[] = [
       { name: "Flask", icon: <SiFlask {...iconProps} className="text-gray-800" /> },
       { name: "PHP", icon: <FaPhp {...iconProps} className="text-indigo-500" /> },
       { name: "Laravel", icon: <FaLaravel {...iconProps} className="text-red-500" /> },
-      { name: "Go", icon: <SiGo {...iconProps} className="text-cyan-400" /> },
+   
+      { name: "NestJS", icon: <SiNestjs {...iconProps} className="text-red-500" /> },
     ]
   },
   {
@@ -63,7 +64,6 @@ const technologies: TechnologyCategoryType[] = [
       { name: "MongoDB", icon: <SiMongodb {...iconProps} className="text-green-500" /> },
       { name: "PostgreSQL", icon: <SiPostgresql {...iconProps} className="text-blue-600" /> },
       { name: "MySQL", icon: <SiMysql {...iconProps} className="text-blue-700" /> },
-      { name: "Redis", icon: <SiRedis {...iconProps} className="text-red-600" /> },
     ]
   },
   {
@@ -74,6 +74,9 @@ const technologies: TechnologyCategoryType[] = [
       { name: "Jenkins", icon: <FaJenkins {...iconProps} className="text-gray-600" /> },
       { name: "Git", icon: <FaGitAlt {...iconProps} className="text-orange-600" /> },
       { name: "Microservices", icon: <VscTerminal {...iconProps} className="text-gray-700" /> },
+      { name: "Vercel", icon: <SiVercel {...iconProps} className="" /> },
+      { name: "Microsoft", icon: <FaMicrosoft {...iconProps} className="" /> },
+      { name: "Cloudflare", icon: <FaCloudflare {...iconProps} className="text-orange-400" /> },
     ]
   },
   {
@@ -93,7 +96,7 @@ const technologies: TechnologyCategoryType[] = [
       { name: "Stripe", icon: <FaStripe {...iconProps} className="text-indigo-600" /> },
       { name: "PayPal", icon: <FaPaypal {...iconProps} className="text-blue-600" /> },
       { name: "Socket.IO", icon: <SiSocketdotio {...iconProps} className="text-gray-800" /> },
-      { name: "Slack", icon: <FaSlack {...iconProps} className="text-purple-600" /> },
+      { name: "Slack", icon: <FaSlack {...iconProps} className="text--600" /> },
     ]
   }
 ];

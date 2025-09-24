@@ -58,8 +58,8 @@ export default function Faq() {
   return (
     <section className="bg-white py-16">
       <div className="container mx-auto px-4">
-        <h1 className="text-center text-4xl font-bold uppercase text-black mb-10">
-          FAQ
+        <h1 className="text-center text-4xl font-semibold uppercase text-black mb-10">
+          Frequently Asked Questions
         </h1>
         <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
           {tabs.map((tab, index) => (

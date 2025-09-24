@@ -28,7 +28,7 @@ export const Footer1: FC = () => {
               {/* Anchor links for the same page are fine with <a> tags */}
               <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
               <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
-              <li><a href="#projects" className="hover:text-white transition-colors">Projects</a></li>
+              {/* <li><a href="#projects" className="hover:text-white transition-colors">Projects</a></li> */}
             </ul>
           </div>
           <div className="space-y-3">

@@ -49,9 +49,9 @@ export const Footer: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link href="/projects" className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1">
+              {/* <Link href="/projects" className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1">
                 Projects
-              </Link>
+              </Link> */}
             </li>
             <li>
               <Link href="/career" className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1">
@@ -259,8 +259,8 @@ const Contact: React.FC = () => {
                       Full Name
                     </Label>
                     <Input
-                      id="name"
-                      name="name"
+                      id="full_name"
+                      name="full_name"
                       type="text"
                       placeholder="John Doe"
                       required
@@ -286,8 +286,8 @@ const Contact: React.FC = () => {
                     Tell us about your project
                   </Label>
                   <Textarea
-                    id="description"
-                    name="description"
+                    id="details"
+                    name="details"
                     placeholder="I'm looking to build a new web application that..."
                     required
                     className="bg-transparent  border-gray-604 min-h-[120px] focus-visible:ring-offset-0 focus-visible:ring-sky-400"

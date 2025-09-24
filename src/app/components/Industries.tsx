@@ -5,29 +5,51 @@ import { Cloud } from "lucide-react"
 
 export default function Industries() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
-
   const slides = [
     {
-      title: "Series A/B Start-ups",
+      title: "Series A/B Startups",
       description:
-        "Empowering Series A & B Startups. You're growing fast and expectations are higher than ever. At CodeVider, we support Series A and B startups with agile, high-performance teams that match your momentum. Launch features faster, scale platforms, and turn MVPs into full-scale products—without the growing pains.",
+        "We help fast-growing startups scale with agile teams and cloud-native solutions. From MVP acceleration to core system growth, we deliver technology that fuels sustainable success.",
     },
     {
-      title: "Enterprise Modernisation",
+      title: "Enterprise Modernization",
       description:
-        "Legacy systems slow you down. We modernize with cloud-native, AI-ready architectures. From monolith refactors and cloud migrations to automation and UX revamps, we reduce tech debt, boost performance, and unlock new business value.",
+        "We modernize legacy systems with cloud-native,reducing technical debt, improving performance, and unlocking long-term innovation.",
     },
     {
-      title: "CRM-Centric Orgs",
+      title: "CRM-Centric Organizations",
       description:
-        "Your operations are unique—your platform should be too. We build tailored CRM/HR systems that streamline workflows, improve employee and customer experiences, and centralize data for scale and performance.",
+        "We design tailored CRM and HR platforms that streamline workflows, improve experiences, and centralize data for smarter decision-making.",
     },
     {
-      title: "Custom Solutions",
+      title: "Custom Software Solutions",
       description:
-        "We deliver exactly what you need—scalable, integrated solutions that evolve with your business. Flexible scopes, clean architecture, and measurable outcomes.",
+        "Off-the-shelf tools don’t fit every need. We build scalable, flexible software solutions that evolve with your business and deliver measurable results.",
     },
-  ]
+    {
+      title: "Fintech & Payments",
+      description:
+        "From digital wallets to trading platforms, we create secure, compliant fintech solutions that scale globally and deliver seamless user experiences.",
+    },
+    {
+      title: "AI & Automation",
+      description:
+        "We implement AI-powered chatbots, predictive analytics, and automation systems that cut manual work, increase accuracy, and drive new revenue.",
+    },
+    {
+      title: "Data & Analytics Platforms",
+      description:
+        "We transform raw data into actionable insights with BI dashboards, data warehouses, and real-time analytics built for smarter decisions.",
+    },
+    {
+      title: "Mobile App Development",
+      description:
+        "We build high-performance iOS, Android, and cross-platform apps with seamless UX-keeping your brand connected to users anytime, anywhere.",
+    },
+  ];
+  
+  
+  
 
   const getDarkCard = () => (hoveredCard !== null ? hoveredCard : 0)
 
@@ -39,7 +61,7 @@ export default function Industries() {
             We Empower Tech Startups, SMEs & Global Brands
           </h2>
         </div>
-
+<div className="p-4"></div>
         <div className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:max-w-7xl xl:mx-auto mb-6">
             {slides.map((slide, index) => {
@@ -47,7 +69,7 @@ export default function Industries() {
               return (
                 <div
                   key={index}
-                  className={`flex flex-col p-4 md:p-5 rounded-2xl transition-all duration-300 h-full ${
+                  className={`flex flex-col p-4 md:p-5 rounded-2xl transition-all duration-300 h-100px min-h-[300px] ${
                     isDark ? "bg-slate-900 text-white" : "bg-gray-100 text-gray-900"
                   } ${hoveredCard === index ? "ring-2 ring-[#0a61cb] shadow-md md:shadow-lg scale-[1.02]" : "hover:shadow-md"}`}
                   onMouseEnter={() => setHoveredCard(index)}
@@ -60,7 +82,7 @@ export default function Industries() {
                   <h3 className="text-lg md:text-xl font-bold mb-2 leading-snug">{slide.title}</h3>
 
                   <p
-                    className={`text-xs md:text-sm leading-relaxed ${
+                    className={`text-md leading-relaxed ${
                       isDark ? "text-gray-300" : "text-gray-600"
                     }`}
                     style={{

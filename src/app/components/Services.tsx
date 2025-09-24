@@ -1,36 +1,39 @@
+
+
 "use client";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { PieChart, Atom, Users, Code, Brain } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+
 const serviceData = [
   {
     icon: Code,
     title: "Product Engineering",
     description:
-      "Design, build, and ship robust web apps and microservices with modern MERN stacks, clean architecture, and rapid release cycles.",
+      "We design and develop scalable web applications and microservices using modern stacks, clean architecture, and agile release cycles, ensuring faster time-to-market and long-term maintainability.",
     isHighlighted: true,
   },
   {
     icon: Users,
     title: "Dedicated Pod Teams",
     description:
-      "Spin up cross-functional squads (PM, FE, BE, QA) in under two weeks. Scale capacity up or down with outcome-based SLAs.",
+      "Quickly launch cross-functional squads, PM, frontend, backend, and QA, within two weeks. Scale effortlessly with flexible, outcome-focused SLAs tailored to your needs.",
     isHighlighted: false,
   },
   {
     icon: Atom,
     title: "Cloud & DevOps",
     description:
-      "CI/CD pipelines, containerization, and cloud infrastructure on AWS/Azure/GCP for secure, high-availability deployments.",
+      "Streamline deployments with CI/CD pipelines, containerization, and secure cloud infrastructure on AWS, delivering high availability and operational efficiency.",
     isHighlighted: false,
   },
   {
     icon: Brain, // <- Lucide-react Brain icon for AI
     title: "AI Integrations",
     description:
-      "Supercharge products with AI: custom LLM apps, intelligent chatbots, process automation, and data-driven insights integrated seamlessly into your systems.",
+      "Enhance your products with AI: from custom LLM-powered apps and intelligent chatbots to workflow automation and actionable insights-seamlessly embedded into your ecosystem.",
     isHighlighted: false,
   },
 ];
@@ -80,8 +83,8 @@ const Services: NextPage = () => {
             Our Core Services
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            We help startups and enterprises ship faster with scalable teams,
-            modern stacks, and reliable delivery—without the overhead.
+            We help enterprises and startups ship faster with scalable teams,
+            modern stacks, and reliable delivery,without the overhead.
           </p>
         </motion.div>
 
@@ -124,7 +127,7 @@ const Services: NextPage = () => {
                     className={`w-12 h-12 flex items-center justify-center bg-slate-900 rounded-lg transition-colors duration-300`}
                   >
                     <Icon
-                      className={`text-white bg-slate-900 duration-300`}
+                      className={`text-blue-400 bg-slate-900 duration-300`}
                       size={28}
                       aria-hidden="true"
                     />
@@ -134,7 +137,7 @@ const Services: NextPage = () => {
                     className={`w-12 h-12 flex items-center justify-center bg-slate-900 rounded-lg transition-colors duration-300`}
                   >
                     <Icon
-                      className={`text-white transition-colors duration-300`}
+                      className={`text-blue-400 transition-colors duration-300`}
                       size={28}
                       aria-hidden="true"
                     />
@@ -151,7 +154,7 @@ const Services: NextPage = () => {
                 {/* Read more (aligned with Services page CTA style) */}
                 <div className="mt-6">
                   <Link
-                    href={readMoreHref[service.title] ?? "/services"}
+                  href={( "/services") }
                     className="inline-flex items-center underline decoration-gray-300 underline-offset-4 text-gray-900 hover:decoration-gray-900 text-sm font-medium"
                     aria-label={`Read more about ${service.title}`}
                   >
