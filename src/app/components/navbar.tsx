@@ -1,10 +1,10 @@
 "use client"
 import { ArrowUpRight, X } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useMemo } from "react"
 import Image from "next/image"
-import Link from "next/link";
-import { usePathname } from "next/navigation"
-import type { Route } from "next";
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+import type { Route } from "next"
 
 type NavLink = { name: string; href: Route };
 
@@ -19,11 +19,19 @@ export const navLinks = [
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
   const isHomePage = pathname === "/"
   const [isSolid, setIsSolid] = useState(!isHomePage)
 
-  const toggleMobileMenu = () => setIsMobileMenuOpen(v => !v)
-  const closeMobileMenu = () => setIsMobileMenuOpen(false)
+  const toggleMobileMenu = useCallback(() => setIsMobileMenuOpen(v => !v), [])
+  const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), [])
+
+  // Preload routes on hover for faster navigation
+  const handleLinkHover = useCallback((href: Route) => {
+    if (href !== pathname) {
+      router.prefetch(href)
+    }
+  }, [router, pathname])
 
   // Lock page scroll when mobile menu is open
   useEffect(() => {
@@ -32,30 +40,45 @@ const Header = () => {
     return () => { root.style.overflow = "" }
   }, [isMobileMenuOpen])
 
+  // Debounced scroll handler for better performance
+  const handleScroll = useCallback(() => {
+    const heroSection = document.getElementById("hero")
+    if (heroSection) {
+      const heroBottom = heroSection.offsetTop + heroSection.offsetHeight
+      setIsSolid(window.scrollY > heroBottom - 80)
+    } else {
+      setIsSolid(window.scrollY > window.innerHeight)
+    }
+  }, [])
+
   useEffect(() => {
     if (!isHomePage) {
       setIsSolid(true)
       return
     }
-    const handleScroll = () => {
-      const heroSection = document.getElementById("hero")
-      if (heroSection) {
-        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight
-        setIsSolid(window.scrollY > heroBottom - 80)
-      } else {
-        setIsSolid(window.scrollY > window.innerHeight)
+
+    let ticking = false
+    const debouncedHandleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
       }
     }
-    handleScroll()
-    window.addEventListener("scroll", handleScroll)
-    window.addEventListener("resize", handleScroll)
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("resize", handleScroll)
-    }
-  }, [isHomePage])
 
-  const year = new Date().getFullYear()
+    handleScroll()
+    window.addEventListener("scroll", debouncedHandleScroll, { passive: true })
+    window.addEventListener("resize", debouncedHandleScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", debouncedHandleScroll)
+      window.removeEventListener("resize", debouncedHandleScroll)
+    }
+  }, [isHomePage, handleScroll])
+
+  // Memoize year to avoid recalculation on every render
+  const year = useMemo(() => new Date().getFullYear(), [])
 
   return (
     <>
@@ -92,6 +115,8 @@ const Header = () => {
                     className={`px-5 py-3 text-sm font-medium transition-colors duration-300 inline-block relative z-10 ${
                       isSolid ? "text-gray-700 hover:text-white" : "text-white hover:text-gray-900"
                     }`}
+                    onMouseEnter={() => handleLinkHover(link.href)}
+                    prefetch={true}
                   >
                     {link.name}
                   </Link>
@@ -194,6 +219,8 @@ const Header = () => {
                   href={link.href}
                   className="text-2xl font-medium text-white hover:text-gray-300"
                   onClick={closeMobileMenu}
+                  onMouseEnter={() => handleLinkHover(link.href)}
+                  prefetch={true}
                 >
                   {link.name}
                 </Link>
