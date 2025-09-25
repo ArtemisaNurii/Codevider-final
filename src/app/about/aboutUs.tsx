@@ -21,7 +21,7 @@ export default function AboutSection3() {
       <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         
         {/* Top highlights section */}
-        <div className="mb-12 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-700 sm:text-base">
+        <div className="mb-12 flex flex-wrap items-center gap-x-2 gap-y-2 text-sm text-gray-700 sm:text-base max-sm:flex-row">
           <span>10+ years delivering software</span>
           <div className="h-4 w-px bg-gray-300" aria-hidden="true"></div>
           <span>10+ enterprise global projects</span>
