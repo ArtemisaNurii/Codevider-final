@@ -14,24 +14,24 @@ export default function AboutSection3() {
           <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
           Crafting Software That Means Business         </h1>
           <p className="mt-4  mx-auto text-lg leading-relaxed text-gray-300">
-          Strategy, design, and engineering under one roof to move your roadmap forward.          </p>
+          Strategy, design, and engineering working in harmony to drive your roadmap forward.        </p>
         </div>
       </header>
       <section className="bg-white font-sans">
-      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8 ">
         
         {/* Top highlights section */}
-        <div className="mb-12 flex flex-wrap items-center gap-x-2 gap-y-2 text-sm text-gray-700 sm:text-base max-sm:flex-row">
+        <div className="mb-12 flex max-w-7xl mx-auto flex-wrap items-center gap-x-2 gap-y-2 text-sm text-gray-700 sm:text-base max-sm:flex-row">
           <span>10+ years delivering software</span>
           <div className="h-4 w-px bg-gray-300" aria-hidden="true"></div>
           <span>10+ enterprise global projects</span>
         </div>
 
         {/* Main grid for the content */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8 max-w-7xl mx-auto">
           
           {/* Left Side: Heading and two text paragraphs */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 ">
             <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
               Who Are We
             </h2>
@@ -63,14 +63,13 @@ export default function AboutSection3() {
               <p className="mt-1 text-gray-500">Albania-based software company</p>
             </div>
 
-            <div className="rounded-lg border border-gray-100 p-6 shadow-sm sm:p-8 lg:p-6 xl:p-8">
+            <div className="sm:p-8 lg:p-6 xl:p-8">
               <p className="text-lg font-medium text-gray-800">
-                Let&apos;s turn your roadmap into shipped features-on time.
-              </p>
+              Let&apos;s bring your roadmap to life with timely, shipped features.              </p>
 
               <button
                 type="button"
-                className="mt-6 flex w-full items-center justify-center gap-2.5 rounded-lg bg-gray-900 px-6 py-4 hover:gap-4 text-center font-semibold text-white transition hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                className="mt-6 flex w-full items-center justify-center gap-2.5 rounded-lg bg-gray-900 px-6 py-4 hover:gap-4 text-center font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
               >
                 <span>LETS BUILD TOGETHER</span>
                 <svg 

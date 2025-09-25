@@ -66,8 +66,7 @@ export default function MeetTeamSection() {
         <p className="text-sm font-medium text-muted-foreground mb-2">Behind The Codes</p>
         <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Meet the team</h2>
         <p className="text-lg text-muted-foreground mb-8 max-w-md mx-auto">
-          Unleashing creativity, our team of design visionaries turns ordinary spaces into extraordinary experiences
-        </p>
+        Unleashing imagination and innovation, we elevate ordinary spaces into extraordinary experiences        </p>
       </div>
 
       {/* Carousel */}

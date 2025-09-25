@@ -150,7 +150,7 @@ const MetricCard = ({
   children?: React.ReactNode;
 }) => (
   <div
-    className={`${bgColor} ${textColor} rounded-3xl flex flex-col p-8 shadow-xl overflow-hidden h-full transform-gpu`}
+    className={`${bgColor} ${textColor} rounded-3xl flex flex-col p-8 shadow-md overflow-hidden h-full transform-gpu`}
   >
     <div className="text-center flex-shrink-0">
       <p className="metric-value text-7xl font-light">{value}</p>
@@ -221,7 +221,7 @@ const SolutionPillars: React.FC = () => {
       value: "10+",
       label: "Years of Experience",
       // Repurposed 'countries' to 'skills' for the pills
-      skills: ["USA", "Germany", "Africa", "Europe"],
+      skills: ["USA", "Germany","London", "Europe"],
     },
   } as const;
 
@@ -441,8 +441,8 @@ const SolutionPillars: React.FC = () => {
         <div className="lg:col-span-2 metric-card ">
           <MetricCard {...pageData.metric1}>
             <div className="w-full h-full min-h-[250px] flex items-center justify-center rounded-lg">
-              <p className="text-gray-700 font-medium text-center p-4">
-                You can manage and be in control of your outsourced project at all times.
+              <p className="text-gray-700 font-medium text-start p-4">
+                You can manage and be in control of your  project at all times.
               </p>
             </div>
           </MetricCard>
@@ -462,7 +462,7 @@ const SolutionPillars: React.FC = () => {
             </div>
             <div className="w-full h-full min-h-[150px]  flex items-center justify-center rounded-lg">
               <p className="text-white font-medium text-center p-4">
-                Profit from our teams new perspectives and out-of-the-box thinking.
+                Profit from our teams new perspectives.
               </p>
             </div>
           </MetricCard>

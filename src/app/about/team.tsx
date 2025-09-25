@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Users, Handshake, Sparkles, Heart, Globe2, Target, Star, Trophy, Scale, Lightbulb, Rocket } from "lucide-react";
+import { ArrowRight, Users, Handshake, Sparkles, Heart, Globe2, Target, Star, Trophy, Scale, Lightbulb, Rocket, Code2 } from "lucide-react";
 import Image from "next/image";
 import MeetTeamSection from "./meetTeam";
 // ---- Types ----
@@ -24,29 +24,27 @@ interface TimelineItem {
   text: string;
 }
 
-// ---- Data ----
+
 const pillars: Pillar[] = [
   {
+    icon: <Target className="h-6 w-6" aria-hidden />,
+    title: "Clear Vision",
+    description:
+      "We set sharp goals, align on outcomes, and keep everyone focused on what actually moves the needle.",
+  },
+  {
+    icon: <Code2 className="h-6 w-6" aria-hidden />,
+    title: "Clean Code",
+    description:
+      "Readable, tested, and maintainable code—peer reviews, standards, and refactors that keep velocity high.",
+  },
+  {
     icon: <Users className="h-6 w-6" aria-hidden />,
-    title: "People First",
+    title: "Supportive Team",
     description:
-      "We design our processes around humans—clear goals, honest feedback, flexible work, and space to grow.",
+      "Kind, candid collaboration with mentorship, knowledge-sharing, and help when you need it.",
   },
-
-
-  {
-    icon: <Lightbulb className="h-6 w-6" aria-hidden />,
-    title: "Always Learning",
-    description:
-      "Weeklies for demos, monthlies for postmortems, and a culture of sharing what we discover.",
-  },
-  {
-    icon: <Scale className="h-6 w-6" aria-hidden />,
-    title: "Do Right",
-    description:
-      "Ethical software, candid communication, and long‑term partnerships over short‑term wins.",
-  },
-];
+]
 
 
 
@@ -63,9 +61,9 @@ export default function CodeviderCulturePage() {
   return (
     <main className="bg-white text-slate-900">
       {/* Hero */}
-      <section className="relative overflow-hidden ">
+      <section className="relative overflow-hidden max-w-7xl mx-auto ">
         <div className="pointer-events-none absolute inset-0 max-w-7xl " />
-        <div className="container mx-auto px-6 py-24 md:py-32">
+        <div className="container mx-auto px-6 py-24 ">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -95,10 +93,10 @@ export default function CodeviderCulturePage() {
       </section>
 
       {/* Values / Pillars */}
-      <section id="principles" className="container mx-auto px-6 py-8 ">
+      <section id="principles" className="container mx-auto max-w-7xl px-6 pb-8 ">
         <div className="mx-auto mb-10 max-w-2xl text-center">
           <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Principles we live by</h2>
-          <p className="mt-3 text-slate-600">Clear ideas. Clean code. Considerate collaboration.</p>
+          <p className="mt-3 text-slate-600">Clear ideas. Clean code. Collaboration.</p>
         </div>
         <div className="grid grid-cols-1 gap-6 text-white sm:grid-cols-2 lg:grid-cols-3">
           {pillars.map((p, i) => (
@@ -122,18 +120,18 @@ export default function CodeviderCulturePage() {
         </div>
       </section>
 
-      <section className="container mx-auto px-6 py-16 md:py-24">
+      <section className="container max-w-7xl mx-auto px-6 py-16 md:py-24 ">
         <div className="grid items-start gap-10 lg:grid-cols-2">
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Working at Codevider</h2>
             <p className="mt-4 text-slate-600">
-              We balance autonomy with support. Small, senior‑leaning teams ship frequently, maintain standards, and
-              demo progress every week. Managers remove blockers. Engineers mentor through pairing, reviews, and docs.
+            We balance independence with guidance, and a culture of integrity, respect, and teamwork ensures an environment where we grow, collaborate, and achieve excellence together.
+            At Codevider, we build with purpose and grow with intention.
             </p>
             <ul className="mt-6 space-y-3 text-slate-700">
-              <li className="flex items-start gap-3"><Sparkles className="mt-1 h-5 w-5 text-sky-600" /> Focus time over needless meetings.</li>
-              <li className="flex items-start gap-3"><Trophy className="mt-1 h-5 w-5 text-sky-600" /> Outcome‑based roadmaps and success metrics.</li>
-              <li className="flex items-start gap-3"><Heart className="mt-1 h-5 w-5 text-sky-600" /> Wellness stipend, learning budget, and flexible hours.</li>
+              <li className="flex items-start gap-3"><Sparkles className="mt-1 h-5 w-5 text-sky-600" /> Dedicated focus time instead of endless meetings.</li>
+              <li className="flex items-start gap-3"><Trophy className="mt-1 h-5 w-5 text-sky-600" /> Goal-oriented roadmaps with clear performance metrics</li>
+              <li className="flex items-start gap-3"><Heart className="mt-1 h-5 w-5 text-sky-600" /> WWellness benefits, training budgets, and flexible time</li>
             </ul>
           </motion.div>
 
@@ -152,7 +150,7 @@ export default function CodeviderCulturePage() {
 <MeetTeamSection/>
 
       <section id="open-roles" className="relative overflow-hidden border-t border-slate-200">
-        <div className="container mx-auto px-6 h-1/2 py-16 md:py-24">
+        <div className="container max-w-7xl mx-auto px-6 h-1/2 py-16 md:py-24">
           <div className="grid items-center gap-10 rounded-3xl bg-gradient-to-br from-black via-slate-950 to-sky-800 p-8 text-white md:grid-cols-2 md:p-12">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Join Our Journey</h2>
