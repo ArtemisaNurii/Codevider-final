@@ -30,7 +30,7 @@ const pillars: Pillar[] = [
     icon: <Target className="h-6 w-6" aria-hidden />,
     title: "Clear Vision",
     description:
-      "We set sharp goals, align on outcomes, and keep everyone focused on what actually moves the needle.",
+      "With a clear vision, we define priorities, align on outcomes, and focus on what truly drives impact",
   },
   {
     icon: <Code2 className="h-6 w-6" aria-hidden />,
@@ -42,7 +42,7 @@ const pillars: Pillar[] = [
     icon: <Users className="h-6 w-6" aria-hidden />,
     title: "Supportive Team",
     description:
-      "Kind, candid collaboration with mentorship, knowledge-sharing, and help when you need it.",
+      "A culture of kindness, mentorship, knowledge-sharing, and support whenever it’s needed.",
   },
 ]
 
@@ -94,9 +94,9 @@ export default function CodeviderCulturePage() {
 
       {/* Values / Pillars */}
       <section id="principles" className="container mx-auto max-w-7xl px-6 pb-8 ">
-        <div className="mx-auto mb-10 max-w-2xl text-center">
+        <div className="mx-auto mb-10 max-w-2xl text-center max-sm:text-start">
           <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Principles we live by</h2>
-          <p className="mt-3 text-slate-600">Clear ideas. Clean code. Collaboration.</p>
+          <p className="mt-3 text-slate-600">Clear Vision, Clean Code and Supportive Team</p>
         </div>
         <div className="grid grid-cols-1 gap-6 text-white sm:grid-cols-2 lg:grid-cols-3">
           {pillars.map((p, i) => (

@@ -60,9 +60,9 @@ export default function MeetTeamSection() {
   }
 
   return (
-    <section className="py-16 px-4 bg-white max-w-7xl mx-auto">
+    <section className="py-16 px-6 bg-white max-w-7xl mx-auto">
       {/* Header */}
-      <div className="text-center mb-12">
+      <div className="text-center max-sm:text-start mb-12">
         <p className="text-sm font-medium text-muted-foreground mb-2">Behind The Codes</p>
         <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Meet the team</h2>
         <p className="text-lg text-muted-foreground mb-8 max-w-md mx-auto">
