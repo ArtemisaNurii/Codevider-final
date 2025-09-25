@@ -13,7 +13,14 @@ import {
 import { GrAndroid, GrApple } from 'react-icons/gr';
 import { CgArrowsExchange } from 'react-icons/cg';
 import { VscTerminal } from 'react-icons/vsc';
-
+import { SiAnthropic } from "react-icons/si";
+import { RiMixtralFill } from "react-icons/ri";
+import { FaMeta } from "react-icons/fa6";
+import { SiHuggingface } from "react-icons/si";
+import { SiOllama } from "react-icons/si";
+import { RiGeminiFill } from "react-icons/ri";
+import { SiGooglecloud } from "react-icons/si";
+import { VscAzure } from "react-icons/vsc";
 // --- TYPE DEFINITIONS ---
 interface TechItemType {
   name: string;
@@ -77,6 +84,9 @@ const technologies: TechnologyCategoryType[] = [
       { name: "Vercel", icon: <SiVercel {...iconProps} className="" /> },
       { name: "Microsoft", icon: <FaMicrosoft {...iconProps} className="" /> },
       { name: "Cloudflare", icon: <FaCloudflare {...iconProps} className="text-orange-400" /> },
+      {name:"SiGooglecloud", icon: <SiGooglecloud {...iconProps} className="text-blue-500" /> },
+      {name:"VscAzure", icon: <VscAzure {...iconProps} className="text-blue-500" /> },
+      {name:"SiKubernetes", icon: <SiKubernetes {...iconProps} className="text-blue-500" /> },
     ]
   },
   {
@@ -86,6 +96,12 @@ const technologies: TechnologyCategoryType[] = [
       { name: "Android", icon: <GrAndroid {...iconProps} className="text-green-500" /> },
       { name: "OpenAI", icon: <SiOpenai {...iconProps} className="text-teal-500" /> },
       { name: "Figma", icon: <SiFigma {...iconProps} className="text-purple-500" /> },
+      { name: "Anthropic", icon: <SiAnthropic {...iconProps} className="text-blue-500" /> },
+      { name: "Mixtral", icon: <RiMixtralFill {...iconProps} className="text-blue-500" /> },
+      { name: "Meta", icon: <FaMeta {...iconProps} className="text-blue-500" /> },
+      { name: "Huggingface", icon: <SiHuggingface {...iconProps} className="text-blue-500" /> },
+      { name: "Ollama", icon: <SiOllama {...iconProps} className="text-blue-500" /> },
+      { name: "Gemini", icon: <RiGeminiFill {...iconProps} className="text-blue-500" /> },
     ]
   },
   {
