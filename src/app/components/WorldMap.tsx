@@ -52,13 +52,13 @@ export default function WorldMapDemo() {
           dots={[
             
             
-              { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 40.7128, lng: -74.0060 } }, // → New York City
-              { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 41.8566, lng: 4.3522 } },  // → Paris
-              { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 37.7749, lng: -122.4194 } }, // → San Francisco
+              { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 27.7128, lng: -77.0060 } }, // → New York City
+              { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 41.8566, lng: 5.3522 } },  // → Paris
+              { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 29.7749, lng: -122.4194 } }, // → San Francisco
               { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: -58.8136, lng: 144.9631 } }, // → Melbourne
-              { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 50.5074, lng: -2.2978 } }, // → London
-              { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 5.2048, lng: 48.9708 } },  // → Dubai
-              { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 10.7167, lng: -10.5677 } }, // Albania → Senegal (Dakar)
+              { start: { lat: 32.1533, lng: 17.1683 }, end: { lat: 46.5074, lng: -2.2978 } }, // → London
+              { start: { lat: 32.1533, lng: 16.1683 }, end: { lat: 5.2048, lng: 55.9708 } },  // → Dubai
+ 
             
             
           
