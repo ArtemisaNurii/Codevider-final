@@ -19,7 +19,7 @@ const Metrics: NextPage = () => {
   
   return (
     <section id="about" className="bg-white">
-      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24 max-w-7xl ">
         {/* Trusted By Section */}
         <div className="text-center mb-16">
           <p className="text-sm font-semibold text-gray-600 tracking-wide">Trusted by Clients Worldwide</p>

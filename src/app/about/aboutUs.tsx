@@ -22,7 +22,7 @@ export default function AboutSection3() {
         
         {/* Top highlights section */}
         <div className="mb-12 flex max-w-7xl mx-auto flex-wrap items-center gap-x-2 gap-y-2 text-sm text-gray-700 sm:text-base max-sm:flex-row">
-          <span>10+ years delivering software</span>
+          <span>+6 years delivering software</span>
           <div className="h-4 w-px bg-gray-300" aria-hidden="true"></div>
           <span>10+ enterprise global projects</span>
         </div>
@@ -41,13 +41,13 @@ export default function AboutSection3() {
               <p>
                 Founded in 2019 in Tirana, Albania, CodeVider delivers high-performance,
                 cost-efficient software development solutions for startups, SMEs, and
-                enterprises across Europe and beyond. We specialize in nearshore web and
+                enterprises across Europe and beyond. We specialize in web and
                 mobile development, cloud-native microservices, and AI-powered
                 integrations, helping you accelerate time-to-market and cut development
                 costs by up to 60%.
               </p>
               <p>
-                Our team of 25+ senior developers excels in today&apos;s most advanced tech
+                Our team of 25+  developers excels in today&apos;s most advanced tech
                 stacks. We integrate directly into your workflow using agile, sprint-based
                 methodologies that keep you informed and in control, every step of the
                 way. With a focus on quality, agility, and long-term partnership, we turn your

@@ -123,10 +123,10 @@ const InfoCard = ({
       </div>
     </div>
     <div className="mt-16">
-      <div className="text-2xl font-medium info-features">
+      <div className="text-xl font-medium info-features">
         {splitTextIntoWords(features.join(" → "))}
       </div>
-      <div className="text-2xl font-medium mt-2 info-subtitle">
+      <div className="text-xl font-medium mt-2 info-subtitle">
         {splitTextIntoWords(subtitle)}
       </div>
     </div>
@@ -218,7 +218,7 @@ const SolutionPillars: React.FC = () => {
     },
     metric1: { value: "100%", label: "Flexibility & Control" },
     metric2: {
-      value: "10+",
+      value: "6+",
       label: "Years of Experience",
       // Repurposed 'countries' to 'skills' for the pills
       skills: ["USA", "Germany","London", "Europe"],
@@ -441,8 +441,8 @@ const SolutionPillars: React.FC = () => {
         <div className="lg:col-span-2 metric-card ">
           <MetricCard {...pageData.metric1}>
             <div className="w-full h-full min-h-[250px] flex items-center justify-center rounded-lg">
-              <p className="text-gray-700 font-medium text-start p-4">
-                You can manage and be in control of your  project at all times.
+              <p className="text-gray-700 font-medium text-xl text-start p-4">
+                You can manage and be in control of your own project at all times.
               </p>
             </div>
           </MetricCard>
@@ -461,7 +461,7 @@ const SolutionPillars: React.FC = () => {
               ))}
             </div>
             <div className="w-full h-full min-h-[150px]  flex items-center justify-center rounded-lg">
-              <p className="text-white font-medium text-center p-4">
+              <p className="text-white text-2xl font-medium text-center p-4">
                 Profit from our teams new perspectives.
               </p>
             </div>

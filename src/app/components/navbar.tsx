@@ -86,14 +86,14 @@ const Header = () => {
         className={`fixed top-0 left-0 right-0 z-50 p-4 transition-all duration-300 ${
           isSolid
             ? "bg-white/95 border-b border-gray-200 backdrop-blur-sm"
-            : "bg-transparent"
+            : "bg-transparent border-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
           <Link href="/">
             <Image
-              src={isSolid ? "/images/logo/black.png" : "/images/logo/white.png"}
+              src={isSolid ? "/images/logo/blue.png" : "/images/logo/whitblue.svg"}
               alt="logo"
               width={140}
               height={82}
@@ -156,7 +156,7 @@ const Header = () => {
           <button
             onClick={toggleMobileMenu}
             className={`md:hidden backdrop-blur-md p-2 rounded-full transition-all duration-300 ${
-              isSolid ? "bg-black/10 text-black hover:bg-black/20" : "bg-white/10 text-white hover:bg-white/20"
+              isSolid ? "bg-transparent text-black hover:bg-black/20" : "bg-transparent text-white hover:bg-white/20"
             }`}
             aria-label="Toggle mobile menu"
             aria-expanded={isMobileMenuOpen}
