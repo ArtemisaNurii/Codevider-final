@@ -7,7 +7,7 @@ export default function AboutSection3() {
   return (
     <section id="about" className=" bg-white md:mt-10 ">
              <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-        <div className="mx-auto max-w-7xl px-6  py-16 md:py-24 text-start">
+        <div className="mx-auto max-w-7xl max-md:px-4 py-16 md:py-24 text-start">
           <p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
               About Us
           </p>
@@ -17,102 +17,78 @@ export default function AboutSection3() {
           Strategy, design, and engineering under one roof to move your roadmap forward.          </p>
         </div>
       </header>
-      <div className="max-w-[80%] mx-auto">
-        <div className="relative">
- 
-          <div className="flex flex-wrap items-center py-3  mt-6 text-sm justify-start md:justify-between  lg:justify-start">
-            <div className="flex gap-4 justify-start">
-              <div className="flex items-center gap-2 mb-2 sm:text-base text-xs text-left">
-                <span className="text-slate-900 font-bold">10+</span>
-                <span className="text-gray-600">years delivering software</span>
-                <span className="text-gray-300">|</span>
-              </div>
-              <div className="flex items-center gap-2 mb-2 sm:text-base text-xs text-left">
-                <span className="text-slate-900 font-bold">10+</span>
-                <span className="text-gray-600">enterprise global projects</span>
-              </div>
-            </div>
-
-            <div className="lg:absolute right-0 bottom-16 flex lg:flex-col flex-row-reverse lg:gap-0 gap-4 items-start">
-              <div className="flex lg:text-4xl sm:text-base text-xs items-center gap-2 mb-2 text-left">
-                {/* <span className="text-slate-900 font-semibold">10+</span>
-                <span className="text-gray-600 uppercase">clients</span> */}
-              </div>
-              <div className="flex items-center gap-2 mb-2 sm:text-base text-xs text-left">
-                <span className="text-slate-900 font-bold"></span>
-                {/* <span className="text-gray-600">Global Partners</span> */}
-                <span className="text-gray-300 lg:hidden block">|</span>
-              </div>
-            </div>
-          </div>
+      <section className="bg-white font-sans">
+      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        
+        {/* Top highlights section */}
+        <div className="mb-12 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-700 sm:text-base">
+          <span>10+ years delivering software</span>
+          <div className="h-4 w-px bg-gray-300" aria-hidden="true"></div>
+          <span>10+ enterprise global projects</span>
         </div>
 
-        {/* Main Content */}
-        <div className="grid md:grid-cols-3  gap-8">
-          <div className="md:col-span-2">
-            <h1 className="sm:text-4xl md:text-5xl text-2xl !leading-[110%] font-semibold text-gray-900 mb-8 text-left md:text-left">
-              <VerticalCutReveal
-                splitBy="words"
-                staggerDuration={0.1}
-                staggerFrom="first"
-                reverse={true}
-                once={true}
-                transition={{
-                  type: "spring",
-                  stiffness: 250,
-                  damping: 30,
-                  delay: 0.1,
-                }}
-              >
-                Who Are We
-              </VerticalCutReveal>
-            </h1>
-
-            <div className="grid md:grid-cols-2 gap-8 text-gray-800">
-              <div className="sm:text-md text-md text-left md:text-justify">
-                <p className="leading-relaxed">
-                Founded in 2019 in Tirana, Albania, CodeVider delivers high-performance, cost-efficient software development solutions for startups, SMEs, and enterprises across Europe and beyond. We specialize in nearshore web and mobile development, cloud-native microservices, and AI-powered integrations, helping you accelerate time-to-market and cut development costs by up to 60%.
-
-
-
-                </p>
-              </div>
-              <div className="sm:text-md text-md text-left md:text-justify">
-                <p className="leading-relaxed">
-               Our team of 25+ senior developers excels in today&apos;s most advanced tech stacks. We integrate directly into your workflow using agile, sprint-based methodologies that keep you informed and in control, every step of the way.With a focus on quality, agility, and long-term partnership, we turn your ideas into scalable, future-ready digital products.
-
-                </p>
-              </div>
+        {/* Main grid for the content */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
+          
+          {/* Left Side: Heading and two text paragraphs */}
+          <div className="lg:col-span-2">
+            <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+              Who Are We
+            </h2>
+            
+            {/* Grid for the two paragraphs to sit side-by-side on medium screens and up */}
+            <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 text-base text-gray-600 leading-relaxed">
+              <p>
+                Founded in 2019 in Tirana, Albania, CodeVider delivers high-performance,
+                cost-efficient software development solutions for startups, SMEs, and
+                enterprises across Europe and beyond. We specialize in nearshore web and
+                mobile development, cloud-native microservices, and AI-powered
+                integrations, helping you accelerate time-to-market and cut development
+                costs by up to 60%.
+              </p>
+              <p>
+                Our team of 25+ senior developers excels in today&apos;s most advanced tech
+                stacks. We integrate directly into your workflow using agile, sprint-based
+                methodologies that keep you informed and in control, every step of the
+                way. With a focus on quality, agility, and long-term partnership, we turn your
+                ideas into scalable, future-ready digital products.
+              </p>
             </div>
           </div>
 
-          <div className="md:col-span-1">
-            <div className="text-left md:text-right">
-              <div className="text-slate-900 text-2xl font-bold mb-2 text-left md:text-right">
-                CODEVIDER
-              </div>
-              <div className="text-gray-600 text-sm mb-8 text-left md:text-right">
-                Albania-based software company
-              </div>
+          {/* Right Side: CTA column */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900">CODEVIDER</h3>
+              <p className="mt-1 text-gray-500">Albania-based software company</p>
+            </div>
 
-              <div className="mb-6 text-left md:text-right">
-                <p className="text-gray-900 font-medium mb-4">
-                  Let&apos;s turn your roadmap into shipped features-on time.
-                </p>
-              </div>
+            <div className="rounded-lg border border-gray-100 p-6 shadow-sm sm:p-8 lg:p-6 xl:p-8">
+              <p className="text-lg font-medium text-gray-800">
+                Let&apos;s turn your roadmap into shipped features-on time.
+              </p>
 
               <button
-                onClick={() => {
-                  window.location.href = "mailto:info@codevider.com";
-                }}
-                className="bg-neutral-900 hover:bg-neutral-950 border border-neutral-700 flex w-fit md:ml-auto ml-0 gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold"
+                type="button"
+                className="mt-6 flex w-full items-center justify-center gap-2.5 rounded-lg bg-gray-900 px-6 py-4 hover:gap-4 text-center font-semibold text-white transition hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
               >
-                LETS BUILD TOGETHER <ArrowRight />
+                <span>LETS BUILD TOGETHER</span>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-5 w-5" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </button>
             </div>
           </div>
         </div>
       </div>
+    </section>
     </section>
   )
 }
