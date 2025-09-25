@@ -34,11 +34,11 @@ export default async function JobsListing({ page, limit }: JobsListingProps) {
           </div>
         </header>
 
-        <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-start">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
             {pagination.totalCount === 0 ? "No Open Positions at the Moment" : "No Jobs Found on This Page"}
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 mb-10">
+          <p className="text-base sm:text-lg text-start text-gray-600 mb-10">
             {pagination.totalCount === 0 
               ? "We may not have active openings right now, but we're always eager to connect with talented professionals. Share your resume with us, and we'll be in touch when a role that matches your skills and ambitions becomes available."
               : `Showing page ${pagination.currentPage} of ${pagination.totalPages}. Try going back to page 1 or adjusting your pagination settings.`
