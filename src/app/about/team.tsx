@@ -131,7 +131,7 @@ export default function CodeviderCulturePage() {
             <ul className="mt-6 space-y-3 text-slate-700">
               <li className="flex items-start gap-3"><Sparkles className="mt-1 h-5 w-5 text-sky-600" /> Dedicated focus time instead of endless meetings.</li>
               <li className="flex items-start gap-3"><Trophy className="mt-1 h-5 w-5 text-sky-600" /> Goal-oriented roadmaps with clear performance metrics</li>
-              <li className="flex items-start gap-3"><Heart className="mt-1 h-5 w-5 text-sky-600" /> WWellness benefits, training budgets, and flexible time</li>
+              <li className="flex items-start gap-3"><Heart className="mt-1 h-5 w-5 text-sky-600" /> Wellness benefits, training budgets, and flexible time</li>
             </ul>
           </motion.div>
 
