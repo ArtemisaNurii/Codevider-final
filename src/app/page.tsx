@@ -24,7 +24,7 @@ const SectionLoader = () => (
 
 export default function Home() {
   return (
-    <div className="min-h-dvh bg-black">
+    <div className="min-h-dvh ">
       <Header />
       <main id="home">
         <Hero />
