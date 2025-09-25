@@ -441,7 +441,7 @@ const SolutionPillars: React.FC = () => {
         <div className="lg:col-span-2 metric-card ">
           <MetricCard {...pageData.metric1}>
             <div className="w-full h-full min-h-[250px] flex items-center justify-center rounded-lg">
-              <p className="text-gray-700 font-medium text-xl text-start p-4">
+              <p className="text-gray-700 font-medium text-xl pt-20 text-start p-4">
                 You can manage and be in control of your own project at all times.
               </p>
             </div>

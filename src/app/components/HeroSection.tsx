@@ -4,7 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   ArrowUpRight, BarChart2, Bell, Search, TrendingUp, DollarSign, Users, Truck,
   Settings, ChevronDown, LayoutDashboard, Target, Zap, Clock, ShieldCheck,
-  CheckCircle, RefreshCw
+  CheckCircle, RefreshCw,
+  PersonStanding,
+  User2
 } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
@@ -151,7 +153,7 @@ const Hero = () => {
           <div className="flex flex-col items-center gap-6 mb-12">
             <button
               onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-[#67c1dd] text-black font-semibold py-3 px-6 rounded-full flex items-center gap-2 shadow-lg hover:scale-105 transition"
+              className="bg-[#67c1dd] text-black font-semibold py-3 px-6 rounded-full flex items-center gap-2 hover:gap-4 shadow-lg hover:scale-105 transition"
             >
               Our Services <ArrowUpRight size={20} strokeWidth={2.5} />
             </button>
@@ -168,15 +170,12 @@ const Hero = () => {
           <Sidebar />
           <main className="flex-1 p-1.5 sm:p-4 lg:p-6 relative">
             <div className="flex justify-between items-center mb-2 sm:mb-4 lg:mb-6">
-              <h1 className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white font-semibold">Welcome</h1>
+              <h1 className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white font-semibold"></h1>
               <div className="flex items-center gap-1 sm:gap-3 lg:gap-4">
                 <Search className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5 hidden sm:block" />
                 <Bell className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5" />
                 <div className="flex items-center gap-1 sm:gap-2">
-                    <Avatar className="w-5 h-5 sm:w-7 sm:h-7 lg:w-8 lg:h-8 border border-white/20">
-                      <AvatarImage src="https://cdn-icons-png.flaticon.com/128/18921/18921078.png" alt="User" />
-                      <AvatarFallback>U</AvatarFallback>
-                    </Avatar>
+                  <User2 size={10} className="text-gray-400 sm:w-4 sm:h-4" />
                     <ChevronDown size={10} className="text-gray-400 sm:w-4 sm:h-4" />
                 </div>
               </div>
@@ -211,7 +210,7 @@ const Hero = () => {
                   </div>
               </DashboardCard>
               <DashboardCard title="Status" icon={Zap} className="hidden lg:block lg:col-span-2">
-                 <div className="flex items-center justify-center gap-2 sm:gap-3 h-full">
+                 <div className="flex items-start justify-start gap-2 sm:gap-3 h-full">
                     <ShieldCheck size={18} className="text-sky-400 sm:w-6 sm:h-6"/>
                     <p className="text-sm sm:text-base lg:text-lg font-semibold text-white">All Systems Operational</p>
                  </div>
