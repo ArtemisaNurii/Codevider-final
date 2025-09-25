@@ -21,7 +21,7 @@ const teamMembers = [
   { name: "Kejdi Balla", role: "UIUX Designer", image: "/images/teamMember/kejdii.png" },
   { name: "Kejsi Terolli", role: "Frontend Developer", image: "/images/teamMember/kejsi1.png" },
   { name: "Fjona Rira", role: "Frontend Developer", image: "/images/teamMember/fjona.png" },
-  { name: "Besjana Fixha ", role: "Frontend Developer", image: "/images/teamMember/besa.png" },
+  { name: "Besjana Fixha ", role: "Fullstack Developer", image: "/images/teamMember/besa.png" },
   { name: "Geri Lluga", role: "Backend Developer", image: "/images/teamMember/geri.png" },
   { name: "Amanda ", role: "Backend Developer", image: "/images/teamMember/amanda.png" },
   { name: "Artenisa Nuri", role: "Frontend Developer", image: "/images/teamMember/artenisa.png" },

@@ -218,7 +218,7 @@ const SolutionPillars: React.FC = () => {
     },
     metric1: { value: "100%", label: "Flexibility & Control" },
     metric2: {
-      value: "6+",
+      value: "+6",
       label: "Years of Experience",
       // Repurposed 'countries' to 'skills' for the pills
       skills: ["USA", "Germany","London", "Europe"],
@@ -461,9 +461,8 @@ const SolutionPillars: React.FC = () => {
               ))}
             </div>
             <div className="w-full h-full min-h-[150px]  flex items-center justify-center rounded-lg">
-              <p className="text-white text-2xl font-medium text-center p-4">
-                Profit from our teams new perspectives.
-              </p>
+              <p className="text-white text-2xl font-medium text-start p-4">
+              Benefit from the innovative viewpoints our team brings              </p>
             </div>
           </MetricCard>
         </div>

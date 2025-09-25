@@ -134,6 +134,15 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
   return (
     <div className="bg-white font-sans">
       <Header />
+      <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
+        <div className="mx-auto max-w-7xl max-md:px-4 py-16 md:py-24 text-start">
+
+          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          {job.title}     </h1>
+          <p className="mt-4  mx-auto text-lg leading-relaxed text-gray-300">
+            Please fill out the form below to apply for the {job.title} position.        </p>
+        </div>
+      </header>
       {/* ... (Header and Job Details JSX remains the same) ... */}
       <main className="max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
