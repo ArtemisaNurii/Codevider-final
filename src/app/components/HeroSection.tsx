@@ -49,12 +49,11 @@ const componentStyles = `
 `;
 
 const PHRASES = [
-  "Digital Transformation",
+  "Software Solutions",
   "Blockchain Apps",
   "Fintech",
   "AI Integrations",
   "A/B Startups",
-  "Cloud Solutions",
   "Smart Automation",
 ];
 type Props = { phrases: string[]; interval?: number };

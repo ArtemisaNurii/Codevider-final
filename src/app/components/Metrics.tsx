@@ -111,7 +111,7 @@ const Metrics: NextPage = () => {
               </div>
               <div className="mt-6">
                 <span className="inline-block rounded-full  bg-white/20  border border-blue-400/30 px-4 py-2 text-sm font-medium text-blue-200">
-                  Senior Developers with Deep Expertise
+                   Developers with Deep Expertise
                 </span>
               </div>
             </div>
