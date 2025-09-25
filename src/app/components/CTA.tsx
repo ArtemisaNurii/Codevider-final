@@ -31,9 +31,9 @@ export const Footer: React.FC = () => {
   return (
     <footer
     id="contact"
-    className="relative z-10 py-8 sm:py-12 lg:py-16 px-6 sm:px-6 lg:px-8 bg-slate-50 text-gray-900"
+    className="relative z-10 py-8 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-slate-50 text-gray-900"
   >
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:justify-between gap-x-6 gap-y-8 text-left">
         <div className="space-y-4">
           <p className="font-bold text-lg sm:text-base text-gray-900">Company</p>
@@ -207,9 +207,9 @@ const Contact: React.FC = () => {
       <div id="contact" className="relative overflow-hidden text-white">
         <section
           ref={sectionRef}
-          className="relative z-10 py-20 sm:py-28 bg-gradient-to-br from-black via-slate-900 to-sky-800 px-4 sm:px-6 lg:px-8"
+          className="relative z-10 px-4 py-20 sm:py-28 bg-gradient-to-br from-black via-slate-900 to-sky-800 "
         >
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 lg:gap-16 items-stretch">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 lg:gap-16 items-stretch">
             <div className="text-center lg:text-left mb-12 lg:mb-0 flex flex-col justify-center">
               <p className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
                 Let&apos;s Connect

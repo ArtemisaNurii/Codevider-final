@@ -70,7 +70,7 @@ export function HeroHeadline({ phrases, interval = 2500 }: Props) {
 
   return (
     <div className="text-center pt-16 sm:pt-24 h-auto md:pt-32 mb-4 sm:mb-6 lg:mb-8">
-      <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
+      <h1 className="text-2xl sm:text-4xl md:text-7xl font-bold bg-clip-text text-transparent  bg-gradient-to-b from-white to-white/80">
         Your Strategic Partner in
       </h1>
       <div className="relative h-14 sm:h-20 md:h-24 flex items-center justify-center overflow-hidden">

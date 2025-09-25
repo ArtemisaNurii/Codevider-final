@@ -100,7 +100,7 @@ const ViewAllButton = () => {
           ref={arrowRef}
           className="transform transition-transform duration-300"
         >
-           <ArrowRight className="text-xl" />
+           <ArrowRight className="text-xl " />
         </span>
       </button>
     </div>
@@ -130,8 +130,8 @@ const InfoCard = ({
         {splitTextIntoWords(subtitle)}
       </div>
     </div>
-    <div className="arrow-icon absolute top-6 right-6 w-16 h-16 bg-[#f8f7f4] text-gray-900 rounded-full flex items-center justify-center cursor-pointer shadow-md hover:scale-105 transition-transform transform-gpu">
-      <ArrowIcon />
+    <div className="arrow-icon max-sm:hidden absolute top-6 right-6 w-16 h-16 bg-[#f8f7f4] text-gray-900 rounded-full flex items-center justify-center cursor-pointer shadow-md hover:scale-105 transition-transform transform-gpu">
+      <ArrowIcon className="" />
     </div>
   </div>
 );
