@@ -28,12 +28,12 @@ export default function Home() {
       <Header />
       <main id="home">
         <Hero />
-        <ScrollReveal delay={0.1}>
+        <ScrollReveal delay={0.03}>
           <Suspense fallback={<SectionLoader />}>
             <Metrics />
           </Suspense>
         </ScrollReveal>
-        <ScrollReveal delay={0.1}>
+        <ScrollReveal delay={0.04}>
           <Suspense fallback={<SectionLoader />}>
             <ServicesPage />
           </Suspense>
