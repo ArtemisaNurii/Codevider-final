@@ -92,13 +92,13 @@ const ViewAllButton = () => {
         onClick={() => router.push("/services")} // Changed to a relevant route
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="group flex items-center gap-3 px-8 py-4 border-2 border-gray-700 rounded-full text-gray-900 font-semibold text-lg transition-colors duration-300 focus:outline-none hover:bg-gradient-to-br from-black to-sky-900 hover:text-white  transform-gpu"
+        className="group flex items-center gap-3 px-8 py-4 border-2 border-gray-700 rounded-full text-gray-900 font-semibold text-lg    hover:bg-gradient-to-br from-black to-sky-900 hover:text-white"
       >
         {/* UPDATED BUTTON TEXT */}
         <span>View More of Our Services</span>
         <span
           ref={arrowRef}
-          className="transform transition-transform duration-300"
+          className=" "
         >
            <ArrowRight className="text-xl " />
         </span>

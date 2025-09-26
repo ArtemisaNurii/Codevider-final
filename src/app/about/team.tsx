@@ -80,7 +80,7 @@ export default function CodeviderCulturePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="/career"
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-black via-slate-900 to-sky-800 hover:gap-4 px-5 py-3 text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+                className="inline-flex items-center gap-2 rounded-xl  hover:gap-4 px-5 py-3 text-black hover:bg-slate-950 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
                 aria-label="Explore open roles"
               >
               Join the team
@@ -95,7 +95,7 @@ export default function CodeviderCulturePage() {
       {/* Values / Pillars */}
       <section id="principles" className="container mx-auto max-w-7xl px-6 pb-8 ">
         <div className="mx-auto mb-10 max-w-2xl text-center max-sm:text-start">
-          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Principles we live by</h2>
+          <h2 className="text-3xl font-bold  md:text-4xl">Principles we live by</h2>
           <p className="mt-3 text-slate-600">Clear Vision, Clean Code and Supportive Team</p>
         </div>
         <div className="grid grid-cols-1 gap-6 text-white sm:grid-cols-2 lg:grid-cols-3">

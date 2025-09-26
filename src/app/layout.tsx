@@ -15,7 +15,6 @@ const spectral = Spectral({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
-// Set this to your production origin
 const siteUrl = new URL("https://www.example.com");
 
 export const metadata: Metadata = {
@@ -26,6 +25,9 @@ export const metadata: Metadata = {
   },
   description:
     "Codevider builds fast, reliable software for startups and enterprises — web, mobile, and cloud. Flexible teams, clear roadmaps, outcome-focused delivery.",
+  applicationName: "Codevider",
+  authors: [{ name: "Codevider Team", url: siteUrl.toString() }],
+  publisher: "Codevider",
   keywords: [
     "software development",
     "web development",
@@ -34,8 +36,12 @@ export const metadata: Metadata = {
     "node.js",
     "microservices",
     "outsourcing",
-    "nearshore",
+    "ai integrations",
     "Codevider",
+    "Albania Software Development Company",
+    "startups",
+    "enterprises",
+    "aws",
   ],
   robots: {
     index: true,
@@ -51,21 +57,21 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "/",
+    canonical: siteUrl.toString(), // ✅ absolute canonical
   },
   openGraph: {
     type: "website",
     url: siteUrl.toString(),
     siteName: "Codevider",
-    title: "Codevider — Software Development Company",
+    title: "Codevider - Software Development Company",
     description:
       "Outcome-driven engineering teams for web, mobile, and cloud. Ship faster with Codevider.",
     images: [
       {
-        url: "/og/og-image.jpg", // place at public/og/og-image.jpg
+        url: "/og/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Codevider — Software Development Company",
+        alt: "Codevider - Software Development Company",
       },
     ],
     locale: "en_US",
@@ -76,8 +82,8 @@ export const metadata: Metadata = {
     description:
       "Outcome-driven engineering teams for web, mobile, and cloud. Ship faster with Codevider.",
     images: ["/og/og-image.jpg"],
-    site: "@your_twitter", // optional
-    creator: "@your_twitter", // optional
+    site: "@your_twitter",
+    creator: "@your_twitter",
   },
   icons: {
     icon: [
@@ -88,10 +94,6 @@ export const metadata: Metadata = {
     apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
   },
   category: "technology",
-  // Google-specific meta (as discussed in your chapter)
-  other: {
-    google: ["nositelinkssearchbox", "notranslate"], // renders two <meta name="google" ...>
-  },
 };
 
 export const viewport: Viewport = {
@@ -105,6 +107,25 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <head>
+        {/* ✅ Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Codevider",
+              url: siteUrl.toString(),
+              logo: "https://www.example.com/icons/icon-192.png",
+              sameAs: [
+                "https://www.linkedin.com/company/codevider",
+                "https://twitter.com/your_twitter",
+              ],
+            }),
+          }}
+        />
+      </head>
       <body
         className={`${manrope.variable} ${spectral.variable} antialiased bg-white`}
         suppressHydrationWarning

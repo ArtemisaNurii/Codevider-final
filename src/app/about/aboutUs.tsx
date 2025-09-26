@@ -7,7 +7,7 @@ export default function AboutSection3() {
   return (
     <section id="about" className=" bg-white md:mt-10 ">
              <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-        <div className="mx-auto max-w-7xl max-md:px-4 py-16 md:py-24 text-start">
+        <div className="mx-auto max-w-7xl py-16 md:py-24 text-start">
           <p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
               About Us
           </p>
@@ -18,13 +18,13 @@ export default function AboutSection3() {
         </div>
       </header>
       <section className="bg-white font-sans">
-      <div className="container mx-auto px-4 py-16 sm:px-2 lg:px-8 ">
+      <div className="container mx-auto py-16 px-6">
         
         {/* Top highlights section */}
-        <div className="mb-12 flex max-w-7xl mx-auto flex-wrap items-center gap-x-2 gap-y-2 text-sm text-gray-700 sm:text-base max-sm:flex-row max-sm:hidden">
+        <div className="mb-12 flex max-w-7xl mx-auto flex-wrap items-center gap-x-2 gap-y-2 text-sm px-6 text-gray-700 sm:text-base max-sm:flex-row max-sm:hidden">
           <span>+6 years delivering software</span>
           <div className="h-4 w-px bg-gray-300" aria-hidden="true"></div>
-          <span>+10 enterprise global projects</span>
+          <span>+45 enterprise global projects</span>
         </div>
 
         {/* Main grid for the content */}
@@ -32,12 +32,12 @@ export default function AboutSection3() {
           
           {/* Left Side: Heading and two text paragraphs */}
           <div className="lg:col-span-2 ">
-            <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            <h2 className="text-4xl font-bold px-6 tracking-tight text-gray-900 sm:text-5xl">
               Who Are We
             </h2>
             
             {/* Grid for the two paragraphs to sit side-by-side on medium screens and up */}
-            <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 text-base text-gray-600 leading-relaxed">
+            <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 text-base text-gray-600 px-6 leading-relaxed">
               <p>
                 Founded in 2019 in Tirana, Albania, CodeVider delivers high-performance,
                 cost-efficient software development solutions for startups, SMEs, and
@@ -59,8 +59,8 @@ export default function AboutSection3() {
           {/* Right Side: CTA column */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900">CODEVIDER</h3>
-              <p className="mt-1 text-gray-500">Albania-based software company</p>
+              {/* <h3 className="text-2xl font-bold text-gray-900">CODEVIDER</h3>
+              <p className="mt-1 text-gray-500">Albania-based software company</p> */}
             </div>
 
             <div className="sm:p-8 lg:p-6 xl:p-8">
@@ -68,8 +68,11 @@ export default function AboutSection3() {
               Let&apos;s bring your roadmap to life with timely, shipped features.              </p>
 
               <button
+              onClick={() => {
+                window.location.href = "/#contact"
+              }}
                 type="button"
-                className="mt-6 flex w-full items-center justify-center gap-2.5 rounded-lg bg-gray-900 px-6 py-4 hover:gap-4 text-center font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                className="mt-6 flex w-full items-center justify-center gap-2.5 rounded-lg bg-gradient-to-r from-black via-slate-900 to-sky-800 px-6 py-4 hover:gap-4 text-center font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
               >
                 <span>LETS BUILD TOGETHER</span>
                 <svg 

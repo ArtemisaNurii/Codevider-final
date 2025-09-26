@@ -92,12 +92,12 @@ export const Footer: React.FC = () => {
               </a>
             </li>
             <li>
-              <a 
+              {/* <a 
                 href="tel:+12247880689" 
                 className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1 font-medium"
               >
                 +1 224 788 0689
-              </a>
+              </a> */}
             </li>
           </ul>
         </div>
@@ -132,7 +132,7 @@ export const Footer: React.FC = () => {
           <div className="flex items-center justify-center md:justify-end gap-4 mt-4 md:mt-0">
             <p className="text-sm text-gray-600 mr-2 hidden sm:block">Follow us:</p>
             <a
-              href="https://www.instagram.com/codevider/?hl=en"
+              href="https://www.instagram.com/codevider/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

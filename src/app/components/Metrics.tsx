@@ -1,17 +1,23 @@
 // components/Metrics.tsx
 "use client"
 import type { NextPage } from "next"
-import { Orbit, Layers3, Sun, Zap, ShieldCheck, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
-// Data for the logo cloud
+// Data for the logo cloud with actual client logos
 const logos = [
-  { name: "Logoipsum", icon: Orbit },
-  { name: "Logoipsum", icon: Layers3 },
-  { name: "Logoipsum", icon: Sun },
-  { name: "Logoipsum", icon: Zap },
-  { name: "Logoipsum", icon: ShieldCheck },
+  { name: "", src: "/images/logo/clients/ACRON-dark.svg" },
+  { name: "", src: "/images/logo/clients/ascend.png" },
+  { name: "", src: "/images/logo/clients/createAPE.png" },
+  { name: "", src: "/images/logo/clients/datastake.svg" },
+  { name: "", src: "/images/logo/clients/Evolvet-Logo-dark.png" },
+  // { name: "", src: "/images/logo/clients/logo-DAIMON-dark.svg" },
+  { name: "", src: "/images/logo/clients/logo-footer.png" },
+  { name: " ", src: "/images/logo/clients/beauty-books-dark.svg" },
+
+
 ]
 
 const Metrics: NextPage = () => {
@@ -26,25 +32,31 @@ const Metrics: NextPage = () => {
           <div className="mt-8 relative overflow-hidden">
             <div className="flex animate-marquee whitespace-nowrap">
               {/* First set of logos */}
-              {logos.map((logo, index) => {
-                const Icon = logo.icon
-                return (
-                  <div key={index} className="flex items-center gap-2 mx-8 flex-shrink-0 text-gray-500">
-                    <Icon className="h-6 w-6" />
-                    <span className="text-lg font-medium">{logo.name}</span>
-                  </div>
-                )
-              })}
+              {logos.map((logo, index) => (
+                <div key={index} className="flex flex-col items-center justify-center mx-8 flex-shrink-0">
+                  <Image
+                    src={logo.src}
+                    alt={logo.name}
+                    width={120}
+                    height={60}
+                    className="h-12 w-auto object-contain  hover:grayscale-0 transition-all duration-300"
+                  />
+                  <span className="text-sm font-medium text-black mt-2">{logo.name}</span>
+                </div>
+              ))}
               {/* Duplicate set for seamless loop */}
-              {logos.map((logo, index) => {
-                const Icon = logo.icon
-                return (
-                  <div key={`duplicate-${index}`} className="flex items-center gap-2 mx-8 flex-shrink-0 text-gray-500">
-                    <Icon className="h-6 w-6" />
-                    <span className="text-lg font-medium">{logo.name}</span>
-                  </div>
-                )
-              })}
+              {logos.map((logo, index) => (
+                <div key={`duplicate-${index}`} className="flex flex-col items-center justify-center mx-8 flex-shrink-0">
+                  <Image
+                    src={logo.src}
+                    alt={logo.name}
+                    width={120}
+                    height={60}
+                    className="h-12 w-auto object-contain  hover:grayscale-0 transition-all duration-300"
+                  />
+                  <span className="text-sm font-medium text-black mt-2">{logo.name}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -77,7 +89,7 @@ const Metrics: NextPage = () => {
             <div className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-gradient-to-br from-black via-slate-900 to-sky-800  p-8 text-white shadow-xl border border-slate-700/50">
               <div>
                 <p className="text-5xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-                  10+
+                  30+
                 </p>
                 <p className="mt-2 text-slate-300 font-medium">Global Partnerships</p>
               </div>
