@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useDataProcessingWorker } from '@/lib/hooks/useWebWorker';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -210,11 +211,49 @@ const ProjectPage: React.FC = memo(() => {
   const categoriesRef = useRef<HTMLDivElement>(null);
 
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const categories = ['All', ...Array.from(new Set(allCaseStudies.map(c => c.tag)))];
+  const [filteredStudies, setFilteredStudies] = useState<CaseStudy[]>(allCaseStudies);
+  const [categories, setCategories] = useState<string[]>(['All']);
+  
+  const { filterProjects, processCategories, isLoading: isProcessing } = useDataProcessingWorker();
 
-  const filteredStudies = selectedCategory === 'All'
-    ? allCaseStudies
-    : allCaseStudies.filter(study => study.tag === selectedCategory);
+  // Process categories with Web Worker
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const result = await processCategories(allCaseStudies) as { categories: string[] };
+        setCategories(result.categories);
+      } catch (error) {
+        console.error('Category processing failed:', error);
+        // Fallback to synchronous processing
+        setCategories(['All', ...Array.from(new Set(allCaseStudies.map(c => c.tag)))]);
+      }
+    };
+
+    loadCategories();
+  }, [processCategories]);
+
+  // Filter studies with Web Worker when category changes
+  useEffect(() => {
+    const filterStudies = async () => {
+      try {
+        if (selectedCategory === 'All') {
+          setFilteredStudies(allCaseStudies);
+        } else {
+          const result = await filterProjects(allCaseStudies, { category: selectedCategory });
+          setFilteredStudies(result as CaseStudy[]);
+        }
+      } catch (error) {
+        console.error('Filtering failed:', error);
+        // Fallback to synchronous filtering
+        const filtered = selectedCategory === 'All'
+          ? allCaseStudies
+          : allCaseStudies.filter(study => study.tag === selectedCategory);
+        setFilteredStudies(filtered);
+      }
+    };
+
+    filterStudies();
+  }, [selectedCategory, filterProjects]);
   
   const leftColumnCases = filteredStudies.filter((_, index) => index % 2 === 0);
   const rightColumnCases = filteredStudies.filter((_, index) => index % 2 !== 0);

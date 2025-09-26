@@ -259,8 +259,8 @@ const Contact: React.FC = () => {
                       Full Name
                     </Label>
                     <Input
-                      id="full_name"
-                      name="full_name"
+                      id="name"
+                      name="name"
                       type="text"
                       placeholder="John Doe"
                       required
@@ -299,7 +299,7 @@ const Contact: React.FC = () => {
                   </Label>
                   <Select
                     name="budget"
-                    defaultValue="$500 – $1,000"
+                    defaultValue="$500 – $1000"
                   >
                     <SelectTrigger
                       id="budget"
@@ -308,16 +308,17 @@ const Contact: React.FC = () => {
                       <SelectValue placeholder="Select a budget range" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="$500 – $1,000">
+                      <SelectItem value="$500 – $1000">
                         $500 – $1,000
                       </SelectItem>
-                      <SelectItem value="$1,000 – $5,000">
+                      <SelectItem value="$1000 – $5000">
                         $1,000 – $5,000
                       </SelectItem>
-                      <SelectItem value="$5,000 – $10,000">
+                      <SelectItem value="$5000 – $10000">
                         $5,000 – $10,000
                       </SelectItem>
-                      <SelectItem value="$10,000+">$10,000+</SelectItem>
+                      <SelectItem value="$10000+">$10,000+</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

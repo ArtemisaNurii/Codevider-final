@@ -2,6 +2,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Spectral } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { WorkerProvider } from "@/components/providers/WorkerProvider";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -130,8 +131,10 @@ export default function RootLayout({
         className={`${manrope.variable} ${spectral.variable} antialiased bg-white`}
         suppressHydrationWarning
       >
-        {children}
-        <Toaster position="top-right" />
+        <WorkerProvider>
+          {children}
+          <Toaster />
+        </WorkerProvider>
       </body>
     </html>
   );

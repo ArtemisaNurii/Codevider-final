@@ -1,6 +1,9 @@
 "use server";
-import { LEAD_CONTACTS_ENDPOINT } from "@/constants/endpoint";
+import { Client } from "@notionhq/client";
 import { z } from "zod";
+
+// Initialize Notion client
+const notion = new Client({ auth: process.env.NOTION_SECRET });
 
 // Define a schema for validation using Zod (highly recommended)
 const contactSchema = z.object({
@@ -10,14 +13,52 @@ const contactSchema = z.object({
   budget: z.string().optional(), // Budget is optional as it might not always be selected
 });
 
+// Function to save lead to Notion database
+async function saveLeadToNotion(
+  name: string,
+  email: string,
+  details: string,
+  budget: string
+) {
+  await notion.pages.create({
+    parent: { database_id: process.env.NOTION_DB_ID! },
+    properties: {
+      Name: {
+        title: [
+          {
+            text: {
+              content: name,
+            },
+          },
+        ],
+      },
+      Email: {
+        email: email,
+      },
+      "Project Details": {
+        rich_text: [
+          {
+            text: {
+              content: details,
+            },
+          },
+        ],
+      },
+      Budget: {
+        select: { name: budget },
+      },
+    },
+  });
+}
+
 // The main server action function
 export async function contactSubmit(formData: FormData) {
-  // 1. Extract data from the form
+  // 1. Extract data from the form and handle null values
   const rawData = {
-    full_name: formData.get("full_name"),
-    email: formData.get("email"),
-    details: formData.get("details"),
-    budget: formData.get("budget"),
+    full_name: formData.get("name")?.toString() || "",
+    email: formData.get("email")?.toString() || "",
+    details: formData.get("details")?.toString() || "",
+    budget: formData.get("budget")?.toString() || "",
   };
 
   // 2. Validate the data
@@ -31,18 +72,9 @@ export async function contactSubmit(formData: FormData) {
     };
   }
 
-
-  const payload = {
-    full_name: validationResult.data.full_name,
-    email: validationResult.data.email,
-    details: validationResult.data.details,
-    budget: validationResult.data.budget || "Not specified", // Use the validated data
-  };
-
-  const apiEndpoint = process.env.BACKEND_API_URL + '/' + LEAD_CONTACTS_ENDPOINT; 
-  
-  if (!process.env.BACKEND_API_URL) {
-    console.error("BACKEND_API_URL is not defined in environment variables.");
+  // 3. Check if Notion environment variables are set
+  if (!process.env.NOTION_SECRET || !process.env.NOTION_DB_ID) {
+    console.error("NOTION_SECRET or NOTION_DB_ID is not defined in environment variables.");
     return {
       success: false,
       message: "Server configuration error. Please contact support.",
@@ -50,37 +82,23 @@ export async function contactSubmit(formData: FormData) {
   }
 
   try {
-    // 5. Make the POST request to your backend
-    if (!apiEndpoint) {
-      throw new Error("API endpoint is undefined.");
-    }
-    const response = await fetch(apiEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-       
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      // If the backend returns an error (e.g., 400, 500)
-      const errorData = await response.json().catch(() => ({ message: "An unknown error occurred." }));
-      console.error("Backend API Error:", errorData);
-      return {
-        success: false,
-        message: errorData.message || "Failed to submit form. Please try again.",
-      };
-    }
+    // 4. Save the lead to Notion database
+    await saveLeadToNotion(
+      validationResult.data.full_name,
+      validationResult.data.email,
+      validationResult.data.details,
+      validationResult.data.budget || "Not specified"
+    );
 
     // If the submission was successful
     return {
       success: true,
       message: "Thank you for your message! We'll be in touch soon.",
+      
     };
 
   } catch (error) {
-    console.error("Fetch Error:", error);
+    console.error("Notion API Error:", error);
     return {
       success: false,
       message: "Something went wrong. Please check your connection and try again.",

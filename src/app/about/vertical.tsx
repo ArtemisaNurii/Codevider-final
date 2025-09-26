@@ -6,6 +6,7 @@ import { type AnimationOptions, motion } from "motion/react"
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react"
 
 import { cn } from "@/lib/utils"
+import { useTextProcessingWorker } from "@/lib/hooks/useWebWorker"
 
 interface TextProps {
   children: React.ReactNode
@@ -75,42 +76,46 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
       return Array.from(text)
     }
 
-    // Split text based on splitBy parameter
-    const elements = useMemo(() => {
-      const words = text.split(" ")
-      if (splitBy === "characters") {
-        return words.map((word, i) => ({
-          characters: splitIntoCharacters(word),
-          needsSpace: i !== words.length - 1,
-        }))
-      }
-      return splitBy === "words" ? text.split(" ") : splitBy === "lines" ? text.split("\n") : text.split(splitBy)
-    }, [text, splitBy])
+    // Use Web Worker for expensive text processing
+    const [processedData, setProcessedData] = useState<{
+      elements: string[] | Array<{characters: string[]; needsSpace: boolean}>;
+      delays: number[];
+      animationData: Array<{element: unknown; delay: number; index: number}>;
+    } | null>(null);
+    
+    const { processAnimationSequence, isLoading: isProcessing } = useTextProcessingWorker();
 
-    // Calculate stagger delays based on staggerFrom
+    // Process text with Web Worker when dependencies change
+    useEffect(() => {
+      const processText = async () => {
+        try {
+          const result = await processAnimationSequence(text, {
+            splitBy: splitBy as 'words' | 'characters' | 'lines',
+            staggerFrom,
+            staggerDuration,
+          });
+          setProcessedData(result as typeof processedData);
+        } catch (error) {
+          console.error('Text processing failed:', error);
+          // Fallback to synchronous processing
+          const words = text.split(" ");
+          const elements = splitBy === "words" ? text.split(" ") : splitBy === "lines" ? text.split("\n") : text.split(splitBy);
+          setProcessedData({
+            elements,
+            delays: elements.map((_, i) => i * staggerDuration),
+            animationData: elements.map((element, index) => ({ element, delay: index * staggerDuration, index }))
+          });
+        }
+      };
+
+      processText();
+    }, [text, splitBy, staggerFrom, staggerDuration, processAnimationSequence]);
+
+    // Extract elements and delays from processed data
+    const elements = processedData?.elements || [];
     const getStaggerDelay = useCallback(
-      (index: number) => {
-        const total =
-          splitBy === "characters"
-            ? elements.reduce(
-                (acc, word) =>
-                  acc + (typeof word === "string" ? 1 : word.characters.length + (word.needsSpace ? 1 : 0)),
-                0,
-              )
-            : elements.length
-        if (staggerFrom === "first") return index * staggerDuration
-        if (staggerFrom === "last") return (total - 1 - index) * staggerDuration
-        if (staggerFrom === "center") {
-          const center = Math.floor(total / 2)
-          return Math.abs(center - index) * staggerDuration
-        }
-        if (staggerFrom === "random") {
-          const randomIndex = Math.floor(Math.random() * total)
-          return Math.abs(randomIndex - index) * staggerDuration
-        }
-        return Math.abs(staggerFrom - index) * staggerDuration
-      },
-      [elements.length, staggerFrom, staggerDuration],
+      (index: number) => processedData?.delays[index] || 0,
+      [processedData],
     )
 
     const startAnimation = useCallback(() => {
