@@ -255,12 +255,12 @@ const Contact: React.FC = () => {
               <form ref={formRef} action={handleSubmit} className="space-y-4 pt-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-gray-200">
+                    <Label htmlFor="companies" className="text-gray-200">
                       Full Name
                     </Label>
                     <Input
-                      id="name"
-                      name="name"
+                      id="companies"
+                      name="companies"
                       type="text"
                       placeholder="John Doe"
                       required
@@ -282,45 +282,28 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="description" className="text-gray-300">
+                  <Label htmlFor="details" className="text-gray-300">
                     Tell us about your project
                   </Label>
                   <Textarea
                     id="details"
                     name="details"
                     placeholder="I'm looking to build a new web application that..."
-                    required
+                    // required
                     className="bg-transparent  border-gray-604 min-h-[120px] focus-visible:ring-offset-0 focus-visible:ring-sky-400"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="budget" className="text-gray-300">
-                    What&apos;s your budget?
+                  <Label htmlFor="Linkedin" className="text-gray-300">
+                    What&apos;s your LinkedIn profile?
                   </Label>
-                  <Select
-                    name="budget"
-                    defaultValue="$500 – $1000"
-                  >
-                    <SelectTrigger
-                      id="budget"
-                      className="w-full bg-transparent border-gray-604 focus:ring-offset-0 focus:ring-sky-400"
-                    >
-                      <SelectValue placeholder="Select a budget range" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="$500 – $1000">
-                        $500 – $1,000
-                      </SelectItem>
-                      <SelectItem value="$1000 – $5000">
-                        $1,000 – $5,000
-                      </SelectItem>
-                      <SelectItem value="$5000 – $10000">
-                        $5,000 – $10,000
-                      </SelectItem>
-                      <SelectItem value="$10000+">$10,000+</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Input
+                    id="linkedin"
+                    name="linkedin"
+                    type="url"
+                    placeholder="https://www.linkedin.com/in/your-profile"
+                    className="bg-transparent border-gray-400 focus-visible:ring-offset-0 focus-visible:ring-sky-400"
+                  />
                 </div>
                 <Button
                   type="submit"

@@ -7,18 +7,18 @@ const notion = new Client({ auth: process.env.NOTION_SECRET });
 
 // Define a schema for validation using Zod (highly recommended)
 const contactSchema = z.object({
-  full_name: z.string().min(2, { message: "Full name must be at least 2 characters." }),
+  companies: z.string().min(2, { message: "Full name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
-  details: z.string().min(10, { message: "Details must be at least 10 characters." }),
-  budget: z.string().optional(), // Budget is optional as it might not always be selected
+  details: z.string().optional(),
+  linkedin: z.string().optional(),
 });
 
 // Function to save lead to Notion database
 async function saveLeadToNotion(
-  name: string,
+  companies: string,
   email: string,
   details: string,
-  budget: string
+  linkedin: string,
 ) {
   await notion.pages.create({
     parent: { database_id: process.env.NOTION_DB_ID! },
@@ -27,7 +27,7 @@ async function saveLeadToNotion(
         title: [
           {
             text: {
-              content: name,
+              content: companies,
             },
           },
         ],
@@ -35,7 +35,7 @@ async function saveLeadToNotion(
       Email: {
         email: email,
       },
-      "Project Details": {
+      "Details": {
         rich_text: [
           {
             text: {
@@ -44,8 +44,8 @@ async function saveLeadToNotion(
           },
         ],
       },
-      Budget: {
-        select: { name: budget },
+      LinkedIn: {
+        url: linkedin,
       },
     },
   });
@@ -55,10 +55,10 @@ async function saveLeadToNotion(
 export async function contactSubmit(formData: FormData) {
   // 1. Extract data from the form and handle null values
   const rawData = {
-    full_name: formData.get("name")?.toString() || "",
+    companies: formData.get("companies")?.toString() || "",
     email: formData.get("email")?.toString() || "",
     details: formData.get("details")?.toString() || "",
-    budget: formData.get("budget")?.toString() || "",
+    linkedin: formData.get("linkedin")?.toString() || "",
   };
 
   // 2. Validate the data
@@ -84,10 +84,10 @@ export async function contactSubmit(formData: FormData) {
   try {
     // 4. Save the lead to Notion database
     await saveLeadToNotion(
-      validationResult.data.full_name,
+      validationResult.data.companies,
       validationResult.data.email,
-      validationResult.data.details,
-      validationResult.data.budget || "Not specified"
+      validationResult.data.details || "",
+      validationResult.data.linkedin || "",
     );
 
     // If the submission was successful

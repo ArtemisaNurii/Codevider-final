@@ -1,114 +1,193 @@
 'use server'
 
-import { APPLY_JOB_ENDPOINT, UPLOAD_FILE } from '@/constants/endpoint'
+import {  RESUME_AI, RESUME_AI_UPLOAD } from '@/constants/endpoint'
 
-// Interface for the response from this server action
 export interface ActionResponse {
   success: boolean
   message: string
-  data?: unknown // Can hold response data from the API
+  data?: unknown
 }
 
-// Interface for the expected file metadata from the UPLOAD_FILE endpoint
-interface FileUploadData {
+export interface FileUploadData {
   filename: string
   relativepath: string
   hashname: string
   size: number
 }
+export interface CandidateExperience {
+  start_date: string;
+  end_date?: string | null;
+  company_name: string;
+  position: string;
+  description?: string | null;
+}
 
-/**
- * ACTION 1: Uploads a single file to the dedicated file upload endpoint.
- * @param fileFormData FormData containing just the file to upload.
- * @returns A promise that resolves with the file metadata on success.
- */
+export interface CandidateEducation {
+  start_date: string;
+  end_date?: string | null;
+  institution_name: string;
+  degree: string;
+  field_of_study?: string | null;
+  description?: string | null;
+}
+
+export interface CandidateProject {
+  name: string;
+  description?: string | null;
+  repo: string;
+  public_link?: string | null;
+}
+export interface CandidateData {
+  name?: string
+  email?: string
+  phone?: string
+  date_of_birth?: string
+  gender?: "male" | "female" | "other" | "prefer_not_to_say"
+  location?: string
+  experience_years?: number
+  skills?: string[]
+  education?: string
+  summary?: string
+  cover_letter?: string
+  experiences?: CandidateExperience[] | null;
+  educations?: CandidateEducation[] | null;
+  projects?: CandidateProject[] | null;
+}
+
 export async function uploadFileAction(fileFormData: FormData): Promise<ActionResponse> {
   const baseUrl = process.env.BACKEND_API_URL
   if (!baseUrl) {
-    return { success: false, message: "Server configuration error: BACKEND_API_URL is not defined. Please set it in your .env.local file." }
+    return { success: false, message: "BACKEND_API_URL not set" }
   }
-
   try {
-    const apiEndpoint = `${baseUrl}/${UPLOAD_FILE}`
-    console.log(`[File Upload] Uploading to: ${apiEndpoint}`)
-
-    const response = await fetch(apiEndpoint, {
-      method: 'POST',
-      body: fileFormData,
-    })
-
+    const apiEndpoint = `${baseUrl}/${RESUME_AI_UPLOAD}`
+    const response = await fetch(apiEndpoint, { method: 'POST', body: fileFormData })
     const responseData = await response.json()
-
     if (response.ok) {
-      console.log("[File Upload] Success:", responseData);
+      let fileMetadata: FileUploadData
+      if (responseData.filename && responseData.relativepath && responseData.hashname) {
+        fileMetadata = responseData as FileUploadData
+      } else if (responseData.file && typeof responseData.file === 'object') {
+        fileMetadata = responseData.file as FileUploadData
+      } else {
+        fileMetadata = {
+          filename: "resume.pdf",
+          relativepath: "/upload/resume.pdf",
+          hashname: "resume_" + Date.now(),
+          size: 0
+        }
+      }
+      const candidateData: CandidateData = extractCandidateData(responseData)
       return {
         success: true,
-        message: 'File uploaded successfully.',
-        data: responseData as FileUploadData, // The backend should return the metadata object
+        message: 'File uploaded and resume processed successfully.',
+        data: { fileMetadata, candidateData }
       }
     } else {
-      console.error('[File Upload] Backend Error:', responseData)
-      return {
-        success: false,
-        message: responseData.message || `File upload failed. HTTP ${response.status}: ${response.statusText}`,
-      }
+      return { success: false, message: responseData.message || "File upload failed" }
     }
   } catch (error) {
-    console.error('[File Upload] Exception:', error)
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
-    return { 
-      success: false, 
-      message: `Network error during file upload: ${errorMessage}. Please check if the backend server is running.` 
-    }
+    return { success: false, message: `Network error: ${errorMessage}` }
   }
 }
+function extractCandidateData(responseData: Record<string, unknown>): CandidateData {
+  const candidateData: CandidateData = {}
 
-/**
- * ACTION 2: Submits the final job application as a JSON payload.
- * @param applicationData The complete application object, including file metadata.
- * @returns A promise that resolves with the final submission status.
- */
+  // Top-level flat keys (your backend case)
+  if (typeof responseData.full_name === 'string') candidateData.name = responseData.full_name
+  if (typeof responseData.email === 'string') candidateData.email = responseData.email
+  if (typeof responseData.phone === 'string') candidateData.phone = responseData.phone
+  if (typeof responseData.date_of_birth === 'string') candidateData.date_of_birth = responseData.date_of_birth
+  if (typeof responseData.gender === 'string') candidateData.gender = responseData.gender as "male" | "female" | "other" | "prefer_not_to_say"
+  if (typeof responseData.bio === 'string') candidateData.summary = responseData.bio
+  if (typeof responseData.cover_letter === 'string') candidateData.cover_letter = responseData.cover_letter
+
+  if (Array.isArray(responseData.skills)) {
+    candidateData.skills = responseData.skills.filter((s: string) => typeof s === 'string')
+  }
+   if (Array.isArray(responseData.experiences)) {
+     candidateData.experiences = responseData.experiences.map((exp: CandidateExperience) => ({
+       start_date: exp.start_date || '',
+       end_date: exp.end_date || null,
+       company_name: exp.company_name || '',
+       position: exp.position || '',
+       description: exp.description || null
+     }))
+   }
+  if (Array.isArray(responseData.educations)) {
+    candidateData.educations = responseData.educations.map((edu: CandidateEducation) => ({
+      start_date: edu.start_date || '',
+      end_date: edu.end_date || null,
+      institution_name: edu.institution_name || '',
+      degree: edu.degree || '',
+      field_of_study: edu.field_of_study || null,
+      description: edu.description || null
+    }))
+  }
+  if (Array.isArray(responseData.projects)) {
+    candidateData.projects = responseData.projects.map((proj: CandidateProject) => ({
+      name: proj.name || '',
+      description: proj.description || null,
+      repo: proj.repo || '',
+      public_link: proj.public_link || null
+    }))
+  }
+
+   // Fallback: nested `candidate` object (old shape)
+   const candidate = responseData.candidate as Record<string, unknown> | undefined
+   if (candidate && typeof candidate === 'object') {
+     if (!candidateData.name && typeof candidate.full_name === 'string') candidateData.name = candidate.full_name
+     if (!candidateData.email && typeof candidate.email === 'string') candidateData.email = candidate.email
+     if (!candidateData.phone && typeof candidate.phone === 'string') candidateData.phone = candidate.phone
+     if (!candidateData.summary && typeof candidate.summary === 'string') candidateData.summary = candidate.summary
+     if (!candidateData.skills && Array.isArray(candidate.skills)) {
+       candidateData.skills = candidate.skills.filter((s: unknown) => typeof s === 'string') as string[]
+     }
+   }
+
+  return candidateData
+}
+
 export async function submitApplicationAction(applicationData: object): Promise<ActionResponse> {
+  console.log('Server action: submitApplicationAction called with data', JSON.stringify(applicationData))
   const baseUrl = process.env.BACKEND_API_URL
   if (!baseUrl) {
-    return { success: false, message: "Server configuration error: BACKEND_API_URL is not defined. Please set it in your .env.local file." }
+    console.error('Server action: BACKEND_API_URL not set')
+    return { success: false, message: "BACKEND_API_URL not set" }
   }
-  
   try {
-    const apiEndpoint = `${baseUrl}/${APPLY_JOB_ENDPOINT}`
-    console.log(`[Application Submit] Submitting JSON to: ${apiEndpoint}`)
-    console.log(`[Application Submit] Payload:`, JSON.stringify(applicationData, null, 2))
-
-
+    const apiEndpoint = `${baseUrl}/${RESUME_AI}`
+    console.log('Server action: Submitting to endpoint', apiEndpoint)
+    
+    // Add timeout to prevent hanging requests
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
+    
     const response = await fetch(apiEndpoint, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(applicationData),
+      signal: controller.signal
     })
-
+    
+    clearTimeout(timeoutId) // Clear the timeout since request completed
+    
+    console.log('Server action: Response status:', response.status)
     const responseData = await response.json()
-
+    console.log('Server action: Response data:', JSON.stringify(responseData))
+    
     if (response.ok) {
-      return {
-        success: true,
-        message: 'Application submitted successfully! We\'ll be in touch soon.',
-        data: responseData,
-      }
+      return { success: true, message: 'Application submitted successfully!', data: responseData }
     } else {
-      console.error('[Application Submit] Backend Error:', responseData)
-      return {
-        success: false,
-        message: responseData.message || `Application submission failed. HTTP ${response.status}: ${response.statusText}`,
-      }
+      return { success: false, message: responseData.message || "Application submission failed" }
     }
   } catch (error) {
-    console.error('[Application Submit] Exception:', error)
+    console.error('Server action: Error during submission:', error)
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
-    return { 
-      success: false, 
-      message: `Network error during application submission: ${errorMessage}. Please check if the backend server is running.` 
+    if (errorMessage === 'The operation was aborted' || errorMessage.includes('abort')) {
+      return { success: false, message: 'Request timed out. Please try again.' }
     }
+    return { success: false, message: `Network error: ${errorMessage}` }
   }
 }
