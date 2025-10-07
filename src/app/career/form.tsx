@@ -111,7 +111,6 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isProcessingResume, setIsProcessingResume] = useState(false)
   const [submitMessage, setSubmitMessage] = useState("")
-  const [extractedCandidateData, setExtractedCandidateData] = useState<CandidateData | null>(null)
   const [fileMetadata, setFileMetadata] = useState<FileUploadData | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -203,8 +202,12 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
       setIsProcessingResume(true)
       setSubmitMessage("Uploading and processing resume...")
       try {
+        // Extract job description to include with the resume
+        const jobDescription = job.job_description || ""
+        
         const fileFormData = new FormData()
         fileFormData.append('resume', files[0])
+        fileFormData.append('jobDescription', jobDescription) // Add job description to form data
         const uploadResult = await uploadFileAction(fileFormData)
         if (!uploadResult.success) {
           setSubmitMessage(uploadResult.message)
@@ -238,7 +241,6 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
             educations: candidateData.educations ?? prev.educations,
             projects: candidateData.projects ?? prev.projects,
           }))
-          setExtractedCandidateData(candidateData)
           setSubmitMessage("Resume processed successfully! Fields auto-filled.")
         }
       } catch {
@@ -330,7 +332,6 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
           projects: [], 
           skills: [] 
         })
-        setExtractedCandidateData(null)
         setFileMetadata(null)
         const fileInput = document.getElementById('resume') as HTMLInputElement
         if (fileInput) fileInput.value = ''
@@ -348,13 +349,27 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
   return (
     <div className="bg-white font-sans">
       <Header />
+      {/* Section Header with Gradient */}
+      <div className="w-full bg-gradient-to-r from-black via-slate-700 to-sky-600 py-30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-white">{job.title}</h2>
+          <p className="mt-2 text-lg text-gray-200">{job.job_type.job_type} • {job.addresses?.[0]?.address?.location || 'Remote'}</p>
+        </div>
+      </div>
       <main className="max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <h3 className="text-3xl font-bold text-gray-900">Apply Now</h3>
+{job.job_description && (
+  <div
+    className="mt-4 pt-4 border-t border-gray-100 text-gray-700 leading-relaxed"
+    dangerouslySetInnerHTML={{ __html: job.job_description }}
+  />
+)}
+
             <form onSubmit={handleSubmit} className="mt-10 space-y-6">
               <label htmlFor="resume" className="block text-sm font-medium text-gray-700 mb-2">Upload Resume *</label>
-              <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx" required onChange={handleFileChange} className="block w-full text-sm mb-4" />
+              <Input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx" required onChange={handleFileChange} className="block w-full text-sm mb-4" />
               {isProcessingResume && (
                 <div className="my-4">
                   <div className="flex items-center space-x-2 mb-4">
@@ -367,12 +382,12 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
               
               {!isProcessingResume && (
                 <>
-                  <Input name="full_name" placeholder="Full Name*" required value={formData.full_name} onChange={handleChange} />
-                  <Input name="email" type="email" placeholder="Email*" required value={formData.email} onChange={handleChange} />
-                  <Input name="phone" placeholder="Phone Number*" required value={formData.phone} onChange={handleChange} />
-                  <Input name="date_of_birth" placeholder="Date of Birth" value={formData.date_of_birth || ""} onChange={handleChange} />
+              <div className=" flex flex-row gap-4"> <Input name="full_name" placeholder="Full Name*" required value={formData.full_name} onChange={handleChange} />
+              <Input name="email" type="email" placeholder="Email*" required value={formData.email} onChange={handleChange} /></div>   
+              <div className=" flex flex-row gap-4">   <Input name="phone" placeholder="Phone Number*" required value={formData.phone} onChange={handleChange} />
+                  <Input name="date_of_birth" placeholder="Date of Birth" value={formData.date_of_birth || ""} onChange={handleChange} /> </div>
                   <Input name="gender" placeholder="Gender" value={formData.gender || ""} onChange={handleChange} />
-                  <textarea name="bio" rows={4} placeholder="Bio" value={formData.bio || ""} onChange={handleChange} className="block w-full rounded-md border-gray-300 shadow-sm" />
+                  <textarea name="bio" rows={4} placeholder="Bio" value={formData.bio || ""} onChange={handleChange} className="block w-full p-4 rounded-md border-gray-300 shadow-sm" />
                 </>  
               )}
               {!isProcessingResume && (

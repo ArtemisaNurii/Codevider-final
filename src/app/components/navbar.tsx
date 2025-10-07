@@ -141,7 +141,7 @@ const Header = () => {
 
           {/* Desktop Book a Call */}
           <Link
-            href="/#contact"
+            href="https://calendly.com/codevider/pasho"
             className={`hidden md:flex backdrop-blur-md px-6 py-3 rounded-full items-center gap-2 text-sm font-semibold transition-all duration-300 ${
               isSolid ? "bg-black text-white hover:bg-gray-800" : "bg-white text-black hover:bg-gray-100"
             }`}
