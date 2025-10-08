@@ -10,8 +10,9 @@ type NavLink = { name: string; href: Route };
 
 export const navLinks = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
+
+  { name: "About", href: "/about" },
   // { name: "Projects", href: "/projects" },
   { name: "Career", href: "/career" },
 ] as const satisfies readonly NavLink[];
