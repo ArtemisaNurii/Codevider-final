@@ -9,22 +9,24 @@ const teamMembers = [
   { name: "Pasho Toska", role: "CEO and Founder", image: "/images/teamMember/pasho1.png" },
   { name: "Jul Kreshpaj", role: "Senior Software engineer", image: "/images/teamMember/juli.png" },
   { name: "Genci Likaj", role: "Senior Software engineer", image: "/images/teamMember/genci.png" },
-  { name: "Elisabeta Guri", role: "HR Manager", image: "/images/teamMember/beta.png" },
+  { name: "Elisabeta Guri", role: "HR Manager", image: "/images/teamMember/eg.png" },
   { name: "Ansel Nikaj", role: "Project Manager", image: "/images/teamMember/ansel.png" },
   { name: "Xhulio Balli", role: "Project Manager", image: "/images/teamMember/xhulio.png" },
-  { name: "Ilvi  Cumani", role: "Frontend Developer", image: "/images/teamMember/ilvi.png" },
+  { name: "Besjana Fixha ", role: "Fullstack Developer", image: "/images/teamMember/besa.png" },
   { name: "Erald Plloha", role: "Backend Developer", image: "/images/teamMember/erald1.png" },
   { name: "Arlind Idrizi", role: "Frontend Developer", image: "/images/teamMember/arlind.png" },
-  { name: "Vasjan Cupri", role: "Backend Developer", image: "/images/teamMember/vasjan1.png" },
-  { name: "Armando Muco", role: "Backend Developer", image: "/images/teamMember/armandoo.png" },
   { name: "Eliana Kryeziu", role: "Frontend Developer", image: "/images/teamMember/eliana1.png" },
-  { name: "Kejdi Balla", role: "UIUX Designer", image: "/images/teamMember/kejdii.png" },
-  { name: "Kejsi Terolli", role: "Frontend Developer", image: "/images/teamMember/kejsi1.png" },
-  { name: "Fjona Rira", role: "Frontend Developer", image: "/images/teamMember/fjona.png" },
-  { name: "Besjana Fixha ", role: "Fullstack Developer", image: "/images/teamMember/besa.png" },
   { name: "Geri Lluga", role: "Backend Developer", image: "/images/teamMember/geri.png" },
+  { name: "Fjona Rira", role: "Frontend Developer", image: "/images/teamMember/fjona.png" },
+
+  { name: "Armando Muco", role: "Backend Developer", image: "/images/teamMember/armandoo.png" },
+  { name: "Kejdi Balla", role: "UIUX Designer", image: "/images/teamMember/kejdii.png" },
   { name: "Amanda ", role: "Backend Developer", image: "/images/teamMember/amanda.png" },
-  { name: "Artenisa Nuri", role: "Frontend Developer", image: "/images/teamMember/artenisa.png" },
+  { name: "Artemisa Nuri", role: "Frontend Developer", image: "/images/teamMember/anur.png" },
+  { name: "Kejsi Terolli", role: "Frontend Developer", image: "/images/teamMember/kejsi1.png" },
+  { name: "Vasjan Cupri", role: "Backend Developer", image: "/images/teamMember/vcpr.png" },
+
+
 ]
 
 export default function MeetTeamSection() {
@@ -120,7 +122,7 @@ export default function MeetTeamSection() {
             >
               <div
                 className="
-                  relative h-80 overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-b from-gray-50 to-white
+                  relative h-94 overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-b from-gray-50 to-white
                   shadow-sm transition-transform duration-300 ease-out will-change-transform hover:-translate-y-0.5 hover:shadow-md
                 "
               >
@@ -131,7 +133,7 @@ export default function MeetTeamSection() {
                   height={800}
                   priority={i < 4}
                   className="
-                    w-full h-full object-cover object-top   /* top-anchored: crops at the bottom */
+                    w-full h-full object-cover object-top    /* top-anchored: crops at the bottom */
                     select-none
                     transition-transform duration-500 ease-out will-change-transform
                     group-hover:scale-[1.02] hover:scale-[1.02]

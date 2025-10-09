@@ -117,7 +117,7 @@ export const Footer: React.FC = () => {
               priority
             />
             <p className="mt-4 text-gray-600 text-sm sm:text-xs max-w-md leading-relaxed">
-              Stay updated on our latest developments, insights, and opportunities by following us.
+              Stay updated on our latest developments, insights, and opportunities.
             </p>
 
             {/* Address for MOBILE VIEW ONLY */}
