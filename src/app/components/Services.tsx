@@ -79,10 +79,10 @@ const Services: NextPage = () => {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <p className="text-sky-500 font-semibold tracking-wider uppercase"></p>
-          <h2 className="text-4xl md:text-5xl font-bold text-center font-sans text-gray-900 leading-tight mt-2">
+          <h2 className="text-4xl md:text-5xl max-sm:text-start font-bold text-center font-sans text-gray-900 leading-tight mt-2">
             Our Core Services
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="mt-4 text-lg max-sm:text-start  text-gray-600">
             We help enterprises and startups ship faster with scalable teams,
             modern stacks, and reliable delivery,without the overhead.
           </p>

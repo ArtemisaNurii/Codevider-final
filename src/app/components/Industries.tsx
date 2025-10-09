@@ -102,7 +102,7 @@ export default function Industries() {
     <section className="bg-white py-12 md:py-16 md:px-20 max-sm:px-4">
       <div>
         <div className="mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold text-center text-gray-900 leading-tight">
+          <h2 className="text-3xl md:text-5xl font-bold text-center max-sm:text-start text-gray-900 leading-tight">
             We Empower Tech Startups, SMEs & Global Brands
           </h2>
         </div>
