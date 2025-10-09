@@ -7,11 +7,11 @@ export default function AboutSection3() {
   return (
     <section id="about" className=" bg-white md:mt-10 ">
              <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-        <div className="mx-auto max-w-7xl py-16 md:py-24 text-start">
+        <div className="mx-auto max-w-7xl py-16 md:py-24  max-sm:px-4 text-start">
           <p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
               About Us
           </p>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          <h1 className="mt-4  text-4xl font-bold tracking-tight md:text-5xl">
           Crafting Software That Means Business         </h1>
           <p className="mt-4  mx-auto text-lg leading-relaxed text-gray-300">
           Strategy, design, and engineering working in harmony to drive your roadmap forward.        </p>
@@ -37,7 +37,7 @@ export default function AboutSection3() {
             </h2>
             
             {/* Grid for the two paragraphs to sit side-by-side on medium screens and up */}
-            <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 text-base text-gray-600 px-6 leading-relaxed">
+            <div className="mt-8 grid grid-cols-1 max-sm:px-4 gap-8 md:grid-cols-2 text-base text-gray-600 px-6 leading-relaxed">
               <p>
                 Founded in 2019 in Tirana, Albania, CodeVider delivers high-performance,
                 cost-efficient software development solutions for startups, SMEs, and
