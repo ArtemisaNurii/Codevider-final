@@ -6,7 +6,7 @@ export default function CareerPage() {
   return (
     <main>
       <Header/>
-      <section className="">
+      <section >
 
         
         <JobsListing page={1} limit={10} />

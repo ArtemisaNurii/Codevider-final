@@ -352,7 +352,7 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
       {/* Section Header with Gradient */}
       <div className="w-full bg-gradient-to-r from-black via-slate-700 to-sky-600 py-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-white">{job.title}</h2>
+          <h2 className="text-5xl font-bold text-white">{job.title}</h2>
           <p className="mt-2 text-lg text-gray-200">{job.job_type.job_type} • {job.addresses?.[0]?.address?.location || 'Remote'}</p>
         </div>
       </div>
