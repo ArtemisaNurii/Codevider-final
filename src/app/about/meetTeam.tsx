@@ -8,13 +8,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 // No changes to the teamMembers array
 const teamMembers = [
     { name: "Pasho Toska", role: "CEO and Founder", image: "/images/teamMember/pasho1.png" },
-    { name: "Ervin Ziko", role: "Co-Founder", image: "/images/teamMember/evziko.png" },
+    { name: "Ervin Ziko", role: "Co-Founder", image: "/images/teamMember/ervinziko.png" },
     { name: "Jul Kreshpaj", role: "Senior Software engineer", image: "/images/teamMember/juli.png" },
     { name: "Genci Likaj", role: "Senior Software engineer", image: "/images/teamMember/genci.png" },
     { name: "Elisabeta Guri", role: "HR Manager", image: "/images/teamMember/eg.png" },
     { name: "Ansel Nikaj", role: "Project Manager", image: "/images/teamMember/ansel.png" },
     { name: "Xhulio Balli", role: "Project Manager", image: "/images/teamMember/xhulio.png" },
-    { name: "Besjana Fixha ", role: "Fullstack Developer", image: "/images/teamMember/besa.png" },
+    { name: "Besjana Fixha ", role: "Fullstack Developer", image: "/images/teamMember/bfixha.png" },
     { name: "Erald Plloha", role: "Backend Developer", image: "/images/teamMember/erald1.png" },
     { name: "Arlind Idrizi", role: "Frontend Developer", image: "/images/teamMember/arlind.png" },
     { name: "Eliana Kryeziu", role: "Frontend Developer", image: "/images/teamMember/eliana1.png" },
@@ -23,9 +23,9 @@ const teamMembers = [
     { name: "Armando Muco", role: "Backend Developer", image: "/images/teamMember/armandoo.png" },
     { name: "Kejdi Balla", role: "UIUX Designer", image: "/images/teamMember/kejdii.png" },
     { name: "Amanda Oshafi", role: "Backend Developer", image: "/images/teamMember/amanda.png" },
-    { name: "Artemisa Nuri", role: "Frontend Developer", image: "/images/teamMember/anur.png" },
+    { name: "Artemisa Nuri", role: "Frontend Developer", image: "/images/teamMember/art.png" },
     { name: "Kejsi Terolli", role: "Frontend Developer", image: "/images/teamMember/kejsi1.png" },
-    { name: "Vasjan Çupri", role: "Backend Developer", image: "/images/teamMember/vcpr.png" },
+    { name: "Vasjan Çupri", role: "Backend Developer", image: "/images/teamMember/vsjn.png" },
 ];
 
 export default function MeetTeamSection() {
