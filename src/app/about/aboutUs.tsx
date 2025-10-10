@@ -7,7 +7,7 @@ export default function AboutSection3() {
   return (
     <section id="about" className=" bg-white md:mt-10 ">
              <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-        <div className="mx-auto max-w-7xl py-16 md:py-24  max-sm:px-4 text-start">
+        <div className="mx-auto max-w-7xl py-16 md:py-24 px-4   md:px-4 text-start">
           <p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
               About Us
           </p>
