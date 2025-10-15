@@ -7,15 +7,16 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 
 // No changes to the teamMembers array
 const teamMembers = [
-    { name: "Pasho Toska", role: "CEO and Founder", image: "/images/teamMember/pasho1.png" },
-    { name: "Ervin Ziko", role: "Co-Founder", image: "/images/teamMember/ervinziko.png" },
-    { name: "Erion Domi", role: "Co-Founder", image: "/images/teamMember/edomi.png" },
-    { name: "Jul Kreshpaj", role: "Senior Software engineer", image: "/images/teamMember/juli.png" },
+    { name: "Pasho Toska", role: "CEO and Founder", image: "/images/teamMember/pasho2.png" },
+    { name: "Ervin Ziko", role: "Co-Founder", image: "/images/teamMember/ez.png" },
+    { name: "Erion Domi", role: "Co-Founder", image: "/images/teamMember/domi.png" },
     { name: "Genci Likaj", role: "Senior Software engineer", image: "/images/teamMember/genci.png" },
+    { name: "Jul Kreshpaj", role: "Senior Software engineer", image: "/images/teamMember/juli.png" },
+
     { name: "Elisabeta Guri", role: "HR Manager", image: "/images/teamMember/eg.png" },
     { name: "Ansel Nikaj", role: "Project Manager", image: "/images/teamMember/ansel.png" },
     { name: "Xhulio Balli", role: "Project Manager", image: "/images/teamMember/xhulio.png" },
-    { name: "Besjana Fixha ", role: "Fullstack Developer", image: "/images/teamMember/besianaf.png" },
+    { name: "Besjana Fixha ", role: "Fullstack Developer", image: "/images/teamMember/besa.png" },
     { name: "Erald Plloha", role: "Backend Developer", image: "/images/teamMember/erald1.png" },
     { name: "Arlind Idrizi", role: "Frontend Developer", image: "/images/teamMember/arlind.png" },
     { name: "Eliana Kryeziu", role: "Frontend Developer", image: "/images/teamMember/eliana1.png" },
@@ -24,8 +25,8 @@ const teamMembers = [
     { name: "Armando Muco", role: "Backend Developer", image: "/images/teamMember/armandoo.png" },
     { name: "Kejdi Balla", role: "UIUX Designer", image: "/images/teamMember/kejdii.png" },
     { name: "Amanda Oshafi", role: "Backend Developer", image: "/images/teamMember/amanda.png" },
-    { name: "Artemisa Nuri", role: "Frontend Developer", image: "/images/teamMember/art.png" },
-    { name: "Kejsi Terolli", role: "Frontend Developer", image: "/images/teamMember/kejsi1.png" },
+    { name: "Artemisa Nuri", role: "Frontend Developer", image: "/images/teamMember/NURI.png" },
+    { name: "Kejsi Terolli", role: "Frontend Developer", image: "/images/teamMember/kejsi.png" },
     { name: "Vasjan Çupri", role: "Backend Developer", image: "/images/teamMember/vsjn.png" },
 ];
 
@@ -94,6 +95,24 @@ export default function MeetTeamSection() {
     }
   }
 
+  // Scroll to a specific card when clicked
+  const scrollToCard = (index: number) => {
+    const el = carouselRef.current
+    if (!el) return
+
+    const cards = el.children
+    if (index >= 0 && index < cards.length) {
+      const targetCard = cards[index] as HTMLElement
+      const containerRect = el.getBoundingClientRect()
+      const cardRect = targetCard.getBoundingClientRect()
+      
+      // Calculate the scroll position to center the card
+      const scrollLeft = el.scrollLeft + (cardRect.left - containerRect.left) - (containerRect.width - cardRect.width) / 2
+      
+      el.scrollTo({ left: scrollLeft, behavior: "smooth" })
+    }
+  }
+
   return (
     <section className="py-16 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
@@ -143,9 +162,10 @@ export default function MeetTeamSection() {
               className="flex-shrink-0 snap-center w-full max-w-xs sm:w-[45%] md:w-[30%] lg:w-[23%] group"
             >
               <div
+                onClick={() => scrollToCard(i)}
                 className="relative overflow-hidden rounded-2xl border border-gray-100 bg-gray-50
                            shadow-sm transition-all duration-300 ease-in-out will-change-transform 
-                           group-hover:-translate-y-1 group-hover:shadow-xl"
+                           group-hover:-translate-y-1 group-hover:shadow-xl cursor-pointer"
               >
                 <div className="aspect-[3/4]">
                   <Image
