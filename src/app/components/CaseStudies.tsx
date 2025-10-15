@@ -273,7 +273,7 @@ const SolutionPillars: React.FC = () => {
           scrollTrigger: {
             trigger: elem as HTMLElement,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            once: true,
           },
         });
       };
@@ -291,7 +291,7 @@ const SolutionPillars: React.FC = () => {
           scrollTrigger: {
             trigger: elem as HTMLElement,
             start: "top 90%",
-            toggleActions: "play none none reverse",
+            once: true,
           },
         });
       };
@@ -316,7 +316,7 @@ const SolutionPillars: React.FC = () => {
         scrollTrigger: {
           trigger: infoCard,
           start: "top 85%",
-          toggleActions: "play none none reverse",
+          once: true,
         },
       });
       // animateWords(infoCard.querySelector(".info-features"), 0.4);
@@ -331,7 +331,7 @@ const SolutionPillars: React.FC = () => {
         scrollTrigger: {
           trigger: infoCard,
           start: "top 85%",
-          toggleActions: "play none none reverse",
+          once: true,
         },
       });
 
@@ -347,7 +347,7 @@ const SolutionPillars: React.FC = () => {
           scrollTrigger: {
             trigger: card,
             start: "top 90%",
-            toggleActions: "play none none reverse",
+            once: true,
           },
         });
 
@@ -363,7 +363,7 @@ const SolutionPillars: React.FC = () => {
             scrollTrigger: {
               trigger: card,
               start: "top 90%",
-              toggleActions: "play none none reverse",
+              once: true,
             },
           });
         }
@@ -382,7 +382,7 @@ const SolutionPillars: React.FC = () => {
           scrollTrigger: {
             trigger: card,
             start: "top 90%",
-            toggleActions: "play none none reverse",
+            once: true,
           },
         });
 
@@ -398,7 +398,7 @@ const SolutionPillars: React.FC = () => {
             scrollTrigger: {
               trigger: card,
               start: "top 90%",
-              toggleActions: "play none none reverse",
+              once: true,
             },
           });
         }
