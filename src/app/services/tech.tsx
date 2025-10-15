@@ -96,12 +96,12 @@ const technologies: TechnologyCategoryType[] = [
       { name: "Android", icon: <GrAndroid {...iconProps} className="text-green-500" /> },
       { name: "OpenAI", icon: <SiOpenai {...iconProps} className="text-teal-500" /> },
       { name: "Figma", icon: <SiFigma {...iconProps} className="text-purple-500" /> },
-      { name: "Anthropic", icon: <SiAnthropic {...iconProps} className="text-blue-500" /> },
-      { name: "Mixtral", icon: <RiMixtralFill {...iconProps} className="text-blue-500" /> },
-      { name: "Meta", icon: <FaMeta {...iconProps} className="text-blue-500" /> },
-      { name: "Huggingface", icon: <SiHuggingface {...iconProps} className="text-blue-500" /> },
-      { name: "Ollama", icon: <SiOllama {...iconProps} className="text-blue-500" /> },
-      { name: "Gemini", icon: <RiGeminiFill {...iconProps} className="text-blue-500" /> },
+      { name: "Anthropic", icon: <SiAnthropic {...iconProps} className="text-orange-600" /> },
+      { name: "Mixtral", icon: <RiMixtralFill {...iconProps} className="text-orange-500" /> },
+      { name: "Meta", icon: <FaMeta {...iconProps} className="text-blue-600" /> },
+      { name: "Huggingface", icon: <SiHuggingface {...iconProps} className="text-yellow-500" /> },
+      { name: "Ollama", icon: <SiOllama {...iconProps} className="text-gray-800" /> },
+      { name: "Gemini", icon: <RiGeminiFill {...iconProps} className="text-blue-600" /> },
     ]
   },
   {

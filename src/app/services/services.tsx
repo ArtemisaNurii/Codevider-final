@@ -29,10 +29,15 @@ const services: ServiceItem[] = [
     description:
       'High-performing web apps that load fast, look great on every device, and convert visitors into customers. Ideal for portals, dashboards, and data-heavy tools.',
   },
+  // {
+  //   title: 'Mobile Application Development',
+  //   description:
+  //     'iOS and Android apps users love,built native or cross-platform. Smooth UX, offline support, and seamless releases to App Store and Google Play.',
+  // },
   {
-    title: 'Mobile Application Development',
+    title: 'AI Integration',
     description:
-      'iOS and Android apps users love,built native or cross-platform. Smooth UX, offline support, and seamless releases to App Store and Google Play.',
+      'We integrate AI into your existing workflows. From custom LLM-powered apps to intelligent chatbots and workflow automation, we make AI work for you.',
   },
   {
     title: 'Automation',
@@ -72,10 +77,10 @@ const solution: Record<string, string[]> = {
     'Real-time dashboards with actionable insights',
     'Secure and intuitive customer-facing web solutions',
   ],
-  'Mobile Application Development': [
-    'Cross-platform apps with consistent UX on iOS & Android',
-    'Offline-first design for reliability in all conditions',
-    'Easy deployment and updates through app stores',
+  'AI Integration': [
+    'Custom LLM-powered apps and intelligent chatbots',
+    'Workflow automation and actionable insights',
+    'Seamless integration into existing ecosystems',
   ],
   Automation: [
     'Fully automated deployment pipelines',
@@ -120,6 +125,11 @@ const outcomes: Record<string, string[]> ={
     'Stronger brand presence on mobile devices',
     'Increased customer retention and loyalty',
     'Faster go-to-market with scalable mobile apps',
+  ],
+  'AI Integration': [
+    'Faster response times with AI-powered chatbots',
+    'Reduction in manual data entry and document processing',
+    'Data-driven insights that improve decision accuracy',
   ],
   Automation: [
     'Fewer manual errors across departments',

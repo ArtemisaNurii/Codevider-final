@@ -94,7 +94,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ step, title, description, del
   return (
     <div 
       ref={stepRef}
-      className={`transition-all duration-700 transform ${
+      className={`transition-all duration-700   font-semiboldtransform ${
         hasAnimated 
           ? 'translate-y-0 opacity-100' 
           : 'translate-y-8 opacity-0'
@@ -103,7 +103,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ step, title, description, del
         transitionDelay: hasAnimated ? `${delay}ms` : '0ms',
       }}
     >
-      <p className="text-sm md:text-base lg:text-lg font-semibold text-sky-700 tracking-[0.2em] uppercase">{step}</p>
+      <p className="text-sm  lg:text-lg font-bold text-sky-700 tracking-[0.2em] uppercase">{step}</p>
       <h3 className="text-base md:text-lg lg:text-lg font-bold text-gray-900 uppercase tracking-wider mt-4 mb-3">{title}</h3>
       {/* The short blue divider line */}
       <div className="border-b border-[#38bdf8] w-1/4 mb-4"></div>

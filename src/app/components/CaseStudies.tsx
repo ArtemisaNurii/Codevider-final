@@ -239,7 +239,7 @@ const SolutionPillars: React.FC = () => {
       title: "Total Flexibility & Control",
       metric: { value: "", label: "Platform Access" },
       description:
-        "Scale your team on-demand for single or multiple projects, and monitor progress anytime through our transparent online platform.",
+        "Scale your team on-demand for single or multiple projects, and monitor progress anytime through Slack, Jira, Github, etc.",
     },
     {
       tag: "Advantage 03",
