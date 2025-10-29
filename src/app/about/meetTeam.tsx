@@ -7,8 +7,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 
 // No changes to the teamMembers array
 const teamMembers = [
-    { name: "Pasho Toska", role: "CEO and Founder", image: "/images/teamMember/pasho2.png" },
-    { name: "Ervin Ziko", role: "Co-Founder", image: "/images/teamMember/ez.png" },
+    { name: "Pasho Toska", role: "CEO and Founder", image: "/images/teamMember/pashoo.png" },
+    { name: "Ervin Ziko", role: "Co-Founder", image: "/images/teamMember/vini.png" },
+    { name: "Altin Luli", role: "Co-Founder", image: "/images/teamMember/altinii.png" },
+
     { name: "Erion Domi", role: "Co-Founder", image: "/images/teamMember/domi.png" },
     { name: "Genci Likaj", role: "Senior Software engineer", image: "/images/teamMember/genci.png" },
     { name: "Jul Kreshpaj", role: "Senior Software engineer", image: "/images/teamMember/juli.png" },
@@ -25,7 +27,7 @@ const teamMembers = [
     { name: "Armando Muco", role: "Backend Developer", image: "/images/teamMember/armandoo.png" },
     { name: "Kejdi Balla", role: "UIUX Designer", image: "/images/teamMember/kejdii.png" },
     { name: "Amanda Oshafi", role: "Backend Developer", image: "/images/teamMember/amanda.png" },
-    { name: "Artemisa Nuri", role: "Frontend Developer", image: "/images/teamMember/NURI.png" },
+    { name: "Artemisa Nuri", role: "Frontend Developer", image: "/images/teamMember/artenisa.png" },
     { name: "Kejsi Terolli", role: "Frontend Developer", image: "/images/teamMember/kejsi.png" },
     { name: "Vasjan Çupri", role: "Backend Developer", image: "/images/teamMember/vsjn.png" },
 ];
