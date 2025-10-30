@@ -8,10 +8,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 // No changes to the teamMembers array
 const teamMembers = [
     { name: "Pasho Toska", role: "CEO and Founder", image: "/images/teamMember/pashoo.png" },
-    { name: "Ervin Ziko", role: "Co-Founder", image: "/images/teamMember/vini.png" },
-    { name: "Altin Luli", role: "Co-Founder", image: "/images/teamMember/altinii.png" },
+    { name: "Ervin Ziko", role: "Co-Founder", image: "/images/teamMember/ervinziko.png" },
+    { name: "Altin Luli", role: "Co-Founder", image: "/images/teamMember/alt.png" },
 
-    { name: "Erion Domi", role: "Co-Founder", image: "/images/teamMember/domi.png" },
+    { name: "Erion Domi", role: "Co-Founder", image: "/images/teamMember/erionn.png" },
     { name: "Genci Likaj", role: "Senior Software engineer", image: "/images/teamMember/genci.png" },
     { name: "Jul Kreshpaj", role: "Senior Software engineer", image: "/images/teamMember/juli.png" },
 

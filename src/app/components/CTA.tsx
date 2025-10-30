@@ -88,7 +88,7 @@ export const Footer: React.FC = () => {
                 href="tel:+355695877742" 
                 className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1 font-medium"
               >
-                +355 695 877 742
+                +355 69 587 7742
               </a>
             </li>
             <li>
