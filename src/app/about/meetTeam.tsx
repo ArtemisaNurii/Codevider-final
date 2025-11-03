@@ -9,7 +9,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 const teamMembers = [
     { name: "Pasho Toska", role: "Co-Founder", image: "/images/teamMember/pashoo.png" },
     { name: "Ervin Ziko", role: "Co-Founder", image: "/images/teamMember/ervinziko.png" },
-    { name: "Altin Luli", role: "Co-Founder", image: "/images/teamMember/altini2.png" },
+    { name: "Altin Luli", role: "Co-Founder", image: "/images/teamMember/altin4.png" },
 
     { name: "Erion Domi", role: "Co-Founder", image: "/images/teamMember/erion1.png" },
     { name: "Genci Likaj", role: "Senior Software engineer", image: "/images/teamMember/genci.png" },
