@@ -256,7 +256,7 @@ export default function ServicesPage() {
         </aside>
 
         {/* Mobile Jump Menu */}
-        <div className="md:hidden">
+        <div className="hidden">
           <label htmlFor="jump" className="sr-only">
             Jump to a service
           </label>
