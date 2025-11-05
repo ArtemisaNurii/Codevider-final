@@ -176,31 +176,43 @@ const Contact: React.FC = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [isPending, setIsPending] = React.useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsPending(true);
-    
-    const formData = new FormData(e.currentTarget);
-    
-    try {
-      const result = await contactSubmit(formData);
-      
-      if (result.success) {
-        toast.success(result.message);
-        // Reset form on success
-        if (formRef.current) {
-          formRef.current.reset();
-        }
-      } else {
-        toast.error(result.message);
-      }
-    } catch (error) {
-      console.error("Contact form submission error:", error);
-      toast.error("Something went wrong. Please try again later.");
-    } finally {
-      setIsPending(false);
+// inside your Contact component file
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setIsPending(true);
+
+  try {
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      companies: String(formData.get("companies") || ""),
+      email: String(formData.get("email") || ""),
+      details: String(formData.get("details") || ""),
+      linkedin: String(formData.get("linkedin") || ""),
+    };
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await res.json();
+
+    if (res.ok && result.success) {
+      toast.success(result.message);
+      formRef.current?.reset();
+    } else {
+      toast.error(result.message || "Failed to submit. Please try again.");
     }
-  };
+  } catch (err) {
+    console.error("Contact form submission error:", err);
+    toast.error("Something went wrong. Please try again later.");
+  } finally {
+    setIsPending(false);
+  }
+};
 
   useEffect(() => {
     // Observer logic if needed
