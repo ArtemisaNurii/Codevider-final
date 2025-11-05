@@ -45,7 +45,7 @@ async function saveLeadToNotion(
         ],
       },
       LinkedIn: {
-        url: linkedin,
+        url: linkedin || null,
       },
     },
   });
