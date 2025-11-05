@@ -176,8 +176,12 @@ const Contact: React.FC = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [isPending, setIsPending] = React.useState(false);
 
-  const handleSubmit = async (formData: FormData) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsPending(true);
+    
+    const formData = new FormData(e.currentTarget);
+    
     try {
       const result = await contactSubmit(formData);
       
@@ -252,7 +256,7 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="w-full flex flex-col justify-center">
-              <form ref={formRef} action={handleSubmit} className="space-y-4 pt-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 pt-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
                   <div className="space-y-2">
                     <Label htmlFor="companies" className="text-gray-200">
