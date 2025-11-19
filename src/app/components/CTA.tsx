@@ -297,18 +297,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                     className="bg-transparent  border-gray-604 min-h-[120px] focus-visible:ring-offset-0 focus-visible:ring-sky-400"
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="Linkedin" className="text-gray-300">
-                    What&apos;s your LinkedIn profile?
-                  </Label>
-                  <Input
-                    id="linkedin"
-                    name="linkedin"
-                    type="url"
-                    placeholder="https://www.linkedin.com/in/your-profile"
-                    className="bg-transparent border-gray-400 focus-visible:ring-offset-0 focus-visible:ring-sky-400"
-                  />
-                </div>
                 <Button
                   type="submit"
                   variant="secondary"

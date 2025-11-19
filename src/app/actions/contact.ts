@@ -10,7 +10,6 @@ const contactSchema = z.object({
   companies: z.string().min(2, { message: "Full name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   details: z.string().optional(),
-  linkedin: z.string().optional(),
 });
 
 // Function to save lead to Notion database
@@ -18,7 +17,6 @@ async function saveLeadToNotion(
   companies: string,
   email: string,
   details: string,
-  linkedin: string,
 ) {
   await notion.pages.create({
     parent: { database_id: process.env.NOTION_DB_ID! },
@@ -44,9 +42,6 @@ async function saveLeadToNotion(
           },
         ],
       },
-      LinkedIn: {
-        url: linkedin || null,
-      },
     },
   });
 }
@@ -58,7 +53,6 @@ export async function contactSubmit(formData: FormData) {
     companies: formData.get("companies")?.toString() || "",
     email: formData.get("email")?.toString() || "",
     details: formData.get("details")?.toString() || "",
-    linkedin: formData.get("linkedin")?.toString() || "",
   };
 
   // 2. Validate the data
@@ -87,7 +81,6 @@ export async function contactSubmit(formData: FormData) {
       validationResult.data.companies,
       validationResult.data.email,
       validationResult.data.details || "",
-      validationResult.data.linkedin || "",
     );
 
     // If the submission was successful
