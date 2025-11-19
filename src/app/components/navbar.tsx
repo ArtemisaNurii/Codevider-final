@@ -143,6 +143,8 @@ const Header = () => {
           {/* Desktop Book a Call */}
           <Link
             href="https://calendly.com/codevider/pasho"
+            target="_blank"
+            rel="noopener noreferrer"
             className={`hidden md:flex backdrop-blur-md px-4 py-3 rounded-full items-center gap-2 text-sm font-semibold transition-all duration-300 ${
               isSolid ? "bg-black text-white hover:bg-gray-800" : "bg-white text-black hover:bg-gray-100"
             }`}
@@ -228,7 +230,9 @@ const Header = () => {
               ))}
             </nav>
             <Link
-              href="/#contact"
+              href="https://calendly.com/codevider/pasho"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-white text-black px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold hover:bg-gray-100 mt-8"
               onClick={() => setIsMobileMenuOpen(false)}
             >

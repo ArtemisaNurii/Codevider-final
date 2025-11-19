@@ -185,22 +185,10 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const payload = {
-      companies: String(formData.get("companies") || ""),
-      email: String(formData.get("email") || ""),
-      details: String(formData.get("details") || ""),
-      linkedin: String(formData.get("linkedin") || ""),
-    };
+    // Call the server action directly
+    const result = await contactSubmit(formData);
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    const result = await res.json();
-
-    if (res.ok && result.success) {
+    if (result.success) {
       toast.success(result.message);
       formRef.current?.reset();
     } else {
@@ -261,7 +249,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   </div>
                   <div>
                     <p className="font-semibold"></p>Call Us Now
-                    <p className="text-sm text-gray-400">+1 224-788-0689</p>
+                    <p className="text-sm text-gray-400">+355 69 587 7742</p>
                   </div>
                 </a>
               </div>
