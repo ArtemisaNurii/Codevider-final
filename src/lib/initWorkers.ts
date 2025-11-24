@@ -14,26 +14,18 @@ export const initAppWorkers = async (): Promise<void> => {
   try {
     const measureId = performanceMonitor.startMeasure('workerInit');
     
-    console.log('🔧 Initializing Web Workers for performance optimization...');
     
     await initializeWorkers();
     
     const duration = performanceMonitor.endMeasure(measureId);
-    console.log(`✅ Web Workers initialized successfully in ${duration.toFixed(2)}ms`);
     
     workersInitialized = true;
     
     // Log performance benefits
-    console.log(`
-🚀 Performance Optimization Active:
-• Text processing: Offloaded to Web Worker
-• Data filtering: Offloaded to Web Worker  
-• Mathematical calculations: Offloaded to Web Worker
-• Main thread: Free for UI interactions
-    `);
+  
     
   } catch (error) {
-    console.warn('⚠️ Some Web Workers failed to initialize. Falling back to main thread processing:', error);
+    console.warn(' Some Web Workers failed to initialize. Falling back to main thread processing:', error);
     // App will continue to work with fallbacks
   }
 };
