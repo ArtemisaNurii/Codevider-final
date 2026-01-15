@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Users, Handshake, Sparkles, Heart, Globe2, Target, Star, Trophy, Scale, Lightbulb, Rocket, Code2 } from "lucide-react";
+import { ArrowRight, Users, Sparkles, Heart, Target, Trophy, Code2 } from "lucide-react";
 import Image from "next/image";
 import MeetTeamSection from "./meetTeam";
 // ---- Types ----
@@ -12,17 +12,17 @@ interface Pillar {
   description: string;
 }
 
-interface Stat {
-  label: string;
-  value: string;
-  note?: string;
-}
+// interface Stat {
+//   label: string;
+//   value: string;
+//   note?: string;
+// }
 
-interface TimelineItem {
-  year: string;
-  title: string;
-  text: string;
-}
+// interface TimelineItem {
+//   year: string;
+//   title: string;
+//   text: string;
+// }
 
 
 const pillars: Pillar[] = [

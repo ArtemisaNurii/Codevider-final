@@ -163,7 +163,6 @@ const MetricCard = ({
 );
 
 const MiniCaseStudyCard = ({
-  tag,
   title,
   metric,
   description,

@@ -4,9 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "generate-build-version": "node generate-build-version",
+    "prebuild": "npm run generate-build-version",
+    "build": "next build && cp -r out/. dist/",
+    "clean": "rimraf ./dist ./out && mkdirp dist",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build-prod": "npm run clean && npm run build && npm run deployee-meta-prod && npm run deployee-prod",
+    "deployee-meta-prod": "s3-deploy './dist/meta.json' --cwd dist/ --profile codevider --region us-east-1 --bucket landing-codevier.com --noCache",
+    "deployee-prod": "s3-deploy './dist/**' --cwd dist/ --profile codevider --region us-east-1 --bucket landing-codevier.com"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

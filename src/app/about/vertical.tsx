@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { type AnimationOptions, motion } from "motion/react"
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react"
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react"
 
 import { cn } from "@/lib/utils"
 import { useTextProcessingWorker } from "@/lib/hooks/useWebWorker"
@@ -67,14 +67,14 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
     const [hasAnimated, setHasAnimated] = useState(false)
 
     // handy function to split text into characters with support for unicode and emojis
-    const splitIntoCharacters = (text: string): string[] => {
-      if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
-        const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" })
-        return Array.from(segmenter.segment(text), ({ segment }) => segment)
-      }
-      // Fallback for browsers that don't support Intl.Segmenter
-      return Array.from(text)
-    }
+    // const splitIntoCharacters = (text: string): string[] => {
+    //   if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
+    //     const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" })
+    //     return Array.from(segmenter.segment(text), ({ segment }) => segment)
+    //   }
+    //   // Fallback for browsers that don't support Intl.Segmenter
+    //   return Array.from(text)
+    // }
 
     // Use Web Worker for expensive text processing
     const [processedData, setProcessedData] = useState<{
@@ -83,7 +83,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
       animationData: Array<{element: unknown; delay: number; index: number}>;
     } | null>(null);
     
-    const { processAnimationSequence, isLoading: isProcessing } = useTextProcessingWorker();
+    const { processAnimationSequence } = useTextProcessingWorker();
 
     // Process text with Web Worker when dependencies change
     useEffect(() => {
@@ -98,7 +98,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
         } catch (error) {
           console.error('Text processing failed:', error);
           // Fallback to synchronous processing
-          const words = text.split(" ");
+          // const words = text.split(" ");
           const elements = splitBy === "words" ? text.split(" ") : splitBy === "lines" ? text.split("\n") : text.split(splitBy);
           setProcessedData({
             elements,
@@ -138,7 +138,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
       if (autoStart) {
         startAnimation()
       }
-    }, [autoStart])
+    }, [autoStart, startAnimation])
 
     const variants = {
       hidden: { y: reverse ? "-100%" : "100%" },

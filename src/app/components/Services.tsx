@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 
 "use client";
 import type { NextPage } from "next";
 import Link from "next/link";
-import { PieChart, Atom, Users, Code, Brain } from "lucide-react";
+import { Atom, Users, Code, Brain } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -39,12 +40,12 @@ const serviceData = [
 ];
 
 // Map “Read more” to Services page anchors (matching the stepper page slugs)
-const readMoreHref: Record<string, string> = {
-  "Product Engineering": "/services#01-custom-software-development",
-  "Dedicated Pod Teams": "/services#09-team-augmentation",
-  "Cloud & DevOps": "/services#04-cloud-computing",
-  "AI Integrations": "/services#10-ai-integration",
-};
+// const readMoreHref: Record<string, string> = {
+//   "Product Engineering": "/services#01-custom-software-development",
+//   "Dedicated Pod Teams": "/services#09-team-augmentation",
+//   "Cloud & DevOps": "/services#04-cloud-computing",
+//   "AI Integrations": "/services#10-ai-integration",
+// };
 
 
 const gridContainerVariants = {
@@ -98,20 +99,20 @@ const Services: NextPage = () => {
         >
           {serviceData.map((service, index) => {
             const Icon = service.icon;
-            const isHovered = hoveredCard === index;
-            const isAnyCardHovered = hoveredCard !== null;
+            // const isHovered = hoveredCard === index;
+            // const isAnyCardHovered = hoveredCard !== null;
 
-            const getHighlightedIconBg = () => {
-              if (isHovered) return "bg-slate-900";
-              if (isAnyCardHovered && !isHovered) return "bg-gray-200";
-              return "bg-slate-900";
-            };
+            // const getHighlightedIconBg = () => {
+            //   if (isHovered) return "bg-slate-900";
+            //   if (isAnyCardHovered && !isHovered) return "bg-gray-200";
+            //   return "bg-slate-900";
+            // };
 
-            const getHighlightedIconColor = () => {
-              if (isHovered) return "text-white";
-              if (isAnyCardHovered && !isHovered) return "text-[#0a61cb]";
-              return "text-[#0a61cb]";
-            };
+            // const getHighlightedIconColor = () => {
+            //   if (isHovered) return "text-white";
+            //   if (isAnyCardHovered && !isHovered) return "text-[#0a61cb]";
+            //   return "text-[#0a61cb]";
+            // };
 
             return (
               <motion.div

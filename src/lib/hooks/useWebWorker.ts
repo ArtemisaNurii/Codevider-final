@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
@@ -26,16 +27,6 @@ export const useTextProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const workerManager = useRef(getWorkerManager());
   const { enableCaching = true, autoInitialize = true } = options;
 
-  useEffect(() => {
-    if (autoInitialize) {
-      initializeWorker();
-    }
-    
-    return () => {
-      workerManager.current.terminate('textProcessor');
-    };
-  }, [autoInitialize]);
-
   const initializeWorker = useCallback(async () => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -52,6 +43,16 @@ export const useTextProcessingWorker = (options: UseWebWorkerOptions = {}) => {
       }));
     }
   }, []);
+
+  useEffect(() => {
+    if (autoInitialize) {
+      initializeWorker();
+    }
+
+    return () => {
+      workerManager.current.terminate('textProcessor');
+    };
+  }, [autoInitialize, initializeWorker]);
 
   const processAnimationSequence = useCallback(async (text: string, config: {
     splitBy: 'words' | 'characters' | 'lines';
@@ -122,16 +123,6 @@ export const useDataProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const workerManager = useRef(getWorkerManager());
   const { enableCaching = true, autoInitialize = true } = options;
 
-  useEffect(() => {
-    if (autoInitialize) {
-      initializeWorker();
-    }
-
-    return () => {
-      workerManager.current.terminate('dataProcessor');
-    };
-  }, [autoInitialize]);
-
   const initializeWorker = useCallback(async () => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -148,6 +139,16 @@ export const useDataProcessingWorker = (options: UseWebWorkerOptions = {}) => {
       }));
     }
   }, []);
+
+  useEffect(() => {
+    if (autoInitialize) {
+      initializeWorker();
+    }
+
+    return () => {
+      workerManager.current.terminate('dataProcessor');
+    };
+  }, [autoInitialize, initializeWorker]);
 
   const filterProjects = useCallback(async (projects: unknown[], filters: Record<string, unknown>) => {
     try {
@@ -262,16 +263,6 @@ export const useMathProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const workerManager = useRef(getWorkerManager());
   const { enableCaching = true, autoInitialize = true } = options;
 
-  useEffect(() => {
-    if (autoInitialize) {
-      initializeWorker();
-    }
-
-    return () => {
-      workerManager.current.terminate('mathProcessor');
-    };
-  }, [autoInitialize]);
-
   const initializeWorker = useCallback(async () => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -288,6 +279,16 @@ export const useMathProcessingWorker = (options: UseWebWorkerOptions = {}) => {
       }));
     }
   }, []);
+
+  useEffect(() => {
+    if (autoInitialize) {
+      initializeWorker();
+    }
+
+    return () => {
+      workerManager.current.terminate('mathProcessor');
+    };
+  }, [autoInitialize, initializeWorker]);
 
   const processMapDots = useCallback(async (dots: unknown[], config?: Record<string, unknown>) => {
     try {
@@ -378,16 +379,6 @@ export const useGenericWorker = (workerType: string, scriptPath: string, options
   const workerManager = useRef(getWorkerManager());
   const { enableCaching = true, autoInitialize = true } = options;
 
-  useEffect(() => {
-    if (autoInitialize) {
-      initializeWorker();
-    }
-
-    return () => {
-      workerManager.current.terminate(workerType);
-    };
-  }, [autoInitialize, workerType]);
-
   const initializeWorker = useCallback(async () => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -401,6 +392,16 @@ export const useGenericWorker = (workerType: string, scriptPath: string, options
       }));
     }
   }, [workerType, scriptPath]);
+
+  useEffect(() => {
+    if (autoInitialize) {
+      initializeWorker();
+    }
+
+    return () => {
+      workerManager.current.terminate(workerType);
+    };
+  }, [autoInitialize, workerType, initializeWorker]);
 
   const executeOperation = useCallback(async (operation: string, data: unknown) => {
     try {

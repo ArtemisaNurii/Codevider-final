@@ -1,7 +1,7 @@
 "use client";
 
 import type { FC } from 'react';
-import Link from 'next/link'; // Import the Next.js Link component for internal navigation
+// import Link from 'next/link'; // Import the Next.js Link component for internal navigation
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 export const Footer1: FC = () => {

@@ -89,7 +89,7 @@ const allCaseStudies: CaseStudy[] = [
 ];
 
 
-const CaseStudyCard: React.FC<CaseStudyCardProps> = memo(({
+const CaseStudyCard: React.FC<CaseStudyCardProps & { id?: number }> = memo(({
   tag,
   title,
   description,
@@ -100,6 +100,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = memo(({
   tagBgColor,
   tagTextColor,
   border,
+  id,
 }) => {
   const cardRef = useRef<HTMLElement>(null);
 
@@ -149,7 +150,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = memo(({
         {description}
       </p>
       <Link 
-        href={`/projects/${title.toLowerCase().replace(/\s+/g, '-')}`} 
+        href={id ? `/projects?id=${id}` : `/projects`}
         className={`font-bold text-sm tracking-widest group ${textColor}`}
       >
         READ MORE{' '}
@@ -214,7 +215,7 @@ const ProjectPage: React.FC = memo(() => {
   const [filteredStudies, setFilteredStudies] = useState<CaseStudy[]>(allCaseStudies);
   const [categories, setCategories] = useState<string[]>(['All']);
   
-  const { filterProjects, processCategories, isLoading: isProcessing } = useDataProcessingWorker();
+  const { filterProjects, processCategories, } = useDataProcessingWorker();
 
   // Process categories with Web Worker
   useEffect(() => {

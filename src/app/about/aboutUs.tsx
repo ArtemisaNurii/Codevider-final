@@ -1,6 +1,6 @@
 "use client"
-import { ArrowRight } from "lucide-react"
-import VerticalCutReveal from "./vertical"
+// import { ArrowRight } from "lucide-react"
+// import VerticalCutReveal from "./vertical"
 
 export default function AboutSection3() {
 

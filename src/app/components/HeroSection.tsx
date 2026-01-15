@@ -1,14 +1,12 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ArrowUpRight, BarChart2, Bell, Search, TrendingUp, DollarSign, Users, Truck,
   Settings, ChevronDown, LayoutDashboard, Target, Zap, Clock, ShieldCheck,
   CheckCircle, RefreshCw,
-  PersonStanding,
   User2
 } from 'lucide-react';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const componentStyles = `
   @keyframes shine {

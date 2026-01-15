@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { Client } from "@notionhq/client";
+import { z } from "zod";
 
 import {
   Instagram,
@@ -15,15 +17,51 @@ import {
 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { contactSubmit } from "../actions/contact";
+
+// Initialize Notion client
+const notion = new Client({ auth: process.env.NEXT_PUBLIC_NOTION_SECRET });
+
+// Define a schema for validation using Zod
+const contactSchema = z.object({
+  companies: z.string().min(2, { message: "Full name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  details: z.string().optional(),
+});
+
+// Function to save lead to Notion database
+async function saveLeadToNotion(
+  companies: string,
+  email: string,
+  details: string,
+) {
+  await notion.pages.create({
+    parent: { database_id: process.env.NEXT_PUBLIC_NOTION_DB_ID! },
+    properties: {
+      Name: {
+        title: [
+          {
+            text: {
+              content: companies,
+            },
+          },
+        ],
+      },
+      Email: {
+        email: email,
+      },
+      "Details": {
+        rich_text: [
+          {
+            text: {
+              content: details,
+            },
+          },
+        ],
+      },
+    },
+  });
+}
 
 // Reusable Footer Component
 export const Footer: React.FC = () => {
@@ -185,18 +223,44 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    // Call the server action directly
-    const result = await contactSubmit(formData);
+    // Extract data from the form and handle null values
+    const rawData = {
+      companies: formData.get("companies")?.toString() || "",
+      email: formData.get("email")?.toString() || "",
+      details: formData.get("details")?.toString() || "",
+    };
 
-    if (result.success) {
-      toast.success(result.message);
-      formRef.current?.reset();
-    } else {
-      toast.error(result.message || "Failed to submit. Please try again.");
+    // Validate the data
+    const validationResult = contactSchema.safeParse(rawData);
+
+    if (!validationResult.success) {
+      const firstError = validationResult.error.errors[0].message;
+      toast.error(firstError);
+      setIsPending(false);
+      return;
     }
-  } catch (err) {
-    console.error("Contact form submission error:", err);
-    toast.error("Something went wrong. Please try again later.");
+
+    // Check if Notion environment variables are set
+    if (!process.env.NEXT_PUBLIC_NOTION_SECRET || !process.env.NEXT_PUBLIC_NOTION_DB_ID) {
+      console.error("NEXT_PUBLIC_NOTION_SECRET or NEXT_PUBLIC_NOTION_DB_ID is not defined in environment variables.");
+      toast.error("Server configuration error. Please contact support.");
+      setIsPending(false);
+      return;
+    }
+
+    // Save the lead to Notion database
+    await saveLeadToNotion(
+      validationResult.data.companies,
+      validationResult.data.email,
+      validationResult.data.details || "",
+    );
+
+    // If the submission was successful
+    toast.success("Thank you for your message! We'll be in touch soon.");
+    formRef.current?.reset();
+  } catch (error) {
+    console.error("Notion API Error:", error);
+    toast.error("Something went wrong. Please check your connection and try again.");
   } finally {
     setIsPending(false);
   }

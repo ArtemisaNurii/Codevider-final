@@ -8,7 +8,7 @@ import {
 import {
   SiNextdotjs, SiMongodb, SiPostgresql, SiTypescript, SiJavascript, SiJquery,SiNestjs,
   SiExpress, SiDjango, SiFlask, SiGraphql, SiSocketdotio,
-  SiGo, SiMysql, SiFigma, SiOpenai, SiKubernetes, SiVercel
+  SiMysql, SiFigma, SiOpenai, SiKubernetes, SiVercel
 } from 'react-icons/si';
 import { GrAndroid, GrApple } from 'react-icons/gr';
 import { CgArrowsExchange } from 'react-icons/cg';

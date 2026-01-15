@@ -1,5 +1,3 @@
-'use server'
-
 import {  RESUME_AI, RESUME_AI_UPLOAD } from '@/constants/endpoint'
 
 export interface ActionResponse {
@@ -55,9 +53,9 @@ export interface CandidateData {
 }
 
 export async function uploadFileAction(fileFormData: FormData): Promise<ActionResponse> {
-  const baseUrl = process.env.BACKEND_API_URL
+  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL
   if (!baseUrl) {
-    return { success: false, message: "BACKEND_API_URL not set" }
+    return { success: false, message: "NEXT_PUBLIC_BACKEND_API_URL not set" }
   }
   try {
     const apiEndpoint = `${baseUrl}/${RESUME_AI_UPLOAD}`
@@ -150,15 +148,15 @@ function extractCandidateData(responseData: Record<string, unknown>): CandidateD
 }
 
 export async function submitApplicationAction(applicationData: object): Promise<ActionResponse> {
-  console.log('Server action: submitApplicationAction called with data', JSON.stringify(applicationData))
-  const baseUrl = process.env.BACKEND_API_URL
+  console.log('Client action: submitApplicationAction called with data', JSON.stringify(applicationData))
+  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL
   if (!baseUrl) {
-    console.error('Server action: BACKEND_API_URL not set')
-    return { success: false, message: "BACKEND_API_URL not set" }
+    console.error('Client action: NEXT_PUBLIC_BACKEND_API_URL not set')
+    return { success: false, message: "NEXT_PUBLIC_BACKEND_API_URL not set" }
   }
   try {
     const apiEndpoint = `${baseUrl}/${RESUME_AI}`
-    console.log('Server action: Submitting to endpoint', apiEndpoint)
+    console.log('Client action: Submitting to endpoint', apiEndpoint)
     
     // Add timeout to prevent hanging requests
     const controller = new AbortController()
@@ -173,9 +171,9 @@ export async function submitApplicationAction(applicationData: object): Promise<
     
     clearTimeout(timeoutId) // Clear the timeout since request completed
     
-    console.log('Server action: Response status:', response.status)
+    console.log('Client action: Response status:', response.status)
     const responseData = await response.json()
-    console.log('Server action: Response data:', JSON.stringify(responseData))
+    console.log('Client action: Response data:', JSON.stringify(responseData))
     
     if (response.ok) {
       return { success: true, message: 'Application submitted successfully!', data: responseData }
@@ -183,7 +181,7 @@ export async function submitApplicationAction(applicationData: object): Promise<
       return { success: false, message: responseData.message || "Application submission failed" }
     }
   } catch (error) {
-    console.error('Server action: Error during submission:', error)
+    console.error('Client action: Error during submission:', error)
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     if (errorMessage === 'The operation was aborted' || errorMessage.includes('abort')) {
       return { success: false, message: 'Request timed out. Please try again.' }

@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client"
+
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { getJobs } from "./action"
 import JobCard from "./JobCard"
@@ -10,8 +14,34 @@ interface JobsListingProps {
   limit: number
 }
 
-export default async function JobsListing({ page, limit }: JobsListingProps) {
-  const jobsResponse = await getJobs({ page, limit })
+export default function JobsListing({ page, limit }: JobsListingProps) {
+  const [jobsResponse, setJobsResponse] = useState<{ jobs: Job[], pagination: any } | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchJobs() {
+      setIsLoading(true)
+      try {
+        const response = await getJobs({ page, limit })
+        setJobsResponse(response)
+      } catch (error) {
+        console.error("Error fetching jobs:", error)
+        setJobsResponse({ jobs: [], pagination: { currentPage: page, totalPages: 0, totalCount: 0, limit, hasNext: false, hasPrev: false } })
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchJobs()
+  }, [page, limit])
+
+  if (isLoading || !jobsResponse) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center">Loading jobs...</div>
+      </div>
+    )
+  }
+
   const { jobs, pagination } = jobsResponse
 
   // --- THIS IS THE STATE FOR "NO JOBS" ---

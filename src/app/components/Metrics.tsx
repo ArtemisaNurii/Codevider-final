@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // components/Metrics.tsx
 "use client"
 import type { NextPage } from "next"
@@ -27,12 +28,12 @@ const Metrics: NextPage = () => {
     <section id="about" className="bg-white">
       <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24 max-w-7xl ">
         {/* Trusted By Section */}
-        <div className="text-center mb-16">
+        {/* <div className="text-center mb-16">
           <p className="text-sm font-semibold text-gray-600 tracking-wide">Trusted by Clients Worldwide</p>
           <div className="mt-8 relative overflow-hidden">
             <div className="flex animate-marquee whitespace-nowrap">
               {/* First set of logos */}
-              {logos.map((logo, index) => (
+              {/* {logos.map((logo, index) => (
                 <div key={index} className="flex flex-col items-center justify-center mx-8 flex-shrink-0">
                   <Image
                     src={logo.src}
@@ -43,9 +44,9 @@ const Metrics: NextPage = () => {
                   />
                   <span className="text-sm font-medium text-black mt-2">{logo.name}</span>
                 </div>
-              ))}
+              ))} */}
               {/* Duplicate set for seamless loop */}
-              {logos.map((logo, index) => (
+        {/*{logos.map((logo, index) => (
                 <div key={`duplicate-${index}`} className="flex flex-col items-center justify-center mx-8 flex-shrink-0">
                   <Image
                     src={logo.src}
@@ -59,7 +60,7 @@ const Metrics: NextPage = () => {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-8">

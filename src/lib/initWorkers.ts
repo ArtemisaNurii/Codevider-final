@@ -1,6 +1,6 @@
 'use client';
 
-import { initializeWorkers, performanceMonitor } from './workerOptimizations';
+import { initializeWorkers } from './workerOptimizations';
 
 // Flag to track if workers have been initialized
 let workersInitialized = false;
@@ -12,12 +12,12 @@ export const initAppWorkers = async (): Promise<void> => {
   }
 
   try {
-    const measureId = performanceMonitor.startMeasure('workerInit');
+    // const measureId = performanceMonitor.startMeasure('workerInit');
     
     
     await initializeWorkers();
     
-    const duration = performanceMonitor.endMeasure(measureId);
+    // const duration = performanceMonitor.endMeasure(measureId);
     
     workersInitialized = true;
     
