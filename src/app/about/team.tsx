@@ -137,8 +137,8 @@ export default function CodeviderCulturePage() {
 
           {/* Gallery Placeholder (drop your images) */}
           <div className="grid grid-cols-2 gap-4">
-            <Image src="/images/teamMember/2member.jpg" alt="Team" width={500} height={500} />
-            <Image src="/images/teamMember/member1.jpg" alt="Team" width={500} height={500} />
+            <Image src="/images/members/members1.jpg" alt="Team" width={500} height={500} />
+            <Image src="/images/members/members2.jpg" alt="Team" width={500} height={500} />
             <Image src="/images/office/zyra9.jpg" alt="Team" width={500} height={500} />
             <Image src="/images/office/zyra10.jpg" alt="Team" width={500} height={500} />
 

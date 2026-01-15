@@ -146,7 +146,7 @@ export const metadata: Metadata = {
       "Partner with Albania's elite tech talent. Codevider delivers high-performance web, mobile, and AI solutions. Discover the power of nearshore development.",
     images: [
       {
-        url: "/og/og-image.jpg", // Make sure this image is compelling!
+        url: "/og/og-image.png", // Make sure this image is compelling!
         width: 1200,
         height: 630,
         alt: "Codevider - Albanian Software Development Company",
@@ -161,7 +161,7 @@ export const metadata: Metadata = {
     title: "Codevider — Elite Software Development in Albania",
     description:
       "Scale your business with dedicated teams from Albania's thriving tech hub. We build, you grow. outcome-focused delivery.",
-    images: ["/og/og-image.jpg"], // Ensure this path is absolute or Next.js handles it
+    images: ["/og/og-image.png"], // Ensure this path is absolute or Next.js handles it
     site: "@codevider", // Replace with your actual Twitter handle
     creator: "@codevider", // Replace with your actual Twitter handle
   },

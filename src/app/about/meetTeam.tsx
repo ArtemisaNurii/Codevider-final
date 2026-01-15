@@ -5,31 +5,32 @@ import Image from "next/image"
 import { useState, useRef, useEffect, useCallback } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-// No changes to the teamMembers array
 const teamMembers = [
-    { name: "Pasho Toska", role: "Co-Founder", image: "/images/teamMember/pashoo.png" },
-    { name: "Ervin Ziko", role: "Co-Founder", image: "/images/teamMember/ervinziko.png" },
-    { name: "Altin Luli", role: "Co-Founder", image: "/images/teamMember/altin4.png" },
+    { name: "Pasho Toska", role: "Co-Founder", image: "pasho_toska.png" },
+    { name: "Ervin Ziko", role: "Co-Founder", image: "ervin_ziko.png" },
+    { name: "Altin Luli", role: "Co-Founder", image: "altin_luli.png" },
 
-    { name: "Erion Domi", role: "Co-Founder", image: "/images/teamMember/erion1.png" },
-    { name: "Genci Likaj", role: "Senior Software engineer", image: "/images/teamMember/genci8.png" },
-    { name: "Jul Kreshpaj", role: "Senior Software engineer", image: "/images/teamMember/juli8.png" },
+    { name: "Erion Domi", role: "Co-Founder", image: "erion_domi.png" },
+    { name: "Genci Likaj", role: "Senior Software engineer", image: "genci_likaj.png" },
+    { name: "Jul Kreshpaj", role: "Senior Software engineer", image: "jul_kreshpaj.png" },
 
-    { name: "Elisabeta Guri", role: "HR Manager", image: "/images/teamMember/beta8.png" },
-    { name: "Ansel Nikaj", role: "Project Manager", image: "/images/teamMember/ansel8.png" },
-    { name: "Xhulio Balli", role: "Project Manager", image: "/images/teamMember/xhulio8.png" },
-    { name: "Besjana Fixha ", role: "Fullstack Developer", image: "/images/teamMember/besa8.png" },
-    { name: "Erald Plloha", role: "Backend Developer", image: "/images/teamMember/erald8.png" },
-    { name: "Arlind Idrizi", role: "Frontend Developer", image: "/images/teamMember/arlind8.png" },
-    { name: "Eliana Kryeziu", role: "Frontend Developer", image: "/images/teamMember/eliana8.png" },
-    { name: "Geri Lluga", role: "Backend Developer", image: "/images/teamMember/geri8.png" },
-    { name: "Fjona Rira", role: "Frontend Developer", image: "/images/teamMember/fiona8.png" },
-    { name: "Armando Muco", role: "Backend Developer", image: "/images/teamMember/armando8.png" },
-    { name: "Kejdi Balla", role: "UIUX Designer", image: "/images/teamMember/kejdi8.png" },
-    { name: "Amanda Oshafi", role: "Backend Developer", image: "/images/teamMember/amanda8.png" },
-    { name: "Artemisa Nuri", role: "Frontend Developer", image: "/images/teamMember/arti8.png" },
-    { name: "Kejsi Terolli", role: "Frontend Developer", image: "/images/teamMember/kejsi8.png" },
-    { name: "Vasjan Çupri", role: "Backend Developer", image: "/images/teamMember/vsjn8.png" },
+    { name: "Elisabeta Guri", role: "HR Manager", image: "elisabeta_guri.png" },
+    { name: "Ansel Nikaj", role: "Project Manager", image: "ansel_nikaj.png" },
+    { name: "Xhulio Balli", role: "Project Manager", image: "xhulio_balli.png" },
+
+    { name: "Besjana Fixha ", role: "Fullstack Developer", image: "besiana_fixha.png" },
+    { name: "Erald Plloha", role: "Backend Developer", image: "erald_plloha.png" },
+    { name: "Arlind Idrizi", role: "Frontend Developer", image: "arlind_idrizi.png" },
+    { name: "Eliana Kryeziu", role: "Frontend Developer", image: "eliana_kryeziu.png" },
+
+    { name: "Geri Lluga", role: "Backend Developer", image: "geri_lluga.png" },
+    { name: "Fjona Rira", role: "Frontend Developer", image: "fjona_rira.png" },
+    { name: "Armando Muco", role: "Backend Developer", image: "mikelanxhelo.png" },
+    { name: "Kejdi Balla", role: "UIUX Designer", image: "kejdi_balla.png" },
+    { name: "Amanda Oshafi", role: "Backend Developer", image: "amanda_oshafi.png" },
+    { name: "Artemisa Nuri", role: "Frontend Developer", image: "zylfi.png" },
+    { name: "Kejsi Terolli", role: "Frontend Developer", image: "kejsi_terolli.png" },
+    { name: "Vasjan Çupri", role: "Backend Developer", image: "vasjan_cupri.png" },
 ];
 
 export default function MeetTeamSection() {
@@ -171,7 +172,7 @@ export default function MeetTeamSection() {
               >
                 <div className="aspect-[3/4]">
                   <Image
-                    src={member.image || "/placeholder.svg"}
+                    src={`/images/members/headshots/${member.image}` || "/placeholder.svg"}
                     alt={member.name}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
