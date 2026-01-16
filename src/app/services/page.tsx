@@ -6,16 +6,15 @@ import ProcessStepper from "./process";
 import ServicesPage from "./services";
 import TechStack from "./tech";
 
-
 export default function Technologies() {
-  return (
-    <main>
-      <Header />
-      <ServicesPage/>
-      <ProcessStepper />
-      <TechStack />
+	return (
+		<main>
+			<Header />
+			<ServicesPage />
+			<ProcessStepper />
+			<TechStack />
 
-      <Footer />
-    </main>
-  );
+			<Footer />
+		</main>
+	);
 }
