@@ -52,7 +52,7 @@ const teamMembers = [
 	{
 		name: "Armando Muco",
 		role: "Backend Developer",
-		image: "mikelanxhelo.png",
+		image: "armando_muco.png",
 	},
 	{ name: "Kejdi Balla", role: "UIUX Designer", image: "kejdi_balla.png" },
 	{
@@ -60,7 +60,7 @@ const teamMembers = [
 		role: "Backend Developer",
 		image: "amanda_oshafi.png",
 	},
-	{ name: "Artemisa Nuri", role: "Frontend Developer", image: "zylfi.png" },
+	{ name: "Artemisa Nuri", role: "Frontend Developer", image: "artemisa_nuri.png" },
 	{
 		name: "Kejsi Terolli",
 		role: "Frontend Developer",
