@@ -1,10 +1,10 @@
 "use client";
 import { ArrowUpRight, X } from "lucide-react";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type { Route } from "next";
+import NavbarCodeviderLogo from "./navbar-codevider-logo";
 
 type NavLink = { name: string; href: Route };
 
@@ -88,6 +88,9 @@ const Header = () => {
 
 	// Memoize year to avoid recalculation on every render
 	const year = useMemo(() => new Date().getFullYear(), []);
+	
+	// Memoize text color for logo based on isSolid state
+	const logoTextColor = useMemo(() => (isSolid ? '#1a1a1a' : '#fff'), [isSolid]);
 
 	return (
 		<>
@@ -101,15 +104,7 @@ const Header = () => {
 				<div className="max-w-7xl mx-auto flex justify-between items-center">
 					{/* Logo */}
 					<Link href="/">
-						<Image
-							src={
-								isSolid ? "/images/logo/blue.png" : "/images/logo/whitblue.svg"
-							}
-							alt="logo"
-							width={140}
-							height={82}
-							priority
-						/>
+					<NavbarCodeviderLogo logoTextColor={logoTextColor} />
 					</Link>
 
 					{/* Desktop Nav */}

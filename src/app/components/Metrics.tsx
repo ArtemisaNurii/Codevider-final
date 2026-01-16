@@ -9,14 +9,14 @@ import Image from "next/image";
 
 // Data for the logo cloud with actual client logos
 const logos = [
-	{ name: "", src: "/images/logo/clients/ACRON-dark.svg" },
-	{ name: "", src: "/images/logo/clients/ascend.png" },
-	{ name: "", src: "/images/logo/clients/createAPE.png" },
-	{ name: "", src: "/images/logo/clients/datastake.svg" },
-	{ name: "", src: "/images/logo/clients/Evolvet-Logo-dark.png" },
-	// { name: "", src: "/images/logo/clients/logo-DAIMON-dark.svg" },
-	{ name: "", src: "/images/logo/clients/logo-footer.png" },
-	{ name: " ", src: "/images/logo/clients/beauty-books-dark.svg" },
+	{ name: "Acron", src: "/images/logo/clients/Acron.svg" },
+	{ name: "Ascend", src: "/images/logo/clients/Ascend.png" },
+	{ name: "Createape", src: "/images/logo/clients/Create_APE.png" },
+	{ name: "Datastake", src: "/images/logo/clients/Datastake.svg" },
+	{ name: "Evolvet", src: "/images/logo/clients/Evolvet.png" },
+	// { name: "", src: "/images/logo/clients/Daimon.svg" },
+	{ name: "Allcot", src: "/images/logo/clients/Allcot.png" },
+	{ name: "Beauty Books", src: "/images/logo/clients/Beauty_Books.png" },
 ];
 
 const Metrics: NextPage = () => {
