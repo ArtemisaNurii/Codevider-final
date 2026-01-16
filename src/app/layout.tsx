@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   applicationName: "Codevider",
   authors: [{ name: "Codevider Team", url: siteUrl.toString() }],
   publisher: "Codevider",
-  
+
   // ✅ SEO KEYWORDS: Expanded with high-intent, long-tail, and Albanian keywords.
   // While less critical now, it helps define context.
   keywords: [
@@ -71,44 +71,44 @@ export const metadata: Metadata = {
     "IT outsourcing albania",
     // --- Albanian Keywords (for context and potential discovery) ---
     "zhvillim softueri Shqipëri", // Software Development Albania
-    "kompani IT Tiranë",          // IT Company Tirana
-    "programues shqiptarë",       // Albanian programmers
-    "agjenci dixhitale",           // Digital agency
-    "zgjidhje softuerike",        // Software solutions
-    "sherbime programimi",  
-          "software development company in albania",
-          "sherbime software në shqipëri",
-          "programues shqiptarë",
-          "agjenci dixhitale",
-          "zgjidhje softuerike",
-          "sherbime programimi",
-          "software development company in albania",
-          "sherbime software në shqipëri",
-          "programues shqiptarë",
-          "agjenci dixhitale",
-          "zgjidhje softuerike",
-          "sherbime programimi",
-          "software development company in albania",
-          "sherbime software në shqipëri",
-          "programues shqiptarë",
-          "agjenci dixhitale",
-          "zgjidhje softuerike",
-          "sherbime programimi",
-          "website",
-          "ai integration",
-          "ai development",
-          "ai solutions",
-          "ai services",
-          "ai consulting",
-          "ai implementation",
-          "ai development company",
-          "ai development services",
-          "ai development company in albania",
-          "ai development services in albania",
-          "ai development company in albania",
-          "ai development services in albania",
+    "kompani IT Tiranë", // IT Company Tirana
+    "programues shqiptarë", // Albanian programmers
+    "agjenci dixhitale", // Digital agency
+    "zgjidhje softuerike", // Software solutions
+    "sherbime programimi",
+    "software development company in albania",
+    "sherbime software në shqipëri",
+    "programues shqiptarë",
+    "agjenci dixhitale",
+    "zgjidhje softuerike",
+    "sherbime programimi",
+    "software development company in albania",
+    "sherbime software në shqipëri",
+    "programues shqiptarë",
+    "agjenci dixhitale",
+    "zgjidhje softuerike",
+    "sherbime programimi",
+    "software development company in albania",
+    "sherbime software në shqipëri",
+    "programues shqiptarë",
+    "agjenci dixhitale",
+    "zgjidhje softuerike",
+    "sherbime programimi",
+    "website",
+    "ai integration",
+    "ai development",
+    "ai solutions",
+    "ai services",
+    "ai consulting",
+    "ai implementation",
+    "ai development company",
+    "ai development services",
+    "ai development company in albania",
+    "ai development services in albania",
+    "ai development company in albania",
+    "ai development services in albania",
   ],
-  
+
   // ✅ ROBOTS: Add a link to your sitemap. Crucial for crawlers.
   robots: {
     index: true,
@@ -123,18 +123,18 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  
+
   // ✅ INTERNATIONALIZATION: The RIGHT way to target different languages.
   // This tells Google that you have (or will have) an Albanian version of your site.
   // This is a massive SEO boost for both languages.
   alternates: {
     canonical: siteUrl.toString(),
     languages: {
-      'en-US': siteUrl.toString(),
-      'sq-AL': `${siteUrl.toString()}/sq`, // Assumes an Albanian version at /sq
+      "en-US": siteUrl.toString(),
+      "sq-AL": `${siteUrl.toString()}/sq`, // Assumes an Albanian version at /sq
     },
   },
-  
+
   // ✅ SOCIAL (OpenGraph for Facebook/LinkedIn, etc.)
   // Title and description are more direct and action-oriented for sharing.
   openGraph: {
@@ -154,7 +154,7 @@ export const metadata: Metadata = {
     ],
     locale: "en_US",
   },
-  
+
   // ✅ SOCIAL (Twitter Card)
   twitter: {
     card: "summary_large_image",
@@ -165,7 +165,7 @@ export const metadata: Metadata = {
     site: "@codevider", // Replace with your actual Twitter handle
     creator: "@codevider", // Replace with your actual Twitter handle
   },
-  
+
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -174,9 +174,9 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
   },
-  
+
   category: "technology",
-  
+
   // 🚀 GOOGLE VERIFICATION: Add your GSC verification code here to prove ownership.
   verification: {
     google: "YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE",
@@ -199,54 +199,54 @@ const structuredData = {
   "@graph": [
     {
       "@type": "Organization",
-      "name": "Codevider",
-      "url": siteUrl.toString(),
-      "logo": `${siteUrl.toString()}/icons/icon-192.png`,
-      "description": "Codevider is a premier software development company based in Tirana, Albania, specializing in web, mobile, and cloud solutions for a global clientele.",
+      name: "Codevider",
+      url: siteUrl.toString(),
+      logo: `${siteUrl.toString()}/icons/icon-192.png`,
+      description:
+        "Codevider is a premier software development company based in Tirana, Albania, specializing in web, mobile, and cloud solutions for a global clientele.",
       // ✅ LOCAL SEO & TRUST: Add address and contact info. This is critical for E-E-A-T.
-      "address": {
+      address: {
         "@type": "PostalAddress",
-        "streetAddress": "Rruga Ismail Qemali 27",
-        "addressLocality": "Tirana",
-        "postalCode": "1001",
-        "addressCountry": "AL"
+        streetAddress: "Rruga Ismail Qemali 27",
+        addressLocality: "Tirana",
+        postalCode: "1001",
+        addressCountry: "AL",
       },
-      "contactPoint": {
+      contactPoint: {
         "@type": "ContactPoint",
-        "telephone": "+355-XX-XXX-XXXX", // Use a real phone number
-        "contactType": "customer service",
-        "email": "contact@codevider.com", // Use a real email
-        "areaServed": "Worldwide",
-        "availableLanguage": ["English", "Albanian"]
+        telephone: "+355-XX-XXX-XXXX", // Use a real phone number
+        contactType: "customer service",
+        email: "contact@codevider.com", // Use a real email
+        areaServed: "Worldwide",
+        availableLanguage: ["English", "Albanian"],
       },
-      "sameAs": [
+      sameAs: [
         "https://www.linkedin.com/company/codevider",
         "https://twitter.com/codevider", // Use your real social links
         // "https://www.facebook.com/codevider",
         // "https://github.com/codevider"
       ],
-      "foundingDate": "2023-01-01" // Add your founding date
+      foundingDate: "2023-01-01", // Add your founding date
     },
     {
       "@type": "WebSite",
-      "url": siteUrl.toString(),
-      "name": "Codevider",
-      "publisher": {
-        "@id": `${siteUrl.toString()}#organization`
+      url: siteUrl.toString(),
+      name: "Codevider",
+      publisher: {
+        "@id": `${siteUrl.toString()}#organization`,
       },
       // ✅ RICH RESULT: This can give you a sitelinks search box in the SERP.
-      "potentialAction": {
+      potentialAction: {
         "@type": "SearchAction",
-        "target": {
+        target: {
           "@type": "EntryPoint",
-          "urlTemplate": `${siteUrl.toString()}/search?q={search_term_string}`
+          urlTemplate: `${siteUrl.toString()}/search?q={search_term_string}`,
         },
-        "query-input": "required name=search_term_string"
-      }
-    }
-  ]
+        "query-input": "required name=search_term_string",
+      },
+    },
+  ],
 };
-
 
 export default function RootLayout({
   children,
@@ -265,7 +265,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <WorkerProvider>
-          {children}
+            {children}
           <Toaster />
         </WorkerProvider>
       </body>
