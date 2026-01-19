@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Instagram, Facebook, Linkedin, Mail, Phone } from "lucide-react";
 
 import ContactForm from "./ContactForm";
+import NavbarCodeviderLogo from "./navbar-codevider-logo";
 
 // Reusable Footer Component
 export const Footer: React.FC = () => {
@@ -101,14 +102,9 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
             {/* Left: Logo, Tagline, and Mobile-Only Address */}
             <div className="text-left">
-              <Image
-                src="/images/logo/codevider-logo.png"
-                alt="Codevider Logo"
-                width={120}
-                height={32}
-                className="h-10 sm:h-8 w-auto"
-                priority
-              />
+              {NavbarCodeviderLogo({
+                logoTextColor: "fff",
+              })}
               <p className="mt-4 text-gray-600 text-sm sm:text-xs max-w-md leading-relaxed">
                 Stay updated on our latest developments, insights, and
                 opportunities.

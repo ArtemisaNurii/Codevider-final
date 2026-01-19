@@ -129,10 +129,6 @@ export const metadata: Metadata = {
 	// This is a massive SEO boost for both languages.
 	alternates: {
 		canonical: siteUrl.toString(),
-		languages: {
-			"en-US": siteUrl.toString(),
-			"sq-AL": `${siteUrl.toString()}/sq`, // Assumes an Albanian version at /sq
-		},
 	},
 
 	// ✅ SOCIAL (OpenGraph for Facebook/LinkedIn, etc.)
@@ -207,26 +203,24 @@ const structuredData = {
 			// ✅ LOCAL SEO & TRUST: Add address and contact info. This is critical for E-E-A-T.
 			address: {
 				"@type": "PostalAddress",
-				streetAddress: "Rruga Ismail Qemali 27",
+				streetAddress: "Rruga e Barrikadave 17-3",
 				addressLocality: "Tirana",
-				postalCode: "1001",
+				postalCode: "1010",
 				addressCountry: "AL",
 			},
 			contactPoint: {
 				"@type": "ContactPoint",
-				telephone: "+355-XX-XXX-XXXX", // Use a real phone number
+				telephone: "+355 69 587 7742", // Use a real phone number
 				contactType: "customer service",
-				email: "contact@codevider.com", // Use a real email
+				email: "info@codevider.com", // Use a real email
 				areaServed: "Worldwide",
-				availableLanguage: ["English", "Albanian"],
 			},
 			sameAs: [
 				"https://www.linkedin.com/company/codevider",
-				"https://twitter.com/codevider", // Use your real social links
-				// "https://www.facebook.com/codevider",
-				// "https://github.com/codevider"
+				"https://www.facebook.com/codevider",
+				"https://github.com/codevider",
 			],
-			foundingDate: "2023-01-01", // Add your founding date
+			foundingDate: "2019-01-01", // Add your founding date
 		},
 		{
 			"@type": "WebSite",

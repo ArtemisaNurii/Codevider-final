@@ -60,7 +60,11 @@ const teamMembers = [
 		role: "Backend Developer",
 		image: "amanda_oshafi.png",
 	},
-	{ name: "Artemisa Nuri", role: "Frontend Developer", image: "artemisa_nuri.png" },
+	{
+		name: "Artemisa Nuri",
+		role: "Frontend Developer",
+		image: "artemisa_nuri.png",
+	},
 	{
 		name: "Kejsi Terolli",
 		role: "Frontend Developer",

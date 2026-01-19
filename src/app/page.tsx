@@ -17,56 +17,56 @@ const Contact = lazy(() => import("./components/CTA"));
 
 // Loading component for better UX
 const SectionLoader = () => (
-	<div className="min-h-[200px] flex items-center justify-center">
-		<div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-	</div>
+  <div className="min-h-[200px] flex items-center justify-center">
+    <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+  </div>
 );
 
 export default function Home() {
-	return (
-		<div className="min-h-dvh ">
-			<Header />
-			<main id="home">
-				<Hero />
-				<ScrollReveal delay={0.03}>
-					<Suspense fallback={<SectionLoader />}>
-						<Metrics />
-					</Suspense>
-				</ScrollReveal>
-				<ScrollReveal delay={0.04}>
-					<Suspense fallback={<SectionLoader />}>
-						<ServicesPage />
-					</Suspense>
-				</ScrollReveal>
-				<ScrollReveal delay={0.1}>
-					<Suspense fallback={<SectionLoader />}>
-						<Industries />
-					</Suspense>
-				</ScrollReveal>
-				<ScrollReveal delay={0.1}>
-					<Suspense fallback={<SectionLoader />}>
-						<Outsource />
-					</Suspense>
-				</ScrollReveal>
-				<ScrollReveal delay={0.1}>
-					<Suspense fallback={<SectionLoader />}>
-						<WorldMapDemo />
-					</Suspense>
-				</ScrollReveal>
-				<ScrollReveal delay={0.1}>
-					<Suspense fallback={<SectionLoader />}>
-						<CaseStudiesSection />
-					</Suspense>
-				</ScrollReveal>
-				<ScrollReveal delay={0.1}>
-					<Suspense fallback={<SectionLoader />}>
-						<Faq />
-					</Suspense>
-				</ScrollReveal>
-				<Suspense fallback={<SectionLoader />}>
-					<Contact />
-				</Suspense>
-			</main>
-		</div>
-	);
+  return (
+    <div className="min-h-dvh ">
+      <Header />
+      <main id="home">
+        <Hero />
+        <ScrollReveal delay={0.03}>
+          <Suspense fallback={<SectionLoader />}>
+            <Metrics />
+          </Suspense>
+        </ScrollReveal>
+        <ScrollReveal delay={0.04}>
+          <Suspense fallback={<SectionLoader />}>
+            <ServicesPage />
+          </Suspense>
+        </ScrollReveal>
+        <ScrollReveal delay={0.1}>
+          <Suspense fallback={<SectionLoader />}>
+            <Industries />
+          </Suspense>
+        </ScrollReveal>
+        <ScrollReveal delay={0.1}>
+          <Suspense fallback={<SectionLoader />}>
+            <Outsource />
+          </Suspense>
+        </ScrollReveal>
+        <ScrollReveal delay={0.1}>
+          <Suspense fallback={<SectionLoader />}>
+            <WorldMapDemo />
+          </Suspense>
+        </ScrollReveal>
+        <ScrollReveal delay={0.1}>
+          <Suspense fallback={<SectionLoader />}>
+            <CaseStudiesSection />
+          </Suspense>
+        </ScrollReveal>
+        <ScrollReveal delay={0.1}>
+          <Suspense fallback={<SectionLoader />}>
+            <Faq />
+          </Suspense>
+        </ScrollReveal>
+        <Suspense fallback={<SectionLoader />}>
+          <Contact />
+        </Suspense>
+      </main>
+    </div>
+  );
 }

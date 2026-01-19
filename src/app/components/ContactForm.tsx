@@ -22,7 +22,6 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 async function saveLeadToNotion(name: string, email: string, details: string) {
-
 	const response = await fetch(
 		`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/leads/landing/contact`,
 		{
