@@ -4,14 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-interface PaginationControlsProps {
-	currentPage: number;
-	totalPages: number;
-	totalCount: number;
-	limit: number;
-	hasNext: boolean;
-	hasPrev: boolean;
-}
+
 
 export default function PaginationControls({
 	currentPage,

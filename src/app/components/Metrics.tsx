@@ -88,9 +88,9 @@ const Metrics: NextPage = () => {
 
 					{/* Right Column: Stats Cards */}
 					<div className="grid grid-cols-2 gap-6">
-						<div className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-gradient-to-br from-black via-slate-900 to-sky-800  p-8 text-white shadow-xl border border-slate-700/50">
+						<div className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-linear-to-br from-black via-slate-900 to-sky-800  p-8 text-white shadow-xl border border-slate-700/50">
 							<div>
-								<p className="text-5xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+								<p className="text-5xl font-bold bg-linear-to-r from-white to-slate-300 bg-clip-text text-transparent">
 									30+
 								</p>
 								<p className="mt-2 text-slate-300 font-medium">
@@ -104,9 +104,9 @@ const Metrics: NextPage = () => {
 							</div>
 						</div>
 
-						<div className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-gradient-to-br from-black via-slate-900 to-sky-800  p-8 text-white shadow-xl border border-slate-700/50">
+						<div className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-linear-to-br from-black via-slate-900 to-sky-800  p-8 text-white shadow-xl border border-slate-700/50">
 							<div>
-								<p className="text-5xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+								<p className="text-5xl font-bold bg-linear-to-r from-white to-slate-300 bg-clip-text text-transparent">
 									60%
 								</p>
 								<p className="mt-2 text-slate-300 font-medium">Growth Rate</p>
@@ -118,9 +118,9 @@ const Metrics: NextPage = () => {
 							</div>
 						</div>
 
-						<div className="col-span-2 flex flex-col justify-between rounded-3xl bg-gradient-to-br from-black via-slate-900 to-sky-800 p-8 text-white shadow-xl border border-slate-700/50">
+						<div className="col-span-2 flex flex-col justify-between rounded-3xl bg-linear-to-br from-black via-slate-900 to-sky-800 p-8 text-white shadow-xl border border-slate-700/50">
 							<div>
-								<p className="text-5xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+								<p className="text-5xl font-bold bg-linear-to-r from-white to-slate-300 bg-clip-text text-transparent">
 									25+
 								</p>
 								<p className="mt-2 text-slate-300 font-medium">Elite Talent</p>

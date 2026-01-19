@@ -114,7 +114,7 @@ export default function Industries() {
 									ref={(el) => {
 										cardRefs.current[index] = el;
 									}}
-									className={`flex flex-col p-4 md:p-5 rounded-2xl transition-all duration-300 h-100px min-h-[300px] ${
+									className={`flex flex-col p-4 md:p-5 rounded-2xl transition-all duration-300 h-100px min-h-75 ${
 										isDark
 											? "bg-slate-900 text-white"
 											: "bg-gray-100 text-gray-900"

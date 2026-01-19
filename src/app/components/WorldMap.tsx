@@ -4,7 +4,7 @@ import WorldMap from "./ui/world-map";
 
 export default function WorldMapDemo() {
 	return (
-		<div className="py-20 dark:bg-black bg-gradient-to-br from-black via-slate-900 to-sky-800  w-full">
+		<div className="py-20 dark:bg-black bg-linear-to-br from-black via-slate-900 to-sky-800  w-full">
 			<motion.div
 				className="max-w-7xl mx-auto text-center"
 				initial={{ opacity: 0, y: 50 }}

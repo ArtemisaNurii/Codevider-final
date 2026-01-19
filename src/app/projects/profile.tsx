@@ -13,40 +13,6 @@ import {
 gsap.registerPlugin(ScrollTrigger);
 
 // --- INTERFACES & DATA (No changes needed) ---
-interface CaseStudyHeroProps {
-	title: string;
-	subtitle: string;
-}
-
-interface KeyMetric {
-	icon: React.ElementType;
-	value: string;
-	label: string;
-}
-
-interface ProjectInfoData {
-	client: string;
-	industry: string;
-	services: string[];
-}
-
-interface CaseStudyContentSectionData {
-	title: string;
-	id: "context" | "solution" | "results";
-	paragraphs: string[];
-	listItems?: string[];
-}
-
-interface CaseStudy {
-	id: number;
-	slug: string;
-	heroImage: string;
-	title: string;
-	subtitle: string;
-	keyMetrics: KeyMetric[];
-	projectInfo: ProjectInfoData;
-	content: CaseStudyContentSectionData[];
-}
 
 const caseStudyData: CaseStudy = {
 	id: 2,

@@ -83,13 +83,13 @@ export function HeroHeadline({ phrases, interval = 2500 }: Props) {
 
 	return (
 		<div className="text-center pt-16 sm:pt-24 h-auto md:pt-32 mb-4 sm:mb-6 lg:mb-8">
-			<h1 className="text-2xl sm:text-4xl md:text-7xl font-bold bg-clip-text text-transparent  bg-gradient-to-b from-white to-white/80">
+			<h1 className="text-2xl sm:text-4xl md:text-7xl font-bold bg-clip-text text-transparent  bg-linear-to-b from-white to-white/80">
 				Your Strategic Partner in
 			</h1>
 			<div className="relative h-14 sm:h-20 md:h-24 flex items-center justify-center overflow-hidden">
 				<h1
 					key={phrases[currentIndex]}
-					className="text-3xl sm:text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80 absolute animate-fade"
+					className="text-3xl sm:text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-linear-to-b from-white to-white/80 absolute animate-fade"
 				>
 					<span className="text-sky-400">{phrases[currentIndex]}</span>
 				</h1>
@@ -107,8 +107,8 @@ const Sidebar = () => {
 	];
 
 	return (
-		<aside className="w-12 sm:w-14 lg:w-16 bg-black/30 backdrop-blur-sm flex-shrink-0 flex flex-col items-center py-2 sm:py-4 gap-2 sm:gap-3 lg:gap-4 border-r border-white/20">
-			<div className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 mb-2 sm:mb-3 lg:mb-4 rounded-md lg:rounded-lg bg-gradient-to-tr from-sky-200 to-sky-300 flex items-center justify-center">
+		<aside className="w-12 sm:w-14 lg:w-16 bg-black/30 backdrop-blur-sm shrink-0 flex flex-col items-center py-2 sm:py-4 gap-2 sm:gap-3 lg:gap-4 border-r border-white/20">
+			<div className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 mb-2 sm:mb-3 lg:mb-4 rounded-md lg:rounded-lg bg-linear-to-tr from-sky-200 to-sky-300 flex items-center justify-center">
 				<BarChart2 size={14} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
 			</div>
 			<div className="flex flex-col gap-1 sm:gap-2">
@@ -189,10 +189,10 @@ const Hero = () => {
 		<section
 			id="hero"
 			style={{ fontFamily: "var(--font-manrope)" }}
-			className="relative w-full min-h-screen text-gray-100 pt-10 overflow-hidden bg-gradient-to-br from-black via-slate-900 to-sky-800"
+			className="relative w-full min-h-screen text-gray-100 pt-10 overflow-hidden bg-linear-to-br from-black via-slate-900 to-sky-800"
 		>
 			<style>{componentStyles}</style>
-			<div className="absolute inset-0 z-0 bg-dot-grid-white/[0.07] [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"></div>
+			<div className="absolute inset-0 z-0 bg-dot-grid-white/[0.07] mask-[radial-gradient(ellipse_at_center,white,transparent_70%)]"></div>
 
 			<div className="relative z-10 container mx-auto flex flex-col min-h-screen px-4">
 				<div className="flex-1 flex flex-col justify-center items-center">
@@ -212,11 +212,11 @@ const Hero = () => {
 				</div>
 				<div
 					className="dashboard-container relative w-full max-w-7xl mx-auto pb-4 sm:pb-8 lg:pb-16
-            bg-gradient-to-b from-black/60 via-[#121212]/40 to-[#0a0a0a]/60
+            bg-linear-to-b from-black/60 via-[#121212]/40 to-[#0a0a0a]/60
             backdrop-blur-xl rounded-t-lg sm:rounded-t-xl lg:rounded-t-2xl
             shadow-2xl shadow-black/60 flex overflow-hidden shine-border
-            [mask-image:linear-gradient(to_bottom,white_70%,transparent_100%)]
-            sm:[mask-image:linear-gradient(to_bottom,white_80%,transparent_100%)]"
+            mask-[linear-gradient(to_bottom,white_70%,transparent_100%)]
+            sm:mask-[linear-gradient(to_bottom,white_80%,transparent_100%)]"
 				>
 					<Sidebar />
 					<main className="flex-1 p-1.5 sm:p-4 lg:p-6 relative">

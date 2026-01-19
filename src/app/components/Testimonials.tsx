@@ -43,7 +43,7 @@ export default function TestimonialsPage() {
 			{/* Glow background */}
 			<div
 				aria-hidden="true"
-				className="absolute max-w-7xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-[550px] rounded-full bg-gradient-to-br from-sky-300 to-blue-300 opacity-50 blur-3xl"
+				className="absolute max-w-7xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-137.5 rounded-full bg-linear-to-br from-sky-300 to-blue-300 opacity-50 blur-3xl"
 			/>
 
 			<div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
@@ -63,7 +63,7 @@ export default function TestimonialsPage() {
 					{testimonials.map((t, idx) => (
 						<article
 							key={idx}
-							className={`relative mx-4 flex ${CARD_WIDTH} ${CARD_HEIGHT} flex-shrink-0 flex-col justify-between rounded-2xl border border-white/30 bg-white/20 p-8 shadow-lg backdrop-blur-lg`}
+							className={`relative mx-4 flex ${CARD_WIDTH} ${CARD_HEIGHT} shrink-0 flex-col justify-between rounded-2xl border border-white/30 bg-white/20 p-8 shadow-lg backdrop-blur-lg`}
 						>
 							<blockquote className="text-lg leading-relaxed text-gray-900">
 								&ldquo;{t.text}&rdquo;

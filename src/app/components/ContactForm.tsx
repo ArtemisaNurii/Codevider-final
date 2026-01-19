@@ -153,7 +153,7 @@ const ContactForm = () => {
 				<Textarea
 					id="details"
 					placeholder="I'm looking to build a new web application that..."
-					className="bg-transparent border-gray-400 min-h-[120px] focus-visible:ring-offset-0 focus-visible:ring-sky-400"
+					className="bg-transparent border-gray-400 min-h-30 focus-visible:ring-offset-0 focus-visible:ring-sky-400"
 					{...register("details")}
 				/>
 				{errors.details && (

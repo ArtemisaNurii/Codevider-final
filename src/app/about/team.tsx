@@ -15,13 +15,6 @@ import Image from "next/image";
 import MeetTeamSection from "./meetTeam";
 import Link from "next/link";
 
-interface Pillar {
-	icon: React.ReactNode;
-	title: string;
-	description: string;
-}
-
-
 const pillars: Pillar[] = [
 	{
 		icon: <Target className="h-6 w-6" aria-hidden />,

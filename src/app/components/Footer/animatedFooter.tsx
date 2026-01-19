@@ -7,10 +7,6 @@ import { FiSend } from "react-icons/fi";
 import Image from "next/image";
 
 // Define props for our reusable link component
-interface FooterLinkProps {
-	href: string;
-	children: React.ReactNode;
-}
 
 // A reusable, typed component for the footer links
 const FooterLink: React.FC<FooterLinkProps> = ({ href, children }) => (

@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
 	return (
-		<main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-black via-slate-800 to-slate-950 text-white">
+		<main className="relative min-h-screen overflow-hidden bg-linear-to-br from-black via-slate-800 to-slate-950 text-white">
 			{/* Subtle background: grid + glow */}
 			<div aria-hidden className="pointer-events-none absolute inset-0">
 				{/* Soft radial glow */}

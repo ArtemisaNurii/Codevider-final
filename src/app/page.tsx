@@ -17,7 +17,7 @@ const Contact = lazy(() => import("./components/CTA"));
 
 // Loading component for better UX
 const SectionLoader = () => (
-	<div className="min-h-[200px] flex items-center justify-center">
+	<div className="min-h-50 flex items-center justify-center">
 		<div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
 	</div>
 );

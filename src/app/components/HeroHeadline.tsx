@@ -13,9 +13,7 @@ const cursorStyle = `
 `;
 
 // --- MODIFIED: The component now accepts props ---
-interface HeroHeadlineProps {
-	displayedText: string;
-}
+
 
 const HeroHeadline: React.FC<HeroHeadlineProps> = ({ displayedText }) => {
 	return (
@@ -26,7 +24,7 @@ const HeroHeadline: React.FC<HeroHeadlineProps> = ({ displayedText }) => {
 				className="hero-text text-4xl md:text-6xl lg:text-7xl font-normal tracking-tighter h-24 md:h-40 lg:h-52 flex flex-col justify-center"
 			>
 				<span className="block text-white/90">Your trusting partner in</span>
-				<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-sky-300">
+				<span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-sky-300">
 					{displayedText}
 					<span className="blinking-cursor">|</span>
 				</span>

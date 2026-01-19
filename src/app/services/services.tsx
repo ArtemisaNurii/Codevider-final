@@ -12,11 +12,7 @@ const slugify = (str: string): string => {
 		.replace(/^-+|-+$/g, ""); // Remove leading and trailing hyphens
 };
 
-// ---- Types ----
-type ServiceItem = {
-	title: string;
-	description: string;
-};
+
 const services: ServiceItem[] = [
 	{
 		title: "Custom Software Development",

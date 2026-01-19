@@ -1,11 +1,7 @@
 import React, { forwardRef, Ref } from "react";
 
 // The props interface remains unchanged.
-export interface LogoIconProps {
-	hexagonRef: Ref<SVGPathElement>;
-	bracketsRef: Ref<SVGPathElement>;
-	heartRef: Ref<SVGPathElement>;
-}
+
 
 export const LogoIcon = forwardRef<SVGSVGElement, LogoIconProps>(
 	({ hexagonRef, bracketsRef, heartRef }, ref) => (

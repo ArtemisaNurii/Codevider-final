@@ -15,33 +15,8 @@ import {
 import { cn } from "@/lib/utils";
 import { useTextProcessingWorker } from "@/lib/hooks/useWebWorker";
 
-interface TextProps {
-	children: React.ReactNode;
-	reverse?: boolean;
-	transition?: AnimationOptions;
-	splitBy?: "words" | "characters" | "lines" | string;
-	staggerDuration?: number;
-	staggerFrom?: "first" | "last" | "center" | "random" | number;
-	containerClassName?: string;
-	wordLevelClassName?: string;
-	elementLevelClassName?: string;
-	onClick?: () => void;
-	onStart?: () => void;
-	onComplete?: () => void;
-	autoStart?: boolean; // Whether to start the animation automatically
-	once?: boolean; // Whether to animate only once
-}
 
-// Ref interface to allow external control of the animation
-export interface VerticalCutRevealRef {
-	startAnimation: () => void;
-	reset: () => void;
-}
 
-interface WordObject {
-	characters: string[];
-	needsSpace: boolean;
-}
 
 const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
 	(

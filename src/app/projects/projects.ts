@@ -1,13 +1,3 @@
-export interface Project {
-	id: number;
-	title: string;
-	category: string;
-	imageUrl: string;
-	description: string;
-	features: string[];
-	duration?: string;
-	client?: string;
-}
 
 export const projectsData: Project[] = [
 	{

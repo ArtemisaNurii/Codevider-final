@@ -48,15 +48,6 @@ import { SiOllama } from "react-icons/si";
 import Image from "next/image";
 
 // --- TYPE DEFINITIONS ---
-interface TechItemType {
-	name: string;
-	icon: React.ReactElement;
-}
-
-interface TechnologyCategoryType {
-	category: string;
-	items: TechItemType[];
-}
 
 // --- DATA ---
 const iconProps = { size: 40 };
@@ -475,10 +466,6 @@ const TechItem: React.FC<TechItemType> = ({ name, icon }) => (
 	</div>
 );
 
-interface TechCategoryProps {
-	title: string;
-	items: TechItemType[];
-}
 
 const TechCategory: React.FC<TechCategoryProps> = ({ title, items }) => (
 	<motion.section

@@ -149,13 +149,13 @@ const MetricCard = ({
 	<div
 		className={`${bgColor} ${textColor} rounded-3xl flex flex-col p-8 shadow-md overflow-hidden h-full transform-gpu`}
 	>
-		<div className="text-center flex-shrink-0">
+		<div className="text-center shrink-0">
 			<p className="metric-value text-7xl font-light">{value}</p>
 			<div className="text-xl mt-2 metric-label">
 				{splitTextIntoWords(label)}
 			</div>
 		</div>
-		<div className="flex-grow flex flex-col justify-center items-center mt-8">
+		<div className="grow flex flex-col justify-center items-center mt-8">
 			{children}
 		</div>
 	</div>
