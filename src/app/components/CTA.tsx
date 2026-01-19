@@ -172,7 +172,7 @@ const Contact: React.FC = () => {
 			<div id="contact" className="relative overflow-hidden text-white">
 				<section
 					ref={sectionRef}
-					className="relative z-10 px-4 py-20 sm:py-28 bg-gradient-to-br from-black via-slate-900 to-sky-800 "
+					className="relative z-10 px-4 py-20 sm:py-28 bg-linear-to-br from-black via-slate-900 to-sky-800 "
 				>
 					<div className="max-w-7xl mx-auto grid lg:grid-cols-2 lg:gap-16 items-stretch">
 						<div className="text-center lg:text-left mb-12 lg:mb-0 flex flex-col justify-center">

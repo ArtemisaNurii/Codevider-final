@@ -9,7 +9,6 @@ import {
 	Clock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Job } from "./jobs";
 
 export default function JobCard({ job }: { job: Job }) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -65,7 +64,7 @@ export default function JobCard({ job }: { job: Job }) {
 					</div>
 				</div>
 
-				<div className="ml-4 flex-shrink-0">
+				<div className="ml-4 shrink-0">
 					<ChevronDown
 						className={`h-5 w-5 text-slate-500 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
 					/>

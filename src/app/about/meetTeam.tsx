@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { teamMembers } from "@/lib/constants";
+import { pageInfoConstants } from "@/lib/constants";
 
 export default function MeetTeamSection() {
 	const carouselRef = useRef<HTMLDivElement>(null);
@@ -140,7 +140,7 @@ export default function MeetTeamSection() {
 					className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-6
                      [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mb-4 pb-4" // Padding for box-shadow
 				>
-					{teamMembers.map((member, i) => (
+					{pageInfoConstants.about.teamMembers.map((member, i) => (
 						<div
 							key={`${member.name}-${i}`}
 							className="shrink-0 snap-center w-full max-w-xs sm:w-[45%] md:w-[30%] lg:w-[23%] group"

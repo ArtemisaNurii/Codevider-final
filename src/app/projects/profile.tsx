@@ -73,8 +73,8 @@ const caseStudyData: CaseStudy = {
 
 // 1. Case Study Hero - Improved responsiveness with fixed heights
 const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ title, subtitle }) => (
-	<header className="relative flex h-[400px] md:h-[450px] flex-col justify-end p-6 md:p-8 lg:p-12 text-white">
-		<div className="absolute inset-0 bg-gradient-to-br from-black via-slate-900 to-sky-800" />
+	<header className="relative flex h-100 md:h-112.5 flex-col justify-end p-6 md:p-8 lg:p-12 text-white">
+		<div className="absolute inset-0 bg-linear-to-br from-black via-slate-900 to-sky-800" />
 		<div className="absolute inset-0 bg-black/40" />
 
 		<div className="relative z-10 max-w-4xl mx-auto w-full">
@@ -99,7 +99,7 @@ const KeyMetricsBar = ({ metrics }: { metrics: KeyMetric[] }) => (
 			{metrics.map((metric) => (
 				<div
 					key={metric.label}
-					className="text-center flex-1 min-w-[100px] lg:flex-none"
+					className="text-center flex-1 min-w-25 lg:flex-none"
 				>
 					<metric.icon
 						className="mx-auto h-7 w-7 sm:h-8 sm:w-8 text-sky-500"
@@ -186,7 +186,7 @@ const ContentSection = React.forwardRef<
 				<ul className="mt-5">
 					{section.listItems.map((item, i) => (
 						<li key={i} className="flex items-start mb-2">
-							<CheckCircleIcon className="mr-3 mt-1 h-5 w-5 flex-shrink-0 text-sky-500" />
+							<CheckCircleIcon className="mr-3 mt-1 h-5 w-5 shrink-0 text-sky-500" />
 							<span>{item}</span>
 						</li>
 					))}

@@ -146,7 +146,7 @@ const Services: NextPage = () => {
 								<h3 className="mt-6 font-sans text-xl font-bold text-gray-800">
 									{service.title}
 								</h3>
-								<p className="mt-2 text-gray-600 flex-grow text-balance">
+								<p className="mt-2 text-gray-600 grow text-balance">
 									{service.description}
 								</p>
 

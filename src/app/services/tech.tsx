@@ -47,15 +47,12 @@ import { FaMeta } from "react-icons/fa6";
 import { SiOllama } from "react-icons/si";
 import Image from "next/image";
 
-// --- TYPE DEFINITIONS ---
-
 // --- DATA ---
 const iconProps = { size: 40 };
 const imgProps = { className: "h-10 w-auto", width: 40, height: 40 };
 
 const returnImageComponent = (src: string, iconName: string) => {
 	return <Image src={src} {...imgProps} alt={`${iconName} icon`} />;
-	// return <img src={src} {...imgProps} alt={`${iconName} icon`} />;
 };
 
 const technologies: TechnologyCategoryType[] = [
@@ -262,7 +259,6 @@ const technologies: TechnologyCategoryType[] = [
 			},
 		],
 	},
-	// vector dbs
 	{
 		category: "Cloud & DevOps",
 		items: [
@@ -465,7 +461,6 @@ const TechItem: React.FC<TechItemType> = ({ name, icon }) => (
 		</p>
 	</div>
 );
-
 
 const TechCategory: React.FC<TechCategoryProps> = ({ title, items }) => (
 	<motion.section

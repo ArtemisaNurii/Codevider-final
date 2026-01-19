@@ -14,7 +14,6 @@ const cursorStyle = `
 
 // --- MODIFIED: The component now accepts props ---
 
-
 const HeroHeadline: React.FC<HeroHeadlineProps> = ({ displayedText }) => {
 	return (
 		<div className="flex flex-col gap-4 text-center items-center">

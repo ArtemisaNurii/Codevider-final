@@ -13,7 +13,6 @@ import {
 	X,
 } from "lucide-react";
 import Header from "../components/navbar";
-import { Job } from "./jobs";
 import {
 	uploadFileAction,
 	submitApplicationAction,
@@ -31,7 +30,7 @@ const JobDetailItem = ({
 	value: string;
 }) => (
 	<li className="flex items-start gap-4">
-		<div className="flex-shrink-0 mt-1 text-slate-600">
+		<div className="shrink-0 mt-1 text-slate-600">
 			<Icon size={20} strokeWidth={1.5} />
 		</div>
 		<div>
@@ -440,7 +439,7 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
 		<div className="bg-white font-sans">
 			<Header />
 			{/* Section Header with Gradient */}
-			<div className="w-full bg-gradient-to-r from-black via-slate-700 to-sky-600 py-30">
+			<div className="w-full bg-linear-to-r from-black via-slate-700 to-sky-600 py-30">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<h2 className="text-5xl font-bold text-white">{job.title}</h2>
 					<p className="mt-2 text-lg text-gray-200">

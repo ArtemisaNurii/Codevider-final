@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { type AnimationOptions, motion } from "motion/react";
+import { motion } from "motion/react";
 import {
 	forwardRef,
 	useCallback,
@@ -14,9 +14,6 @@ import {
 
 import { cn } from "@/lib/utils";
 import { useTextProcessingWorker } from "@/lib/hooks/useWebWorker";
-
-
-
 
 const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
 	(

@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { getJobs } from "./action";
 import JobCard from "./JobCard";
 import PaginationControls from "./PaginationControls";
-import { Job } from "./jobs";
 import HiringProcess from "./hiringProcess";
 
 interface JobsListingProps {
@@ -63,7 +62,7 @@ export default function JobsListing({ page, limit }: JobsListingProps) {
 		if (pagination.totalCount === 0) {
 			return (
 				<>
-					<header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
+					<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
 						<div className="mx-auto sm:pt-32 pt-32 max-w-7xl px-6 py-20 md:py-24 text-start">
 							<p className="text-sm font-semibold uppercase tracking-widest text-sky-300">
 								Careers
@@ -129,7 +128,7 @@ export default function JobsListing({ page, limit }: JobsListingProps) {
 	// --- THIS IS THE STATE WHEN JOBS ARE AVAILABLE ---
 	return (
 		<>
-			<header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
+			<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
 				<div className="mx-auto max-w-7xl px-6 py-16 md:py-24 mt-10 md:mt-10 text-start">
 					<p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
 						Careers

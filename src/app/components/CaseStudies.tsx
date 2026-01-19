@@ -92,7 +92,7 @@ const ViewAllButton = () => {
 				onClick={() => router.push("/services")} // Changed to a relevant route
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
-				className="group flex items-center gap-3 px-8 py-4 border-2 border-gray-700 rounded-full text-gray-900 font-semibold text-lg    hover:bg-gradient-to-br from-black to-sky-900 hover:text-white"
+				className="group flex items-center gap-3 px-8 py-4 border-2 border-gray-700 rounded-full text-gray-900 font-semibold text-lg  hover:bg-linear-to-br from-black to-sky-900 hover:text-white"
 			>
 				{/* UPDATED BUTTON TEXT */}
 				<span>View More of Our Services</span>
@@ -113,9 +113,9 @@ const InfoCard = ({
 	features: readonly string[];
 	subtitle: string;
 }) => (
-	<div className="cardBlu info-card-container relative bg-sky-200 p-8 rounded-3xl flex-grow flex flex-col justify-between min-h-[300px] transform-gpu">
+	<div className="cardBlu info-card-container relative bg-sky-200 p-8 rounded-3xl grow flex flex-col justify-between min-h-75 transform-gpu">
 		<div>
-			<div className="info-tag bg-gradient-to-br from-black to-sky-900 text-white text-lg font-semibold px-6 py-2 rounded-full inline-block">
+			<div className="info-tag bg-linear-to-br from-black to-sky-900 text-white text-lg font-semibold px-6 py-2 rounded-full inline-block">
 				{tag}
 			</div>
 		</div>
@@ -176,7 +176,7 @@ const MiniCaseStudyCard = ({
 			<span className="text-gray-700 px-4 py-1 rounded-full sky font-semibold text-xs uppercase tracking-wider">
 				{/* {tag} */}
 			</span>
-			<div className="text-right flex-shrink-0 ml-4">
+			<div className="text-right shrink-0 ml-4">
 				<p className="metric-number text-4xl font-semibold text-[#0a61cb]">
 					{/* {metric.value} */}
 				</p>
@@ -186,11 +186,11 @@ const MiniCaseStudyCard = ({
 		<div className="case-study-title text-xl font-semibold text-gray-700">
 			{splitTextIntoWords(title)}
 		</div>
-		<p className="case-study-desc text-balance text-gray-700 leading-relaxed mt-2 flex-grow">
+		<p className="case-study-desc text-balance text-gray-700 leading-relaxed mt-2 grow">
 			{description}
 		</p>
 		<div className="flex justify-end mt-6">
-			<div className="w-12 h-12 bg-gradient-to-br from-black to-sky-900 rounded-full flex items-center justify-center transform group-hover:scale-110 group-hover:bg-gray-800 transition-all duration-300">
+			<div className="w-12 h-12 bg-linear-to-br from-black to-sky-900 rounded-full flex items-center justify-center transform group-hover:scale-110 group-hover:bg-gray-800 transition-all duration-300">
 				<AlignEndHorizontal className="stroke-white text-white" />
 			</div>
 		</div>
@@ -440,7 +440,7 @@ const SolutionPillars: React.FC = () => {
 
 				<div className="lg:col-span-2 metric-card ">
 					<MetricCard {...pageData.metric1}>
-						<div className="w-full h-full min-h-[250px] flex items-center justify-center rounded-lg">
+						<div className="w-full h-full min-h-62.5 flex items-center justify-center rounded-lg">
 							<p className="text-gray-700 font-medium text-xl text-balance pt-20 text-start p-4">
 								You can manage and be in control of your own project at all
 								times.
@@ -461,7 +461,7 @@ const SolutionPillars: React.FC = () => {
 								<Pill key={skill} text={skill} />
 							))}
 						</div>
-						<div className="w-full h-full min-h-[150px]  flex items-center justify-center rounded-lg">
+						<div className="w-full h-full min-h-37.5  flex items-center justify-center rounded-lg">
 							<p className="text-white text-2xl font-medium text-start p-4">
 								Benefit from the innovative viewpoints our team brings{" "}
 							</p>

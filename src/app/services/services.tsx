@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 // ---- Utility Functions ----
 const slugify = (str: string): string => {
@@ -11,7 +11,6 @@ const slugify = (str: string): string => {
 		.replace(/[\s_-]+/g, "-") // Replace spaces, underscores, and multiple hyphens with single hyphen
 		.replace(/^-+|-+$/g, ""); // Remove leading and trailing hyphens
 };
-
 
 const services: ServiceItem[] = [
 	{
@@ -199,7 +198,7 @@ export default function ServicesPage() {
 	return (
 		<main className="bg-white text-slate-900">
 			{/* Header */}
-			<header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
+			<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
 				<div className="mx-auto max-w-7xl px-6 py-16 md:py-20 mt-10 md:mt-20 ">
 					<p className="text-sm font-semibold uppercase tracking-widest mt-10 text-sky-300">
 						Our Capabilities
@@ -293,7 +292,7 @@ export default function ServicesPage() {
 										<ul className="mt-3 space-y-2 text-base text-slate-700">
 											{it.whyItMatters.map((w, idx) => (
 												<li key={idx} className="flex items-start gap-3">
-													<span className="mt-2 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#0a61cb]" />
+													<span className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-[#0a61cb]" />
 													<span>{w}</span>
 												</li>
 											))}
@@ -306,7 +305,7 @@ export default function ServicesPage() {
 										<ul className="mt-3 space-y-2 text-base text-slate-700">
 											{it.useCases.map((u, idx) => (
 												<li key={idx} className="flex items-start gap-3">
-													<span className="mt-2 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#0a61cb]" />
+													<span className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-[#0a61cb]" />
 													<span>{u}</span>
 												</li>
 											))}
