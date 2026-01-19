@@ -204,7 +204,7 @@ export default function ServicesPage() {
     <main className="bg-white text-slate-900">
       {/* Header */}
       <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20 md:mt-20 ">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20 mt-10 md:mt-20 ">
           <p className="text-sm font-semibold uppercase tracking-widest mt-10 text-sky-300">
             Our Capabilities
           </p>
