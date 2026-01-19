@@ -81,9 +81,9 @@ const Services: NextPage = () => {
 					<h2 className="text-4xl md:text-5xl max-sm:text-start font-bold text-center font-sans text-gray-900 leading-tight mt-2">
 						Our Core Services
 					</h2>
-					<p className="mt-4 text-lg max-sm:text-start  text-gray-600">
+					<p className="mt-4 text-lg max-sm:text-start text-balance  text-gray-600">
 						We help enterprises and startups ship faster with scalable teams,
-						modern stacks, and reliable delivery,without the overhead.
+						modern stacks, and reliable delivery, without the overhead.
 					</p>
 				</motion.div>
 
@@ -146,7 +146,7 @@ const Services: NextPage = () => {
 								<h3 className="mt-6 font-sans text-xl font-bold text-gray-800">
 									{service.title}
 								</h3>
-								<p className="mt-2 text-gray-600 flex-grow">
+								<p className="mt-2 text-gray-600 flex-grow text-balance">
 									{service.description}
 								</p>
 

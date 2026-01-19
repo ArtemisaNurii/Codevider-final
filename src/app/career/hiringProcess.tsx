@@ -54,7 +54,7 @@ export default function HiringProcess({
 							className="flex flex-col items-start text-left bg-white p-8 rounded-2xl shadow-md border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
 						>
 							<div className="flex items-center gap-4 mb-4">
-								<div className="flex-shrink-0 h-16 w-16 flex items-center justify-center rounded-full bg-slate-100">
+								<div className="shrink-0 h-16 w-16 flex items-center justify-center rounded-full bg-slate-100">
 									{item.icon}
 								</div>
 								<span className="text-5xl font-bold text-slate-300">
@@ -64,7 +64,7 @@ export default function HiringProcess({
 							<h3 className="text-lg font-semibold text-slate-900 mb-2">
 								{item.title}
 							</h3>
-							<p className="text-slate-600 leading-relaxed text-sm">
+							<p className="text-slate-600 text-pretty leading-relaxed text-sm">
 								{item.description}
 							</p>
 						</div>

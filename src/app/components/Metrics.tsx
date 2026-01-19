@@ -64,7 +64,7 @@ const Metrics: NextPage = () => {
 				<div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-8">
 					{/* Left Column: Text Content */}
 					<div className="flex flex-col justify-center">
-						<h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+						<h1 className="text-4xl font-bold tracking-tight lg:leading-16 text-gray-900 sm:text-5xl lg:text-6xl">
 							Transforming Ideas <br /> Into Trusted Digital Solutions
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-600">
@@ -79,7 +79,7 @@ const Metrics: NextPage = () => {
 						<div className="mt-10">
 							<a
 								href="/about"
-								className="inline-flex items-center gap-2 bg-white text-gray-900 font-semibold px-6 py-3 rounded-lg shadow-md hover:gap-4 transition-all duration-300"
+								className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-900 font-semibold px-6 py-3 rounded-lg shadow-md hover:gap-4 transition-all duration-300"
 							>
 								Read More <ArrowRight className="w-5 h-5" />
 							</a>

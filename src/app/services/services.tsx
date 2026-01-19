@@ -211,7 +211,7 @@ export default function ServicesPage() {
 					<h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
 						Services that Move Your Roadmap Forward
 					</h1>
-					<p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-300">
+					<p className="mt-4 max-w-3xl text-lg text-balance leading-relaxed text-gray-300">
 						Explore how we design, build, and scale reliable products. We focus
 						on clean typography, clear sections, and an index you can scan at a
 						glance.
@@ -284,7 +284,7 @@ export default function ServicesPage() {
 									<h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">
 										{it.title}
 									</h2>
-									<p className="mt-3 text-lg leading-relaxed text-slate-600">
+									<p className="mt-3 text-lg leading-relaxed text-balance text-slate-600">
 										{it.description}
 									</p>
 								</header>
@@ -326,7 +326,7 @@ export default function ServicesPage() {
 						<h3 className="text-2xl font-semibold">
 							Not seeing a perfect match?
 						</h3>
-						<p className="mt-2 max-w-2xl text-lg text-slate-600">
+						<p className="mt-2 max-w-2xl text-lg text-balance text-slate-600">
 							We tailor engagements to fit your roadmap. Tell us about your use
 							case and we’ll suggest the most effective path forward.
 						</p>

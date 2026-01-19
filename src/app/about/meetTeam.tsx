@@ -4,78 +4,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-const teamMembers = [
-	{ name: "Pasho Toska", role: "Co-Founder", image: "pasho_toska.png" },
-	{ name: "Ervin Ziko", role: "Co-Founder", image: "ervin_ziko.png" },
-	{ name: "Altin Luli", role: "Co-Founder", image: "altin_luli.png" },
-
-	{ name: "Erion Domi", role: "Co-Founder", image: "erion_domi.png" },
-	{
-		name: "Genci Likaj",
-		role: "Senior Software engineer",
-		image: "genci_likaj.png",
-	},
-	{
-		name: "Jul Kreshpaj",
-		role: "Senior Software engineer",
-		image: "jul_kreshpaj.png",
-	},
-
-	{ name: "Elisabeta Guri", role: "HR Manager", image: "elisabeta_guri.png" },
-	{ name: "Ansel Nikaj", role: "Project Manager", image: "ansel_nikaj.png" },
-	{ name: "Xhulio Balli", role: "Project Manager", image: "xhulio_balli.png" },
-
-	{
-		name: "Besjana Fixha ",
-		role: "Fullstack Developer",
-		image: "besiana_fixha.png",
-	},
-	{
-		name: "Erald Plloha",
-		role: "Backend Developer",
-		image: "erald_plloha.png",
-	},
-	{
-		name: "Arlind Idrizi",
-		role: "Frontend Developer",
-		image: "arlind_idrizi.png",
-	},
-	{
-		name: "Eliana Kryeziu",
-		role: "Frontend Developer",
-		image: "eliana_kryeziu.png",
-	},
-
-	{ name: "Geri Lluga", role: "Backend Developer", image: "geri_lluga.png" },
-	{ name: "Fjona Rira", role: "Frontend Developer", image: "fjona_rira.png" },
-	{
-		name: "Armando Muco",
-		role: "Backend Developer",
-		image: "armando_muco.png",
-	},
-	{ name: "Kejdi Balla", role: "UIUX Designer", image: "kejdi_balla.png" },
-	{
-		name: "Amanda Oshafi",
-		role: "Backend Developer",
-		image: "amanda_oshafi.png",
-	},
-	{
-		name: "Artemisa Nuri",
-		role: "Frontend Developer",
-		image: "artemisa_nuri.png",
-	},
-	{
-		name: "Kejsi Terolli",
-		role: "Frontend Developer",
-		image: "kejsi_terolli.png",
-	},
-	{
-		name: "Vasjan Çupri",
-		role: "Backend Developer",
-		image: "vasjan_cupri.png",
-	},
-];
+import { teamMembers } from "@/lib/constants";
 
 export default function MeetTeamSection() {
 	const carouselRef = useRef<HTMLDivElement>(null);
@@ -174,7 +103,7 @@ export default function MeetTeamSection() {
 					<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
 						Meet the team
 					</h2>
-					<p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto max-sm:mx-0">
+					<p className="text-lg text-muted-foreground text-balance mb-8 max-w-2xl mx-auto max-sm:mx-0">
 						Unleashing imagination and innovation, we elevate ordinary spaces
 						into extraordinary experiences
 					</p>
@@ -214,7 +143,7 @@ export default function MeetTeamSection() {
 					{teamMembers.map((member, i) => (
 						<div
 							key={`${member.name}-${i}`}
-							className="flex-shrink-0 snap-center w-full max-w-xs sm:w-[45%] md:w-[30%] lg:w-[23%] group"
+							className="shrink-0 snap-center w-full max-w-xs sm:w-[45%] md:w-[30%] lg:w-[23%] group"
 						>
 							<div
 								onClick={() => scrollToCard(i)}
@@ -222,7 +151,7 @@ export default function MeetTeamSection() {
                            shadow-sm transition-all duration-300 ease-in-out will-change-transform 
                            group-hover:-translate-y-1 group-hover:shadow-xl cursor-pointer"
 							>
-								<div className="aspect-[3/4]">
+								<div className="aspect-3/4">
 									<Image
 										src={
 											`/images/members/headshots/${member.image}` ||

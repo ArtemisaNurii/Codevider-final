@@ -122,7 +122,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({
 			</h3>
 			{/* The short blue divider line */}
 			<div className="border-b border-[#38bdf8] w-1/4 mb-4"></div>
-			<p className="text-gray-700 text-sm md:text-base lg:text-md leading-relaxed">
+			<p className="text-gray-700 text-sm md:text-base text-balance lg:text-md leading-relaxed">
 				{description}
 			</p>
 		</div>
@@ -144,7 +144,7 @@ const Processes = () => {
 							Process
 						</h2>
 					</div>
-					<div className="lg:col-span-3 text-gray-700 text-base md:text-lg lg:text-xl leading-relaxed space-y-4 pt-2">
+					<div className="lg:col-span-3 text-gray-700 text-balance text-base md:text-lg lg:text-xl leading-relaxed space-y-4 pt-2">
 						<p>
 							Our clients’needs guide every step. We begin with a hands‑on
 							discovery phase-aligning on goals, defining the product vision,

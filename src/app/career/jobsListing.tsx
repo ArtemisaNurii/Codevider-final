@@ -71,7 +71,7 @@ export default function JobsListing({ page, limit }: JobsListingProps) {
 							<h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
 								Join Our Team
 							</h1>
-							<p className="mt-4 mx-auto text-lg leading-relaxed text-gray-300">
+							<p className="mt-4 mx-auto text-lg leading-relaxed text-balance text-gray-300">
 								We&apos;re always looking for talented individuals to join our
 								growing team. Explore opportunities to work on cutting-edge
 								projects and make a meaningful impact.

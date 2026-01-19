@@ -133,7 +133,7 @@ export default function Industries() {
 									</h3>
 
 									<p
-										className={`text-md leading-relaxed ${
+										className={`text-md leading-relaxed text-balance ${
 											isDark ? "text-gray-300" : "text-gray-600"
 										}`}
 										style={{

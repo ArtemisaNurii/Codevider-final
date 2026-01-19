@@ -13,24 +13,14 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import MeetTeamSection from "./meetTeam";
-// ---- Types ----
+import Link from "next/link";
+
 interface Pillar {
 	icon: React.ReactNode;
 	title: string;
 	description: string;
 }
 
-// interface Stat {
-//   label: string;
-//   value: string;
-//   note?: string;
-// }
-
-// interface TimelineItem {
-//   year: string;
-//   title: string;
-//   text: string;
-// }
 
 const pillars: Pillar[] = [
 	{
@@ -81,11 +71,11 @@ export default function CodeviderCulturePage() {
 						</p>
 						<h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight md:text-5xl">
 							How we build at{" "}
-							<span className="bg-gradient-to-r from-sky-600 to-slate-900 bg-clip-text text-transparent">
+							<span className="bg-linear-to-r from-sky-600 to-slate-900 bg-clip-text text-transparent">
 								Codevider
 							</span>
 						</h1>
-						<p className="mt-5 text-lg text-slate-600 md:text-xl">
+						<p className="mt-5 text-lg text-balance text-slate-600 md:text-xl">
 							At the heart of our company is a culture built on collaboration,
 							creativity, and accountability. We value open communication,
 							celebrate diverse perspectives, and empower every team member to
@@ -94,14 +84,14 @@ export default function CodeviderCulturePage() {
 							with passion and purpose.
 						</p>
 						<div className="mt-8 flex flex-wrap gap-3">
-							<a
+							<Link
 								href="/career"
-								className="inline-flex items-center gap-2 rounded-xl  hover:gap-4 px-5 py-3 text-black hover:bg-slate-950 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+								className="inline-flex items-center gap-2 rounded-xl border hover:gap-4 px-5 py-3 text-black hover:bg-slate-950 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
 								aria-label="Explore open roles"
 							>
 								Join the team
 								<ArrowRight className="h-4 w-4" aria-hidden />
-							</a>
+							</Link>
 						</div>
 					</motion.div>
 				</div>
@@ -135,7 +125,7 @@ export default function CodeviderCulturePage() {
 								{p.icon}
 							</div>
 							<h3 className="text-lg font-semibold">{p.title}</h3>
-							<p className="mt-2 text-white">{p.description}</p>
+							<p className="mt-2 text-white text-balance">{p.description}</p>
 						</motion.article>
 					))}
 				</div>
@@ -152,7 +142,7 @@ export default function CodeviderCulturePage() {
 						<h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
 							Working at Codevider
 						</h2>
-						<p className="mt-4 text-slate-600">
+						<p className="mt-4 text-slate-600 text-balance">
 							We balance independence with guidance, and a culture of integrity,
 							respect, and teamwork ensures an environment where we grow,
 							collaborate, and achieve excellence together. At Codevider, we
@@ -211,12 +201,12 @@ export default function CodeviderCulturePage() {
 				className="relative overflow-hidden border-t border-slate-200"
 			>
 				<div className="container max-w-7xl mx-auto px-6 h-1/2 py-16 md:py-24">
-					<div className="grid items-center gap-10 rounded-3xl bg-gradient-to-br from-black via-slate-950 to-sky-800 p-8 text-white md:grid-cols-2 md:p-12">
+					<div className="grid items-center gap-10 rounded-3xl bg-linear-to-br from-black via-slate-950 to-sky-800 p-8 text-white md:grid-cols-2 md:p-12">
 						<div>
 							<h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
 								Join Our Journey
 							</h2>
-							<p className="mt-3 text-sky-100">
+							<p className="mt-3 text-sky-100 text-balance">
 								{" "}
 								We&apos;re always looking for passionate, talented people who
 								want to shape the future of software with us. Explore open roles
@@ -224,14 +214,14 @@ export default function CodeviderCulturePage() {
 							</p>
 						</div>
 						<div className="flex flex-wrap gap-3 md:justify-end">
-							<a
+							<Link
 								href="/career"
-								className="inline-flex items-center hover:gap-4 gap-2 rounded-xl bg-white px-5 py-3 text-slate-900 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+								className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-slate-900 hover:bg-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
 								aria-label="See open roles"
 							>
 								See open roles
 								<ArrowRight className="h-4 w-4" aria-hidden />
-							</a>
+							</Link>
 							{/* <a
                 href="/about"
                 className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-transparent px-5 py-3 text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"

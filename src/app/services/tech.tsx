@@ -519,7 +519,7 @@ const TechStack: React.FC = () => {
 					<h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
 						Our Technology Stack
 					</h1>
-					<p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+					<p className="mt-4 text-lg text-balance text-slate-600 max-w-3xl mx-auto">
 						A showcase of the tools, frameworks, and languages I use to build
 						modern, high-performance web and mobile applications.
 					</p>

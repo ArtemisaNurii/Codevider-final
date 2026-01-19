@@ -110,14 +110,14 @@ const Outsource: React.FC = () => {
 									<TextAnimation
 										as="p"
 										text={description}
-										classname="mt-2 text-base leading-7 text-gray-800"
+										classname="mt-2 text-base leading-7 text-balance text-gray-800"
 									/>
 								</motion.div>
 							))}
 						</div>
 					</motion.div>
 				</div>
-				<div className="p-4"></div>
+				<div className="mb-20"></div>
 			</section>
 		</div>
 	);

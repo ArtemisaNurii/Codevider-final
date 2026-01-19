@@ -85,7 +85,7 @@ export default function Faq() {
 											delay: 0.14,
 										}}
 									>
-										<p className="px-8 pb-4 pt-0 text-black text-sm sm:text-base">
+										<p className="px-8 pb-4 pt-0 text-black text-balance text-sm sm:text-base">
 											{tab.description}
 										</p>
 									</motion.div>

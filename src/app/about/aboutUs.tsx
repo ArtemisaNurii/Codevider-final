@@ -1,11 +1,8 @@
 "use client";
-// import { ArrowRight } from "lucide-react"
-// import VerticalCutReveal from "./vertical"
-
 export default function AboutSection3() {
 	return (
 		<section id="about" className=" bg-white mt-10 md:mt-10 ">
-			<header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
+			<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
 				<div className="mx-auto max-w-7xl py-16 md:py-24 px-4   md:px-4 text-start">
 					<p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
 						About Us
@@ -13,7 +10,7 @@ export default function AboutSection3() {
 					<h1 className="mt-4  text-4xl font-bold tracking-tight md:text-5xl">
 						Crafting Software That Means Business{" "}
 					</h1>
-					<p className="mt-4  mx-auto text-lg leading-relaxed text-gray-300">
+					<p className="mt-4  mx-auto text-lg leading-relaxed text-balance text-gray-300">
 						Strategy, design, and engineering working in harmony to drive your
 						roadmap forward.{" "}
 					</p>
@@ -38,7 +35,7 @@ export default function AboutSection3() {
 
 							{/* Grid for the two paragraphs to sit side-by-side on medium screens and up */}
 							<div className="mt-8 grid grid-cols-1 max-sm:px-4 gap-8 md:grid-cols-2 text-base text-gray-600 px-6 leading-relaxed">
-								<p>
+								<p className="text-balance">
 									Founded in 2019 in Tirana, Albania, CodeVider delivers
 									high-performance, cost-efficient software development
 									solutions for startups, SMEs, and enterprises across Europe
@@ -47,7 +44,7 @@ export default function AboutSection3() {
 									helping you accelerate time-to-market and cut development
 									costs by up to 60%.
 								</p>
-								<p>
+								<p className="text-balance">
 									Our team of 25+ developers excels in today&apos;s most
 									advanced tech stacks. We integrate directly into your workflow
 									using agile, sprint-based methodologies that keep you informed
@@ -66,7 +63,7 @@ export default function AboutSection3() {
 							</div>
 
 							<div className="sm:p-8 lg:p-6 xl:p-8">
-								<p className="text-lg font-medium text-gray-800">
+								<p className="text-lg font-medium text-balance text-gray-800">
 									Let&apos;s bring your roadmap to life with timely, shipped
 									features.{" "}
 								</p>
@@ -76,7 +73,7 @@ export default function AboutSection3() {
 										window.location.href = "/#contact";
 									}}
 									type="button"
-									className="mt-6 flex w-full items-center justify-center gap-2.5 rounded-lg bg-gradient-to-r from-black via-slate-900 to-sky-800 px-6 py-4 hover:gap-4 text-center font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+									className="mt-6 flex w-full items-center justify-center gap-2.5 rounded-lg bg-linear-to-r from-black via-slate-900 to-sky-800 px-6 py-4 hover:gap-4 text-center font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
 								>
 									<span>LETS BUILD TOGETHER</span>
 									<svg
