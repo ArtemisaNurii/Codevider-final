@@ -1,10 +1,11 @@
 "use client";
 import React, { useRef } from "react";
 import Link from "next/link";
-import { Instagram, Facebook, Linkedin, Mail, Phone } from "lucide-react";
+import { Instagram, Facebook, Linkedin } from "lucide-react";
 
 import ContactForm from "./ContactForm";
 import NavbarCodeviderLogo from "./navbar-codevider-logo";
+import { pageInfoConstants } from "@/lib/constants";
 
 // Reusable Footer Component
 export const Footer: React.FC = () => {
@@ -166,6 +167,7 @@ export const Footer: React.FC = () => {
 
 const Contact: React.FC = () => {
 	const sectionRef = useRef<HTMLElement | null>(null);
+	const { contact } = pageInfoConstants.home;
 
 	return (
 		<>
@@ -177,42 +179,32 @@ const Contact: React.FC = () => {
 					<div className="max-w-7xl mx-auto grid lg:grid-cols-2 lg:gap-16 items-stretch">
 						<div className="text-center lg:text-left mb-12 lg:mb-0 flex flex-col justify-center">
 							<p className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
-								Let&apos;s Connect
+								{contact.aboveTitle}
 							</p>
 							<h2 className="text-4xl sm:text-5xl font-semibold leading-tight text-white mb-6">
-								Ready to Build Your Next Big Idea?
+								{contact.title}
 							</h2>
 							<p className="text-lg text-gray-300 max-w-lg text-balance mx-auto lg:mx-0 mb-8">
-								Whether you have a specific project in mind or just want to
-								explore possibilities, our team is here to help. Fill out the
-								form, or reach out to us directly.
+								{contact.description}
 							</p>
 
 							<div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-								<a
-									href="mailto:hello@codevider.com"
-									className="group flex items-center gap-3 text-left"
-								>
-									<div className="bg-white/10 p-3 rounded-full group-hover:bg-sky-400/20 transition-colors">
-										<Mail className="h-6 w-6 text-sky-300" />
-									</div>
-									<div>
-										<p className="font-semibold">Email Us Directly</p>
-										<p className="text-sm text-gray-400">info@codevider.com</p>
-									</div>
-								</a>
-								<a
-									href="#schedule-call"
-									className="group flex items-center gap-3 text-left"
-								>
-									<div className="bg-white/10 p-3 rounded-full group-hover:bg-sky-400/20 transition-colors">
-										<Phone className="h-6 w-6 text-sky-300" />
-									</div>
-									<div>
-										<p className="font-semibold"></p>Call Us Now
-										<p className="text-sm text-gray-400">+355 69 587 7742</p>
-									</div>
-								</a>
+								{contact.buttonList.map((button, index) => (
+									<a
+										key={index}
+										href={button.href}
+										className="group flex items-center gap-3 text-left"
+									>
+										<div className="rounded-full bg-white/10 p-3 transition-colors group-hover:bg-sky-400/20">
+											{button.icon}
+										</div>
+
+										<div>
+											<p className="font-semibold">{button.text}</p>
+											<p className="text-sm text-gray-400">{button.detail}</p>
+										</div>
+									</a>
+								))}
 							</div>
 						</div>
 

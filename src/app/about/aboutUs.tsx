@@ -1,5 +1,9 @@
 "use client";
+
+import { pageInfoConstants } from "@/lib/constants";
+
 export default function AboutSection3() {
+	const { whoarewe } = pageInfoConstants.about;
 	return (
 		<section id="about" className=" bg-white mt-10 md:mt-10 ">
 			<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
@@ -35,23 +39,11 @@ export default function AboutSection3() {
 
 							{/* Grid for the two paragraphs to sit side-by-side on medium screens and up */}
 							<div className="mt-8 grid grid-cols-1 max-sm:px-4 gap-8 md:grid-cols-2 text-base text-gray-600 px-6 leading-relaxed">
-								<p className="text-balance">
-									Founded in 2019 in Tirana, Albania, CodeVider delivers
-									high-performance, cost-efficient software development
-									solutions for startups, SMEs, and enterprises across Europe
-									and beyond. We specialize in web and mobile development,
-									cloud-native microservices, and AI-powered integrations,
-									helping you accelerate time-to-market and cut development
-									costs by up to 60%.
-								</p>
-								<p className="text-balance">
-									Our team of 25+ developers excels in today&apos;s most
-									advanced tech stacks. We integrate directly into your workflow
-									using agile, sprint-based methodologies that keep you informed
-									and in control, every step of the way. With a focus on
-									quality, agility, and long-term partnership, we turn your
-									ideas into scalable, future-ready digital products.
-								</p>
+								{whoarewe.map((paragraph, index) => (
+									<p key={index} className="text-pretty">
+										{paragraph}
+									</p>
+								))}
 							</div>
 						</div>
 

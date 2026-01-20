@@ -3,40 +3,9 @@
 "use client";
 import type { NextPage } from "next";
 import Link from "next/link";
-import { Atom, Users, Code, Brain } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-
-const serviceData = [
-	{
-		icon: Code,
-		title: "Product Engineering",
-		description:
-			"We design and develop scalable web applications and microservices using modern stacks, clean architecture, and agile release cycles, ensuring faster time-to-market and long-term maintainability.",
-		isHighlighted: true,
-	},
-	{
-		icon: Users,
-		title: "Dedicated Pod Teams",
-		description:
-			"Quickly launch cross-functional squads, PM, frontend, backend, and QA, within two weeks. Scale effortlessly with flexible, outcome-focused SLAs tailored to your needs.",
-		isHighlighted: false,
-	},
-	{
-		icon: Atom,
-		title: "Cloud & DevOps",
-		description:
-			"Streamline deployments with CI/CD pipelines, containerization, and secure cloud infrastructure on AWS, delivering high availability and operational efficiency.",
-		isHighlighted: false,
-	},
-	{
-		icon: Brain, // <- Lucide-react Brain icon for AI
-		title: "AI Integrations",
-		description:
-			"Enhance your products with AI: from custom LLM-powered apps and intelligent chatbots to workflow automation and actionable insights-seamlessly embedded into your ecosystem.",
-		isHighlighted: false,
-	},
-];
+import { pageInfoConstants } from "@/lib/constants";
 
 // Map “Read more” to Services page anchors (matching the stepper page slugs)
 // const readMoreHref: Record<string, string> = {
@@ -61,7 +30,7 @@ const cardVariants = {
 
 const Services: NextPage = () => {
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-
+	const { ourCoreServices } = pageInfoConstants.home;
 	return (
 		<section id="services" className="bg-white py-20 lg:py-24">
 			<div className="container mx-auto px-4">
@@ -79,11 +48,10 @@ const Services: NextPage = () => {
 				>
 					<p className="text-sky-500 font-semibold tracking-wider uppercase"></p>
 					<h2 className="text-4xl md:text-5xl max-sm:text-start font-bold text-center font-sans text-gray-900 leading-tight mt-2">
-						Our Core Services
+						{ourCoreServices.title}
 					</h2>
 					<p className="mt-4 text-lg max-sm:text-start text-balance  text-gray-600">
-						We help enterprises and startups ship faster with scalable teams,
-						modern stacks, and reliable delivery, without the overhead.
+						{ourCoreServices.description}
 					</p>
 				</motion.div>
 
@@ -95,7 +63,7 @@ const Services: NextPage = () => {
 					viewport={{ once: true, amount: 0.2 }}
 					variants={gridContainerVariants}
 				>
-					{serviceData.map((service, index) => {
+					{ourCoreServices.list.map((service, index) => {
 						const Icon = service.icon;
 						// const isHovered = hoveredCard === index;
 						// const isAnyCardHovered = hoveredCard !== null;

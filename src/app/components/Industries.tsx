@@ -2,11 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Cloud } from "lucide-react";
+import { pageInfoConstants } from "@/lib/constants";
 
 export default function Industries() {
 	const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 	const [isMobile, setIsMobile] = useState(false);
 	const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+	const { industries } = pageInfoConstants.home;
 
 	// Detect if device is mobile/tablet
 	useEffect(() => {
@@ -50,49 +52,6 @@ export default function Industries() {
 			observers.forEach((observer) => observer.disconnect());
 		};
 	}, [isMobile]);
-	const slides = [
-		{
-			title: "Series A/B Startups",
-			description:
-				"We help fast-growing startups scale with agile teams and cloud-native solutions. From MVP acceleration to core system growth, we deliver technology that fuels sustainable success.",
-		},
-		{
-			title: "Enterprise Modernization",
-			description:
-				"We modernize legacy systems with cloud-native,reducing technical debt, improving performance, and unlocking long-term innovation.",
-		},
-		{
-			title: "CRM-Centric Organizations",
-			description:
-				"We design tailored CRM and HR platforms that streamline workflows, improve experiences, and centralize data for smarter decision-making.",
-		},
-		{
-			title: "Custom Software Solutions",
-			description:
-				"Off-the-shelf tools don’t fit every need. We build scalable, flexible software solutions that evolve with your business and deliver measurable results.",
-		},
-		{
-			title: "Fintech & Payments",
-			description:
-				"From digital wallets to trading platforms, we create secure, compliant fintech solutions that scale globally and deliver seamless user experiences.",
-		},
-		{
-			title: "AI & Automation",
-			description:
-				"We implement AI-powered chatbots, predictive analytics, and automation systems that cut manual work, increase accuracy, and drive new revenue.",
-		},
-		{
-			title: "Data & Analytics Platforms",
-			description:
-				"We transform raw data into actionable insights with BI dashboards, data warehouses, and real-time analytics built for smarter decisions.",
-		},
-		{
-			title: "Mobile App Development",
-			description:
-				"We build high-performance iOS, Android, and cross-platform apps with seamless UX-keeping your brand connected to users anytime, anywhere.",
-		},
-	];
-
 	const getDarkCard = () => (hoveredCard !== null ? hoveredCard : 0);
 
 	return (
@@ -100,13 +59,13 @@ export default function Industries() {
 			<div>
 				<div className="mb-8 md:mb-12">
 					<h2 className="text-3xl md:text-5xl font-bold text-center max-sm:text-start text-gray-900 leading-tight">
-						We Empower Tech Startups, SMEs & Global Brands
+						{industries.title}
 					</h2>
 				</div>
 				<div className="p-4"></div>
 				<div className="relative">
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:px-6 xl:max-w-7xl xl:mx-auto mb-6">
-						{slides.map((slide, index) => {
+						{industries.list.map((slide, index) => {
 							const isDark = getDarkCard() === index;
 							return (
 								<div

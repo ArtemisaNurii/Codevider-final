@@ -2,39 +2,11 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import {
-	ArrowRight,
-	Users,
-	Sparkles,
-	Heart,
-	Target,
-	Trophy,
-	Code2,
-} from "lucide-react";
+import { ArrowRight, Sparkles, Heart, Trophy } from "lucide-react";
 import Image from "next/image";
 import MeetTeamSection from "./meetTeam";
 import Link from "next/link";
-
-const pillars: Pillar[] = [
-	{
-		icon: <Target className="h-6 w-6" aria-hidden />,
-		title: "Clear Vision",
-		description:
-			"With a clear vision, we define priorities, align on outcomes, and focus on what truly drives impact",
-	},
-	{
-		icon: <Code2 className="h-6 w-6" aria-hidden />,
-		title: "Clean Code",
-		description:
-			"Readable, tested, and maintainable code—peer reviews, standards, and refactors that keep velocity high.",
-	},
-	{
-		icon: <Users className="h-6 w-6" aria-hidden />,
-		title: "Supportive Team",
-		description:
-			"A culture of kindness, mentorship, knowledge-sharing, and support whenever it’s needed.",
-	},
-];
+import { pageInfoConstants } from "@/lib/constants";
 
 // ---- Helpers ----
 const fadeUp = {
@@ -47,6 +19,8 @@ const card =
 
 // ---- Component ----
 export default function CodeviderCulturePage() {
+	const { howWeBuildAtCodevider, pillars, workingAtCodevider } =
+		pageInfoConstants.about;
 	return (
 		<main className="bg-white text-slate-900">
 			{/* Hero */}
@@ -69,12 +43,7 @@ export default function CodeviderCulturePage() {
 							</span>
 						</h1>
 						<p className="mt-5 text-lg text-balance text-slate-600 md:text-xl">
-							At the heart of our company is a culture built on collaboration,
-							creativity, and accountability. We value open communication,
-							celebrate diverse perspectives, and empower every team member to
-							take ownership of their work. Growth and learning are part of our
-							daily journey, and we believe success comes from working together
-							with passion and purpose.
+							{howWeBuildAtCodevider}
 						</p>
 						<div className="mt-8 flex flex-wrap gap-3">
 							<Link
@@ -136,53 +105,28 @@ export default function CodeviderCulturePage() {
 							Working at Codevider
 						</h2>
 						<p className="mt-4 text-slate-600 text-balance">
-							We balance independence with guidance, and a culture of integrity,
-							respect, and teamwork ensures an environment where we grow,
-							collaborate, and achieve excellence together. At Codevider, we
-							build with purpose and grow with intention.
+							{workingAtCodevider.mainText}
 						</p>
 						<ul className="mt-6 space-y-3 text-slate-700">
-							<li className="flex items-start gap-3">
-								<Sparkles className="mt-1 h-5 w-5 text-sky-600" /> Dedicated
-								focus time instead of endless meetings.
-							</li>
-							<li className="flex items-start gap-3">
-								<Trophy className="mt-1 h-5 w-5 text-sky-600" /> Goal-oriented
-								roadmaps with clear performance metrics
-							</li>
-							<li className="flex items-start gap-3">
-								<Heart className="mt-1 h-5 w-5 text-sky-600" /> Wellness
-								benefits, training budgets, and flexible time
-							</li>
+							{workingAtCodevider.list.map((item, index) => (
+								<li key={index} className="flex items-start gap-3">
+									{item.icon} {item.text}
+								</li>
+							))}
 						</ul>
 					</motion.div>
 
 					{/* Gallery Placeholder (drop your images) */}
 					<div className="grid grid-cols-2 gap-4">
-						<Image
-							src="/images/members/members1.jpg"
-							alt="Team"
-							width={500}
-							height={500}
-						/>
-						<Image
-							src="/images/members/members2.jpg"
-							alt="Team"
-							width={500}
-							height={500}
-						/>
-						<Image
-							src="/images/office/zyra9.jpg"
-							alt="Team"
-							width={500}
-							height={500}
-						/>
-						<Image
-							src="/images/office/zyra10.jpg"
-							alt="Team"
-							width={500}
-							height={500}
-						/>
+						{workingAtCodevider.gallery.map((imgSrc, index) => (
+							<Image
+								key={index}
+								src={imgSrc}
+								alt={`Image ${index + 1}`}
+								width={500}
+								height={500}
+							/>
+						))}
 					</div>
 				</div>
 			</section>

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { pageInfoConstants } from "@/lib/constants";
+import { pageInfoConstants } from "@/lib/constants/index";
 
 export default function MeetTeamSection() {
 	const carouselRef = useRef<HTMLDivElement>(null);
