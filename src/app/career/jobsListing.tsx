@@ -7,6 +7,7 @@ import { getJobs } from "./action";
 import JobCard from "./JobCard";
 import PaginationControls from "./PaginationControls";
 import HiringProcess from "./hiringProcess";
+import { pageInfoConstants } from "@/lib/constants";
 
 interface JobsListingProps {
 	page: number;
@@ -19,6 +20,7 @@ export default function JobsListing({ page, limit }: JobsListingProps) {
 		pagination: any;
 	} | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const { main } = pageInfoConstants.career;
 
 	useEffect(() => {
 		async function fetchJobs() {
@@ -65,15 +67,13 @@ export default function JobsListing({ page, limit }: JobsListingProps) {
 					<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
 						<div className="mx-auto sm:pt-32 pt-32 max-w-7xl px-6 py-20 md:py-24 text-start">
 							<p className="text-sm font-semibold uppercase tracking-widest text-sky-300">
-								Careers
+								{main.aboveTitle}
 							</p>
 							<h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
-								Join Our Team
+								{main.title}
 							</h1>
 							<p className="mt-4 mx-auto text-lg leading-relaxed text-balance text-gray-300">
-								We&apos;re always looking for talented individuals to join our
-								growing team. Explore opportunities to work on cutting-edge
-								projects and make a meaningful impact.
+								{main.description}
 							</p>
 						</div>
 					</header>

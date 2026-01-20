@@ -2,6 +2,45 @@ import { Atom, Users, Code, Brain, Mail } from "lucide-react";
 import { Blend, ChartSpline, ShieldCheck } from "lucide-react";
 
 export const homePage = {
+	hero: {
+		heroTitle: "Your Strategic Partner in",
+		phrases: [
+			"Software Solutions",
+			"Blockchain Apps",
+			"Fintech",
+			"AI Integrations",
+			"A/B Startups",
+			"Smart Automation",
+		],
+	},
+	transformingIdeas: {
+		title: (
+			<>
+				Transforming Ideas <br /> Into Trusted Digital Solutions
+			</>
+		),
+		description:
+			"From web and mobile apps to cloud platforms and enterprise systems, we craft reliable software tailored to your business needs. Our teams blend modern technologies, scalable architectures, and intuitive design to deliver secure, high-performance solutions that help organizations innovate and grow.",
+		cards: {
+			smallOnes: [
+				{
+					metric: "30+",
+					title: "Global Partnerships",
+					badge: "Network Expansion",
+				},
+				{
+					metric: "60%",
+					title: "Growth Rate",
+					badge: "Faster Acquisition",
+				},
+			],
+			largeOne: {
+				metric: "25+",
+				title: "Elite Talent",
+				badge: "Developers with Deep Expertise",
+			},
+		},
+	},
 	ourCoreServices: {
 		title: "Our Core Services",
 		description:
@@ -141,6 +180,61 @@ export const homePage = {
 			}, // → Dubai
 		],
 	},
+	unlockYourPotential: {
+		mainTitle: {
+			part1: "Unlock Your",
+			highlight: "Potential With",
+			part2: "Our Expertise",
+		},
+		infoCard: {
+			tag: "Our Value Proposition",
+			features: ["Efficiency", "Flexibility", "Expertise"],
+			subtitle:
+				"We deliver more than code providing a strategic partnership designed for growth.",
+		},
+		metric1: {
+			value: "100%",
+			label: "Flexibility & Control",
+			subtitle:
+				"You can manage and be in control of your own project at all times.",
+		},
+		metric2: {
+			value: "+6",
+			label: "Years of Experience",
+			subtitle: "Benefit from the innovative viewpoints our team brings.",
+			// Repurposed 'countries' to 'skills' for the pills
+			skills: ["USA", "Germany", "London", "Europe"],
+		},
+	},
+	whyOurClientsChooseUs: {
+		title: "Why Our Clients Choose Us",
+		description:
+			"Our partnership model is built on three pillars: efficiency, flexibility, and deep expertise.",
+		list: [
+			{
+				tag: "Advantage 01",
+				title: "Significant Cost & Time Savings",
+				metric: { value: "", label: "Avg. Savings" },
+				description:
+					"Bypass expensive hiring and training. Our streamlined process gets you to market faster, saving crucial time and resources.",
+			},
+			{
+				tag: "Advantage 02",
+				title: "Total Flexibility & Control",
+				metric: { value: "", label: "Platform Access" },
+				description:
+					"Scale your team on-demand for single or multiple projects, and monitor progress anytime through Slack, Jira, Github, etc.",
+			},
+			{
+				tag: "Advantage 03",
+				title: "Creative Expertise on Demand",
+				metric: { value: "", label: "Perspectives" },
+				description:
+					"Instantly access a pool of highly motivated, creative professionals who bring fresh perspectives and innovative solutions to the table.",
+			},
+		],
+	},
+
 	faq: {
 		title: "Frequently Asked Questions",
 		list: [

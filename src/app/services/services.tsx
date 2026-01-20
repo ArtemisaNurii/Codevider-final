@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 
 export default function ServicesPage() {
 	const [active, setActive] = useState<string>("");
+	const { main } = pageInfoConstants.services;
 
 	// We map over the constants to add the index 'idx' for numbering (01, 02, etc.)
 	const items = useMemo(
@@ -51,15 +52,13 @@ export default function ServicesPage() {
 			<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
 				<div className="mx-auto max-w-7xl px-6 py-16 md:py-20 mt-10 md:mt-20 ">
 					<p className="text-sm font-semibold uppercase tracking-widest mt-10 text-sky-300">
-						Our Capabilities
+						{main.aboveTitle}
 					</p>
 					<h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
-						Services that Move Your Roadmap Forward
+						{main.title}
 					</h1>
 					<p className="mt-4 max-w-3xl text-lg text-balance leading-relaxed text-gray-300">
-						Explore how we design, build, and scale reliable products. We focus
-						on clean typography, clear sections, and an index you can scan at a
-						glance.
+						{main.description}
 					</p>
 				</div>
 			</header>

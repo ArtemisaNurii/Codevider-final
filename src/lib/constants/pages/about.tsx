@@ -4,6 +4,12 @@ const workingAtCodeviderIconStyling = {
 	className: "mt-1 h-5 w-5 text-sky-600",
 };
 export const aboutPage = {
+	main: {
+		aboveTitle: "About Us",
+		title: "Crafting Software That Means Business",
+		description:
+			"Strategy, design, and engineering working in harmony to drive your roadmap forward.",
+	},
 	whoarewe: [
 		"Founded in 2019 in Tirana, Albania, CodeVider delivers high-performance, cost-efficient software development solutions for startups, SMEs, and enterprises across Europe and beyond. We specialize in web and mobile development, cloud-native microservices, and AI-powered integrations, helping you accelerate time-to-market and cut development costs by up to 60%.",
 		"Our team of 25+ developers excels in today's most advanced tech stacks. We integrate directly into your workflow using agile, sprint-based methodologies that keep you informed and in control, every step of the way. With a focus on quality, agility, and long-term partnership, we turn your ideas into scalable, future-ready digital products.",

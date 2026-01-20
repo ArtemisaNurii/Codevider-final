@@ -56,6 +56,12 @@ export const returnImageComponent = (src: string, iconName: string) => {
 };
 
 export const servicesPage = {
+	main: {
+		aboveTitle: "Our Capabilities",
+		title: "Services that Move Your Roadmap Forward",
+		description:
+			"Explore how we design, build, and scale reliable products. We focus on clean typography, clear sections, and an index you can scan at a glance.",
+	},
 	services: [
 		{
 			title: "Custom Software Development",

@@ -3,20 +3,19 @@
 import { pageInfoConstants } from "@/lib/constants";
 
 export default function AboutSection3() {
-	const { whoarewe } = pageInfoConstants.about;
+	const { main, whoarewe } = pageInfoConstants.about;
 	return (
 		<section id="about" className=" bg-white mt-10 md:mt-10 ">
 			<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
 				<div className="mx-auto max-w-7xl py-16 md:py-24 px-4   md:px-4 text-start">
 					<p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
-						About Us
+						{main.aboveTitle}
 					</p>
 					<h1 className="mt-4  text-4xl font-bold tracking-tight md:text-5xl">
-						Crafting Software That Means Business{" "}
+						{main.title}
 					</h1>
 					<p className="mt-4  mx-auto text-lg leading-relaxed text-balance text-gray-300">
-						Strategy, design, and engineering working in harmony to drive your
-						roadmap forward.{" "}
+						{main.description}
 					</p>
 				</div>
 			</header>

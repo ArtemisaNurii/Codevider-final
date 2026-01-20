@@ -1,6 +1,12 @@
 import { Briefcase, FileText, Users, Award } from "lucide-react"; // Using icons for better visuals
 
 export const careerPage = {
+	main: {
+		aboveTitle: "Careers",
+		title: "Be part of our exceptional team",
+		description:
+			"Join our team and help us build the future of software development. We are always looking for talented individuals to join our growing team.",
+	},
 	processSteps: [
 		{
 			step: 1,

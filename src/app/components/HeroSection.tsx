@@ -21,6 +21,7 @@ import {
 	RefreshCw,
 	User2,
 } from "lucide-react";
+import { pageInfoConstants } from "@/lib/constants";
 
 const componentStyles = `
   @keyframes shine {
@@ -60,19 +61,11 @@ const componentStyles = `
   }
 `;
 
-const PHRASES = [
-	"Software Solutions",
-	"Blockchain Apps",
-	"Fintech",
-	"AI Integrations",
-	"A/B Startups",
-	"Smart Automation",
-];
 type Props = { phrases: string[]; interval?: number };
 
-export function HeroHeadline({ phrases, interval = 2500 }: Props) {
+export function HeroHeadline({ phrases, interval = 3000 }: Props) {
 	const [currentIndex, setCurrentIndex] = useState(0);
-
+	const { hero } = pageInfoConstants.home;
 	useEffect(() => {
 		if (phrases.length <= 1) return;
 		const id = setTimeout(() => {
@@ -84,7 +77,7 @@ export function HeroHeadline({ phrases, interval = 2500 }: Props) {
 	return (
 		<div className="text-center pt-16 sm:pt-24 h-auto md:pt-32 mb-4 sm:mb-6 lg:mb-8">
 			<h1 className="text-2xl sm:text-4xl md:text-7xl font-bold bg-clip-text text-transparent  bg-linear-to-b from-white to-white/80">
-				Your Strategic Partner in
+				{hero.heroTitle}
 			</h1>
 			<div className="relative h-14 sm:h-20 md:h-24 flex items-center justify-center overflow-hidden">
 				<h1
@@ -185,6 +178,7 @@ const StatCardContent = ({
 );
 
 const Hero = () => {
+	const { hero } = pageInfoConstants.home;
 	return (
 		<section
 			id="hero"
@@ -196,7 +190,7 @@ const Hero = () => {
 
 			<div className="relative z-10 container mx-auto flex flex-col min-h-screen px-4">
 				<div className="flex-1 flex flex-col justify-center items-center">
-					<HeroHeadline phrases={PHRASES} />
+					<HeroHeadline phrases={hero.phrases} />
 					<div className="flex flex-col items-center gap-6 mb-12">
 						<button
 							onClick={() =>
