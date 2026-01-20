@@ -79,7 +79,7 @@ export default function Industries() {
 											: "bg-gray-100 text-gray-900"
 									} ${hoveredCard === index ? "ring-2 ring-[#0a61cb] shadow-md md:shadow-lg scale-[1.02]" : "hover:shadow-md"}`}
 									onMouseEnter={() => !isMobile && setHoveredCard(index)}
-									onMouseLeave={() => !isMobile && setHoveredCard(null)}
+									onMouseLeave={() => !isMobile && setHoveredCard(index)}
 								>
 									<div className="mb-4">
 										<Cloud

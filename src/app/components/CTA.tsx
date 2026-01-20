@@ -105,7 +105,7 @@ export const Footer: React.FC = () => {
 							{NavbarCodeviderLogo({
 								logoTextColor: "fff",
 							})}
-							<p className="mt-4 text-gray-600 text-sm sm:text-xs max-w-md leading-relaxed">
+							<p className="mt-4 text-gray-600 text-sm sm:text-xs max-w-md justify-self-center leading-relaxed">
 								Stay updated on our latest developments, insights, and
 								opportunities.
 							</p>
