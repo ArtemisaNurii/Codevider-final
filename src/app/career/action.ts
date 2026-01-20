@@ -1,6 +1,4 @@
 import { RECRUIT_JOBS_ENDPOINT } from "@/constants/endpoint";
-import { Job } from "./jobs";
-
 interface PaginationParams {
 	page?: number;
 	limit?: number;

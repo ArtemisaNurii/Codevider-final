@@ -16,8 +16,8 @@ import Header from "../components/navbar";
 import {
 	uploadFileAction,
 	submitApplicationAction,
-	CandidateData,
-	FileUploadData,
+	type CandidateData,
+	type FileUploadData,
 } from "./apply/action";
 
 const JobDetailItem = ({
@@ -100,7 +100,7 @@ const FormSkeleton = () => (
 type JobApplicationPageProps = { job: Job };
 
 // Using the same interfaces as in action.ts
-import {
+import type {
 	CandidateExperience as Experience,
 	CandidateEducation as Education,
 	CandidateProject as Project,

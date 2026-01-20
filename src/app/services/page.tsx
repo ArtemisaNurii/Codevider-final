@@ -1,6 +1,6 @@
 // pages/index.js
 
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { Footer } from "../components/CTA";
 import Header from "../components/navbar";
 import ProcessStepper from "./process";

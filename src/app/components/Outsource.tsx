@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import TextAnimation from "./ui/AnimationText";
 import { pageInfoConstants } from "@/lib/constants";

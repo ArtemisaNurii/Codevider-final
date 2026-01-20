@@ -1,6 +1,6 @@
 "use client";
 import { pageInfoConstants } from "@/lib/constants/index";
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const useIntersectionObserver = (options: IntersectionObserverOptions = {}) => {
 	const [hasAnimated, setHasAnimated] = useState(false);

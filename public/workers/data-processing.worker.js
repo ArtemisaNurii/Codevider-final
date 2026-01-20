@@ -171,7 +171,7 @@ class DataProcessor {
     const { projects, transformations } = data;
     
     return projects.map(project => {
-      let transformed = { ...project };
+      const transformed = { ...project };
       
       transformations.forEach(transform => {
         switch (transform.type) {

@@ -5,8 +5,6 @@ import { useSearchParams } from "next/navigation";
 import { getJobs } from "../action";
 import JobApplicationPage from "../form";
 import { Footer } from "@/app/components/CTA";
-import { Job } from "../jobs";
-
 function ApplyPageContent() {
 	const searchParams = useSearchParams();
 	const jobId = searchParams.get("jobId");

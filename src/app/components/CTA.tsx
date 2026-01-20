@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import { Instagram, Facebook, Linkedin } from "lucide-react";
 

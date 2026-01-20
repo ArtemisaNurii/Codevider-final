@@ -117,15 +117,15 @@ class MathProcessor {
     const curve = [];
     
     for (let t = 0; t <= 1; t += 1 / steps) {
-      const x = Math.pow(1 - t, 3) * p0.x +
-                3 * Math.pow(1 - t, 2) * t * p1.x +
-                3 * (1 - t) * Math.pow(t, 2) * p2.x +
-                Math.pow(t, 3) * p3.x;
+      const x = (1 - t) ** 3 * p0.x +
+                3 * (1 - t) ** 2 * t * p1.x +
+                3 * (1 - t) * t ** 2 * p2.x +
+                t ** 3 * p3.x;
       
-      const y = Math.pow(1 - t, 3) * p0.y +
-                3 * Math.pow(1 - t, 2) * t * p1.y +
-                3 * (1 - t) * Math.pow(t, 2) * p2.y +
-                Math.pow(t, 3) * p3.y;
+      const y = (1 - t) ** 3 * p0.y +
+                3 * (1 - t) ** 2 * t * p1.y +
+                3 * (1 - t) * t ** 2 * p2.y +
+                t ** 3 * p3.y;
       
       curve.push({ x, y, t });
     }
@@ -167,7 +167,7 @@ class MathProcessor {
   applyEasing(t, easing) {
     switch (easing) {
       case 'easeInOut':
-        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        return t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
       case 'easeIn':
         return t * t;
       case 'easeOut':
@@ -186,8 +186,8 @@ class MathProcessor {
     const c2 = c1 * 1.525;
     
     return t < 0.5
-      ? (Math.pow(2 * t, 2) * ((c2 + 1) * 2 * t - c2)) / 2
-      : (Math.pow(2 * t - 2, 2) * ((c2 + 1) * (t * 2 - 2) + c2) + 2) / 2;
+      ? ((2 * t) ** 2 * ((c2 + 1) * 2 * t - c2)) / 2
+      : ((2 * t - 2) ** 2 * ((c2 + 1) * (t * 2 - 2) + c2) + 2) / 2;
   }
 
   elasticEase(t) {
@@ -197,7 +197,7 @@ class MathProcessor {
       ? 0
       : t === 1
       ? 1
-      : -Math.pow(2, 10 * t - 10) * Math.sin((t * 10 - 10.75) * c4);
+      : -(2 ** (10 * t - 10)) * Math.sin((t * 10 - 10.75) * c4);
   }
 
   // Matrix operations for complex transformations

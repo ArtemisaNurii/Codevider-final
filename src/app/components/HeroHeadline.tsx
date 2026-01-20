@@ -1,6 +1,4 @@
 "use client";
-import React from "react";
-
 // CSS for the blinking cursor effect
 const cursorStyle = `
   @keyframes blink {
