@@ -45,7 +45,9 @@ interface JobAddress {
     createdAt: string;
     updatedAt: string;
     location: string;
-    address: string;
+    name: string;
+    address1: string;
+    address2: string;
     is_default: boolean;
     tax_number: string | null;
     tax_name: string | null;

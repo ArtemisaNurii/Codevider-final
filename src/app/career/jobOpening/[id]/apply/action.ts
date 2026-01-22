@@ -12,6 +12,14 @@ export interface FileUploadData {
 	hashname: string;
 	size: number;
 }
+
+export interface FileDto {
+	filename: string;
+	relativepath: string;
+	hashname: string;
+	size: number;
+	type?: string;
+}
 export interface CandidateExperience {
 	start_date: string;
 	end_date?: string | null;
@@ -67,28 +75,15 @@ export async function uploadFileAction(
 		});
 		const responseData = await response.json();
 		if (response.ok) {
-			let fileMetadata: FileUploadData;
-			if (
-				responseData.filename &&
-				responseData.relativepath &&
-				responseData.hashname
-			) {
-				fileMetadata = responseData as FileUploadData;
-			} else if (responseData.file && typeof responseData.file === "object") {
-				fileMetadata = responseData.file as FileUploadData;
-			} else {
-				fileMetadata = {
-					filename: "resume.pdf",
-					relativepath: "/upload/resume.pdf",
-					hashname: "resume_" + Date.now(),
-					size: 0,
-				};
-			}
-			const candidateData: CandidateData = extractCandidateData(responseData);
+			// Backend returns { resume: {...}, photo: {...} }
+			// Pass it through directly
 			return {
 				success: true,
-				message: "File uploaded and resume processed successfully.",
-				data: { fileMetadata, candidateData },
+				message: "Files uploaded successfully.",
+				data: {
+					resume: responseData.resume || undefined,
+					photo: responseData.photo || undefined,
+				},
 			};
 		} else {
 			return {
@@ -202,6 +197,7 @@ export async function submitApplicationAction(
 		return { success: false, message: "NEXT_PUBLIC_BACKEND_API_URL not set" };
 	}
 	try {
+		// Submit to the NestJS controller endpoint
 		const apiEndpoint = `${baseUrl}/${RESUME_AI}`;
 		console.log("Client action: Submitting to endpoint", apiEndpoint);
 

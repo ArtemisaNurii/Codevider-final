@@ -18,7 +18,7 @@ import {
 	submitApplicationAction,
 	type CandidateData,
 	type FileUploadData,
-} from "./apply/action";
+} from "./jobOpening/[id]/apply/action";
 
 const JobDetailItem = ({
 	icon: Icon,
@@ -104,7 +104,7 @@ import type {
 	CandidateExperience as Experience,
 	CandidateEducation as Education,
 	CandidateProject as Project,
-} from "./apply/action";
+} from "./jobOpening/[id]/apply/action";
 
 interface JobApplicationFormData {
 	full_name: string;
@@ -434,6 +434,7 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
 			setIsSubmitting(false);
 		}
 	};
+	console.log("job", job);
 
 	return (
 		<div className="bg-white font-sans">
@@ -454,7 +455,7 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
 						<h3 className="text-3xl font-bold text-gray-900">Apply Now</h3>
 						{job.job_description && (
 							<div
-								className="mt-4 pt-4 border-t border-gray-100 text-gray-700 leading-relaxed"
+								className="mt-4 pt-4 border-t border-gray-100 text-gray-700 text-balanced leading-relaxed"
 								dangerouslySetInnerHTML={{ __html: job.job_description }}
 							/>
 						)}
