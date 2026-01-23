@@ -94,7 +94,7 @@ const Services: NextPage = () => {
 										className={`w-12 h-12 flex items-center justify-center bg-slate-900 rounded-lg transition-colors duration-300`}
 									>
 										<Icon
-											className={`text-blue-400 bg-slate-900 duration-300`}
+											className={`text-blue-400 bg-slate-900 duration-300 stroke-1 md:stroke-2`}
 											size={28}
 											aria-hidden="true"
 										/>
@@ -104,7 +104,7 @@ const Services: NextPage = () => {
 										className={`w-12 h-12 flex items-center justify-center bg-slate-900 rounded-lg transition-colors duration-300`}
 									>
 										<Icon
-											className={`text-blue-400 transition-colors duration-300`}
+											className={`text-blue-400 transition-colors duration-300 stroke-1 md:stroke-2`}
 											size={28}
 											aria-hidden="true"
 										/>
@@ -125,7 +125,7 @@ const Services: NextPage = () => {
 										className="inline-flex items-center underline decoration-gray-300 underline-offset-4 text-gray-900 hover:decoration-gray-900 text-sm font-medium"
 										aria-label={`Read more about ${service.title}`}
 									>
-										Read more →
+										Read more  →
 									</Link>
 								</div>
 							</motion.div>

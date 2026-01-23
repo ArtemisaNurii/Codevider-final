@@ -153,52 +153,52 @@ interface MapProps {
 }
 
 interface HeroHeadlineProps {
-	displayedText: string;
+  displayedText: string;
 }
 
 interface CaseStudyHeroProps {
-	title: string;
-	subtitle: string;
+  title: string;
+  subtitle: string;
 }
 
 interface KeyMetric {
-	icon: React.ElementType;
-	value: string;
-	label: string;
+  icon: React.ElementType;
+  value: string;
+  label: string;
 }
 
 interface ProjectInfoData {
-	client: string;
-	industry: string;
-	services: string[];
+  client: string;
+  industry: string;
+  services: string[];
 }
 
 interface CaseStudyContentSectionData {
-	title: string;
-	id: "context" | "solution" | "results";
-	paragraphs: string[];
-	listItems?: string[];
+  title: string;
+  id: "context" | "solution" | "results";
+  paragraphs: string[];
+  listItems?: string[];
 }
 
 interface CaseStudy {
-	id: number;
-	slug: string;
-	heroImage: string;
-	title: string;
-	subtitle: string;
-	keyMetrics: KeyMetric[];
-	projectInfo: ProjectInfoData;
-	content: CaseStudyContentSectionData[];
+  id: number;
+  slug: string;
+  heroImage: string;
+  title: string;
+  subtitle: string;
+  keyMetrics: KeyMetric[];
+  projectInfo: ProjectInfoData;
+  content: CaseStudyContentSectionData[];
 }
 interface Project {
-	id: number;
-	title: string;
-	category: string;
-	imageUrl: string;
-	description: string;
-	features: string[];
-	duration?: string;
-	client?: string;
+  id: number;
+  title: string;
+  category: string;
+  imageUrl: string;
+  description: string;
+  features: string[];
+  duration?: string;
+  client?: string;
 }
 interface IntersectionObserverOptions {
   threshold?: number;
@@ -220,8 +220,8 @@ interface StepData {
 }
 
 interface ServiceItem {
-	title: string;
-	description: string;
+  title: string;
+  description: string;
 }
 
 interface TechItemType {
@@ -235,6 +235,38 @@ interface TechnologyCategoryType {
 }
 
 interface TechCategoryProps {
-	title: string;
-	items: TechItemType[];
+  title: string;
+  items: TechItemType[];
+}
+
+interface FileDto {
+  filename: string;
+  relativepath: string;
+  hashname: string;
+  size: number;
+  type?: string;
+}
+
+interface Experience {
+  start_date: string;
+  end_date?: string | null;
+  company_name: string;
+  position: string;
+  description?: string | null;
+}
+
+interface Education {
+  start_date: string;
+  end_date?: string | null;
+  institution_name: string;
+  degree: string;
+  field_of_study?: string | null;
+  description?: string | null;
+}
+
+interface Project {
+  name: string;
+  description?: string | null;
+  repo: string;
+  public_link?: string | null;
 }

@@ -79,7 +79,7 @@ export const Footer1: FC = () => {
 							rel="noopener noreferrer"
 							aria-label="Instagram"
 						>
-							<Instagram className="h-6 w-6 text-gray-400 hover:text-white transition-colors" />
+							<Instagram className="h-6 w-6 text-gray-400 hover:text-white transition-colors " />
 						</a>
 						<a
 							href="https://www.facebook.com/codevider/"
@@ -87,7 +87,7 @@ export const Footer1: FC = () => {
 							rel="noopener noreferrer"
 							aria-label="Facebook"
 						>
-							<Facebook className="h-6 w-6 text-gray-400 hover:text-white transition-colors" />
+							<Facebook className="h-6 w-6 text-gray-400 hover:text-white transition-colors " />
 						</a>
 						<a
 							href="https://al.linkedin.com/company/codevider"
@@ -95,7 +95,7 @@ export const Footer1: FC = () => {
 							rel="noopener noreferrer"
 							aria-label="LinkedIn"
 						>
-							<Linkedin className="h-6 w-6 text-gray-400 hover:text-white transition-colors" />
+							<Linkedin className="h-6 w-6 text-gray-400 hover:text-white transition-colors " />
 						</a>
 					</div>
 

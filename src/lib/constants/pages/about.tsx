@@ -1,7 +1,7 @@
 import { Users, Sparkles, Heart, Target, Trophy, Code2 } from "lucide-react";
 
 const workingAtCodeviderIconStyling = {
-	className: "mt-1 h-5 w-5 text-sky-600",
+	className: "mt-1 h-5 w-5 text-sky-600 stroke-1 md:stroke-2",
 };
 export const aboutPage = {
 	main: {
@@ -18,19 +18,19 @@ export const aboutPage = {
 		"At the heart of our company is a culture built on collaboration, creativity, and accountability. We value open communication, celebrate diverse perspectives, and empower every team member to take ownership of their work. Growth and learning are part of our daily journey, and we believe success comes from working together with passion and purpose.",
 	pillars: [
 		{
-			icon: <Target className="h-6 w-6" aria-hidden />,
+			icon: <Target className="h-6 w-6 stroke-1 md:stroke-2" aria-hidden />,
 			title: "Clear Vision",
 			description:
 				"With a clear vision, we define priorities, align on outcomes, and focus on what truly drives impact",
 		},
 		{
-			icon: <Code2 className="h-6 w-6" aria-hidden />,
+			icon: <Code2 className="h-6 w-6 stroke-1 md:stroke-2" aria-hidden />,
 			title: "Clean Code",
 			description:
 				"Readable, tested, and maintainable code—peer reviews, standards, and refactors that keep velocity high.",
 		},
 		{
-			icon: <Users className="h-6 w-6" aria-hidden />,
+			icon: <Users className="h-6 w-6 stroke-1 md:stroke-2" aria-hidden />,
 			title: "Supportive Team",
 			description:
 				"A culture of kindness, mentorship, knowledge-sharing, and support whenever it’s needed.",

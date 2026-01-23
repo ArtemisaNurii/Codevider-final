@@ -175,11 +175,9 @@ const MiniCaseStudyCard = ({
 	<div className="mini-case-study bg-slate-50 p-6 rounded-3xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col group cursor-pointer transform-gpu">
 		<div className="flex justify-between items-start mb-4">
 			<span className="text-gray-700 px-4 py-1 rounded-full sky font-semibold text-xs uppercase tracking-wider">
-				{/* {tag} */}
 			</span>
 			<div className="text-right shrink-0 ml-4">
 				<p className="metric-number text-4xl font-semibold text-[#0a61cb]">
-					{/* {metric.value} */}
 				</p>
 				<p className="text-sm text-gray-700">{metric.label}</p>
 			</div>
@@ -192,7 +190,7 @@ const MiniCaseStudyCard = ({
 		</p>
 		<div className="flex justify-end mt-6">
 			<div className="w-12 h-12 bg-linear-to-br from-black to-sky-900 rounded-full flex items-center justify-center transform group-hover:scale-110 group-hover:bg-gray-800 transition-all duration-300">
-				<AlignEndHorizontal className="stroke-white text-white" />
+				<AlignEndHorizontal className="stroke-white text-white stroke-1 md:stroke-2" />
 			</div>
 		</div>
 	</div>

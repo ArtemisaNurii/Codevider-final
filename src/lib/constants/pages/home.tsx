@@ -1,4 +1,4 @@
-import { Atom, Users, Code, Brain, Mail } from "lucide-react";
+import { Atom, Users, Code, Brain, Mail, Phone } from "lucide-react";
 import { Blend, ChartSpline, ShieldCheck } from "lucide-react";
 
 export const homePage = {
@@ -287,13 +287,13 @@ export const homePage = {
 			"Whether you have a specific project in mind or just want to explore possibilities, our team is here to help. Fill out the form, or reach out to us directly.",
 		buttonList: [
 			{
-				icon: <Mail className="h-6 w-6 text-sky-300" />,
+				icon: <Mail className="h-6 w-6 text-sky-300 stroke-1 md:stroke-2" />,
 				href: "mailto:info@codevider.com",
 				text: "Email Us Directly",
 				detail: "info@codevider.com",
 			},
 			{
-				icon: <Mail className="h-6 w-6 text-sky-300" />,
+				icon: <Phone className="h-6 w-6 text-sky-300 stroke-1 md:stroke-2" />,
 				href: "tel:+355695877742",
 				text: "Call Us Now",
 				detail: "+355 69 587 7742",

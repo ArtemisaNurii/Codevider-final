@@ -75,7 +75,7 @@ const Outsource: React.FC = () => {
 								<motion.div key={id} variants={cardItemVariants}>
 									<div className="mb-4">
 										<Icon
-											className="h-8 w-8 text-[#0a61cb]"
+											className="h-8 w-8 text-[#0a61cb] stroke-1 md:stroke-2"
 											aria-hidden="true"
 										/>
 									</div>

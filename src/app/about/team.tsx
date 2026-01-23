@@ -52,7 +52,7 @@ export default function CodeviderCulturePage() {
 								aria-label="Explore open roles"
 							>
 								Join the team
-								<ArrowRight className="h-4 w-4" aria-hidden />
+								<ArrowRight className="h-4 w-4 stroke-1 md:stroke-2" aria-hidden />
 							</Link>
 						</div>
 					</motion.div>
@@ -157,7 +157,7 @@ export default function CodeviderCulturePage() {
 								aria-label="See open roles"
 							>
 								See open roles
-								<ArrowRight className="h-4 w-4" aria-hidden />
+								<ArrowRight className="h-4 w-4 stroke-1 md:stroke-2" aria-hidden />
 							</Link>
 							{/* <a
                 href="/about"

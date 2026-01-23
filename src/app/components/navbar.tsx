@@ -260,7 +260,7 @@ const Header = () => {
 						>
 							BOOK A CALL
 							<div className="bg-black text-white rounded-full p-2">
-								<ArrowUpRight size={18} />
+								<ArrowUpRight size={18} className="stroke-1 md:stroke-2" />
 							</div>
 						</Link>
 					</div>

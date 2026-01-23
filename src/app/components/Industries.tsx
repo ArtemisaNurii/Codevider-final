@@ -83,7 +83,7 @@ export default function Industries() {
 								>
 									<div className="mb-4">
 										<Cloud
-											className={`w-9 h-9 md:w-10 md:h-10 ${isDark ? "text-blue-400" : "text-[#0a61cb]"}`}
+											className={`w-9 h-9 md:w-10 md:h-10 ${isDark ? "text-blue-400" : "text-[#0a61cb]"} stroke-1 md:stroke-2`}
 										/>
 									</div>
 
