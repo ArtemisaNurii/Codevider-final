@@ -24,7 +24,9 @@ export const careerPage = {
 		},
 		{
 			step: 3,
-			icon: <Briefcase className="h-8 w-8 text-blue-900 stroke-1 md:stroke-2" />,
+			icon: (
+				<Briefcase className="h-8 w-8 text-blue-900 stroke-1 md:stroke-2" />
+			),
 			title: "Technical Review",
 			description:
 				"We conduct a technical assessment to evaluate your level of expertise, your analytical thinking, and the way you approach challenges. This process helps us build a full picture of your professional profile and identify whether it aligns with the requirements of our open positions",

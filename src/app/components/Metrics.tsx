@@ -78,7 +78,8 @@ const Metrics: NextPage = () => {
 								href="/about"
 								className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-900 font-semibold px-6 py-3 rounded-lg shadow-md hover:gap-4 transition-all duration-300"
 							>
-								Read More <ArrowRight className="w-5 h-5 stroke-1 md:stroke-2" />
+								Read More{" "}
+								<ArrowRight className="w-5 h-5 stroke-1 md:stroke-2" />
 							</a>
 						</div>
 					</div>

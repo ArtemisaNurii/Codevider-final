@@ -102,7 +102,10 @@ const Sidebar = () => {
 	return (
 		<aside className="w-12 sm:w-14 lg:w-16 bg-black/30 backdrop-blur-sm shrink-0 flex flex-col items-center py-2 sm:py-4 gap-2 sm:gap-3 lg:gap-4 border-r border-white/20">
 			<div className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 mb-2 sm:mb-3 lg:mb-4 rounded-md lg:rounded-lg bg-linear-to-tr from-sky-200 to-sky-300 flex items-center justify-center">
-				<BarChart2 size={14} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5 stroke-1 md:stroke-2" />
+				<BarChart2
+					size={14}
+					className="sm:w-4 sm:h-4 lg:w-5 lg:h-5 stroke-1 md:stroke-2"
+				/>
 			</div>
 			<div className="flex flex-col gap-1 sm:gap-2">
 				{navItems.map((item, index) => (
@@ -115,7 +118,10 @@ const Sidebar = () => {
 								: "text-gray-400 hover:bg-white/10 hover:text-white"
 						}`}
 					>
-						<item.icon size={16} className="sm:w-5 sm:h-5 lg:w-5 lg:h-5 stroke-1 md:stroke-2" />
+						<item.icon
+							size={16}
+							className="sm:w-5 sm:h-5 lg:w-5 lg:h-5 stroke-1 md:stroke-2"
+						/>
 						{item.active && (
 							<div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 sm:w-1 h-4 sm:h-5 lg:h-6 bg-sky-400 rounded-r-full"></div>
 						)}
@@ -124,7 +130,10 @@ const Sidebar = () => {
 			</div>
 			<div className="mt-auto" title="Settings">
 				<div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white rounded-md lg:rounded-lg cursor-pointer transition-colors">
-					<Settings size={16} className="sm:w-5 sm:h-5 lg:w-5 lg:h-5 stroke-1 md:stroke-2" />
+					<Settings
+						size={16}
+						className="sm:w-5 sm:h-5 lg:w-5 lg:h-5 stroke-1 md:stroke-2"
+					/>
 				</div>
 			</div>
 		</aside>
@@ -200,7 +209,8 @@ const Hero = () => {
 							}
 							className="bg-[#67c1dd] text-black font-semibold py-3 px-6 rounded-full flex items-center gap-2 hover:gap-4 shadow-lg hover:scale-105 transition"
 						>
-							Our Services <ArrowUpRight size={20} className="stroke-1 md:stroke-[2.5]" />
+							Our Services{" "}
+							<ArrowUpRight size={20} className="stroke-1 md:stroke-[2.5]" />
 						</button>
 					</div>
 				</div>
@@ -220,7 +230,10 @@ const Hero = () => {
 								<Search className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5 hidden sm:block stroke-1 md:stroke-2" />
 								<Bell className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5 stroke-1 md:stroke-2" />
 								<div className="flex items-center gap-1 sm:gap-2">
-									<User2 size={10} className="text-gray-400 sm:w-4 sm:h-4 stroke-1 md:stroke-2" />
+									<User2
+										size={10}
+										className="text-gray-400 sm:w-4 sm:h-4 stroke-1 md:stroke-2"
+									/>
 									<ChevronDown
 										size={10}
 										className="text-gray-400 sm:w-4 sm:h-4 stroke-1 md:stroke-2"

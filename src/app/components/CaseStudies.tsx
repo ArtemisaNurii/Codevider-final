@@ -174,11 +174,9 @@ const MiniCaseStudyCard = ({
 }) => (
 	<div className="mini-case-study bg-slate-50 p-6 rounded-3xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col group cursor-pointer transform-gpu">
 		<div className="flex justify-between items-start mb-4">
-			<span className="text-gray-700 px-4 py-1 rounded-full sky font-semibold text-xs uppercase tracking-wider">
-			</span>
+			<span className="text-gray-700 px-4 py-1 rounded-full sky font-semibold text-xs uppercase tracking-wider"></span>
 			<div className="text-right shrink-0 ml-4">
-				<p className="metric-number text-4xl font-semibold text-[#0a61cb]">
-				</p>
+				<p className="metric-number text-4xl font-semibold text-[#0a61cb]"></p>
 				<p className="text-sm text-gray-700">{metric.label}</p>
 			</div>
 		</div>

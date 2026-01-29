@@ -125,7 +125,7 @@ const Services: NextPage = () => {
 										className="inline-flex items-center underline decoration-gray-300 underline-offset-4 text-gray-900 hover:decoration-gray-900 text-sm font-medium"
 										aria-label={`Read more about ${service.title}`}
 									>
-										Read more  →
+										Read more →
 									</Link>
 								</div>
 							</motion.div>

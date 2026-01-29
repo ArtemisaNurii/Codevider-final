@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 export default function JobCard({ job }: { job: Job }) {
 	const [isOpen, setIsOpen] = useState(false);
-	const applyHref = `/career/jobOpening/${job.id}/apply`;
+	const applyHref = `/career/apply?job_id=${job.id}`;
 
 	// Helper function to create metadata tags - good for reusability and clean code
 	const InfoTag = ({
