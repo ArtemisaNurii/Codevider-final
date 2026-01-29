@@ -72,8 +72,11 @@ const ContactForm = () => {
 			const validationResult = contactSchema.safeParse(data);
 
 			if (!validationResult.success) {
-				const firstError = validationResult.error.errors[0].message;
-				toast.error(firstError);
+				// @ts-expect-error because it is comming from backend in this structure
+				const firstError = validationResult?.error?.errors?.[0]?.message;
+				if (firstError) {
+					toast.error(firstError);
+				}
 				setIsPending(false);
 				return;
 			}
