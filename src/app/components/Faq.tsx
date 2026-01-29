@@ -15,7 +15,7 @@ export default function Faq() {
 
 	return (
 		<section className="bg-white py-16">
-			<div className="container max-w-7xl mx-auto px-4">
+			<div className="container max-w-7xl mx-auto px-4 md:p-0">
 				<h1 className="text-center text-4xl font-semibold uppercase text-black mb-10">
 					{faq.title}
 				</h1>

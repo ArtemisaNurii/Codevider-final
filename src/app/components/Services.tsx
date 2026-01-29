@@ -33,7 +33,7 @@ const Services: NextPage = () => {
 	const { ourCoreServices } = pageInfoConstants.home;
 	return (
 		<section id="services" className="bg-white py-20 lg:py-24">
-			<div className="container mx-auto px-4">
+			<div className="container mx-auto px-6">
 				{/* Section Header */}
 				<motion.div
 					initial="hidden"
