@@ -458,8 +458,8 @@ export const servicesPage = {
 					name: "OVHCloud",
 					icon: returnImageComponent(
 						"/images/stackIcons/cloudNDevops/ovhcloud.png",
-						"OVHCloud"
-					)
+						"OVHCloud",
+					),
 				},
 				{
 					name: "Cloudflare",
@@ -509,8 +509,6 @@ export const servicesPage = {
 						"Microsoft",
 					),
 				},
-
-
 			],
 		},
 		{
@@ -553,15 +551,12 @@ export const servicesPage = {
 					name: "AI Agents",
 					icon: returnImageComponent(
 						"/images/stackIcons/ai/agents.svg",
-						"AI Agents"
-					)
+						"AI Agents",
+					),
 				},
 				{
 					name: "MCP",
-					icon: returnImageComponent(
-						"/images/stackIcons/ai/mcp.svg",
-						"MCP"
-					)
+					icon: returnImageComponent("/images/stackIcons/ai/mcp.svg", "MCP"),
 				},
 				{
 					name: "Ollama",

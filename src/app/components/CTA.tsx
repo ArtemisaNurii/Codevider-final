@@ -115,8 +115,8 @@ export const Footer: React.FC = () => {
 						<div className="text-left">
 							<div className="relative right-1.25">
 								{NavbarCodeviderLogo({
-								logoTextColor: "fff",
-							})}
+									logoTextColor: "fff",
+								})}
 							</div>
 							<p className="mt-4 text-gray-600 text-sm sm:text-xs max-w-md justify-self-center leading-relaxed">
 								Stay updated on our latest developments, insights, and
@@ -187,65 +187,63 @@ export const Footer: React.FC = () => {
 };
 
 const Contact: React.FC = () => {
-    const sectionRef = useRef<HTMLElement | null>(null);
-    const { contact } = pageInfoConstants.home;
+	const sectionRef = useRef<HTMLElement | null>(null);
+	const { contact } = pageInfoConstants.home;
 
-    return (
-        <>
-            <div id="contact" className="relative overflow-hidden text-white">
-                <section
-                    ref={sectionRef}
-                    className="relative z-10 px-4 py-16 sm:py-24 lg:py-28 bg-linear-to-br from-black via-slate-900 to-sky-800"
-                >
-                    <div className="max-w-7xl mx-auto grid lg:grid-cols-2 lg:gap-16 items-center">
-                        {/* Text Content Container */}
-                        <div className="text-left mb-12 lg:mb-0 flex flex-col justify-center">
-                            <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
-                                {contact.aboveTitle}
-                            </p>
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight text-white mb-6">
-                                {contact.title}
-                            </h2>
-                            <p className="text-base sm:text-lg text-gray-300  text-balance mb-10">
-                                {contact.description}
-                            </p>
+	return (
+		<>
+			<div id="contact" className="relative overflow-hidden text-white">
+				<section
+					ref={sectionRef}
+					className="relative z-10 px-4 py-16 sm:py-24 lg:py-28 bg-linear-to-br from-black via-slate-900 to-sky-800"
+				>
+					<div className="max-w-7xl mx-auto grid lg:grid-cols-2 lg:gap-16 items-center">
+						{/* Text Content Container */}
+						<div className="text-left mb-12 lg:mb-0 flex flex-col justify-center">
+							<p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
+								{contact.aboveTitle}
+							</p>
+							<h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight text-white mb-6">
+								{contact.title}
+							</h2>
+							<p className="text-base sm:text-lg text-gray-300  text-balance mb-10">
+								{contact.description}
+							</p>
 
-                            {/* Button List - Improved Mobile Grid */}
-							<div className="flex flex-col sm:flex-row gap-6 justify-start">           
-								                     {contact.buttonList.map((button, index) => (
-                                    <a
-                                        key={index}
-                                        href={button.href}
-                                        className="group flex items-center gap-4 text-left transition-transform duration-200 active:scale-95"
-                                    >
-                                        <div className="flex-shrink-0 rounded-full bg-white/10 p-4 sm:p-3 transition-colors group-hover:bg-sky-400/20">
-                                            {button.icon}
-                                        </div>
+							{/* Button List - Improved Mobile Grid */}
+							<div className="flex flex-col sm:flex-row gap-6 justify-start">
+								{contact.buttonList.map((button, index) => (
+									<a
+										key={index}
+										href={button.href}
+										className="group flex items-center gap-4 text-left transition-transform duration-200 active:scale-95"
+									>
+										<div className="shrink-0 rounded-full bg-white/10 p-4 sm:p-3 transition-colors group-hover:bg-sky-400/20">
+											{button.icon}
+										</div>
 
-                                        <div className="flex flex-col">
-                                            <p className="font-semibold text-white group-hover:text-sky-400 transition-colors">
-                                                {button.text}
-                                            </p>
-                                            <p className="text-sm text-gray-400">
-                                                {button.detail}
-                                            </p>
-                                        </div>
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
+										<div className="flex flex-col">
+											<p className="font-semibold text-white group-hover:text-sky-400 transition-colors">
+												{button.text}
+											</p>
+											<p className="text-sm text-gray-400">{button.detail}</p>
+										</div>
+									</a>
+								))}
+							</div>
+						</div>
 
-                        {/* Form Container */}
-                        <div className="w-full flex flex-col justify-center">
-                            <ContactForm />
-                        </div>
-                    </div>
-                </section>
+						{/* Form Container */}
+						<div className="w-full flex flex-col justify-center">
+							<ContactForm />
+						</div>
+					</div>
+				</section>
 
-                <Footer />
-            </div>
-        </>
-    );
+				<Footer />
+			</div>
+		</>
+	);
 };
 
 export default Contact;

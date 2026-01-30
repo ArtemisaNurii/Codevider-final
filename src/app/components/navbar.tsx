@@ -23,14 +23,17 @@ const Header = () => {
 	const isHomePage = pathname === "/";
 	const [isSolid, setIsSolid] = useState(!isHomePage);
 
-	const toggleMobileMenu = useCallback(() => setIsMobileMenuOpen((v) => !v), []);
+	const toggleMobileMenu = useCallback(
+		() => setIsMobileMenuOpen((v) => !v),
+		[],
+	);
 	const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
 
 	const handleLinkHover = useCallback(
 		(href: Route) => {
 			if (href !== pathname) router.prefetch(href);
 		},
-		[router, pathname]
+		[router, pathname],
 	);
 
 	// Lock page scroll when mobile menu is open
@@ -61,14 +64,18 @@ const Header = () => {
 	}, [isHomePage]);
 
 	const year = useMemo(() => new Date().getFullYear(), []);
-	const logoTextColor = useMemo(() => (isSolid ? "#1a1a1a" : "#fff"), [isSolid]);
+	const logoTextColor = useMemo(
+		() => (isSolid ? "#1a1a1a" : "#fff"),
+		[isSolid],
+	);
 
 	return (
 		<header
-			className={`fixed top-0 left-0 right-0 z-50 px-4 py-4 transition-all duration-500 ease-in-out ${isSolid
+			className={`fixed top-0 left-0 right-0 z-50 px-4 py-4 transition-all duration-500 ease-in-out ${
+				isSolid
 					? "bg-white/80 border-b border-gray-200/50 backdrop-blur-md py-3"
 					: "bg-transparent border-transparent"
-				}`}
+			}`}
 		>
 			<div className="max-w-7xl mx-auto flex justify-between items-center">
 				{/* Logo */}
@@ -78,10 +85,11 @@ const Header = () => {
 
 				{/* Desktop Nav - Refined Pill Design */}
 				<nav
-					className={`hidden md:flex items-center justify-center backdrop-blur-xl rounded-full px-2 py-1.5 transition-colors duration-300 ${isSolid
+					className={`hidden md:flex items-center justify-center backdrop-blur-xl rounded-full px-2 py-1.5 transition-colors duration-300 ${
+						isSolid
 							? "bg-gray-200/70 border border-gray-200/50"
 							: "bg-white/10 border border-white/10"
-						}`}
+					}`}
 				>
 					<ul className="flex items-center gap-1">
 						{navLinks.map((link, index) => (
@@ -93,16 +101,18 @@ const Header = () => {
 								>
 									{/* The Background Pill (Absolute) */}
 									<span
-										className={`absolute inset-0 w-full h-full transition-all duration-300 ease-out opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 rounded-full ${isSolid ? "bg-black" : "bg-white"
-											}`}
+										className={`absolute inset-0 w-full h-full transition-all duration-300 ease-out opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 rounded-full ${
+											isSolid ? "bg-black" : "bg-white"
+										}`}
 									/>
 
 									{/* The Text (Relative) */}
 									<span
-										className={`relative z-10 transition-colors duration-300 ${isSolid
+										className={`relative z-10 transition-colors duration-300 ${
+											isSolid
 												? "text-gray-600 group-hover:text-white"
 												: "text-white/90 group-hover:text-black"
-											}`}
+										}`}
 									>
 										{link.name}
 									</span>
@@ -111,8 +121,9 @@ const Header = () => {
 								{/* Separator (Outside the hover area) */}
 								{index < navLinks.length - 1 && (
 									<span
-										className={`mx-1 text-xs select-none ${isSolid ? "text-gray-300" : "text-white/20"
-											}`}
+										className={`mx-1 text-xs select-none ${
+											isSolid ? "text-gray-300" : "text-white/20"
+										}`}
 									>
 										|
 									</span>
@@ -126,52 +137,52 @@ const Header = () => {
 				<Link
 					href="https://calendly.com/codevider/pasho"
 					target="_blank"
-					className={`hidden md:flex group pl-5 pr-1 py-3 rounded-full items-center gap-3 text-sm font-semibold transition-all duration-300 border ${isSolid
+					className={`hidden md:flex group pl-5 pr-1 py-3 rounded-full items-center gap-3 text-sm font-semibold transition-all duration-300 border ${
+						isSolid
 							? "bg-black text-white hover:bg-gray-800"
-
 							: "bg-white text-black hover:bg-gray-100"
-						}`}
+					}`}
 				>
 					<span>BOOK A CALL</span>
 					<div
-
 						className={`rounded-full p-1 ${isSolid ? "bg-white text-black" : "bg-black text-white"}`}
-
 					>
-
 						<ArrowUpRight size={14} />
-
 					</div>
 				</Link>
 
 				<button
 					onClick={toggleMobileMenu}
-					className={`md:hidden backdrop-blur-md p-2 rounded-full transition-all duration-300 ${isSolid
+					className={`md:hidden backdrop-blur-md p-2 rounded-full transition-all duration-300 ${
+						isSolid
 							? "bg-transparent text-black hover:bg-black/20"
 							: "bg-transparent text-white hover:bg-white/20"
-						}`}
+					}`}
 					aria-label="Toggle mobile menu"
 					aria-expanded={isMobileMenuOpen}
 				>
 					<span className="relative block w-4 h-4">
 						{/* top line */}
 						<span
-							className={`absolute left-0 top-0 h-px w-4 bg-current transition-all duration-300 ease-in-out ${isMobileMenuOpen
+							className={`absolute left-0 top-0 h-px w-4 bg-current transition-all duration-300 ease-in-out ${
+								isMobileMenuOpen
 									? "translate-y-1.5 rotate-45"
 									: "translate-y-0 rotate-0"
-								}`}
+							}`}
 						/>
 						{/* middle line */}
 						<span
-							className={`absolute left-0 top-1/2 h-px w-4 bg-current transition-all duration-300 ease-in-out -translate-y-1/2 ${isMobileMenuOpen ? "opacity-0" : "opacity-100"
-								}`}
+							className={`absolute left-0 top-1/2 h-px w-4 bg-current transition-all duration-300 ease-in-out -translate-y-1/2 ${
+								isMobileMenuOpen ? "opacity-0" : "opacity-100"
+							}`}
 						/>
 						{/* bottom line */}
 						<span
-							className={`absolute left-0 bottom-0 h-px w-4 bg-current transition-all duration-300 ease-in-out ${isMobileMenuOpen
+							className={`absolute left-0 bottom-0 h-px w-4 bg-current transition-all duration-300 ease-in-out ${
+								isMobileMenuOpen
 									? "-translate-y-1.5 -rotate-45"
 									: "translate-y-0 rotate-0"
-								}`}
+							}`}
 						/>
 					</span>
 				</button>
@@ -179,10 +190,11 @@ const Header = () => {
 
 			{/* --- MOBILE OVERLAY (Original Code) --- */}
 			<div
-				className={`fixed inset-0 md:hidden z-60 bg-black/95 backdrop-blur-lg transition-all duration-700 ease-in-out ${isMobileMenuOpen
+				className={`fixed inset-0 md:hidden z-60 bg-black/95 backdrop-blur-lg transition-all duration-700 ease-in-out ${
+					isMobileMenuOpen
 						? "opacity-100 visible translate-y-0"
 						: "opacity-0 invisible -translate-y-full"
-					}`}
+				}`}
 				style={{ height: "100dvh" }}
 				onClick={(e) => {
 					if (e.currentTarget === e.target) closeMobileMenu();
@@ -202,10 +214,11 @@ const Header = () => {
 
 				{/* Content */}
 				<div
-					className={`flex flex-col items-center justify-center h-full space-y-8 px-6 transition-all duration-500 ease-out ${isMobileMenuOpen
+					className={`flex flex-col items-center justify-center h-full space-y-8 px-6 transition-all duration-500 ease-out ${
+						isMobileMenuOpen
 							? "translate-y-0 opacity-100"
 							: "translate-y-12 opacity-0"
-						}`}
+					}`}
 				>
 					<nav className="flex flex-col items-start space-y-6">
 						{navLinks.map((link) => (

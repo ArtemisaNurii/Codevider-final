@@ -73,10 +73,11 @@ export default function ServicesPage() {
 									<button
 										key={it.slug}
 										onClick={() => scrollTo(it.slug)}
-										className={`group flex w-full items-center cursor-pointer gap-x-3 rounded-md p-2 text-left transition-all duration-200 ${isActive
+										className={`group flex w-full items-center cursor-pointer gap-x-3 rounded-md p-2 text-left transition-all duration-200 ${
+											isActive
 												? "bg-slate-100 text-[#0a61cb]"
 												: "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-											}`}
+										}`}
 										aria-current={isActive ? "true" : undefined}
 									>
 										<span className="text-sm tabular-nums text-slate-400">
@@ -156,11 +157,16 @@ export default function ServicesPage() {
 								Not seeing a perfect match?
 							</h3>
 							<p className="mt-4 text-lg text-blue-50 leading-relaxed opacity-90">
-								We tailor engagements to fit your roadmap. Tell us about your use
-								case and we’ll suggest the most effective path forward.
+								We tailor engagements to fit your roadmap. Tell us about your
+								use case and we’ll suggest the most effective path forward.
 							</p>
 							<div className="mt-8">
-								<button onClick={() => (window.location.href = "mailto:info@codevider.com")} className="rounded-full bg-white px-8 py-3 text-base font-bold text-[#0a61cb] transition-transform hover:scale-105 active:scale-95">
+								<button
+									onClick={() =>
+										(window.location.href = "mailto:info@codevider.com")
+									}
+									className="rounded-full bg-white px-8 py-3 text-base font-bold text-[#0a61cb] transition-transform hover:scale-105 active:scale-95"
+								>
 									Get in Touch
 								</button>
 							</div>

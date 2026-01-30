@@ -202,8 +202,13 @@ export const homePage = {
 			value: "+6",
 			label: "Years of Proven Delivery",
 			subtitle: "Benefit from the innovative viewpoints our team brings.",
-			skills: ["Team Collaboration", "Customer Satisfaction", "Clear Communication", "On-Time Delivery"],
-		  },
+			skills: [
+				"Team Collaboration",
+				"Customer Satisfaction",
+				"Clear Communication",
+				"On-Time Delivery",
+			],
+		},
 	},
 	whyOurClientsChooseUs: {
 		title: "Why Our Clients Choose Us",
