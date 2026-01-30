@@ -113,9 +113,11 @@ export const Footer: React.FC = () => {
 					<div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
 						{/* Left: Logo, Tagline, and Mobile-Only Address */}
 						<div className="text-left">
-							{NavbarCodeviderLogo({
+							<div className="relative right-1.25">
+								{NavbarCodeviderLogo({
 								logoTextColor: "fff",
 							})}
+							</div>
 							<p className="mt-4 text-gray-600 text-sm sm:text-xs max-w-md justify-self-center leading-relaxed">
 								Stay updated on our latest developments, insights, and
 								opportunities.

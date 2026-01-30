@@ -33,7 +33,7 @@ export const aboutPage = {
 			icon: <Users className="h-6 w-6 stroke-1 md:stroke-2" aria-hidden />,
 			title: "Supportive Team",
 			description:
-				"A culture of kindness, mentorship, knowledge-sharing, and support whenever it’s needed.",
+				"A culture of collaboration, mentorship, and proactive knowledge-sharing that ensures continuous team elevation.",
 		},
 	],
 
@@ -43,7 +43,7 @@ export const aboutPage = {
 		list: [
 			{
 				icon: <Sparkles {...workingAtCodeviderIconStyling} />,
-				text: "Dedicated focus time instead of endless meetings.",
+				text: "Structured deep-work sessions with optimized communication flows.",
 			},
 			{
 				icon: <Trophy {...workingAtCodeviderIconStyling} />,

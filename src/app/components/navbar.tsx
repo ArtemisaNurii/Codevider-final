@@ -66,7 +66,7 @@ const Header = () => {
 	return (
 		<header
 			className={`fixed top-0 left-0 right-0 z-50 px-4 py-4 transition-all duration-500 ease-in-out ${isSolid
-					? "bg-white/90 border-b border-gray-200/50 backdrop-blur-md py-3"
+					? "bg-white/80 border-b border-gray-200/50 backdrop-blur-md py-3"
 					: "bg-transparent border-transparent"
 				}`}
 		>

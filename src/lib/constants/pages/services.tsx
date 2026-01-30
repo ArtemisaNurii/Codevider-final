@@ -60,7 +60,7 @@ export const servicesPage = {
 		aboveTitle: "Our Capabilities",
 		title: "Services that Move Your Roadmap Forward",
 		description:
-			"Explore how we design, build, and scale reliable products. We focus on clean typography, clear sections, and an index you can scan at a glance.",
+			"Explore how we design, build, and scale reliable products. We combine technical excellence with strategic oversight to deliver software that outperforms.",
 	},
 	services: [
 		{
@@ -198,7 +198,7 @@ export const servicesPage = {
 			step: "Step 3",
 			title: "Development",
 			description:
-				"Where the magic happens. Our developers work diligently, crafting high-quality, clean code for your project.",
+				"Engineering & Execution. Our developers build with precision, utilizing clean architecture and industry standards to ensure scalability.",
 		},
 		4: {
 			step: "Step 4",
@@ -216,7 +216,7 @@ export const servicesPage = {
 			step: "Step 6",
 			title: "Maintenance",
 			description:
-				"We’re with you for the long haul. You can continue with the same team for consistent productivity and support.",
+				"Long-Term Partnership. We provide post-launch support and iteration, allowing you to retain the same dedicated team for consistent knowledge retention.",
 		},
 	},
 	techStack: [
@@ -455,8 +455,24 @@ export const servicesPage = {
 					),
 				},
 				{
+					name: "OVHCloud",
+					icon: returnImageComponent(
+						"/images/stackIcons/cloudNDevops/ovhcloud.png",
+						"OVHCloud"
+					)
+				},
+				{
+					name: "Cloudflare",
+					icon: <FaCloudflare {...iconProps} className="text-orange-400" />,
+				},
+
+				{
 					name: "Docker",
 					icon: <FaDocker {...iconProps} className="text-blue-500" />,
+				},
+				{
+					name: "Kubernetes",
+					icon: <SiKubernetes {...iconProps} className="text-blue-500" />,
 				},
 				{
 					name: "Jenkins",
@@ -493,14 +509,8 @@ export const servicesPage = {
 						"Microsoft",
 					),
 				},
-				{
-					name: "Cloudflare",
-					icon: <FaCloudflare {...iconProps} className="text-orange-400" />,
-				},
-				{
-					name: "Kubernetes",
-					icon: <SiKubernetes {...iconProps} className="text-blue-500" />,
-				},
+
+
 			],
 		},
 		{
@@ -514,33 +524,48 @@ export const servicesPage = {
 					name: "Anthropic",
 					icon: returnImageComponent(
 						"/images/stackIcons/ai/anthropic.png",
-						"Anthropic icon",
+						"Anthropic",
 					),
 				},
-				{
-					name: "Ollama",
-					icon: <SiOllama {...iconProps} className="text-gray-800" />,
-				},
+
 				{
 					name: "Gemini",
 					icon: returnImageComponent(
 						"/images/stackIcons/ai/gemini.png",
-						"Gemini icon",
+						"Gemini",
 					),
 				},
 				{
 					name: "Mistral",
 					icon: returnImageComponent(
 						"/images/stackIcons/ai/mistral.png",
-						"Mistral icon",
+						"Mistral",
 					),
 				},
 				{
 					name: "Huggingface",
 					icon: returnImageComponent(
 						"/images/stackIcons/ai/huggingface.png",
-						"Huggingface icon",
+						"Huggingface",
 					),
+				},
+				{
+					name: "AI Agents",
+					icon: returnImageComponent(
+						"/images/stackIcons/ai/agents.svg",
+						"AI Agents"
+					)
+				},
+				{
+					name: "MCP",
+					icon: returnImageComponent(
+						"/images/stackIcons/ai/mcp.svg",
+						"MCP"
+					)
+				},
+				{
+					name: "Ollama",
+					icon: <SiOllama {...iconProps} className="text-gray-800" />,
 				},
 			],
 		},
@@ -560,7 +585,7 @@ export const servicesPage = {
 					name: "Figma",
 					icon: returnImageComponent(
 						"/images/stackIcons/mobileNDesign/figma.png",
-						"Figma icon",
+						"Figma",
 					),
 				},
 				{
@@ -581,6 +606,10 @@ export const servicesPage = {
 					icon: <SiGraphql {...iconProps} className="text-pink-500" />,
 				},
 				{
+					name: "Socket.IO",
+					icon: <SiSocketdotio {...iconProps} className="text-gray-800" />,
+				},
+				{
 					name: "Stripe",
 					icon: <FaStripe {...iconProps} className="text-indigo-600" />,
 				},
@@ -591,22 +620,19 @@ export const servicesPage = {
 						"PayPal",
 					),
 				},
-				{
-					name: "Socket.IO",
-					icon: <SiSocketdotio {...iconProps} className="text-gray-800" />,
-				},
+
 				{
 					name: "Slack",
 					icon: returnImageComponent(
 						"/images/stackIcons/apiNCommunication/slack.png",
-						"Slack icon",
+						"Slack",
 					),
 				},
 				{
 					name: "Jira",
 					icon: returnImageComponent(
 						"/images/stackIcons/apiNCommunication/jira.svg",
-						"Jira icon",
+						"Jira",
 					),
 				},
 			],

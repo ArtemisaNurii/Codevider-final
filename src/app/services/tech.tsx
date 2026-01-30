@@ -6,7 +6,7 @@ import { pageInfoConstants } from "@/lib/constants/index";
 const { techStack: technologies } = pageInfoConstants.services;
 
 const TechItem: React.FC<TechItemType> = ({ name, icon }) => (
-	<div className="group flex flex-col items-center justify-center gap-2 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm transition-all duration-300 ease-in-out hover:shadow-md hover:-translate-y-1">
+	<div className="group flex flex-col items-center justify-center bg-zinc-50/80 gap-2 p-4  rounded-lg shadow-sm transition-all duration-300 ease-in-out hover:shadow-md hover:-translate-y-1">
 		<div className="w-16 h-16 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
 			{icon}
 		</div>

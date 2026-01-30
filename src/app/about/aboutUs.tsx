@@ -20,7 +20,7 @@ export default function AboutSection3() {
 				</div>
 			</header>
 			<section className="bg-white font-sans">
-				<div className="container mx-auto py-16 px-6">
+				<div className="container mx-auto py-16">
 					{/* Top highlights section */}
 					<div className="mb-12 flex max-w-7xl mx-auto flex-wrap items-center gap-x-2 gap-y-2 text-sm px-6 text-gray-700 sm:text-base max-sm:flex-row max-sm:hidden">
 						<span>+6 years delivering software</span>

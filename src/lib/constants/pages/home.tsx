@@ -6,7 +6,7 @@ export const homePage = {
 		heroTitle: "Your Strategic Partner in",
 		phrases: [
 			"Software Solutions",
-			"Blockchain Apps",
+			"Blockchain Applications",
 			"Fintech",
 			"AI Integrations",
 			"A/B Startups",
@@ -16,7 +16,7 @@ export const homePage = {
 	transformingIdeas: {
 		title: (
 			<>
-				Transforming Ideas <br /> Into Trusted Digital Solutions
+				Transforming Complex Ideas <br /> Into Scalable Digital Solutions
 			</>
 		),
 		description:
@@ -31,7 +31,7 @@ export const homePage = {
 				{
 					metric: "60%",
 					title: "Growth Rate",
-					badge: "Faster Acquisition",
+					badge: "Accelerated Acquisition",
 				},
 			],
 			largeOne: {
@@ -57,7 +57,7 @@ export const homePage = {
 				icon: Users,
 				title: "Dedicated Pod Teams",
 				description:
-					"Quickly launch cross-functional squads, PM, frontend, backend, and QA, within two weeks. Scale effortlessly with flexible, outcome-focused SLAs tailored to your needs.",
+					"Deploy cross-functional squads (PM, Frontend, Backend, QA) within two weeks. Scale effortlessly with flexible, outcome-focused SLAs tailored to your needs.",
 				isHighlighted: false,
 			},
 			{
@@ -87,7 +87,7 @@ export const homePage = {
 			{
 				title: "Enterprise Modernization",
 				description:
-					"We modernize legacy systems with cloud-native,reducing technical debt, improving performance, and unlocking long-term innovation.",
+					"We modernize legacy systems with cloud-native, reducing technical debt, improving performance and unlocking long-term innovation.",
 			},
 			{
 				title: "CRM-Centric Organizations",
@@ -97,7 +97,7 @@ export const homePage = {
 			{
 				title: "Custom Software Solutions",
 				description:
-					"Off-the-shelf tools don’t fit every need. We build scalable, flexible software solutions that evolve with your business and deliver measurable results.",
+					"Off-the-shelf tools rarely fit every need. We build scalable, flexible software solutions that evolve with your business and deliver measurable results.",
 			},
 			{
 				title: "Fintech & Payments",
@@ -138,14 +138,14 @@ export const homePage = {
 				icon: ChartSpline,
 				title: "Legal Protection",
 				description:
-					"Our developers build applications for clients only. This guarantees that clients always own the intellectual property rights to their software 100% of the time. We also sign non-disclosure and non-competition agreements for full legal protection..",
+					"Our developers build applications for clients only. This guarantees that clients always own the intellectual property rights to their software 100% of the time. We also sign non-disclosure and non-competition agreements for full legal protection.",
 			},
 			{
 				id: 3,
 				icon: ShieldCheck,
 				title: "Cost-Effective Development",
 				description:
-					"Outsourcing Projects and development tasks to Eastern Europe saves you cash, without sacrificing code quality. CodeVider is headquartered in Tirana-Albania, which is a well-known hub for finding talented web app developers at budget-friendly prices",
+					"Outsourcing Projects and development tasks to Eastern Europe optimizes your budget, without sacrificing code quality. CodeVider is headquartered in Tirana, Albania, an emerging European tech hub known for elite engineering talent and high-value cost efficiency.",
 			},
 		],
 	},
@@ -196,7 +196,7 @@ export const homePage = {
 			value: "100%",
 			label: "Flexibility & Control",
 			subtitle:
-				"You can manage and be in control of your own project at all times.",
+				"Maintain full oversight and transparency over your project lifecycle at all times.",
 		},
 		metric2: {
 			value: "+6",
