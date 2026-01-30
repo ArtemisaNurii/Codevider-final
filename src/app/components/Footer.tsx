@@ -15,7 +15,7 @@ export const Footer1: FC = () => {
 					</p>
 					<button
 						className="border border-white/80 text-white px-8 py-3 font-semibold rounded-lg hover:bg-white hover:text-black transition-colors w-full md:w-auto shrink-0"
-						onClick={() => (window.location.href = "mailto:hr@codevider.com")}
+						onClick={() => (window.location.href = "mailto:info@codevider.com")}
 					>
 						Let&apos;s Talk
 					</button>
@@ -49,10 +49,10 @@ export const Footer1: FC = () => {
 							{/* mailto and tel links should use standard <a> tags */}
 							<li>
 								<a
-									href="mailto:hello@codevider.com"
+									href="mailto:info@codevider.com"
 									className="hover:text-white transition-colors"
 								>
-									hr@codevider.com
+									info@codevider.com
 								</a>
 							</li>
 							<li>

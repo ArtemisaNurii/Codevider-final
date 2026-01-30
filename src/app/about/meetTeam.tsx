@@ -7,174 +7,185 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { pageInfoConstants } from "@/lib/constants/index";
 
 export default function MeetTeamSection() {
-	const carouselRef = useRef<HTMLDivElement>(null);
-	const [canScrollLeft, setCanScrollLeft] = useState(false);
-	const [canScrollRight, setCanScrollRight] = useState(true);
+    const carouselRef = useRef<HTMLDivElement>(null);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
 
-	// A more robust check for scroll position
-	const checkScrollability = useCallback(() => {
-		const el = carouselRef.current;
-		if (!el) return;
+    const checkScrollability = useCallback(() => {
+        const el = carouselRef.current;
+        if (!el) return;
 
-		// Check if the content is wider than the container
-		const isScrollable = el.scrollWidth > el.clientWidth;
-		if (!isScrollable) {
-			setCanScrollLeft(false);
-			setCanScrollRight(false);
-			return;
-		}
+        const isScrollable = el.scrollWidth > el.clientWidth;
+        if (!isScrollable) {
+            setCanScrollLeft(false);
+            setCanScrollRight(false);
+            return;
+        }
 
-		const { scrollLeft, scrollWidth, clientWidth } = el;
-		setCanScrollLeft(scrollLeft > 1); // A small buffer for precision
-		setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
-	}, []);
+        const { scrollLeft, scrollWidth, clientWidth } = el;
+        // Adjusted precision buffer
+        setCanScrollLeft(scrollLeft > 2); 
+        setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 2);
+    }, []);
 
-	useEffect(() => {
-		const el = carouselRef.current;
-		if (!el) return;
+    useEffect(() => {
+        const el = carouselRef.current;
+        if (!el) return;
 
-		checkScrollability();
+        checkScrollability();
+        const resizeObserver = new ResizeObserver(() => checkScrollability());
+        resizeObserver.observe(el);
+        el.addEventListener("scroll", checkScrollability, { passive: true });
 
-		// We use a ResizeObserver for better performance and accuracy on element resize
-		const resizeObserver = new ResizeObserver(() => checkScrollability());
-		resizeObserver.observe(el);
+        return () => {
+            resizeObserver.unobserve(el);
+            el.removeEventListener("scroll", checkScrollability);
+        };
+    }, [checkScrollability]);
 
-		el.addEventListener("scroll", checkScrollability, { passive: true });
+    const scroll = (direction: "left" | "right") => {
+        const el = carouselRef.current;
+        if (!el) return;
 
-		return () => {
-			resizeObserver.unobserve(el);
-			el.removeEventListener("scroll", checkScrollability);
-		};
-	}, [checkScrollability]);
+        // Scroll by one card width + gap for better precision than arbitrary percentage
+        const firstCard = el.firstElementChild as HTMLElement;
+        const cardWidth = firstCard ? firstCard.offsetWidth + 24 : el.clientWidth * 0.8; 
 
-	// Enhanced scroll function with looping behavior
-	const scroll = (direction: "left" | "right") => {
-		const el = carouselRef.current;
-		if (!el) return;
+        if (direction === "right") {
+            if (!canScrollRight) {
+                el.scrollTo({ left: 0, behavior: "smooth" });
+            } else {
+                el.scrollBy({ left: cardWidth, behavior: "smooth" });
+            }
+        } else {
+            if (!canScrollLeft) {
+                el.scrollTo({ left: el.scrollWidth, behavior: "smooth" });
+            } else {
+                el.scrollBy({ left: -cardWidth, behavior: "smooth" });
+            }
+        }
+    };
 
-		const scrollAmount = el.clientWidth * 0.9; // Scroll by 90% of the visible width
+    const scrollToCard = (index: number) => {
+        const el = carouselRef.current;
+        if (!el) return;
 
-		if (direction === "right") {
-			if (!canScrollRight) {
-				// If at the end, loop to the beginning
-				el.scrollTo({ left: 0, behavior: "smooth" });
-			} else {
-				el.scrollBy({ left: scrollAmount, behavior: "smooth" });
-			}
-		} else {
-			if (!canScrollLeft) {
-				// If at the beginning, loop to the end
-				el.scrollTo({ left: el.scrollWidth, behavior: "smooth" });
-			} else {
-				el.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-			}
-		}
-	};
+        const cards = el.children;
+        if (index >= 0 && index < cards.length) {
+            const targetCard = cards[index] as HTMLElement;
+            
+            // Layout agnostic centering calculation
+            const containerCenter = el.clientWidth / 2;
+            const cardCenter = targetCard.offsetLeft + targetCard.offsetWidth / 2;
+            
+            el.scrollTo({
+                left: cardCenter - containerCenter,
+                behavior: "smooth"
+            });
+        }
+    };
 
-	// Scroll to a specific card when clicked
-	const scrollToCard = (index: number) => {
-		const el = carouselRef.current;
-		if (!el) return;
+    return (
+        <section className="py-16 bg-white overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="text-center max-sm:text-start mb-12">
+                    <p className="text-sm font-medium text-muted-foreground mb-2">
+                        Behind The Codes
+                    </p>
+                    <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                        Meet the team
+                    </h2>
+                    <p className="text-lg text-muted-foreground text-balance mb-8 max-w-2xl mx-auto max-sm:mx-0">
+                        Unleashing imagination and innovation, we elevate ordinary spaces
+                        into extraordinary experiences
+                    </p>
+                </div>
+            </div>
 
-		const cards = el.children;
-		if (index >= 0 && index < cards.length) {
-			const targetCard = cards[index] as HTMLElement;
-			const containerRect = el.getBoundingClientRect();
-			const cardRect = targetCard.getBoundingClientRect();
+            {/* Carousel Wrapper */}
+            <div className="relative max-w-7xl mx-auto px-6">
+                {/* Navigation Buttons (Hidden on mobile to reduce clutter, visible desktop) */}
+                <div className="hidden md:flex absolute inset-y-0 left-0 right-0 items-center justify-between z-20 pointer-events-none -mx-4 lg:-mx-12">
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => scroll("left")}
+                        disabled={!canScrollLeft}
+                        aria-label="Scroll left"
+                        className={`pointer-events-auto h-12 w-12 rounded-full border-gray-200 bg-white shadow-lg hover:bg-gray-50 hover:scale-105 transition-all duration-300 ${!canScrollLeft ? 'opacity-0 cursor-default' : 'opacity-100'}`}
+                    >
+                        <ChevronLeft className="h-5 w-5 text-gray-700" />
+                    </Button>
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => scroll("right")}
+                        aria-label="Scroll right"
+                        className="pointer-events-auto h-12 w-12 rounded-full border-gray-200 bg-white shadow-lg hover:bg-gray-50 hover:scale-105 transition-all duration-300"
+                    >
+                        <ChevronRight className="h-5 w-5 text-gray-700" />
+                    </Button>
+                </div>
 
-			// Calculate the scroll position to center the card
-			const scrollLeft =
-				el.scrollLeft +
-				(cardRect.left - containerRect.left) -
-				(containerRect.width - cardRect.width) / 2;
-
-			el.scrollTo({ left: scrollLeft, behavior: "smooth" });
-		}
-	};
-
-	return (
-		<section className="py-16 bg-white overflow-hidden">
-			<div className="max-w-7xl mx-auto px-6">
-				{/* Header */}
-				<div className="text-center max-sm:text-start mb-12">
-					<p className="text-sm font-medium text-muted-foreground mb-2">
-						Behind The Codes
-					</p>
-					<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-						Meet the team
-					</h2>
-					<p className="text-lg text-muted-foreground text-balance mb-8 max-w-2xl mx-auto max-sm:mx-0">
-						Unleashing imagination and innovation, we elevate ordinary spaces
-						into extraordinary experiences
-					</p>
-				</div>
-			</div>
-
-			{/* Carousel Wrapper */}
-			<div className="relative max-w-7xl mx-auto px-6">
-				{/* Navigation Buttons */}
-				<div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-20 pointer-events-none max-w-7xl mx-auto px-2 sm:px-4">
-					<Button
-						variant="outline"
-						size="icon"
-						onClick={() => scroll("left")}
-						aria-label="Scroll left"
-						className="pointer-events-auto h-9 w-9 rounded-full bg-white/80 backdrop-blur-sm shadow-md hover:bg-white transition-opacity"
-					>
-						<ChevronLeft className="h-4 w-4 stroke-1 md:stroke-2" />
-					</Button>
-					<Button
-						variant="outline"
-						size="icon"
-						onClick={() => scroll("right")}
-						aria-label="Scroll right"
-						className="pointer-events-auto h-9 w-9 rounded-full bg-white/80 backdrop-blur-sm shadow-md hover:bg-white transition-opacity"
-					>
-						<ChevronRight className="h-4 w-4 stroke-1 md:stroke-2" />
-					</Button>
-				</div>
-
-				{/* The Carousel Track */}
-				<div
-					ref={carouselRef}
-					className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-6
-                     [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mb-4 pb-4" // Padding for box-shadow
-				>
-					{pageInfoConstants.about.teamMembers.map((member, i) => (
-						<div
-							key={`${member.name}-${i}`}
-							className="shrink-0 snap-center w-full max-w-xs sm:w-[45%] md:w-[30%] lg:w-[23%] group"
-						>
-							<div
-								onClick={() => scrollToCard(i)}
-								className="relative overflow-hidden rounded-2xl border border-gray-100 bg-gray-50
+                {/* The Carousel Track */}
+                <div
+                    ref={carouselRef}
+                    className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory 
+                     [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mb-4 pb-4
+                     
+                     /* MOBILE FIXES: */
+                     /* 1. Break out of parent padding (-mx-6) to touch screen edges */
+                     -mx-6 md:mx-0
+                     
+                     /* 2. Add symmetric padding so the card sits perfectly in center */
+                     px-[14vw] md:px-1
+                     "
+                >
+                    {pageInfoConstants.about.teamMembers.map((member, i) => (
+                        <div
+                            key={`${member.name}-${i}`}
+                            // Changed width logic for perfect centering
+                            className="shrink-0 snap-center group
+                                       w-[72vw]         /* Mobile: 72% of screen width */
+                                       sm:w-[42%]       /* Tablet: 2 itemsish */
+                                       md:w-[28%]       /* Desktop small */
+                                       lg:w-[21%]       /* Desktop large */
+                                       "
+                        >
+                            <div
+                                onClick={() => scrollToCard(i)}
+                                className="relative overflow-hidden rounded-2xl border border-gray-100 bg-gray-50
                            shadow-sm transition-all duration-300 ease-in-out will-change-transform 
-                           group-hover:-translate-y-1 group-hover:shadow-xl cursor-pointer"
-							>
-								<div className="aspect-3/4">
-									<Image
-										src={
-											`/images/members/headshots/${member.image}` ||
-											"/placeholder.svg"
-										}
-										alt={member.name}
-										fill
-										sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-										priority={i < 5}
-										className="object-cover object-top select-none transition-transform duration-500 ease-out group-hover:scale-105"
-									/>
-								</div>
-							</div>
-							<div className="mt-4 text-center">
-								<h3 className="font-semibold text-lg text-foreground">
-									{member.name}
-								</h3>
-								<p className="text-muted-foreground text-sm">{member.role}</p>
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
-		</section>
-	);
+                           group-hover:-translate-y-2 group-hover:shadow-lg cursor-pointer"
+                            >
+                                <div className="aspect-[3/4] relative">
+                                    <Image
+                                        src={
+                                            `/images/members/headshots/${member.image}` ||
+                                            "/placeholder.svg"
+                                        }
+                                        alt={member.name}
+                                        fill
+                                        sizes="(max-width: 640px) 72vw, (max-width: 768px) 42vw, 25vw"
+                                        priority={i < 3}
+                                        className="object-cover object-top select-none transition-transform duration-700 ease-out group-hover:scale-105"
+                                        draggable={false}
+                                    />
+                                    
+                                    {/* Optional: Subtle gradient overlay for better text contrast if you ever add text overlay */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"/>
+                                </div>
+                            </div>
+                            <div className="mt-4 text-center">
+                                <h3 className="font-semibold text-lg text-foreground tracking-tight">
+                                    {member.name}
+                                </h3>
+                                <p className="text-muted-foreground text-sm font-medium">{member.role}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
 }

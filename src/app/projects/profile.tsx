@@ -214,7 +214,7 @@ const CallToAction = () => (
 			<div className="mt-8">
 				<button
 					className="inline-flex items-center justify-center rounded-md border  bg-inherit px-8 py-3 text-base font-medium text-black border-slate-700 shadow-sm hover:bg-slate-900  hover:text-white transition-colors"
-					onClick={() => (window.location.href = "mailto:hr@codevider.com")}
+					onClick={() => (window.location.href = "mailto:info@codevider.com")}
 				>
 					Lets Talk
 				</button>

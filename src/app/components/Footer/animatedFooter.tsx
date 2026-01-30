@@ -1,14 +1,16 @@
-"use client"; // This must be a client component for hooks and DOM manipulation
+"use client";
 
-import { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import Image from "next/image";
 
-// Define props for our reusable link component
+type FooterLinkProps = {
+	href: string;
+	children: React.ReactNode;
+};
 
-// A reusable, typed component for the footer links
 const FooterLink: React.FC<FooterLinkProps> = ({ href, children }) => (
 	<li>
 		<a
@@ -21,14 +23,15 @@ const FooterLink: React.FC<FooterLinkProps> = ({ href, children }) => (
 );
 
 const AnimatedFooter: React.FC = () => {
+	const GOOGLE_MAPS_PLACE =
+		"https://www.google.com/maps/place/CodeVider/data=!4m2!3m1!1s0x0:0x868519590dbd2f21?sa=X&ved=1t:2428&ictx=111";
+
 	// Create refs for the elements we want to animate with GSAP.
-	// We type them to tell TypeScript they will be attached to a div element.
 	const blob1 = useRef<HTMLDivElement | null>(null);
 	const blob2 = useRef<HTMLDivElement | null>(null);
 
 	// Set up the animation inside a useEffect hook to run after the component mounts
 	useEffect(() => {
-		// Check if the refs are attached before animating
 		if (blob1.current && blob2.current) {
 			gsap.to(blob1.current, {
 				x: "20vw",
@@ -36,8 +39,8 @@ const AnimatedFooter: React.FC = () => {
 				rotation: 360,
 				duration: 40,
 				ease: "power1.inOut",
-				repeat: -1, // Repeat indefinitely
-				yoyo: true, // Animate back and forth
+				repeat: -1,
+				yoyo: true,
 			});
 
 			gsap.to(blob2.current, {
@@ -50,7 +53,7 @@ const AnimatedFooter: React.FC = () => {
 				yoyo: true,
 			});
 		}
-	}, []); // The empty dependency array ensures this effect runs only once
+	}, []);
 
 	return (
 		<footer className="bg-white antialiased">
@@ -159,21 +162,42 @@ const AnimatedFooter: React.FC = () => {
 						</ul>
 					</div>
 
-					{/* Column 4: Address */}
 					<div className="col-span-2 sm:col-span-1">
 						<h3 className="text-sm sm:text-base font-semibold text-gray-900">
 							Address
 						</h3>
+
 						<div className="mt-3 sm:mt-4 space-y-2 sm:space-y-3 text-gray-600">
-							<p className="text-xs sm:text-sm leading-5 sm:leading-6">
-								Barrikada Street, Tirana, Albania
-							</p>
+							<a
+								href={GOOGLE_MAPS_PLACE}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="block text-xs sm:text-sm leading-5 sm:leading-6 hover:text-gray-900 transition-colors duration-200"
+								aria-label="Open Codevider location on Google Maps"
+							>
+								Barrikada Street, Tirana, Albania 1001
+							</a>
+
+							<a
+								href={GOOGLE_MAPS_PLACE}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-block text-xs sm:text-sm font-medium text-sky-700 hover:text-sky-900 transition-colors duration-200"
+							>
+								Get directions →
+							</a>
+
 							<p className="text-xs sm:text-sm leading-5 sm:leading-6">
 								+355 69 123 4567
 							</p>
-							<p className="text-xs sm:text-sm leading-5 sm:leading-6">
+
+							<a
+								href="mailto:hello@codevider.com"
+								className="block text-xs sm:text-sm leading-5 sm:leading-6 hover:text-gray-900 transition-colors duration-200"
+							>
 								hello@codevider.com
-							</p>
+							</a>
+
 							<p className="text-xs sm:text-sm leading-5 sm:leading-6">
 								Mon-Fri: 9:00 AM - 6:00 PM CET
 							</p>

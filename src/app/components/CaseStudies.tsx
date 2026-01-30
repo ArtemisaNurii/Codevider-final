@@ -392,9 +392,9 @@ const SolutionPillars: React.FC = () => {
 					<InfoCard {...unlockYourPotential.infoCard} />
 				</div>
 
-				<div className="lg:col-span-2 metric-card ">
+				<div className="lg:col-span-2 metric-card max-md:hidden  ">
 					<MetricCard {...unlockYourPotential.metric1}>
-						<div className="w-full h-full min-h-62.5 flex items-center justify-center rounded-lg">
+						<div className="w-full h-full min-h-62.5 flex items-center  justify-start rounded-lg">
 							<p className="text-gray-700 font-medium text-xl text-balance pt-20 text-start p-4">
 								{unlockYourPotential.metric1.subtitle}
 							</p>
@@ -426,11 +426,11 @@ const SolutionPillars: React.FC = () => {
 			<section className="py-16 max-w-7xl mx-auto md:pt-24">
 				<div className="text-center mb-12">
 					{/* UPDATED SECTION TITLE */}
-					<div className="text-4xl md:text-5xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
+					<div className="text-4xl md:text-5xl font-semibold leading-tight tracking-tighter word-animate-parent max-md:text-start transform-gpu">
 						{splitTextIntoWords(whyOurClientsChooseUs.title)}
 					</div>
 					{/* UPDATED SECTION DESCRIPTION */}
-					<p className="mt-4 text-lg text-gray-700 text-balance max-w-2xl mx-auto case-study-desc transform-gpu">
+					<p className="mt-4 text-lg text-gray-700 text-balance max-w-2xl mx-auto case-study-desc max-md:text-start transform-gpu">
 						{whyOurClientsChooseUs.description}
 					</p>
 				</div>

@@ -200,11 +200,10 @@ export const homePage = {
 		},
 		metric2: {
 			value: "+6",
-			label: "Years of Experience",
+			label: "Years of Proven Delivery",
 			subtitle: "Benefit from the innovative viewpoints our team brings.",
-			// Repurposed 'countries' to 'skills' for the pills
-			skills: ["USA", "Germany", "London", "Europe"],
-		},
+			skills: ["Team Collaboration", "Customer Satisfaction", "Clear Communication", "On-Time Delivery"],
+		  },
 	},
 	whyOurClientsChooseUs: {
 		title: "Why Our Clients Choose Us",
