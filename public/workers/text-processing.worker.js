@@ -53,14 +53,16 @@ class TextProcessor {
         case 'last':
           delay = (total - 1 - index) * staggerDuration;
           break;
-        case 'center':
+        case 'center': {
           const center = Math.floor(total / 2);
           delay = Math.abs(center - index) * staggerDuration;
           break;
-        case 'random':
+        }
+        case 'random': {
           const randomIndex = Math.floor(Math.random() * total);
           delay = Math.abs(randomIndex - index) * staggerDuration;
           break;
+        }
         default:
           delay = Math.abs(staggerFrom - index) * staggerDuration;
       }

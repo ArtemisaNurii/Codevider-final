@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 export default function JobCard({ job }: { job: Job }) {
 	const [isOpen, setIsOpen] = useState(false);
-	const applyHref = `/career/apply?jobId=${job.id}`;
+	const applyHref = `/career/apply?job_id=${job.id}`;
 
 	// Helper function to create metadata tags - good for reusability and clean code
 	const InfoTag = ({
@@ -50,15 +50,15 @@ export default function JobCard({ job }: { job: Job }) {
 					</h3>
 					<div className="mt-3 flex flex-wrap items-center gap-2">
 						<InfoTag
-							icon={<Briefcase className="h-3.5 w-3.5" />}
+							icon={<Briefcase className="h-3.5 w-3.5 stroke-1 md:stroke-2" />}
 							text={job.department.name}
 						/>
 						<InfoTag
-							icon={<MapPin className="h-3.5 w-3.5" />}
+							icon={<MapPin className="h-3.5 w-3.5 stroke-1 md:stroke-2" />}
 							text={job.addresses?.[0]?.address?.location}
 						/>
 						<InfoTag
-							icon={<Clock className="h-3.5 w-3.5" />}
+							icon={<Clock className="h-3.5 w-3.5 stroke-1 md:stroke-2" />}
 							text={job.job_type.job_type}
 						/>
 					</div>
@@ -66,7 +66,7 @@ export default function JobCard({ job }: { job: Job }) {
 
 				<div className="ml-4 shrink-0">
 					<ChevronDown
-						className={`h-5 w-5 text-slate-500 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+						className={`h-5 w-5 text-slate-500 transition-transform duration-300 stroke-1 md:stroke-2 ${isOpen ? "rotate-180" : ""}`}
 					/>
 				</div>
 			</button>

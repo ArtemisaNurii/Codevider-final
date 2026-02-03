@@ -1,6 +1,6 @@
 "use client"; // This must be a client component for hooks and DOM manipulation
 
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";

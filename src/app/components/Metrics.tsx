@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { pageInfoConstants } from "@/lib/constants";
 
 // Data for the logo cloud with actual client logos
 const logos = [
@@ -21,6 +22,7 @@ const logos = [
 
 const Metrics: NextPage = () => {
 	const router = useRouter();
+	const { transformingIdeas } = pageInfoConstants.home;
 
 	return (
 		<section id="about" className="bg-white">
@@ -65,15 +67,10 @@ const Metrics: NextPage = () => {
 					{/* Left Column: Text Content */}
 					<div className="flex flex-col justify-center">
 						<h1 className="text-4xl font-bold tracking-tight lg:leading-16 text-gray-900 sm:text-5xl lg:text-6xl">
-							Transforming Ideas <br /> Into Trusted Digital Solutions
+							{transformingIdeas.title}
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-600">
-							From web and mobile apps to cloud platforms and enterprise
-							systems, we craft reliable software tailored to your business
-							needs. Our teams blend modern technologies, scalable
-							architectures, and intuitive design to deliver secure,
-							high-performance solutions that help organizations innovate and
-							grow.
+							{transformingIdeas.description}
 						</p>
 
 						<div className="mt-10">
@@ -81,53 +78,47 @@ const Metrics: NextPage = () => {
 								href="/about"
 								className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-900 font-semibold px-6 py-3 rounded-lg shadow-md hover:gap-4 transition-all duration-300"
 							>
-								Read More <ArrowRight className="w-5 h-5" />
+								Read More{" "}
+								<ArrowRight className="w-5 h-5 stroke-1 md:stroke-2" />
 							</a>
 						</div>
 					</div>
 
 					{/* Right Column: Stats Cards */}
 					<div className="grid grid-cols-2 gap-6">
-						<div className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-linear-to-br from-black via-slate-900 to-sky-800  p-8 text-white shadow-xl border border-slate-700/50">
-							<div>
-								<p className="text-5xl font-bold bg-linear-to-r from-white to-slate-300 bg-clip-text text-transparent">
-									30+
-								</p>
-								<p className="mt-2 text-slate-300 font-medium">
-									Global Partnerships
-								</p>
+						{transformingIdeas.cards.smallOnes.map((card, index) => (
+							<div
+								key={index}
+								className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-linear-to-br from-black via-slate-900 to-sky-800  p-8 text-white shadow-xl border border-slate-700/50"
+							>
+								<div>
+									<p className="text-5xl font-bold bg-linear-to-r from-white to-slate-300 bg-clip-text text-transparent">
+										{card.metric}
+									</p>
+									<p className="mt-2 text-slate-300 font-medium">
+										{card.title}
+									</p>
+								</div>
+								<div className="mt-6">
+									<span className="inline-block rounded-full bg-white/20  border border-blue-400/30 px-4 py-2 text-sm font-medium text-blue-200">
+										{card.badge}
+									</span>
+								</div>
 							</div>
-							<div className="mt-6">
-								<span className="inline-block rounded-full bg-white/20  border border-blue-400/30 px-4 py-2 text-sm font-medium text-blue-200">
-									Network Expansion
-								</span>
-							</div>
-						</div>
-
-						<div className="col-span-2 sm:col-span-1 flex flex-col justify-between rounded-3xl bg-linear-to-br from-black via-slate-900 to-sky-800  p-8 text-white shadow-xl border border-slate-700/50">
-							<div>
-								<p className="text-5xl font-bold bg-linear-to-r from-white to-slate-300 bg-clip-text text-transparent">
-									60%
-								</p>
-								<p className="mt-2 text-slate-300 font-medium">Growth Rate</p>
-							</div>
-							<div className="mt-6">
-								<span className="inline-block rounded-full bg-white/20 border border-blue-400/30 px-4 py-2 text-sm font-medium text-blue-200">
-									Faster Acquisition
-								</span>
-							</div>
-						</div>
+						))}
 
 						<div className="col-span-2 flex flex-col justify-between rounded-3xl bg-linear-to-br from-black via-slate-900 to-sky-800 p-8 text-white shadow-xl border border-slate-700/50">
 							<div>
 								<p className="text-5xl font-bold bg-linear-to-r from-white to-slate-300 bg-clip-text text-transparent">
-									25+
+									{transformingIdeas.cards.largeOne.metric}
 								</p>
-								<p className="mt-2 text-slate-300 font-medium">Elite Talent</p>
+								<p className="mt-2 text-slate-300 font-medium">
+									{transformingIdeas.cards.largeOne.title}
+								</p>
 							</div>
 							<div className="mt-6">
 								<span className="inline-block rounded-full  bg-white/20  border border-blue-400/30 px-4 py-2 text-sm font-medium text-blue-200">
-									Developers with Deep Expertise
+									{transformingIdeas.cards.largeOne.badge}
 								</span>
 							</div>
 						</div>

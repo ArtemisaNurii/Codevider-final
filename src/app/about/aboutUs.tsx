@@ -1,18 +1,21 @@
 "use client";
+
+import { pageInfoConstants } from "@/lib/constants";
+
 export default function AboutSection3() {
+	const { main, whoarewe } = pageInfoConstants.about;
 	return (
 		<section id="about" className=" bg-white mt-10 md:mt-10 ">
 			<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
 				<div className="mx-auto max-w-7xl py-16 md:py-24 px-4   md:px-4 text-start">
 					<p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
-						About Us
+						{main.aboveTitle}
 					</p>
 					<h1 className="mt-4  text-4xl font-bold tracking-tight md:text-5xl">
-						Crafting Software That Means Business{" "}
+						{main.title}
 					</h1>
 					<p className="mt-4  mx-auto text-lg leading-relaxed text-balance text-gray-300">
-						Strategy, design, and engineering working in harmony to drive your
-						roadmap forward.{" "}
+						{main.description}
 					</p>
 				</div>
 			</header>
@@ -35,23 +38,11 @@ export default function AboutSection3() {
 
 							{/* Grid for the two paragraphs to sit side-by-side on medium screens and up */}
 							<div className="mt-8 grid grid-cols-1 max-sm:px-4 gap-8 md:grid-cols-2 text-base text-gray-600 px-6 leading-relaxed">
-								<p className="text-balance">
-									Founded in 2019 in Tirana, Albania, CodeVider delivers
-									high-performance, cost-efficient software development
-									solutions for startups, SMEs, and enterprises across Europe
-									and beyond. We specialize in web and mobile development,
-									cloud-native microservices, and AI-powered integrations,
-									helping you accelerate time-to-market and cut development
-									costs by up to 60%.
-								</p>
-								<p className="text-balance">
-									Our team of 25+ developers excels in today&apos;s most
-									advanced tech stacks. We integrate directly into your workflow
-									using agile, sprint-based methodologies that keep you informed
-									and in control, every step of the way. With a focus on
-									quality, agility, and long-term partnership, we turn your
-									ideas into scalable, future-ready digital products.
-								</p>
+								{whoarewe.map((paragraph, index) => (
+									<p key={index} className="text-pretty">
+										{paragraph}
+									</p>
+								))}
 							</div>
 						</div>
 
@@ -78,11 +69,10 @@ export default function AboutSection3() {
 									<span>LETS BUILD TOGETHER</span>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
-										className="h-5 w-5"
+										className="h-5 w-5 stroke-1 md:stroke-2"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
-										strokeWidth={2}
 									>
 										<path
 											strokeLinecap="round"

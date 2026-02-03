@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { SendHorizonal } from "lucide-react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { Turnstile } from "@marsidev/react-turnstile";
 
 const contactSchema = z.object({
@@ -72,8 +72,11 @@ const ContactForm = () => {
 			const validationResult = contactSchema.safeParse(data);
 
 			if (!validationResult.success) {
-				const firstError = validationResult.error.errors[0].message;
-				toast.error(firstError);
+				// @ts-expect-error because it is comming from backend in this structure
+				const firstError = validationResult?.error?.errors?.[0]?.message;
+				if (firstError) {
+					toast.error(firstError);
+				}
 				setIsPending(false);
 				return;
 			}

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { pageInfoConstants } from "@/lib/constants";
+import { pageInfoConstants } from "@/lib/constants/index";
 
 export default function MeetTeamSection() {
 	const carouselRef = useRef<HTMLDivElement>(null);
@@ -121,7 +121,7 @@ export default function MeetTeamSection() {
 						aria-label="Scroll left"
 						className="pointer-events-auto h-9 w-9 rounded-full bg-white/80 backdrop-blur-sm shadow-md hover:bg-white transition-opacity"
 					>
-						<ChevronLeft className="h-4 w-4" />
+						<ChevronLeft className="h-4 w-4 stroke-1 md:stroke-2" />
 					</Button>
 					<Button
 						variant="outline"
@@ -130,7 +130,7 @@ export default function MeetTeamSection() {
 						aria-label="Scroll right"
 						className="pointer-events-auto h-9 w-9 rounded-full bg-white/80 backdrop-blur-sm shadow-md hover:bg-white transition-opacity"
 					>
-						<ChevronRight className="h-4 w-4" />
+						<ChevronRight className="h-4 w-4 stroke-1 md:stroke-2" />
 					</Button>
 				</div>
 

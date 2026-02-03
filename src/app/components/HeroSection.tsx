@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
 	ArrowUpRight,
 	BarChart2,
@@ -21,6 +21,7 @@ import {
 	RefreshCw,
 	User2,
 } from "lucide-react";
+import { pageInfoConstants } from "@/lib/constants";
 
 const componentStyles = `
   @keyframes shine {
@@ -60,19 +61,11 @@ const componentStyles = `
   }
 `;
 
-const PHRASES = [
-	"Software Solutions",
-	"Blockchain Apps",
-	"Fintech",
-	"AI Integrations",
-	"A/B Startups",
-	"Smart Automation",
-];
 type Props = { phrases: string[]; interval?: number };
 
-export function HeroHeadline({ phrases, interval = 2500 }: Props) {
+export function HeroHeadline({ phrases, interval = 3000 }: Props) {
 	const [currentIndex, setCurrentIndex] = useState(0);
-
+	const { hero } = pageInfoConstants.home;
 	useEffect(() => {
 		if (phrases.length <= 1) return;
 		const id = setTimeout(() => {
@@ -84,7 +77,7 @@ export function HeroHeadline({ phrases, interval = 2500 }: Props) {
 	return (
 		<div className="text-center pt-16 sm:pt-24 h-auto md:pt-32 mb-4 sm:mb-6 lg:mb-8">
 			<h1 className="text-2xl sm:text-4xl md:text-7xl font-bold bg-clip-text text-transparent  bg-linear-to-b from-white to-white/80">
-				Your Strategic Partner in
+				{hero.heroTitle}
 			</h1>
 			<div className="relative h-14 sm:h-20 md:h-24 flex items-center justify-center overflow-hidden">
 				<h1
@@ -109,7 +102,10 @@ const Sidebar = () => {
 	return (
 		<aside className="w-12 sm:w-14 lg:w-16 bg-black/30 backdrop-blur-sm shrink-0 flex flex-col items-center py-2 sm:py-4 gap-2 sm:gap-3 lg:gap-4 border-r border-white/20">
 			<div className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 mb-2 sm:mb-3 lg:mb-4 rounded-md lg:rounded-lg bg-linear-to-tr from-sky-200 to-sky-300 flex items-center justify-center">
-				<BarChart2 size={14} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
+				<BarChart2
+					size={14}
+					className="sm:w-4 sm:h-4 lg:w-5 lg:h-5 stroke-1 md:stroke-2"
+				/>
 			</div>
 			<div className="flex flex-col gap-1 sm:gap-2">
 				{navItems.map((item, index) => (
@@ -122,7 +118,10 @@ const Sidebar = () => {
 								: "text-gray-400 hover:bg-white/10 hover:text-white"
 						}`}
 					>
-						<item.icon size={16} className="sm:w-5 sm:h-5 lg:w-5 lg:h-5" />
+						<item.icon
+							size={16}
+							className="sm:w-5 sm:h-5 lg:w-5 lg:h-5 stroke-1 md:stroke-2"
+						/>
 						{item.active && (
 							<div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 sm:w-1 h-4 sm:h-5 lg:h-6 bg-sky-400 rounded-r-full"></div>
 						)}
@@ -131,7 +130,10 @@ const Sidebar = () => {
 			</div>
 			<div className="mt-auto" title="Settings">
 				<div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white rounded-md lg:rounded-lg cursor-pointer transition-colors">
-					<Settings size={16} className="sm:w-5 sm:h-5 lg:w-5 lg:h-5" />
+					<Settings
+						size={16}
+						className="sm:w-5 sm:h-5 lg:w-5 lg:h-5 stroke-1 md:stroke-2"
+					/>
 				</div>
 			</div>
 		</aside>
@@ -153,7 +155,7 @@ const DashboardCard = ({
 		className={`dashboard-item bg-black/40 backdrop-blur-sm rounded-md sm:rounded-lg lg:rounded-xl p-1.5 sm:p-3 lg:p-4 flex flex-col border border-white/10 ${className}`}
 	>
 		<div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2 lg:mb-3">
-			<Icon className="text-sky-400 w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
+			<Icon className="text-sky-400 w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 stroke-1 md:stroke-2" />
 			<h3 className="text-xs sm:text-sm lg:text-base font-semibold text-white truncate">
 				{title}
 			</h3>
@@ -185,6 +187,7 @@ const StatCardContent = ({
 );
 
 const Hero = () => {
+	const { hero } = pageInfoConstants.home;
 	return (
 		<section
 			id="hero"
@@ -196,7 +199,7 @@ const Hero = () => {
 
 			<div className="relative z-10 container mx-auto flex flex-col min-h-screen px-4">
 				<div className="flex-1 flex flex-col justify-center items-center">
-					<HeroHeadline phrases={PHRASES} />
+					<HeroHeadline phrases={hero.phrases} />
 					<div className="flex flex-col items-center gap-6 mb-12">
 						<button
 							onClick={() =>
@@ -206,7 +209,8 @@ const Hero = () => {
 							}
 							className="bg-[#67c1dd] text-black font-semibold py-3 px-6 rounded-full flex items-center gap-2 hover:gap-4 shadow-lg hover:scale-105 transition"
 						>
-							Our Services <ArrowUpRight size={20} strokeWidth={2.5} />
+							Our Services{" "}
+							<ArrowUpRight size={20} className="stroke-1 md:stroke-[2.5]" />
 						</button>
 					</div>
 				</div>
@@ -223,13 +227,16 @@ const Hero = () => {
 						<div className="flex justify-between items-center mb-2 sm:mb-4 lg:mb-6">
 							<h1 className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white font-semibold"></h1>
 							<div className="flex items-center gap-1 sm:gap-3 lg:gap-4">
-								<Search className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5 hidden sm:block" />
-								<Bell className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5" />
+								<Search className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5 hidden sm:block stroke-1 md:stroke-2" />
+								<Bell className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5 stroke-1 md:stroke-2" />
 								<div className="flex items-center gap-1 sm:gap-2">
-									<User2 size={10} className="text-gray-400 sm:w-4 sm:h-4" />
+									<User2
+										size={10}
+										className="text-gray-400 sm:w-4 sm:h-4 stroke-1 md:stroke-2"
+									/>
 									<ChevronDown
 										size={10}
-										className="text-gray-400 sm:w-4 sm:h-4"
+										className="text-gray-400 sm:w-4 sm:h-4 stroke-1 md:stroke-2"
 									/>
 								</div>
 							</div>
