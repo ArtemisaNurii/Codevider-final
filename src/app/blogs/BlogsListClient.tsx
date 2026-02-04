@@ -9,6 +9,8 @@ import {
     Tag,
     ChevronRight,
     BookOpen,
+    List,
+    ArrowUpRight,
 } from "lucide-react";
 import type { PostWithBlocks } from "./types";
 import type { NotionBlock, NotionRichText } from "@/lib/notionBlog";
@@ -17,6 +19,8 @@ import { Footer } from "../components/CTA";
 
 type Props = {
     posts: PostWithBlocks[];
+    loading?: boolean;
+    error?: string | null;
 };
 
 // Estimate reading time based on content length
@@ -51,6 +55,111 @@ function formatDate(dateString: string | null): string {
     });
 }
 
+// Generate a URL-friendly slug from text
+function slugify(text: string): string {
+    return text
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+}
+
+// Heading item for table of contents
+type HeadingItem = {
+    id: string;
+    text: string;
+    level: number;
+};
+
+// Extract headings from blocks for table of contents
+function extractHeadings(blocks: NotionBlock[]): HeadingItem[] {
+    const headings: HeadingItem[] = [];
+
+    const processBlocks = (blocklist: NotionBlock[]) => {
+        for (const block of blocklist) {
+            if (block.type.startsWith("heading_")) {
+                const level = parseInt(block.type.replace("heading_", ""), 10);
+                const content = (block as any)[block.type];
+                const text = content?.rich_text
+                    ?.map((t: NotionRichText) => t.plain_text)
+                    .join("") || "";
+                if (text) {
+                    headings.push({
+                        id: slugify(text),
+                        text,
+                        level,
+                    });
+                }
+            }
+            if (block.children) {
+                processBlocks(block.children);
+            }
+        }
+    };
+
+    processBlocks(blocks);
+    return headings;
+}
+
+// Table of Contents component
+// Table of Contents component
+// Table of Contents component
+function TableOfContents({ headings }: { headings: HeadingItem[] }) {
+    const [activeId, setActiveId] = useState<string>("");
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveId(entry.target.id);
+                    }
+                });
+            },
+            { rootMargin: "-80px 0px -80% 0px" }
+        );
+
+        headings.forEach((h) => {
+            const el = document.getElementById(h.id);
+            if (el) observer.observe(el);
+        });
+
+        return () => observer.disconnect();
+    }, [headings]);
+
+    if (!headings.length) return null;
+
+    return (
+        <nav className="relative">
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-slate-200" />
+            <ul className="space-y-2 relative">
+                {headings.map((h, i) => (
+                    <li key={i} className="relative">
+                        <button
+                            onClick={() => {
+                                document.getElementById(h.id)?.scrollIntoView({ behavior: "smooth" });
+                                setActiveId(h.id);
+                            }}
+                            className={`block w-full text-left transition-all duration-200 truncate pl-4 border-l-2 -ml-[1px]
+                                ${activeId === h.id
+                                    ? "border-sky-500 text-sky-600 font-medium translate-x-1"
+                                    : "border-transparent text-slate-500 hover:text-slate-900 hover:border-slate-300"
+                                }`}
+                            style={{
+                                marginLeft: h.level > 2 ? `${(h.level - 2) * 1}rem` : undefined
+                            }}
+                            title={h.text}
+                        >
+                            <span className="text-sm leading-relaxed block py-1">
+                                {h.text}
+                            </span>
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+    );
+}
+
 // Notion block renderer
 function RenderBlock({
     block,
@@ -60,6 +169,29 @@ function RenderBlock({
     depth?: number;
 }) {
     const content = (block as any)[block.type];
+
+    // Color mappings for Notion text colors (using inline styles to avoid Tailwind purge)
+    const notionColorMap: Record<string, { color?: string; background?: string }> = {
+        gray: { color: "#6B7280" },
+        brown: { color: "#92400E" },
+        orange: { color: "#EA580C" },
+        yellow: { color: "#CA8A04" },
+        green: { color: "#16A34A" },
+        blue: { color: "#2563EB" },
+        purple: { color: "#9333EA" },
+        pink: { color: "#EC4899" },
+        red: { color: "#DC2626" },
+        // Background colors with matching dark text for good contrast
+        gray_background: { background: "#F3F4F6", },
+        brown_background: { background: "#FEF3C7", },
+        orange_background: { background: "#FFEDD5", },
+        yellow_background: { background: "#FEF9C3", },
+        green_background: { background: "#DCFCE7", },
+        blue_background: { background: "#DBEAFE", },
+        purple_background: { background: "#F3E8FF", },
+        pink_background: { background: "#FCE7F3", },
+        red_background: { background: "#FEE2E2", },
+    };
 
     const renderRichText = (richText: NotionRichText[]) => {
         return richText.map((text, i) => {
@@ -95,6 +227,28 @@ function RenderBlock({
                     </code>
                 );
             }
+            // Handle Notion text colors
+            if (text.annotations?.color && text.annotations.color !== "default") {
+                const colorStyle = notionColorMap[text.annotations.color];
+                if (colorStyle) {
+                    const styleObj: React.CSSProperties = {};
+                    // Only set color if explicitly defined in the map
+                    if (colorStyle.color) {
+                        styleObj.color = colorStyle.color;
+                    }
+                    // Only set background if explicitly defined in the map
+                    if (colorStyle.background) {
+                        styleObj.backgroundColor = colorStyle.background;
+                        styleObj.padding = "0.125rem 0.25rem";
+                        styleObj.borderRadius = "0.25rem";
+                    }
+                    element = (
+                        <span key={i} style={styleObj}>
+                            {element}
+                        </span>
+                    );
+                }
+            }
             if (text.href) {
                 element = (
                     <a
@@ -122,25 +276,30 @@ function RenderBlock({
             );
 
         case "heading_1":
-            return (
-                <h2 className="text-3xl font-bold text-slate-900 mt-10 mb-4">
-                    {content?.rich_text && renderRichText(content.rich_text)}
-                </h2>
-            );
-
         case "heading_2":
-            return (
-                <h3 className="text-2xl font-semibold text-slate-900 mt-8 mb-3">
-                    {content?.rich_text && renderRichText(content.rich_text)}
-                </h3>
-            );
-
         case "heading_3":
+        case "heading_4":
+        case "heading_5":
+        case "heading_6": {
+            const headingText = content?.rich_text
+                ?.map((t: NotionRichText) => t.plain_text)
+                .join("") || "";
+            const headingId = slugify(headingText);
+            const headingStyles: Record<string, { tag: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"; className: string }> = {
+                heading_1: { tag: "h2", className: "text-3xl font-bold text-slate-900 mt-10 mb-4" },
+                heading_2: { tag: "h3", className: "text-2xl font-semibold text-slate-900 mt-8 mb-3" },
+                heading_3: { tag: "h4", className: "text-xl font-medium text-slate-900 mt-6 mb-2" },
+                heading_4: { tag: "h4", className: "text-lg font-medium text-slate-900 mt-6 mb-2" },
+                heading_5: { tag: "h4", className: "text-md font-medium text-slate-900 mt-6 mb-2" },
+                heading_6: { tag: "h4", className: "text-sm font-medium text-slate-900 mt-6 mb-2" },
+            };
+            const { tag: HeadingTag, className } = headingStyles[block.type];
             return (
-                <h4 className="text-xl font-medium text-slate-900 mt-6 mb-2">
+                <HeadingTag id={headingId} className={`${className} scroll-mt-24`}>
                     {content?.rich_text && renderRichText(content.rich_text)}
-                </h4>
+                </HeadingTag>
             );
+        }
 
         case "bulleted_list_item":
             return (
@@ -367,160 +526,161 @@ function groupBlocks(blocks: NotionBlock[]): (NotionBlock | NotionBlock[])[] {
 }
 
 // Blog post card component
-function BlogCard({
-    post,
-    onClick,
-}: {
-    post: PostWithBlocks;
-    onClick: () => void;
-}) {
+// Blog post card component
+function BlogCard({ post, onClick }: { post: PostWithBlocks; onClick: () => void }) {
     const readingTime = estimateReadingTime(post.blocks);
 
     return (
         <article
             onClick={onClick}
-            className="group cursor-pointer bg-white
-                       border border-slate-200 rounded-2xl overflow-hidden
-                       hover:border-sky-400/50 hover:shadow-lg hover:shadow-sky-400/10
-                       transition-all duration-300"
+            className="group flex flex-col h-full cursor-pointer bg-white rounded-3xl overflow-hidden
+                       border border-slate-200 shadow-sm
+                       hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1
+                       transition-all duration-300 ease-out"
         >
             {post.cover && (
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-64 overflow-hidden bg-slate-100">
                     <img
                         src={post.cover}
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                 </div>
             )}
-            <div className="p-6">
-                <div className="flex flex-wrap gap-2 mb-3">
-                    {post.tags.slice(0, 3).map((tag) => (
-                        <span
-                            key={tag}
-                            className="px-2.5 py-1 text-xs font-medium bg-sky-50 text-sky-600 rounded-full border border-sky-200"
-                        >
-                            {tag}
-                        </span>
-                    ))}
+
+            <div className="flex-1 p-8 flex flex-col">
+                <div className="flex justify-between items-start gap-4 mb-3">
+                    <h2 className="text-2xl font-bold tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors line-clamp-2">
+                        {post.title}
+                    </h2>
+                    <ArrowUpRight className="shrink-0 text-slate-400 group-hover:text-sky-600 transition-colors" size={24} />
                 </div>
-                <h2 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-sky-600 transition-colors line-clamp-2">
-                    {post.title}
-                </h2>
-                <p className="text-slate-600 text-sm mb-4 line-clamp-2">
+
+                <p className="text-base text-slate-600 mb-8 line-clamp-3 leading-relaxed">
                     {post.description}
                 </p>
-                <div className="flex items-center justify-between text-xs text-slate-500">
-                    <div className="flex items-center gap-4">
-                        {post.date && (
-                            <span className="flex items-center gap-1">
-                                <Calendar size={12} />
-                                {formatDate(post.date)}
+
+                <div className="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
+                    <div className="flex flex-wrap gap-2">
+                        {post.tags.slice(0, 2).map(tag => (
+                            <span
+                                key={tag}
+                                className="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-lg
+                                           bg-slate-100 text-slate-600 group-hover:bg-sky-50 group-hover:text-sky-700 transition-colors"
+                            >
+                                {tag}
                             </span>
-                        )}
-                        <span className="flex items-center gap-1">
-                            <Clock size={12} />
-                            {readingTime} min read
-                        </span>
+                        ))}
                     </div>
-                    <ChevronRight
-                        size={16}
-                        className="text-sky-500 group-hover:translate-x-1 transition-transform"
-                    />
+
+                    <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                        {readingTime} min read
+                    </span>
                 </div>
             </div>
         </article>
     );
 }
 
-// Single blog post view
-function BlogPostView({
-    post,
-    onBack,
-}: {
-    post: PostWithBlocks;
-    onBack: () => void;
-}) {
+function BlogPostView({ post, onBack }: { post: PostWithBlocks; onBack: () => void }) {
     const readingTime = estimateReadingTime(post.blocks);
     const groupedBlocks = groupBlocks(post.blocks);
+    const headings = extractHeadings(post.blocks);
 
     return (
-        <article className="max-w-3xl mx-auto">
+        <article className="w-full">
             <button
                 onClick={onBack}
-                className="flex items-center gap-2 text-slate-500 hover:text-sky-600 transition-colors mb-4 group"
+                className="group flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors mb-8"
             >
-                <ArrowLeft
-                    size={18}
-                    className="group-hover:-translate-x-1 transition-transform"
-                />
-                <span>Back to all posts</span>
+                <div className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center group-hover:border-slate-300 transition-colors shadow-xs">
+                    <ArrowLeft size={16} />
+                </div>
+                Back to all posts
             </button>
 
             {post.cover && (
-                <div className="relative h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden mb-8 border border-slate-200">
-                    <img
-                        src={post.cover}
-                        alt={post.title}
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
+                <div className="relative aspect-[21/9] rounded-3xl overflow-hidden mb-12 shadow-lg ring-1 ring-slate-900/5">
+                    <img src={post.cover} alt={post.title} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
                 </div>
             )}
 
-            <header className="mb-6">
-                <div className="flex flex-wrap gap-2 mb-2">
-                    {post.tags.map((tag) => (
-                        <span
-                            key={tag}
-                            className="px-3 py-1 text-sm font-medium bg-sky-50 text-sky-600 rounded-full border border-sky-200"
-                        >
-                            <Tag size={12} className="inline mr-1.5" />
+            <header className="mb-12 text-center max-w-2xl mx-auto">
+                <div className="flex flex-wrap justify-center gap-2 mb-6">
+                    {post.tags.map(tag => (
+                        <span key={tag} className="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-blue-50 text-blue-700 border border-blue-100/50">
                             {tag}
                         </span>
                     ))}
                 </div>
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-2 leading-tight">
+
+                <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-6 text-balance leading-[1.1]">
                     {post.title}
                 </h1>
-                <p className="text-lg text-slate-600 mb-4">{post.description}</p>
-                <div className="flex items-center gap-6 text-sm text-slate-500 pb-4 border-b border-slate-200">
+
+                <p className="text-xl text-slate-600 mb-8 leading-relaxed text-balance">{post.description}</p>
+
+                <div className="flex items-center justify-center gap-8 text-sm font-medium text-slate-500 border-y border-slate-100 py-4">
                     {post.date && (
                         <span className="flex items-center gap-2">
-                            <Calendar size={16} className="text-sky-500" />
+                            <Calendar size={16} className="text-slate-400" />
                             {formatDate(post.date)}
                         </span>
                     )}
                     <span className="flex items-center gap-2">
-                        <Clock size={16} className="text-sky-500" />
+                        <Clock size={16} className="text-slate-400" />
                         {readingTime} min read
                     </span>
                 </div>
             </header>
 
-            <div className="prose prose-slate max-w-none">
-                {groupedBlocks.map((item, index) => {
-                    if (Array.isArray(item)) {
-                        const ListTag =
-                            item[0].type === "numbered_list_item" ? "ol" : "ul";
-                        return (
-                            <ListTag key={index} className="mb-4">
-                                {item.map((block) => (
-                                    <RenderBlock key={block.id} block={block} />
-                                ))}
-                            </ListTag>
-                        );
-                    }
-                    return <RenderBlock key={item.id} block={item} />;
-                })}
+            <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-12 items-start">
+                <aside className="hidden lg:block sticky top-24">
+                    <div className="text-sm font-semibold text-slate-900 mb-4 uppercase tracking-wider">
+                        Table of Contents
+                    </div>
+                    <TableOfContents headings={headings} />
+                </aside>
+
+                <div className="prose prose-lg prose-slate prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-img:rounded-2xl prose-img:shadow-md max-w-none">
+                    <div className="lg:hidden mb-8">
+                        <TableOfContents headings={headings} />
+                    </div>
+                    {groupedBlocks.map((item, i) =>
+                        Array.isArray(item)
+                            ? <ul key={i}>{item.map(b => <RenderBlock key={b.id} block={b} />)}</ul>
+                            : <RenderBlock key={item.id} block={item} />
+                    )}
+                </div>
             </div>
         </article>
     );
 }
+// Skeleton card for loading state
+function BlogCardSkeleton() {
+    return (
+        <div className="bg-white rounded-2xl overflow-hidden border border-slate-200/60 shadow-sm h-full flex flex-col">
+            <div className="aspect-[16/9] bg-slate-200 animate-pulse" />
+            <div className="p-6 flex-1 flex flex-col">
+                <div className="flex gap-2 mb-4">
+                    <div className="h-5 w-16 bg-slate-200 rounded-full animate-pulse" />
+                    <div className="h-5 w-20 bg-slate-200 rounded-full animate-pulse" />
+                </div>
+                <div className="h-7 w-3/4 bg-slate-200 rounded animate-pulse mb-3" />
+                <div className="h-4 w-full bg-slate-200 rounded animate-pulse mb-2" />
+                <div className="h-4 w-2/3 bg-slate-200 rounded animate-pulse mb-auto" />
+                <div className="pt-5 mt-6 border-t border-slate-100 flex justify-between">
+                    <div className="h-4 w-32 bg-slate-200 rounded animate-pulse" />
+                </div>
+            </div>
+        </div>
+    );
+}
 
 // Main component
-export default function BlogsListClient({ posts }: Props) {
+export default function BlogsListClient({ posts, loading, error }: Props) {
     const searchParams = useSearchParams();
     const slugParam = searchParams.get("slug");
 
@@ -573,35 +733,62 @@ export default function BlogsListClient({ posts }: Props) {
             )}
 
             {/* Main Content */}
-            <main className={`bg-white ${selectedPost ? 'mt-24' : ''}`}>
+            <main className={`bg-slate-50 ${selectedPost ? 'mt-24' : ''}`}>
                 <div className="mx-auto max-w-7xl px-6 py-16">
-                    {selectedPost ? (
-                        <BlogPostView post={selectedPost} onBack={handleBack} />
-                    ) : (
+                    {/* Loading State - Skeleton */}
+                    {loading && !selectedPost && (
+                        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                            {[1, 2, 3, 4, 5, 6].map((i) => (
+                                <BlogCardSkeleton key={i} />
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Error State */}
+                    {error && !loading && (
+                        <div className="text-center py-20">
+                            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-red-100 flex items-center justify-center">
+                                <BookOpen size={28} className="text-red-500" />
+                            </div>
+                            <h2 className="text-xl font-semibold text-slate-900 mb-2">
+                                Error loading posts
+                            </h2>
+                            <p className="text-slate-500">{error}</p>
+                        </div>
+                    )}
+
+                    {/* Content */}
+                    {!loading && !error && (
                         <>
-                            {/* Posts Grid */}
-                            {posts.length === 0 ? (
-                                <div className="text-center py-20">
-                                    <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-slate-100 flex items-center justify-center">
-                                        <BookOpen size={28} className="text-slate-400" />
-                                    </div>
-                                    <h2 className="text-xl font-semibold text-slate-900 mb-2">
-                                        No posts yet
-                                    </h2>
-                                    <p className="text-slate-500">
-                                        Check back soon for our latest articles and insights.
-                                    </p>
-                                </div>
+                            {selectedPost ? (
+                                <BlogPostView post={selectedPost} onBack={handleBack} />
                             ) : (
-                                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                                    {posts.map((post) => (
-                                        <BlogCard
-                                            key={post.id}
-                                            post={post}
-                                            onClick={() => handleSelectPost(post)}
-                                        />
-                                    ))}
-                                </div>
+                                <>
+                                    {/* Posts Grid */}
+                                    {posts.length === 0 ? (
+                                        <div className="text-center py-20">
+                                            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-slate-100 flex items-center justify-center">
+                                                <BookOpen size={28} className="text-slate-400" />
+                                            </div>
+                                            <h2 className="text-xl font-semibold text-slate-900 mb-2">
+                                                No posts yet
+                                            </h2>
+                                            <p className="text-slate-500">
+                                                Check back soon for our latest articles and insights.
+                                            </p>
+                                        </div>
+                                    ) : (
+                                        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                                            {posts.map((post) => (
+                                                <BlogCard
+                                                    key={post.id}
+                                                    post={post}
+                                                    onClick={() => handleSelectPost(post)}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                </>
                             )}
                         </>
                     )}
@@ -611,3 +798,4 @@ export default function BlogsListClient({ posts }: Props) {
         </div>
     );
 }
+

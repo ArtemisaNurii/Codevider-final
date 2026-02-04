@@ -1,24 +1,43 @@
-import type { Metadata } from "next";
-import { fetchPosts, fetchPostBlocks } from "@/lib/notionBlog";
+"use client";
+
+import { useState, useEffect } from "react";
+import { fetchPosts, fetchPostBySlug } from "@/lib/notionBlog";
 import BlogsListClient from "./BlogsListClient";
 import type { PostWithBlocks } from "./types";
 
-export const metadata: Metadata = {
-	title: "Blogs",
-	description: "Codevider insights and engineering notes",
-};
+export default function BlogsPage() {
+	const [posts, setPosts] = useState<PostWithBlocks[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<string | null>(null);
 
-// Fetch all posts and their blocks at build time
-export default async function BlogsPage() {
-	const posts = await fetchPosts();
+	useEffect(() => {
+		async function loadPosts() {
+			try {
+				setLoading(true);
+				const fetchedPosts = await fetchPosts();
 
-	// Pre-fetch blocks for all posts so they're available client-side
-	const postsWithBlocks: PostWithBlocks[] = await Promise.all(
-		posts.map(async (post) => {
-			const blocks = await fetchPostBlocks(post.id);
-			return { ...post, blocks };
-		})
-	);
+				// Fetch content for all posts
+				const postsWithBlocks: PostWithBlocks[] = await Promise.all(
+					fetchedPosts.map(async (post) => {
+						const fullPost = await fetchPostBySlug(post.slug);
+						return {
+							...post,
+							blocks: fullPost?.blocks || [],
+						};
+					})
+				);
 
-	return <BlogsListClient posts={postsWithBlocks} />;
+				setPosts(postsWithBlocks);
+			} catch (err) {
+				console.error("Error loading posts:", err);
+				setError(err instanceof Error ? err.message : "Failed to load posts");
+			} finally {
+				setLoading(false);
+			}
+		}
+
+		loadPosts();
+	}, []);
+
+	return <BlogsListClient posts={posts} loading={loading} error={error} />;
 }
