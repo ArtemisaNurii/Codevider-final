@@ -1,15 +1,10 @@
 import { Suspense } from "react";
 import { ApplyFormClient } from "./ApplyFormClient";
+import { ApplyFormSkeleton } from "./ApplyFormSkeleton";
 
 export default function ApplyPage() {
 	return (
-		<Suspense
-			fallback={
-				<div className="min-h-screen flex items-center justify-center">
-					Loading...
-				</div>
-			}
-		>
+		<Suspense fallback={<ApplyFormSkeleton />}>
 			<ApplyFormClient />
 		</Suspense>
 	);

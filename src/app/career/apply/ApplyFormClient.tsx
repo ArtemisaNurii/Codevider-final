@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Plus, X } from "lucide-react";
 import { formatPayment } from "@/lib/utils";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -28,6 +28,7 @@ import {
 	createJobApplicationSchema,
 } from "./schemas";
 import { useSearchParams, notFound } from "next/navigation";
+import { ApplyFormSkeleton } from "./ApplyFormSkeleton";
 
 type JobApplicationFormData = z.infer<
 	ReturnType<typeof createJobApplicationSchema>
@@ -109,6 +110,7 @@ export function ApplyFormClient() {
 				: parseInt(String(jobIdFromForm || "0"), 10);
 		if (!id || id < 1) {
 			setJob(null);
+			setShowNotFound(false);
 			return;
 		}
 		let cancelled = false;
@@ -168,7 +170,19 @@ export function ApplyFormClient() {
 
 	const formData = watch() as JobApplicationFormData;
 
-	if (!hasValidJobId || showNotFound) notFound();
+	if (!hasValidJobId) notFound();
+
+	if (showNotFound) notFound();
+
+	// Show skeleton while loading job details
+	if (isLoadingJob) {
+		return <ApplyFormSkeleton />;
+	}
+
+	// Job not loaded yet, show skeleton
+	if (!job) {
+		return <ApplyFormSkeleton />;
+	}
 
 	const addExperience = () => {
 		appendExperience({
@@ -194,7 +208,13 @@ export function ApplyFormClient() {
 	const addSkill = (skill: string) => {
 		if (skill.trim() === "") return;
 		const currentSkills = formData.skills || [];
-		setValue("skills", [...new Set([...currentSkills, skill.trim()])]);
+		const trimmedSkill = skill.trim();
+		// Check for case-insensitive duplicates
+		const isDuplicate = currentSkills.some(
+			(s) => s.toLowerCase() === trimmedSkill.toLowerCase(),
+		);
+		if (isDuplicate) return;
+		setValue("skills", [...currentSkills, trimmedSkill]);
 	};
 
 	const removeSkill = (skill: string) => {
@@ -414,494 +434,479 @@ export function ApplyFormClient() {
 
 	return (
 		<div>
-			<Suspense
-				fallback={
-					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-						<div className="text-center">Loading...</div>
-					</div>
-				}
-			>
-				<Header />
-				<div className="w-full bg-linear-to-r from-black via-slate-700 to-sky-600 pt-20 pb-10 ">
-					<div className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 lg:px-8">
-						<h2 className="text-5xl font-bold text-white">
-							{job?.title ?? "Apply for a position"}
-						</h2>
-						{job?.job_description && (
-							<p className="mt-4 text-gray-200 text-sm">
-								{job.job_description}
+			<Header />
+			<div className="w-full bg-linear-to-r from-black via-slate-700 to-sky-600 pt-20 pb-10 ">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 lg:px-8">
+					<h2 className="text-5xl font-bold text-white">
+						{job?.title ?? "Apply for a position"}
+					</h2>
+					{job?.job_description && (
+						<p className="mt-4 text-gray-200 text-sm">{job.job_description}</p>
+					)}
+					{job && (
+						<div className="flex flex-wrap gap-2 mt-3">
+							{[
+								job?.job_type?.job_type || "N/A",
+								formatPayment(
+									job?.start_amount,
+									job?.end_amount,
+									job?.pay_type,
+									job?.pay_according_to as
+										| "hour"
+										| "day"
+										| "week"
+										| "month"
+										| "year"
+										| undefined,
+								),
+								`${job?.addresses?.[0]?.address?.name ?? ""} • ${job?.addresses?.[0]?.address?.address1 ?? ""}`,
+							]
+								.filter(Boolean)
+								.map((info, index) => (
+									<span
+										key={index}
+										className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur"
+									>
+										{info}
+									</span>
+								))}
+						</div>
+					)}
+				</div>
+			</div>
+			<main className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+				<form onSubmit={handleSubmit(onSubmit)} className="">
+					{/* Job id from query param – kept in form for submit, hidden and disabled */}
+					<input
+						type="hidden"
+						{...register("job_id", {
+							setValueAs: (v) =>
+								v === "" || Number.isNaN(Number(v)) ? 0 : Number(v),
+						})}
+						disabled
+						aria-hidden
+					/>
+
+					<div className="space-y-2 mb-10">
+						<label
+							htmlFor="profile_image"
+							className="block text-sm font-medium text-gray-700 mb-2"
+						>
+							Profile Image{job?.is_photo_required === true && " *"}
+						</label>
+						{errors.profile_image && (
+							<p className="text-red-600 text-sm mb-2">
+								{errors.profile_image.message}
 							</p>
 						)}
-						{job && (
-							<div className="flex flex-wrap gap-2 mt-3">
-								{[
-									job?.job_type?.job_type || "N/A",
-									formatPayment(
-										job?.start_amount,
-										job?.end_amount,
-										job?.pay_type,
-										job?.pay_according_to as
-											| "hour"
-											| "day"
-											| "week"
-											| "month"
-											| "year"
-											| undefined,
-									),
-									`${job?.addresses?.[0]?.address?.name ?? ""} • ${job?.addresses?.[0]?.address?.address1 ?? ""}`,
-								]
-									.filter(Boolean)
-									.map((info, index) => (
-										<span
-											key={index}
-											className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur"
-										>
-											{info}
-										</span>
-									))}
-							</div>
-						)}
-					</div>
-				</div>
-				<main className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-					{isLoadingJob ? (
-						<div className="text-center py-10">
-							<div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500 mx-auto" />
-							<p className="mt-2 text-gray-600">Loading job details...</p>
-						</div>
-					) : null}
-
-					<form onSubmit={handleSubmit(onSubmit)} className="">
-						{/* Job id from query param – kept in form for submit, hidden and disabled */}
-						<input
-							type="hidden"
-							{...register("job_id", {
-								setValueAs: (v) =>
-									v === "" || Number.isNaN(Number(v)) ? 0 : Number(v),
-							})}
-							disabled
-							aria-hidden
-						/>
-
-						<div className="space-y-2 mb-10">
-							<label
-								htmlFor="profile_image"
-								className="block text-sm font-medium text-gray-700 mb-2"
-							>
-								Profile Image{job?.is_photo_required === true && " *"}
-							</label>
-							{errors.profile_image && (
-								<p className="text-red-600 text-sm mb-2">
-									{errors.profile_image.message}
-								</p>
+						<div className="flex items-center gap-4">
+							{profileImagePreview ? (
+								<div className="relative inline-block">
+									<img
+										src={profileImagePreview}
+										alt="Profile preview"
+										className="w-24 h-24 rounded-full object-cover border-2 border-gray-300 shadow-sm"
+									/>
+									<button
+										type="button"
+										onClick={() => {
+											setProfileImagePreview(null);
+											setValue("profile_image", null);
+											const input = document.getElementById(
+												"profile_image",
+											) as HTMLInputElement;
+											if (input) input.value = "";
+										}}
+										className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1.5 hover:bg-red-600"
+										aria-label="Remove image"
+									>
+										<X size={12} />
+									</button>
+								</div>
+							) : (
+								<div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center border-2 border-dashed border-gray-300">
+									<span className="text-gray-400 text-xs px-2">No image</span>
+								</div>
 							)}
-							<div className="flex items-center gap-4">
-								{profileImagePreview ? (
-									<div className="relative inline-block">
-										<img
-											src={profileImagePreview}
-											alt="Profile preview"
-											className="w-24 h-24 rounded-full object-cover border-2 border-gray-300 shadow-sm"
-										/>
-										<button
-											type="button"
-											onClick={() => {
-												setProfileImagePreview(null);
-												setValue("profile_image", null);
-												const input = document.getElementById(
-													"profile_image",
-												) as HTMLInputElement;
-												if (input) input.value = "";
-											}}
-											className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1.5 hover:bg-red-600"
-											aria-label="Remove image"
-										>
-											<X size={12} />
-										</button>
-									</div>
-								) : (
-									<div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center border-2 border-dashed border-gray-300">
-										<span className="text-gray-400 text-xs px-2">No image</span>
-									</div>
-								)}
-								<div className="flex-1">
-									<Input
-										id="profile_image"
-										name="profile_image"
-										type="file"
-										accept="image/*"
-										onChange={handleProfileImageChange}
-										className="block w-full text-sm"
-									/>
-									<p className="text-xs text-gray-500 mt-1">
-										Max 5MB, JPG, PNG, etc.
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<div className="mb-10 space-y-4">
-							<div className="flex flex-row gap-4">
-								<div className="flex-1">
-									<Input placeholder="Full Name*" {...register("full_name")} />
-									{errors.full_name && (
-										<p className="text-red-600 text-sm mt-1">
-											{errors.full_name.message}
-										</p>
-									)}
-								</div>
-								<div className="flex-1">
-									<Input
-										type="email"
-										placeholder="Email*"
-										{...register("email")}
-									/>
-									{errors.email && (
-										<p className="text-red-600 text-sm mt-1">
-											{errors.email.message}
-										</p>
-									)}
-								</div>
-							</div>
-							<div className="flex flex-row gap-4">
-								<div className="flex-1">
-									<Input placeholder="Phone Number*" {...register("phone")} />
-									{errors.phone && (
-										<p className="text-red-600 text-sm mt-1">
-											{errors.phone.message}
-										</p>
-									)}
-								</div>
-								<div className="flex-1">
-									<Input
-										type="date"
-										placeholder={`Date of Birth${job?.is_dob_required ? " *" : ""}`}
-										{...register("date_of_birth")}
-									/>
-									{errors.date_of_birth && (
-										<p className="text-red-600 text-sm mt-1">
-											{errors.date_of_birth.message}
-										</p>
-									)}
-								</div>
-							</div>
-							<div>
-								<Controller
-									name="gender"
-									control={control}
-									render={({ field }) => (
-										<Select
-											value={field.value || ""}
-											onValueChange={field.onChange}
-										>
-											<SelectTrigger className="w-full">
-												<SelectValue
-													placeholder={`Gender${job?.is_gender_required ? " *" : ""}`}
-												/>
-											</SelectTrigger>
-											<SelectContent>
-												<SelectItem value="male">Male</SelectItem>
-												<SelectItem value="female">Female</SelectItem>
-												<SelectItem value="others">Others</SelectItem>
-											</SelectContent>
-										</Select>
-									)}
-								/>
-								{errors.gender && (
-									<p className="text-red-600 text-sm mt-1">
-										{errors.gender.message}
-									</p>
-								)}
-							</div>
-							<textarea
-								rows={4}
-								placeholder="Bio"
-								{...register("bio")}
-								className="block w-full p-4 rounded-md border border-gray-300 shadow-sm"
-							/>
-
-							<div className="space-y-2">
-								<label
-									htmlFor="resume"
-									className="block text-sm font-medium text-gray-700 mb-2"
-								>
-									Upload Resume{" "}
-									{(job?.is_resume_required === true ||
-										job?.is_resume_required === undefined) &&
-										"*"}
-								</label>
-								{errors.resume && (
-									<p className="text-red-600 text-sm mb-2">
-										{errors.resume.message}
-									</p>
-								)}
+							<div className="flex-1">
 								<Input
-									id="resume"
+									id="profile_image"
+									name="profile_image"
 									type="file"
-									accept=".pdf,.doc,.docx"
-									onChange={handleFileChange}
+									accept="image/*"
+									onChange={handleProfileImageChange}
 									className="block w-full text-sm"
 								/>
-								<p className="text-xs text-gray-500 mt-1">PDF, DOC, or DOCX</p>
+								<p className="text-xs text-gray-500 mt-1">
+									Max 5MB, JPG, PNG, etc.
+								</p>
 							</div>
 						</div>
+					</div>
 
-						<div className="space-y-4 mb-10">
-							<h4 className="text-lg font-medium">Experience</h4>
-							{experienceFields.map((field, index) => (
-								<div
-									key={field.id}
-									className="p-4 border border-gray-200 rounded-md space-y-3 relative"
-								>
-									<button
-										type="button"
-										onClick={() => removeExperience(index)}
-										className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
-									>
-										<X size={18} />
-									</button>
-									<div className="grid grid-cols-2 gap-3">
-										<div>
-											<label className="block text-sm font-medium text-gray-700 mb-1">
-												Start Date
-											</label>
-											<Input
-												type="date"
-												{...register(`experiences.${index}.start_date`)}
-												className="w-full"
-											/>
-											{errors.experiences?.[index]?.start_date && (
-												<p className="text-red-600 text-sm mt-1">
-													{errors.experiences[index]?.start_date?.message}
-												</p>
-											)}
-										</div>
-										<div>
-											<label className="block text-sm font-medium text-gray-700 mb-1">
-												End Date
-											</label>
-											<Input
-												type="date"
-												{...register(`experiences.${index}.end_date`)}
-												className="w-full"
-											/>
-										</div>
-									</div>
-									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">
-											Company
-										</label>
-										<Input
-											{...register(`experiences.${index}.company_name`)}
-											className="w-full"
-										/>
-										{errors.experiences?.[index]?.company_name && (
-											<p className="text-red-600 text-sm mt-1">
-												{errors.experiences[index]?.company_name?.message}
-											</p>
-										)}
-									</div>
-									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">
-											Position
-										</label>
-										<Input
-											{...register(`experiences.${index}.position`)}
-											className="w-full"
-										/>
-										{errors.experiences?.[index]?.position && (
-											<p className="text-red-600 text-sm mt-1">
-												{errors.experiences[index]?.position?.message}
-											</p>
-										)}
-									</div>
-									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">
-											Description
-										</label>
-										<textarea
-											{...register(`experiences.${index}.description`)}
-											className="block w-full rounded-md border border-gray-300 shadow-sm"
-											rows={3}
-										/>
-									</div>
-								</div>
-							))}
-							<Button
-								type="button"
-								onClick={addExperience}
-								variant="outline"
-								className="flex items-center gap-2 w-full justify-center"
-							>
-								<Plus size={16} /> Add Experience
-							</Button>
-						</div>
-
-						<div className="space-y-4 mb-10">
-							<h4 className="text-lg font-medium">Education</h4>
-							{educationFields.map((field, index) => (
-								<div
-									key={field.id}
-									className="p-4 border border-gray-200 rounded-md space-y-3 relative"
-								>
-									<button
-										type="button"
-										onClick={() => removeEducation(index)}
-										className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
-									>
-										<X size={18} />
-									</button>
-									<div className="grid grid-cols-2 gap-3">
-										<div>
-											<label className="block text-sm font-medium text-gray-700 mb-1">
-												Start Date
-											</label>
-											<Input
-												type="date"
-												{...register(`educations.${index}.start_date`)}
-												className="w-full"
-											/>
-											{errors.educations?.[index]?.start_date && (
-												<p className="text-red-600 text-sm mt-1">
-													{errors.educations[index]?.start_date?.message}
-												</p>
-											)}
-										</div>
-										<div>
-											<label className="block text-sm font-medium text-gray-700 mb-1">
-												End Date
-											</label>
-											<Input
-												type="date"
-												{...register(`educations.${index}.end_date`)}
-												className="w-full"
-											/>
-										</div>
-									</div>
-									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">
-											Institution
-										</label>
-										<Input
-											{...register(`educations.${index}.institution_name`)}
-											className="w-full"
-										/>
-										{errors.educations?.[index]?.institution_name && (
-											<p className="text-red-600 text-sm mt-1">
-												{errors.educations[index]?.institution_name?.message}
-											</p>
-										)}
-									</div>
-									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">
-											Degree
-										</label>
-										<Input
-											{...register(`educations.${index}.degree`)}
-											className="w-full"
-										/>
-										{errors.educations?.[index]?.degree && (
-											<p className="text-red-600 text-sm mt-1">
-												{errors.educations[index]?.degree?.message}
-											</p>
-										)}
-									</div>
-									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">
-											Field of Study
-										</label>
-										<Input
-											{...register(`educations.${index}.field_of_study`)}
-											className="w-full"
-										/>
-									</div>
-									<div>
-										<label className="block text-sm font-medium text-gray-700 mb-1">
-											Description
-										</label>
-										<textarea
-											{...register(`educations.${index}.description`)}
-											className="block w-full rounded-md border border-gray-300 shadow-sm"
-											rows={3}
-										/>
-									</div>
-								</div>
-							))}
-							<Button
-								type="button"
-								onClick={addEducation}
-								variant="outline"
-								className="flex items-center gap-2 w-full justify-center"
-							>
-								<Plus size={16} /> Add Education
-							</Button>
-						</div>
-
-						<div className="space-y-4 mb-10">
-							<h4 className="text-lg font-medium">Skills</h4>
-							<div className="flex flex-wrap gap-2 mb-2">
-								{Array.isArray(formData.skills) &&
-									formData.skills.map((skill: string, index: number) => (
-										<div
-											key={index}
-											className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full flex items-center gap-1"
-										>
-											<span>{skill}</span>
-											<button
-												type="button"
-												onClick={() => removeSkill(skill)}
-												className="text-blue-600 hover:text-blue-800"
-											>
-												<X size={14} />
-											</button>
-										</div>
-									))}
+					<div className="mb-10 space-y-4">
+						<div className="flex flex-row gap-4">
+							<div className="flex-1">
+								<Input placeholder="Full Name*" {...register("full_name")} />
+								{errors.full_name && (
+									<p className="text-red-600 text-sm mt-1">
+										{errors.full_name.message}
+									</p>
+								)}
 							</div>
-							<div className="flex items-center gap-2">
+							<div className="flex-1">
 								<Input
-									placeholder="Type a skill and press Enter"
-									onKeyDown={handleSkillInputKeyDown}
-									className="flex-1"
+									type="email"
+									placeholder="Email*"
+									{...register("email")}
 								/>
-								<Button
-									type="button"
-									onClick={(e) => {
-										const input = e.currentTarget
-											.previousElementSibling as HTMLInputElement;
-										if (input?.value?.trim()) {
-											addSkill(input.value.trim());
-											input.value = "";
-										}
-									}}
-									variant="outline"
-								>
-									Add
-								</Button>
+								{errors.email && (
+									<p className="text-red-600 text-sm mt-1">
+										{errors.email.message}
+									</p>
+								)}
 							</div>
 						</div>
-
-						{submitMessage && (
-							<div
-								className={`p-2 mb-4 ${
-									submitMessage.includes("Error")
-										? "text-red-600"
-										: "text-green-600"
-								}`}
-							>
-								{submitMessage}
+						<div className="flex flex-row gap-4">
+							<div className="flex-1">
+								<Input placeholder="Phone Number*" {...register("phone")} />
+								{errors.phone && (
+									<p className="text-red-600 text-sm mt-1">
+										{errors.phone.message}
+									</p>
+								)}
 							</div>
-						)}
+							<div className="flex-1">
+								<Input
+									type="date"
+									placeholder={`Date of Birth${job?.is_dob_required ? " *" : ""}`}
+									{...register("date_of_birth")}
+								/>
+								{errors.date_of_birth && (
+									<p className="text-red-600 text-sm mt-1">
+										{errors.date_of_birth.message}
+									</p>
+								)}
+							</div>
+						</div>
+						<div>
+							<Controller
+								name="gender"
+								control={control}
+								render={({ field }) => (
+									<Select
+										value={field.value || ""}
+										onValueChange={field.onChange}
+									>
+										<SelectTrigger className="w-full">
+											<SelectValue
+												placeholder={`Gender${job?.is_gender_required ? " *" : ""}`}
+											/>
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value="male">Male</SelectItem>
+											<SelectItem value="female">Female</SelectItem>
+											<SelectItem value="others">Others</SelectItem>
+										</SelectContent>
+									</Select>
+								)}
+							/>
+							{errors.gender && (
+								<p className="text-red-600 text-sm mt-1">
+									{errors.gender.message}
+								</p>
+							)}
+						</div>
+						<textarea
+							rows={4}
+							placeholder="Bio"
+							{...register("bio")}
+							className="block w-full p-4 rounded-md border border-gray-300 shadow-sm"
+						/>
+
+						<div className="space-y-2">
+							<label
+								htmlFor="resume"
+								className="block text-sm font-medium text-gray-700 mb-2"
+							>
+								Upload Resume{" "}
+								{(job?.is_resume_required === true ||
+									job?.is_resume_required === undefined) &&
+									"*"}
+							</label>
+							{errors.resume && (
+								<p className="text-red-600 text-sm mb-2">
+									{errors.resume.message}
+								</p>
+							)}
+							<Input
+								id="resume"
+								type="file"
+								accept=".pdf,.doc,.docx,.txt,.md,.odt"
+								onChange={handleFileChange}
+								className="block w-full text-sm"
+							/>
+							<p className="text-xs text-gray-500 mt-1">
+								PDF, DOC, DOCX, TXT, MD, or ODT
+							</p>
+						</div>
+					</div>
+
+					<div className="space-y-4 mb-10">
+						<h4 className="text-lg font-medium">Experience</h4>
+						{experienceFields.map((field, index) => (
+							<div
+								key={field.id}
+								className="p-4 border border-gray-200 rounded-md space-y-3 relative"
+							>
+								<button
+									type="button"
+									onClick={() => removeExperience(index)}
+									className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
+								>
+									<X size={18} />
+								</button>
+								<div className="grid grid-cols-2 gap-3">
+									<div>
+										<label className="block text-sm font-medium text-gray-700 mb-1">
+											Start Date
+										</label>
+										<Input
+											type="date"
+											{...register(`experiences.${index}.start_date`)}
+											className="w-full"
+										/>
+										{errors.experiences?.[index]?.start_date && (
+											<p className="text-red-600 text-sm mt-1">
+												{errors.experiences[index]?.start_date?.message}
+											</p>
+										)}
+									</div>
+									<div>
+										<label className="block text-sm font-medium text-gray-700 mb-1">
+											End Date
+										</label>
+										<Input
+											type="date"
+											{...register(`experiences.${index}.end_date`)}
+											className="w-full"
+										/>
+									</div>
+								</div>
+								<div>
+									<label className="block text-sm font-medium text-gray-700 mb-1">
+										Company
+									</label>
+									<Input
+										{...register(`experiences.${index}.company_name`)}
+										className="w-full"
+									/>
+									{errors.experiences?.[index]?.company_name && (
+										<p className="text-red-600 text-sm mt-1">
+											{errors.experiences[index]?.company_name?.message}
+										</p>
+									)}
+								</div>
+								<div>
+									<label className="block text-sm font-medium text-gray-700 mb-1">
+										Position
+									</label>
+									<Input
+										{...register(`experiences.${index}.position`)}
+										className="w-full"
+									/>
+									{errors.experiences?.[index]?.position && (
+										<p className="text-red-600 text-sm mt-1">
+											{errors.experiences[index]?.position?.message}
+										</p>
+									)}
+								</div>
+								<div>
+									<label className="block text-sm font-medium text-gray-700 mb-1">
+										Description
+									</label>
+									<textarea
+										{...register(`experiences.${index}.description`)}
+										className="block w-full rounded-md border border-gray-300 shadow-sm"
+										rows={3}
+									/>
+								</div>
+							</div>
+						))}
 						<Button
-							type="submit"
-							disabled={isSubmitting || !hasValidJobId}
-							className="w-full"
+							type="button"
+							onClick={addExperience}
+							variant="outline"
+							className="flex items-center gap-2 w-full justify-center"
 						>
-							{isSubmitting ? "Submitting..." : "Apply Now"}
+							<Plus size={16} /> Add Experience
 						</Button>
-					</form>
-				</main>
-				<Footer />
-			</Suspense>
+					</div>
+
+					<div className="space-y-4 mb-10">
+						<h4 className="text-lg font-medium">Education</h4>
+						{educationFields.map((field, index) => (
+							<div
+								key={field.id}
+								className="p-4 border border-gray-200 rounded-md space-y-3 relative"
+							>
+								<button
+									type="button"
+									onClick={() => removeEducation(index)}
+									className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
+								>
+									<X size={18} />
+								</button>
+								<div className="grid grid-cols-2 gap-3">
+									<div>
+										<label className="block text-sm font-medium text-gray-700 mb-1">
+											Start Date
+										</label>
+										<Input
+											type="date"
+											{...register(`educations.${index}.start_date`)}
+											className="w-full"
+										/>
+										{errors.educations?.[index]?.start_date && (
+											<p className="text-red-600 text-sm mt-1">
+												{errors.educations[index]?.start_date?.message}
+											</p>
+										)}
+									</div>
+									<div>
+										<label className="block text-sm font-medium text-gray-700 mb-1">
+											End Date
+										</label>
+										<Input
+											type="date"
+											{...register(`educations.${index}.end_date`)}
+											className="w-full"
+										/>
+									</div>
+								</div>
+								<div>
+									<label className="block text-sm font-medium text-gray-700 mb-1">
+										Institution
+									</label>
+									<Input
+										{...register(`educations.${index}.institution_name`)}
+										className="w-full"
+									/>
+									{errors.educations?.[index]?.institution_name && (
+										<p className="text-red-600 text-sm mt-1">
+											{errors.educations[index]?.institution_name?.message}
+										</p>
+									)}
+								</div>
+								<div>
+									<label className="block text-sm font-medium text-gray-700 mb-1">
+										Degree
+									</label>
+									<Input
+										{...register(`educations.${index}.degree`)}
+										className="w-full"
+									/>
+									{errors.educations?.[index]?.degree && (
+										<p className="text-red-600 text-sm mt-1">
+											{errors.educations[index]?.degree?.message}
+										</p>
+									)}
+								</div>
+								<div>
+									<label className="block text-sm font-medium text-gray-700 mb-1">
+										Field of Study
+									</label>
+									<Input
+										{...register(`educations.${index}.field_of_study`)}
+										className="w-full"
+									/>
+								</div>
+								<div>
+									<label className="block text-sm font-medium text-gray-700 mb-1">
+										Description
+									</label>
+									<textarea
+										{...register(`educations.${index}.description`)}
+										className="block w-full rounded-md border border-gray-300 shadow-sm"
+										rows={3}
+									/>
+								</div>
+							</div>
+						))}
+						<Button
+							type="button"
+							onClick={addEducation}
+							variant="outline"
+							className="flex items-center gap-2 w-full justify-center"
+						>
+							<Plus size={16} /> Add Education
+						</Button>
+					</div>
+
+					<div className="space-y-4 mb-10">
+						<h4 className="text-lg font-medium">Skills</h4>
+						<div className="flex flex-wrap gap-2 mb-2">
+							{Array.isArray(formData.skills) &&
+								formData.skills.map((skill: string, index: number) => (
+									<div
+										key={index}
+										className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full flex items-center gap-1"
+									>
+										<span>{skill}</span>
+										<button
+											type="button"
+											onClick={() => removeSkill(skill)}
+											className="text-blue-600 hover:text-blue-800"
+										>
+											<X size={14} />
+										</button>
+									</div>
+								))}
+						</div>
+						<div className="flex items-center gap-2">
+							<Input
+								placeholder="Type a skill and press Enter"
+								onKeyDown={handleSkillInputKeyDown}
+								className="flex-1"
+							/>
+							<Button
+								type="button"
+								onClick={(e) => {
+									const input = e.currentTarget
+										.previousElementSibling as HTMLInputElement;
+									if (input?.value?.trim()) {
+										addSkill(input.value.trim());
+										input.value = "";
+									}
+								}}
+								variant="outline"
+							>
+								Add
+							</Button>
+						</div>
+					</div>
+
+					{submitMessage && (
+						<div
+							className={`p-2 mb-4 ${
+								submitMessage.includes("Error")
+									? "text-red-600"
+									: "text-green-600"
+							}`}
+						>
+							{submitMessage}
+						</div>
+					)}
+					<Button
+						type="submit"
+						disabled={isSubmitting || !hasValidJobId}
+						className="w-full"
+					>
+						{isSubmitting ? "Submitting..." : "Apply Now"}
+					</Button>
+				</form>
+			</main>
+			<Footer />
 		</div>
 	);
 }
