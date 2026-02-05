@@ -31,7 +31,7 @@ export async function getJobs(
 	const limit = params.limit ?? 10;
 
 	// Build URL (send page & limit by default)
-	const url = new URL(`${baseUrl}/${RECRUIT_JOBS_ENDPOINT}`);
+	const url = new URL(`${baseUrl}/${RECRUIT_JOBS_ENDPOINT}/open`);
 	url.searchParams.set("page", String(page));
 	url.searchParams.set("limit", String(limit));
 

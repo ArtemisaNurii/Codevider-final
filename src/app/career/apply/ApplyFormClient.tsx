@@ -17,7 +17,7 @@ import { formatPayment } from "@/lib/utils";
 import { Suspense, useEffect, useState } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { APPLICATION, APPLICATION_BLOBS_UPLOAD } from "@/constants/endpoint";
+import { APPLICATION, APPLICATION_BLOBS_UPLOAD, RECRUIT_JOBS_ENDPOINT } from "@/constants/endpoint";
 import { z } from "zod";
 import {
 	createJobApplicationDefaultValues,
@@ -110,7 +110,7 @@ export function ApplyFormClient() {
 		let cancelled = false;
 		setShowNotFound(false);
 		setIsLoadingJob(true);
-		fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/recruit/jobs/${id}`)
+		fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/${RECRUIT_JOBS_ENDPOINT}/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				if (cancelled) return;
@@ -435,12 +435,12 @@ export function ApplyFormClient() {
 										job?.end_amount,
 										job?.pay_type,
 										job?.pay_according_to as
-											| "hour"
-											| "day"
-											| "week"
-											| "month"
-											| "year"
-											| undefined,
+										| "hour"
+										| "day"
+										| "week"
+										| "month"
+										| "year"
+										| undefined,
 									),
 									`${job?.addresses?.[0]?.address?.name ?? ""} • ${job?.addresses?.[0]?.address?.address1 ?? ""}`,
 								]
@@ -876,11 +876,10 @@ export function ApplyFormClient() {
 
 						{submitMessage && (
 							<div
-								className={`p-2 mb-4 ${
-									submitMessage.includes("Error")
+								className={`p-2 mb-4 ${submitMessage.includes("Error")
 										? "text-red-600"
 										: "text-green-600"
-								}`}
+									}`}
 							>
 								{submitMessage}
 							</div>

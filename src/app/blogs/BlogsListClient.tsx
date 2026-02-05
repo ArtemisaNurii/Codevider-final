@@ -1,17 +1,17 @@
-"use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, useEffect, useRef } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { fetchPostBySlug } from "@/lib/notionBlog";
+import { BlogDetailSkeleton, SearchSkeleton, BlogCardSkeleton, BlogContentSkeleton } from "./skeletons";
 import {
     ArrowLeft,
     Calendar,
     Clock,
-    Tag,
-    ChevronRight,
     BookOpen,
-    List,
     ArrowUpRight,
+    Search,
 } from "lucide-react";
+import BlogFilters from "./BlogFilters";
 import type { PostWithBlocks } from "./types";
 import type { NotionBlock, NotionRichText } from "@/lib/notionBlog";
 import Header from "../components/navbar";
@@ -21,6 +21,10 @@ type Props = {
     posts: PostWithBlocks[];
     loading?: boolean;
     error?: string | null;
+    hasMore?: boolean;
+    loadMore?: () => void;
+    loadingMore?: boolean;
+    availableTags?: string[];
 };
 
 // Estimate reading time based on content length
@@ -129,32 +133,37 @@ function TableOfContents({ headings }: { headings: HeadingItem[] }) {
     if (!headings.length) return null;
 
     return (
-        <nav className="relative">
-            <div className="absolute left-0 top-0 bottom-0 w-px bg-slate-200" />
-            <ul className="space-y-2 relative">
-                {headings.map((h, i) => (
-                    <li key={i} className="relative">
-                        <button
-                            onClick={() => {
-                                document.getElementById(h.id)?.scrollIntoView({ behavior: "smooth" });
-                                setActiveId(h.id);
-                            }}
-                            className={`block w-full text-left transition-all duration-200 truncate pl-4 border-l-2 -ml-[1px]
-                                ${activeId === h.id
-                                    ? "border-sky-500 text-sky-600 font-medium translate-x-1"
-                                    : "border-transparent text-slate-500 hover:text-slate-900 hover:border-slate-300"
-                                }`}
-                            style={{
-                                marginLeft: h.level > 2 ? `${(h.level - 2) * 1}rem` : undefined
-                            }}
-                            title={h.text}
-                        >
-                            <span className="text-sm leading-relaxed block py-1">
-                                {h.text}
-                            </span>
-                        </button>
-                    </li>
-                ))}
+        <nav className="relative pl-2">
+            {/* Subtle background track */}
+            <div className="absolute left-2 top-2 bottom-2 w-[1px] bg-slate-100 rounded-full" />
+
+            <ul className="font-medium text-sm space-y-0.5 relative">
+                {headings.map((h, i) => {
+                    const isActive = activeId === h.id;
+                    return (
+                        <li key={i} className="relative">
+                            <button
+                                onClick={() => {
+                                    document.getElementById(h.id)?.scrollIntoView({ behavior: "smooth" });
+                                    setActiveId(h.id);
+                                }}
+                                className={`group flex w-full text-left py-1.5 pl-4 transition-all duration-300 ease-out border-l-[1.5px] -ml-[1px]
+                                    ${isActive
+                                        ? "border-sky-500 text-sky-700 font-semibold"
+                                        : "border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300"
+                                    }`}
+                                style={{
+                                    paddingLeft: `${1 + (h.level > 2 ? (h.level - 2) * 0.75 : 0)}rem`
+                                }}
+                                title={h.text}
+                            >
+                                <span className={`block truncate transition-transform duration-300 ${isActive ? 'translate-x-1' : 'group-hover:translate-x-0.5'}`}>
+                                    {h.text}
+                                </span>
+                            </button>
+                        </li>
+                    );
+                })}
             </ul>
         </nav>
     );
@@ -646,76 +655,145 @@ function BlogPostView({ post, onBack }: { post: PostWithBlocks; onBack: () => vo
 
                 <div className="prose prose-lg prose-slate prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-img:rounded-2xl prose-img:shadow-md max-w-none">
                     <div className="lg:hidden mb-8">
-                        <TableOfContents headings={headings} />
+                        {headings.length > 0 && <TableOfContents headings={headings} />}
                     </div>
-                    {groupedBlocks.map((item, i) =>
-                        Array.isArray(item)
-                            ? <ul key={i}>{item.map(b => <RenderBlock key={b.id} block={b} />)}</ul>
-                            : <RenderBlock key={item.id} block={item} />
+                    {groupedBlocks.length > 0 ? (
+                        groupedBlocks.map((item, i) =>
+                            Array.isArray(item)
+                                ? <ul key={i}>{item.map(b => <RenderBlock key={b.id} block={b} />)}</ul>
+                                : <RenderBlock key={item.id} block={item} />
+                        )
+                    ) : (
+                        /* Show skeleton if no blocks (still loading content) */
+                        <BlogContentSkeleton />
                     )}
                 </div>
             </div>
         </article>
     );
 }
-// Skeleton card for loading state
-function BlogCardSkeleton() {
-    return (
-        <div className="bg-white rounded-2xl overflow-hidden border border-slate-200/60 shadow-sm h-full flex flex-col">
-            <div className="aspect-[16/9] bg-slate-200 animate-pulse" />
-            <div className="p-6 flex-1 flex flex-col">
-                <div className="flex gap-2 mb-4">
-                    <div className="h-5 w-16 bg-slate-200 rounded-full animate-pulse" />
-                    <div className="h-5 w-20 bg-slate-200 rounded-full animate-pulse" />
-                </div>
-                <div className="h-7 w-3/4 bg-slate-200 rounded animate-pulse mb-3" />
-                <div className="h-4 w-full bg-slate-200 rounded animate-pulse mb-2" />
-                <div className="h-4 w-2/3 bg-slate-200 rounded animate-pulse mb-auto" />
-                <div className="pt-5 mt-6 border-t border-slate-100 flex justify-between">
-                    <div className="h-4 w-32 bg-slate-200 rounded animate-pulse" />
-                </div>
-            </div>
-        </div>
-    );
-}
+
 
 // Main component
-export default function BlogsListClient({ posts, loading, error }: Props) {
+export default function BlogsListClient({ posts, loading, error, hasMore, loadMore, loadingMore, availableTags = [] }: Props) {
     const searchParams = useSearchParams();
+    const router = useRouter(); // Use router for navigation to ensure SearchParams update
     const slugParam = searchParams.get("slug");
 
-    // Compute the current post directly from URL to avoid flash/double render
-    const currentPost = slugParam
-        ? posts.find((p) => p.slug === slugParam) || null
-        : null;
+    const [searchQuery, setSearchQuery] = useState("");
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-    const [selectedPost, setSelectedPost] = useState<PostWithBlocks | null>(currentPost);
+    const [selectedPost, setSelectedPost] = useState<PostWithBlocks | null>(null);
+    const [loadingPost, setLoadingPost] = useState(false);
+    const [postError, setPostError] = useState<string | null>(null);
 
-    // Sync selected post with URL slug changes
+    // Sync selected post with URL slug changes and fetch content if needed
     useEffect(() => {
-        setSelectedPost(currentPost);
-    }, [currentPost]);
+        if (!slugParam) {
+            setSelectedPost(null);
+            setPostError(null);
+            return;
+        }
+
+        async function loadPostContent() {
+            // Check if we already have the full content in state (optimization)
+            if (selectedPost && selectedPost.slug === slugParam && selectedPost.blocks && selectedPost.blocks.length > 0) {
+                return;
+            }
+
+            // Should reset error on new fetch attempt
+            setPostError(null);
+
+            // Check if passed in props (unlikely to have blocks now, but good check)
+            const postInList = posts.find(p => p.slug === slugParam);
+            if (postInList && postInList.blocks && postInList.blocks.length > 0) {
+                setSelectedPost(postInList);
+                return;
+            }
+
+            // Fetch content
+            setLoadingPost(true);
+            try {
+                // Use the object from list as base if available (for instant title/cover render while loading blocks)
+                if (postInList) {
+                    setSelectedPost(postInList);
+                }
+
+                const fullPost = await fetchPostBySlug(slugParam!);
+                if (fullPost) {
+                    setSelectedPost(fullPost);
+                } else {
+                    // Start of handling for null return (404) or similar issues not caught by catch
+                    setPostError("Post not found");
+                }
+            } catch (err) {
+                console.error("Failed to load post content", err);
+                setPostError("Failed to load post content. Please try again later.");
+            } finally {
+                setLoadingPost(false);
+            }
+        }
+
+        loadPostContent();
+    }, [slugParam, posts]);
 
     // Handle post selection
     const handleSelectPost = (post: PostWithBlocks) => {
-        window.history.pushState({}, "", `/blogs?slug=${post.slug}`);
-        setSelectedPost(post);
+        // Use router to update URL, triggering the effect above
+        // We push to the same page with query param
+        router.push(`/blogs?slug=${post.slug}`);
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     // Handle back navigation
     const handleBack = () => {
-        window.history.pushState({}, "", "/blogs");
+        router.push("/blogs");
         setSelectedPost(null);
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
+
+    // Use availableTags from props instead of deriving
+    const allTags = availableTags;
+
+    const filteredPosts = posts.filter(post => {
+        const query = searchQuery.toLowerCase().trim();
+        const matchesSearch = !query ||
+            post.title.toLowerCase().includes(query) ||
+            post.description.toLowerCase().includes(query) ||
+            post.tags.some(t => t.toLowerCase().includes(query));
+
+        const matchesTags = selectedTags.length === 0 ||
+            selectedTags.some(tag => post.tags.includes(tag));
+
+        return matchesSearch && matchesTags;
+    });
+
+    // Infinite scroll observer
+    const loadMoreRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!loadMore || !hasMore || loadingMore) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                loadMore();
+            }
+        }, { rootMargin: "200px" });
+
+        // Wait a bit for the DOM to settle or just observe immediately
+        if (loadMoreRef.current) {
+            observer.observe(loadMoreRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [loadMore, hasMore, loadingMore]);
 
     return (
         <div>
             <Header />
 
             {/* Header Section - matching Services/Career pages (only show on list view) */}
-            {!selectedPost && (
+            {!slugParam && (
                 <header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
                     <div className="mx-auto max-w-7xl px-6 py-16 md:py-20 mt-10 md:mt-20">
                         <p className="text-sm font-semibold uppercase tracking-widest mt-10 text-sky-300">
@@ -733,15 +811,19 @@ export default function BlogsListClient({ posts, loading, error }: Props) {
             )}
 
             {/* Main Content */}
-            <main className={`bg-slate-50 ${selectedPost ? 'mt-24' : ''}`}>
+            <main className={`bg-slate-50 ${slugParam ? 'mt-24' : ''}`}>
                 <div className="mx-auto max-w-7xl px-6 py-16">
                     {/* Loading State - Skeleton */}
-                    {loading && !selectedPost && (
-                        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                            {[1, 2, 3, 4, 5, 6].map((i) => (
-                                <BlogCardSkeleton key={i} />
-                            ))}
-                        </div>
+                    {loading && (
+                        !slugParam ? (
+                            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                                {[1, 2, 3, 4, 5, 6].map((i) => (
+                                    <BlogCardSkeleton key={i} />
+                                ))}
+                            </div>
+                        ) : (
+                            <BlogDetailSkeleton onBack={handleBack} />
+                        )
                     )}
 
                     {/* Error State */}
@@ -760,8 +842,29 @@ export default function BlogsListClient({ posts, loading, error }: Props) {
                     {/* Content */}
                     {!loading && !error && (
                         <>
-                            {selectedPost ? (
-                                <BlogPostView post={selectedPost} onBack={handleBack} />
+                            {slugParam ? (
+                                postError ? (
+                                    <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl border border-slate-200">
+                                        <div className="w-16 h-16 mb-4 rounded-full bg-red-50 flex items-center justify-center">
+                                            <BookOpen size={28} className="text-red-500" />
+                                        </div>
+                                        <h2 className="text-xl font-bold text-slate-900 mb-2">Unavailable</h2>
+                                        <p className="text-slate-500 mb-8 max-w-md text-center">{postError}</p>
+                                        <button
+                                            onClick={handleBack}
+                                            className="px-6 py-2 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-colors font-medium"
+                                        >
+                                            Back to all posts
+                                        </button>
+                                    </div>
+                                ) : (
+                                    // If we have selectedPost (even with no blocks), show View. Otherwise show Skeleton.
+                                    selectedPost ? (
+                                        <BlogPostView post={selectedPost} onBack={handleBack} />
+                                    ) : (
+                                        <BlogDetailSkeleton onBack={handleBack} />
+                                    )
+                                )
                             ) : (
                                 <>
                                     {/* Posts Grid */}
@@ -778,15 +881,70 @@ export default function BlogsListClient({ posts, loading, error }: Props) {
                                             </p>
                                         </div>
                                     ) : (
-                                        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                                            {posts.map((post) => (
-                                                <BlogCard
-                                                    key={post.id}
-                                                    post={post}
-                                                    onClick={() => handleSelectPost(post)}
+                                        <>
+                                            {loading ? (
+                                                <SearchSkeleton />
+                                            ) : (
+                                                <BlogFilters
+                                                    searchQuery={searchQuery}
+                                                    setSearchQuery={setSearchQuery}
+                                                    selectedTags={selectedTags}
+                                                    setSelectedTags={setSelectedTags}
+                                                    availableTags={allTags}
                                                 />
-                                            ))}
-                                        </div>
+                                            )}
+
+                                            {filteredPosts.length === 0 ? (
+                                                <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200">
+                                                    <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-slate-50 flex items-center justify-center">
+                                                        <Search size={28} className="text-slate-400" />
+                                                    </div>
+                                                    <h2 className="text-xl font-semibold text-slate-900 mb-2">
+                                                        No matching articles
+                                                    </h2>
+                                                    <p className="text-slate-500 mb-6 max-w-md mx-auto">
+                                                        We couldn't find any posts matching your search. Try adjusting your filters or search terms.
+                                                    </p>
+                                                    <button
+                                                        onClick={() => { setSearchQuery(""); setSelectedTags([]); }}
+                                                        className="px-6 py-2.5 text-sm font-medium text-sky-600 bg-sky-50 hover:bg-sky-100 rounded-xl transition-colors"
+                                                    >
+                                                        Clear all filters
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <div className="space-y-8">
+                                                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                                                        {filteredPosts.map((post) => (
+                                                            <BlogCard
+                                                                key={post.id}
+                                                                post={post}
+                                                                onClick={() => handleSelectPost(post)}
+                                                            />
+                                                        ))}
+                                                    </div>
+
+                                                    {/* Infinite Scroll Trigger & Loader */}
+                                                    {(hasMore || loadingMore) && !searchQuery && selectedTags.length === 0 && (
+                                                        <>
+                                                            {/* Invisible trigger div */}
+                                                            {hasMore && !loadingMore && (
+                                                                <div ref={loadMoreRef} className="h-10 w-full invisible" />
+                                                            )}
+
+                                                            {/* Loading Status */}
+                                                            {loadingMore && (
+                                                                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                                                                    {[1, 2, 3].map((i) => (
+                                                                        <BlogCardSkeleton key={`skeleton-${i}`} />
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                        </>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </>
                                     )}
                                 </>
                             )}

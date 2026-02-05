@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { SendHorizonal } from "lucide-react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { Turnstile } from "@marsidev/react-turnstile";
+import { LEAD_CONTACTS_ENDPOINT } from "@/constants/endpoint";
 
 const contactSchema = z.object({
 	name: z
@@ -23,7 +24,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 async function saveLeadToNotion(name: string, email: string, details: string) {
 	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/leads/landing/contact`,
+		`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/${LEAD_CONTACTS_ENDPOINT}`,
 		{
 			method: "POST",
 			body: JSON.stringify({
