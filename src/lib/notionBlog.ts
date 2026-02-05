@@ -73,9 +73,11 @@ function mapPageToPost(page: any): BlogPost {
 	};
 }
 
-// Fetch all published posts
 // Fetch published posts with pagination
-export async function fetchPosts(cursor?: string, limit: number = 6): Promise<PaginatedBlogResponse> {
+export async function fetchPosts(
+	cursor?: string,
+	limit: number = 6,
+): Promise<PaginatedBlogResponse> {
 	// Construct URL safely handling both absolute and relative paths
 	const endpoint = `${BASE_URL}/${BLOGS_ENDPOINT}`;
 	const params = new URLSearchParams();
@@ -119,8 +121,78 @@ export async function fetchPosts(cursor?: string, limit: number = 6): Promise<Pa
 	return { posts, next_cursor, has_more };
 }
 
+// Fetch posts with filters applied
+export async function fetchFilteredPosts(filters: {
+	search?: string;
+	tags?: string[];
+	startDate?: string;
+	endDate?: string;
+	cursor?: string;
+	limit?: number;
+}): Promise<PaginatedBlogResponse> {
+	const endpoint = `${BASE_URL}/${BLOGS_ENDPOINT}`;
+	const params = new URLSearchParams();
+
+	if (filters.search && filters.search.trim()) {
+		params.append("search", filters.search.trim());
+	}
+
+	if (filters.tags && filters.tags.length > 0) {
+		params.append("tags", filters.tags.join(","));
+	}
+
+	if (filters.startDate) {
+		params.append("startDate", filters.startDate);
+	}
+
+	if (filters.endDate) {
+		params.append("endDate", filters.endDate);
+	}
+
+	if (filters.cursor) {
+		params.append("cursor", filters.cursor);
+	}
+
+	if (filters.limit) {
+		params.append("limit", filters.limit.toString());
+	}
+
+	const queryString = params.toString();
+	const fullUrl = queryString ? `${endpoint}?${queryString}` : endpoint;
+
+	const response = await fetch(fullUrl);
+
+	if (!response.ok) {
+		throw new Error(`Failed to fetch filtered posts: ${response.status}`);
+	}
+
+	const data = await response.json();
+
+	// Handle both array (legacy) and object (paginated) responses
+	let rawPosts: any[] = [];
+	let next_cursor: string | null = null;
+	let has_more = false;
+
+	if (Array.isArray(data)) {
+		rawPosts = data;
+	} else if (data.results) {
+		rawPosts = data.results;
+		next_cursor = data.next_cursor || null;
+		has_more = data.has_more || false;
+	}
+
+	// Map the response to BlogPost format
+	const posts = rawPosts
+		.map((page: any) => mapPageToPost(page))
+		.filter((post: BlogPost) => post.slug);
+
+	return { posts, next_cursor, has_more };
+}
+
 // Fetch a single post by slug (includes content blocks)
-export async function fetchPostBySlug(slug: string): Promise<BlogPostWithContent | null> {
+export async function fetchPostBySlug(
+	slug: string,
+): Promise<BlogPostWithContent | null> {
 	const response = await fetch(`${BASE_URL}/${BLOGS_ENDPOINT}/${slug}`);
 
 	if (!response.ok) {
@@ -161,11 +233,13 @@ export async function fetchFilters(): Promise<string[]> {
 	}
 
 	// Map to strings if they are objects
-	return tags.map((tag: any) => {
-		if (typeof tag === 'string') return tag;
-		if (tag && typeof tag === 'object' && 'name' in tag) return tag.name;
-		return null;
-	}).filter((tag): tag is string => typeof tag === 'string' && tag.length > 0);
+	return tags
+		.map((tag: any) => {
+			if (typeof tag === "string") return tag;
+			if (tag && typeof tag === "object" && "name" in tag) return tag.name;
+			return null;
+		})
+		.filter((tag): tag is string => typeof tag === "string" && tag.length > 0);
 }
 
 // Fetch blocks for a post (by page ID) - for lazy loading
@@ -176,7 +250,7 @@ export async function fetchPostBlocks(pageId: string): Promise<NotionBlock[]> {
 	// But really we should use fetchPostBySlug if we have the slug, or this might fail for old posts
 	// For now, let's keep it simple and just fetch first page
 	const { posts } = await fetchPosts(undefined, 100);
-	const post = posts.find(p => p.id === pageId);
+	const post = posts.find((p) => p.id === pageId);
 
 	if (!post) return [];
 
@@ -184,6 +258,8 @@ export async function fetchPostBlocks(pageId: string): Promise<NotionBlock[]> {
 	return fullPost?.blocks || [];
 }
 
-export function getRichTextText(richText: NotionRichText[] | undefined): string {
+export function getRichTextText(
+	richText: NotionRichText[] | undefined,
+): string {
 	return getPlainText(richText);
 }

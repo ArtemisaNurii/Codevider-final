@@ -1,11 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { fetchPosts, fetchPostBySlug, fetchFilters } from "@/lib/notionBlog";
 import BlogsListClient from "./BlogsListClient";
 import type { PostWithBlocks } from "./types";
 
 export default function BlogsPage() {
+	const searchParams = useSearchParams();
+	const slugParam = searchParams.get("slug");
+
 	const [posts, setPosts] = useState<PostWithBlocks[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
@@ -15,18 +19,24 @@ export default function BlogsPage() {
 	const [availableTags, setAvailableTags] = useState<string[]>([]);
 
 	useEffect(() => {
+		// Only fetch posts and filters if we're NOT viewing a detail view (no slug param)
+		if (slugParam) {
+			setLoading(false);
+			return;
+		}
+
 		async function loadInitialPosts() {
 			try {
 				setLoading(true);
 
-				// Parallel fetch: posts (without blocks) and filters
+				// Parallel fetch: posts (without blocks) and filters - only on main blog list page
 				const [postsData, tags] = await Promise.all([
 					fetchPosts(undefined, 6),
-					fetchFilters()
+					fetchFilters(),
 				]);
 
 				// Add empty blocks to satisfy type (blocks will be loaded on demand)
-				const postsWithPlaceholders = postsData.posts.map(post => ({
+				const postsWithPlaceholders = postsData.posts.map((post) => ({
 					...post,
 					blocks: [],
 				}));
@@ -44,16 +54,20 @@ export default function BlogsPage() {
 		}
 
 		loadInitialPosts();
-	}, []);
+	}, [slugParam]);
 
 	const loadMore = async () => {
 		if (loadingMore || !hasMore || !nextCursor) return;
 
 		try {
 			setLoadingMore(true);
-			const { posts: newPosts, next_cursor: newCursor, has_more: newHasMore } = await fetchPosts(nextCursor, 6);
+			const {
+				posts: newPosts,
+				next_cursor: newCursor,
+				has_more: newHasMore,
+			} = await fetchPosts(nextCursor, 6);
 
-			const newPostsWithPlaceholders = newPosts.map(post => ({
+			const newPostsWithPlaceholders = newPosts.map((post) => ({
 				...post,
 				blocks: [],
 			}));
