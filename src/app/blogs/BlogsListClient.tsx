@@ -509,6 +509,7 @@ function RenderBlock({
 								key={row.id}
 								className={rowIndex === 0 ? "bg-slate-100" : "bg-slate-50"}
 							>
+								{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
 								{(row as any).table_row?.cells?.map(
 									(cell: NotionRichText[], cellIndex: number) => {
 										const CellTag = rowIndex === 0 ? "th" : "td";
@@ -935,10 +936,10 @@ export default function BlogsListClient({
 		// Only for filtered results
 		const hasActiveFilters =
 			searchQuery || selectedTags.length > 0 || startDate || endDate;
-		if (!hasActiveFilters || !filteredHasMore || filteredLoadingMore) return;
+		if (!hasActiveFilters) return;
 
 		const handleLoadMoreFiltered = async () => {
-			if (!filteredNextCursor || filteredLoadingMore || !filteredHasMore)
+			if (!filteredNextCursor || stateRef.current.filteredLoadingMore || !stateRef.current.filteredHasMore)
 				return;
 
 			try {
@@ -971,7 +972,7 @@ export default function BlogsListClient({
 
 		const observer = new IntersectionObserver(
 			(entries) => {
-				if (entries[0].isIntersecting) {
+				if (entries[0].isIntersecting && stateRef.current.filteredHasMore && !stateRef.current.filteredLoadingMore) {
 					handleLoadMoreFiltered();
 				}
 			},
@@ -984,8 +985,6 @@ export default function BlogsListClient({
 
 		return () => observer.disconnect();
 	}, [
-		filteredHasMore,
-		filteredLoadingMore,
 		searchQuery,
 		selectedTags,
 		startDate,
@@ -1012,28 +1011,58 @@ export default function BlogsListClient({
 	// Display filtered posts (or all posts if no filters active)
 	const displayPosts = filteredPosts;
 
-	// Infinite scroll observer
+	// Track current state for observer callbacks
+	const stateRef = useRef({
+		hasMore,
+		loadingMore,
+		filteredHasMore,
+		filteredLoadingMore,
+	});
+
+	// Update ref whenever state changes
+	useEffect(() => {
+		stateRef.current = {
+			hasMore,
+			loadingMore,
+			filteredHasMore,
+			filteredLoadingMore,
+		};
+	}, [hasMore, loadingMore, filteredHasMore, filteredLoadingMore]);
+
+	// Infinite scroll observer for main/unfiltered results
 	const loadMoreRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		if (!loadMore || !hasMore || loadingMore) return;
+		// Determine if we should show infinite scroll for main results (no active filters)
+		const hasActiveFilters =
+			searchQuery || selectedTags.length > 0 || startDate || endDate;
+
+		// Skip setup if we have active filters or no loadMore callback
+		if (!loadMore || hasActiveFilters) return;
 
 		const observer = new IntersectionObserver(
 			(entries) => {
-				if (entries[0].isIntersecting) {
+				// Use ref to get current state instead of closure
+				if (
+					entries[0].isIntersecting &&
+					stateRef.current.hasMore &&
+					!stateRef.current.loadingMore
+				) {
 					loadMore();
 				}
 			},
 			{ rootMargin: "200px" },
 		);
 
-		// Wait a bit for the DOM to settle or just observe immediately
+		// Observe the trigger element if it exists
 		if (loadMoreRef.current) {
 			observer.observe(loadMoreRef.current);
 		}
 
-		return () => observer.disconnect();
-	}, [loadMore, hasMore, loadingMore]);
+		return () => {
+			observer.disconnect();
+		};
+	}, [loadMore, searchQuery, selectedTags, startDate, endDate]);
 
 	return (
 		<div>
@@ -1191,20 +1220,29 @@ export default function BlogsListClient({
 													</div>
 
 													{/* Infinite Scroll Trigger & Loader */}
-													{/* For unfiltered results */}
-													{(hasMore || loadingMore) &&
-														!searchQuery &&
-														selectedTags.length === 0 &&
-														!startDate &&
-														!endDate && (
+													{/* For unfiltered results - show trigger when no active filters */}
+													{(() => {
+														const hasActiveFilters =
+															searchQuery ||
+															selectedTags.length > 0 ||
+															startDate ||
+															endDate;
+
+														if (
+															hasActiveFilters ||
+															(!hasMore && !loadingMore)
+														) {
+															return null;
+														}
+
+														return (
 															<>
-																{/* Invisible trigger div */}
-																{hasMore && !loadingMore && (
-																	<div
-																		ref={loadMoreRef}
-																		className="h-10 w-full invisible"
-																	/>
-																)}
+																{/* Invisible trigger div for intersection observer */}
+																<div
+																	ref={loadMoreRef}
+																	className="h-10 w-full"
+																	aria-label="Load more posts trigger"
+																/>
 
 																{/* Loading Status */}
 																{loadingMore && (
@@ -1215,22 +1253,32 @@ export default function BlogsListClient({
 																	</div>
 																)}
 															</>
-														)}
+														);
+													})()}
 
-													{/* For filtered results */}
-													{(filteredHasMore || filteredLoadingMore) &&
-														(searchQuery ||
+													{/* For filtered results - show separate infinite scroll */}
+													{(() => {
+														const hasActiveFilters =
+															searchQuery ||
 															selectedTags.length > 0 ||
 															startDate ||
-															endDate) && (
+															endDate;
+
+														if (
+															!hasActiveFilters ||
+															(!filteredHasMore && !filteredLoadingMore)
+														) {
+															return null;
+														}
+
+														return (
 															<>
 																{/* Invisible trigger div */}
-																{filteredHasMore && !filteredLoadingMore && (
-																	<div
-																		ref={filteredLoadMoreRef}
-																		className="h-10 w-full invisible"
-																	/>
-																)}
+																<div
+																	ref={filteredLoadMoreRef}
+																	className="h-10 w-full"
+																	aria-label="Load more filtered posts trigger"
+																/>
 
 																{/* Loading Status */}
 																{filteredLoadingMore && (
@@ -1243,7 +1291,8 @@ export default function BlogsListClient({
 																	</div>
 																)}
 															</>
-														)}
+														);
+													})()}
 												</div>
 											)}
 										</>

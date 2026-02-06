@@ -42,7 +42,11 @@ export default function PaginationControls({
 				<div className="flex items-center gap-2">
 					{/* Items per page selector */}
 					<div className="mr-4">
+						<label htmlFor="per-page-select" className="sr-only">
+							Items per page
+						</label>
 						<select
+						id='per-page-select'
 							value={limit}
 							onChange={(e) => handleLimitChange(Number(e.target.value))}
 							className="text-sm border border-gray-300 rounded-md px-2 py-1 bg-white"

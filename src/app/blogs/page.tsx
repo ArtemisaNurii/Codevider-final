@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { fetchPosts, fetchFilters } from "@/lib/notionBlog";
 import BlogsListClient from "./BlogsListClient";
 import type { PostWithBlocks } from "./types";
 
-export default function BlogsPage() {
+const POSTS_PER_PAGE = 6;
+
+function BlogsPage() {
 	const searchParams = useSearchParams();
 	const slugParam = searchParams.get("slug");
 
@@ -28,10 +30,11 @@ export default function BlogsPage() {
 		async function loadInitialPosts() {
 			try {
 				setLoading(true);
+				setError(null);
 
 				// Parallel fetch: posts (without blocks) and filters - only on main blog list page
 				const [postsData, tags] = await Promise.all([
-					fetchPosts(undefined, 6),
+					fetchPosts(undefined, POSTS_PER_PAGE),
 					fetchFilters(),
 				]);
 
@@ -56,8 +59,12 @@ export default function BlogsPage() {
 		loadInitialPosts();
 	}, [slugParam]);
 
-	const loadMore = async () => {
-		if (loadingMore || !hasMore || !nextCursor) return;
+	// Use useCallback to memoize the loadMore function
+	const loadMore = useCallback(async () => {
+		// Guard checks
+		if (loadingMore || !hasMore || !nextCursor) {
+			return;
+		}
 
 		try {
 			setLoadingMore(true);
@@ -65,7 +72,14 @@ export default function BlogsPage() {
 				posts: newPosts,
 				next_cursor: newCursor,
 				has_more: newHasMore,
-			} = await fetchPosts(nextCursor, 6);
+			} = await fetchPosts(nextCursor, POSTS_PER_PAGE);
+
+			if (newPosts.length === 0) {
+				// No new posts received, mark as no more
+				setHasMore(false);
+				setLoadingMore(false);
+				return;
+			}
 
 			const newPostsWithPlaceholders = newPosts.map((post) => ({
 				...post,
@@ -77,10 +91,11 @@ export default function BlogsPage() {
 			setHasMore(newHasMore);
 		} catch (err) {
 			console.error("Error loading more posts:", err);
+			// Continue marking as loading more false, but don't reset hasMore
 		} finally {
 			setLoadingMore(false);
 		}
-	};
+	}, [loadingMore, hasMore, nextCursor]);
 
 	return (
 		<BlogsListClient
@@ -92,5 +107,22 @@ export default function BlogsPage() {
 			loadingMore={loadingMore}
 			availableTags={availableTags}
 		/>
+	);
+}
+
+import { Suspense } from "react";
+import { SearchSkeleton } from "./skeletons";
+
+export default function Page() {
+	return (
+		<Suspense
+			fallback={
+				<div className="min-h-screen bg-white py-20">
+					<SearchSkeleton />
+				</div>
+			}
+		>
+			<BlogsPage />
+		</Suspense>
 	);
 }
