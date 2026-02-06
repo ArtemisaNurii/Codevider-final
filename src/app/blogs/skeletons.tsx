@@ -1,15 +1,13 @@
-import { ArrowLeft } from "lucide-react";
-
 export function SearchSkeleton() {
 	return (
 		<div className="flex flex-col md:flex-row gap-4 mb-10 w-full max-w-4xl mx-auto">
 			{/* Search Input Skeleton */}
 			<div className="flex-1 relative">
-				<div className="w-full h-[52px] bg-slate-200 rounded-2xl animate-pulse" />
+				<div className="w-full h-13 bg-slate-200 rounded-2xl animate-pulse" />
 			</div>
 			{/* Tags Dropdown Skeleton */}
 			<div className="shrink-0">
-				<div className="w-full md:w-[140px] h-[52px] bg-slate-200 rounded-2xl animate-pulse" />
+				<div className="w-full md:w-35 h-13 bg-slate-200 rounded-2xl animate-pulse" />
 			</div>
 		</div>
 	);
@@ -27,7 +25,7 @@ export function BlogDetailSkeleton({ onBack }: { onBack?: () => void }) {
 			)}
 
 			{/* Cover Image */}
-			<div className="relative aspect-[21/9] rounded-3xl bg-slate-200 mb-12 shadow-sm ring-1 ring-slate-900/5" />
+			<div className="relative aspect-21/9 rounded-3xl bg-slate-200 mb-12 shadow-sm ring-1 ring-slate-900/5" />
 
 			<header className="mb-12 text-center max-w-2xl mx-auto">
 				{/* Tags */}
@@ -94,7 +92,7 @@ export { BlogContentSkeleton };
 export function BlogCardSkeleton() {
 	return (
 		<div className="bg-white rounded-2xl overflow-hidden border border-slate-200/60 shadow-sm h-full flex flex-col">
-			<div className="aspect-[16/9] bg-slate-200 animate-pulse" />
+			<div className="aspect-video bg-slate-200 animate-pulse" />
 			<div className="p-6 flex-1 flex flex-col">
 				<div className="flex gap-2 mb-4">
 					<div className="h-5 w-16 bg-slate-200 rounded-full animate-pulse" />

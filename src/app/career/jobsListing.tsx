@@ -14,10 +14,7 @@ interface JobsListingProps {
 	limit?: number;
 }
 
-const getPaginationFromUrl = (
-	fallbackPage: number,
-	fallbackLimit: number,
-) => {
+const getPaginationFromUrl = (fallbackPage: number, fallbackLimit: number) => {
 	if (typeof window === "undefined") {
 		return { page: fallbackPage, limit: fallbackLimit };
 	}

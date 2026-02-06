@@ -20,6 +20,7 @@ export interface NotionBlock {
 	type: string;
 	has_children: boolean;
 	children?: NotionBlock[];
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	[key: string]: any; // To access dynamic keys like block.paragraph or block.heading_1
 }
 
@@ -124,6 +125,7 @@ export function RenderBlock({
 		case "heading_1":
 		case "heading_2":
 		case "heading_3": {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const levels: Record<string, { tag: any; size: string }> = {
 				heading_1: { tag: "h1", size: "text-3xl" },
 				heading_2: { tag: "h2", size: "text-2xl" },
@@ -266,8 +268,9 @@ export function RenderBlock({
 // --- List Grouping Utility ---
 // Notion sends lists as separate blocks. This function wraps consecutive
 // list items into a single <ul> or <ol> tag for proper HTML structure.
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function groupBlocks(blocks: NotionBlock[]): any[] {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const result: any[] = [];
 	let currentList: { type: string; items: NotionBlock[] } | null = null;
 

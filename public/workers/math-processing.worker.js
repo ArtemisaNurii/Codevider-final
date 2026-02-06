@@ -151,7 +151,7 @@ class MathProcessor {
 				...animation,
 				frameTime,
 				totalFrames,
-				elements: elements.map((element, index) => ({
+				elements: elements.map((element) => ({
 					...element,
 					startFrame: Math.floor(element.delay / frameTime),
 					endFrame: Math.floor((element.delay + element.duration) / frameTime),

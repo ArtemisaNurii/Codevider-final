@@ -36,6 +36,7 @@ function estimateReadingTime(blocks: NotionBlock[]): number {
 	let wordCount = 0;
 	const countWords = (blocklist: NotionBlock[]) => {
 		for (const block of blocklist) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const content = (block as any)[block.type];
 			if (content?.rich_text) {
 				wordCount += content.rich_text
@@ -86,6 +87,7 @@ function extractHeadings(blocks: NotionBlock[]): HeadingItem[] {
 		for (const block of blocklist) {
 			if (block.type.startsWith("heading_")) {
 				const level = parseInt(block.type.replace("heading_", ""), 10);
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				const content = (block as any)[block.type];
 				const text =
 					content?.rich_text
@@ -187,6 +189,7 @@ function RenderBlock({
 	block: NotionBlock;
 	depth?: number;
 }) {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const content = (block as any)[block.type];
 
 	// Color mappings for Notion text colors (using inline styles to avoid Tailwind purge)
@@ -765,7 +768,6 @@ export default function BlogsListClient({
 	);
 
 	const [selectedPost, setSelectedPost] = useState<PostWithBlocks | null>(null);
-	const [loadingPost, setLoadingPost] = useState(false);
 	const [postError, setPostError] = useState<string | null>(null);
 
 	// Filter-based data fetching
@@ -809,7 +811,6 @@ export default function BlogsListClient({
 			}
 
 			// Fetch content
-			setLoadingPost(true);
 			try {
 				// Use the object from list as base if available (for instant title/cover render while loading blocks)
 				if (postInList) {
@@ -826,8 +827,6 @@ export default function BlogsListClient({
 			} catch (err) {
 				console.error("Failed to load post content", err);
 				setPostError("Post not found");
-			} finally {
-				setLoadingPost(false);
 			}
 		}
 
@@ -931,44 +930,44 @@ export default function BlogsListClient({
 		};
 	}, [searchQuery, selectedTags, startDate, endDate, slugParam]);
 
-	// Load more filtered posts when scrolling
-	const handleLoadMoreFiltered = async () => {
-		if (!filteredNextCursor || filteredLoadingMore || !filteredHasMore) return;
-
-		try {
-			setFilteredLoadingMore(true);
-			const response = await fetchFilteredPosts({
-				search: searchQuery || undefined,
-				tags: selectedTags.length > 0 ? selectedTags : undefined,
-				startDate: startDate || undefined,
-				endDate: endDate || undefined,
-				cursor: filteredNextCursor,
-				limit: 6,
-			});
-
-			// Map to PostWithBlocks format
-			const postsWithBlocks = response.posts.map((post) => ({
-				...post,
-				blocks: [],
-			}));
-
-			// Append new posts to existing filtered posts
-			setFilteredPosts((prev) => [...prev, ...postsWithBlocks]);
-			setFilteredNextCursor(response.next_cursor);
-			setFilteredHasMore(response.has_more);
-		} catch (err) {
-			console.error("Error loading more filtered posts:", err);
-		} finally {
-			setFilteredLoadingMore(false);
-		}
-	};
-
 	// Infinite scroll observer for filtered results
 	useEffect(() => {
 		// Only for filtered results
 		const hasActiveFilters =
 			searchQuery || selectedTags.length > 0 || startDate || endDate;
 		if (!hasActiveFilters || !filteredHasMore || filteredLoadingMore) return;
+
+		const handleLoadMoreFiltered = async () => {
+			if (!filteredNextCursor || filteredLoadingMore || !filteredHasMore)
+				return;
+
+			try {
+				setFilteredLoadingMore(true);
+				const response = await fetchFilteredPosts({
+					search: searchQuery || undefined,
+					tags: selectedTags.length > 0 ? selectedTags : undefined,
+					startDate: startDate || undefined,
+					endDate: endDate || undefined,
+					cursor: filteredNextCursor,
+					limit: 6,
+				});
+
+				// Map to PostWithBlocks format
+				const postsWithBlocks = response.posts.map((post) => ({
+					...post,
+					blocks: [],
+				}));
+
+				// Append new posts to existing filtered posts
+				setFilteredPosts((prev) => [...prev, ...postsWithBlocks]);
+				setFilteredNextCursor(response.next_cursor);
+				setFilteredHasMore(response.has_more);
+			} catch (err) {
+				console.error("Error loading more filtered posts:", err);
+			} finally {
+				setFilteredLoadingMore(false);
+			}
+		};
 
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -992,7 +991,6 @@ export default function BlogsListClient({
 		startDate,
 		endDate,
 		filteredNextCursor,
-		handleLoadMoreFiltered
 	]);
 	const handleSelectPost = (post: PostWithBlocks) => {
 		// Use router to update URL, triggering the effect above
@@ -1165,8 +1163,8 @@ export default function BlogsListClient({
 														No matching articles
 													</h2>
 													<p className="text-slate-500 mb-6 max-w-md mx-auto">
-														We couldn&apos;t find any posts matching your search. Try
-														adjusting your filters or search terms.
+														We couldn&apos;t find any posts matching your
+														search. Try adjusting your filters or search terms.
 													</p>
 													<button
 														onClick={() => {

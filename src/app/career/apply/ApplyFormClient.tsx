@@ -394,7 +394,7 @@ export function ApplyFormClient() {
 				body: JSON.stringify(applicationPayload),
 			});
 
-			const responseData = await submitResponse.json();
+			await submitResponse.json();
 
 			if (submitResponse.ok) {
 				setSubmitMessage("Application submitted successfully!");

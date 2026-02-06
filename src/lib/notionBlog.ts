@@ -28,6 +28,7 @@ export type NotionBlock = {
 	type: string;
 	has_children: boolean;
 	children?: NotionBlock[];
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	[key: string]: any;
 };
 
@@ -46,12 +47,14 @@ export type BlogPostWithContent = BlogPost & {
 };
 
 // Helper to extract text from rich_text array
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getPlainText(richText: any[] | undefined): string {
 	if (!richText || richText.length === 0) return "";
 	return richText.map((item) => item.plain_text).join("");
 }
 
 // Helper to get file URL from files array
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getFileUrl(files: any[] | undefined): string | null {
 	if (!files || files.length === 0) return null;
 	const file = files[0];
@@ -60,6 +63,7 @@ function getFileUrl(files: any[] | undefined): string | null {
 }
 
 // Map backend response to BlogPost
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapPageToPost(page: any): BlogPost {
 	const props = page.properties;
 	return {
@@ -67,6 +71,7 @@ function mapPageToPost(page: any): BlogPost {
 		title: getPlainText(props?.Title?.title),
 		slug: getPlainText(props?.Slug?.rich_text),
 		description: getPlainText(props?.Description?.rich_text),
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		tags: (props?.Tags?.multi_select || []).map((tag: any) => tag.name),
 		date: props?.Date?.date?.start ?? null,
 		cover: getFileUrl(props?.Cover?.files),
@@ -101,6 +106,7 @@ export async function fetchPosts(
 	const data = await response.json();
 
 	// Handle both array (legacy) and object (paginated) responses
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let rawPosts: any[] = [];
 	let next_cursor: string | null = null;
 	let has_more = false;
@@ -115,6 +121,7 @@ export async function fetchPosts(
 
 	// Map the response to BlogPost format
 	const posts = rawPosts
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		.map((page: any) => mapPageToPost(page))
 		.filter((post: BlogPost) => post.slug);
 
@@ -169,6 +176,7 @@ export async function fetchFilteredPosts(filters: {
 	const data = await response.json();
 
 	// Handle both array (legacy) and object (paginated) responses
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let rawPosts: any[] = [];
 	let next_cursor: string | null = null;
 	let has_more = false;
@@ -183,6 +191,7 @@ export async function fetchFilteredPosts(filters: {
 
 	// Map the response to BlogPost format
 	const posts = rawPosts
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		.map((page: any) => mapPageToPost(page))
 		.filter((post: BlogPost) => post.slug);
 
@@ -223,6 +232,7 @@ export async function fetchFilters(): Promise<string[]> {
 
 	const data = await response.json();
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let tags: any[] = [];
 	if (Array.isArray(data)) {
 		tags = data;
@@ -233,13 +243,16 @@ export async function fetchFilters(): Promise<string[]> {
 	}
 
 	// Map to strings if they are objects
-	return tags
-		.map((tag: any) => {
-			if (typeof tag === "string") return tag;
-			if (tag && typeof tag === "object" && "name" in tag) return tag.name;
-			return null;
-		})
-		.filter((tag): tag is string => typeof tag === "string" && tag.length > 0);
+	return (
+		tags
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			.map((tag: any) => {
+				if (typeof tag === "string") return tag;
+				if (tag && typeof tag === "object" && "name" in tag) return tag.name;
+				return null;
+			})
+			.filter((tag): tag is string => typeof tag === "string" && tag.length > 0)
+	);
 }
 
 // Fetch blocks for a post (by page ID) - for lazy loading
