@@ -127,8 +127,8 @@ export default function JobsListing({
 
 	const careersHero = (
 		<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-			<div className="mx-auto max-w-7xl px-6 py-16 md:py-24 mt-10 md:mt-10 text-start">
-				<p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
+			<div className="mx-auto max-w-7xl px-6 py-16 md:py-20 mt-10 md:mt-20 text-start">
+				<p className="text-sm font-semibold uppercase tracking-widest mt-10 text-sky-300">
 					Careers
 				</p>
 				<h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
@@ -170,8 +170,8 @@ export default function JobsListing({
 			return (
 				<>
 					<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-						<div className="mx-auto sm:pt-32 pt-32 max-w-7xl px-6 py-20  mt-20 md:py-24 text-start">
-							<p className="text-sm font-semibold uppercase tracking-widest text-sky-300">
+						<div className="mx-auto max-w-7xl px-6 py-16 md:py-20 mt-10 md:mt-20 text-start">
+							<p className="text-sm font-semibold uppercase tracking-widest mt-10 text-sky-300">
 								{main.aboveTitle}
 							</p>
 							<h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
