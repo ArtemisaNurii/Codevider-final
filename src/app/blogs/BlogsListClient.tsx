@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { fetchPostBySlug, fetchFilteredPosts } from "@/lib/notionBlog";
 import {
@@ -1030,19 +1030,24 @@ export default function BlogsListClient({
 	}, [hasMore, loadingMore, filteredHasMore, filteredLoadingMore]);
 
 	// Infinite scroll observer for main/unfiltered results
-	const loadMoreRef = useRef<HTMLDivElement>(null);
+	const loadMoreRef = useRef<HTMLDivElement | null>(null);
+	const observerRef = useRef<IntersectionObserver | null>(null);
+	// Re-attach observer when sentinel mounts (ensures we observe after DOM is ready)
+	const [loadMoreSentinelMounted, setLoadMoreSentinelMounted] = useState(false);
+
+	const setLoadMoreRef = useCallback((el: HTMLDivElement | null) => {
+		loadMoreRef.current = el;
+		setLoadMoreSentinelMounted(!!el);
+	}, []);
 
 	useEffect(() => {
-		// Determine if we should show infinite scroll for main results (no active filters)
 		const hasActiveFilters =
 			searchQuery || selectedTags.length > 0 || startDate || endDate;
 
-		// Skip setup if we have active filters or no loadMore callback
 		if (!loadMore || hasActiveFilters) return;
 
-		const observer = new IntersectionObserver(
+		observerRef.current = new IntersectionObserver(
 			(entries) => {
-				// Use ref to get current state instead of closure
 				if (
 					entries[0].isIntersecting &&
 					stateRef.current.hasMore &&
@@ -1054,15 +1059,23 @@ export default function BlogsListClient({
 			{ rootMargin: "200px" },
 		);
 
-		// Observe the trigger element if it exists
-		if (loadMoreRef.current) {
-			observer.observe(loadMoreRef.current);
-		}
-
 		return () => {
-			observer.disconnect();
+			observerRef.current?.disconnect();
+			observerRef.current = null;
 		};
 	}, [loadMore, searchQuery, selectedTags, startDate, endDate]);
+
+	// Observe the sentinel element when it mounts or when observer is recreated (e.g. after loadMore identity changes)
+	useEffect(() => {
+		if (!loadMoreSentinelMounted || !observerRef.current) return;
+		const el = loadMoreRef.current;
+		if (el) {
+			observerRef.current.observe(el);
+			return () => {
+				observerRef.current?.unobserve(el);
+			};
+		}
+	}, [loadMoreSentinelMounted, hasMore, loadMore]);
 
 	return (
 		<div>
@@ -1239,7 +1252,7 @@ export default function BlogsListClient({
 															<>
 																{/* Invisible trigger div for intersection observer */}
 																<div
-																	ref={loadMoreRef}
+																	ref={setLoadMoreRef}
 																	className="h-10 w-full"
 																	aria-label="Load more posts trigger"
 																/>

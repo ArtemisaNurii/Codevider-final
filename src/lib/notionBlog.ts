@@ -115,8 +115,8 @@ export async function fetchPosts(
 		rawPosts = data;
 	} else if (data.results) {
 		rawPosts = data.results;
-		next_cursor = data.next_cursor || null;
-		has_more = data.has_more || false;
+		next_cursor = data.next_cursor ?? null;
+		has_more = data.has_more ?? false;
 	}
 
 	// Map the response to BlogPost format
@@ -185,8 +185,8 @@ export async function fetchFilteredPosts(filters: {
 		rawPosts = data;
 	} else if (data.results) {
 		rawPosts = data.results;
-		next_cursor = data.next_cursor || null;
-		has_more = data.has_more || false;
+		next_cursor = data.next_cursor ?? null;
+		has_more = data.has_more ?? false;
 	}
 
 	// Map the response to BlogPost format
