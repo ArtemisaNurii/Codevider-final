@@ -272,7 +272,7 @@ export default function BlogFilters({
 					<span className="font-medium text-slate-600">Active filters:</span>
 					{searchQuery && (
 						<span className="px-2.5 py-1 bg-sky-50 text-sky-700 rounded-full border border-sky-200/50 font-medium">
-							Search: "{searchQuery}"
+							Search: &quot;{searchQuery}&quot;
 						</span>
 					)}
 					{selectedTags.length > 0 && (

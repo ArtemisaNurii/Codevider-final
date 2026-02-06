@@ -5,24 +5,82 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { getJobs } from "./action";
 import JobCard from "./JobCard";
-import PaginationControls from "./PaginationControls";
+import PaginationControls, { PaginationSkeleton } from "./PaginationControls";
 import HiringProcess from "./hiringProcess";
 import { pageInfoConstants } from "@/lib/constants";
 
 interface JobsListingProps {
-	page: number;
-	limit: number;
+	page?: number;
+	limit?: number;
 }
 
-export default function JobsListing({ page, limit }: JobsListingProps) {
+const getPaginationFromUrl = (
+	fallbackPage: number,
+	fallbackLimit: number,
+) => {
+	if (typeof window === "undefined") {
+		return { page: fallbackPage, limit: fallbackLimit };
+	}
+
+	const params = new URLSearchParams(window.location.search);
+	const rawPage = Number(params.get("page"));
+	const rawLimit = Number(params.get("limit"));
+
+	const page = Number.isFinite(rawPage) && rawPage > 0 ? rawPage : fallbackPage;
+	const limit =
+		Number.isFinite(rawLimit) && rawLimit > 0 ? rawLimit : fallbackLimit;
+
+	return { page, limit };
+};
+
+export default function JobsListing({
+	page: defaultPage = 1,
+	limit: defaultLimit = 5,
+}: JobsListingProps) {
 	const [jobsResponse, setJobsResponse] = useState<{
 		jobs: Job[];
 		pagination: any;
 	} | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const [page, setPage] = useState(defaultPage);
+	const [limit, setLimit] = useState(defaultLimit);
+	const [hasSyncedUrl, setHasSyncedUrl] = useState(false);
 	const { main } = pageInfoConstants.career;
 
 	useEffect(() => {
+		const { page: urlPage, limit: urlLimit } = getPaginationFromUrl(
+			defaultPage,
+			defaultLimit,
+		);
+		setPage((prev) => (prev === urlPage ? prev : urlPage));
+		setLimit((prev) => (prev === urlLimit ? prev : urlLimit));
+		setHasSyncedUrl(true);
+	}, [defaultPage, defaultLimit]);
+
+	useEffect(() => {
+		const handlePopState = () => {
+			const { page: urlPage, limit: urlLimit } = getPaginationFromUrl(
+				defaultPage,
+				defaultLimit,
+			);
+			setPage((prev) => (prev === urlPage ? prev : urlPage));
+			setLimit((prev) => (prev === urlLimit ? prev : urlLimit));
+		};
+
+		if (typeof window !== "undefined") {
+			window.addEventListener("popstate", handlePopState);
+		}
+
+		return () => {
+			if (typeof window !== "undefined") {
+				window.removeEventListener("popstate", handlePopState);
+			}
+		};
+	}, [defaultPage, defaultLimit]);
+
+	useEffect(() => {
+		if (!hasSyncedUrl) return;
+
 		async function fetchJobs() {
 			setIsLoading(true);
 			try {
@@ -46,13 +104,63 @@ export default function JobsListing({ page, limit }: JobsListingProps) {
 			}
 		}
 		fetchJobs();
-	}, [page, limit]);
+	}, [page, limit, hasSyncedUrl]);
 
-	if (isLoading || !jobsResponse) {
-		return (
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-				<div className="text-center">Loading jobs...</div>
+	const updateUrl = (nextPage: number, nextLimit: number) => {
+		if (typeof window === "undefined") return;
+		const params = new URLSearchParams(window.location.search);
+		params.set("page", nextPage.toString());
+		params.set("limit", nextLimit.toString());
+		const newUrl = `${window.location.pathname}?${params.toString()}`;
+		window.history.pushState(null, "", newUrl);
+	};
+
+	const handlePageChange = (nextPage: number) => {
+		const safePage = Math.max(1, nextPage);
+		setPage(safePage);
+		updateUrl(safePage, limit);
+	};
+
+	const handleLimitChange = (nextLimit: number) => {
+		const safeLimit = Math.max(1, nextLimit);
+		setLimit(safeLimit);
+		setPage(1);
+		updateUrl(1, safeLimit);
+	};
+
+	const careersHero = (
+		<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
+			<div className="mx-auto max-w-7xl px-6 py-16 md:py-24 mt-10 md:mt-10 text-start">
+				<p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
+					Careers
+				</p>
+				<h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+					Be part of our exceptional team
+				</h1>
+				<p className="mt-4 text-start mx-auto text-lg leading-relaxed text-gray-300">
+					Join our team and help us build the future of software development.
+					<br />
+					We are always looking for talented individuals to join our growing
+					team.
+				</p>
 			</div>
+		</header>
+	);
+
+	if (!jobsResponse) {
+		return (
+			<>
+				{careersHero}
+				<section className="mx-auto items-center px-4 sm:px-6 bg-white lg:px-8 py-20">
+					<div className="max-w-7xl mx-auto text-center text-gray-600">
+						Loading jobs...
+					</div>
+					<div className="max-w-4xl mx-auto mt-8">
+						<PaginationSkeleton />
+					</div>
+				</section>
+				<HiringProcess />
+			</>
 		);
 	}
 
@@ -113,14 +221,20 @@ export default function JobsListing({ page, limit }: JobsListingProps) {
 				<p className="text-gray-600 mb-8">
 					It looks like you&apos;ve gone past the last page of job listings.
 				</p>
-				<PaginationControls
-					currentPage={pagination.currentPage}
-					totalPages={pagination.totalPages}
-					totalCount={0}
-					limit={0}
-					hasNext={false}
-					hasPrev={false} // ... other props
-				/>
+				{isLoading ? (
+					<PaginationSkeleton />
+				) : (
+					<PaginationControls
+						currentPage={pagination.currentPage}
+						totalPages={pagination.totalPages}
+						totalCount={pagination.totalCount}
+						limit={pagination.limit}
+						hasNext={pagination.hasNext}
+						hasPrev={pagination.hasPrev}
+						onPageChange={handlePageChange}
+						onLimitChange={handleLimitChange}
+					/>
+				)}
 			</div>
 		);
 	}
@@ -128,22 +242,7 @@ export default function JobsListing({ page, limit }: JobsListingProps) {
 	// --- THIS IS THE STATE WHEN JOBS ARE AVAILABLE ---
 	return (
 		<>
-			<header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-				<div className="mx-auto max-w-7xl px-6 py-16 md:py-24 mt-10 md:mt-10 text-start">
-					<p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
-						Careers
-					</p>
-					<h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
-						Be part of our exceptional team
-					</h1>
-					<p className="mt-4 text-start mx-auto text-lg leading-relaxed text-gray-300">
-						Join our team and help us build the future of software development.
-						<br />
-						We are always looking for talented individuals to join our growing
-						team.
-					</p>
-				</div>
-			</header>
+			{careersHero}
 
 			<section className="mx-auto items-center px-4 sm:px-6 bg-white lg:px-8 py-20">
 				<div className="grid gap-6 max-w-7xl mx-auto items-center sm:gap-8">
@@ -153,14 +252,20 @@ export default function JobsListing({ page, limit }: JobsListingProps) {
 				</div>
 
 				<div className="max-w-4xl mx-auto mt-8">
-					<PaginationControls
-						currentPage={pagination.currentPage}
-						totalPages={pagination.totalPages}
-						totalCount={0}
-						limit={0}
-						hasNext={false}
-						hasPrev={false} // ... other props
-					/>
+					{isLoading ? (
+						<PaginationSkeleton />
+					) : (
+						<PaginationControls
+							currentPage={pagination.currentPage}
+							totalPages={pagination.totalPages}
+							totalCount={pagination.totalCount}
+							limit={pagination.limit}
+							hasNext={pagination.hasNext}
+							hasPrev={pagination.hasPrev}
+							onPageChange={handlePageChange}
+							onLimitChange={handleLimitChange}
+						/>
+					)}
 				</div>
 			</section>
 

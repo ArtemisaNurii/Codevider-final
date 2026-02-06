@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { fetchPostBySlug, fetchFilteredPosts } from "@/lib/notionBlog";
 import {
@@ -140,7 +140,7 @@ function TableOfContents({ headings }: { headings: HeadingItem[] }) {
 	return (
 		<nav className="relative pl-2">
 			{/* Subtle background track */}
-			<div className="absolute left-2 top-2 bottom-2 w-[1px] bg-slate-100 rounded-full" />
+			<div className="absolute left-2 top-2 bottom-2 w-px bg-slate-100 rounded-full" />
 
 			<ul className="font-medium text-sm space-y-0.5 relative">
 				{headings.map((h, i) => {
@@ -154,7 +154,7 @@ function TableOfContents({ headings }: { headings: HeadingItem[] }) {
 										?.scrollIntoView({ behavior: "smooth" });
 									setActiveId(h.id);
 								}}
-								className={`group flex w-full text-left py-1.5 pl-4 transition-all duration-300 ease-out border-l-[1.5px] -ml-[1px]
+								className={`group flex w-full text-left py-1.5 pl-4 transition-all duration-300 ease-out border-l-[1.5px] -ml-px
                                     ${
 																			isActive
 																				? "border-sky-500 text-sky-700 font-semibold"
@@ -657,7 +657,7 @@ function BlogPostView({
 			</button>
 
 			{post.cover && (
-				<div className="relative aspect-[21/9] rounded-3xl overflow-hidden mb-12 shadow-lg ring-1 ring-slate-900/5">
+				<div className="relative aspect-21/9 rounded-3xl overflow-hidden mb-12 shadow-lg ring-1 ring-slate-900/5">
 					<img
 						src={post.cover}
 						alt={post.title}
@@ -832,7 +832,7 @@ export default function BlogsListClient({
 		}
 
 		loadPostContent();
-	}, [slugParam, posts]);
+	}, [slugParam, posts, selectedPost]);
 
 	// Sync filteredPosts with posts prop when no filters are active
 	useEffect(() => {
@@ -992,6 +992,7 @@ export default function BlogsListClient({
 		startDate,
 		endDate,
 		filteredNextCursor,
+		handleLoadMoreFiltered
 	]);
 	const handleSelectPost = (post: PostWithBlocks) => {
 		// Use router to update URL, triggering the effect above
@@ -1164,7 +1165,7 @@ export default function BlogsListClient({
 														No matching articles
 													</h2>
 													<p className="text-slate-500 mb-6 max-w-md mx-auto">
-														We couldn't find any posts matching your search. Try
+														We couldn&apos;t find any posts matching your search. Try
 														adjusting your filters or search terms.
 													</p>
 													<button

@@ -133,6 +133,8 @@ interface PaginationControlsProps {
 	limit: number;
 	hasNext: boolean;
 	hasPrev: boolean;
+	onPageChange: (page: number) => void;
+	onLimitChange: (limit: number) => void;
 }
 interface FooterLinkProps {
 	href: string;

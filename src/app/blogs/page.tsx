@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { fetchPosts, fetchPostBySlug, fetchFilters } from "@/lib/notionBlog";
+import { fetchPosts, fetchFilters } from "@/lib/notionBlog";
 import BlogsListClient from "./BlogsListClient";
 import type { PostWithBlocks } from "./types";
 
