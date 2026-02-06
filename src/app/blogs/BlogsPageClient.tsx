@@ -19,6 +19,7 @@ export default function BlogsPageClient() {
 	const [hasMore, setHasMore] = useState(false);
 	const [loadingMore, setLoadingMore] = useState(false);
 	const [availableTags, setAvailableTags] = useState<string[]>([]);
+	const [availableYears, setAvailableYears] = useState<number[]>([]);
 
 	useEffect(() => {
 		// Only fetch posts and filters if we're NOT viewing a detail view (no slug param)
@@ -33,7 +34,7 @@ export default function BlogsPageClient() {
 				setError(null);
 
 				// Parallel fetch: posts (without blocks) and filters - only on main blog list page
-				const [postsData, tags] = await Promise.all([
+				const [postsData, filters] = await Promise.all([
 					fetchPosts(undefined, POSTS_PER_PAGE),
 					fetchFilters(),
 				]);
@@ -47,10 +48,15 @@ export default function BlogsPageClient() {
 				setPosts(postsWithPlaceholders);
 				setNextCursor(postsData.next_cursor);
 				setHasMore(postsData.has_more);
-				setAvailableTags(tags);
+				setAvailableTags(filters.tags);
+				setAvailableYears(filters.timePeriod);
 			} catch (err) {
 				console.error("Error loading posts:", err);
-				setError(err instanceof Error ? err.message : "Failed to load posts");
+				setError(
+					err instanceof Error 
+						? err.message 
+						: "Failed to load posts. Please check your backend API configuration."
+				);
 			} finally {
 				setLoading(false);
 			}
@@ -103,6 +109,7 @@ export default function BlogsPageClient() {
 			loadMore={loadMore}
 			loadingMore={loadingMore}
 			availableTags={availableTags}
+			availableYears={availableYears}
 		/>
 	);
 }

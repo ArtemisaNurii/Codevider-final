@@ -29,6 +29,7 @@ type Props = {
 	loadMore?: () => void;
 	loadingMore?: boolean;
 	availableTags?: string[];
+	availableYears?: number[];
 };
 
 // Estimate reading time based on content length
@@ -571,7 +572,6 @@ function groupBlocks(blocks: NotionBlock[]): (NotionBlock | NotionBlock[])[] {
 }
 
 // Blog post card component
-// Blog post card component
 function BlogCard({
 	post,
 	onClick,
@@ -579,58 +579,63 @@ function BlogCard({
 	post: PostWithBlocks;
 	onClick: () => void;
 }) {
-	const readingTime = estimateReadingTime(post.blocks);
-
 	return (
 		<article
 			onClick={onClick}
-			className="group flex flex-col h-full cursor-pointer bg-white rounded-3xl overflow-hidden
-                       border border-slate-200 shadow-sm
-                       hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1
+			className="group relative flex flex-col h-full cursor-pointer rounded-3xl overflow-hidden
+                       border-2 border-slate-200
+                       hover:border-sky-400 hover:shadow-xl hover:shadow-sky-400/20
                        transition-all duration-300 ease-out"
 		>
+			{/* Background Image with Overlay */}
 			{post.cover && (
-				<div className="relative h-64 overflow-hidden bg-slate-100">
-					<img
-						src={post.cover}
-						alt={post.title}
-						className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-					/>
-					<div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-				</div>
+				<>
+					<div className="absolute inset-0 z-0">
+						<img
+							src={post.cover}
+							alt={post.title}
+							className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+						/>
+					</div>
+					{/* Glass effect overlay */}
+					<div className="absolute inset-0 z-10 bg-black/60" />
+				</>
 			)}
 
-			<div className="flex-1 p-8 flex flex-col">
-				<div className="flex justify-between items-start gap-4 mb-3">
-					<h2 className="text-2xl font-bold tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors line-clamp-2">
-						{post.title}
-					</h2>
-					<ArrowUpRight
-						className="shrink-0 text-slate-400 group-hover:text-sky-600 transition-colors"
-						size={24}
-					/>
+			{/* Content */}
+			<div className={`relative z-20 flex flex-col h-full p-8 ${!post.cover ? 'bg-white' : ''}`}>
+				{/* Tags at the top */}
+				<div className="flex flex-wrap gap-2 mb-6">
+					{post.tags.slice(0, 2).map((tag) => (
+						<span
+							key={tag}
+							className={`px-3 py-1 text-xs font-medium tracking-wide rounded-lg transition-colors
+                                   ${post.cover 
+									? 'bg-white/20 text-white backdrop-blur-md group-hover:bg-sky-500/30' 
+									: 'bg-slate-100 text-slate-600 group-hover:bg-sky-50 group-hover:text-sky-700'}`}
+						>
+							{tag}
+						</span>
+					))}
 				</div>
 
-				<p className="text-base text-slate-600 mb-8 line-clamp-3 leading-relaxed">
-					{post.description}
-				</p>
+				{/* Title in the middle */}
+				<h2 className={`text-2xl font-bold tracking-tight transition-colors mb-auto line-clamp-3
+					${post.cover ? 'text-white group-hover:text-sky-300' : 'text-slate-900 group-hover:text-sky-600'}`}>
+					{post.title}
+				</h2>
 
-				<div className="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
-					<div className="flex flex-wrap gap-2">
-						{post.tags.slice(0, 2).map((tag) => (
-							<span
-								key={tag}
-								className="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-lg
-                                           bg-slate-100 text-slate-600 group-hover:bg-sky-50 group-hover:text-sky-700 transition-colors"
-							>
-								{tag}
-							</span>
-						))}
-					</div>
-
-					<span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
-						{readingTime} min read
+				{/* Date and Arrow at the bottom */}
+				<div className={`flex items-center justify-between mt-8 pt-6 border-t transition-colors
+					${post.cover ? 'border-white/20' : 'border-slate-200'}`}>
+					<span className={`text-sm ${post.cover ? 'text-white/80' : 'text-slate-500'}`}>
+						{formatDate(post.date)}
 					</span>
+					<ArrowUpRight
+						className={`shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300
+							${post.cover ? 'text-white/80 group-hover:text-sky-300' : 'text-slate-400 group-hover:text-sky-600'}`}
+						size={24}
+					/>
 				</div>
 			</div>
 		</article>
@@ -748,6 +753,7 @@ export default function BlogsListClient({
 	loadMore,
 	loadingMore,
 	availableTags = [],
+	availableYears = [],
 }: Props) {
 	const searchParams = useSearchParams();
 	const router = useRouter(); // Use router for navigation to ensure SearchParams update
@@ -761,12 +767,10 @@ export default function BlogsListClient({
 		const tagsParam = searchParams.get("tags");
 		return tagsParam ? tagsParam.split(",").filter(Boolean) : [];
 	});
-	const [startDate, setStartDate] = useState(
-		() => searchParams.get("startDate") || "",
-	);
-	const [endDate, setEndDate] = useState(
-		() => searchParams.get("endDate") || "",
-	);
+	const [selectedYear, setSelectedYear] = useState<number | null>(() => {
+		const yearParam = searchParams.get("year");
+		return yearParam ? parseInt(yearParam, 10) : null;
+	});
 
 	const [selectedPost, setSelectedPost] = useState<PostWithBlocks | null>(null);
 	const [postError, setPostError] = useState<string | null>(null);
@@ -836,12 +840,12 @@ export default function BlogsListClient({
 
 	// Sync filteredPosts with posts prop when no filters are active
 	useEffect(() => {
-		if (!searchQuery && selectedTags.length === 0 && !startDate && !endDate) {
+		if (!searchQuery && selectedTags.length === 0 && !selectedYear) {
 			setFilteredPosts(posts);
 			setFilteredHasMore(hasMore);
 			setFilteredNextCursor(null);
 		}
-	}, [posts, hasMore, searchQuery, selectedTags, startDate, endDate]);
+	}, [posts, hasMore, searchQuery, selectedTags, selectedYear]);
 
 	// Update search params when filters change
 	useEffect(() => {
@@ -859,12 +863,8 @@ export default function BlogsListClient({
 			params.append("tags", selectedTags.join(","));
 		}
 
-		if (startDate) {
-			params.append("startDate", startDate);
-		}
-
-		if (endDate) {
-			params.append("endDate", endDate);
+		if (selectedYear) {
+			params.append("year", selectedYear.toString());
 		}
 
 		// Build the query string
@@ -873,7 +873,7 @@ export default function BlogsListClient({
 
 		// Update URL without causing a page refresh
 		window.history.replaceState(null, "", newUrl);
-	}, [searchQuery, selectedTags, startDate, endDate, slugParam]);
+	}, [searchQuery, selectedTags, selectedYear, slugParam]);
 
 	// Debounced filter effect - fetches from backend when filters change
 	useEffect(() => {
@@ -882,7 +882,7 @@ export default function BlogsListClient({
 
 		// Only fetch if there are active filters
 		const hasActiveFilters =
-			searchQuery || selectedTags.length > 0 || startDate || endDate;
+			searchQuery || selectedTags.length > 0 || selectedYear !== null;
 		if (!hasActiveFilters) return;
 
 		// Clear posts immediately to show skeletons
@@ -901,8 +901,7 @@ export default function BlogsListClient({
 				const response = await fetchFilteredPosts({
 					search: searchQuery || undefined,
 					tags: selectedTags.length > 0 ? selectedTags : undefined,
-					startDate: startDate || undefined,
-					endDate: endDate || undefined,
+					year: selectedYear || undefined,
 					limit: 6,
 				});
 
@@ -929,13 +928,13 @@ export default function BlogsListClient({
 				clearTimeout(debounceTimerRef.current);
 			}
 		};
-	}, [searchQuery, selectedTags, startDate, endDate, slugParam]);
+	}, [searchQuery, selectedTags, selectedYear, slugParam]);
 
 	// Infinite scroll observer for filtered results
 	useEffect(() => {
 		// Only for filtered results
 		const hasActiveFilters =
-			searchQuery || selectedTags.length > 0 || startDate || endDate;
+			searchQuery || selectedTags.length > 0 || selectedYear !== null;
 		if (!hasActiveFilters) return;
 
 		const handleLoadMoreFiltered = async () => {
@@ -947,8 +946,7 @@ export default function BlogsListClient({
 				const response = await fetchFilteredPosts({
 					search: searchQuery || undefined,
 					tags: selectedTags.length > 0 ? selectedTags : undefined,
-					startDate: startDate || undefined,
-					endDate: endDate || undefined,
+					year: selectedYear || undefined,
 					cursor: filteredNextCursor,
 					limit: 6,
 				});
@@ -987,8 +985,7 @@ export default function BlogsListClient({
 	}, [
 		searchQuery,
 		selectedTags,
-		startDate,
-		endDate,
+		selectedYear,
 		filteredNextCursor,
 	]);
 	const handleSelectPost = (post: PostWithBlocks) => {
@@ -1042,7 +1039,7 @@ export default function BlogsListClient({
 
 	useEffect(() => {
 		const hasActiveFilters =
-			searchQuery || selectedTags.length > 0 || startDate || endDate;
+			searchQuery || selectedTags.length > 0 || selectedYear !== null;
 
 		if (!loadMore || hasActiveFilters) return;
 
@@ -1063,7 +1060,7 @@ export default function BlogsListClient({
 			observerRef.current?.disconnect();
 			observerRef.current = null;
 		};
-	}, [loadMore, searchQuery, selectedTags, startDate, endDate]);
+	}, [loadMore, searchQuery, selectedTags, selectedYear]);
 
 	// Observe the sentinel element when it mounts or when observer is recreated (e.g. after loadMore identity changes)
 	useEffect(() => {
@@ -1116,14 +1113,29 @@ export default function BlogsListClient({
 
 					{/* Error State */}
 					{error && !loading && (
-						<div className="text-center py-20">
+						<div className="text-center py-20 bg-white rounded-3xl border border-red-200">
 							<div className="w-16 h-16 mx-auto mb-6 rounded-full bg-red-100 flex items-center justify-center">
 								<BookOpen size={28} className="text-red-500" />
 							</div>
 							<h2 className="text-xl font-semibold text-slate-900 mb-2">
 								Error loading posts
 							</h2>
-							<p className="text-slate-500">{error}</p>
+							<p className="text-slate-600 mb-4 max-w-md mx-auto">{error}</p>
+							{error.includes("500") && (
+								<div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl max-w-lg mx-auto text-left">
+									<p className="text-sm text-amber-900 font-medium mb-2">
+										Backend API Error
+									</p>
+									<p className="text-sm text-amber-800">
+										Please check:
+									</p>
+									<ul className="text-sm text-amber-800 list-disc list-inside mt-2 space-y-1">
+										<li>Backend API is running</li>
+										<li>NEXT_PUBLIC_BACKEND_API_URL is configured in .env</li>
+										<li>Backend /api/blogs endpoint is accessible</li>
+									</ul>
+								</div>
+							)}
 						</div>
 					)}
 
@@ -1175,28 +1187,25 @@ export default function BlogsListClient({
 											{loading ? (
 												<SearchSkeleton />
 											) : (
-												<>
-													<BlogFilters
-														searchQuery={searchQuery}
-														setSearchQuery={setSearchQuery}
-														selectedTags={selectedTags}
-														setSelectedTags={setSelectedTags}
-														availableTags={allTags}
-														startDate={startDate}
-														setStartDate={setStartDate}
-														endDate={endDate}
-														setEndDate={setEndDate}
-													/>
-													{filterLoading && (
-														<div className="flex items-center justify-center gap-2 text-sm text-slate-500 mb-6">
-															<div className="w-2 h-2 bg-sky-500 rounded-full animate-pulse" />
-															Fetching results...
-														</div>
-													)}
-												</>
+												<BlogFilters
+													searchQuery={searchQuery}
+													setSearchQuery={setSearchQuery}
+													selectedTags={selectedTags}
+													setSelectedTags={setSelectedTags}
+													availableTags={allTags}
+													selectedYear={selectedYear}
+													setSelectedYear={setSelectedYear}
+													availableYears={availableYears}
+												/>
 											)}
 
-											{displayPosts.length === 0 ? (
+											{filterLoading ? (
+												<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+													{[1, 2, 3, 4, 5, 6].map((i) => (
+														<BlogCardSkeleton key={i} />
+													))}
+												</div>
+											) : displayPosts.length === 0 ? (
 												<div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200">
 													<div className="w-16 h-16 mx-auto mb-6 rounded-full bg-slate-50 flex items-center justify-center">
 														<Search size={28} className="text-slate-400" />
@@ -1212,8 +1221,7 @@ export default function BlogsListClient({
 														onClick={() => {
 															setSearchQuery("");
 															setSelectedTags([]);
-															setStartDate("");
-															setEndDate("");
+															setSelectedYear(null);
 														}}
 														className="px-6 py-2.5 text-sm font-medium text-sky-600 bg-sky-50 hover:bg-sky-100 rounded-xl transition-colors"
 													>
@@ -1221,7 +1229,7 @@ export default function BlogsListClient({
 													</button>
 												</div>
 											) : (
-												<div className="space-y-8">
+												<>
 													<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 														{displayPosts.map((post) => (
 															<BlogCard
@@ -1230,83 +1238,97 @@ export default function BlogsListClient({
 																onClick={() => handleSelectPost(post)}
 															/>
 														))}
+
+														{/* Infinite Scroll Trigger & Loader */}
+														{/* For unfiltered results - show trigger when no active filters */}
+														{(() => {
+															const hasActiveFilters =
+																searchQuery ||
+																selectedTags.length > 0 ||
+																selectedYear !== null;
+
+															if (
+																hasActiveFilters ||
+																(!hasMore && !loadingMore)
+															) {
+																return null;
+															}
+
+															return (
+																<>
+																	{/* Loading Status - inline with grid */}
+																	{loadingMore && (
+																		<>
+																			{[1, 2, 3].map((i) => (
+																				<BlogCardSkeleton key={`skeleton-${i}`} />
+																			))}
+																		</>
+																	)}
+																</>
+															);
+														})()}
+
+														{/* For filtered results - show separate infinite scroll */}
+														{(() => {
+															const hasActiveFilters =
+																searchQuery ||
+																selectedTags.length > 0 ||
+																selectedYear !== null;
+
+															if (
+																!hasActiveFilters ||
+																(!filteredHasMore && !filteredLoadingMore)
+															) {
+																return null;
+															}
+
+															return (
+																<>
+																	{/* Loading Status - inline with grid */}
+																	{filteredLoadingMore && (
+																		<>
+																			{[1, 2, 3].map((i) => (
+																				<BlogCardSkeleton
+																					key={`filtered-skeleton-${i}`}
+																				/>
+																			))}
+																		</>
+																	)}
+																</>
+															);
+														})()}
 													</div>
 
-													{/* Infinite Scroll Trigger & Loader */}
-													{/* For unfiltered results - show trigger when no active filters */}
+													{/* Invisible trigger divs placed after the grid */}
 													{(() => {
 														const hasActiveFilters =
 															searchQuery ||
 															selectedTags.length > 0 ||
-															startDate ||
-															endDate;
+															selectedYear !== null;
 
-														if (
-															hasActiveFilters ||
-															(!hasMore && !loadingMore)
-														) {
-															return null;
-														}
-
-														return (
-															<>
-																{/* Invisible trigger div for intersection observer */}
+														if (!hasActiveFilters && hasMore) {
+															return (
 																<div
 																	ref={setLoadMoreRef}
-																	className="h-10 w-full"
+																	className="h-1 w-full"
 																	aria-label="Load more posts trigger"
 																/>
-
-																{/* Loading Status */}
-																{loadingMore && (
-																	<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-																		{[1, 2, 3].map((i) => (
-																			<BlogCardSkeleton key={`skeleton-${i}`} />
-																		))}
-																	</div>
-																)}
-															</>
-														);
-													})()}
-
-													{/* For filtered results - show separate infinite scroll */}
-													{(() => {
-														const hasActiveFilters =
-															searchQuery ||
-															selectedTags.length > 0 ||
-															startDate ||
-															endDate;
-
-														if (
-															!hasActiveFilters ||
-															(!filteredHasMore && !filteredLoadingMore)
-														) {
-															return null;
+															);
 														}
 
-														return (
-															<>
-																{/* Invisible trigger div */}
+														if (hasActiveFilters && filteredHasMore) {
+															return (
 																<div
 																	ref={filteredLoadMoreRef}
-																	className="h-10 w-full"
+																	className="h-1 w-full"
 																	aria-label="Load more filtered posts trigger"
 																/>
+															);
+														}
 
-																{/* Loading Status */}
-																{filteredLoadingMore && (
-																	<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-																		{[1, 2, 3].map((i) => (
-																			<BlogCardSkeleton
-																				key={`filtered-skeleton-${i}`}
-																			/>
-																		))}
-																	</div>
-																)}
-															</>
-														);
+														return null;
 													})()}
-												</div>
+												</>
 											)}
 										</>
 									)}

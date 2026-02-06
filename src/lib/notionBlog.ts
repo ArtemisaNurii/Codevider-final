@@ -100,6 +100,8 @@ export async function fetchPosts(
 	const response = await fetch(fullUrl);
 
 	if (!response.ok) {
+		const errorText = await response.text().catch(() => "No error details");
+		console.error(`Failed to fetch posts: ${response.status}`, errorText);
 		throw new Error(`Failed to fetch posts: ${response.status}`);
 	}
 
@@ -132,8 +134,7 @@ export async function fetchPosts(
 export async function fetchFilteredPosts(filters: {
 	search?: string;
 	tags?: string[];
-	startDate?: string;
-	endDate?: string;
+	year?: number;
 	cursor?: string;
 	limit?: number;
 }): Promise<PaginatedBlogResponse> {
@@ -148,12 +149,8 @@ export async function fetchFilteredPosts(filters: {
 		params.append("tags", filters.tags.join(","));
 	}
 
-	if (filters.startDate) {
-		params.append("startDate", filters.startDate);
-	}
-
-	if (filters.endDate) {
-		params.append("endDate", filters.endDate);
+	if (filters.year) {
+		params.append("year", filters.year.toString());
 	}
 
 	if (filters.cursor) {
@@ -221,13 +218,19 @@ export async function fetchPostBySlug(
 	};
 }
 
-// Fetch available filters (tags)
-export async function fetchFilters(): Promise<string[]> {
+// Filter response type
+export type FiltersResponse = {
+	tags: string[];
+	timePeriod: number[];
+};
+
+// Fetch available filters (tags and time periods)
+export async function fetchFilters(): Promise<FiltersResponse> {
 	const response = await fetch(`${BASE_URL}/${BLOGS_ENDPOINT}/filters`);
 
 	if (!response.ok) {
 		console.warn(`Failed to fetch filters: ${response.status}`);
-		return [];
+		return { tags: [], timePeriod: [] };
 	}
 
 	const data = await response.json();
@@ -242,17 +245,31 @@ export async function fetchFilters(): Promise<string[]> {
 		tags = data.results;
 	}
 
-	// Map to strings if they are objects
-	return (
-		tags
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			.map((tag: any) => {
-				if (typeof tag === "string") return tag;
-				if (tag && typeof tag === "object" && "name" in tag) return tag.name;
-				return null;
-			})
-			.filter((tag): tag is string => typeof tag === "string" && tag.length > 0)
-	);
+	// Map tags to strings if they are objects
+	const tagStrings = tags
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		.map((tag: any) => {
+			if (typeof tag === "string") return tag;
+			if (tag && typeof tag === "object" && "name" in tag) return tag.name;
+			return null;
+		})
+		.filter((tag): tag is string => typeof tag === "string" && tag.length > 0);
+
+	// Extract time period (years) and sort sequentially
+	let timePeriod: number[] = [];
+	if (data.years && Array.isArray(data.years)) {
+		timePeriod = data.years.filter((year: unknown) => typeof year === "number");
+	} else if (data.timePeriod && Array.isArray(data.timePeriod)) {
+		timePeriod = data.timePeriod.filter((year: unknown) => typeof year === "number");
+	}
+	
+	// Sort years in descending order (most recent first)
+	timePeriod.sort((a, b) => b - a);
+
+	return {
+		tags: tagStrings,
+		timePeriod,
+	};
 }
 
 // Fetch blocks for a post (by page ID) - for lazy loading

@@ -7,10 +7,9 @@ interface BlogFiltersProps {
 	selectedTags: string[];
 	setSelectedTags: (tags: string[]) => void;
 	availableTags: string[];
-	startDate: string;
-	setStartDate: (date: string) => void;
-	endDate: string;
-	setEndDate: (date: string) => void;
+	selectedYear: number | null;
+	setSelectedYear: (year: number | null) => void;
+	availableYears: number[];
 }
 
 export default function BlogFilters({
@@ -19,15 +18,14 @@ export default function BlogFilters({
 	selectedTags,
 	setSelectedTags,
 	availableTags,
-	startDate,
-	setStartDate,
-	endDate,
-	setEndDate,
+	selectedYear,
+	setSelectedYear,
+	availableYears,
 }: BlogFiltersProps) {
 	const [isTagsOpen, setIsTagsOpen] = useState(false);
-	const [isDateOpen, setIsDateOpen] = useState(false);
+	const [isYearsOpen, setIsYearsOpen] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
-	const dateRef = useRef<HTMLDivElement>(null);
+	const yearsRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		function handleClickOutside(event: MouseEvent) {
@@ -37,8 +35,11 @@ export default function BlogFilters({
 			) {
 				setIsTagsOpen(false);
 			}
-			if (dateRef.current && !dateRef.current.contains(event.target as Node)) {
-				setIsDateOpen(false);
+			if (
+				yearsRef.current &&
+				!yearsRef.current.contains(event.target as Node)
+			) {
+				setIsYearsOpen(false);
 			}
 		}
 		document.addEventListener("mousedown", handleClickOutside);
@@ -53,19 +54,28 @@ export default function BlogFilters({
 		}
 	};
 
+	const selectYear = (year: number) => {
+		// Radio button behavior: clicking the same year deselects it
+		if (selectedYear === year) {
+			setSelectedYear(null);
+		} else {
+			setSelectedYear(year);
+		}
+		setIsYearsOpen(false); // Close dropdown after selection
+	};
+
 	const clearTags = (e: React.MouseEvent) => {
 		e.stopPropagation();
 		setSelectedTags([]);
 	};
 
-	const clearDates = (e: React.MouseEvent) => {
+	const clearYear = (e: React.MouseEvent) => {
 		e.stopPropagation();
-		setStartDate("");
-		setEndDate("");
+		setSelectedYear(null);
 	};
 
 	const hasActiveFilters =
-		searchQuery || selectedTags.length > 0 || startDate || endDate;
+		searchQuery || selectedTags.length > 0 || selectedYear !== null;
 
 	return (
 		<div className="mb-10 w-full max-w-7xl mx-auto">
@@ -99,167 +109,156 @@ export default function BlogFilters({
 					)}
 				</div>
 
-				{/* Tags Dropdown */}
-				<div className="relative shrink-0" ref={dropdownRef}>
-					<button
-						onClick={() => setIsTagsOpen(!isTagsOpen)}
-						className={`flex items-center gap-2.5 px-4 py-3 bg-white border rounded-xl transition-all duration-200 shadow-sm hover:shadow-md whitespace-nowrap text-sm
+				{/* Topics and Date Range Row - 50/50 on mobile */}
+				<div className="flex gap-3 lg:contents">
+					{/* Tags Dropdown */}
+					<div className="relative flex-1 lg:flex-none lg:shrink-0" ref={dropdownRef}>
+						<button
+							onClick={() => setIsTagsOpen(!isTagsOpen)}
+							className={`w-full flex items-center gap-2.5 px-4 py-3 bg-white border rounded-xl transition-all duration-200 shadow-sm hover:shadow-md whitespace-nowrap text-sm
                                ${
 																	isTagsOpen || selectedTags.length > 0
 																		? "border-sky-500 ring-3 ring-sky-500/10"
 																		: "border-slate-200 hover:border-slate-300"
 																}
                               `}
-					>
-						<Tag
-							size={18}
-							className={
-								selectedTags.length > 0 ? "text-sky-600" : "text-slate-400"
-							}
-						/>
-						<span
-							className={`font-medium ${selectedTags.length > 0 ? "text-slate-900" : "text-slate-600"}`}
 						>
-							{selectedTags.length > 0
-								? `${selectedTags.length} Topic${selectedTags.length !== 1 ? "s" : ""}`
-								: "Topics"}
-						</span>
-
-						<div className="flex items-center gap-1.5 ml-auto">
-							{selectedTags.length > 0 && (
-								<span
-									onClick={clearTags}
-									className="p-0.5 hover:bg-slate-100 rounded-md text-slate-400 hover:text-red-500 transition-all cursor-pointer"
-									title="Clear tags"
-								>
-									<X size={14} />
-								</span>
-							)}
-							<ChevronDown
-								size={14}
-								className={`text-slate-400 transition-transform duration-300 ${isTagsOpen ? "rotate-180" : ""}`}
+							<Tag
+								size={18}
+								className={
+									selectedTags.length > 0 ? "text-sky-600" : "text-slate-400"
+								}
 							/>
-						</div>
-					</button>
+							<span
+								className={`font-medium ${selectedTags.length > 0 ? "text-slate-900" : "text-slate-600"}`}
+							>
+								{selectedTags.length > 0
+									? `${selectedTags.length} Topic${selectedTags.length !== 1 ? "s" : ""}`
+									: "Topics"}
+							</span>
 
-					<div
-						className={`absolute top-full left-0 mt-2 w-56 max-h-72 overflow-y-auto
+							<div className="flex items-center gap-1.5 ml-auto">
+								{selectedTags.length > 0 && (
+									<span
+										onClick={clearTags}
+										className="p-0.5 hover:bg-slate-100 rounded-md text-slate-400 hover:text-red-500 transition-all cursor-pointer"
+										title="Clear tags"
+									>
+										<X size={14} />
+									</span>
+								)}
+								<ChevronDown
+									size={14}
+									className={`text-slate-400 transition-transform duration-300 ${isTagsOpen ? "rotate-180" : ""}`}
+								/>
+							</div>
+						</button>
+
+						<div
+							className={`absolute top-full left-0 mt-2 w-56 max-h-72 overflow-y-auto
                                   bg-white border border-slate-100 rounded-xl shadow-lg z-30 py-2 
                                   origin-top transition-all duration-200 ease-out
                                   ${isTagsOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-1 pointer-events-none"}
                                   `}
-					>
-						<div className="px-3 py-1.5 mb-1 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-							Topics
-						</div>
-						{availableTags.map((tag) => (
-							<button
-								key={tag}
-								onClick={() => toggleTag(tag)}
-								className="w-full flex items-center justify-between px-3 py-2 hover:bg-sky-50 transition-colors text-left group text-sm"
-							>
-								<span
-									className={`transition-colors ${selectedTags.includes(tag) ? "text-sky-700 font-semibold" : "text-slate-600 group-hover:text-slate-900"}`}
-								>
-									{tag}
-								</span>
-								{selectedTags.includes(tag) && (
-									<Check size={16} className="text-sky-600" />
-								)}
-							</button>
-						))}
-						{availableTags.length === 0 && (
-							<div className="px-3 py-2 text-xs text-slate-400 text-center italic">
-								No topics available
+						>
+							<div className="px-3 py-1.5 mb-1 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+								Topics
 							</div>
-						)}
+							{availableTags.map((tag) => (
+								<button
+									key={tag}
+									onClick={() => toggleTag(tag)}
+									className="w-full flex items-center justify-between px-3 py-2 hover:bg-sky-50 transition-colors text-left group text-sm"
+								>
+									<span
+										className={`transition-colors ${selectedTags.includes(tag) ? "text-sky-700 font-semibold" : "text-slate-600 group-hover:text-slate-900"}`}
+									>
+										{tag}
+									</span>
+									{selectedTags.includes(tag) && (
+										<Check size={16} className="text-sky-600" />
+									)}
+								</button>
+							))}
+							{availableTags.length === 0 && (
+								<div className="px-3 py-2 text-xs text-slate-400 text-center italic">
+									No topics available
+								</div>
+							)}
+						</div>
 					</div>
-				</div>
 
-				{/* Date Range Dropdown */}
-				<div className="relative shrink-0" ref={dateRef}>
-					<button
-						onClick={() => setIsDateOpen(!isDateOpen)}
-						className={`flex items-center gap-2.5 px-4 py-3 bg-white border rounded-xl transition-all duration-200 shadow-sm hover:shadow-md whitespace-nowrap text-sm
+					{/* Years Dropdown */}
+					<div className="relative flex-1 lg:flex-none lg:shrink-0" ref={yearsRef}>
+						<button
+							onClick={() => setIsYearsOpen(!isYearsOpen)}
+							className={`w-full flex items-center gap-2.5 px-4 py-3 bg-white border rounded-xl transition-all duration-200 shadow-sm hover:shadow-md whitespace-nowrap text-sm
                                ${
-																	isDateOpen || startDate || endDate
+																	isYearsOpen || selectedYear !== null
 																		? "border-sky-500 ring-3 ring-sky-500/10"
 																		: "border-slate-200 hover:border-slate-300"
 																}
                               `}
-					>
-						<Calendar
-							size={18}
-							className={
-								startDate || endDate ? "text-sky-600" : "text-slate-400"
-							}
-						/>
-						<span
-							className={`font-medium ${startDate || endDate ? "text-slate-900" : "text-slate-600"}`}
 						>
-							{startDate || endDate ? "Dates Set" : "Date Range"}
-						</span>
-
-						<div className="flex items-center gap-1.5 ml-auto">
-							{(startDate || endDate) && (
-								<span
-									onClick={clearDates}
-									className="p-0.5 hover:bg-slate-100 rounded-md text-slate-400 hover:text-red-500 transition-all cursor-pointer"
-									title="Clear dates"
-								>
-									<X size={14} />
-								</span>
-							)}
-							<ChevronDown
-								size={14}
-								className={`text-slate-400 transition-transform duration-300 ${isDateOpen ? "rotate-180" : ""}`}
+							<Calendar
+								size={18}
+								className={
+									selectedYear !== null ? "text-sky-600" : "text-slate-400"
+								}
 							/>
-						</div>
-					</button>
+							<span
+								className={`font-medium ${selectedYear !== null ? "text-slate-900" : "text-slate-600"}`}
+							>
+								{selectedYear !== null ? selectedYear : "Year"}
+							</span>
 
-					<div
-						className={`absolute top-full right-0 mt-2 w-80 bg-white border border-slate-100 rounded-xl shadow-lg z-30 p-4
+							<div className="flex items-center gap-1.5 ml-auto">
+								{selectedYear !== null && (
+									<span
+										onClick={clearYear}
+										className="p-0.5 hover:bg-slate-100 rounded-md text-slate-400 hover:text-red-500 transition-all cursor-pointer"
+										title="Clear year"
+									>
+										<X size={14} />
+									</span>
+								)}
+								<ChevronDown
+									size={14}
+									className={`text-slate-400 transition-transform duration-300 ${isYearsOpen ? "rotate-180" : ""}`}
+								/>
+							</div>
+						</button>
+
+						<div
+							className={`absolute top-full left-0 mt-2 w-40 max-h-72 overflow-y-auto
+                                  bg-white border border-slate-100 rounded-xl shadow-lg z-30 py-2 
                                   origin-top transition-all duration-200 ease-out
-                                  ${isDateOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-1 pointer-events-none"}
+                                  ${isYearsOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-1 pointer-events-none"}
                                   `}
-					>
-						<div className="space-y-4">
-							<div>
-								<label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">
-									Start Date
-								</label>
-								<input
-									type="date"
-									value={startDate}
-									onChange={(e) => setStartDate(e.target.value)}
-									className="w-full px-3 py-2 border border-slate-200 rounded-lg text-slate-900 text-sm
-                                         focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20
-                                         transition-all duration-200"
-								/>
+						>
+							<div className="px-3 py-1.5 mb-1 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+								Year
 							</div>
-
-							<div>
-								<label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">
-									End Date
-								</label>
-								<input
-									type="date"
-									value={endDate}
-									onChange={(e) => setEndDate(e.target.value)}
-									className="w-full px-3 py-2 border border-slate-200 rounded-lg text-slate-900 text-sm
-                                         focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20
-                                         transition-all duration-200"
-								/>
-							</div>
-
-							{(startDate || endDate) && (
+							{availableYears.map((year) => (
 								<button
-									onClick={clearDates}
-									className="w-full py-2 px-3 bg-red-50 text-red-600 text-sm font-medium rounded-lg
-                                         hover:bg-red-100 transition-colors duration-200"
+									key={year}
+									onClick={() => selectYear(year)}
+									className="w-full flex items-center justify-between px-3 py-2 hover:bg-sky-50 transition-colors text-left group text-sm"
 								>
-									Clear Dates
+									<span
+										className={`transition-colors ${selectedYear === year ? "text-sky-700 font-semibold" : "text-slate-600 group-hover:text-slate-900"}`}
+									>
+										{year}
+									</span>
+									{selectedYear === year && (
+										<Check size={16} className="text-sky-600" />
+									)}
 								</button>
+							))}
+							{availableYears.length === 0 && (
+								<div className="px-3 py-2 text-xs text-slate-400 text-center italic">
+									No years available
+								</div>
 							)}
 						</div>
 					</div>
@@ -280,13 +279,9 @@ export default function BlogFilters({
 							Topics: {selectedTags.join(", ")}
 						</span>
 					)}
-					{(startDate || endDate) && (
+					{selectedYear !== null && (
 						<span className="px-2.5 py-1 bg-sky-50 text-sky-700 rounded-full border border-sky-200/50 font-medium">
-							{startDate && endDate
-								? `${startDate} to ${endDate}`
-								: startDate
-									? `From ${startDate}`
-									: `Until ${endDate}`}
+							Year: {selectedYear}
 						</span>
 					)}
 				</div>

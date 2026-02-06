@@ -91,19 +91,23 @@ export { BlogContentSkeleton };
 // Blog post card component skeleton
 export function BlogCardSkeleton() {
 	return (
-		<div className="bg-white rounded-2xl overflow-hidden border border-slate-200/60 shadow-sm h-full flex flex-col">
-			<div className="aspect-video bg-slate-200 animate-pulse" />
-			<div className="p-6 flex-1 flex flex-col">
-				<div className="flex gap-2 mb-4">
-					<div className="h-5 w-16 bg-slate-200 rounded-full animate-pulse" />
-					<div className="h-5 w-20 bg-slate-200 rounded-full animate-pulse" />
-				</div>
-				<div className="h-7 w-3/4 bg-slate-200 rounded animate-pulse mb-3" />
-				<div className="h-4 w-full bg-slate-200 rounded animate-pulse mb-2" />
-				<div className="h-4 w-2/3 bg-slate-200 rounded animate-pulse mb-auto" />
-				<div className="pt-5 mt-6 border-t border-slate-100 flex justify-between">
-					<div className="h-4 w-32 bg-slate-200 rounded animate-pulse" />
-				</div>
+		<div className="bg-white rounded-3xl border-2 border-slate-200 h-full flex flex-col p-8">
+			{/* Tags at the top */}
+			<div className="flex gap-2 mb-6">
+				<div className="h-6 w-16 bg-slate-200 rounded-lg animate-pulse" />
+				<div className="h-6 w-20 bg-slate-200 rounded-lg animate-pulse" />
+			</div>
+			
+			{/* Title in the middle */}
+			<div className="mb-auto space-y-3">
+				<div className="h-7 w-full bg-slate-200 rounded animate-pulse" />
+				<div className="h-7 w-3/4 bg-slate-200 rounded animate-pulse" />
+			</div>
+			
+			{/* Date and Arrow at the bottom */}
+			<div className="pt-6 mt-8 border-t border-slate-200 flex justify-between items-center">
+				<div className="h-4 w-32 bg-slate-200 rounded animate-pulse" />
+				<div className="h-6 w-6 bg-slate-200 rounded animate-pulse" />
 			</div>
 		</div>
 	);
