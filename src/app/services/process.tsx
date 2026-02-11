@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import { pageInfoConstants } from "@/lib/constants/index";
+import { useState, useEffect, useRef } from "react";
 
 const useIntersectionObserver = (options: IntersectionObserverOptions = {}) => {
 	const [hasAnimated, setHasAnimated] = useState(false);
@@ -35,45 +36,7 @@ const useIntersectionObserver = (options: IntersectionObserverOptions = {}) => {
 };
 
 // Define the data for the steps.
-const stepsData: Record<number, StepData> = {
-	1: {
-		step: "Step 1",
-		title: "Discovery & Needs",
-		description:
-			"We start by understanding your vision. Stakeholder interviews and product-vision canvas sessions align goals and metrics.",
-	},
-	2: {
-		step: "Step 2",
-		title: "Team Selection",
-		description:
-			"The perfect team, assembled for you. We match our developer skills and expertise directly to your project requirements.",
-	},
-	3: {
-		step: "Step 3",
-		title: "Development",
-		description:
-			"Where the magic happens. Our developers work diligently, crafting high-quality, clean code for your project.",
-	},
-	4: {
-		step: "Step 4",
-		title: "Agile Reporting",
-		description:
-			"Stay in the loop, always. We use CI/CD, code reviews, daily stand-ups, and weekly reports to ensure transparency.",
-	},
-	5: {
-		step: "Step 5",
-		title: "Deployment",
-		description:
-			"Going live, smoothly. We provide a staging server for testing and deploy clean, optimized code to your servers.",
-	},
-	6: {
-		step: "Step 6",
-		title: "Maintenance",
-		description:
-			"We’re with you for the long haul. You can continue with the same team for consistent productivity and support.",
-	},
-};
-
+const { processSteps } = pageInfoConstants.services;
 // A reusable component for each individual process step
 const ProcessStep: React.FC<ProcessStepProps> = ({
 	step,
@@ -119,9 +82,7 @@ const Processes = () => {
 				{/* Header Section (03 Removed) */}
 				<div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start mb-20">
 					<div className="lg:col-span-2">
-						<h2 className="text-4xl sm:text-5xl  font-semibold  leading-0.5">
-							Process
-						</h2>
+						<h2 className="text-4xl sm:text-5xl font-semibold">Process</h2>
 					</div>
 					<div className="lg:col-span-3 text-gray-700 text-balance text-base md:text-lg lg:text-xl leading-relaxed space-y-4 pt-2">
 						<p>
@@ -135,20 +96,20 @@ const Processes = () => {
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-16">
 					{/* Column 1: Step 1 */}
 					<div className="space-y-16">
-						<ProcessStep {...stepsData[1]} />
+						<ProcessStep {...processSteps[1]} />
 					</div>
 
 					{/* Column 2: Step 2 and Step 4 */}
 					<div className="space-y-16">
-						<ProcessStep {...stepsData[2]} />
-						<ProcessStep {...stepsData[4]} />
+						<ProcessStep {...processSteps[2]} />
+						<ProcessStep {...processSteps[4]} />
 					</div>
 
 					{/* Column 3: Step 3, Step 5, and Step 6 */}
 					<div className="space-y-16">
-						<ProcessStep {...stepsData[3]} />
-						<ProcessStep {...stepsData[5]} />
-						<ProcessStep {...stepsData[6]} />
+						<ProcessStep {...processSteps[3]} />
+						<ProcessStep {...processSteps[5]} />
+						<ProcessStep {...processSteps[6]} />
 					</div>
 				</div>
 			</div>

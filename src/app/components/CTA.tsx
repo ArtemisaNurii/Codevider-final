@@ -1,13 +1,17 @@
 "use client";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link";
-import { Instagram, Facebook, Linkedin, Mail, Phone } from "lucide-react";
+import { Instagram, Facebook, Linkedin } from "lucide-react";
 
 import ContactForm from "./ContactForm";
 import NavbarCodeviderLogo from "./navbar-codevider-logo";
+import { pageInfoConstants } from "@/lib/constants";
 
 // Reusable Footer Component
 export const Footer: React.FC = () => {
+	const GOOGLE_MAPS_PLACE =
+		"https://www.google.com/maps/place/CodeVider/data=!4m2!3m1!1s0x0:0x868519590dbd2f21?sa=X&ved=1t:2428&ictx=111";
+
 	return (
 		<footer
 			id="contact"
@@ -55,11 +59,19 @@ export const Footer: React.FC = () => {
 					{/* Column 2 (DESKTOP ONLY): Address */}
 					<div className="hidden md:block space-y-4">
 						<p className="font-bold text-base text-gray-900">Address</p>
-						<address className="text-gray-700 text-sm not-italic leading-7">
-							Codevider <br />
-							Barrikada Street <br />
-							Tirana, Albania 1001
-						</address>
+						<a
+							href={GOOGLE_MAPS_PLACE}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Open Codevider location on Google Maps"
+							className="block text-gray-700 text-sm not-italic leading-7 hover:text-blue-600 transition-colors"
+						>
+							<address className="not-italic">
+								Codevider <br />
+								Barrikada Street <br />
+								Tirana, Albania 1001
+							</address>
+						</a>
 					</div>
 
 					{/* Column 3: Contact */}
@@ -70,7 +82,7 @@ export const Footer: React.FC = () => {
 						<ul className="space-y-1 text-gray-700">
 							<li>
 								<a
-									href="mailto:hr@codevider.com"
+									href="mailto:info@codevider.com"
 									className="hover:text-blue-600 transition-colors wrap-break-word text-base sm:text-sm block py-1 font-medium"
 								>
 									info@codevider.com
@@ -101,22 +113,32 @@ export const Footer: React.FC = () => {
 					<div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
 						{/* Left: Logo, Tagline, and Mobile-Only Address */}
 						<div className="text-left">
-							{NavbarCodeviderLogo({
-								logoTextColor: "fff",
-							})}
-							<p className="mt-4 text-gray-600 text-sm sm:text-xs max-w-md leading-relaxed">
+							<div className="relative right-1.25">
+								{NavbarCodeviderLogo({
+									logoTextColor: "fff",
+								})}
+							</div>
+							<p className="mt-4 text-gray-600 text-sm sm:text-xs max-w-md justify-self-center leading-relaxed">
 								Stay updated on our latest developments, insights, and
 								opportunities.
 							</p>
 
 							{/* Address for MOBILE VIEW ONLY */}
-							<address className="mt-4 text-sm sm:text-xs text-gray-500 not-italic md:hidden leading-relaxed">
-								<strong>Codevider</strong>
-								<br />
-								Barrikada Street
-								<br />
-								Tirana, Albania 1001
-							</address>
+							<a
+								href={GOOGLE_MAPS_PLACE}
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="Open Codevider location on Google Maps"
+								className="mt-4 block text-sm sm:text-xs text-gray-500 not-italic md:hidden leading-relaxed hover:text-blue-600 transition-colors"
+							>
+								<address className="not-italic">
+									<strong>Codevider</strong>
+									<br />
+									Barrikada Street
+									<br />
+									Tirana, Albania 1001
+								</address>
+							</a>
 						</div>
 
 						{/* Right: Social Icons */}
@@ -131,7 +153,7 @@ export const Footer: React.FC = () => {
 								aria-label="Instagram"
 								className="text-gray-500 hover:text-blue-600 transition-colors p-2 hover:bg-blue-50 rounded-full"
 							>
-								<Instagram className="w-6 h-6" />
+								<Instagram className="w-6 h-6 stroke-1 md:stroke-2" />
 							</Link>
 							<Link
 								href="https://linkedin.com/company/codevider"
@@ -140,23 +162,23 @@ export const Footer: React.FC = () => {
 								aria-label="LinkedIn"
 								className="text-gray-500 hover:text-blue-600 transition-colors p-2 hover:bg-blue-50 rounded-full"
 							>
-								<Linkedin className="w-6 h-6" />
+								<Linkedin className="w-6 h-6 stroke-1 md:stroke-2" />
 							</Link>
 							<Link
 								href="https://www.facebook.com/codevider/"
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label="Facebook"
-								className="text-gray-500 hover:text-blue-600 transition-colors p-2 hover:bg-blue-50 rounded-full"
+								className="text-gray-500 hover:text-blue-600 transition-colors p-2 hover:bg-blue-50 rounded-full "
 							>
-								<Facebook className="w-6 h-6" />
+								<Facebook className="w-6 h-6 stroke-1 md:stroke-2" />
 							</Link>
 						</div>
 					</div>
 
 					{/* Copyright */}
 					<p className="mt-6 pt-4 border-t border-gray-100 text-xs text-gray-500 text-center">
-						© {new Date().getFullYear()} Codevider. All rights reserved.
+						© 2026 Codevider. All rights reserved.
 					</p>
 				</div>
 			</div>
@@ -166,56 +188,52 @@ export const Footer: React.FC = () => {
 
 const Contact: React.FC = () => {
 	const sectionRef = useRef<HTMLElement | null>(null);
+	const { contact } = pageInfoConstants.home;
 
 	return (
 		<>
 			<div id="contact" className="relative overflow-hidden text-white">
 				<section
 					ref={sectionRef}
-					className="relative z-10 px-4 py-20 sm:py-28 bg-linear-to-br from-black via-slate-900 to-sky-800 "
+					className="relative z-10 px-4 py-16 sm:py-24 lg:py-28 bg-linear-to-br from-black via-slate-900 to-sky-800"
 				>
-					<div className="max-w-7xl mx-auto grid lg:grid-cols-2 lg:gap-16 items-stretch">
-						<div className="text-center lg:text-left mb-12 lg:mb-0 flex flex-col justify-center">
-							<p className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
-								Let&apos;s Connect
+					<div className="max-w-7xl mx-auto grid lg:grid-cols-2 lg:gap-16 items-center">
+						{/* Text Content Container */}
+						<div className="text-left mb-12 lg:mb-0 flex flex-col justify-center">
+							<p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
+								{contact.aboveTitle}
 							</p>
-							<h2 className="text-4xl sm:text-5xl font-semibold leading-tight text-white mb-6">
-								Ready to Build Your Next Big Idea?
+							<h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight text-white mb-6">
+								{contact.title}
 							</h2>
-							<p className="text-lg text-gray-300 max-w-lg text-balance mx-auto lg:mx-0 mb-8">
-								Whether you have a specific project in mind or just want to
-								explore possibilities, our team is here to help. Fill out the
-								form, or reach out to us directly.
+							<p className="text-base sm:text-lg text-gray-300  text-balance mb-10">
+								{contact.description}
 							</p>
 
-							<div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-								<a
-									href="mailto:hello@codevider.com"
-									className="group flex items-center gap-3 text-left"
-								>
-									<div className="bg-white/10 p-3 rounded-full group-hover:bg-sky-400/20 transition-colors">
-										<Mail className="h-6 w-6 text-sky-300" />
-									</div>
-									<div>
-										<p className="font-semibold">Email Us Directly</p>
-										<p className="text-sm text-gray-400">info@codevider.com</p>
-									</div>
-								</a>
-								<a
-									href="#schedule-call"
-									className="group flex items-center gap-3 text-left"
-								>
-									<div className="bg-white/10 p-3 rounded-full group-hover:bg-sky-400/20 transition-colors">
-										<Phone className="h-6 w-6 text-sky-300" />
-									</div>
-									<div>
-										<p className="font-semibold"></p>Call Us Now
-										<p className="text-sm text-gray-400">+355 69 587 7742</p>
-									</div>
-								</a>
+							{/* Button List - Improved Mobile Grid */}
+							<div className="flex flex-col sm:flex-row gap-6 justify-start">
+								{contact.buttonList.map((button, index) => (
+									<a
+										key={index}
+										href={button.href}
+										className="group flex items-center gap-4 text-left transition-transform duration-200 active:scale-95"
+									>
+										<div className="shrink-0 rounded-full bg-white/10 p-4 sm:p-3 transition-colors group-hover:bg-sky-400/20">
+											{button.icon}
+										</div>
+
+										<div className="flex flex-col">
+											<p className="font-semibold text-white group-hover:text-sky-400 transition-colors">
+												{button.text}
+											</p>
+											<p className="text-sm text-gray-400">{button.detail}</p>
+										</div>
+									</a>
+								))}
 							</div>
 						</div>
 
+						{/* Form Container */}
 						<div className="w-full flex flex-col justify-center">
 							<ContactForm />
 						</div>

@@ -1,7 +1,6 @@
 "use client";
-
-import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function PaginationControls({
@@ -11,21 +10,15 @@ export default function PaginationControls({
 	limit,
 	hasNext,
 	hasPrev,
+	onPageChange,
+	onLimitChange,
 }: PaginationControlsProps) {
-	const router = useRouter();
-	const searchParams = useSearchParams();
-
 	const handlePageChange = (page: number) => {
-		const params = new URLSearchParams(searchParams.toString());
-		params.set("page", page.toString());
-		router.push(`/career?${params.toString()}`);
+		onPageChange(page);
 	};
 
 	const handleLimitChange = (newLimit: number) => {
-		const params = new URLSearchParams(searchParams.toString());
-		params.set("limit", newLimit.toString());
-		params.set("page", "1"); // Reset to first page when changing limit
-		router.push(`/career?${params.toString()}`);
+		onLimitChange(newLimit);
 	};
 
 	if (totalPages <= 1) return null;
@@ -49,7 +42,11 @@ export default function PaginationControls({
 				<div className="flex items-center gap-2">
 					{/* Items per page selector */}
 					<div className="mr-4">
+						<label htmlFor="per-page-select" className="sr-only">
+							Items per page
+						</label>
 						<select
+						id='per-page-select'
 							value={limit}
 							onChange={(e) => handleLimitChange(Number(e.target.value))}
 							className="text-sm border border-gray-300 rounded-md px-2 py-1 bg-white"
@@ -112,6 +109,26 @@ export default function PaginationControls({
 						Next
 						<ChevronRight className="h-4 w-4" />
 					</Button>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+export function PaginationSkeleton() {
+	return (
+		<div className="bg-white border-t border-gray-200 px-4 py-6 sm:px-6">
+			<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+				<Skeleton className="h-4 w-56" />
+				<div className="flex items-center gap-2">
+					<Skeleton className="h-8 w-24" />
+					<Skeleton className="h-8 w-24" />
+					<div className="hidden sm:flex items-center gap-1">
+						{Array.from({ length: 5 }, (_, i) => (
+							<Skeleton key={i} className="h-8 w-10" />
+						))}
+					</div>
+					<Skeleton className="h-8 w-24" />
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import React, { forwardRef, Ref } from "react";
+import React, { forwardRef } from "react";
 
 // The props interface remains unchanged.
 

@@ -1,5 +1,5 @@
-import { motion, useInView, Variants } from "framer-motion";
-import { useRef, ElementType, ReactNode } from "react";
+import { motion, useInView, type Variants } from "framer-motion";
+import { useRef, type ElementType, type ReactNode } from "react";
 import clsx from "clsx";
 
 type TextAnimationProps = {

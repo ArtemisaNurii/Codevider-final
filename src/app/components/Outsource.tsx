@@ -1,34 +1,10 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
-import { Blend, ChartSpline, ShieldCheck } from "lucide-react";
 import TextAnimation from "./ui/AnimationText";
+import { pageInfoConstants } from "@/lib/constants";
 
 // --- Data ---
-const featuresData = [
-	{
-		id: 1,
-		icon: Blend,
-		title: "Transparent Collaboration",
-		description:
-			"As your outsourced development partner, we integrate seamlessly with your in-house teams through open communication, prioritized roadmaps, and full visibility into every stage of our remote workflow.",
-	},
-	{
-		id: 2,
-		icon: ChartSpline,
-		title: "Legal Protection",
-		description:
-			"Our developers build applications for clients only. This guarantees that clients always own the intellectual property rights to their software 100% of the time. We also sign non-disclosure and non-competition agreements for full legal protection..",
-	},
-	{
-		id: 3,
-		icon: ShieldCheck,
-		title: "Cost-Effective Development",
-		description:
-			"Outsourcing Projects and development tasks to Eastern Europe saves you cash, without sacrificing code quality. CodeVider is headquartered in Tirana-Albania, which is a well-known hub for finding talented web app developers at budget-friendly prices",
-	},
-] as const;
 
 // --- Animation variants ---
 const cardContainerVariants = {
@@ -49,6 +25,7 @@ const cardItemVariants = {
 };
 
 const Outsource: React.FC = () => {
+	const { outsource } = pageInfoConstants.home;
 	return (
 		<div className="section-compact relative mt-8 bg-white font-sans">
 			{/* CONTENT */}
@@ -65,7 +42,7 @@ const Outsource: React.FC = () => {
 						>
 							<TextAnimation
 								as="h2"
-								text="Outsource Engineering, Accelerate Growth"
+								text={outsource.title}
 								classname="mt-2 text-4xl sm:text-5xl font-bold leading-tight text-gray-900"
 							/>
 						</motion.div>
@@ -79,7 +56,7 @@ const Outsource: React.FC = () => {
 						>
 							<TextAnimation
 								as="p"
-								text="Achieve cost efficiency and expert accuracy, scale with agile adaptability, and concentrate on your core strengths"
+								text={outsource.description}
 								classname="text-lg leading-8 text-gray-800"
 							/>
 						</motion.div>
@@ -94,11 +71,11 @@ const Outsource: React.FC = () => {
 						viewport={{ once: true, amount: 0.3 }}
 					>
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
-							{featuresData.map(({ id, icon: Icon, title, description }) => (
+							{outsource.list.map(({ id, icon: Icon, title, description }) => (
 								<motion.div key={id} variants={cardItemVariants}>
 									<div className="mb-4">
 										<Icon
-											className="h-8 w-8 text-[#0a61cb]"
+											className="h-8 w-8 text-[#0a61cb] stroke-1 md:stroke-2"
 											aria-hidden="true"
 										/>
 									</div>

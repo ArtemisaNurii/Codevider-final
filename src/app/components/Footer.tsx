@@ -15,7 +15,7 @@ export const Footer1: FC = () => {
 					</p>
 					<button
 						className="border border-white/80 text-white px-8 py-3 font-semibold rounded-lg hover:bg-white hover:text-black transition-colors w-full md:w-auto shrink-0"
-						onClick={() => (window.location.href = "mailto:hr@codevider.com")}
+						onClick={() => (window.location.href = "mailto:info@codevider.com")}
 					>
 						Let&apos;s Talk
 					</button>
@@ -49,10 +49,10 @@ export const Footer1: FC = () => {
 							{/* mailto and tel links should use standard <a> tags */}
 							<li>
 								<a
-									href="mailto:hello@codevider.com"
+									href="mailto:info@codevider.com"
 									className="hover:text-white transition-colors"
 								>
-									hr@codevider.com
+									info@codevider.com
 								</a>
 							</li>
 							<li>
@@ -79,7 +79,7 @@ export const Footer1: FC = () => {
 							rel="noopener noreferrer"
 							aria-label="Instagram"
 						>
-							<Instagram className="h-6 w-6 text-gray-400 hover:text-white transition-colors" />
+							<Instagram className="h-6 w-6 text-gray-400 hover:text-white transition-colors " />
 						</a>
 						<a
 							href="https://www.facebook.com/codevider/"
@@ -87,7 +87,7 @@ export const Footer1: FC = () => {
 							rel="noopener noreferrer"
 							aria-label="Facebook"
 						>
-							<Facebook className="h-6 w-6 text-gray-400 hover:text-white transition-colors" />
+							<Facebook className="h-6 w-6 text-gray-400 hover:text-white transition-colors " />
 						</a>
 						<a
 							href="https://al.linkedin.com/company/codevider"
@@ -95,7 +95,7 @@ export const Footer1: FC = () => {
 							rel="noopener noreferrer"
 							aria-label="LinkedIn"
 						>
-							<Linkedin className="h-6 w-6 text-gray-400 hover:text-white transition-colors" />
+							<Linkedin className="h-6 w-6 text-gray-400 hover:text-white transition-colors " />
 						</a>
 					</div>
 

@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
 import { AlignEndHorizontal, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { pageInfoConstants } from "@/lib/constants";
 
 // Register GSAP plugins (safe on client)
 if (typeof window !== "undefined") {
@@ -173,13 +174,9 @@ const MiniCaseStudyCard = ({
 }) => (
 	<div className="mini-case-study bg-slate-50 p-6 rounded-3xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col group cursor-pointer transform-gpu">
 		<div className="flex justify-between items-start mb-4">
-			<span className="text-gray-700 px-4 py-1 rounded-full sky font-semibold text-xs uppercase tracking-wider">
-				{/* {tag} */}
-			</span>
+			<span className="text-gray-700 px-4 py-1 rounded-full sky font-semibold text-xs uppercase tracking-wider"></span>
 			<div className="text-right shrink-0 ml-4">
-				<p className="metric-number text-4xl font-semibold text-[#0a61cb]">
-					{/* {metric.value} */}
-				</p>
+				<p className="metric-number text-4xl font-semibold text-[#0a61cb]"></p>
 				<p className="text-sm text-gray-700">{metric.label}</p>
 			</div>
 		</div>
@@ -191,7 +188,7 @@ const MiniCaseStudyCard = ({
 		</p>
 		<div className="flex justify-end mt-6">
 			<div className="w-12 h-12 bg-linear-to-br from-black to-sky-900 rounded-full flex items-center justify-center transform group-hover:scale-110 group-hover:bg-gray-800 transition-all duration-300">
-				<AlignEndHorizontal className="stroke-white text-white" />
+				<AlignEndHorizontal className="stroke-white text-white stroke-1 md:stroke-2" />
 			</div>
 		</div>
 	</div>
@@ -201,52 +198,8 @@ const MiniCaseStudyCard = ({
 const SolutionPillars: React.FC = () => {
 	const mainRef = useRef<HTMLDivElement | null>(null);
 
-	// --- DATA (Centralized & Adapted) ---
-	const pageData = {
-		mainTitle: {
-			part1: "Unlock Your",
-			highlight: "Potential With",
-			part2: "Our Expertise",
-		},
-		infoCard: {
-			tag: "Our Value Proposition",
-			features: ["Efficiency", "Flexibility", "Expertise"],
-			subtitle:
-				"We deliver more than code providing a strategic partnership designed for growth.",
-		},
-		metric1: { value: "100%", label: "Flexibility & Control" },
-		metric2: {
-			value: "+6",
-			label: "Years of Experience",
-			// Repurposed 'countries' to 'skills' for the pills
-			skills: ["USA", "Germany", "London", "Europe"],
-		},
-	} as const;
-
 	// REPURPOSED 'caseStudiesData' to 'whyUsData' for your new content
-	const whyUsData = [
-		{
-			tag: "Advantage 01",
-			title: "Significant Cost & Time Savings",
-			metric: { value: "", label: "Avg. Savings" },
-			description:
-				"Bypass expensive hiring and training. Our streamlined process gets you to market faster, saving crucial time and resources.",
-		},
-		{
-			tag: "Advantage 02",
-			title: "Total Flexibility & Control",
-			metric: { value: "", label: "Platform Access" },
-			description:
-				"Scale your team on-demand for single or multiple projects, and monitor progress anytime through Slack, Jira, Github, etc.",
-		},
-		{
-			tag: "Advantage 03",
-			title: "Creative Expertise on Demand",
-			metric: { value: "", label: "Perspectives" },
-			description:
-				"Instantly access a pool of highly motivated, creative professionals who bring fresh perspectives and innovative solutions to the table.",
-		},
-	] as const;
+	const { unlockYourPotential } = pageInfoConstants.home;
 
 	// --- MASTER ANIMATION LOGIC (UNCHANGED) ---
 	useLayoutEffect(() => {
@@ -416,6 +369,7 @@ const SolutionPillars: React.FC = () => {
 		return () => ctx.revert();
 	}, []);
 
+	const { whyOurClientsChooseUs } = pageInfoConstants.home;
 	return (
 		<div
 			ref={mainRef}
@@ -426,24 +380,23 @@ const SolutionPillars: React.FC = () => {
 				<div className="lg:col-span-5 flex flex-col gap-8">
 					<div className="main-title">
 						<div className="text-5xl max-sm:text-3xl pl-2 font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
-							{splitTextIntoWords(pageData.mainTitle.part1)}
+							{splitTextIntoWords(unlockYourPotential.mainTitle.part1)}
 						</div>
 						<div className="text-5xl pl-2 max-sm:text-3xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
-							{splitTextIntoWords(pageData.mainTitle.highlight)}
+							{splitTextIntoWords(unlockYourPotential.mainTitle.highlight)}
 						</div>
 						<div className="text-5xl max-sm:text-3xl pl-2 font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
-							{splitTextIntoWords(pageData.mainTitle.part2)}
+							{splitTextIntoWords(unlockYourPotential.mainTitle.part2)}
 						</div>
 					</div>
-					<InfoCard {...pageData.infoCard} />
+					<InfoCard {...unlockYourPotential.infoCard} />
 				</div>
 
-				<div className="lg:col-span-2 metric-card ">
-					<MetricCard {...pageData.metric1}>
-						<div className="w-full h-full min-h-62.5 flex items-center justify-center rounded-lg">
+				<div className="lg:col-span-2 metric-card max-md:hidden  ">
+					<MetricCard {...unlockYourPotential.metric1}>
+						<div className="w-full h-full min-h-62.5 flex items-center  justify-start rounded-lg">
 							<p className="text-gray-700 font-medium text-xl text-balance pt-20 text-start p-4">
-								You can manage and be in control of your own project at all
-								times.
+								{unlockYourPotential.metric1.subtitle}
 							</p>
 						</div>
 					</MetricCard>
@@ -451,19 +404,19 @@ const SolutionPillars: React.FC = () => {
 
 				<div className="lg:col-span-3 metric-card">
 					<MetricCard
-						value={pageData.metric2.value}
-						label={pageData.metric2.label}
+						value={unlockYourPotential.metric2.value}
+						label={unlockYourPotential.metric2.label}
 						bgColor="bg-gradient-to-br from-black to-sky-900"
 						textColor="text-white"
 					>
 						<div className="grid grid-cols-2 gap-3 mb-6">
-							{pageData.metric2.skills.map((skill) => (
+							{unlockYourPotential.metric2.skills.map((skill) => (
 								<Pill key={skill} text={skill} />
 							))}
 						</div>
 						<div className="w-full h-full min-h-37.5  flex items-center justify-center rounded-lg">
 							<p className="text-white text-2xl font-medium text-start p-4">
-								Benefit from the innovative viewpoints our team brings{" "}
+								{unlockYourPotential.metric2.subtitle}
 							</p>
 						</div>
 					</MetricCard>
@@ -473,18 +426,17 @@ const SolutionPillars: React.FC = () => {
 			<section className="py-16 max-w-7xl mx-auto md:pt-24">
 				<div className="text-center mb-12">
 					{/* UPDATED SECTION TITLE */}
-					<div className="text-4xl md:text-5xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
-						{splitTextIntoWords("Why Our Clients Choose Us")}
+					<div className="text-4xl md:text-5xl font-semibold leading-tight tracking-tighter word-animate-parent max-md:text-start transform-gpu">
+						{splitTextIntoWords(whyOurClientsChooseUs.title)}
 					</div>
 					{/* UPDATED SECTION DESCRIPTION */}
-					<p className="mt-4 text-lg text-gray-700 text-balance max-w-2xl mx-auto case-study-desc transform-gpu">
-						Our partnership model is built on three pillars: efficiency,
-						flexibility, and deep expertise.
+					<p className="mt-4 text-lg text-gray-700 text-balance max-w-2xl mx-auto case-study-desc max-md:text-start transform-gpu">
+						{whyOurClientsChooseUs.description}
 					</p>
 				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 					{/* Mapped the new "Why Us" data */}
-					{whyUsData.map((item, index) => (
+					{whyOurClientsChooseUs.list.map((item, index) => (
 						<MiniCaseStudyCard key={index} {...item} />
 					))}
 				</div>
