@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { pageInfoConstants } from "@/lib/constants";
+import Link from "next/link";
 
 // Data for the logo cloud with actual client logos
 const logos = [

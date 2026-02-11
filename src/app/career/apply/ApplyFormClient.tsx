@@ -188,7 +188,13 @@ export function ApplyFormClient() {
 	const addSkill = (skill: string) => {
 		if (skill.trim() === "") return;
 		const currentSkills = formData.skills || [];
-		setValue("skills", [...new Set([...currentSkills, skill.trim()])]);
+		const trimmedSkill = skill.trim();
+		// Check for case-insensitive duplicates
+		const isDuplicate = currentSkills.some(
+			(s) => s.toLowerCase() === trimmedSkill.toLowerCase(),
+		);
+		if (isDuplicate) return;
+		setValue("skills", [...currentSkills, trimmedSkill]);
 	};
 
 	const removeSkill = (skill: string) => {
@@ -368,7 +374,7 @@ export function ApplyFormClient() {
 				body: JSON.stringify(applicationPayload),
 			});
 
-			const responseData = await submitResponse.json();
+				await submitResponse.json();
 
 			if (submitResponse.ok) {
 				setSubmitMessage("Application submitted successfully!");
@@ -632,11 +638,13 @@ export function ApplyFormClient() {
 								<Input
 									id="resume"
 									type="file"
-									accept=".pdf,.doc,.docx"
+									accept=".pdf,.doc,.docx,.txt,.md,.odt"
 									onChange={handleFileChange}
 									className="block w-full text-sm"
 								/>
-								<p className="text-xs text-gray-500 mt-1">PDF, DOC, or DOCX</p>
+								<p className="text-xs text-gray-500 mt-1">
+									PDF, DOC, DOCX, TXT, MD, or ODT
+								</p>
 							</div>
 						</div>
 

@@ -178,7 +178,7 @@ export const Footer: React.FC = () => {
 
 					{/* Copyright */}
 					<p className="mt-6 pt-4 border-t border-gray-100 text-xs text-gray-500 text-center">
-						© {new Date().getFullYear()} Codevider. All rights reserved.
+						© 2026 Codevider. All rights reserved.
 					</p>
 				</div>
 			</div>

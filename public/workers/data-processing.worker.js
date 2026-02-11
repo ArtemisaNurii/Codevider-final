@@ -232,7 +232,7 @@ class DataProcessor {
 		return Math.ceil(words / wordsPerMinute);
 	}
 
-	extractColors(imageUrl) {
+	extractColors() {
 		// Placeholder for color extraction logic
 		// In a real implementation, you might use canvas or image processing
 		return ["#3b82f6", "#1e40af", "#1d4ed8"];
