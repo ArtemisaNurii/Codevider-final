@@ -21,7 +21,7 @@ class DataProcessor {
 
     // Filter by category
     if (category && category !== 'All') {
-      filtered = filtered.filter(project =>
+      filtered = filtered.filter(project => 
         project.category?.toLowerCase() === category.toLowerCase()
       );
     }
@@ -56,7 +56,7 @@ class DataProcessor {
 
   sortProjects(data) {
     const { projects, sortBy, sortOrder = 'asc' } = data;
-
+    
     const sorted = [...projects].sort((a, b) => {
       let valueA, valueB;
 
@@ -91,21 +91,21 @@ class DataProcessor {
 
   searchProjects(data) {
     const { projects, searchTerm, searchFields = ['title', 'description', 'features'] } = data;
-
+    
     if (!searchTerm.trim()) return projects;
 
     const term = searchTerm.toLowerCase();
-
+    
     return projects.filter(project => {
       return searchFields.some(field => {
         const value = project[field];
-
+        
         if (Array.isArray(value)) {
-          return value.some(item =>
+          return value.some(item => 
             String(item).toLowerCase().includes(term)
           );
         }
-
+        
         return String(value || '').toLowerCase().includes(term);
       });
     });
@@ -113,7 +113,7 @@ class DataProcessor {
 
   processCategories(data) {
     const { projects } = data;
-
+    
     // Extract unique categories
     const categories = new Set(['All']);
     projects.forEach(project => {
@@ -131,7 +131,7 @@ class DataProcessor {
       if (category === 'All') {
         categoryCounts[category] = projects.length;
       } else {
-        categoryCounts[category] = projects.filter(project =>
+        categoryCounts[category] = projects.filter(project => 
           project.category === category || project.tag === category
         ).length;
       }
@@ -145,13 +145,13 @@ class DataProcessor {
 
   paginateData(data) {
     const { items, page = 1, limit = 10 } = data;
-
+    
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
-
+    
     const paginatedItems = items.slice(startIndex, endIndex);
     const totalPages = Math.ceil(items.length / limit);
-
+    
     return {
       items: paginatedItems,
       pagination: {
@@ -169,10 +169,10 @@ class DataProcessor {
 
   transformProjectData(data) {
     const { projects, transformations } = data;
-
+    
     return projects.map(project => {
       let transformed = { ...project };
-
+      
       transformations.forEach(transform => {
         switch (transform.type) {
           case 'addSlug':
@@ -189,7 +189,7 @@ class DataProcessor {
             break;
         }
       });
-
+      
       return transformed;
     });
   }
@@ -223,7 +223,7 @@ class DataProcessor {
     return Math.ceil(words / wordsPerMinute);
   }
 
-  extractColors() {
+  extractColors(imageUrl) {
     // Placeholder for color extraction logic
     // In a real implementation, you might use canvas or image processing
     return ['#3b82f6', '#1e40af', '#1d4ed8'];
@@ -236,11 +236,11 @@ const processor = new DataProcessor();
 // Listen for messages from main thread
 self.addEventListener('message', (event) => {
   const { id, operation, data } = event.data;
-
+  
   try {
     if (processor.operations[operation]) {
       const result = processor.operations[operation](data);
-
+      
       // Send result back to main thread
       self.postMessage({
         id,
@@ -261,4 +261,4 @@ self.addEventListener('message', (event) => {
 });
 
 // Signal that worker is ready
-self.postMessage({ type: 'ready' });
+self.postMessage({ type: 'ready' }); 
