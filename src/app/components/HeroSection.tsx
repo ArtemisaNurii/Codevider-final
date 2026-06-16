@@ -1,14 +1,12 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ArrowUpRight, BarChart2, Bell, Search, TrendingUp, DollarSign, Users, Truck,
   Settings, ChevronDown, LayoutDashboard, Target, Zap, Clock, ShieldCheck,
   CheckCircle, RefreshCw,
-  PersonStanding,
   User2
 } from 'lucide-react';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const componentStyles = `
   @keyframes shine {
@@ -169,7 +167,6 @@ const Hero = () => {
           <Sidebar />
           <main className="flex-1 p-1.5 sm:p-4 lg:p-6 relative">
             <div className="flex justify-between items-center mb-2 sm:mb-4 lg:mb-6">
-              <h1 className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white font-semibold"></h1>
               <div className="flex items-center gap-1 sm:gap-3 lg:gap-4">
                 <Search className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5 hidden sm:block" />
                 <Bell className="text-gray-400 hover:text-white cursor-pointer w-3 h-3 sm:w-5 sm:h-5" />

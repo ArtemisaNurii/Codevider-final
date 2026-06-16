@@ -16,36 +16,36 @@ class MathProcessor {
 
   projectMapPoint(data) {
     const { lat, lng, width = 800, height = 400 } = data;
-    
+
     // Convert latitude and longitude to pixel coordinates
     const x = (lng + 180) * (width / 360);
     const y = (90 - lat) * (height / 180);
-    
+
     return { x, y };
   }
 
   createCurvedPath(data) {
     const { start, end } = data;
-    
+
     // Calculate midpoint for curved path
     const midX = (start.x + end.x) / 2;
     const midY = Math.min(start.y, end.y) - 50;
-    
+
     return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
   }
 
   calculateDistance(data) {
     const { point1, point2 } = data;
-    
+
     // Haversine formula for distance between two geographic points
     const R = 6371; // Earth's radius in kilometers
     const dLat = this.toRad(point2.lat - point1.lat);
     const dLng = this.toRad(point2.lng - point1.lng);
-    
+
     const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
               Math.cos(this.toRad(point1.lat)) * Math.cos(this.toRad(point2.lat)) *
               Math.sin(dLng / 2) * Math.sin(dLng / 2);
-    
+
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
@@ -54,11 +54,11 @@ class MathProcessor {
     const { duration, fps = 60, easing = 'linear' } = data;
     const totalFrames = Math.floor(duration * fps);
     const frames = [];
-    
+
     for (let i = 0; i <= totalFrames; i++) {
       const progress = i / totalFrames;
       const easedProgress = this.applyEasing(progress, easing);
-      
+
       frames.push({
         frame: i,
         time: i / fps,
@@ -66,14 +66,14 @@ class MathProcessor {
         value: easedProgress
       });
     }
-    
+
     return frames;
   }
 
   processMapDots(data) {
     const { dots, config = {} } = data;
     const { width = 800, height = 400 } = config;
-    
+
     return dots.map((dot, index) => {
       const startPoint = this.projectMapPoint({
         lat: dot.start.lat,
@@ -81,24 +81,24 @@ class MathProcessor {
         width,
         height
       });
-      
+
       const endPoint = this.projectMapPoint({
         lat: dot.end.lat,
         lng: dot.end.lng,
         width,
         height
       });
-      
+
       const path = this.createCurvedPath({
         start: startPoint,
         end: endPoint
       });
-      
+
       const distance = this.calculateDistance({
         point1: dot.start,
         point2: dot.end
       });
-      
+
       return {
         ...dot,
         index,
@@ -115,47 +115,47 @@ class MathProcessor {
     const { points, steps = 100 } = data;
     const [p0, p1, p2, p3] = points;
     const curve = [];
-    
+
     for (let t = 0; t <= 1; t += 1 / steps) {
       const x = Math.pow(1 - t, 3) * p0.x +
                 3 * Math.pow(1 - t, 2) * t * p1.x +
                 3 * (1 - t) * Math.pow(t, 2) * p2.x +
                 Math.pow(t, 3) * p3.x;
-      
+
       const y = Math.pow(1 - t, 3) * p0.y +
                 3 * Math.pow(1 - t, 2) * t * p1.y +
                 3 * (1 - t) * Math.pow(t, 2) * p2.y +
                 Math.pow(t, 3) * p3.y;
-      
+
       curve.push({ x, y, t });
     }
-    
+
     return curve;
   }
 
   optimizeAnimationTimings(data) {
     const { animations, targetFPS = 60 } = data;
     const optimized = [];
-    
+
     animations.forEach(animation => {
       const { duration, elements } = animation;
       const frameTime = 1000 / targetFPS;
       const totalFrames = Math.ceil(duration / frameTime);
-      
+
       const optimizedAnimation = {
         ...animation,
         frameTime,
         totalFrames,
-        elements: elements.map((element, index) => ({
+        elements: elements.map((element) => ({
           ...element,
           startFrame: Math.floor(element.delay / frameTime),
           endFrame: Math.floor((element.delay + element.duration) / frameTime)
         }))
       };
-      
+
       optimized.push(optimizedAnimation);
     });
-    
+
     return optimized;
   }
 
@@ -184,7 +184,7 @@ class MathProcessor {
   bounceEase(t) {
     const c1 = 1.70158;
     const c2 = c1 * 1.525;
-    
+
     return t < 0.5
       ? (Math.pow(2 * t, 2) * ((c2 + 1) * 2 * t - c2)) / 2
       : (Math.pow(2 * t - 2, 2) * ((c2 + 1) * (t * 2 - 2) + c2) + 2) / 2;
@@ -192,7 +192,7 @@ class MathProcessor {
 
   elasticEase(t) {
     const c4 = (2 * Math.PI) / 3;
-    
+
     return t === 0
       ? 0
       : t === 1
@@ -220,19 +220,19 @@ class MathProcessor {
   createSpatialIndex(data) {
     const { points, gridSize = 50 } = data;
     const index = {};
-    
+
     points.forEach((point, i) => {
       const gridX = Math.floor(point.x / gridSize);
       const gridY = Math.floor(point.y / gridSize);
       const key = `${gridX},${gridY}`;
-      
+
       if (!index[key]) {
         index[key] = [];
       }
-      
+
       index[key].push({ ...point, originalIndex: i });
     });
-    
+
     return index;
   }
 }
@@ -243,11 +243,11 @@ const processor = new MathProcessor();
 // Listen for messages from main thread
 self.addEventListener('message', (event) => {
   const { id, operation, data } = event.data;
-  
+
   try {
     if (processor.operations[operation]) {
       const result = processor.operations[operation](data);
-      
+
       // Send result back to main thread
       self.postMessage({
         id,
@@ -268,4 +268,4 @@ self.addEventListener('message', (event) => {
 });
 
 // Signal that worker is ready
-self.postMessage({ type: 'ready' }); 
+self.postMessage({ type: 'ready' });

@@ -7,12 +7,10 @@ import { TextPlugin } from "gsap/TextPlugin";
 import { AlignEndHorizontal, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-// Register GSAP plugins (safe on client)
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, TextPlugin);
 }
 
-// --- UTILITY FUNCTIONS ---
 const splitTextIntoWords = (text: string) => {
   return text.split(" ").map((word, index) => (
     <span
@@ -25,7 +23,6 @@ const splitTextIntoWords = (text: string) => {
   ));
 };
 
-// --- PRESENTATIONAL COMPONENTS (NO ANIMATION LOGIC) ---
 const ArrowIcon = ({ className = "stroke-black" }: { className?: string }) => (
   <svg
     width="24"
@@ -163,25 +160,18 @@ const MetricCard = ({
 );
 
 const MiniCaseStudyCard = ({
-  tag,
   title,
   metric,
   description,
 }: {
-  tag: string;
   title: string;
   metric: { value: string; label: string };
   description: string;
 }) => (
   <div className="mini-case-study bg-slate-50 p-6 rounded-3xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col group cursor-pointer transform-gpu">
     <div className="flex justify-between items-start mb-4">
-      <span className="text-gray-700 px-4 py-1 rounded-full sky font-semibold text-xs uppercase tracking-wider">
-        {/* {tag} */}
-      </span>
+      <span aria-hidden="true" />
       <div className="text-right flex-shrink-0 ml-4">
-        <p className="metric-number text-4xl font-semibold text-[#0a61cb]">
-          {/* {metric.value} */}
-        </p>
         <p className="text-sm text-gray-700">{metric.label}</p>
       </div>
     </div>
@@ -199,11 +189,9 @@ const MiniCaseStudyCard = ({
   </div>
 );
 
-// --- MAIN COMPONENT (ORCHESTRATOR) ---
 const SolutionPillars: React.FC = () => {
   const mainRef = useRef<HTMLDivElement | null>(null);
 
-  // --- DATA (Centralized & Adapted) ---
   const pageData = {
     mainTitle: {
       part1: "Unlock Your",
@@ -220,29 +208,24 @@ const SolutionPillars: React.FC = () => {
     metric2: {
       value: "+6",
       label: "Years of Experience",
-      // Repurposed 'countries' to 'skills' for the pills
       skills: ["USA", "Germany","London", "Europe"],
     },
   } as const;
 
-  // REPURPOSED 'caseStudiesData' to 'whyUsData' for your new content
   const whyUsData = [
     {
-      tag: "Advantage 01",
       title: "Significant Cost & Time Savings",
       metric: { value: "", label: "Avg. Savings" },
       description:
         "Bypass expensive hiring and training. Our streamlined process gets you to market faster, saving crucial time and resources.",
     },
     {
-      tag: "Advantage 02",
       title: "Total Flexibility & Control",
       metric: { value: "", label: "Platform Access" },
       description:
         "Scale your team on-demand for single or multiple projects, and monitor progress anytime through Slack, Jira, Github, etc.",
     },
     {
-      tag: "Advantage 03",
       title: "Creative Expertise on Demand",
       metric: { value: "", label: "Perspectives" },
       description:
@@ -250,12 +233,10 @@ const SolutionPillars: React.FC = () => {
     },
   ] as const;
 
-  // --- MASTER ANIMATION LOGIC (UNCHANGED) ---
   useLayoutEffect(() => {
     if (!mainRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Helper for word animations
       const animateWords = (elem: Element | null, delay = 0) => {
         if (!elem) return;
         const words = elem.querySelectorAll(".word-animate");
@@ -278,7 +259,6 @@ const SolutionPillars: React.FC = () => {
         });
       };
 
-      // Helper for paragraph/block animations
       const animateBlock = (elem: Element | null, delay = 0) => {
         if (!elem) return;
         gsap.from(elem, {
@@ -296,14 +276,12 @@ const SolutionPillars: React.FC = () => {
         });
       };
 
-      // 1. Main Title Animation
       gsap.utils
         .toArray<HTMLElement>(".main-title .word-animate-parent")
         .forEach((el, i) => {
           animateWords(el, i * 0.3);
         });
 
-      // 2. InfoCard Animation
       const infoCard = mainRef.current!.querySelector(
         ".info-card-container"
       ) as HTMLElement;
@@ -319,8 +297,6 @@ const SolutionPillars: React.FC = () => {
           once: true,
         },
       });
-      // animateWords(infoCard.querySelector(".info-features"), 0.4);
-      // animateWords(infoCard.querySelector(".info-subtitle"), 0.2);
       gsap.from(infoCard.querySelector(".arrow-icon") as HTMLElement, {
         opacity: 0,
         scale: 0,
@@ -335,7 +311,6 @@ const SolutionPillars: React.FC = () => {
         },
       });
 
-      // 3. Metric Cards Animation
       gsap.utils.toArray<HTMLElement>(".metric-card").forEach((card, i) => {
         gsap.from(card, {
           opacity: 0,
@@ -370,7 +345,6 @@ const SolutionPillars: React.FC = () => {
         animateWords(card.querySelector(".metric-label"), 0.8);
       });
 
-      // 4. Mini Case Studies Animation
       gsap.utils.toArray<HTMLElement>(".mini-case-study").forEach((card, i) => {
         gsap.from(card, {
           opacity: 0,
@@ -406,7 +380,6 @@ const SolutionPillars: React.FC = () => {
         animateBlock(card.querySelector(".case-study-desc"));
       });
 
-      // 5. "View All" Button
       const viewAllButton = mainRef.current!.querySelector(
         ".view-all-button-container"
       ) as HTMLElement;
@@ -470,17 +443,14 @@ const SolutionPillars: React.FC = () => {
 
       <section className="py-16 max-w-7xl mx-auto md:py-24">
         <div className="text-center mb-12">
-          {/* UPDATED SECTION TITLE */}
           <div className="text-4xl md:text-5xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
             {splitTextIntoWords("Why Our Clients Choose Us")}
           </div>
-          {/* UPDATED SECTION DESCRIPTION */}
           <p className="mt-4 text-lg text-gray-700 max-w-2xl mx-auto case-study-desc transform-gpu">
             Our partnership model is built on three pillars: efficiency, flexibility, and deep expertise.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Mapped the new "Why Us" data */}
           {whyUsData.map((item, index) => (
             <MiniCaseStudyCard key={index} {...item} />
           ))}

@@ -8,7 +8,7 @@ import {
 import {
   SiNextdotjs, SiMongodb, SiPostgresql, SiTypescript, SiJavascript, SiJquery,SiNestjs,
   SiExpress, SiDjango, SiFlask, SiGraphql, SiSocketdotio,
-  SiGo, SiMysql, SiFigma, SiOpenai, SiKubernetes, SiVercel
+  SiMysql, SiFigma, SiOpenai, SiKubernetes, SiVercel
 } from 'react-icons/si';
 import { GrAndroid, GrApple } from 'react-icons/gr';
 import { CgArrowsExchange } from 'react-icons/cg';
@@ -21,7 +21,6 @@ import { SiOllama } from "react-icons/si";
 import { RiGeminiFill } from "react-icons/ri";
 import { SiGooglecloud } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
-// --- TYPE DEFINITIONS ---
 interface TechItemType {
   name: string;
   icon: React.ReactElement;
@@ -32,7 +31,6 @@ interface TechnologyCategoryType {
   items: TechItemType[];
 }
 
-// --- DATA ---
 const iconProps = { size: 40 };
 
 const technologies: TechnologyCategoryType[] = [
@@ -117,8 +115,6 @@ const technologies: TechnologyCategoryType[] = [
   }
 ];
 
-// --- CHILD COMPONENTS ---
-
 const TechItem: React.FC<TechItemType> = ({ name, icon }) => (
   <div className="group flex flex-col items-center justify-center gap-2 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm transition-all duration-300 ease-in-out hover:shadow-md hover:-translate-y-1">
     <div className="w-16 h-16 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
@@ -154,8 +150,6 @@ const TechCategory: React.FC<TechCategoryProps> = ({ title, items }) => (
     </div>
   </motion.section>
 );
-
-// --- MAIN EXPORTED COMPONENT ---
 
 const TechStack: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');

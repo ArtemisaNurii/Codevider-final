@@ -26,16 +26,6 @@ export const useTextProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const workerManager = useRef(getWorkerManager());
   const { enableCaching = true, autoInitialize = true } = options;
 
-  useEffect(() => {
-    if (autoInitialize) {
-      initializeWorker();
-    }
-    
-    return () => {
-      workerManager.current.terminate('textProcessor');
-    };
-  }, [autoInitialize]);
-
   const initializeWorker = useCallback(async () => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -53,6 +43,18 @@ export const useTextProcessingWorker = (options: UseWebWorkerOptions = {}) => {
     }
   }, []);
 
+  useEffect(() => {
+    const manager = workerManager.current;
+
+    if (autoInitialize) {
+      initializeWorker();
+    }
+
+    return () => {
+      manager.terminate('textProcessor');
+    };
+  }, [autoInitialize, initializeWorker]);
+
   const processAnimationSequence = useCallback(async (text: string, config: {
     splitBy: 'words' | 'characters' | 'lines';
     staggerFrom: 'first' | 'last' | 'center' | 'random' | number;
@@ -60,14 +62,14 @@ export const useTextProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   }) => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      
+
       const result = await workerManager.current.executeOperation(
         'textProcessor',
         'processAnimationSequence',
         { text, config },
         enableCaching
       );
-      
+
       setState(prev => ({ ...prev, isLoading: false }));
       return result;
     } catch (error) {
@@ -83,14 +85,14 @@ export const useTextProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const splitText = useCallback(async (text: string, splitBy: 'words' | 'characters' | 'lines') => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      
+
       const result = await workerManager.current.executeOperation(
         'textProcessor',
         'splitText',
         { text, splitBy },
         enableCaching
       );
-      
+
       setState(prev => ({ ...prev, isLoading: false }));
       return result;
     } catch (error) {
@@ -122,16 +124,6 @@ export const useDataProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const workerManager = useRef(getWorkerManager());
   const { enableCaching = true, autoInitialize = true } = options;
 
-  useEffect(() => {
-    if (autoInitialize) {
-      initializeWorker();
-    }
-
-    return () => {
-      workerManager.current.terminate('dataProcessor');
-    };
-  }, [autoInitialize]);
-
   const initializeWorker = useCallback(async () => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -149,17 +141,29 @@ export const useDataProcessingWorker = (options: UseWebWorkerOptions = {}) => {
     }
   }, []);
 
+  useEffect(() => {
+    const manager = workerManager.current;
+
+    if (autoInitialize) {
+      initializeWorker();
+    }
+
+    return () => {
+      manager.terminate('dataProcessor');
+    };
+  }, [autoInitialize, initializeWorker]);
+
   const filterProjects = useCallback(async (projects: unknown[], filters: Record<string, unknown>) => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      
+
       const result = await workerManager.current.executeOperation(
         'dataProcessor',
         'filterProjects',
         { projects, filters },
         enableCaching
       );
-      
+
       setState(prev => ({ ...prev, isLoading: false }));
       return result;
     } catch (error) {
@@ -175,14 +179,14 @@ export const useDataProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const sortProjects = useCallback(async (projects: unknown[], sortBy: string, sortOrder: 'asc' | 'desc' = 'asc') => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      
+
       const result = await workerManager.current.executeOperation(
         'dataProcessor',
         'sortProjects',
         { projects, sortBy, sortOrder },
         enableCaching
       );
-      
+
       setState(prev => ({ ...prev, isLoading: false }));
       return result;
     } catch (error) {
@@ -198,14 +202,14 @@ export const useDataProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const searchProjects = useCallback(async (projects: unknown[], searchTerm: string, searchFields?: string[]) => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      
+
       const result = await workerManager.current.executeOperation(
         'dataProcessor',
         'searchProjects',
         { projects, searchTerm, searchFields },
         enableCaching
       );
-      
+
       setState(prev => ({ ...prev, isLoading: false }));
       return result;
     } catch (error) {
@@ -221,14 +225,14 @@ export const useDataProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const processCategories = useCallback(async (projects: unknown[]) => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      
+
       const result = await workerManager.current.executeOperation(
         'dataProcessor',
         'processCategories',
         { projects },
         enableCaching
       );
-      
+
       setState(prev => ({ ...prev, isLoading: false }));
       return result;
     } catch (error) {
@@ -262,16 +266,6 @@ export const useMathProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const workerManager = useRef(getWorkerManager());
   const { enableCaching = true, autoInitialize = true } = options;
 
-  useEffect(() => {
-    if (autoInitialize) {
-      initializeWorker();
-    }
-
-    return () => {
-      workerManager.current.terminate('mathProcessor');
-    };
-  }, [autoInitialize]);
-
   const initializeWorker = useCallback(async () => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -289,17 +283,29 @@ export const useMathProcessingWorker = (options: UseWebWorkerOptions = {}) => {
     }
   }, []);
 
+  useEffect(() => {
+    const manager = workerManager.current;
+
+    if (autoInitialize) {
+      initializeWorker();
+    }
+
+    return () => {
+      manager.terminate('mathProcessor');
+    };
+  }, [autoInitialize, initializeWorker]);
+
   const processMapDots = useCallback(async (dots: unknown[], config?: Record<string, unknown>) => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      
+
       const result = await workerManager.current.executeOperation(
         'mathProcessor',
         'processMapDots',
         { dots, config },
         enableCaching
       );
-      
+
       setState(prev => ({ ...prev, isLoading: false }));
       return result;
     } catch (error) {
@@ -315,14 +321,14 @@ export const useMathProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const projectMapPoint = useCallback(async (lat: number, lng: number, width?: number, height?: number) => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      
+
       const result = await workerManager.current.executeOperation(
         'mathProcessor',
         'projectMapPoint',
         { lat, lng, width, height },
         enableCaching
       );
-      
+
       setState(prev => ({ ...prev, isLoading: false }));
       return result;
     } catch (error) {
@@ -338,14 +344,14 @@ export const useMathProcessingWorker = (options: UseWebWorkerOptions = {}) => {
   const optimizeAnimationTimings = useCallback(async (animations: unknown[], targetFPS?: number) => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      
+
       const result = await workerManager.current.executeOperation(
         'mathProcessor',
         'optimizeAnimationTimings',
         { animations, targetFPS },
         enableCaching
       );
-      
+
       setState(prev => ({ ...prev, isLoading: false }));
       return result;
     } catch (error) {
@@ -378,16 +384,6 @@ export const useGenericWorker = (workerType: string, scriptPath: string, options
   const workerManager = useRef(getWorkerManager());
   const { enableCaching = true, autoInitialize = true } = options;
 
-  useEffect(() => {
-    if (autoInitialize) {
-      initializeWorker();
-    }
-
-    return () => {
-      workerManager.current.terminate(workerType);
-    };
-  }, [autoInitialize, workerType]);
-
   const initializeWorker = useCallback(async () => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -402,17 +398,29 @@ export const useGenericWorker = (workerType: string, scriptPath: string, options
     }
   }, [workerType, scriptPath]);
 
+  useEffect(() => {
+    const manager = workerManager.current;
+
+    if (autoInitialize) {
+      initializeWorker();
+    }
+
+    return () => {
+      manager.terminate(workerType);
+    };
+  }, [autoInitialize, initializeWorker, workerType]);
+
   const executeOperation = useCallback(async (operation: string, data: unknown) => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      
+
       const result = await workerManager.current.executeOperation(
         workerType,
         operation,
         data,
         enableCaching
       );
-      
+
       setState(prev => ({ ...prev, isLoading: false }));
       return result;
     } catch (error) {
@@ -430,4 +438,4 @@ export const useGenericWorker = (workerType: string, scriptPath: string, options
     executeOperation,
     initializeWorker,
   };
-}; 
+};

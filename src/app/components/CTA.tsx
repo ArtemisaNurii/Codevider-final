@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+
+import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -15,19 +16,10 @@ import {
 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { contactSubmit } from "../actions/contact";
 
-// Reusable Footer Component
 export const Footer: React.FC = () => {
-
   return (
     <footer
     id="contact"
@@ -49,9 +41,6 @@ export const Footer: React.FC = () => {
               </Link>
             </li>
             <li>
-              {/* <Link href="/projects" className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1">
-                Projects
-              </Link> */}
             </li>
             <li>
               <Link href="/career" className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1">
@@ -92,21 +81,13 @@ export const Footer: React.FC = () => {
               </a>
             </li>
             <li>
-              {/* <a 
-                href="tel:+12247880689" 
-                className="hover:text-blue-600 transition-colors text-base sm:text-sm block py-1 font-medium"
-              >
-                +1 224 788 0689
-              </a> */}
             </li>
           </ul>
         </div>
       </div>
 
-      {/* --- Bottom Section --- */}
       <div className="mt-10 pt-6 border-t border-gray-200">
         <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
-          {/* Left: Logo, Tagline, and Mobile-Only Address */}
           <div className="text-left">
             <Image
               src="/images/logo/blue.png"
@@ -120,7 +101,6 @@ export const Footer: React.FC = () => {
               Stay updated on our latest developments, insights, and opportunities.
             </p>
 
-            {/* Address for MOBILE VIEW ONLY */}
             <address className="mt-4 text-sm sm:text-xs text-gray-500 not-italic md:hidden leading-relaxed">
               <strong>Codevider</strong><br />
               Barrikada Street<br />
@@ -128,7 +108,6 @@ export const Footer: React.FC = () => {
             </address>
           </div>
 
-          {/* Right: Social Icons */}
           <div className="flex items-center justify-center md:justify-end gap-4 mt-4 md:mt-0">
             <p className="text-sm text-gray-600 mr-2 hidden sm:block">Follow us:</p>
             <a
@@ -161,7 +140,6 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Copyright */}
         <p className="mt-6 pt-4 border-t border-gray-100 text-xs text-gray-500 text-center">
           © {new Date().getFullYear()} Codevider. All rights reserved.
         </p>
@@ -172,11 +150,9 @@ export const Footer: React.FC = () => {
 };
 
 const Contact: React.FC = () => {
-  const sectionRef = useRef<HTMLElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
   const [isPending, setIsPending] = React.useState(false);
 
-// inside your Contact component file
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   setIsPending(true);
@@ -185,7 +161,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    // Call the server action directly
     const result = await contactSubmit(formData);
 
     if (result.success) {
@@ -202,15 +177,10 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   }
 };
 
-  useEffect(() => {
-    // Observer logic if needed
-  }, []);
-
   return (
     <>
       <div id="contact" className="relative overflow-hidden text-white">
         <section
-          ref={sectionRef}
           className="relative z-10 px-4 py-20 sm:py-28 bg-gradient-to-br from-black via-slate-900 to-sky-800 "
         >
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 lg:gap-16 items-stretch">

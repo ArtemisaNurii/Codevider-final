@@ -214,9 +214,8 @@ const ProjectPage: React.FC = memo(() => {
   const [filteredStudies, setFilteredStudies] = useState<CaseStudy[]>(allCaseStudies);
   const [categories, setCategories] = useState<string[]>(['All']);
   
-  const { filterProjects, processCategories, isLoading: isProcessing } = useDataProcessingWorker();
+  const { filterProjects, processCategories } = useDataProcessingWorker();
 
-  // Process categories with Web Worker
   useEffect(() => {
     const loadCategories = async () => {
       try {
@@ -224,7 +223,6 @@ const ProjectPage: React.FC = memo(() => {
         setCategories(result.categories);
       } catch (error) {
         console.error('Category processing failed:', error);
-        // Fallback to synchronous processing
         setCategories(['All', ...Array.from(new Set(allCaseStudies.map(c => c.tag)))]);
       }
     };
@@ -232,7 +230,6 @@ const ProjectPage: React.FC = memo(() => {
     loadCategories();
   }, [processCategories]);
 
-  // Filter studies with Web Worker when category changes
   useEffect(() => {
     const filterStudies = async () => {
       try {
@@ -244,7 +241,6 @@ const ProjectPage: React.FC = memo(() => {
         }
       } catch (error) {
         console.error('Filtering failed:', error);
-        // Fallback to synchronous filtering
         const filtered = selectedCategory === 'All'
           ? allCaseStudies
           : allCaseStudies.filter(study => study.tag === selectedCategory);

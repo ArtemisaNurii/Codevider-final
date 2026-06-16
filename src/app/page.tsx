@@ -2,7 +2,7 @@
 
 import { lazy, Suspense } from "react"
 import Hero from "./components/HeroSection";
-import Header from "./components/navbar";
+import SiteNavbar from "./components/navbar";
 import ScrollReveal from "./components/ScrollReveal";
 
 // Lazy load components that are below the fold
@@ -25,7 +25,7 @@ const SectionLoader = () => (
 export default function Home() {
   return (
     <div className="min-h-dvh ">
-      <Header />
+      <SiteNavbar />
       <main id="home">
         <Hero />
         <ScrollReveal delay={0.03}>

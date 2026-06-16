@@ -1,3 +1,12 @@
+export function generateStaticParams() {
+  return [
+    { id: 'simplitime-—-user-&-employment-management-platform' },
+    { id: 'straatos-—-forest-carbon-(co₂)-management-platform' },
+    { id: 'memcoin-—-investing-&-portfolio-platform' },
+    { id: 'noname-—-ai-policy-compliance-assistant' },
+  ];
+}
+
 export default function ProjectDetailPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

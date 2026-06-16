@@ -1,3 +1,7 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { getJobs } from "./action"
 import JobCard from "./JobCard"
@@ -5,18 +9,75 @@ import PaginationControls from "./PaginationControls"
 import { Job } from "./jobs"
 import HiringProcess from "./hiringProcess"
 
-interface JobsListingProps {
-  page: number
-  limit: number
-}
+export default function JobsListing() {
+  const searchParams = useSearchParams()
+  const page = Number(searchParams.get("page")) || 1
+  const limit = Number(searchParams.get("limit")) || 10
 
-export default async function JobsListing({ page, limit }: JobsListingProps) {
-  const jobsResponse = await getJobs({ page, limit })
-  const { jobs, pagination } = jobsResponse
+  const [jobs, setJobs] = useState<Job[]>([])
+  const [pagination, setPagination] = useState({
+    currentPage: page,
+    totalPages: 0,
+    totalCount: 0,
+    limit: limit,
+    hasNext: false,
+    hasPrev: false,
+  })
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let active = true
+    setIsLoading(true)
+    setError(null)
+    
+    getJobs({ page, limit })
+      .then((res) => {
+        if (!active) return
+        setJobs(res.jobs)
+        setPagination({
+          currentPage: res.pagination.currentPage,
+          totalPages: res.pagination.totalPages,
+          totalCount: res.pagination.totalCount,
+          limit: res.pagination.limit,
+          hasNext: res.pagination.hasNext,
+          hasPrev: res.pagination.hasPrev,
+        })
+        setIsLoading(false)
+      })
+      .catch((err) => {
+        if (!active) return
+        console.error("Error in JobsListing fetch:", err)
+        setError("Failed to load job openings. Please try again.")
+        setIsLoading(false)
+      })
+
+    return () => {
+      active = false
+    }
+  }, [page, limit])
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-slate-900"></div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-4xl mx-auto py-24 text-center">
+        <h2 className="text-2xl font-bold text-red-600 mb-4">{error}</h2>
+        <Button onClick={() => window.location.reload()} className="bg-slate-900 text-white">
+          Retry
+        </Button>
+      </div>
+    )
+  }
 
   // --- THIS IS THE STATE FOR "NO JOBS" ---
   if (!jobs || jobs.length === 0) {
-    // We only show the full "no open positions" page if there are truly zero jobs in the system.
     if (pagination.totalCount === 0) {
       return (
         <>
@@ -41,7 +102,7 @@ export default async function JobsListing({ page, limit }: JobsListingProps) {
             </h2>
             <p className="text-lg text-start text-gray-600 mb-8 mx-auto">
               We may not have active openings right now, but we&apos;re always eager to connect with talented professionals.
-             <br/> Feel free to send us your resume for future consideration.
+              <br/> Feel free to send us your resume for future consideration.
             </p>
             <Button
               asChild
@@ -52,15 +113,11 @@ export default async function JobsListing({ page, limit }: JobsListingProps) {
             </Button>
           </section>
           
-          {/* CHANGE 2: Render the HiringProcess component here, even with no jobs. */}
-          {/* We use a different title to frame it as general company info. */}
           <HiringProcess title="Our Hiring Process" />
         </>
       )
     }
 
-    // This handles the case where there are jobs, but not on the current page (e.g., page 3 of 2).
-    // It's a less common edge case, so a simpler message is fine.
     return (
       <div className="max-w-4xl mx-auto py-24 text-center">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">No Jobs Found on This Page</h2>
@@ -69,7 +126,11 @@ export default async function JobsListing({ page, limit }: JobsListingProps) {
         </p>
         <PaginationControls
           currentPage={pagination.currentPage}
-          totalPages={pagination.totalPages} totalCount={0} limit={0} hasNext={false} hasPrev={false}            // ... other props
+          totalPages={pagination.totalPages}
+          totalCount={pagination.totalCount}
+          limit={pagination.limit}
+          hasNext={pagination.hasNext}
+          hasPrev={pagination.hasPrev}
         />
       </div>
     )
@@ -103,12 +164,15 @@ export default async function JobsListing({ page, limit }: JobsListingProps) {
         <div className="max-w-4xl mx-auto mt-8">
           <PaginationControls
             currentPage={pagination.currentPage}
-            totalPages={pagination.totalPages} totalCount={0} limit={0} hasNext={false} hasPrev={false}            // ... other props
+            totalPages={pagination.totalPages}
+            totalCount={pagination.totalCount}
+            limit={pagination.limit}
+            hasNext={pagination.hasNext}
+            hasPrev={pagination.hasPrev}
           />
         </div>
       </section>
 
-      {/* CHANGE 3: Replace the old hardcoded section with the new component */}
       <HiringProcess />
     </>
   )

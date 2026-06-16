@@ -2,28 +2,15 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Users, Handshake, Sparkles, Heart, Globe2, Target, Star, Trophy, Scale, Lightbulb, Rocket, Code2 } from "lucide-react";
+import { ArrowRight, Code2, Heart, Sparkles, Target, Trophy, Users } from "lucide-react";
 import Image from "next/image";
 import MeetTeamSection from "./meetTeam";
-// ---- Types ----
+
 interface Pillar {
   icon: React.ReactNode;
   title: string;
   description: string;
 }
-
-interface Stat {
-  label: string;
-  value: string;
-  note?: string;
-}
-
-interface TimelineItem {
-  year: string;
-  title: string;
-  text: string;
-}
-
 
 const pillars: Pillar[] = [
   {
@@ -46,9 +33,6 @@ const pillars: Pillar[] = [
   },
 ]
 
-
-
-// ---- Helpers ----
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -56,11 +40,9 @@ const fadeUp = {
 
 const card = "rounded-2xl border bg-gradient-to-r from-black to-slate-800 border-slate-200  shadow-sm hover:shadow-md transition-shadow";
 
-// ---- Component ----
 export default function CodeviderCulturePage() {
   return (
     <main className="bg-white text-slate-900">
-      {/* Hero */}
       <section className="relative overflow-hidden max-w-7xl mx-auto ">
         <div className="pointer-events-none absolute inset-0 max-w-7xl " />
         <div className="container mx-auto px-6 py-24 ">
@@ -92,7 +74,6 @@ export default function CodeviderCulturePage() {
         </div>
       </section>
 
-      {/* Values / Pillars */}
       <section id="principles" className="container mx-auto max-w-7xl px-6 pb-8 ">
         <div className="mx-auto mb-10 max-w-2xl text-center max-sm:text-start">
           <h2 className="text-3xl font-bold  md:text-4xl">Principles we live by</h2>
@@ -135,7 +116,6 @@ export default function CodeviderCulturePage() {
             </ul>
           </motion.div>
 
-          {/* Gallery Placeholder (drop your images) */}
           <div className="grid grid-cols-2 gap-4">
             <Image src="/images/teamMember/2member.jpg" alt="Team" width={500} height={500} />
             <Image src="/images/teamMember/member1.jpg" alt="Team" width={500} height={500} />
@@ -166,13 +146,6 @@ export default function CodeviderCulturePage() {
                 See open roles
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </a>
-              {/* <a
-                href="/about"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-transparent px-5 py-3 text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                aria-label="Learn more about Codevider"
-              >
-                Learn more
-              </a> */}
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Briefcase, MapPin, FileText, BadgeDollarSign, Plus, X } from "lucide-react"
-import Header from "../components/navbar"
+import SiteNavbar from "../components/navbar"
 import { Job } from "./jobs"
 import { uploadFileAction, submitApplicationAction, CandidateData, FileUploadData } from "./apply/action"
 
@@ -313,7 +313,6 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
         }
       
       
-      console.log('Submitting application data:', applicationPayload)
       const submissionResult = await submitApplicationAction(applicationPayload)
       
       if (submissionResult.success) {
@@ -348,7 +347,7 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
 
   return (
     <div className="bg-white font-sans">
-      <Header />
+      <SiteNavbar />
       {/* Section Header with Gradient */}
       <div className="w-full bg-gradient-to-r from-black via-slate-700 to-sky-600 py-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

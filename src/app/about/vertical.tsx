@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { type AnimationOptions, motion } from "motion/react"
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react"
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react"
 
 import { cn } from "@/lib/utils"
 import { useTextProcessingWorker } from "@/lib/hooks/useWebWorker"
@@ -36,6 +36,15 @@ interface WordObject {
   needsSpace: boolean
 }
 
+const splitIntoCharacters = (text: string): string[] => {
+  if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
+    const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" })
+    return Array.from(segmenter.segment(text), ({ segment }) => segment)
+  }
+
+  return Array.from(text)
+}
+
 const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
   (
     {
@@ -66,26 +75,14 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
     const [isAnimating, setIsAnimating] = useState(false)
     const [hasAnimated, setHasAnimated] = useState(false)
 
-    // handy function to split text into characters with support for unicode and emojis
-    const splitIntoCharacters = (text: string): string[] => {
-      if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
-        const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" })
-        return Array.from(segmenter.segment(text), ({ segment }) => segment)
-      }
-      // Fallback for browsers that don't support Intl.Segmenter
-      return Array.from(text)
-    }
-
-    // Use Web Worker for expensive text processing
     const [processedData, setProcessedData] = useState<{
       elements: string[] | Array<{characters: string[]; needsSpace: boolean}>;
       delays: number[];
       animationData: Array<{element: unknown; delay: number; index: number}>;
     } | null>(null);
     
-    const { processAnimationSequence, isLoading: isProcessing } = useTextProcessingWorker();
+    const { processAnimationSequence } = useTextProcessingWorker();
 
-    // Process text with Web Worker when dependencies change
     useEffect(() => {
       const processText = async () => {
         try {
@@ -97,9 +94,14 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
           setProcessedData(result as typeof processedData);
         } catch (error) {
           console.error('Text processing failed:', error);
-          // Fallback to synchronous processing
-          const words = text.split(" ");
-          const elements = splitBy === "words" ? text.split(" ") : splitBy === "lines" ? text.split("\n") : text.split(splitBy);
+          const elements = splitBy === "characters"
+            ? splitIntoCharacters(text).map((character) => ({ characters: [character], needsSpace: false }))
+            : splitBy === "words"
+              ? text.split(" ")
+              : splitBy === "lines"
+                ? text.split("\n")
+                : text.split(splitBy);
+
           setProcessedData({
             elements,
             delays: elements.map((_, i) => i * staggerDuration),
@@ -111,7 +113,6 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
       processText();
     }, [text, splitBy, staggerFrom, staggerDuration, processAnimationSequence]);
 
-    // Extract elements and delays from processed data
     const elements = processedData?.elements || [];
     const getStaggerDelay = useCallback(
       (index: number) => processedData?.delays[index] || 0,
@@ -124,7 +125,6 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
       onStart?.()
     }, [onStart, once, hasAnimated])
 
-    // Expose the startAnimation function via ref
     useImperativeHandle(ref, () => ({
       startAnimation,
       reset: () => {
@@ -133,12 +133,11 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
       },
     }))
 
-    // Auto start animation
     useEffect(() => {
       if (autoStart) {
         startAnimation()
       }
-    }, [autoStart])
+    }, [autoStart, startAnimation])
 
     const variants = {
       hidden: { y: reverse ? "-100%" : "100%" },

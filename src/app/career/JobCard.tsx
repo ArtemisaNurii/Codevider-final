@@ -13,7 +13,7 @@ import { Job } from "./jobs"
 
 export default function JobCard({ job }: { job: Job }) {
   const [isOpen, setIsOpen] = useState(false)
-  const applyHref = `/career/apply/${job.id}`
+  const applyHref = `/career/apply?jobId=${job.id}`
 
   // Helper function to create metadata tags - good for reusability and clean code
   const InfoTag = ({ icon, text }: { icon: React.ReactNode, text: string | undefined }) => {

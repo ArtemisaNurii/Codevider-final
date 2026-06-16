@@ -1,5 +1,3 @@
-'use server'
-
 import {  RESUME_AI, RESUME_AI_UPLOAD } from '@/constants/endpoint'
 
 export interface ActionResponse {
@@ -55,9 +53,9 @@ export interface CandidateData {
 }
 
 export async function uploadFileAction(fileFormData: FormData): Promise<ActionResponse> {
-  const baseUrl = process.env.BACKEND_API_URL
+  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL
   if (!baseUrl) {
-    return { success: false, message: "BACKEND_API_URL not set" }
+    return { success: false, message: "NEXT_PUBLIC_BACKEND_API_URL not set" }
   }
   try {
     const apiEndpoint = `${baseUrl}/${RESUME_AI_UPLOAD}`
@@ -91,6 +89,7 @@ export async function uploadFileAction(fileFormData: FormData): Promise<ActionRe
     return { success: false, message: `Network error: ${errorMessage}` }
   }
 }
+
 function extractCandidateData(responseData: Record<string, unknown>): CandidateData {
   const candidateData: CandidateData = {}
 
@@ -106,15 +105,15 @@ function extractCandidateData(responseData: Record<string, unknown>): CandidateD
   if (Array.isArray(responseData.skills)) {
     candidateData.skills = responseData.skills.filter((s: string) => typeof s === 'string')
   }
-   if (Array.isArray(responseData.experiences)) {
-     candidateData.experiences = responseData.experiences.map((exp: CandidateExperience) => ({
-       start_date: exp.start_date || '',
-       end_date: exp.end_date || null,
-       company_name: exp.company_name || '',
-       position: exp.position || '',
-       description: exp.description || null
-     }))
-   }
+  if (Array.isArray(responseData.experiences)) {
+    candidateData.experiences = responseData.experiences.map((exp: CandidateExperience) => ({
+      start_date: exp.start_date || '',
+      end_date: exp.end_date || null,
+      company_name: exp.company_name || '',
+      position: exp.position || '',
+      description: exp.description || null
+    }))
+  }
   if (Array.isArray(responseData.educations)) {
     candidateData.educations = responseData.educations.map((edu: CandidateEducation) => ({
       start_date: edu.start_date || '',
@@ -134,35 +133,31 @@ function extractCandidateData(responseData: Record<string, unknown>): CandidateD
     }))
   }
 
-   // Fallback: nested `candidate` object (old shape)
-   const candidate = responseData.candidate as Record<string, unknown> | undefined
-   if (candidate && typeof candidate === 'object') {
-     if (!candidateData.name && typeof candidate.full_name === 'string') candidateData.name = candidate.full_name
-     if (!candidateData.email && typeof candidate.email === 'string') candidateData.email = candidate.email
-     if (!candidateData.phone && typeof candidate.phone === 'string') candidateData.phone = candidate.phone
-     if (!candidateData.summary && typeof candidate.summary === 'string') candidateData.summary = candidate.summary
-     if (!candidateData.skills && Array.isArray(candidate.skills)) {
-       candidateData.skills = candidate.skills.filter((s: unknown) => typeof s === 'string') as string[]
-     }
-   }
+  // Fallback: nested `candidate` object (old shape)
+  const candidate = responseData.candidate as Record<string, unknown> | undefined
+  if (candidate && typeof candidate === 'object') {
+    if (!candidateData.name && typeof candidate.full_name === 'string') candidateData.name = candidate.full_name
+    if (!candidateData.email && typeof candidate.email === 'string') candidateData.email = candidate.email
+    if (!candidateData.phone && typeof candidate.phone === 'string') candidateData.phone = candidate.phone
+    if (!candidateData.summary && typeof candidate.summary === 'string') candidateData.summary = candidate.summary
+    if (!candidateData.skills && Array.isArray(candidate.skills)) {
+      candidateData.skills = candidate.skills.filter((s: unknown) => typeof s === 'string') as string[]
+    }
+  }
 
   return candidateData
 }
 
 export async function submitApplicationAction(applicationData: object): Promise<ActionResponse> {
-  console.log('Server action: submitApplicationAction called with data', JSON.stringify(applicationData))
-  const baseUrl = process.env.BACKEND_API_URL
+  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL
   if (!baseUrl) {
-    console.error('Server action: BACKEND_API_URL not set')
-    return { success: false, message: "BACKEND_API_URL not set" }
+    console.error('Client API: NEXT_PUBLIC_BACKEND_API_URL not set')
+    return { success: false, message: "NEXT_PUBLIC_BACKEND_API_URL not set" }
   }
   try {
     const apiEndpoint = `${baseUrl}/${RESUME_AI}`
-    console.log('Server action: Submitting to endpoint', apiEndpoint)
-    
-    // Add timeout to prevent hanging requests
     const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 30000)
     
     const response = await fetch(apiEndpoint, {
       method: 'POST',
@@ -171,11 +166,8 @@ export async function submitApplicationAction(applicationData: object): Promise<
       signal: controller.signal
     })
     
-    clearTimeout(timeoutId) // Clear the timeout since request completed
-    
-    console.log('Server action: Response status:', response.status)
+    clearTimeout(timeoutId)
     const responseData = await response.json()
-    console.log('Server action: Response data:', JSON.stringify(responseData))
     
     if (response.ok) {
       return { success: true, message: 'Application submitted successfully!', data: responseData }
@@ -183,7 +175,7 @@ export async function submitApplicationAction(applicationData: object): Promise<
       return { success: false, message: responseData.message || "Application submission failed" }
     }
   } catch (error) {
-    console.error('Server action: Error during submission:', error)
+    console.error('Client API: Error during submission:', error)
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     if (errorMessage === 'The operation was aborted' || errorMessage.includes('abort')) {
       return { success: false, message: 'Request timed out. Please try again.' }

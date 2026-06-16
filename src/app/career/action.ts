@@ -1,5 +1,3 @@
-"use server"
-
 import { RECRUIT_JOBS_ENDPOINT } from "@/constants/endpoint"
 import { Job } from "./jobs"
 
@@ -23,9 +21,9 @@ interface JobsResponse {
 }
 
 export async function getJobs(params: PaginationParams = {}): Promise<JobsResponse> {
-  const baseUrl = process.env.BACKEND_API_URL
+  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL
   if (!baseUrl) {
-    throw new Error("❌ BACKEND_API_URL is not defined in .env.local")
+    throw new Error("❌ NEXT_PUBLIC_BACKEND_API_URL is not defined in environment variables")
   }
 
   // Defaults
@@ -47,7 +45,6 @@ export async function getJobs(params: PaginationParams = {}): Promise<JobsRespon
     const res = await fetch(url.toString(), {
       method: "GET",
       headers: { Accept: "application/json" },
-      cache: "no-store",
     })
 
     if (!res.ok) {
