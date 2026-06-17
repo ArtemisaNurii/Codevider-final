@@ -126,7 +126,7 @@ const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ title, subtitle }) => (
 const KeyMetricsBar = ({ metrics }: { metrics: KeyMetric[] }) => (
   <div className="bg-slate-50 border-b border-slate-200">
     {/* Use justify-around for more even spacing that adapts better */}
-    <div className="mx-auto flex max-w-7xl justify-around gap-4 px-4 py-6 sm:py-8 lg:px-8">
+    <div className="site-container flex justify-around gap-4 py-6 sm:py-8">
       {metrics.map((metric) => (
         <div key={metric.label} className="text-center flex-1 min-w-[100px] lg:flex-none">
           <metric.icon className="mx-auto h-7 w-7 sm:h-8 sm:w-8 text-sky-500" aria-hidden="true" />
@@ -212,7 +212,7 @@ ContentSection.displayName = "ContentSection";
 // 6. Call To Action
 const CallToAction = () => (
     <div className="bg-white">
-        <div className="mx-auto max-w-4xl py-12 px-6 text-center sm:py-16 lg:py-20">
+        <div className="site-container max-w-4xl py-12 text-center sm:py-16 lg:py-20">
             <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-gray-700">
                 Have a similar challenge?
             </h2>
@@ -271,7 +271,7 @@ const ProjectProfile: React.FC = () => {
       />
       <KeyMetricsBar metrics={caseStudyData.keyMetrics} />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-12 sm:pt-12 sm:pb-16 lg:pt-16 lg:pb-20">
+      <div className="site-container pt-10 pb-12 sm:pt-12 sm:pb-16 lg:pt-16 lg:pb-20">
         <div className="flex flex-col lg:flex-row lg:gap-12">
 
           {/* Sidebar: Appears second on mobile (using order), first on desktop */}

@@ -3,95 +3,85 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Plus } from 'lucide-react';
+import { homePage } from '@/lib/constants/pages/home';
 
-const tabs = [
-    {
-      title: 'What types of software projects do you take on?',
-      description:
-        'We build everything from MVPs and mobile apps to large-scale SaaS platforms, internal tools, and complex cloud back-ends. If it involves custom code, we can probably handle it.',
-    },
-    {
-      title: 'Which technologies and frameworks do you specialize in?',
-      description:
-        'Our team specializes in modern web and mobile frameworks including React, Next.js, Node.js, Python, Tailwind CSS, and AWS Cloud services. We’re also flexible and learn new stacks quickly.',
-    },
-    {
-      title: 'How do you estimate project timelines and budgets?',
-      description:
-        'We start with a discovery session to understand your goals, then create a detailed scope with estimates. Our estimates balance speed and thoroughness to help you plan accurately.',
-    },
-    {
-      title: 'Will I own the source code and intellectual property?',
-      description:
-        'Yes, you retain full ownership of all source code and IP upon final payment. We make this clear in our contract for transparency and peace of mind.',
-    },
-    {
-      title: 'How will we communicate during the project?',
-      description:
-        'We use tools like Slack, Notion, and regular video calls to keep you updated. You’ll have a direct line to your project manager and developers.',
-    },
-    {
-      title: 'What is your quality-assurance process?',
-      description:
-        'Our QA process includes manual and automated testing, peer code reviews, staging environments, and performance monitoring to ensure everything works as intended.',
-    },
-    {
-      title: 'Do you provide post-launch support and maintenance?',
-      description:
-        'Yes. We offer flexible maintenance plans, including bug fixes, updates, performance monitoring, and new feature development.',
-    },
-    {
-      title: 'Can you work with an existing or legacy codebase?',
-      description:
-        'Absolutely. We’ve helped modernize and scale legacy systems across various tech stacks while preserving core functionality.',
-    },
-  ];
-  
+const springTransition = { type: 'spring' as const, duration: 0.3, bounce: 0 };
 
 export default function Faq() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const { title, list: items } = homePage.faq;
 
-  const handleClick = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index);
+  const toggle = (index: number) => {
+    setActiveIndex((current) => (current === index ? null : index));
   };
 
   return (
-    <section className="bg-white py-16">
-      <div className="container max-w-7xl mx-auto px-4">
-        <h1 className="text-center text-4xl font-semibold uppercase text-black mb-10">
-          Frequently Asked Questions
-        </h1>
-        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-          {tabs.map((tab, index) => (
-            <motion.div
-              key={index}
-              className={`overflow-hidden ${index !== tabs.length - 1 ? 'border-b border-gray-200' : ''}`}
-              onClick={() => handleClick(index)}
-            >
-              <button
-                className="flex w-full items-center gap-2 px-2 py-4 text-left text-gray-800 font-semibold transition-all sm:text-base text-sm"
+    <section className="bg-white section-py">
+      <div className="site-container">
+        <h2 className="text-center text-fluid-heading font-semibold uppercase text-black mb-8 sm:mb-10 text-balance">
+          {title}
+        </h2>
+        <div className="rounded-2xl bg-white p-2 sm:p-3 surface-elevated">
+          {items.map((item, index) => {
+            const isOpen = activeIndex === index;
+            const panelId = `faq-panel-${index}`;
+            const triggerId = `faq-trigger-${index}`;
+
+            return (
+              <div
+                key={item.title}
+                className={`overflow-hidden rounded-xl ${
+                  index !== items.length - 1 ? 'shadow-[0_1px_0_rgba(0,0,0,0.06)]' : ''
+                }`}
               >
-                <Plus
-                  className={`h-5 w-5 transform transition-transform text-gray-700 ${activeIndex === index ? 'rotate-45' : 'rotate-0'}`}
-                />
-                {tab.title}
-              </button>
-              <AnimatePresence mode="sync">
-                {activeIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut', delay: 0.14 }}
+                <button
+                  type="button"
+                  id={triggerId}
+                  onClick={() => toggle(index)}
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
+                  className="relative flex w-full min-h-11 items-center gap-3 rounded-xl px-3 py-4 text-left text-sm font-semibold text-gray-800 transition-[color,background-color,transform] duration-150 ease-out hover:bg-gray-50/80 sm:text-base active:scale-[0.96] before:absolute before:inset-[-2px] before:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40 focus-visible:ring-offset-2"
+                >
+                  <motion.span
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={springTransition}
+                    className="inline-flex shrink-0"
+                    aria-hidden
                   >
-                    <p className="px-8 pb-4 pt-0 text-black text-sm sm:text-base">
-                      {tab.description}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                    <Plus className="h-5 w-5 text-gray-700" />
+                  </motion.span>
+                  <span className="text-pretty">{item.title}</span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={triggerId}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{
+                        height: 0,
+                        opacity: 0,
+                        transition: {
+                          height: { duration: 0.2, ease: [0.2, 0, 0, 1] },
+                          opacity: { duration: 0.15, ease: 'easeIn' },
+                        },
+                      }}
+                      transition={{
+                        height: springTransition,
+                        opacity: { duration: 0.2 },
+                      }}
+                    >
+                      <p className="px-3 pb-4 pt-0 text-sm leading-relaxed text-gray-700 text-pretty sm:px-8 sm:text-base">
+                        {item.description}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

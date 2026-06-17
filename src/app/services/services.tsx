@@ -1,7 +1,7 @@
 
 'use client'
 
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
 // ---- Utility Functions ----
 const slugify = (str: string): string => {
@@ -161,6 +161,9 @@ const outcomes: Record<string, string[]> ={
 // ---- Component ----
 export default function ServicesPage() {
   const [active, setActive] = useState<string>('')
+  const mobileNavRef = useRef<HTMLDivElement>(null)
+  const mobileStickyNavRef = useRef<HTMLElement>(null)
+  const isJumpScrollingRef = useRef(false)
 
   const items = useMemo(
     () =>
@@ -174,39 +177,161 @@ export default function ServicesPage() {
     []
   )
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries.find((e) => e.isIntersecting)
-        if (visibleEntry) {
-          setActive(visibleEntry.target.getAttribute('id') || '')
-        }
-      },
-      {
-        rootMargin: '-25% 0px -40% 0px',
-        threshold: 0,
+  const activeItem = useMemo(
+    () => items.find((it) => it.slug === active) ?? items[0],
+    [active, items]
+  )
+
+  const getStickyOffset = () => {
+    const root = document.documentElement
+    const styles = getComputedStyle(root)
+    const headerHeight =
+      Number.parseFloat(styles.getPropertyValue('--site-header-height')) || 72
+
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+      return headerHeight
+    }
+
+    const mobileNavHeight =
+      Number.parseFloat(styles.getPropertyValue('--services-mobile-nav-height')) ||
+      mobileStickyNavRef.current?.getBoundingClientRect().height ||
+      0
+
+    return headerHeight + mobileNavHeight
+  }
+
+  const getScrollTopForSlug = (slug: string) => {
+    const index = items.findIndex((it) => it.slug === slug)
+    if (index < 0) return 0
+
+    const offset = getStickyOffset()
+
+    if (index > 0) {
+      const prevEl = document.getElementById(items[index - 1].slug)
+      if (prevEl) {
+        return prevEl.getBoundingClientRect().bottom + window.scrollY - offset
       }
-    )
+    }
 
-    items.forEach((it) => {
-      const el = document.getElementById(it.slug)
-      if (el) observer.observe(el)
-    })
+    const el = document.getElementById(slug)
+    if (!el) return 0
 
-    return () => observer.disconnect()
+    return el.getBoundingClientRect().top + window.scrollY - offset
+  }
+
+  useEffect(() => {
+    const sectionEls = items
+      .map((it) => document.getElementById(it.slug))
+      .filter((el): el is HTMLElement => el !== null)
+
+    if (!sectionEls.length) return
+
+    const updateActive = () => {
+      if (isJumpScrollingRef.current) return
+
+      const line = getStickyOffset()
+      let current = items[0].slug
+
+      for (let i = 0; i < sectionEls.length; i++) {
+        const el = sectionEls[i]
+
+        if (i === 0) {
+          if (el.getBoundingClientRect().top <= line) {
+            current = el.id
+          }
+          continue
+        }
+
+        const prevBottom = sectionEls[i - 1].getBoundingClientRect().bottom
+        if (prevBottom <= line) {
+          current = el.id
+        }
+      }
+
+      setActive((prev) => (prev === current ? prev : current))
+    }
+
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        updateActive()
+        ticking = false
+      })
+    }
+
+    updateActive()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [items])
+
+  useLayoutEffect(() => {
+    const nav = mobileStickyNavRef.current
+    if (!nav) return
+
+    const syncMobileNavHeight = () => {
+      document.documentElement.style.setProperty(
+        '--services-mobile-nav-height',
+        `${nav.getBoundingClientRect().height}px`
+      )
+    }
+
+    syncMobileNavHeight()
+    const observer = new ResizeObserver(syncMobileNavHeight)
+    observer.observe(nav)
+    window.addEventListener('resize', syncMobileNavHeight, { passive: true })
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', syncMobileNavHeight)
+    }
+  }, [])
+
+  useEffect(() => {
+    const nav = mobileNavRef.current
+    if (!nav || !active) return
+
+    const activeButton = nav.querySelector<HTMLButtonElement>(
+      `[data-slug="${active}"]`
+    )
+    if (!activeButton) return
+
+    const targetLeft =
+      activeButton.offsetLeft -
+      (nav.clientWidth - activeButton.clientWidth) / 2
+
+    nav.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: 'smooth',
+    })
+  }, [active])
 
   const scrollTo = (slug: string) => {
     const el = document.getElementById(slug)
     if (!el) return
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
+    setActive(slug)
+    isJumpScrollingRef.current = true
+
+    const top = Math.max(0, getScrollTopForSlug(slug))
+    window.scrollTo({ top, behavior: 'smooth' })
+
+    window.setTimeout(() => {
+      isJumpScrollingRef.current = false
+    }, 700)
   }
 
   return (
     <main className="bg-white text-slate-900">
       {/* Header */}
       <header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-24 text-start">
+        <div className="site-container py-16 md:py-24 text-start">
           <p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
             Our Capabilities
           </p>
@@ -222,10 +347,10 @@ export default function ServicesPage() {
       </header>
 
       {/* Content */}
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-12 px-6 py-16 md:grid-cols-12">
+      <div className="site-container grid grid-cols-1 gap-x-12 py-16 lg:grid-cols-12">
         {/* Sticky Index (Desktop) */}
-        <aside className="hidden md:col-span-4 md:block lg:col-span-3">
-          <div className="sticky top-24">
+        <aside className="hidden lg:col-span-4 lg:block xl:col-span-3">
+          <div className="sticky top-(--site-header-height)">
             <nav aria-label="Services index" className="flex flex-col gap-y-1">
               {items.map((it) => {
                 const isActive = active ? active === it.slug : it.idx === 1
@@ -255,33 +380,73 @@ export default function ServicesPage() {
           </div>
         </aside>
 
-        {/* Mobile Jump Menu */}
-        <div className="hidden">
-          <label htmlFor="jump" className="sr-only">
-            Jump to a service
-          </label>
-          <select
-            id="jump"
-            className="w-full rounded-md border-slate-300 bg-white px-3 py-2 text-base shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            onChange={(e) => scrollTo(e.target.value)}
-            defaultValue={items[0]?.slug}
+        {/* Mobile Sticky Navigation */}
+        <nav
+          ref={mobileStickyNavRef}
+          aria-label="Services index"
+          className="sticky top-(--site-header-height) z-40 -mx-4 border-b border-slate-200/80 bg-white px-4 py-3 backdrop-blur-md [box-shadow:0_4px_12px_-6px_rgba(0,0,0,0.06)] sm:-mx-6 sm:px-6 lg:hidden"
+        >
+          <div className="flex min-w-0 items-baseline gap-x-2">
+            <span className="shrink-0 text-sm font-semibold tabular-nums text-[#0a61cb]">
+              {String(activeItem.idx).padStart(2, '0')}
+            </span>
+            <p className="min-w-0 truncate text-sm font-semibold text-slate-900 text-balance">
+              {activeItem.title}
+            </p>
+            <span className="ml-auto shrink-0 text-xs tabular-nums text-slate-400">
+              {String(activeItem.idx).padStart(2, '0')}/{String(items.length).padStart(2, '0')}
+            </span>
+          </div>
+
+          <div
+            ref={mobileNavRef}
+            className="mt-3 flex gap-1.5 overflow-x-auto overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            {items.map((it) => (
-              <option key={it.slug} value={it.slug}>
-                {String(it.idx).padStart(2, '0')} — {it.title}
-              </option>
-            ))}
-          </select>
-        </div>
+            {items.map((it) => {
+              const isActive = active ? active === it.slug : it.idx === 1
+              return (
+                <button
+                  key={it.slug}
+                  type="button"
+                  data-slug={it.slug}
+                  onClick={() => scrollTo(it.slug)}
+                  aria-current={isActive ? 'true' : undefined}
+                  aria-label={it.title}
+                  className={`shrink-0 rounded-full px-3 py-2 text-xs font-medium tabular-nums transition-[color,background-color,transform] duration-150 active:scale-[0.96] ${
+                    isActive
+                      ? 'bg-[#0a61cb] text-white'
+                      : 'bg-slate-100 text-slate-600'
+                  }`}
+                >
+                  {String(it.idx).padStart(2, '0')}
+                </button>
+              )
+            })}
+          </div>
+
+          <div
+            className="mt-3 h-0.5 overflow-hidden rounded-full bg-slate-100"
+            role="progressbar"
+            aria-valuenow={activeItem.idx}
+            aria-valuemin={1}
+            aria-valuemax={items.length}
+            aria-label="Service progress"
+          >
+            <div
+              className="h-full rounded-full bg-[#0a61cb] transition-[width] duration-300 ease-out"
+              style={{ width: `${(activeItem.idx / items.length) * 100}%` }}
+            />
+          </div>
+        </nav>
 
         {/* Sections */}
-        <div className="mt-8 md:col-span-8 md:mt-0 lg:col-span-9">
+        <div className="mt-6 lg:col-span-8 lg:mt-0 xl:col-span-9">
           <div className="space-y-16">
             {items.map((it) => (
               <section
                 key={it.slug}
                 id={it.slug}
-                className="scroll-mt-24"
+                className="scroll-mt-[calc(var(--site-header-height)+var(--services-mobile-nav-height))] lg:scroll-mt-(--site-header-height)"
               >
                 <header className="max-w-3xl">
                   <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">

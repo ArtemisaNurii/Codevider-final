@@ -286,7 +286,7 @@ const ProjectPage: React.FC = memo(() => {
   return (
     <div className="bg-white font-sans will-change-scroll"> 
       <div className="p-6" />
-      <div ref={containerRef} className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <div ref={containerRef} className="site-container py-16 sm:py-24">
         <h1 
           ref={titleRef} 
           className="text-5xl pt-10 font-bold text-gray-900 mb-6 will-change-transform"

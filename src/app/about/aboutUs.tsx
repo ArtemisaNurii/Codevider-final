@@ -4,7 +4,7 @@ export default function AboutSection3() {
   return (
     <section id="about" className=" bg-white md:mt-10 ">
              <header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-        <div className="mx-auto max-w-7xl py-16 md:py-24 px-4   md:px-4 text-start">
+        <div className="site-container py-16 md:py-24 text-start">
           <p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
               About Us
           </p>
@@ -15,20 +15,20 @@ export default function AboutSection3() {
         </div>
       </header>
       <section className="bg-white font-sans">
-      <div className="container mx-auto py-16 px-6">
-        <div className="mb-12 flex max-w-7xl mx-auto flex-wrap items-center gap-x-2 gap-y-2 text-sm px-6 text-gray-700 sm:text-base max-sm:flex-row max-sm:hidden">
-          <span>+6 years delivering software</span>
+      <div className="site-container py-16">
+        <div className="mb-12 flex flex-wrap items-center gap-x-2 gap-y-2 text-sm text-gray-700 sm:text-base max-sm:flex-row max-sm:hidden">
+          <span>+{new Date().getFullYear() - 2019} years delivering software</span>
           <div className="h-4 w-px bg-gray-300" aria-hidden="true"></div>
           <span>+45 enterprise global projects</span>
         </div>
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
           <div className="lg:col-span-2 ">
-            <h2 className="text-4xl font-bold px-6 tracking-tight text-gray-900 sm:text-5xl">
+            <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
               Who Are We
             </h2>
             
-            <div className="mt-8 grid grid-cols-1 max-sm:px-4 gap-8 md:grid-cols-2 text-base text-gray-600 px-6 leading-relaxed">
+            <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 text-base text-gray-600 leading-relaxed">
               <p>
                 Founded in 2019 in Tirana, Albania, CodeVider delivers high-performance,
                 cost-efficient software development solutions for startups, SMEs, and

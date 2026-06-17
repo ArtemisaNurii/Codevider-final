@@ -1,7 +1,10 @@
 "use client"
 
-import { motion, useReducedMotion, type Variants } from "framer-motion"
+import { motion, useReducedMotion, type Variants } from "motion/react"
 import type React from "react"
+import {
+  useScrollRevealAnimation,
+} from "@/lib/hooks/useScrollRevealMode"
 
 const easeCubic = [0.25, 0.1, 0.25, 1.0] as const
 
@@ -9,50 +12,45 @@ const enterTransition = { duration: 0.5, ease: easeCubic }
 
 // Variants for different reveal styles
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: enterTransition,
   },
 }
 
 const fadeIn: Variants = {
-  hidden: { opacity: 0, filter: "blur(4px)" },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    filter: "blur(0px)",
     transition: { duration: 0.6, ease: easeCubic },
   },
 }
 
 const scaleUp: Variants = {
-  hidden: { opacity: 0, scale: 0.97, filter: "blur(4px)" },
+  hidden: { opacity: 0, scale: 0.97 },
   visible: {
     opacity: 1,
     scale: 1,
-    filter: "blur(0px)",
     transition: enterTransition,
   },
 }
 
 const slideFromLeft: Variants = {
-  hidden: { opacity: 0, x: -24, filter: "blur(4px)" },
+  hidden: { opacity: 0, x: -24 },
   visible: {
     opacity: 1,
     x: 0,
-    filter: "blur(0px)",
     transition: enterTransition,
   },
 }
 
 const slideFromRight: Variants = {
-  hidden: { opacity: 0, x: 24, filter: "blur(4px)" },
+  hidden: { opacity: 0, x: 24 },
   visible: {
     opacity: 1,
     x: 0,
-    filter: "blur(0px)",
     transition: enterTransition,
   },
 }
@@ -93,6 +91,11 @@ const ScrollReveal = ({
 }: ScrollRevealProps) => {
   const prefersReducedMotion = useReducedMotion()
   const selectedVariant = variantMap[variant]
+  const { ref, initial, animate, whileInView, viewport } = useScrollRevealAnimation({
+    once,
+    amount,
+    margin: "0px 0px -8% 0px",
+  })
 
   if (prefersReducedMotion) {
     const StaticComponent = as
@@ -114,9 +117,11 @@ const ScrollReveal = ({
 
   return (
     <Component
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, amount, margin: "0px 0px -8% 0px" }}
+      ref={ref}
+      initial={initial}
+      animate={animate}
+      whileInView={whileInView}
+      viewport={viewport}
       variants={delayedVariant}
       className={className}
     >
@@ -142,6 +147,10 @@ export function StaggerContainer({
   staggerDelay = 0.1,
   as = "div",
 }: StaggerContainerProps) {
+  const { ref, initial, animate, whileInView, viewport } = useScrollRevealAnimation({
+    once: true,
+    amount: 0.2,
+  })
   const customStagger: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -157,9 +166,11 @@ export function StaggerContainer({
 
   return (
     <Component
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      ref={ref}
+      initial={initial}
+      animate={animate}
+      whileInView={whileInView}
+      viewport={viewport}
       variants={customStagger}
       className={className}
     >
@@ -203,13 +214,19 @@ export function TextReveal({
   by = "word",
   delay = 0,
 }: TextRevealProps) {
+  const { ref, initial, animate, whileInView, viewport } = useScrollRevealAnimation({
+    once: true,
+    amount: 0.5,
+  })
   const items = by === "word" ? text.split(" ") : text.split("")
 
   return (
     <motion.span
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.5 }}
+      ref={ref}
+      initial={initial}
+      animate={animate}
+      whileInView={whileInView}
+      viewport={viewport}
       variants={{
         hidden: {},
         visible: {
@@ -226,11 +243,10 @@ export function TextReveal({
         <motion.span
           key={`${item}-${i}`}
           variants={{
-            hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
+            hidden: { opacity: 0, y: 20 },
             visible: {
               opacity: 1,
               y: 0,
-              filter: "blur(0px)",
               transition: { duration: 0.5, ease: easeCubic },
             },
           }}
@@ -259,17 +275,46 @@ export function CountUp({
   className = "",
   suffix = "",
 }: CountUpProps) {
+  const { ref, initial, animate, whileInView, viewport } = useRevealInViewOpacity()
+
   return (
     <motion.span
+      ref={ref}
       className={className}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
+      initial={initial}
+      animate={animate}
+      whileInView={whileInView}
+      viewport={viewport}
     >
-      <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+      <motion.span initial={initial} animate={animate} whileInView={whileInView} viewport={viewport}>
         {target}
         {suffix}
       </motion.span>
     </motion.span>
   )
+}
+
+function useRevealInViewOpacity() {
+  const { ref, initial, mode } = useScrollRevealAnimation({
+    once: true,
+    amount: 0,
+  })
+
+  if (mode === "instant" || initial === "visible") {
+    return {
+      ref,
+      initial: { opacity: 1 },
+      animate: { opacity: 1 },
+      whileInView: undefined,
+      viewport: { once: true },
+    }
+  }
+
+  return {
+    ref,
+    initial: { opacity: 0 },
+    animate: undefined,
+    whileInView: { opacity: 1 },
+    viewport: { once: true },
+  }
 }

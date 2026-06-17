@@ -1,21 +1,17 @@
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
-import { Cabin, DM_Sans, Figtree, Spectral } from "next/font/google";
+import { Figtree } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { WorkerProvider } from "@/components/providers/WorkerProvider";
-import { Footer } from "./components/CTA";
+import { SiteFooter } from "./components/SiteFooter";
 import SiteNavbar from "./components/navbar";
 import "./globals.css";
 
-const manrope = Figtree({
+const figtree = Figtree({
   variable: "--font-manrope",
   subsets: ["latin"],
-});
-
-const spectral = Figtree({
-  variable: "--font-spectral",
-  subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 // 🚀 SEO STRATEGY: Define your base URL once and reuse it.
@@ -263,13 +259,13 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${manrope.variable} ${spectral.variable} antialiased bg-white`}
+        className={`${figtree.variable} antialiased bg-white`}
         suppressHydrationWarning
       >
         <WorkerProvider>
           <SiteNavbar />
           {children}
-          <Footer />
+          <SiteFooter />
           <Toaster />
         </WorkerProvider>
       </body>

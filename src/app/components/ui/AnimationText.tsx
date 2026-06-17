@@ -1,6 +1,7 @@
 import { motion, useInView, Variants } from 'framer-motion';
-import { useRef, ElementType, ReactNode } from 'react';
+import { useRef, useCallback, ElementType, ReactNode } from 'react';
 import clsx from 'clsx';
+import { useInViewRevealAnimation } from '@/lib/hooks/useScrollRevealMode';
 
 type TextAnimationProps = {
   text: string;
@@ -26,13 +27,19 @@ const TextAnimation: React.FC<TextAnimationProps> = ({
   direction = 'left',
   variants = defaultVariants,
 }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-20% 0px -20% 0px' });
+  const inViewRef = useRef<Element | null>(null);
+  const isInView = useInView(inViewRef as React.RefObject<Element | null>, { once: true, margin: '-20% 0px -20% 0px' });
+  const { ref: revealRef, initial, animate } = useInViewRevealAnimation(isInView);
+
+  const setRef = useCallback((node: Element | null) => {
+    inViewRef.current = node;
+    revealRef(node);
+  }, [revealRef]);
 
   const getAnimationProps = (index: number) => ({
     variants: variants,
-    initial: 'hidden',
-    animate: isInView ? 'visible' : 'hidden',
+    initial,
+    animate,
     transition: {
       delay: lineAnime ? 0 : index * 0.025,
       duration: lineAnime ? 0.5 : 0.25,
@@ -58,8 +65,8 @@ const TextAnimation: React.FC<TextAnimationProps> = ({
       return (
         <motion.span
           variants={lineVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+          initial={initial}
+          animate={animate}
           // --- ALSO APPLY THE FIX HERE ---
           transition={{ duration: 0.5, ease: 'easeOut' as const }}
           className="block"
@@ -95,7 +102,7 @@ const TextAnimation: React.FC<TextAnimationProps> = ({
 
   return (
     <Tag
-    ref={ref}
+    ref={setRef}
     className={clsx('text-animation whitespace-pre-wrap', classname)}
   >
     {renderContent()}

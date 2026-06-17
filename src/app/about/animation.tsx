@@ -1,6 +1,7 @@
 import { type HTMLMotionProps, motion, useInView } from "motion/react"
 import type React from "react"
 import type { Variants } from "motion/react"
+import { useInViewRevealAnimation } from "@/lib/hooks/useScrollRevealMode"
 
 type TimelineContentProps<T extends keyof HTMLElementTagNameMap> = {
   children?: React.ReactNode
@@ -45,13 +46,14 @@ export const TimelineContent = <T extends keyof HTMLElementTagNameMap = "div">({
   const isInView = useInView(timelineRef, {
     once,
   })
+  const { initial, animate } = useInViewRevealAnimation(isInView)
 
   const MotionComponent = motion[as || "div"] as React.ElementType
 
   return (
     <MotionComponent
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      initial={initial}
+      animate={animate}
       custom={animationNum}
       variants={sequenceVariants}
       className={className}

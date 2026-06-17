@@ -43,7 +43,7 @@ export default function TestimonialsPage() {
         className="absolute max-w-7xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-[550px] rounded-full bg-gradient-to-br from-sky-300 to-blue-300 opacity-50 blur-3xl"
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative z-10 site-container">
         <div className="mb-16 text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-gray-700">Testimonials</p>
           <h2 className="mt-4 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">

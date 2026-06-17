@@ -1,7 +1,8 @@
 "use client"
 
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { shouldSkipScrollAnimation } from '@/lib/hooks/useScrollRevealMode';
 
 // Type definitions
 interface IntersectionObserverOptions {
@@ -26,6 +27,13 @@ interface StepData {
 const useIntersectionObserver = (options: IntersectionObserverOptions = {}) => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const element = ref.current;
+    if (element && shouldSkipScrollAnimation(element)) {
+      setHasAnimated(true);
+    }
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -114,9 +122,8 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ step, title, description, del
 
 const Processes = () => {
   return (
-    <section id="process" className="font-sans  text-gray-900 p-6  bg-white max-sm:pt-10  pb-20">
-      <div className='p-10 max-sm:p-0'></div>
-      <div className="container mx-auto  max-w-7xl">
+    <section id="process" className="font-sans text-gray-900 bg-white max-sm:pt-10 pb-20">
+      <div className="site-container">
         
         {/* Header Section (03 Removed) */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start mb-20">
@@ -141,7 +148,6 @@ const Processes = () => {
           ))}
         </div>
       </div>
-      <div className='p-12'></div>
     </section>
   );
 };

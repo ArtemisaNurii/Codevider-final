@@ -1,11 +1,43 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion } from "motion/react"
-import DottedMap from "dotted-map"
 import Image from "next/image"
 
-import { useTheme } from "next-themes"
+import { useRevealInView } from "@/lib/hooks/useScrollRevealMode"
+
+const pathHidden = { pathLength: 0 }
+const pathVisible = { pathLength: 1 }
+const pathViewport = { once: true, margin: "0px" }
+
+function AnimatedPath({
+  d,
+  index,
+}: {
+  d: string
+  index: number
+}) {
+  const pathMotion = useRevealInView<SVGPathElement>(pathHidden, pathVisible, pathViewport)
+
+  return (
+    <motion.path
+      ref={pathMotion.ref}
+      d={d}
+      fill="none"
+      stroke="url(#path-gradient)"
+      strokeWidth="1.1"
+      initial={pathMotion.initial}
+      animate={pathMotion.animate}
+      whileInView={pathMotion.whileInView}
+      viewport={pathMotion.viewport}
+      transition={{
+        duration: 1.5,
+        delay: 0.3 * index,
+        ease: "easeOut",
+      }}
+    />
+  )
+}
 
 interface MapProps {
   dots?: Array<{
@@ -16,16 +48,29 @@ interface MapProps {
 }
 export default function WorldMap({ dots = [], lineColor = "#0a61cb" }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null)
-  const map = new DottedMap({ height: 100, grid: "diagonal" })
+  const [svgMap, setSvgMap] = useState<string | null>(null)
 
-  const { theme } = useTheme()
+  useEffect(() => {
+    let cancelled = false
 
-  const svgMap = map.getSVG({
-    radius: 0.22,
-    color: theme === "dark" ? "#FFFFFF40" : "#FFFFFF60",
-    shape: "circle",
-    backgroundColor: "transparent",
-  })
+    void import("dotted-map").then(({ default: DottedMap }) => {
+      if (cancelled) return
+
+      const map = new DottedMap({ height: 100, grid: "diagonal" })
+      setSvgMap(
+        map.getSVG({
+          radius: 0.22,
+          color: "#FFFFFF60",
+          shape: "circle",
+          backgroundColor: "transparent",
+        }),
+      )
+    })
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360)
@@ -37,6 +82,15 @@ export default function WorldMap({ dots = [], lineColor = "#0a61cb" }: MapProps)
     const midX = (start.x + end.x) / 2
     const midY = Math.min(start.y, end.y) - 50
     return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`
+  }
+
+  if (!svgMap) {
+    return (
+      <div
+        aria-hidden
+        className="w-full lg:w-auto xl:max-w-7xl mx-auto aspect-[2/1] animate-pulse rounded-lg bg-white/5"
+      />
+    )
   }
 
   return (
@@ -60,19 +114,9 @@ export default function WorldMap({ dots = [], lineColor = "#0a61cb" }: MapProps)
           const endPoint = projectPoint(dot.end.lat, dot.end.lng)
           return (
             <g key={`path-group-${i}`}>
-             <motion.path
+             <AnimatedPath
   d={createCurvedPath(startPoint, endPoint)}
-  fill="none"
-  stroke="url(#path-gradient)"
-  strokeWidth="1.1"
-  initial={{ pathLength: 0 }}
-  whileInView={{ pathLength: 1 }}
-  transition={{
-    duration: 1.5,
-    delay: 0.3 * i,
-    ease: "easeOut",
-  }}
-  viewport={{ once: true, margin: "0px" }}
+  index={i}
 />
 
             </g>

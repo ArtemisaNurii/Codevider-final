@@ -43,17 +43,17 @@ export default function PaginationControls({
   const endItem = Math.min(currentPage * limit, totalCount)
 
   return (
-    <div className="bg-white border-t border-gray-200 px-4 py-6 sm:px-6">
+    <div className="border-t border-gray-200 py-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         {/* Results info */}
         <div className="mb-4 sm:mb-0">
           <p className="text-sm text-gray-700">
             Showing{" "}
-            <span className="font-medium">{startItem}</span>
+            <span className="font-medium tabular-nums">{startItem}</span>
             {" "}to{" "}
-            <span className="font-medium">{endItem}</span>
+            <span className="font-medium tabular-nums">{endItem}</span>
             {" "}of{" "}
-            <span className="font-medium">{totalCount}</span>
+            <span className="font-medium tabular-nums">{totalCount}</span>
             {" "}results
           </p>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 import { ArrowUpRight, X } from "lucide-react";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef, useLayoutEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type { Route } from "next";
@@ -15,7 +15,13 @@ export const navLinks = [
 	{ name: "About", href: "/about" },
 ] as const satisfies readonly NavLink[];
 
+const isActiveLink = (href: Route, pathname: string) => {
+	if (href === "/") return pathname === "/";
+	return pathname === href || pathname.startsWith(`${href}/`);
+};
+
 const Header = () => {
+	const headerRef = useRef<HTMLElement>(null);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const pathname = usePathname();
 	const router = useRouter();
@@ -84,6 +90,28 @@ const Header = () => {
 		};
 	}, [isHomePage, handleScroll]);
 
+	useLayoutEffect(() => {
+		const el = headerRef.current;
+		if (!el) return;
+
+		const syncHeaderHeight = () => {
+			document.documentElement.style.setProperty(
+				"--site-header-height",
+				`${el.getBoundingClientRect().height}px`,
+			);
+		};
+
+		syncHeaderHeight();
+		const observer = new ResizeObserver(syncHeaderHeight);
+		observer.observe(el);
+		window.addEventListener("resize", syncHeaderHeight, { passive: true });
+
+		return () => {
+			observer.disconnect();
+			window.removeEventListener("resize", syncHeaderHeight);
+		};
+	}, [isSolid, isMobileMenuOpen]);
+
 	// Memoize year to avoid recalculation on every render
 	const year = useMemo(() => new Date().getFullYear(), []);
 
@@ -93,17 +121,58 @@ const Header = () => {
 		[isSolid],
 	);
 
+	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+	const [pillStyle, setPillStyle] = useState({ left: 0, width: 0, opacity: 0 });
+	const navListRef = useRef<HTMLUListElement>(null);
+	const navRef = useRef<HTMLElement>(null);
+	const linkRefs = useRef<(HTMLLIElement | null)[]>([]);
+
+	const activeIndex = useMemo(
+		() => navLinks.findIndex((link) => isActiveLink(link.href, pathname)),
+		[pathname],
+	);
+
+	const highlightedIndex = hoveredIndex ?? activeIndex;
+
+	const updatePill = useCallback((index: number) => {
+		const nav = navRef.current;
+		const link = linkRefs.current[index];
+		if (!nav || !link) return;
+		const navRect = nav.getBoundingClientRect();
+		const linkRect = link.getBoundingClientRect();
+		setPillStyle({
+			left: linkRect.left - navRect.left,
+			width: linkRect.width,
+			opacity: 1,
+		});
+	}, []);
+
+	useLayoutEffect(() => {
+		if (highlightedIndex < 0) return;
+		updatePill(highlightedIndex);
+	}, [highlightedIndex, pathname, updatePill]);
+
+	useEffect(() => {
+		const handleResize = () => {
+			if (highlightedIndex < 0) return;
+			updatePill(highlightedIndex);
+		};
+		window.addEventListener("resize", handleResize, { passive: true });
+		return () => window.removeEventListener("resize", handleResize);
+	}, [highlightedIndex, updatePill]);
+
 	return (
 		<>
 			<header
+				ref={headerRef}
 				style={{ willChange: "background-color, box-shadow", transform: "translateZ(0)" }}
-				className={`fixed top-0 left-0 right-0 z-50 p-4 transition-[background-color,backdrop-filter,box-shadow] duration-500 ease-out ${
+				className={`fixed top-0 left-0 right-0 z-50 py-4 transition-[background-color,backdrop-filter,box-shadow] duration-500 ease-out ${
 					isSolid
 						? "bg-white/80 backdrop-blur-xl [box-shadow:0_1px_0_0_rgba(0,0,0,0.06),0_4px_16px_-4px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.04)]"
 						: "bg-black/10 backdrop-blur-md [box-shadow:none]"
 				}`}
 			>
-				<div className="max-w-7xl mx-auto flex justify-between items-center">
+				<div className="site-container flex justify-between items-center">
 					{/* Logo */}
 					<Link href="/">
 						<NavbarCodeviderLogo logoTextColor={logoTextColor} />
@@ -111,33 +180,61 @@ const Header = () => {
 
 					{/* Desktop Nav */}
 					<nav
+						ref={navRef}
 						className={`hidden md:block backdrop-blur-md rounded-full relative overflow-hidden ${
 							isSolid ? "bg-black/10" : "bg-white/10"
 						}`}
+						onMouseLeave={() => setHoveredIndex(null)}
 					>
-						<ul className="flex items-center relative z-10">
-							{navLinks.map((link, index) => (
-								<li key={link.name} className="relative group">
-									<Link
-										href={link.href}
-										className={`px-5 py-3 text-sm font-medium transition-colors duration-300 inline-block relative z-10 ${
-											isSolid
-												? "text-gray-700 hover:text-white"
-												: "text-white hover:text-gray-900"
-										}`}
-										onMouseEnter={() => handleLinkHover(link.href)}
-										prefetch={true}
+						<div
+							aria-hidden="true"
+							className={`absolute top-0 h-full rounded-full transition-[left,width] duration-300 ease-out pointer-events-none ${
+								isSolid ? "bg-black" : "bg-white"
+							}`}
+							style={{
+								left: pillStyle.left,
+								width: pillStyle.width,
+								opacity: pillStyle.opacity,
+							}}
+						/>
+						<ul
+							ref={navListRef}
+							className="flex items-center relative z-10"
+						>
+							{navLinks.map((link, index) => {
+								const isActive = isActiveLink(link.href, pathname);
+								const isHighlighted = index === highlightedIndex;
+								return (
+									<li
+										key={link.name}
+										ref={(el) => {
+											linkRefs.current[index] = el;
+										}}
+										className="relative"
 									>
-										{link.name}
-									</Link>
-									<div
-										className={`absolute inset-0 rounded-full scale-0 group-hover:scale-100 transition-all duration-300 ease-out origin-center -z-10 ${
-											isSolid ? "bg-black" : "bg-white"
-										}`}
-									/>
-
-								</li>
-							))}
+										<Link
+											href={link.href}
+											aria-current={isActive ? "page" : undefined}
+											className={`px-5 py-3 text-sm font-medium transition-colors duration-300 inline-block relative z-10 ${
+												isHighlighted
+													? isSolid
+														? "text-white"
+														: "text-gray-900"
+													: isSolid
+														? "text-gray-700"
+														: "text-white"
+											}`}
+											onMouseEnter={() => {
+												setHoveredIndex(index);
+												handleLinkHover(link.href);
+											}}
+											prefetch={true}
+										>
+											{link.name}
+										</Link>
+									</li>
+								);
+							})}
 						</ul>
 					</nav>
 
@@ -231,18 +328,26 @@ const Header = () => {
 						}`}
 					>
 						<nav className="flex flex-col items-center space-y-6">
-							{navLinks.map((link) => (
-								<Link
-									key={link.name}
-									href={link.href}
-									className="text-2xl font-medium text-white hover:text-gray-300"
-									onClick={closeMobileMenu}
-									onMouseEnter={() => handleLinkHover(link.href)}
-									prefetch={true}
-								>
-									{link.name}
-								</Link>
-							))}
+							{navLinks.map((link) => {
+								const isActive = isActiveLink(link.href, pathname);
+								return (
+									<Link
+										key={link.name}
+										href={link.href}
+										aria-current={isActive ? "page" : undefined}
+										className={`text-2xl font-medium px-6 py-2 rounded-full transition-colors ${
+											isActive
+												? "text-white bg-white/15 ring-1 ring-white/30"
+												: "text-white hover:text-gray-300"
+										}`}
+										onClick={closeMobileMenu}
+										onMouseEnter={() => handleLinkHover(link.href)}
+										prefetch={true}
+									>
+										{link.name}
+									</Link>
+								);
+							})}
 						</nav>
 						<Link
 							href="https://calendly.com/codevider/pasho"

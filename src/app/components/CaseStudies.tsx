@@ -1,15 +1,10 @@
 "use client";
 
 import React, { useRef, useLayoutEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { TextPlugin } from "gsap/TextPlugin";
 import { AlignEndHorizontal, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, TextPlugin);
-}
+import { shouldSkipScrollAnimation } from "@/lib/hooks/useScrollRevealMode";
+import { StaggerContainer, StaggerItem } from "./ScrollReveal";
 
 const splitTextIntoWords = (text: string) => {
   return text.split(" ").map((word, index) => (
@@ -57,48 +52,15 @@ const Pill = ({ text }: { text: string }) => (
 
 const ViewAllButton = () => {
   const router = useRouter();
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const arrowRef = useRef<HTMLSpanElement | null>(null);
-
-  const handleMouseEnter = () => {
-    gsap.to(buttonRef.current, {
-      scale: 1.05,
-      backgroundColor: "#374151",
-      color: "#FFFFFF",
-      duration: 0.3,
-      ease: "power2.out",
-    });
-    gsap.to(arrowRef.current, { x: 8, duration: 0.3, ease: "power2.out" });
-  };
-
-  const handleMouseLeave = () => {
-    gsap.to(buttonRef.current, {
-      scale: 1,
-      backgroundColor: "transparent",
-      color: "#374151",
-      duration: 0.3,
-      ease: "power2.out",
-    });
-    gsap.to(arrowRef.current, { x: 0, duration: 0.3, ease: "power2.out" });
-  };
 
   return (
     <div className="flex justify-center mt-10 md:mt-24">
       <button
-        ref={buttonRef}
-        onClick={() => router.push("/services")} // Changed to a relevant route
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        className="group flex items-center gap-3 px-8 py-4 border-2 border-gray-700 rounded-full text-gray-900 font-semibold text-lg    hover:bg-gradient-to-br from-black to-sky-900 hover:text-white"
+        onClick={() => router.push("/services")}
+        className="group flex items-center gap-3 px-8 py-4 min-h-11 border-2 border-gray-700 rounded-full text-gray-900 font-semibold text-lg hover:bg-linear-to-br hover:from-black hover:to-sky-900 hover:text-white active:scale-[0.96] transition-[transform,background-color,color,gap] duration-300 hover:gap-4"
       >
-        {/* UPDATED BUTTON TEXT */}
         <span>View More of Our Services</span>
-        <span
-          ref={arrowRef}
-          className=" "
-        >
-           <ArrowRight className="text-xl " />
-        </span>
+        <ArrowRight className="text-xl transition-transform duration-300 group-hover:translate-x-2" />
       </button>
     </div>
   );
@@ -150,7 +112,7 @@ const MetricCard = ({
     className={`${bgColor} ${textColor} rounded-3xl flex flex-col p-8 shadow-md overflow-hidden h-full transform-gpu`}
   >
     <div className="text-center flex-shrink-0">
-      <p className="metric-value text-7xl font-light">{value}</p>
+      <p className="metric-value text-5xl sm:text-7xl font-light tabular-nums">{value}</p>
       <div className="text-xl mt-2 metric-label">{splitTextIntoWords(label)}</div>
     </div>
     <div className="flex-grow flex flex-col justify-center items-center mt-8">
@@ -168,21 +130,21 @@ const MiniCaseStudyCard = ({
   metric: { value: string; label: string };
   description: string;
 }) => (
-  <div className="mini-case-study bg-slate-50 p-6 rounded-3xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col group cursor-pointer transform-gpu">
+  <div className="h-full bg-slate-50 p-6 rounded-3xl surface-elevated hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] transition-[transform,box-shadow] duration-300 flex flex-col group cursor-pointer transform-gpu">
     <div className="flex justify-between items-start mb-4">
       <span aria-hidden="true" />
       <div className="text-right flex-shrink-0 ml-4">
         <p className="text-sm text-gray-700">{metric.label}</p>
       </div>
     </div>
-    <div className="case-study-title text-xl font-semibold text-gray-700">
-      {splitTextIntoWords(title)}
-    </div>
-    <p className="case-study-desc text-gray-700 leading-relaxed mt-2 flex-grow">
+    <h3 className="text-xl font-semibold text-gray-700 text-balance">
+      {title}
+    </h3>
+    <p className="text-gray-700 leading-relaxed mt-2 flex-grow text-pretty">
       {description}
     </p>
     <div className="flex justify-end mt-6">
-      <div className="w-12 h-12 bg-gradient-to-br from-black to-sky-900 rounded-full flex items-center justify-center transform group-hover:scale-110 group-hover:bg-gray-800 transition-all duration-300">
+      <div className="w-12 h-12 bg-linear-to-br from-black to-sky-900 rounded-full flex items-center justify-center">
         <AlignEndHorizontal className="stroke-white text-white" />
       </div>
     </div>
@@ -206,7 +168,7 @@ const SolutionPillars: React.FC = () => {
     },
     metric1: { value: "100%", label: "Flexibility & Control" },
     metric2: {
-      value: "+6",
+      value: `${new Date().getFullYear() - 2019}+`,
       label: "Years of Experience",
       skills: ["USA", "Germany","London", "Europe"],
     },
@@ -236,11 +198,30 @@ const SolutionPillars: React.FC = () => {
   useLayoutEffect(() => {
     if (!mainRef.current) return;
 
-    const ctx = gsap.context(() => {
+    let cancelled = false;
+    let ctx: { revert: () => void } | undefined;
+
+    void (async () => {
+      const [{ gsap }, { ScrollTrigger }, { TextPlugin }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+        import("gsap/TextPlugin"),
+      ]);
+
+      if (cancelled || !mainRef.current) return;
+
+      gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+      ctx = gsap.context(() => {
       const animateWords = (elem: Element | null, delay = 0) => {
         if (!elem) return;
         const words = elem.querySelectorAll(".word-animate");
         if (words.length === 0) return;
+
+        if (shouldSkipScrollAnimation(elem)) {
+          gsap.set(words, { opacity: 1, y: 0, rotationX: 0 });
+          return;
+        }
 
         gsap.set(words, { opacity: 0, y: 30, rotationX: -90 });
         gsap.to(words, {
@@ -261,6 +242,8 @@ const SolutionPillars: React.FC = () => {
 
       const animateBlock = (elem: Element | null, delay = 0) => {
         if (!elem) return;
+        if (shouldSkipScrollAnimation(elem)) return;
+
         gsap.from(elem, {
           opacity: 0,
           y: 40,
@@ -285,6 +268,11 @@ const SolutionPillars: React.FC = () => {
       const infoCard = mainRef.current!.querySelector(
         ".info-card-container"
       ) as HTMLElement;
+      if (shouldSkipScrollAnimation(infoCard)) {
+        gsap.set(infoCard, { opacity: 1, y: 0, scale: 1 });
+        const arrowIcon = infoCard.querySelector(".arrow-icon") as HTMLElement | null;
+        if (arrowIcon) gsap.set(arrowIcon, { opacity: 1, scale: 1, rotation: 0 });
+      } else {
       gsap.from(infoCard, {
         opacity: 0,
         y: 50,
@@ -310,8 +298,18 @@ const SolutionPillars: React.FC = () => {
           once: true,
         },
       });
+      }
 
       gsap.utils.toArray<HTMLElement>(".metric-card").forEach((card, i) => {
+        if (shouldSkipScrollAnimation(card)) {
+          gsap.set(card, { opacity: 1, y: 0, scale: 1 });
+          const valueEl = card.querySelector(".metric-value") as HTMLElement | null;
+          if (valueEl) gsap.set(valueEl, { textContent: valueEl.textContent });
+          const label = card.querySelector(".metric-label");
+          if (label) animateWords(label, 0);
+          return;
+        }
+
         gsap.from(card, {
           opacity: 0,
           y: 50,
@@ -345,58 +343,27 @@ const SolutionPillars: React.FC = () => {
         animateWords(card.querySelector(".metric-label"), 0.8);
       });
 
-      gsap.utils.toArray<HTMLElement>(".mini-case-study").forEach((card, i) => {
-        gsap.from(card, {
-          opacity: 0,
-          y: 60,
-          scale: 0.9,
-          duration: 0.6,
-          ease: "back.out(1.7)",
-          delay: i * 0.1,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 90%",
-            once: true,
-          },
-        });
-
-        const metricNum = card.querySelector(".metric-number") as
-          | HTMLElement
-          | null;
-        if (metricNum && /\d+/.test(metricNum.textContent || "")) {
-          gsap.from(metricNum, {
-            textContent: metricNum.textContent!.replace(/\d+/, "0"),
-            duration: 1,
-            ease: "power2.out",
-            snap: { textContent: 1 },
-            scrollTrigger: {
-              trigger: card,
-              start: "top 90%",
-              once: true,
-            },
-          });
-        }
-        animateWords(card.querySelector(".case-study-title"), 0.3);
-        animateBlock(card.querySelector(".case-study-desc"));
-      });
-
       const viewAllButton = mainRef.current!.querySelector(
         ".view-all-button-container"
       ) as HTMLElement;
       animateBlock(viewAllButton);
     }, mainRef);
+    })();
 
-    return () => ctx.revert();
+    return () => {
+      cancelled = true;
+      ctx?.revert();
+    };
   }, []);
 
   return (
     <div
       ref={mainRef}
-      className="bg-white text-gray-900 min-h-screen p-6 sm:p-8 lg:p-12 font-sans"
+      className="bg-white text-gray-900 min-h-screen font-sans"
     >
-      <div className="p-4"></div>
-      <main className="grid grid-cols-1 max-w-7xl mx-auto lg:grid-cols-10 gap-8">
-        <div className="lg:col-span-5 flex flex-col gap-8">
+      <div className="site-container py-6 sm:py-8 lg:py-12">
+      <main className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-6 flex flex-col gap-8">
           <div className="main-title">
             <div className="text-5xl max-sm:text-3xl pl-2 font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
               {splitTextIntoWords(pageData.mainTitle.part1)}
@@ -411,7 +378,7 @@ const SolutionPillars: React.FC = () => {
           <InfoCard {...pageData.infoCard} />
         </div>
 
-        <div className="lg:col-span-2 metric-card ">
+        <div className="lg:col-span-3 metric-card ">
           <MetricCard {...pageData.metric1}>
             <div className="w-full h-full min-h-[250px] flex items-center justify-center rounded-lg">
               <p className="text-gray-700 font-medium text-xl pt-20 text-start p-4">
@@ -441,26 +408,40 @@ const SolutionPillars: React.FC = () => {
         </div>
       </main>
 
-      <section className="py-16 max-w-7xl mx-auto md:py-24">
+      <section className="section-py">
         <div className="text-center mb-12">
-          <div className="text-4xl md:text-5xl font-semibold leading-tight tracking-tighter word-animate-parent transform-gpu">
-            {splitTextIntoWords("Why Our Clients Choose Us")}
-          </div>
-          <p className="mt-4 text-lg text-gray-700 max-w-2xl mx-auto case-study-desc transform-gpu">
+          <h2 className="text-fluid-heading font-semibold leading-tight tracking-tighter text-balance">
+            Why Our Clients Choose Us
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-gray-700 max-w-2xl mx-auto text-pretty leading-relaxed">
             Our partnership model is built on three pillars: efficiency, flexibility, and deep expertise.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <StaggerContainer
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          staggerDelay={0.06}
+        >
           {whyUsData.map((item, index) => (
-            <MiniCaseStudyCard key={index} {...item} />
+            <StaggerItem
+              key={index}
+              variant="fadeUp"
+              className={
+                index === whyUsData.length - 1
+                  ? "md:col-span-2 lg:col-span-1 h-full"
+                  : "h-full"
+              }
+            >
+              <MiniCaseStudyCard {...item} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </section>
 
       <div className="view-all-button-container transform-gpu">
         <ViewAllButton />
       </div>
       <div className="m-22"></div>
+      </div>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 "use client"
 
 import React from 'react'
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Blend, ChartSpline, ShieldCheck } from "lucide-react";
-import TextAnimation from './ui/AnimationText';
+import { useRevealInView, useScrollRevealAnimation } from '@/lib/hooks/useScrollRevealMode';
 
 // --- Data ---
 const featuresData = [
@@ -48,76 +48,77 @@ const cardItemVariants = {
   },
 };
 
+const headingHidden = { opacity: 0, y: 20 };
+const headingVisible = { opacity: 1, y: 0 };
+const headingViewport = { once: true, amount: 0.3 };
+
 const Outsource: React.FC = () => {
+  const leftHeading = useRevealInView(headingHidden, headingVisible, headingViewport);
+  const rightHeading = useRevealInView(headingHidden, headingVisible, headingViewport);
+  const features = useScrollRevealAnimation({ once: true, amount: 0.3 });
+
   return (
-    <div className="section-compact relative mt-8 bg-white font-sans">
-
-
-      {/* CONTENT */}
-      <section className="relative z-10 bg-white max-sm:-mt-44 md:-mt-8 text-gray-900 pt-6 pb-16 sm:pt-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative bg-white font-sans">
+      <section className="relative z-10 bg-white text-gray-900 section-py max-sm:pt-4">
+        <div className="site-container">
           {/* Heading */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-10 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-8 lg:gap-y-10 items-start">
             <motion.div
+              ref={leftHeading.ref}
               className="lg:pr-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              initial={leftHeading.initial}
+              animate={leftHeading.animate}
+              whileInView={leftHeading.whileInView}
+              viewport={leftHeading.viewport}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-       
-              <TextAnimation
-                as="h2"
-                text="Outsource Engineering, Accelerate Growth"
-                classname="mt-2 text-4xl sm:text-5xl font-bold leading-tight text-gray-900"
-              />
+              <h2 className="mt-2 text-fluid-heading font-bold leading-tight text-gray-900 text-balance">
+                Outsource Engineering, Accelerate Growth
+              </h2>
             </motion.div>
 
             <motion.div
+              ref={rightHeading.ref}
               className="lg:pt-2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              initial={rightHeading.initial}
+              animate={rightHeading.animate}
+              whileInView={rightHeading.whileInView}
+              viewport={rightHeading.viewport}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <TextAnimation
-                as="p"
-                text="Achieve cost efficiency and expert accuracy, scale with agile adaptability, and concentrate on your core strengths"
-                classname="text-lg leading-8 text-gray-800"
-              />
+              <p className="text-base sm:text-lg leading-relaxed text-gray-800 text-pretty">
+                Achieve cost efficiency and expert accuracy, scale with agile adaptability, and concentrate on your core strengths
+              </p>
             </motion.div>
           </div>
 
           {/* Features */}
           <motion.div
-            className="mt-16 sm:mt-20"
+            ref={features.ref}
+            className="mt-12 sm:mt-16 lg:mt-20"
             variants={cardContainerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            initial={features.initial}
+            animate={features.animate}
+            whileInView={features.whileInView}
+            viewport={features.viewport}
           >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10 md:gap-y-12">
               {featuresData.map(({ id, icon: Icon, title, description }) => (
                 <motion.div key={id} variants={cardItemVariants}>
                   <div className="mb-4">
                     <Icon className="h-8 w-8 text-[#0a61cb]" aria-hidden="true" />
                   </div>
-                  <TextAnimation
-                    as="h3"
-                    text={title}
-                    classname="text-lg font-bold font-sans leading-7 text-gray-900"
-                  />
-                  <TextAnimation
-                    as="p"
-                    text={description}
-                    classname="mt-2 text-base leading-7 text-gray-800"
-                  />
+                  <h3 className="text-lg font-bold font-sans leading-7 text-gray-900 text-balance">
+                    {title}
+                  </h3>
+                  <p className="mt-2 text-base leading-7 text-gray-800 text-pretty">
+                    {description}
+                  </p>
                 </motion.div>
               ))}
             </div>
           </motion.div>
         </div>
-        <div className="p-4"></div>
       </section>
     </div>
   );

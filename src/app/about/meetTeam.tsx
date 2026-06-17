@@ -23,7 +23,7 @@ const teamMembers = [
     { name: "Fjona Rira", role: "Frontend Developer", image: "images/members/headshots/fjona_rira.png" },
     { name: "Armando Muco", role: "Backend Developer", image: "images/members/headshots/armando_muco.png" },
     { name: "Kejdi Balla", role: "UIUX Designer", image: "images/members/headshots/kejdi_balla.png" },
-    { name: "Amanda Oshafi", role: "Backend Developer", image: "images/members/headshots/amanda_osha.png" },
+    { name: "Amanda Oshafi", role: "Backend Developer", image: "images/members/headshots/amanda_oshafi.png" },
     { name: "Kejsi Terolli", role: "Frontend Developer", image: "images/members/headshots/kejsi_terolli.png" },
     { name: "Vasjan Çupri", role: "Backend Developer", image: "images/members/headshots/vasjan_cupri.png" },
 ];
@@ -113,7 +113,7 @@ export default function MeetTeamSection() {
 
   return (
     <section className="py-16 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="site-container">
         {/* Header */}
         <div className="text-center max-sm:text-start mb-12">
             <p className="text-sm font-medium text-muted-foreground mb-2">Behind The Codes</p>
@@ -125,7 +125,7 @@ export default function MeetTeamSection() {
       </div>
 
       {/* Carousel Wrapper */}
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative site-container">
         {/* Navigation Buttons */}
         <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-20 pointer-events-none max-w-7xl mx-auto px-2 sm:px-4">
           <Button
@@ -151,7 +151,7 @@ export default function MeetTeamSection() {
         {/* The Carousel Track */}
         <div
           ref={carouselRef}
-          className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-6
+          className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory
                      [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mb-4 pb-4" // Padding for box-shadow
         >
           {teamMembers.map((member, i) => (

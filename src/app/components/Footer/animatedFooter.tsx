@@ -55,7 +55,7 @@ const AnimatedFooter: React.FC = () => {
 
   return (
     <footer className="bg-white antialiased">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 sm:py-24">
+      <div className="site-container py-16 sm:py-24">
         
         {/* Call to Action Section with Animated Background */}
         <div className="relative isolate overflow-hidden bg-sky-500/10 rounded-2xl sm:rounded-3xl shadow-xl px-4 sm:px-6 py-12 sm:py-20 lg:py-24 lg:px-24">
