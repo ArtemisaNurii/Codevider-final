@@ -5,14 +5,14 @@ import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 export const Footer1: FC = () => {
   return (
-    <footer className="relative z-10 pt-12 border-black/40 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-black via-[#050a08] to-[#0ea5e9] text-gray-400">
+    <footer className="relative z-10 pt-12 border-black/40 sm:py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-black via-[#050a08] to-[#0ea5e9] text-gray-400">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-white/20 pb-8 mb-8">
           <p className="text-center md:text-left text-gray-400 max-w-2xl">
             Stay updated on our latest developments, insights, and opportunities by following us.
           </p>
           <button
-            className="border border-white/80 text-white px-8 py-3 font-semibold rounded-lg hover:bg-white hover:text-black transition-colors w-full md:w-auto flex-shrink-0"
+            className="border border-white/80 text-white px-8 py-3 font-semibold rounded-lg hover:bg-white hover:text-black transition-colors w-full md:w-auto shrink-0"
             onClick={() => (window.location.href = "mailto:hr@codevider.com")}
           >
             Let&apos;s Talk

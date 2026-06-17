@@ -64,11 +64,11 @@ const AnimatedFooter: React.FC = () => {
           <div className="absolute inset-0 -z-10">
               <div
                 ref={blob1}
-                className="absolute top-[-50%] left-[-50%] w-[40rem] h-[40rem] bg-gradient-to-br from-sky-500 to-cyan-600 rounded-full filter blur-3xl opacity-40"
+                className="absolute top-[-50%] left-[-50%] w-160 h-160 bg-linear-to-br from-sky-500 to-cyan-600 rounded-full filter blur-3xl opacity-40"
               />
               <div
                 ref={blob2}
-                className="absolute bottom-[-50%] right-[-50%] w-[50rem] h-[50rem] bg-gradient-to-br from-blue-400 to-sky-500 rounded-full filter blur-3xl opacity-50"
+                className="absolute bottom-[-50%] right-[-50%] w-200 h-200 bg-linear-to-br from-blue-400 to-sky-500 rounded-full filter blur-3xl opacity-50"
               />
           </div>
           

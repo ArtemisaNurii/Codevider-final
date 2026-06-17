@@ -4,7 +4,6 @@ import { useState, useEffect, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { getJobs } from "../action"
 import JobApplicationPage from "../form"
-import { Footer } from "@/app/components/CTA"
 import { Job } from "../jobs"
 
 function ApplyContent() {
@@ -84,12 +83,7 @@ function ApplyContent() {
     )
   }
 
-  return (
-    <>
-      <JobApplicationPage job={job} />
-      <Footer />
-    </>
-  )
+  return <JobApplicationPage job={job} />
 }
 
 export default function ApplyPage() {

@@ -135,26 +135,10 @@ const Processes = () => {
         </div>
 
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-16">
-          
-          {/* Column 1: Step 1 */}
-          <div className="space-y-16">
-            <ProcessStep {...stepsData[1]} />
-          </div>
-
-          {/* Column 2: Step 2 and Step 4 */}
-          <div className="space-y-16">
-            <ProcessStep {...stepsData[2]} />
-            <ProcessStep {...stepsData[4]} />
-          </div>
-
-          {/* Column 3: Step 3, Step 5, and Step 6 */}
-          <div className="space-y-16">
-            <ProcessStep {...stepsData[3]} />
-            <ProcessStep {...stepsData[5]} />
-            <ProcessStep {...stepsData[6]} />
-          </div>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+          {[1, 2, 3, 4, 5, 6].map((step, index) => (
+            <ProcessStep key={step} {...stepsData[step]} delay={index * 100} />
+          ))}
         </div>
       </div>
       <div className='p-12'></div>

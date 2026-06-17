@@ -3,7 +3,7 @@
 export default function AboutSection3() {
   return (
     <section id="about" className=" bg-white md:mt-10 ">
-             <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
+             <header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
         <div className="mx-auto max-w-7xl py-16 md:py-24 px-4   md:px-4 text-start">
           <p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
               About Us
@@ -57,7 +57,7 @@ export default function AboutSection3() {
                 window.location.href = "/#contact"
               }}
                 type="button"
-                className="mt-6 flex w-full items-center justify-center gap-2.5 rounded-lg bg-gradient-to-r from-black via-slate-900 to-sky-800 px-6 py-4 hover:gap-4 text-center font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                className="mt-6 flex w-full items-center justify-center gap-2.5 rounded-lg bg-linear-to-r from-black via-slate-900 to-sky-800 px-6 py-4 hover:gap-4 text-center font-semibold text-white transition focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
               >
                 <span>LETS BUILD TOGETHER</span>
                 <svg 

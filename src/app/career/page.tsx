@@ -1,14 +1,11 @@
 "use client"
 
 import { Suspense } from "react"
-import { Footer } from "../components/CTA"
-import SiteNavbar from "../components/navbar"
 import JobsListing from "./jobsListing"
 
 export default function CareerPage() {
   return (
     <main>
-      <SiteNavbar/>
       <section>
         <Suspense fallback={
           <div className="flex items-center justify-center min-h-[400px]">
@@ -18,7 +15,6 @@ export default function CareerPage() {
           <JobsListing />
         </Suspense>
       </section>
-      <Footer/>
     </main>
   )
 }

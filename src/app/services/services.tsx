@@ -205,9 +205,9 @@ export default function ServicesPage() {
   return (
     <main className="bg-white text-slate-900">
       {/* Header */}
-      <header className="border-b text-white bg-gradient-to-br from-black via-slate-900 to-sky-800 border-slate-200">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-          <p className="text-sm font-semibold uppercase tracking-widest mt-10 text-sky-300">
+      <header className="border-b text-white bg-linear-to-br from-black via-slate-900 to-sky-800 border-slate-200">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-24 text-start">
+          <p className="text-sm pt-10 sm:pt-20 font-semibold uppercase tracking-widest text-sky-300">
             Our Capabilities
           </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
@@ -302,7 +302,7 @@ Our Solutions                    </h3>
                     <ul className="mt-3 space-y-2 text-base text-slate-700">
                       {it.whyItMatters.map((w, idx) => (
                         <li key={idx} className="flex items-start gap-3">
-                          <span className="mt-2 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#0a61cb]" />
+                          <span className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-[#0a61cb]" />
                           <span>{w}</span>
                         </li>
                       ))}
@@ -315,7 +315,7 @@ Our Solutions                    </h3>
                     <ul className="mt-3 space-y-2 text-base text-slate-700">
                       {it.useCases.map((u, idx) => (
                         <li key={idx} className="flex items-start gap-3">
-                          <span className="mt-2 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#0a61cb]" />
+                          <span className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-[#0a61cb]" />
                           <span>{u}</span>
                         </li>
                       ))}

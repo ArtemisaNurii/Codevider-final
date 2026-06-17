@@ -1,65 +1,275 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { ReactNode, useMemo } from "react"
+import { motion, useReducedMotion, type Variants } from "framer-motion"
+import type React from "react"
+
+const easeCubic = [0.25, 0.1, 0.25, 1.0] as const
+
+const enterTransition = { duration: 0.5, ease: easeCubic }
+
+// Variants for different reveal styles
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: enterTransition,
+  },
+}
+
+const fadeIn: Variants = {
+  hidden: { opacity: 0, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease: easeCubic },
+  },
+}
+
+const scaleUp: Variants = {
+  hidden: { opacity: 0, scale: 0.97, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: enterTransition,
+  },
+}
+
+const slideFromLeft: Variants = {
+  hidden: { opacity: 0, x: -24, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    x: 0,
+    filter: "blur(0px)",
+    transition: enterTransition,
+  },
+}
+
+const slideFromRight: Variants = {
+  hidden: { opacity: 0, x: 24, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    x: 0,
+    filter: "blur(0px)",
+    transition: enterTransition,
+  },
+}
+
+const variantMap = {
+  fadeUp,
+  fadeIn,
+  scaleUp,
+  slideFromLeft,
+  slideFromRight,
+}
+
+export type AnimationVariant = keyof typeof variantMap
+
+// ─── AnimatedSection (drop-in ScrollReveal replacement) ───────────────────────
 
 interface ScrollRevealProps {
-  children: ReactNode
+  children: React.ReactNode
+  variant?: AnimationVariant
   delay?: number
-  direction?: "up" | "down" | "left" | "right" | "fade"
   className?: string
+  as?: "div" | "section" | "span" | "h1" | "h2" | "h3" | "p" | "a"
+  once?: boolean
+  amount?: number
+  // legacy prop aliases kept for back-compat
+  direction?: "up" | "down" | "left" | "right" | "fade"
   duration?: number
 }
 
-const ScrollReveal = ({ 
-  children, 
-  delay = 0, 
-  direction = "up", 
+const ScrollReveal = ({
+  children,
+  variant = "fadeUp",
+  delay = 0,
   className = "",
-  duration = 0.6 
+  as = "div",
+  once = true,
+  amount = 0.1,
 }: ScrollRevealProps) => {
-  // Memoize direction variants to avoid recreation on every render
-  const directionVariants = useMemo(() => ({
-    up: { y: 50, opacity: 0 },
-    down: { y: -50, opacity: 0 },
-    left: { x: 50, opacity: 0 },
-    right: { x: -50, opacity: 0 },
-    fade: { opacity: 0 }
-  }), [])
+  const prefersReducedMotion = useReducedMotion()
+  const selectedVariant = variantMap[variant]
 
-  // Memoize animation variants to prevent unnecessary recalculations
-  const variants = useMemo(() => ({
-    hidden: directionVariants[direction],
+  if (prefersReducedMotion) {
+    const StaticComponent = as
+    return <StaticComponent className={className}>{children}</StaticComponent>
+  }
+
+  const delayedVariant: Variants = {
+    hidden: selectedVariant.hidden,
     visible: {
-      y: 0,
-      x: 0,
-      opacity: 1,
+      ...selectedVariant.visible,
       transition: {
-        duration,
+        ...((selectedVariant.visible as Record<string, unknown>).transition as Record<string, unknown>),
         delay,
-        ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number]
-      }
-    }
-  }), [direction, duration, delay, directionVariants])
+      },
+    },
+  }
 
-  // Memoize viewport settings for better performance
-  const viewportSettings = useMemo(() => ({
-    once: true, // This prevents re-rendering once animated
-    amount: 0.1, // Reduced from 0.2 for earlier triggering
-    margin: "-50px" // Reduced margin for smoother experience
-  }), [])
+  const Component = motion.create(as as "div")
 
   return (
-    <motion.div
-      className={className}
+    <Component
       initial="hidden"
       whileInView="visible"
-      viewport={viewportSettings}
-      variants={variants}
+      viewport={{ once, amount, margin: "0px 0px -8% 0px" }}
+      variants={delayedVariant}
+      className={className}
     >
+      {children}
+    </Component>
+  )
+}
+
+export default ScrollReveal
+
+// ─── StaggerContainer ─────────────────────────────────────────────────────────
+
+interface StaggerContainerProps {
+  children: React.ReactNode
+  className?: string
+  staggerDelay?: number
+  as?: "div" | "section" | "ul"
+}
+
+export function StaggerContainer({
+  children,
+  className = "",
+  staggerDelay = 0.1,
+  as = "div",
+}: StaggerContainerProps) {
+  const customStagger: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: staggerDelay,
+        delayChildren: 0.1,
+      },
+    },
+  }
+
+  const Component = motion.create(as as "div")
+
+  return (
+    <Component
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={customStagger}
+      className={className}
+    >
+      {children}
+    </Component>
+  )
+}
+
+// ─── StaggerItem ──────────────────────────────────────────────────────────────
+
+interface StaggerItemProps {
+  children: React.ReactNode
+  className?: string
+  variant?: AnimationVariant
+}
+
+export function StaggerItem({
+  children,
+  className = "",
+  variant = "fadeUp",
+}: StaggerItemProps) {
+  return (
+    <motion.div variants={variantMap[variant]} className={className}>
       {children}
     </motion.div>
   )
 }
 
-export default ScrollReveal
+// ─── TextReveal ───────────────────────────────────────────────────────────────
+
+interface TextRevealProps {
+  text: string
+  className?: string
+  by?: "word" | "char"
+  delay?: number
+}
+
+export function TextReveal({
+  text,
+  className = "",
+  by = "word",
+  delay = 0,
+}: TextRevealProps) {
+  const items = by === "word" ? text.split(" ") : text.split("")
+
+  return (
+    <motion.span
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: by === "word" ? 0.08 : 0.03,
+            delayChildren: delay,
+          },
+        },
+      }}
+      className={className}
+      aria-label={text}
+    >
+      {items.map((item, i) => (
+        <motion.span
+          key={`${item}-${i}`}
+          variants={{
+            hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
+            visible: {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              transition: { duration: 0.5, ease: easeCubic },
+            },
+          }}
+          className="inline-block"
+        >
+          {item}
+          {by === "word" && i < items.length - 1 ? "\u00A0" : ""}
+        </motion.span>
+      ))}
+    </motion.span>
+  )
+}
+
+// ─── CountUp ──────────────────────────────────────────────────────────────────
+
+interface CountUpProps {
+  target: number
+  duration?: number
+  className?: string
+  suffix?: string
+}
+
+export function CountUp({
+  target,
+  duration = 2,
+  className = "",
+  suffix = "",
+}: CountUpProps) {
+  return (
+    <motion.span
+      className={className}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
+      <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+        {target}
+        {suffix}
+      </motion.span>
+    </motion.span>
+  )
+}

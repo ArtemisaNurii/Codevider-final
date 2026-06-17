@@ -1,13 +1,10 @@
 'use client';
 
-import { lazy, Suspense } from "react"
+import { lazy, Suspense, type ComponentType } from "react"
 import Hero from "./components/HeroSection";
-import SiteNavbar from "./components/navbar";
-import ScrollReveal from "./components/ScrollReveal";
+import ScrollReveal, { type AnimationVariant } from "./components/ScrollReveal";
 
-// Lazy load components that are below the fold
 const Metrics = lazy(() => import("./components/Metrics"))
-const ServicesPage = lazy(() => import("./components/Services"))
 const Industries = lazy(() => import("./components/Industries"))
 const Outsource = lazy(() => import("./components/Outsource"))
 const WorldMapDemo = lazy(() => import("./components/WorldMap"))
@@ -15,57 +12,51 @@ const CaseStudiesSection = lazy(() => import("./components/CaseStudies"))
 const Faq = lazy(() => import("./components/Faq"))
 const Contact = lazy(() => import("./components/CTA"))
 
-// Loading component for better UX
+type HomepageSection = {
+  id: string
+  Component: ComponentType
+  variant: AnimationVariant
+  amount?: number
+}
+
+const HOMEPAGE_SECTIONS: HomepageSection[] = [
+  { id: "metrics", Component: Metrics, variant: "fadeUp" },
+  { id: "industries", Component: Industries, variant: "fadeUp" },
+  { id: "outsource", Component: Outsource, variant: "scaleUp" },
+  { id: "world-map", Component: WorldMapDemo, variant: "fadeIn", amount: 0.05 },
+  { id: "case-studies", Component: CaseStudiesSection, variant: "fadeUp" },
+  { id: "faq", Component: Faq, variant: "fadeUp" },
+  { id: "contact", Component: Contact, variant: "fadeUp" },
+]
+
 const SectionLoader = () => (
-  <div className="min-h-[200px] flex items-center justify-center">
-    <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+  <div
+    className="flex min-h-[clamp(12rem,35vh,20rem)] items-center justify-center"
+    role="status"
+    aria-label="Loading section"
+  >
+    <div className="size-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent motion-reduce:animate-none" />
   </div>
 )
 
+function LazySection({ Component, variant, amount }: Omit<HomepageSection, "id">) {
+  return (
+    <ScrollReveal variant={variant} amount={amount}>
+      <Suspense fallback={<SectionLoader />}>
+        <Component />
+      </Suspense>
+    </ScrollReveal>
+  )
+}
+
 export default function Home() {
   return (
-    <div className="min-h-dvh ">
-      <SiteNavbar />
+    <div className="min-h-dvh">
       <main id="home">
         <Hero />
-        <ScrollReveal delay={0.03}>
-          <Suspense fallback={<SectionLoader />}>
-            <Metrics />
-          </Suspense>
-        </ScrollReveal>
-        <ScrollReveal delay={0.04}>
-          <Suspense fallback={<SectionLoader />}>
-            <ServicesPage />
-          </Suspense>
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
-          <Suspense fallback={<SectionLoader />}>
-            <Industries />
-          </Suspense>
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
-          <Suspense fallback={<SectionLoader />}>
-            <Outsource />
-          </Suspense>
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
-          <Suspense fallback={<SectionLoader />}>
-            <WorldMapDemo />
-          </Suspense>
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
-          <Suspense fallback={<SectionLoader />}>
-            <CaseStudiesSection />
-          </Suspense>
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
-          <Suspense fallback={<SectionLoader />}>
-            <Faq />
-          </Suspense>
-        </ScrollReveal>
-        <Suspense fallback={<SectionLoader />}>
-          <Contact />
-        </Suspense>
+        {HOMEPAGE_SECTIONS.map(({ id, ...section }) => (
+          <LazySection key={id} {...section} />
+        ))}
       </main>
     </div>
   );

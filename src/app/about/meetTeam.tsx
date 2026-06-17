@@ -7,29 +7,25 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 
 // No changes to the teamMembers array
 const teamMembers = [
-    { name: "Pasho Toska", role: "Co-Founder", image: "/images/teamMember/pashoo.png" },
-    { name: "Ervin Ziko", role: "Co-Founder", image: "/images/teamMember/ervinziko.png" },
-    { name: "Altin Luli", role: "Co-Founder", image: "/images/teamMember/altin4.png" },
-
-    { name: "Erion Domi", role: "Co-Founder", image: "/images/teamMember/erion1.png" },
-    { name: "Genci Likaj", role: "Senior Software engineer", image: "/images/teamMember/genci8.png" },
-    { name: "Jul Kreshpaj", role: "Senior Software engineer", image: "/images/teamMember/juli8.png" },
-
-    { name: "Elisabeta Guri", role: "HR Manager", image: "/images/teamMember/beta8.png" },
-    { name: "Ansel Nikaj", role: "Project Manager", image: "/images/teamMember/ansel8.png" },
-    { name: "Xhulio Balli", role: "Project Manager", image: "/images/teamMember/xhulio8.png" },
-    { name: "Besjana Fixha ", role: "Fullstack Developer", image: "/images/teamMember/besa8.png" },
-    { name: "Erald Plloha", role: "Backend Developer", image: "/images/teamMember/erald8.png" },
-    { name: "Arlind Idrizi", role: "Frontend Developer", image: "/images/teamMember/arlind8.png" },
-    { name: "Eliana Kryeziu", role: "Frontend Developer", image: "/images/teamMember/eliana8.png" },
-    { name: "Geri Lluga", role: "Backend Developer", image: "/images/teamMember/geri8.png" },
-    { name: "Fjona Rira", role: "Frontend Developer", image: "/images/teamMember/fiona8.png" },
-    { name: "Armando Muco", role: "Backend Developer", image: "/images/teamMember/armando8.png" },
-    { name: "Kejdi Balla", role: "UIUX Designer", image: "/images/teamMember/kejdi8.png" },
-    { name: "Amanda Oshafi", role: "Backend Developer", image: "/images/teamMember/amanda8.png" },
-    { name: "Artemisa Nuri", role: "Frontend Developer", image: "/images/teamMember/arti8.png" },
-    { name: "Kejsi Terolli", role: "Frontend Developer", image: "/images/teamMember/kejsi8.png" },
-    { name: "Vasjan Çupri", role: "Backend Developer", image: "/images/teamMember/vsjn8.png" },
+    { name: "Pasho Toska", role: "Co-Founder", image: "images/members/headshots/pasho_toska.png" },
+    { name: "Ervin Ziko", role: "Co-Founder", image: "images/members/headshots/ervin_ziko.png" },
+    { name: "Altin Luli", role: "Co-Founder", image: "images/members/headshots/altin_luli.png" },
+    { name: "Erion Domi", role: "Co-Founder", image: "images/members/headshots/erion_domi.png" },
+    { name: "Genci Likaj", role: "Senior Software engineer", image: "images/members/headshots/genci_likaj.png" },
+    { name: "Jul Kreshpaj", role: "Senior Software engineer", image: "images/members/headshots/jul_kreshpaj.png" },
+    { name: "Elisabeta Guri", role: "HR Manager", image: "images/members/headshots/elisabeta_guri.png" },
+    { name: "Xhulio Balli", role: "Project Manager", image: "images/members/headshots/xhulio_balli.png" },
+    { name: "Besjana Fixha ", role: "Fullstack Developer", image: "images/members/headshots/besjana_fixha.png" },
+    { name: "Erald Plloha", role: "Backend Developer", image: "images/members/headshots/erald_plloha.png" },
+    { name: "Arlind Idrizi", role: "Frontend Developer", image: "images/members/headshots/arlind_idrizi.png" },
+    { name: "Eliana Kryeziu", role: "Frontend Developer", image: "images/members/headshots/eliana_kryeziu.png" },
+    { name: "Geri Lluga", role: "Backend Developer", image: "images/members/headshots/geri_lluga.png" },
+    { name: "Fjona Rira", role: "Frontend Developer", image: "images/members/headshots/fjona_rira.png" },
+    { name: "Armando Muco", role: "Backend Developer", image: "images/members/headshots/armando_muco.png" },
+    { name: "Kejdi Balla", role: "UIUX Designer", image: "images/members/headshots/kejdi_balla.png" },
+    { name: "Amanda Oshafi", role: "Backend Developer", image: "images/members/headshots/amanda_osha.png" },
+    { name: "Kejsi Terolli", role: "Frontend Developer", image: "images/members/headshots/kejsi_terolli.png" },
+    { name: "Vasjan Çupri", role: "Backend Developer", image: "images/members/headshots/vasjan_cupri.png" },
 ];
 
 export default function MeetTeamSection() {
@@ -161,7 +157,7 @@ export default function MeetTeamSection() {
           {teamMembers.map((member, i) => (
             <div
               key={`${member.name}-${i}`}
-              className="flex-shrink-0 snap-center w-full max-w-xs sm:w-[45%] md:w-[30%] lg:w-[23%] group"
+              className="shrink-0 snap-center w-full max-w-xs sm:w-[45%] md:w-[30%] lg:w-[23%] group"
             >
               <div
                 onClick={() => scrollToCard(i)}
@@ -169,7 +165,7 @@ export default function MeetTeamSection() {
                            shadow-sm transition-all duration-300 ease-in-out will-change-transform 
                            group-hover:-translate-y-1 group-hover:shadow-xl cursor-pointer"
               >
-                <div className="aspect-[3/4]">
+                <div className="aspect-3/4">
                   <Image
                     src={member.image || "/placeholder.svg"}
                     alt={member.name}

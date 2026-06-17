@@ -1,19 +1,21 @@
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
-import { Manrope, Spectral } from "next/font/google";
+import { Cabin, DM_Sans, Figtree, Spectral } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { WorkerProvider } from "@/components/providers/WorkerProvider";
+import { Footer } from "./components/CTA";
+import SiteNavbar from "./components/navbar";
 import "./globals.css";
 
-const manrope = Manrope({
+const manrope = Figtree({
   variable: "--font-manrope",
   subsets: ["latin"],
 });
 
-const spectral = Spectral({
+const spectral = Figtree({
   variable: "--font-spectral",
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 // 🚀 SEO STRATEGY: Define your base URL once and reuse it.
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
   applicationName: "Codevider",
   authors: [{ name: "Codevider Team", url: siteUrl.toString() }],
   publisher: "Codevider",
-  
+
   // ✅ SEO KEYWORDS: Expanded with high-intent, long-tail, and Albanian keywords.
   // While less critical now, it helps define context.
   keywords: [
@@ -75,40 +77,40 @@ export const metadata: Metadata = {
     "programues shqiptarë",       // Albanian programmers
     "agjenci dixhitale",           // Digital agency
     "zgjidhje softuerike",        // Software solutions
-    "sherbime programimi",  
-          "software development company in albania",
-          "sherbime software në shqipëri",
-          "programues shqiptarë",
-          "agjenci dixhitale",
-          "zgjidhje softuerike",
-          "sherbime programimi",
-          "software development company in albania",
-          "sherbime software në shqipëri",
-          "programues shqiptarë",
-          "agjenci dixhitale",
-          "zgjidhje softuerike",
-          "sherbime programimi",
-          "software development company in albania",
-          "sherbime software në shqipëri",
-          "programues shqiptarë",
-          "agjenci dixhitale",
-          "zgjidhje softuerike",
-          "sherbime programimi",
-          "website",
-          "ai integration",
-          "ai development",
-          "ai solutions",
-          "ai services",
-          "ai consulting",
-          "ai implementation",
-          "ai development company",
-          "ai development services",
-          "ai development company in albania",
-          "ai development services in albania",
-          "ai development company in albania",
-          "ai development services in albania",
+    "sherbime programimi",
+    "software development company in albania",
+    "sherbime software në shqipëri",
+    "programues shqiptarë",
+    "agjenci dixhitale",
+    "zgjidhje softuerike",
+    "sherbime programimi",
+    "software development company in albania",
+    "sherbime software në shqipëri",
+    "programues shqiptarë",
+    "agjenci dixhitale",
+    "zgjidhje softuerike",
+    "sherbime programimi",
+    "software development company in albania",
+    "sherbime software në shqipëri",
+    "programues shqiptarë",
+    "agjenci dixhitale",
+    "zgjidhje softuerike",
+    "sherbime programimi",
+    "website",
+    "ai integration",
+    "ai development",
+    "ai solutions",
+    "ai services",
+    "ai consulting",
+    "ai implementation",
+    "ai development company",
+    "ai development services",
+    "ai development company in albania",
+    "ai development services in albania",
+    "ai development company in albania",
+    "ai development services in albania",
   ],
-  
+
   // ✅ ROBOTS: Add a link to your sitemap. Crucial for crawlers.
   robots: {
     index: true,
@@ -123,7 +125,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  
+
   // ✅ INTERNATIONALIZATION: The RIGHT way to target different languages.
   // This tells Google that you have (or will have) an Albanian version of your site.
   // This is a massive SEO boost for both languages.
@@ -134,7 +136,7 @@ export const metadata: Metadata = {
       'sq-AL': `${siteUrl.toString()}/sq`, // Assumes an Albanian version at /sq
     },
   },
-  
+
   // ✅ SOCIAL (OpenGraph for Facebook/LinkedIn, etc.)
   // Title and description are more direct and action-oriented for sharing.
   openGraph: {
@@ -154,7 +156,7 @@ export const metadata: Metadata = {
     ],
     locale: "en_US",
   },
-  
+
   // ✅ SOCIAL (Twitter Card)
   twitter: {
     card: "summary_large_image",
@@ -165,7 +167,7 @@ export const metadata: Metadata = {
     site: "@codevider", // Replace with your actual Twitter handle
     creator: "@codevider", // Replace with your actual Twitter handle
   },
-  
+
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -174,9 +176,9 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
   },
-  
+
   category: "technology",
-  
+
   // 🚀 GOOGLE VERIFICATION: Add your GSC verification code here to prove ownership.
   verification: {
     google: "YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE",
@@ -265,7 +267,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <WorkerProvider>
+          <SiteNavbar />
           {children}
+          <Footer />
           <Toaster />
         </WorkerProvider>
       </body>

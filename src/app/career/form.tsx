@@ -5,13 +5,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Briefcase, MapPin, FileText, BadgeDollarSign, Plus, X } from "lucide-react"
-import SiteNavbar from "../components/navbar"
 import { Job } from "./jobs"
 import { uploadFileAction, submitApplicationAction, CandidateData, FileUploadData } from "./apply/action"
 
 const JobDetailItem = ({ icon: Icon, title, value }: { icon: React.ElementType, title: string, value: string }) => (
   <li className="flex items-start gap-4">
-    <div className="flex-shrink-0 mt-1 text-slate-600"><Icon size={20} strokeWidth={1.5} /></div>
+    <div className="shrink-0 mt-1 text-slate-600"><Icon size={20} strokeWidth={1.5} /></div>
     <div><h4 className="font-semibold text-gray-800">{title}</h4><p className="text-gray-500 text-sm">{value}</p></div>
   </li>
 )
@@ -347,9 +346,8 @@ export default function JobApplicationPage({ job }: JobApplicationPageProps) {
 
   return (
     <div className="bg-white font-sans">
-      <SiteNavbar />
       {/* Section Header with Gradient */}
-      <div className="w-full bg-gradient-to-r from-black via-slate-700 to-sky-600 py-30">
+      <div className="w-full bg-linear-to-r from-black via-slate-700 to-sky-600 py-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-5xl font-bold text-white">{job.title}</h2>
           <p className="mt-2 text-lg text-gray-200">{job.job_type.job_type} • {job.addresses?.[0]?.address?.location || 'Remote'}</p>

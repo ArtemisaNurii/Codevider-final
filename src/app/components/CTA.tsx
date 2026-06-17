@@ -18,6 +18,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { contactSubmit } from "../actions/contact";
+import NavbarCodeviderLogo from "./navbar-codevider-logo";
 
 export const Footer: React.FC = () => {
   return (
@@ -67,7 +68,7 @@ export const Footer: React.FC = () => {
             <li>
               <a
                 href="mailto:hr@codevider.com"
-                className="hover:text-blue-600 transition-colors break-words text-base sm:text-sm block py-1 font-medium"
+                className="hover:text-blue-600 transition-colors wrap-break-word text-base sm:text-sm block py-1 font-medium"
               >
                 info@codevider.com
               </a>
@@ -89,14 +90,7 @@ export const Footer: React.FC = () => {
       <div className="mt-10 pt-6 border-t border-gray-200">
         <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
           <div className="text-left">
-            <Image
-              src="/images/logo/blue.png"
-              alt="Codevider Logo"
-              width={120}
-              height={32}
-              className="h-10 sm:h-8 w-auto"
-              priority
-            />
+            <NavbarCodeviderLogo logoTextColor="text-gray-900" />
             <p className="mt-4 text-gray-600 text-sm sm:text-xs max-w-md leading-relaxed">
               Stay updated on our latest developments, insights, and opportunities.
             </p>
@@ -181,7 +175,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     <>
       <div id="contact" className="relative overflow-hidden text-white">
         <section
-          className="relative z-10 px-4 py-20 sm:py-28 bg-gradient-to-br from-black via-slate-900 to-sky-800 "
+          className="relative z-10 px-4 py-20 sm:py-28 bg-linear-to-br from-black via-slate-900 to-sky-800 "
         >
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 lg:gap-16 items-stretch">
             <div className="text-center lg:text-left mb-12 lg:mb-0 flex flex-col justify-center">
@@ -289,8 +283,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             </div>
           </div>
         </section>
-
-        <Footer />
       </div>
     </>
   );
