@@ -1,0 +1,63 @@
+{
+    "home": {
+      "your_strategic_partner_in": "Ihr strategischer Partner in",
+      "we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Wir entwerfen, bauen und skalieren zuverlässige Web-, Mobile- und Cloud-Software – eingebettet in Ihr Team und ohne Overhead geliefert.",
+      "start_your_project": "Starten Sie Ihr Projekt",
+      "explore_services": "Entdecken Sie unsere Dienstleistungen",
+      "years_delivering": "Jahre des Lieferns",
+      "global_projects": "Globale Projekte",
+      "engineers": "Ingenieure",
+      "dashboard": {
+        "window_url": "app.codevider.io/analytics",
+        "live": "Live",
+        "performance": "Leistung",
+        "performance_delta": "+18,2 % vs. letzten Monat",
+        "growth": "Wachstum",
+        "growth_delta": "+842 neue Nutzer",
+        "system_health": "Systemstatus",
+        "system_health_delta": "Alle Systeme operationell",
+        "leads": "Leads",
+        "leads_delta": "+12 % Conversion",
+        "revenue_overview": "Umsatzübersicht",
+        "revenue_period": "Letzte 12 Wochen",
+        "revenue_chart_label": "Wöchentlicher Umsatztrend über 12 Wochen",
+        "week_1": "W1",
+        "week_6": "W6",
+        "week_12": "W12",
+        "transactions": "Letzte Transaktionen",
+        "tx_1_title": "Stripe-Auszahlung",
+        "tx_1_meta": "Heute · 09:42",
+        "tx_1_amount": "+12.400 $",
+        "tx_2_title": "Pro-Abo",
+        "tx_2_meta": "Heute · 08:15",
+        "tx_2_amount": "+299 $",
+        "tx_3_title": "Anbieter-Auszahlung",
+        "tx_3_meta": "Gestern · 16:30",
+        "tx_3_amount": "-4.200 $",
+        "toast_title": "Deploy erfolgreich",
+        "toast_message": "v2.4.1 in Produktion · vor 2 Min."
+      }
+    },
+    "about": {
+      "about_us": "Über uns",
+      "our_mission": "Unsere Mission",
+      "our_values": "Unsere Werte",
+      "our_team": "Unser Team",
+      "our_story": "Unsere Geschichte"
+    },
+    "navbar": {
+      "home": "Startseite",
+      "career": "Karriere",
+      "about": "Über",
+      "services": "Dienstleistungen",
+      "book_a_call": "Termin buchen",
+      "select_language": "Sprache wählen",
+      "language_options": "Sprachoptionen",
+      "switch_to_light_mode": "Zum hellen Modus wechseln",
+      "switch_to_dark_mode": "Zum dunklen Modus wechseln",
+      "open_menu": "Menü öffnen",
+      "close_menu": "Menü schließen",
+      "theme": "Design"
+    }
+  }
+  

@@ -1,0 +1,63 @@
+{
+    "home": {
+      "your_strategic_partner_in": "Il tuo partner strategico in",
+      "we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Progettiamo, costruiamo e scalamo software web, mobile e cloud affidabili — integrati con il tuo team e consegnati senza costi generali.",
+      "start_your_project": "Avvia il tuo progetto",
+      "explore_services": "Esplora i servizi",
+      "years_delivering": "Anni di consegna",
+      "global_projects": "Progetti globali",
+      "engineers": "Ingegneri",
+      "dashboard": {
+        "window_url": "app.codevider.io/analytics",
+        "live": "Live",
+        "performance": "Performance",
+        "performance_delta": "+18,2% vs mese scorso",
+        "growth": "Crescita",
+        "growth_delta": "+842 nuovi utenti",
+        "system_health": "Salute del sistema",
+        "system_health_delta": "Tutti i sistemi operativi",
+        "leads": "Lead",
+        "leads_delta": "+12% conversione",
+        "revenue_overview": "Panorama ricavi",
+        "revenue_period": "Ultime 12 settimane",
+        "revenue_chart_label": "Andamento settimanale dei ricavi su 12 settimane",
+        "week_1": "S1",
+        "week_6": "S6",
+        "week_12": "S12",
+        "transactions": "Transazioni recenti",
+        "tx_1_title": "Pagamento Stripe",
+        "tx_1_meta": "Oggi · 09:42",
+        "tx_1_amount": "+$12.400",
+        "tx_2_title": "Abbonamento Pro",
+        "tx_2_meta": "Oggi · 08:15",
+        "tx_2_amount": "+$299",
+        "tx_3_title": "Prelievo fornitore",
+        "tx_3_meta": "Ieri · 16:30",
+        "tx_3_amount": "-$4.200",
+        "toast_title": "Deploy riuscito",
+        "toast_message": "v2.4.1 in produzione · 2 min fa"
+      }
+    },
+    "about": {
+      "about_us": "Chi siamo",
+      "our_mission": "La nostra missione",
+      "our_values": "I nostri valori",
+      "our_team": "Il nostro team",
+      "our_story": "La nostra storia"
+    },
+    "navbar": {
+      "home": "Home",
+      "career": "Carriera",
+      "about": "Chi siamo",
+      "services": "Servizi",
+      "book_a_call": "Prenota una call",
+      "select_language": "Seleziona lingua",
+      "language_options": "Opzioni lingua",
+      "switch_to_light_mode": "Passa alla modalità chiara",
+      "switch_to_dark_mode": "Passa alla modalità scura",
+      "open_menu": "Apri menu",
+      "close_menu": "Chiudi menu",
+      "theme": "Tema"
+    }
+  }
+  

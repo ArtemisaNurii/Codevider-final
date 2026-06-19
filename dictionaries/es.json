@@ -1,0 +1,63 @@
+{
+    "home": {
+      "your_strategic_partner_in": "Su socio estratégico en",
+      "we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Diseñamos, construimos y escalamos software web, móvil y en la nube confiable — integrado con su equipo y entregado sin costos generales.",
+      "start_your_project": "Inicie su proyecto",
+      "explore_services": "Explore nuestros servicios",
+      "years_delivering": "Años de entrega",
+      "global_projects": "Proyectos globales",
+      "engineers": "Ingenieros",
+      "dashboard": {
+        "window_url": "app.codevider.io/analytics",
+        "live": "En vivo",
+        "performance": "Rendimiento",
+        "performance_delta": "+18,2 % vs mes pasado",
+        "growth": "Crecimiento",
+        "growth_delta": "+842 usuarios nuevos",
+        "system_health": "Salud del sistema",
+        "system_health_delta": "Todos los sistemas operativos",
+        "leads": "Leads",
+        "leads_delta": "+12 % conversión",
+        "revenue_overview": "Resumen de ingresos",
+        "revenue_period": "Últimas 12 semanas",
+        "revenue_chart_label": "Tendencia semanal de ingresos en 12 semanas",
+        "week_1": "S1",
+        "week_6": "S6",
+        "week_12": "S12",
+        "transactions": "Transacciones recientes",
+        "tx_1_title": "Pago Stripe",
+        "tx_1_meta": "Hoy · 09:42",
+        "tx_1_amount": "+$12.400",
+        "tx_2_title": "Suscripción Pro",
+        "tx_2_meta": "Hoy · 08:15",
+        "tx_2_amount": "+$299",
+        "tx_3_title": "Retiro de proveedor",
+        "tx_3_meta": "Ayer · 16:30",
+        "tx_3_amount": "-$4.200",
+        "toast_title": "Despliegue exitoso",
+        "toast_message": "v2.4.1 en producción · hace 2 min"
+      }
+    },
+    "about": {
+      "about_us": "Sobre nosotros",
+      "our_mission": "Nuestra misión",
+      "our_values": "Nuestros valores",
+      "our_team": "Nuestro equipo",
+      "our_story": "Nuestra historia"
+    },
+    "navbar": {
+      "home": "Inicio",
+      "career": "Carrera",
+      "about": "Acerca de",
+      "services": "Servicios",
+      "book_a_call": "Reservar una llamada",
+      "select_language": "Seleccionar idioma",
+      "language_options": "Opciones de idioma",
+      "switch_to_light_mode": "Cambiar a modo claro",
+      "switch_to_dark_mode": "Cambiar a modo oscuro",
+      "open_menu": "Abrir menú",
+      "close_menu": "Cerrar menú",
+      "theme": "Tema"
+    }
+  }
+  

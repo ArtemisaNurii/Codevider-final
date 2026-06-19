@@ -1,0 +1,63 @@
+{
+    "home": {
+      "your_strategic_partner_in": "Partneri juaj strategjik në",
+      "we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Projektojmë, ndërtim dhe skalojmë softuer të besueshëm web, mobile dhe cloud — i përfshirë në ekipin tuaj dhe i dorëzuar pa mbajtje.",
+      "start_your_project": "Nis projektin tuaj",
+      "explore_services": "Eksploroni shërbimet",
+      "years_delivering": "Vjetësh në treg",
+      "global_projects": "Projekte globale",
+      "engineers": "Inxhinier",
+      "dashboard": {
+        "window_url": "app.codevider.io/analytics",
+        "live": "Live",
+        "performance": "Performanca",
+        "performance_delta": "+18,2% vs muajin e kaluar",
+        "growth": "Rritja",
+        "growth_delta": "+842 përdorues të rinj",
+        "system_health": "Shëndeti i sistemit",
+        "system_health_delta": "Të gjitha sistemet në rregull",
+        "leads": "Leads",
+        "leads_delta": "+12% konvertim",
+        "revenue_overview": "Përmbledhja e të ardhurave",
+        "revenue_period": "12 muajt e fundit",
+        "revenue_chart_label": "Trendi javor i të ardhurave për 12 muaj",
+        "week_1": "J1",
+        "week_6": "J6",
+        "week_12": "J12",
+        "transactions": "Transaksionet e fundit",
+        "tx_1_title": "Pagesa Stripe",
+        "tx_1_meta": "Sot · 09:42",
+        "tx_1_amount": "+$12,400",
+        "tx_2_title": "Abonim Pro",
+        "tx_2_meta": "Sot · 08:15",
+        "tx_2_amount": "+$299",
+        "tx_3_title": "Tërheqje furnizuesi",
+        "tx_3_meta": "Dje · 16:30",
+        "tx_3_amount": "-$4,200",
+        "toast_title": "Deploy i suksesshëm",
+        "toast_message": "v2.4.1 në prodhim · 2 min më parë"
+      }
+    },
+    "about": {
+      "about_us": "Rreth nesh",
+      "our_mission": "Misioni ynë",
+      "our_values": "Vlerat tona",
+      "our_team": "Ekipi ynë",
+      "our_story": "Historia jonë"
+    },
+    "navbar": {
+      "home": "Kryefaqja",
+      "career": "Karriera",
+      "about": "Rreth",
+      "services": "Shërbimet",
+      "book_a_call": "Rezervo një thirrje",
+      "select_language": "Zgjidhni gjuhën",
+      "language_options": "Opsionet e gjuhës",
+      "switch_to_light_mode": "Kalo në modalitetin e ndriçuar",
+      "switch_to_dark_mode": "Kalo në modalitetin e errët",
+      "open_menu": "Hap menunë",
+      "close_menu": "Mbyll menunë",
+      "theme": "Tema"
+    }
+  }
+  

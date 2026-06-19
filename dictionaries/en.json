@@ -1,0 +1,342 @@
+{
+    "home": {
+        "your_strategic_partner_in": "Your strategic partner in",
+        "we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "We design, build, and scale reliable web, mobile, and cloud software — embedded with your team and delivered without the overhead.",
+        "start_your_project": "Start your project",
+        "explore_services": "Explore services",
+        "years_delivering": "Years delivering",
+        "global_projects": "Global projects",
+        "engineers": "Engineers",
+        "who_we_are_eyebrow": "Who we are",
+        "who_we_are_headline": "Transforming ideas into trusted digital solutions",
+        "who_we_are_description": "From web and mobile apps to cloud platforms and enterprise systems, we craft reliable software tailored to your business needs. Our teams blend modern technologies, scalable architectures, and intuitive design to deliver secure, high-performance solutions that help organizations innovate and grow.",
+        "read_more_about_us": "Read more about us",
+        "stat_global_partnerships_value": "30+",
+        "stat_global_partnerships": "Global partnerships across Europe",
+        "stat_delivery_velocity_value": "60%",
+        "stat_delivery_velocity": "Average growth in delivery velocity",
+        "stat_elite_engineers_value": "25+",
+        "stat_elite_engineers": "Elite engineers with deep, full-stack expertise — ready to embed into your team within two weeks.",
+        "core_services": {
+            "eyebrow": "Our core services",
+            "headline": "Everything you need to ship, scale, and stay ahead",
+            "description": "We help enterprises and startups ship faster with scalable teams, modern stacks, and reliable delivery — without the overhead. Four ways we plug in:"
+        },
+        "features": {
+            "ai": {
+                "badge": "01 · AI Integration",
+                "headline": "Ship AI features your users actually feel",
+                "description": "From custom LLM-powered apps and intelligent chatbots to workflow automation and actionable insights — seamlessly embedded into your existing ecosystem.",
+                "bullet_1": "Custom LLM apps & assistants trained on your data",
+                "bullet_2": "Intelligent chatbots & support automation",
+                "bullet_3": "Insight pipelines wired into your workflows",
+                "link": "Explore AI services",
+                "demo": {
+                    "title": "AI Assistant",
+                    "status": "Driven by your data, safeguarded by design.",
+                    "chip_tickets_label": "Summarize tickets",
+                    "chip_tickets_q": "Summarize today's support tickets",
+                    "chip_tickets_a": "Here's a quick snapshot of the day's support activity:\n\n• Ticket #1023 – Login issue (resolved in 12 min)\n• Ticket #1024 – Feature request: export to PDF (pending review)\n• Ticket #1025 – Bug: data sync delay (fixed, 3 min)\n\nTotal tickets handled: 3 – 2 resolved, 1 pending.",
+                    "chip_leads_label": "Classify leads",
+                    "chip_leads_q": "Classify new leads by intent",
+                    "chip_leads_a": "Lead intent breakdown (last 24 h):\n\n• High Intent – 4 leads (budget > $5k, demo requested)\n• Medium Intent – 7 leads (product comparison, pricing questions)\n• Low Intent – 3 leads (general info, newsletter sign-ups)\n\nAction: prioritize high-intent leads for outreach.",
+                    "chip_schedule_label": "Create a schedule",
+                    "chip_schedule_q": "Add a new schedule for tomorrow",
+                    "chip_schedule_a": "Schedule created for Client: BrightWave Solutions – tomorrow, 9 AM – 10 AM (UTC+2). \n\n Agenda: 9 AM – Intro & Goals, 9:30 AM – Demo, 9:55 AM – Q&A, 10 AM – Wrap‑up.\n\n Confirmation email sent to the client and team."
+                }
+            },
+            "engineering": {
+                "badge": "02 · Product Engineering",
+                "headline": "Clean architecture, shipped on a cadence",
+                "description": "We design and develop scalable web applications and intuitive products with clean architecture and agile release cycles — ensuring faster time-to-market and long-term maintainability.",
+                "bullet_1": "Modern, typed, well-tested codebases",
+                "bullet_2": "Continuous delivery from day one",
+                "bullet_3": "Maintainable systems that scale with you",
+                "link": "Explore engineering",
+                "demo": {
+                    "tab_orders": "orders.ts",
+                    "tab_schema": "schema.sql",
+                    "tab_deploy": "deploy.yml",
+                    "tabs_aria": "Code samples",
+                    "code_orders": "export async function createOrder(input: OrderInputDTO) {\n  const order = await db.insert(orders).values({\n    userId: input.userId,\n    total: input.amount,\n    status: ORDERS.pending,\n  })\n\n  await queue.emit('order.created', order.id)\n  return order\n}",
+                    "code_schema": "create table orders (\n  id        uuid primary key default gen_random_uuid(),\n  user_id   uuid not null references users(id),\n  total     integer not null check (total >= 0),\n  status    text not null default 'pending',\n  created_at timestamptz default now()\n);",
+                    "code_deploy": "name: Deploy\non:\n  push:\n    branches: [main]\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: pnpm install --frozen-lockfile\n      - run: pnpm build && pnpm test --ci\n      - uses: aws-actions/configure-aws-credentials@v4\n      - run: aws codedeploy push --application-name prod-app --s3-location s3://deployments/app.zip --region us-east-1",
+                    "status": "Build passed · 0 type errors · deployed to production"
+                }
+            },
+            "pod": {
+                "badge": "03 · Dedicated Pod Teams",
+                "headline": "A full squad, embedded in two weeks",
+                "description": "Quickly stand up cross-functional pods — frontend, backend, and QA — that plug into your process. Scale effortlessly with flexible, SLA-backed engagements tailored to your needs.",
+                "bullet_1": "Cross-functional from the first sprint",
+                "bullet_2": "Daily standups, weekly reporting, full visibility",
+                "bullet_3": "Scale the pod up or down on demand",
+                "link": "Explore pod teams",
+                "demo": {
+                    "title": "Your dedicated pod",
+                    "subtitle": "hover a role",
+                    "center": "Your\nproduct",
+                    "role_frontend": "Frontend",
+                    "role_frontend_desc": "React, Next.js & polished, accessible UI.",
+                    "role_backend": "Backend",
+                    "role_backend_desc": "APIs, data models & business logic that scale.",
+                    "role_qa": "QA",
+                    "role_qa_desc": "Automated tests & release confidence.",
+                    "role_pm": "PM",
+                    "role_pm_desc": "Standups, reporting & a single point of contact."
+                }
+            },
+            "devops": {
+                "badge": "04 · Cloud & DevOps",
+                "headline": "Ship to production with confidence",
+                "description": "Streamline deployments with CI/CD pipelines, containerization, and secure cloud infrastructure on AWS — ensuring high availability and operational efficiency.",
+                "bullet_1": "Automated build, test & deploy pipelines",
+                "bullet_2": "Containerized, infrastructure-as-code setups",
+                "bullet_3": "High availability & 99.98% uptime SLAs",
+                "link": "Explore cloud & DevOps",
+                "demo": {
+                    "title": "CI/CD pipeline",
+                    "subtitle": "main → production",
+                    "stage_build": "Build",
+                    "stage_test": "Test",
+                    "stage_deploy": "Deploy",
+                    "idle": "Idle",
+                    "running": "Running…",
+                    "run": "Run pipeline",
+                    "run_again": "Run again",
+                    "status_building": "Building…",
+                    "status_test": "Running tests…",
+                    "status_deploy": "Deploying…",
+                    "status_live": "Live · 99.98% uptime"
+                }
+            }
+        },
+        "empower": {
+            "eyebrow": "Who we empower",
+            "headline": "We empower tech startups, SMEs & global brands",
+            "cards": {
+                "startups": {
+                    "title": "Series A/B Startups",
+                    "description": "We help fast-growing startups scale with agile teams and cloud-native solutions — from MVP acceleration to core-system growth."
+                },
+                "enterprise": {
+                    "title": "Enterprise Modernization",
+                    "description": "We modernize legacy systems with cloud-native solutions — reducing technical debt, improving performance, and unlocking innovation."
+                },
+                "crm": {
+                    "title": "CRM-Centric Organizations",
+                    "description": "We design tailored CRM and HubSpot-centric structures that centralize data, improve experiences, and power smarter decisions."
+                },
+                "custom": {
+                    "title": "Custom Software Solutions",
+                    "description": "Off-the-shelf tools don't fit every need. We build scalable, flexible software that evolves with your business and delivers measurable results."
+                },
+                "fintech": {
+                    "title": "Fintech & Payments",
+                    "description": "From digital banking to trading platforms, we create secure, compliant fintech solutions that scale globally with seamless UX."
+                },
+                "ai": {
+                    "title": "AI & Automation",
+                    "description": "We implement AI-powered chatbots, predictive analytics, and automation systems that cut manual work and drive new revenue."
+                },
+                "data": {
+                    "title": "Data & Analytics",
+                    "description": "We turn raw data into actionable insight with BI dashboards, data warehouses, and real-time analytics built for smarter decisions."
+                },
+                "mobile": {
+                    "title": "Mobile App Development",
+                    "description": "We build high-performance iOS, Android, and cross-platform apps with seamless UX — keeping your brand connected anytime, anywhere."
+                }
+            }
+        },
+        "outsource": {
+            "eyebrow": "Why outsource with us",
+            "headline": "Outsource engineering, accelerate growth",
+            "description": "Achieve cost efficiency and expert accuracy. Scale with agile adaptability and concentrate on your core strengths.",
+            "pillars": {
+                "collaboration": {
+                    "title": "Transparent Collaboration",
+                    "description": "As your outsourced development partner, we integrate seamlessly with your in-house teams through open communication, shared roadmaps, and full visibility into every stage of our workflow."
+                },
+                "legal": {
+                    "title": "Legal Protection",
+                    "description": "Our developers build applications for clients only — you retain 100% of the intellectual property rights to your software. We also sign NDAs and non-competition agreements for full legal protection."
+                },
+                "cost": {
+                    "title": "Cost-Effective Development",
+                    "description": "Work without sacrificing code quality. Codevider is headquartered in Tirana, Albania — a well-known hub for top-tier web app developers at budget-friendly rates."
+                }
+            }
+        },
+        "global": {
+            "eyebrow": "Global partnerships",
+            "headline": "Building bridges across borders",
+            "description": "We enable seamless collaboration on projects worldwide — empowering startups, enterprises, and innovators to grow together.",
+            "tirana": "Tirana",
+            "germany": "Germany",
+            "usa": "United States",
+            "uk": "United Kingdom"
+        },
+        "why_choose": {
+            "eyebrow": "Why clients choose us",
+            "headline": "A partnership built on three pillars",
+            "description": "Efficiency, flexibility, and deep expertise — the foundation of every engagement.",
+            "value_badge": "Our value proposition",
+            "value_flow": "Efficiency → Flexibility → Expertise",
+            "value_description": "We deliver more than code — a strategic partnership designed for growth, where you stay in control at every step.",
+            "flex_value": "100%",
+            "flex_title": "Flexibility & control",
+            "flex_description": "Manage and stay in control of your own project at all times — your roadmap, your priorities.",
+            "years_value": "6+",
+            "years_title": "Years of experience",
+            "years_description": "Benefit from the innovative viewpoints our team brings.",
+            "flags": {
+                "usa": "🇺🇸 USA",
+                "germany": "🇩🇪 Germany",
+                "london": "🇬🇧 London",
+                "europe": "🇪🇺 Europe"
+            },
+            "cards": {
+                "savings": {
+                    "pin": "Avg. savings",
+                    "title": "Significant cost & time savings",
+                    "description": "Bypass expensive hiring and training. Our streamlined process gets you to market faster — saving crucial time and resources."
+                },
+                "control": {
+                    "pin": "Control",
+                    "title": "Total flexibility & control",
+                    "description": "Scale your team on demand and stay in control across multiple projects — collaborating through Slack, Jira, GitHub, and your tools."
+                },
+                "expertise": {
+                    "pin": "Perspective",
+                    "title": "Creative expertise on demand",
+                    "description": "Inject fresh creativity. Our highly-motivated professionals bring new perspectives and innovative solutions to the table."
+                }
+            }
+        },
+        "faq": {
+            "eyebrow": "FAQ",
+            "headline": "Frequently asked questions",
+            "items": {
+                "projects": {
+                    "question": "What types of software projects do you take on?",
+                    "answer": "From greenfield web and mobile apps to enterprise platforms, cloud migrations, and AI integrations — we handle full-lifecycle development for startups, SMEs, and enterprises across commercial-grade, mid-to-large-scale projects."
+                },
+                "technologies": {
+                    "question": "Which technologies and frameworks do you specialize in?",
+                    "answer": "Our core stack includes React, Next.js, Angular, Vue, and React Native on the frontend; Node.js, Python, Django, Laravel, and PHP on the backend; plus PostgreSQL, MySQL, MongoDB, and AWS for data and cloud infrastructure."
+                },
+                "estimates": {
+                    "question": "How do you estimate project timelines and budgets?",
+                    "answer": "We begin with a discovery phase to scope your requirements, then provide a transparent estimate with milestones. Engagements run hourly or on a dedicated monthly basis, so you always know what you're paying for."
+                },
+                "ownership": {
+                    "question": "Will I own the source code and intellectual property?",
+                    "answer": "Yes — 100% of the time. Our developers build for clients only, and you retain full IP rights to your software. We also sign NDAs and non-competition agreements for complete legal protection."
+                },
+                "communication": {
+                    "question": "How will we communicate during the project?",
+                    "answer": "You'll have daily standups with your selected developers and weekly progress reports from your project manager. We collaborate through your preferred tools — Slack, Jira, GitHub, and more."
+                },
+                "quality": {
+                    "question": "What is your quality assurance process?",
+                    "answer": "Quality is built in, not bolted on. Every pod includes QA, with automated testing, code review, and a dedicated development server where you can test your project before it ships to production."
+                },
+                "support": {
+                    "question": "Do you provide post-launch support and maintenance?",
+                    "answer": "Absolutely. After deploying to your servers, we offer ongoing support, maintenance, and iterative improvements to keep your product secure, performant, and evolving with your business."
+                },
+                "legacy": {
+                    "question": "Can you work with an existing or legacy codebase?",
+                    "answer": "Yes. We specialize in modernizing legacy systems — reducing technical debt, improving performance, and integrating with your existing architecture without disrupting your operations."
+                }
+            }
+        },
+        "contact": {
+            "eyebrow": "Let's connect",
+            "headline": "Ready to build your next big idea?",
+            "description": "Whether you have a specific project in mind or just want to explore possibilities, our team is here to help. Fill out the form, or reach out to us directly.",
+            "email_title": "Email us directly",
+            "phone_title": "Call us now",
+            "address_title": "Visit us",
+            "address_value": "Barrikada Street, Tirana, Albania 1001",
+            "form_name": "Full name",
+            "form_name_placeholder": "Jane Doe",
+            "form_email": "Email address",
+            "form_email_placeholder": "jane@company.com",
+            "form_company": "Company",
+            "form_optional": "optional",
+            "form_company_placeholder": "Acme Inc.",
+            "form_message": "Tell us about your project",
+            "form_message_placeholder": "What are you building? Timeline, scope, tech stack…",
+            "form_submit": "Send your message",
+            "form_note": "We typically reply within one business day.",
+            "success_title": "Message sent!",
+            "success_message": "Thanks for reaching out — we'll get back to you within one business day."
+        },
+        "dashboard": {
+            "window_url": "app.codevider.io/analytics",
+            "live": "Live",
+            "performance": "Performance",
+            "performance_delta": "+18.2% vs last month",
+            "growth": "Growth",
+            "growth_delta": "+842 new users",
+            "system_health": "System health",
+            "system_health_delta": "All systems operational",
+            "leads": "Leads",
+            "leads_delta": "+12% conversion",
+            "revenue_overview": "Revenue overview",
+            "revenue_period": "Last 12 weeks",
+            "revenue_chart_label": "Weekly revenue trend over 12 weeks",
+            "week_1": "W1",
+            "week_6": "W6",
+            "week_12": "W12",
+            "transactions": "Recent transactions",
+            "tx_1_title": "Stripe payout",
+            "tx_1_meta": "Today · 09:42",
+            "tx_1_amount": "+$12,400",
+            "tx_2_title": "Pro subscription",
+            "tx_2_meta": "Today · 08:15",
+            "tx_2_amount": "+$299",
+            "tx_3_title": "Vendor withdrawal",
+            "tx_3_meta": "Yesterday · 16:30",
+            "tx_3_amount": "-$4,200",
+            "toast_title": "Deploy successful",
+            "toast_message": "v2.4.1 shipped to production · 2m ago"
+        }
+    },
+    "footer": {
+        "description": "Your strategic software development partner — building reliable web, mobile, and cloud products that scale.",
+        "company": "Company",
+        "about": "About Us",
+        "services": "Services",
+        "careers": "Careers",
+        "address_heading": "Address",
+        "address_line_1": "Codevider",
+        "address_line_2": "Barrikada Street",
+        "address_line_3": "Tirana, Albania 1001",
+        "contact_heading": "Contact",
+        "copyright": "© 2026 Codevider. All rights reserved. — Stay updated on our latest developments and opportunities."
+    },
+    "about": {
+        "about_us": "About us",
+        "our_mission": "Our mission",
+        "our_values": "Our values",
+        "our_team": "Our team",
+        "our_story": "Our story"
+    },
+    "navbar": {
+        "home": "Home",
+        "career": "Career",
+        "about": "About",
+        "services": "Services",
+        "book_a_call": "Book a call",
+        "select_language": "Select language",
+        "language_options": "Language options",
+        "switch_to_light_mode": "Switch to light mode",
+        "switch_to_dark_mode": "Switch to dark mode",
+        "open_menu": "Open menu",
+        "close_menu": "Close menu",
+        "theme": "Theme"
+    }
+}
