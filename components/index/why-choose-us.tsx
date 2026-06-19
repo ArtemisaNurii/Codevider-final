@@ -1,122 +1,111 @@
-'use client'
+"use client";
 
-import { Clock, Lightbulb, SlidersHorizontal } from 'lucide-react'
-import { motion, useInView, useReducedMotion } from 'motion/react'
-import { useRef } from 'react'
-import { useTranslations } from 'next-intl'
-import SectionHead from './section-head'
+import { Clock, Lightbulb, Percent, SlidersHorizontal } from "lucide-react";
+import { motion, useInView, useReducedMotion } from "motion/react";
+import { useRef } from "react";
+import { useTranslations } from "next-intl";
+import SectionHead from "./section-head";
 
-const WHY_CARDS = [
-  { id: 'savings', icon: Clock },
-  { id: 'control', icon: SlidersHorizontal },
-  { id: 'expertise', icon: Lightbulb },
-] as const
+const BOTTOM_CARDS = [
+	{ id: "savings", icon: Clock },
+	{ id: "flex", icon: Percent, flexKeys: true },
+	{ id: "control", icon: SlidersHorizontal },
+	{ id: "expertise", icon: Lightbulb },
+] as const;
+
+const revealEase = [0.22, 1, 0.36, 1] as const;
 
 export default function WhyChooseUs() {
-  const t = useTranslations('home.why_choose')
-  const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-10% 0px' })
-  const shouldReduceMotion = useReducedMotion()
+	const t = useTranslations("home.why_choose");
+	const ref = useRef<HTMLElement>(null);
+	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+	const shouldReduceMotion = useReducedMotion();
 
-  return (
-    <section ref={ref} className="home-section">
-      <div className="home-wrap">
-        <SectionHead
-          eyebrow={t('eyebrow')}
-          headline={t('headline')}
-          description={t('description')}
-          centered
-        />
+	const cardTransition = (delay: number) =>
+		shouldReduceMotion
+			? { duration: 0 }
+			: { duration: 0.5, ease: revealEase, delay };
 
-        <div className="home-section-lead grid gap-5 lg:grid-cols-[1.2fr_0.9fr_0.9fr]">
-          <motion.article
-            className="home-vp-card home-vp-card--tint home-card-body"
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-            transition={{ type: 'spring', duration: 0.45, bounce: 0 }}
-          >
-            <span className="inline-block rounded-full bg-[var(--text-h)] px-3.5 py-1.5 text-[13px] font-semibold text-[var(--bg)]">
-              {t('value_badge')}
-            </span>
-            <p className="text-[17px] font-semibold text-[#3a53c9]">
-              {t('value_flow')}
-            </p>
-            <p className="text-[15px] leading-relaxed text-[var(--text-h)]/80">
-              {t('value_description')}
-            </p>
-          </motion.article>
+	const motionProps = (delay: number) => ({
+		initial: shouldReduceMotion ? false : { y: 18 },
+		animate: inView || shouldReduceMotion ? { y: 0 } : { y: 18 },
+		transition: cardTransition(delay),
+	});
 
-          <motion.article
-            className="home-vp-card home-card-body"
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-            transition={{ type: 'spring', duration: 0.45, bounce: 0, delay: 0.08 }}
-          >
-            <p className="font-[family-name:var(--mono)] text-[44px] font-semibold tracking-[-0.03em] text-[var(--text-h)]">
-              {t('flex_value')}
-            </p>
-            <p className="font-semibold text-[var(--text-h)]">{t('flex_title')}</p>
-            <p className="text-sm leading-relaxed text-[var(--text)]">
-              {t('flex_description')}
-            </p>
-          </motion.article>
+	return (
+		<section ref={ref} className="home-section">
+			<div className="home-wrap">
+				<SectionHead
+					eyebrow={t("eyebrow")}
+					headline={t("headline")}
+					description={t("description")}
+					centered
+				/>
 
-          <motion.article
-            className="home-vp-card home-vp-card--dark home-card-body"
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-            transition={{ type: 'spring', duration: 0.45, bounce: 0, delay: 0.16 }}
-          >
-            <p className="font-[family-name:var(--mono)] text-[44px] font-semibold tracking-[-0.03em] text-white">
-              {t('years_value')}
-            </p>
-            <p className="font-semibold text-white">{t('years_title')}</p>
-            <p className="text-sm leading-relaxed text-blue-100/70">
-              {t('years_description')}
-            </p>
-            <div className="flex flex-wrap gap-2 pt-1">
-              {(['usa', 'germany', 'london', 'europe'] as const).map((flag) => (
-                <span
-                  key={flag}
-                  className="rounded-full border border-white/10 bg-white/[0.08] px-2.5 py-1 text-xs text-blue-100/70"
-                >
-                  {t(`flags.${flag}`)}
-                </span>
-              ))}
-            </div>
-          </motion.article>
-        </div>
+				<div className="home-section-lead grid items-stretch gap-5 lg:grid-cols-4">
+					<motion.article
+						{...motionProps(0)}
+						className="home-vp-card home-vp-card--tint home-card-body lg:col-span-3"
+					>
+						<span className="inline-block w-fit rounded-full bg-[var(--text-h)] px-3.5 py-1.5 text-[13px] font-semibold text-[var(--bg)]">
+							{t("value_badge")}
+						</span>
+						<p className="text-balance text-[17px] font-semibold text-[var(--dash-brand)]">
+							{t("value_flow")}
+						</p>
+						<p className="text-pretty text-[15px] leading-relaxed text-[var(--text-h)]/80">
+							{t("value_description")}
+						</p>
+					</motion.article>
 
-        <div className="mt-6 grid gap-5 lg:grid-cols-3">
-          {WHY_CARDS.map(({ id, icon: Icon }, index) => (
-            <motion.article
-              key={id}
-              className="home-ecard home-card-body"
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{
-                type: 'spring',
-                duration: 0.45,
-                bounce: 0,
-                delay: 0.2 + index * 0.08,
-              }}
-            >
-              <div className="float-right grid size-12 place-items-center rounded-[13px] bg-[#3a53c9]/10 text-[#3a53c9]">
-                <Icon className="size-6" aria-hidden />
-              </div>
-              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[#3a53c9]">
-                {t(`cards.${id}.pin`)}
-              </p>
-              <h3 className="text-xl font-semibold tracking-[-0.01em] text-[var(--text-h)]">
-                {t(`cards.${id}.title`)}
-              </h3>
-              <p className="text-[15px] leading-relaxed text-[var(--text)]">
-                {t(`cards.${id}.description`)}
-              </p>
-            </motion.article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
+					<motion.article
+						{...motionProps(0.08)}
+						className="home-vp-card home-vp-card--dark home-card-body lg:col-span-1"
+					>
+						<p className="font-[family-name:var(--mono)] text-[clamp(2rem,4vw,2.75rem)] font-semibold tabular-nums tracking-[-0.03em] text-white">
+							{`${new Date().getFullYear() - 2019}+`}
+						</p>
+						<p className="font-semibold text-balance text-white">
+							{t("years_title")}
+						</p>
+						<p className="text-pretty text-sm leading-relaxed text-blue-100/70">
+							{t("years_description")}
+						</p>
+					</motion.article>
+				</div>
+
+				<div className="mt-6 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4">
+					{BOTTOM_CARDS.map(({ id, icon: Icon, ...rest }, index) => {
+						const flexKeys = "flexKeys" in rest;
+						const pin = flexKeys ? t("flex_value") : t(`cards.${id}.pin`);
+						const title = flexKeys ? t("flex_title") : t(`cards.${id}.title`);
+						const description = flexKeys
+							? t("flex_description")
+							: t(`cards.${id}.description`);
+
+						return (
+							<motion.article
+								key={id}
+								{...motionProps(0.16 + index * 0.08)}
+								className="home-ecard home-card-body"
+							>
+								<div className="home-ecard-icon">
+									<Icon className="size-[22px]" aria-hidden />
+								</div>
+								<p className="text-xs font-semibold tabular-nums text-[var(--dash-brand)]">
+									{pin}
+								</p>
+								<h3 className="text-xl font-semibold text-balance tracking-[-0.01em] text-[var(--text-h)]">
+									{title}
+								</h3>
+								<p className="text-pretty text-[15px] leading-relaxed text-[var(--text)]">
+									{description}
+								</p>
+							</motion.article>
+						);
+					})}
+				</div>
+			</div>
+		</section>
+	);
 }

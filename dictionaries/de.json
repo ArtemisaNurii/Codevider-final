@@ -1,63 +1,716 @@
 {
-    "home": {
-      "your_strategic_partner_in": "Ihr strategischer Partner in",
-      "we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Wir entwerfen, bauen und skalieren zuverlässige Web-, Mobile- und Cloud-Software – eingebettet in Ihr Team und ohne Overhead geliefert.",
-      "start_your_project": "Starten Sie Ihr Projekt",
-      "explore_services": "Entdecken Sie unsere Dienstleistungen",
-      "years_delivering": "Jahre des Lieferns",
-      "global_projects": "Globale Projekte",
-      "engineers": "Ingenieure",
-      "dashboard": {
-        "window_url": "app.codevider.io/analytics",
-        "live": "Live",
-        "performance": "Leistung",
-        "performance_delta": "+18,2 % vs. letzten Monat",
-        "growth": "Wachstum",
-        "growth_delta": "+842 neue Nutzer",
-        "system_health": "Systemstatus",
-        "system_health_delta": "Alle Systeme operationell",
-        "leads": "Leads",
-        "leads_delta": "+12 % Conversion",
-        "revenue_overview": "Umsatzübersicht",
-        "revenue_period": "Letzte 12 Wochen",
-        "revenue_chart_label": "Wöchentlicher Umsatztrend über 12 Wochen",
-        "week_1": "W1",
-        "week_6": "W6",
-        "week_12": "W12",
-        "transactions": "Letzte Transaktionen",
-        "tx_1_title": "Stripe-Auszahlung",
-        "tx_1_meta": "Heute · 09:42",
-        "tx_1_amount": "+12.400 $",
-        "tx_2_title": "Pro-Abo",
-        "tx_2_meta": "Heute · 08:15",
-        "tx_2_amount": "+299 $",
-        "tx_3_title": "Anbieter-Auszahlung",
-        "tx_3_meta": "Gestern · 16:30",
-        "tx_3_amount": "-4.200 $",
-        "toast_title": "Deploy erfolgreich",
-        "toast_message": "v2.4.1 in Produktion · vor 2 Min."
-      }
-    },
-    "about": {
-      "about_us": "Über uns",
-      "our_mission": "Unsere Mission",
-      "our_values": "Unsere Werte",
-      "our_team": "Unser Team",
-      "our_story": "Unsere Geschichte"
-    },
-    "navbar": {
-      "home": "Startseite",
-      "career": "Karriere",
-      "about": "Über",
-      "services": "Dienstleistungen",
-      "book_a_call": "Termin buchen",
-      "select_language": "Sprache wählen",
-      "language_options": "Sprachoptionen",
-      "switch_to_light_mode": "Zum hellen Modus wechseln",
-      "switch_to_dark_mode": "Zum dunklen Modus wechseln",
-      "open_menu": "Menü öffnen",
-      "close_menu": "Menü schließen",
-      "theme": "Design"
-    }
-  }
-  
+	"home": {
+		"your_strategic_partner_in": "Ihr strategischer Partner für",
+		"we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Wir konzipieren, entwickeln und skalieren zuverlässige Web-, Mobile- und Cloud-Software — direkt in Ihr Team integriert und ohne administrativen Mehraufwand geliefert.",
+		"start_your_project": "Projekt starten",
+		"explore_services": "Dienstleistungen erkunden",
+		"years_delivering": "Jahre erfolgreicher Projektabwicklung",
+		"global_projects": "Globale Projekte",
+		"engineers": "Ingenieure",
+		"who_we_are_eyebrow": "Wer wir sind",
+		"who_we_are_headline": "Ideen in vertrauenswürdige digitale Lösungen verwandeln",
+		"who_we_are_description": "Von Web- und Mobile-Apps bis hin zu Cloud-Plattformen und Unternehmenssystemen entwickeln wir zuverlässige, exakt auf Ihre Geschäftsanforderungen zugeschnittene Software. Unsere Teams kombinieren moderne Technologien, skalierbare Architekturen und intuitives Design, um sichere, hochperformante Lösungen bereitzustellen, die Unternehmen bei Innovation und Wachstum unterstützen.",
+		"read_more_about_us": "Mehr über uns erfahren",
+		"stat_global_partnerships_value": "30+",
+		"stat_global_partnerships": "Globale Partnerschaften in ganz Europa",
+		"stat_delivery_velocity_value": "60%",
+		"stat_delivery_velocity": "Durchschnittliche Steigerung der Auslieferungsgeschwindigkeit",
+		"stat_elite_engineers_value": "25+",
+		"stat_elite_engineers": "Elite-Entwickler mit tiefgreifender Full-Stack-Expertise — bereit, innerhalb von zwei Wochen in Ihr Team integriert zu werden.",
+		"core_services": {
+			"eyebrow": "Unsere Kerndienstleistungen",
+			"headline": "Alles, was Sie brauchen, um Software produktiv zu bringen, zu skalieren und die Nase vorn zu haben",
+			"description": "Wir unterstützen Unternehmen und Startups dabei, Software schneller auszuliefern – mit skalierbaren Teams, modernen Tech-Stacks und verlässlicher Umsetzung, ganz ohne administrativen Mehraufwand. Vier Wege unserer Zusammenarbeit:"
+		},
+		"features": {
+			"ai": {
+				"badge": "01 · KI-Integration",
+				"headline": "Bringen Sie KI-Funktionen auf den Markt, die Ihre Nutzer wirklich spüren",
+				"description": "Von maßgeschneiderten, LLM-basierten Anwendungen und intelligenten Chatbots bis hin zur Workflow-Automatisierung und direkt nutzbaren Erkenntnissen — nahtlos in Ihr bestehendes Ökosystem integriert.",
+				"bullet_1": "Maßgeschneiderte LLM-Apps & Assistenten, trainiert mit Ihren Daten",
+				"bullet_2": "Intelligente Chatbots & Support-Automatisierung",
+				"bullet_3": "Daten-Pipelines für tiefere Einblicke direkt in Ihren Workflows",
+				"link": "KI-Dienstleistungen erkunden",
+				"demo": {
+					"title": "KI-Assistent",
+					"status": "Datengesteuert und von Grund auf sicher konzipiert.",
+					"chip_tickets_label": "Tickets zusammenfassen",
+					"chip_tickets_q": "Fasse die heutigen Support-Tickets zusammen",
+					"chip_tickets_a": "Hier ist eine kurze Übersicht der heutigen Support-Aktivitäten:\n\n• Ticket #1023 – Login-Problem (gelöst in 12 Min.)\n• Ticket #1024 – Feature-Wunsch: PDF-Export (wartet auf Prüfung)\n• Ticket #1025 – Bug: Datensynchronisations-Verzögerung (behoben, 3 Min.)\n\nGesamtzahl bearbeiteter Tickets: 3 – 2 gelöst, 1 offen.",
+					"chip_leads_label": "Leads klassifizieren",
+					"chip_leads_q": "Klassifiziere neue Leads nach Kaufabsicht",
+					"chip_leads_a": "Übersicht der Lead-Kaufabsichten (letzte 24 Std.):\n\n• Hohe Absicht – 4 Leads (Budget > 5.000 $, Demo angefordert)\n• Mittlere Absicht – 7 Leads (Produktvergleich, Fragen zu Preisen)\n• Geringe Absicht – 3 Leads (Allgemeine Infos, Newsletter-Anmeldungen)\n\nMaßnahme: Leads mit hoher Kaufabsicht für die Kontaktaufnahme priorisieren.",
+					"chip_schedule_label": "Zeitplan erstellen",
+					"chip_schedule_q": "Füge einen neuen Termin für morgen hinzu",
+					"chip_schedule_a": "Termin erstellt für Kunde: BrightWave Solutions – morgen, 09:00 – 10:00 Uhr (UTC+2).\n\n Agenda: 09:00 Uhr – Intro & Ziele, 09:30 Uhr – Demo, 09:55 Uhr – Q&A, 10:00 Uhr – Abschluss.\n\n Bestätigungs-E-Mail wurde an den Kunden und das Team gesendet."
+				}
+			},
+			"engineering": {
+				"badge": "02 · Produktentwicklung",
+				"headline": "Saubere Architektur, verlässlich getaktet geliefert",
+				"description": "Wir konzipieren und entwickeln skalierbare Webanwendungen und intuitive Produkte mit sauberer Architektur und agilen Release-Zyklen — für eine schnellere Marktreife und langfristige Wartbarkeit.",
+				"bullet_1": "Moderne, typisierte und umfassend getestete Codebasen",
+				"bullet_2": "Continuous Delivery vom ersten Tag an",
+				"bullet_3": "Wartbare Systeme, die flexibel mit Ihnen wachsen",
+				"link": "Entwicklung erkunden",
+				"demo": {
+					"tab_orders": "orders.ts",
+					"tab_schema": "schema.sql",
+					"tab_deploy": "deploy.yml",
+					"tabs_aria": "Code samples",
+					"code_orders": "export async function createOrder(input: OrderInputDTO) {\n  const order = await db.insert(orders).values({\n    userId: input.userId,\n    total: input.amount,\n    status: ORDERS.pending,\n  })\n\n  await queue.emit('order.created', order.id)\n  return order\n}",
+					"code_schema": "create table orders (\n  id        uuid primary key default gen_random_uuid(),\n  user_id   uuid not null references users(id),\n  total     integer not null check (total >= 0),\n  status    text not null default 'pending',\n  created_at timestamptz default now()\n);",
+					"code_deploy": "name: Deploy\non:\n  push:\n    branches: [main]\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: pnpm install --frozen-lockfile\n      - run: pnpm build && pnpm test --ci\n      - uses: aws-actions/configure-aws-credentials@v4\n      - run: aws codedeploy push --application-name prod-app --s3-location s3://deployments/app.zip --region us-east-1",
+					"status": "Build erfolgreich · 0 Typfehler · produktiv bereitgestellt"
+				}
+			},
+			"pod": {
+				"badge": "03 · Dedizierte Pod-Teams",
+				"headline": "Ein komplettes Team, einsatzbereit in zwei Wochen",
+				"description": "Stellen Sie schnell cross-funktionale Pods zusammen — Frontend, Backend und QA —, die sich nahtlos in Ihre Prozesse integrieren. Skalieren Sie mühelos mit flexiblen, SLA-gestützten Kooperationen, die genau auf Ihre Anforderungen zugeschnitten sind.",
+				"bullet_1": "Cross-funktional ab dem ersten Sprint",
+				"bullet_2": "Daily Standups, wöchentliche Berichte, volle Transparenz",
+				"bullet_3": "Das Pod-Team je nach Bedarf flexibel vergrößern oder verkleinern",
+				"link": "Pod-Teams erkunden",
+				"demo": {
+					"title": "Ihr dediziertes Pod-Team",
+					"subtitle": "Bewege den Mauszeiger über eine Rolle",
+					"center": "Ihr\nProdukt",
+					"role_frontend": "Frontend",
+					"role_frontend_desc": "React, Next.js & geschliffene, barrierefreie UIs.",
+					"role_backend": "Backend",
+					"role_backend_desc": "APIs, Datenmodelle & skalierbare Geschäftslogik.",
+					"role_qa": "QA",
+					"role_qa_desc": "Automatisierte Tests & absolute Release-Sicherheit.",
+					"role_pm": "PM",
+					"role_pm_desc": "Standups, Reporting & ein zentraler Ansprechpartner."
+				}
+			},
+			"devops": {
+				"badge": "04 · Cloud & DevOps",
+				"headline": "Mit absolutem Vertrauen produktiv gehen",
+				"description": "Optimieren Sie Bereitstellungen mit CI/CD-Pipelines, Containerisierung und sicherer Cloud-Infrastruktur auf AWS — für maximale Verfügbarkeit und operative Effizienz.",
+				"bullet_1": "Automatisierte Build-, Test- und Deploy-Pipelines",
+				"bullet_2": "Containerisierte Infrastruktur-as-Code-Setups",
+				"bullet_3": "Hochverfügbarkeit & SLAs mit 99,98 % Uptime",
+				"link": "Cloud & DevOps erkunden",
+				"demo": {
+					"title": "CI/CD-Pipeline",
+					"subtitle": "main → Production",
+					"stage_build": "Build",
+					"stage_test": "Test",
+					"stage_deploy": "Deploy",
+					"idle": "Bereit",
+					"running": "Läuft…",
+					"run": "Pipeline starten",
+					"run_again": "Erneut starten",
+					"status_building": "Erstellung…",
+					"status_test": "Tests laufen…",
+					"status_deploy": "Bereitstellung…",
+					"status_live_label": "Live",
+					"status_live_uptime": "99,98 % Uptime"
+				}
+			}
+		},
+		"empower": {
+			"eyebrow": "Wen wir unterstützen",
+			"headline": "Wir unterstützen Tech-Startups, KMUs & globale Marken",
+			"description": "Von Produktteams in der Frühphase bis hin zur Modernisierung von Altsystemen in Großunternehmen — wir passen das passende Entwicklungsmodell exakt an Ihre Phase, Ihren Tech-Stack und Ihre Wachstumsziele an.",
+			"featured_pin": "Kernkompetenz",
+			"cards": {
+				"startups": {
+					"title": "Series A/B Startups",
+					"description": "Wir unterstützen schnell wachsende Startups bei der Skalierung mit agilen Teams und cloud-nativen Lösungen — von der MVP-Beschleunigung bis zum Ausbau von Kernsystemen."
+				},
+				"enterprise": {
+					"title": "Unternehmens-Modernisierung",
+					"description": "Wir modernisieren veraltete Systeme mit cloud-nativen Lösungen — um technische Schulden abzubauen, die Performance zu steigern und Innovationen freizusetzen."
+				},
+				"crm": {
+					"title": "CRM-zentrierte Unternehmen",
+					"description": "Wir entwerfen maßgeschneiderte CRM- und HubSpot-zentrierte Strukturen, die Daten zentralisieren, Prozesse optimieren und fundierte Entscheidungen ermöglichen."
+				},
+				"custom": {
+					"title": "Individuelle Softwarelösungen",
+					"description": "Standardwerkzeuge passen nicht für jede Anforderung. Wir entwickeln skalierbare, flexible Software, die sich mit Ihrem Unternehmen weiterentwickelt und messbare Ergebnisse liefert."
+				},
+				"fintech": {
+					"title": "Fintech & Zahlungsverkehr",
+					"description": "Von digitalem Banking bis hin zu Handelsplattformen entwickeln wir sichere, regelkonforme Fintech-Lösungen, die weltweit skalieren und eine nahtlose UX bieten."
+				},
+				"ai": {
+					"title": "KI & Automatisierung",
+					"description": "Wir implementieren KI-gestützte Chatbots, prädiktive Analysen und Automatisierungssysteme, die manuelle Arbeit reduzieren und neue Umsatzströme generieren."
+				},
+				"data": {
+					"title": "Daten & Analytik",
+					"description": "Wir verwandeln Rohdaten in handfeste Erkenntnisse mit BI-Dashboards, Data Warehouses und Echtzeit-Analysen, die für kluge Entscheidungen gebaut sind."
+				},
+				"mobile": {
+					"title": "Mobile App-Entwicklung",
+					"description": "Wir entwickeln hochperformante iOS-, Android- und plattformübergreifende Apps mit erstklassiger UX — damit Ihre Marke immer und überall optimal vernetzt bleibt."
+				}
+			}
+		},
+		"outsource": {
+			"eyebrow": "Warum Software-Outsourcing mit uns",
+			"headline": "Entwicklung auslagern, Wachstum beschleunigen",
+			"description": "Erreichen Sie maximale Kosteneffizienz und exakte Präzision. Skalieren Sie mit agiler Anpassungsfähigkeit und konzentrieren Sie sich voll auf Ihre Kernkompetenzen.",
+			"pillars": {
+				"collaboration": {
+					"title": "Transparente Zusammenarbeit",
+					"description": "Als Ihr Outsourcing-Entwicklungspartner integrieren wir uns nahtlos in Ihre Inhouse-Teams – durch offene Kommunikation, gemeinsame Roadmaps und vollständige Transparenz in jeder Phase unseres Workflows."
+				},
+				"legal": {
+					"title": "Rechtlicher Schutz",
+					"description": "Unsere Entwickler arbeiten ausschließlich für unsere Kunden — Sie behalten zu 100 % die geistigen Eigentumsrechte an Ihrer Software. Zudem unterzeichnen wir NDAs und Wettbewerbsverbote für lückenlosen rechtlichen Schutz."
+				},
+				"cost": {
+					"title": "Kosteneffiziente Entwicklung",
+					"description": "Profitieren Sie von hoher Codequalität ohne Kompromisse. Codevider hat seinen Hauptsitz in Tirana, Albanien — einem bekannten Hub für erstklassige Webentwickler zu äußerst budgetfreundlichen Raten."
+				}
+			}
+		},
+		"global": {
+			"eyebrow": "Globale Partnerschaften",
+			"headline": "Grenzenlose Brücken bauen",
+			"description": "Wir ermöglichen eine reibungslose Zusammenarbeit an Projekten weltweit — und befähigen Startups, etablierte Unternehmen und Innovatoren, gemeinsam zu wachsen.",
+			"tirana": "Tirana",
+			"germany": "Deutschland",
+			"usa": "Vereinigte Staaten",
+			"uk": "Vereinigtes Königreich"
+		},
+		"why_choose": {
+			"eyebrow": "Warum Kunden uns wählen",
+			"headline": "Eine Partnerschaft auf drei Säulen",
+			"description": "Effizienz, Flexibilität und tiefes Fachwissen — das Fundament jeder Zusammenarbeit.",
+			"value_badge": "Unser Wertversprechen",
+			"value_flow": "Effizienz → Flexibilität → Expertise",
+			"value_description": "Wir liefern mehr als nur Code — eine strategische Partnerschaft, die auf Wachstum ausgelegt ist und bei der Sie in jedem Schritt die volle Kontrolle behalten.",
+			"flex_value": "100%",
+			"flex_title": "Flexibilität & Kontrolle",
+			"flex_description": "Steuern und behalten Sie jederzeit die Kontrolle über Ihr eigenes Projekt — Ihre Roadmap, Ihre Prioritäten.",
+			"years_title": "Jahre an Erfahrung",
+			"years_description": "Profitieren Sie von den innovativen Denkansätzen und Perspektiven, die unser Team einbringt.",
+			"flags": {
+				"usa": "🇺🇸 USA",
+				"germany": "🇩🇪 Deutschland",
+				"london": "🇬🇧 London",
+				"europe": "🇪🇺 Europa"
+			},
+			"cards": {
+				"savings": {
+					"pin": "Ø Ersparnis",
+					"title": "Erhebliche Kosten- & Zeitersparnis",
+					"description": "Umgehen Sie teure Recruiting- und Schulungsprozesse. Unser optimierter Ablauf bringt Sie schneller an den Markt — und spart wertvolle Ressourcen."
+				},
+				"control": {
+					"pin": "Kontrolle",
+					"title": "Volle Flexibilität & Kontrolle",
+					"description": "Skalieren Sie Ihr Team ganz nach Bedarf und behalten Sie die Übersicht über mehrere Projekte — die Zusammenarbeit erfolgt über Slack, Jira, GitHub und Ihre gewohnten Tools."
+				},
+				"expertise": {
+					"pin": "Perspektive",
+					"title": "Kreative Expertise auf Abruf",
+					"description": "Bringen Sie frische Kreativität in Ihre Projekte. Unsere hochmotivierten Experten steuern neue Perspektiven und innovative Lösungsansätze bei."
+				}
+			}
+		},
+		"faq": {
+			"eyebrow": "FAQ",
+			"headline": "Häufig gestellte Fragen",
+			"items": {
+				"projects": {
+					"question": "Welche Arten von Softwareprojekten übernehmen Sie?",
+					"answer": "Von komplett neuen Web- und Mobile-Apps bis hin zu komplexen Unternehmensplattformen, Cloud-Migrationen und KI-Integrationen — wir übernehmen die gesamte Lifecycle-Entwicklung für Startups, KMUs und Großunternehmen bei kommerziellen, mittleren bis großen Projekten."
+				},
+				"technologies": {
+					"question": "Auf welche Technologien und Frameworks sind Sie spezialisiert?",
+					"answer": "Unser Kern-Tech-Stack umfasst React, Next.js, Angular, Vue und React Native im Frontend; Node.js, Python, Django, Laravel und PHP im Backend; sowie PostgreSQL, MySQL, MongoDB und AWS für Daten- und Cloud-Infrastrukturen."
+				},
+				"estimates": {
+					"question": "Wie schätzen Sie Projektabläufe, Zeitpläne und Budgets ab?",
+					"answer": "Wir starten mit einer Discovery-Phase, um Ihre Anforderungen exakt zu definieren, und erstellen anschließend eine transparente Aufwandsschätzung mit Meilensteinen. Die Abrechnung erfolgt stundenbasiert oder auf dedizierter monatlicher Basis, sodass Sie immer genau wissen, wofür Sie bezahlen."
+				},
+				"ownership": {
+					"question": "Gehören mir der Quellcode und das geistige Eigentum?",
+					"answer": "Ja — zu 100 %. Unsere Entwickler arbeiten ausschließlich für unsere Kunden, und Sie behalten sämtliche IP-Rechte an Ihrer Software. Zudem unterzeichnen wir NDAs und Wettbewerbsverbote für lückenlosen rechtlichen Schutz."
+				},
+				"communication": {
+					"question": "Wie kommunizieren wir während des Projekts?",
+					"answer": "Sie führen tägliche Standups mit Ihren ausgewählten Entwicklern und erhalten wöchentliche Fortschrittsberichte von Ihrem Projektmanager. Wir arbeiten über Ihre bevorzugten Tools wie Slack, Jira, GitHub und mehr."
+				},
+				"quality": {
+					"question": "Wie sieht Ihr Qualitätssicherungsprozess aus?",
+					"answer": "Qualität ist von Anfang an fest integriert. Jedes Pod-Team beinhaltet integrierte QA-Experten, automatisierte Tests, Code-Reviews und einen dedizierten Entwicklungsserver, auf dem Sie Ihr Projekt prüfen können, bevor es produktiv geht."
+				},
+				"support": {
+					"question": "Bieten Sie auch Support und Wartung nach dem Live-Gang an?",
+					"answer": "Absolut. Nach der Bereitstellung auf Ihren Servern bieten wir fortlaufenden Support, Wartung und iterative Verbesserungen an, um Ihr Produkt sicher, performant und technologisch auf dem neuesten Stand zu halten."
+				},
+				"legacy": {
+					"question": "Können Sie auch mit bestehendem oder veraltetem Code arbeiten?",
+					"answer": "Ja. Wir sind darauf spezialisiert, Altsysteme (Legacy Code) zu modernisieren — um technische Schulden abzubauen, die Performance zu optimieren und neue Features nahtlos zu integrieren, ohne Ihren laufenden Betrieb zu stören."
+				}
+			}
+		},
+		"contact": {
+			"eyebrow": "Kontakt",
+			"headline": "Bereit, Ihre nächste große Idee umzusetzen?",
+			"description": "Egal, ob Sie bereits ein konkretes Projekt planen oder einfach nur Möglichkeiten ausloten möchten — unser Team ist für Sie da. Füllen Sie das Formular aus oder kontaktieren Sie uns direkt.",
+			"email_title": "Direkt per E-Mail kontaktieren",
+			"phone_title": "Jetzt anrufen",
+			"address_title": "Uns besuchen",
+			"address_value": "Barrikada-Straße, Tirana, Albanien 1001",
+			"form_name": "Vollständiger Name",
+			"form_name_placeholder": "Max Mustermann",
+			"form_email": "E-Mail-Adresse",
+			"form_email_placeholder": "max@unternehmen.de",
+			"form_company": "Unternehmen",
+			"form_optional": "optional",
+			"form_company_placeholder": "Acme GmbH",
+			"form_message": "Erzählen Sie uns von Ihrem Projekt",
+			"form_message_placeholder": "Was möchten Sie entwickeln? Zeitplan, Umfang, Tech-Stack…",
+			"form_title": "Schreiben Sie uns eine Nachricht",
+			"form_subtitle": "Teilen Sie uns ein paar Details zu Ihrem Vorhaben mit und wir melden uns mit den nächsten Schritten bei Ihnen.",
+			"form_required": "Pflichtfelder",
+			"form_submit": "Nachricht senden",
+			"form_note": "Wir antworten in der Regel innerhalb eines Werktages.",
+			"form_note_privacy": "Ihre Daten bleiben absolut vertraulich — wir geben sie niemals an Dritte weiter.",
+			"success_title": "Nachricht gesendet!",
+			"success_message": "Vielen Dank für Ihre Kontaktaufnahme — wir melden uns innerhalb eines Werktages bei Ihnen."
+		},
+		"dashboard": {
+			"window_url": "app.codevider.io/analytics",
+			"live": "Live",
+			"performance": "Performance",
+			"performance_delta": "+18,2 % vs. Vormonat",
+			"growth": "Wachstum",
+			"growth_delta": "+842 neue Nutzer",
+			"system_health": "Systemstatus",
+			"system_health_delta": "Alle Systeme laufen normal",
+			"leads": "Leads",
+			"leads_delta": "+12 % Conversion",
+			"revenue_overview": "Umsatzübersicht",
+			"revenue_period": "Letzte 12 Wochen",
+			"revenue_chart_label": "Wöchentlicher Umsatztrend über 12 Wochen",
+			"week_1": "W1",
+			"week_6": "W6",
+			"week_12": "W12",
+			"transactions": "Letzte Transaktionen",
+			"tx_1_title": "Stripe-Auszahlung",
+			"tx_1_meta": "Heute · 09:42",
+			"tx_1_amount": "+12.400 $",
+			"tx_2_title": "Pro-Abonnement",
+			"tx_2_meta": "Heute · 08:15",
+			"tx_2_amount": "+299 $",
+			"tx_3_title": "Dienstleister-Abbuchung",
+			"tx_3_meta": "Gestern · 16:30",
+			"tx_3_amount": "-4.200 $",
+			"toast_title": "Deployment erfolgreich",
+			"toast_message": "v2.4.1 produktiv bereitgestellt · vor 2 Min."
+		}
+	},
+	"footer": {
+		"description": "Ihr strategischer Software-Entwicklungspartner — wir bauen zuverlässige Web-, Mobile- und Cloud-Produkte, die nachhaltig skalieren.",
+		"company": "Unternehmen",
+		"about": "Über uns",
+		"services": "Dienstleistungen",
+		"careers": "Karriere",
+		"address_heading": "Adresse",
+		"address_line_1": "Codevider",
+		"address_line_2": "Barrikada-Straße",
+		"address_line_3": "Tirana, Albanien 1001",
+		"contact_heading": "Kontakt",
+		"copyright": "© 2026 Codevider. Alle Rechte vorbehalten. — Bleiben Sie über unsere neuesten Entwicklungen und Chancen informiert."
+	},
+	"about": {
+		"about_us": "Über uns",
+		"our_mission": "Unsere Mission",
+		"our_values": "Unsere Werte",
+		"our_team": "Unser Team",
+		"our_story": "Unsere Geschichte",
+		"meta_title": "Über uns — Codevider",
+		"meta_description": "Gegründet im Jahr 2019 in Tirana, Albanien, entwickelt Codevider Software, die geschäftlichen Erfolg bringt — Strategie, Design und Engineering in perfekter Harmonie.",
+		"hero": {
+			"eyebrow": "Über uns",
+			"headline": "Software entwickeln, die geschäftlichen Erfolg bringt",
+			"lead": "Strategie, Design und Engineering arbeiten Hand in Hand, um Ihre Produkt-Roadmap optimal voranzutreiben.",
+			"meta_years": "6+ Jahre erfolgreiche Software-Auslieferung",
+			"meta_projects": "45+ globale Enterprise-Projekte",
+			"meta_location": "Tirana, Albanien · Europa"
+		},
+		"who_we_are": {
+			"eyebrow": "Wer wir sind",
+			"headline": "Auf Partnerschaft ausgelegt, auf Skalierung ausgerichtet",
+			"paragraph_1": "Codevider wurde 2019 in Tirana, Albanien, gegründet und liefert hochperformante, kosteneffiziente Softwareentwicklungslösungen für Startups, KMUs und Großunternehmen in ganz Europa und darüber hinaus. Wir sind spezialisiert auf Web- und Mobile-Entwicklung, cloud-native Mikroservices sowie KI-gestützte Integrationen — und unterstützen Sie dabei, Ihre Markteinführung zu beschleunigen und Entwicklungskosten um bis zu 60 % zu senken.",
+			"paragraph_2": "Unser Team von mehr als 25 Entwicklern beherrscht die modernsten Tech-Stacks unserer Zeit. Wir integrieren uns direkt in Ihre Arbeitsabläufe mittels agiler, sprintbasierter Methoden, wodurch Sie in jeder Phase bestens informiert bleiben und die volle Kontrolle behalten. Mit klarem Fokus auf Qualität, Agilität und langfristige Partnerschaften verwandeln wir Ihre Visionen in skalierbare, zukunftssichere digitale Produkte.",
+			"cta": "Lassen Sie uns gemeinsam bauen"
+		},
+		"culture": {
+			"eyebrow": "Unsere Unternehmenskultur",
+			"headline": "Wie wir bei Codevider entwickeln",
+			"description": "Das Herzstück unseres Unternehmens ist eine Kultur, die auf Zusammenarbeit, Kreativität und Eigenverantwortung basiert. Wir schätzen offene Kommunikation, feiern vielfältige Perspektiven und befähigen jedes Teammitglied, Verantwortung für die eigene Arbeit zu übernehmen.",
+			"principles": {
+				"vision": {
+					"title": "Klare Vision",
+					"description": "Wir stimmen uns detailliert auf Ziele ab, bevor wir die erste Zeile Code schreiben — damit jeder Sprint Ihr Produkt hin zu einem messbaren Erfolg führt."
+				},
+				"code": {
+					"title": "Sauberer Code",
+					"description": "Wartbare, umfassend getestete Architekturen sind für uns nicht verhandelbar. Ihre Codebasis bleibt ein echter Vermögenswert, niemals eine Last."
+				},
+				"team": {
+					"title": "Unterstützendes Team",
+					"description": "Wachstum und kontinuierliches Lernen prägen unseren Alltag. Wir sind davon überzeugt, dass großartige Produkte von Menschen geschaffen werden, die sich gegenseitig den Rücken stärken."
+				}
+			}
+		},
+		"life": {
+			"eyebrow": "Das Leben bei Codevider",
+			"headline": "Unser Team im Studio",
+			"description": "Von hochfokussierter Tiefenarbeit bis hin zu gemeinsamen Teammomenten — so gestalten wir tagtäglich unsere Zusammenarbeit.",
+			"office_alt_1": "Private Glaskabinen und offene Arbeitsbereiche im Codevider-Büro",
+			"office_alt_2": "Farbenfroher Loungebereich mit Sitzsäcken im Codevider-Büro",
+			"photo_alt_1": "Zwei lächelnde Codevider-Teammitglieder im Büro",
+			"photo_alt_2": "Teammitglied genießt eine Pause mit Kollegen im Büro"
+		},
+		"team": {
+			"eyebrow": "Hinter dem Code",
+			"headline": "Lernen Sie das Team kennen",
+			"description": "Die Gründer und Ingenieure, die ambitionierte Ideen in produktive, skalierbare Produkte verwandeln.",
+			"scroll_left": "Nach links scrollen",
+			"scroll_right": "Nach rechts scrollen"
+		},
+		"join": {
+			"eyebrow": "Karriere",
+			"headline": "Werden Sie Teil unserer Reise",
+			"description": "Wir sind immer auf der Suche nach leidenschaftlichen, talentierten Köpfen, die die Zukunft der Softwareentwicklung mitgestalten wollen. Erkunden Sie offene Stellen und werden Sie Teil unseres wachsenden Teams.",
+			"cta": "Offene Stellen ansehen"
+		}
+	},
+	"navbar": {
+		"home": "Startseite",
+		"career": "Karriere",
+		"about": "Über uns",
+		"services": "Dienstleistungen",
+		"book_a_call": "Gespräch buchen",
+		"select_language": "Sprache wählen",
+		"language_options": "Sprachoptionen",
+		"switch_to_light_mode": "In den Hellen Modus wechseln",
+		"switch_to_dark_mode": "In den Dunklen Modus wechseln",
+		"open_menu": "Menü öffnen",
+		"close_menu": "Menü schließen",
+		"theme": "Design"
+	},
+	"career": {
+		"meta_title": "Karriere — Codevider",
+		"meta_description": "Kommen Sie zu Codevider und bauen Sie an der Zukunft der Softwareentwicklung mit. Lernen Sie unseren Bewerbungsprozess kennen und vernetzen Sie sich mit unserem Team in Tirana, Albanien.",
+		"hero": {
+			"eyebrow": "Karriere",
+			"headline": "Werden Sie Teil unseres großartigen Teams",
+			"lead": "Begleiten Sie uns und gestalten Sie die Zukunft der Softwareentwicklung. Wir suchen kontinuierlich nach talentierten Talenten, die mit unserem Team wachsen möchten."
+		},
+		"openings": {
+			"eyebrow": "Offene Stellen",
+			"headline": "Aktuell keine offenen Positionen",
+			"description": "Wir haben im Moment zwar keine aktiven Ausschreibungen, sind aber immer daran interessiert, talentierte Fachkräfte kennenzulernen. Senden Sie uns gerne Ihren Lebenslauf für zukünftige Gelegenheiten zu.",
+			"cta": "Mit uns vernetzen",
+			"email_subject": "Zukünftige Karrierechancen bei Codevider"
+		},
+		"why_join": {
+			"eyebrow": "Warum Codevider",
+			"headline": "Wo aus guten Entwicklern exzellente werden",
+			"values": {
+				"ownership": {
+					"title": "Echte Eigenverantwortung",
+					"description": "Jedes Teammitglied übernimmt die volle Verantwortung für seine Arbeit und bringt Features auf den Markt, die echte Nutzer in ganz Europa und darüber hinaus erreichen."
+				},
+				"growth": {
+					"title": "Kontinuierliches Wachstum",
+					"description": "Lernen ist ein fester Bestandteil unseres Arbeitsalltags. Wir investieren in Ihre Fähigkeiten mit modernen Stacks, Mentoring und vierteljährlichen Teamevents."
+				},
+				"culture": {
+					"title": "Unterstützende Kultur",
+					"description": "Offene Kommunikation und vielfältige Blickwinkel. Wir unterstützen uns gegenseitig und feiern Erfolge als ein einziges, starkes Team."
+				}
+			}
+		},
+		"hiring": {
+			"eyebrow": "Wie wir rekrutieren",
+			"headline": "Unser Bewerbungsprozess",
+			"description": "Vier klare Schritte — transparent, fair und absolut respektvoll mit Ihrer Zeit gestaltet.",
+			"steps": {
+				"application_review": {
+					"title": "Prüfung der Bewerbung",
+					"description": "Wir prüfen Ihren Lebenslauf und Ihr Portfolio sorgfältig, um zu sehen, wie Ihre Fähigkeiten zu unseren Anforderungen passen. Wir suchen nach Potenzial, nicht nur nach Perfektion — uns zählen Ihre Fähigkeit zu wachsen, kollaborativ zu arbeiten und echten Impact zu erzielen."
+				},
+				"hr_interview": {
+					"title": "HR-Interview",
+					"description": "Das Management und unser HR-Team führen das erste Gespräch, um Ihre Erfahrungen, Talente und beruflichen Ziele zu verstehen — und um Ihnen mehr über unsere Arbeitskultur und Leitprinzipien zu erzählen."
+				},
+				"technical_review": {
+					"title": "Technische Überprüfung",
+					"description": "Ein fundiertes technisches Assessment bewertet Ihr Fachwissen, Ihr analytisches Denken und Ihre Herangehensweise an komplexe Probleme, um ein vollständiges Bild Ihres professionellen Profils zu zeichnen."
+				},
+				"offer": {
+					"title": "Das Angebot",
+					"description": "Wenn wir perfekt zusammenpassen, unterbreiten wir Ihnen ein kompetitives Angebot, besprechen jedes Detail ausführlich und unterstützen Sie intensiv beim Onboarding, damit Sie mit vollem Vertrauen in Ihre neue Rolle starten können."
+				}
+			}
+		}
+	},
+	"services": {
+		"meta_title": "Dienstleistungen — Codevider",
+		"meta_description": "Erfahren Sie, wie Codevider zuverlässige Software konzipiert, baut und skaliert: Individualsoftware, Web-Apps, KI-Integration, Automatisierung, Systemintegration, Cloud und Team-Augmentation.",
+		"hero": {
+			"eyebrow": "Unsere Kompetenzen",
+			"headline": "Dienstleistungen, die Ihre Produkt-Roadmap vorantreiben",
+			"lead": "Erfahren Sie, wie wir verlässliche Produkte konzipieren, entwickeln und skalieren. Saubere Architektur, transparente Projektabwicklung und ein Team, das sich nahtlos in Ihres einfügt.",
+			"meta_capabilities": "7 Kernkompetenzen",
+			"meta_engagement": "Stundenbasiert oder dediziert monatlich",
+			"meta_location": "In der Europäische Union ansässig, weltweit aktiv"
+		},
+		"capabilities": {
+			"solutions_heading": "Unsere Lösungen",
+			"outcomes_heading": "Ergebnisse",
+			"nav_aria": "Dienstleistungskategorien",
+			"cta_title": "Nicht das perfekte Match dabei?",
+			"cta_body": "Wir passen unsere Kooperationen exakt an Ihre Roadmap an — beschreiben Sie uns einfach Ihren Anwendungsfall und wir schlagen Ihnen den effektivsten Weg vor.",
+			"cta_button": "Sprechen Sie mit uns",
+			"nav": {
+				"custom": "Individualsoftware",
+				"web": "Webanwendungen",
+				"ai": "KI-Integration",
+				"automation": "Automatisierung",
+				"systems": "Systemintegration",
+				"cloud": "Cloud-Infrastruktur",
+				"team": "Team-Augmentation"
+			},
+			"items": {
+				"custom": {
+					"num": "01",
+					"title": "Individuelle Softwareentwicklung",
+					"description": "Wir konzipieren und bauen exakt auf Ihr Unternehmen zugeschnittene Software. Von der ersten Analyse bis zum Launch konzentrieren wir uns auf reale Ergebnisse — schnellere Workflows, geringere Kosten und skalierbare Technologien, die mit Ihnen wachsen.",
+					"solutions": {
+						"1": "Maßgeschneiderte Plattformen, exakt um Ihre realen Arbeitsabläufe herum gebaut",
+						"2": "Langfristige Skalierbarkeit durch sauberen, wartungsfreundlichen Code",
+						"3": "Nahtlose Anbindung an bereits bestehende interne Unternehmenssysteme"
+					},
+					"outcomes": {
+						"1": "Deutliche Reduzierung des administrativen und operativen Aufwands",
+						"2": "Spürbare Steigerung der Mitarbeiterproduktivität im Alltag",
+						"3": "Zukunftssichere Technologie, die perfekt auf Ihre Wachstumspläne abgestimmt ist"
+					}
+				},
+				"web": {
+					"num": "02",
+					"title": "Webanwendungsentwicklung",
+					"description": "Hochperformante Web-Apps, die extrem schnell laden, auf jedem Endgerät hervorragend aussehen und Besucher effektiv in Kunden verwandeln. Perfekt geeignet für Portale, Dashboards und datenintensive Tools.",
+					"solutions": {
+						"1": "Responsive Apps, konsequent auf maximale Performance optimiert",
+						"2": "Echtzeit-Dashboards mit direkt nutzbaren Geschäftsdaten und Insights",
+						"3": "Sichere, intuitive Weblösungen mit Fokus auf die Endkunden"
+					},
+					"outcomes": {
+						"1": "Verbessertes Kundenengagement und optimierte Conversion-Rates",
+						"2": "Geringere Absprungraten durch spürbar beschleunigte Ladezeiten",
+						"3": "Rationalisierte interne Abläufe durch maßgeschneiderte Portal-Lösungen"
+					}
+				},
+				"ai": {
+					"num": "03",
+					"title": "KI-Integration",
+					"description": "Wir integrieren künstliche Intelligenz nahtlos in Ihre bestehenden Workflows. Von maßgeschneiderten LLM-Anwendungen bis hin zu intelligenten Chatbots und durchdachter Prozessautomatisierung.",
+					"solutions": {
+						"1": "Individuelle LLM-gestützte Apps und hochintelligente Chatbot-Systeme",
+						"2": "Workflow-Automatisierung und tiefe, direkt verwertbare Dateneinblicke",
+						"3": "Sorgfältige und reibungslose Einbettung in bestehende IT-Ökosysteme"
+					},
+					"outcomes": {
+						"1": "Schnellere Reaktionszeiten im Kundenservice durch smarte KI-Chatbots",
+						"2": "Weniger manueller Aufwand bei Datenerfassung und Dokumentenverarbeitung",
+						"3": "Datengestützte Erkenntnisse, die die Präzision strategischer Entscheidungen erhöhen"
+					}
+				},
+				"automation": {
+					"num": "04",
+					"title": "Automatisierung",
+					"description": "Eliminieren Sie wiederkehrende Routinearbeiten und reduzieren Sie Fehlerquellen nachhaltig. Wir automatisieren Bereitstellungen, Testing und operative Abläufe, damit sich Ihr Team auf wertschöpfende Aufgaben konzentrieren kann.",
+					"solutions": {
+						"1": "Vollständig automatisierte und überwachte Deployment-Pipelines",
+						"2": "QA-Prozesse, die autark mit minimalem menschlichen Eingriff laufen",
+						"3": "Exakt auf Ihre individuellen Geschäftsregeln abgestimmte Workflow-Automatisierungen"
+					},
+					"outcomes": {
+						"1": "Signifikante Reduzierung manueller Fehler über alle Abteilungen hinweg",
+						"2": "Beschleunigte Projektzyklen und schnellere Time-to-Market-Zeitpläne",
+						"3": "Stärkere Fokussierung der personellen Ressourcen auf umsatztreibende Aktivitäten"
+					}
+				},
+				"systems": {
+					"num": "05",
+					"title": "Systemintegration",
+					"description": "Verbinden Sie Ihre isolierten Werkzeuge zu einem einzigen, verlässlichen Gesamtfluss. Wir führen Anwendungen und Daten zusammen, brechen Informationssilos auf und machen Wissen genau dort verfügbar, wo es gebraucht wird.",
+					"solutions": {
+						"1": "Vereinheitlichte Datenbasis über alle Abteilungen und Plattformen hinweg",
+						"2": "Nahtloser Abgleich zwischen CRM-, ERP-Systemen und Drittanbieter-Tools",
+						"3": "Zentralisiertes Reporting für schnellere und fundierte Geschäftsentscheidungen"
+					},
+					"outcomes": {
+						"1": "Verbesserte abteilungsübergreifende Zusammenarbeit durch vernetzte Tools",
+						"2": "Echtzeit-Einblicke und transparente Kennzahlen über alle Geschäftseinheiten",
+						"3": "Schnellere und präzisere Umsetzung unternehmensweiter Initiativen"
+					}
+				},
+				"cloud": {
+					"num": "06",
+					"title": "Cloud-Infrastruktur",
+					"description": "Ein hochsicheres, flexibel skalierbares Cloud-Fundament, konsequent auf Basis von Infrastructure as Code aufgebaut. Wir optimieren Performance, Ausfallsicherheit und Kosten, sodass Sie nur zahlen, was Sie wirklich nutzen.",
+					"solutions": {
+						"1": "Infrastructure as Code für absolut wiederholbare und sichere Deployments",
+						"2": "Optimierte Workloads mit einer hochgradig kosteneffizienten Skalierung",
+						"3": "Durchdachte Hochverfügbarkeits-Architekturen und Disaster-Recovery-Setups"
+					},
+					"outcomes": {
+						"1": "Minimierte Ausfallzeiten durch extrem belastbare, resiliente Systeme",
+						"2": "Niedrigere Infrastrukturkosten durch bedarfsgerechte automatische Skalierung",
+						"3": "Beschleunigte Bereitstellungszeiten für neue Produkte und Innovationen"
+					}
+				},
+				"team": {
+					"num": "07",
+					"title": "Team-Augmentation",
+					"description": "Erweitern Sie Ihre Kapazitäten mit hochqualifizierten Entwicklern und Produktexperten, die sich direkt in Ihre Prozesse integrieren. Skalieren Sie schnell, halten Sie das Momentum hoch und schaffen Sie mehr Volumen ohne langwierige Recruiting-Zyklen.",
+					"solutions": {
+						"1": "Spezialisierte Ingenieure, die fest in Ihren bestehenden Workflow eingebettet werden",
+						"2": "Flexibles Kooperationsmodell — personelle Kapazitäten unkompliziert anpassbar",
+						"3": "Sofortige operative Kapazität ohne monatelange, aufwendige Einstellungsverfahren"
+					},
+					"outcomes": {
+						"1": "Pünktliche und erfolgreiche Fertigstellung geschäftskritischer Projekte",
+						"2": "Erhöhte Innovationskraft durch die Einbindung vielseitiger technologischer Skills",
+						"3": "Schnellere und flexiblere Reaktion auf dynamische Markt- und Geschäftsanforderungen"
+					}
+				}
+			}
+		},
+		"process": {
+			"eyebrow": "Wie wir arbeiten",
+			"headline": "Ein Prozess, konsequent um Ihre Bedürfnisse herum gebaut",
+			"description": "Ihre Anforderungen geben in jeder Phase die Richtung vor. Wir starten mit einer intensiven, praxisnahen Discovery-Phase und liefern anschließend in agilen Sprints bei absoluter Transparenz.",
+			"steps": {
+				"discovery": {
+					"title": "Discovery",
+					"description": "Wir erfassen Ihre exakten Anforderungen, stimmen die Ziele ab und dokumentieren die gesamte Produktvision in einem gemeinsamen Pflichtenheft."
+				},
+				"team_selection": {
+					"title": "Teamauswahl",
+					"description": "Wir stellen ein maßgeschneidertes Pod-Team zusammen — Frontend, Backend und QA —, das perfekt zu Ihrem Stack und Zeitplan passt."
+				},
+				"agile_delivery": {
+					"title": "Agile Umsetzung",
+					"description": "Tägliche Standups und detaillierte wöchentliche Fortschrittsberichte halten Sie jederzeit informiert und geben Ihnen Sprint für Sprint die volle Kontrolle."
+				},
+				"test_deploy": {
+					"title": "Test & Bereitstellung",
+					"description": "Sie testen alles ausgiebig auf unseren Entwicklungsservern, bevor wir die Software mit fortlaufendem Support produktiv auf Ihre Infrastruktur übertragen."
+				}
+			}
+		},
+		"tech": {
+			"eyebrow": "Technology",
+			"headline": "Our technology stack",
+			"description": "A curated set of tools, frameworks, and languages we use to build modern, high-performance web and mobile applications.",
+			"categories_aria": "Technology categories",
+			"all": "All",
+			"categories": {
+				"frontend": {
+					"label": "Frontend",
+					"items": [
+						"React",
+						"Next.js",
+						"Vue.js",
+						"Angular",
+						"TypeScript",
+						"JavaScript",
+						"HTML5",
+						"CSS3",
+						"Sass",
+						"jQuery"
+					]
+				},
+				"backend": {
+					"label": "Backend",
+					"items": [
+						"Node.js",
+						"Express",
+						"NestJS",
+						"Python",
+						"Django",
+						"Flask",
+						"FastAPI",
+						"PHP",
+						"Laravel"
+					]
+				},
+				"databases": {
+					"label": "Databases",
+					"items": [
+						"PostgreSQL",
+						"MySQL",
+						"MongoDB",
+						"Redis",
+						"SQL Server",
+						"DynamoDB",
+						"Firebase",
+						"Elasticsearch",
+						"BigQuery",
+						"ClickHouse"
+					]
+				},
+				"cloud_devops": {
+					"label": "Cloud & DevOps",
+					"items": [
+						"AWS",
+						"Google Cloud",
+						"Azure",
+						"Docker",
+						"Kubernetes",
+						"Jenkins",
+						"GitHub",
+						"GitLab",
+						"Nginx",
+						"Cloudflare"
+					]
+				},
+				"ai": {
+					"label": "AI",
+					"items": [
+						"OpenAI",
+						"Anthropic",
+						"Ollama",
+						"Gemini",
+						"Mistral",
+						"Hugging Face"
+					]
+				},
+				"mobile_design": {
+					"label": "Mobile & Design",
+					"items": ["iOS", "Android", "React Native", "Figma", "Meta"]
+				},
+				"apis": {
+					"label": "APIs",
+					"items": [
+						"REST API",
+						"GraphQL",
+						"Stripe",
+						"Socket.IO",
+						"Slack",
+						"Webhooks"
+					]
+				}
+			}
+		}
+	}
+}

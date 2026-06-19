@@ -1,34 +1,38 @@
 {
-  "name": "codevider-website",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "lucide-react": "^1.21.0",
-    "motion": "^12.40.0",
-    "next": "16.2.9",
-    "next-intl": "^4.13.0",
-    "postprocessing": "^6.39.1",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "react-syntax-highlighter": "^16.1.1",
-    "three": "^0.184.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@types/react-syntax-highlighter": "^15.5.13",
-    "@types/three": "^0.184.1",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.9",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+	"name": "codevider-website",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "biome lint .",
+		"format": "biome format --write .",
+		"check": "biome check --write ."
+	},
+	"dependencies": {
+		"dotted-map": "^2.2.3",
+		"lucide-react": "^1.21.0",
+		"motion": "^12.40.0",
+		"next": "16.2.9",
+		"next-intl": "^4.13.0",
+		"postprocessing": "^6.39.1",
+		"react": "19.2.4",
+		"react-dom": "19.2.4",
+		"react-syntax-highlighter": "^16.1.1",
+		"three": "^0.184.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.0",
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "^20",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"@types/react-syntax-highlighter": "^15.5.13",
+		"@types/three": "^0.184.1",
+		"eslint": "^9",
+		"eslint-config-next": "16.2.9",
+		"tailwindcss": "^4",
+		"typescript": "^5"
+	}
 }
