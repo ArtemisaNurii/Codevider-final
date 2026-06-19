@@ -1,4 +1,22 @@
 {
+	"metadata": {
+		"home": {
+			"title": "Codevider",
+			"description": "Tu socio estratégico en desarrollo de software"
+		},
+		"about": {
+			"title": "Sobre nosotros — Codevider",
+			"description": "Fundada en 2019 en Tirana, Albania, Codevider crea software orientado al éxito empresarial — estrategia, diseño e ingeniería en armonía."
+		},
+		"services": {
+			"title": "Servicios — Codevider",
+			"description": "Explora cómo Codevider diseña, desarrolla y escala software confiable: desarrollo a medida, aplicaciones web, integración de IA, automatización, integración de sistemas, nube y aumento de equipo."
+		},
+		"career": {
+			"title": "Carreras — Codevider",
+			"description": "Únete a Codevider y ayuda a construir el futuro del desarrollo de software. Explora nuestro proceso de contratación y conecta con nuestro equipo en Tirana, Albania."
+		}
+	},
 	"home": {
 		"your_strategic_partner_in": "Su socio estratégico en",
 		"we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Diseñamos, desarrollamos y escalamos software web, móvil y cloud fiable — integrados en su equipo y entregados sin costes estructurales indirectos.",
@@ -54,13 +72,7 @@
 				"bullet_3": "Sistemas mantenibles que escalan con usted",
 				"link": "Explorar ingeniería",
 				"demo": {
-					"tab_orders": "orders.ts",
-					"tab_schema": "schema.sql",
-					"tab_deploy": "deploy.yml",
 					"tabs_aria": "Code samples",
-					"code_orders": "export async function createOrder(input: OrderInputDTO) {\n  const order = await db.insert(orders).values({\n    userId: input.userId,\n    total: input.amount,\n    status: ORDERS.pending,\n  })\n\n  await queue.emit('order.created', order.id)\n  return order\n}",
-					"code_schema": "create table orders (\n  id        uuid primary key default gen_random_uuid(),\n  user_id   uuid not null references users(id),\n  total     integer not null check (total >= 0),\n  status    text not null default 'pending',\n  created_at timestamptz default now()\n);",
-					"code_deploy": "name: Deploy\non:\n  push:\n    branches: [main]\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: pnpm install --frozen-lockfile\n      - run: pnpm build && pnpm test --ci\n      - uses: aws-actions/configure-aws-credentials@v4\n      - run: aws codedeploy push --application-name prod-app --s3-location s3://deployments/app.zip --region us-east-1",
 					"status": "Build superado · 0 errores de tipo · desplegado en producción"
 				}
 			},
@@ -626,89 +638,25 @@
 			"all": "All",
 			"categories": {
 				"frontend": {
-					"label": "Frontend",
-					"items": [
-						"React",
-						"Next.js",
-						"Vue.js",
-						"Angular",
-						"TypeScript",
-						"JavaScript",
-						"HTML5",
-						"CSS3",
-						"Sass",
-						"jQuery"
-					]
+					"label": "Frontend"
 				},
 				"backend": {
-					"label": "Backend",
-					"items": [
-						"Node.js",
-						"Express",
-						"NestJS",
-						"Python",
-						"Django",
-						"Flask",
-						"FastAPI",
-						"PHP",
-						"Laravel"
-					]
+					"label": "Backend"
 				},
 				"databases": {
-					"label": "Databases",
-					"items": [
-						"PostgreSQL",
-						"MySQL",
-						"MongoDB",
-						"Redis",
-						"SQL Server",
-						"DynamoDB",
-						"Firebase",
-						"Elasticsearch",
-						"BigQuery",
-						"ClickHouse"
-					]
+					"label": "Databases"
 				},
 				"cloud_devops": {
-					"label": "Cloud & DevOps",
-					"items": [
-						"AWS",
-						"Google Cloud",
-						"Azure",
-						"Docker",
-						"Kubernetes",
-						"Jenkins",
-						"GitHub",
-						"GitLab",
-						"Nginx",
-						"Cloudflare"
-					]
+					"label": "Cloud & DevOps"
 				},
 				"ai": {
-					"label": "AI",
-					"items": [
-						"OpenAI",
-						"Anthropic",
-						"Ollama",
-						"Gemini",
-						"Mistral",
-						"Hugging Face"
-					]
+					"label": "AI"
 				},
 				"mobile_design": {
-					"label": "Mobile & Design",
-					"items": ["iOS", "Android", "React Native", "Figma", "Meta"]
+					"label": "Mobile & Design"
 				},
 				"apis": {
-					"label": "APIs",
-					"items": [
-						"REST API",
-						"GraphQL",
-						"Stripe",
-						"Socket.IO",
-						"Slack",
-						"Webhooks"
-					]
+					"label": "APIs"
 				}
 			}
 		}

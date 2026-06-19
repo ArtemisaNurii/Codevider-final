@@ -24,12 +24,10 @@ export default function GlobalPartnerships() {
 	const shouldReduceMotion = useReducedMotion();
 
 	return (
-		<section ref={ref} className="home-section relative overflow-visible">
-			<div
-				className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_120%,rgba(58,83,201,0.18),transparent_60%)] dark:bg-[radial-gradient(60%_50%_at_50%_120%,rgba(58,83,201,0.5),transparent_60%)]"
-				aria-hidden
-			/>
-
+		<section
+			ref={ref}
+			className="home-section home-section--tight relative overflow-visible max-md:pb-10"
+		>
 			<div className="home-wrap relative z-1">
 				<SectionHead
 					eyebrow={t("eyebrow")}
@@ -41,7 +39,7 @@ export default function GlobalPartnerships() {
 			</div>
 
 			<motion.div
-				className="relative z-1 mt-[var(--home-stack)] w-full px-[var(--home-inline)]"
+				className="relative z-1 mt-[var(--home-stack)] w-full px-[var(--home-inline)] max-md:mt-[var(--home-stack-sm)]"
 				initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
 				animate={
 					inView || shouldReduceMotion
@@ -50,6 +48,10 @@ export default function GlobalPartnerships() {
 				}
 				transition={{ type: "spring", duration: 0.45, bounce: 0, delay: 0.1 }}
 			>
+				<div
+					className="pointer-events-none absolute inset-x-0 -bottom-6 top-1/3 bg-[radial-gradient(70%_55%_at_50%_100%,rgba(58,83,201,0.18),transparent_65%)] dark:bg-[radial-gradient(70%_55%_at_50%_100%,rgba(58,83,201,0.5),transparent_65%)] max-md:-bottom-2 max-md:top-1/2"
+					aria-hidden
+				/>
 				<WorldMap dots={[...PARTNERSHIP_ROUTES]} />
 			</motion.div>
 		</section>

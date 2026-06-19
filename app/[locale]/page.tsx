@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Contact from "@/components/index/contact";
 import CoreServices from "@/components/index/core-services";
 import Faq from "@/components/index/faq";
@@ -8,10 +8,21 @@ import WhoWeAre from "@/components/index/who-we-are";
 import WhoWeEmpower from "@/components/index/who-we-empower";
 import WhyChooseUs from "@/components/index/why-choose-us";
 import WhyOutsource from "@/components/index/why-outsource";
+import { Metadata } from "next";
 
 type Props = {
 	params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const { locale } = await params;
+	const t = await getTranslations({ locale });
+
+	return {
+		title: t("metadata.home.title"),
+		description: t("metadata.home.description"),
+	};
+}
 
 export default async function Home({ params }: Props) {
 	const { locale } = await params;

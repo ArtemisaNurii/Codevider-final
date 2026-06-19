@@ -9,30 +9,18 @@ import {
 import { useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import SectionHead from "@/components/index/section-head";
+import {
+	TECH_STACK_CATEGORIES,
+	TECH_STACK_ITEMS,
+	type TechStackCategoryId,
+} from "@/data/tech-stack";
 
-const CATEGORY_IDS = [
-	"frontend",
-	"backend",
-	"databases",
-	"cloud_devops",
-	"ai",
-	"mobile_design",
-	"apis",
-] as const;
-
-type CategoryId = (typeof CATEGORY_IDS)[number];
+type CategoryId = TechStackCategoryId;
 type FilterId = "all" | CategoryId;
 
 const springOpen = { type: "spring" as const, duration: 0.4, bounce: 0 };
 const instantTransition = { duration: 0 };
 const revealEase = [0.22, 1, 0.36, 1] as const;
-
-function techInitials(name: string) {
-	return name
-		.replace(/[^A-Za-z0-9]/g, "")
-		.slice(0, 2)
-		.toUpperCase();
-}
 
 function TechTile({
 	name,
@@ -56,7 +44,6 @@ function TechTile({
 			animate={{ opacity: 1, y: 0, scale: 1 }}
 			transition={transition}
 		>
-			<span className="svc-tech-tile__badge">{techInitials(name)}</span>
 			{name}
 		</motion.div>
 	);
@@ -72,7 +59,7 @@ function TechCategorySection({
 	shouldReduceMotion: boolean | null;
 }) {
 	const t = useTranslations("services.tech");
-	const items = t.raw(`categories.${categoryId}.items`) as string[];
+	const items = TECH_STACK_ITEMS[categoryId];
 	const titleId = `tech-section-${categoryId}`;
 
 	const sectionTransition = shouldReduceMotion
@@ -114,7 +101,8 @@ export default function ServicesTechStack() {
 	const [activeFilter, setActiveFilter] = useState<FilterId>("all");
 
 	const visibleCategories = useMemo(
-		() => (activeFilter === "all" ? [...CATEGORY_IDS] : [activeFilter]),
+		() =>
+			activeFilter === "all" ? [...TECH_STACK_CATEGORIES] : [activeFilter],
 		[activeFilter],
 	);
 
@@ -122,7 +110,7 @@ export default function ServicesTechStack() {
 
 	const filters: { id: FilterId; label: string }[] = [
 		{ id: "all", label: t("all") },
-		...CATEGORY_IDS.map((id) => ({
+		...TECH_STACK_CATEGORIES.map((id) => ({
 			id,
 			label: t(`categories.${id}.label`),
 		})),

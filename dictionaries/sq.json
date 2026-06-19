@@ -1,4 +1,22 @@
 {
+	"metadata": {
+		"home": {
+			"title": "Codevider",
+			"description": "Partneri juaj strategjik në zhvillimin e softuerit"
+		},
+		"about": {
+			"title": "Rreth nesh — Codevider",
+			"description": "Themeluar në vitin 2019 në Tiranë, Shqipëri, Codevider krijon softuerë që marrin biznesin seriozisht — strategji, dizajnim dhe inxhinieri në harmoni."
+		},
+		"services": {
+			"title": "Shërbimet — Codevider",
+			"description": "Eksploroni se si Codevider dizajnon, ndërton dhe shkallëzon softuerë të besueshëm: zhvillim i personalizuar, aplikacione ueb, integrim i inteligjencës artificiale (AI), automatizim, integrim i sistemeve, cloud dhe zgjerim i ekipit."
+		},
+		"career": {
+			"title": "Karriera — Codevider",
+			"description": "Bashkohuni me Codevider dhe ndihmoni në ndërtimin e së ardhmes së zhvillimit të softuerit. Eksploroni procesin tonë të punësimit dhe lidhuni me ekipin tonë në Tiranë, Shqipëri."
+		}
+	},
 	"home": {
 		"your_strategic_partner_in": "Partneri juaj strategjik në",
 		"we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Ne dizajnojmë, ndërtojmë dhe rrisim softuerë të besueshëm për ueb, celular dhe cloud — të integruar me ekipin tuaj dhe të ofruar pa shpenzime shtesë.",
@@ -54,13 +72,7 @@
 				"bullet_3": "Sisteme të mirëmbajtshme që rriten me ju",
 				"link": "Eksploroni inxhinierinë",
 				"demo": {
-					"tab_orders": "orders.ts",
-					"tab_schema": "schema.sql",
-					"tab_deploy": "deploy.yml",
 					"tabs_aria": "Code samples",
-					"code_orders": "export async function createOrder(input: OrderInputDTO) {\n  const order = await db.insert(orders).values({\n    userId: input.userId,\n    total: input.amount,\n    status: ORDERS.pending,\n  })\n\n  await queue.emit('order.created', order.id)\n  return order\n}",
-					"code_schema": "create table orders (\n  id        uuid primary key default gen_random_uuid(),\n  user_id   uuid not null references users(id),\n  total     integer not null check (total >= 0),\n  status    text not null default 'pending',\n  created_at timestamptz default now()\n);",
-					"code_deploy": "name: Deploy\non:\n  push:\n    branches: [main]\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: pnpm install --frozen-lockfile\n      - run: pnpm build && pnpm test --ci\n      - uses: aws-actions/configure-aws-credentials@v4\n      - run: aws codedeploy push --application-name prod-app --s3-location s3://deployments/app.zip --region us-east-1",
 					"status": "Ndërtimi kaloi · 0 gabime tipi · vendosur në prodhim"
 				}
 			},
@@ -626,89 +638,25 @@
 			"all": "All",
 			"categories": {
 				"frontend": {
-					"label": "Frontend",
-					"items": [
-						"React",
-						"Next.js",
-						"Vue.js",
-						"Angular",
-						"TypeScript",
-						"JavaScript",
-						"HTML5",
-						"CSS3",
-						"Sass",
-						"jQuery"
-					]
+					"label": "Frontend"
 				},
 				"backend": {
-					"label": "Backend",
-					"items": [
-						"Node.js",
-						"Express",
-						"NestJS",
-						"Python",
-						"Django",
-						"Flask",
-						"FastAPI",
-						"PHP",
-						"Laravel"
-					]
+					"label": "Backend"
 				},
 				"databases": {
-					"label": "Databases",
-					"items": [
-						"PostgreSQL",
-						"MySQL",
-						"MongoDB",
-						"Redis",
-						"SQL Server",
-						"DynamoDB",
-						"Firebase",
-						"Elasticsearch",
-						"BigQuery",
-						"ClickHouse"
-					]
+					"label": "Databases"
 				},
 				"cloud_devops": {
-					"label": "Cloud & DevOps",
-					"items": [
-						"AWS",
-						"Google Cloud",
-						"Azure",
-						"Docker",
-						"Kubernetes",
-						"Jenkins",
-						"GitHub",
-						"GitLab",
-						"Nginx",
-						"Cloudflare"
-					]
+					"label": "Cloud & DevOps"
 				},
 				"ai": {
-					"label": "AI",
-					"items": [
-						"OpenAI",
-						"Anthropic",
-						"Ollama",
-						"Gemini",
-						"Mistral",
-						"Hugging Face"
-					]
+					"label": "AI"
 				},
 				"mobile_design": {
-					"label": "Mobile & Design",
-					"items": ["iOS", "Android", "React Native", "Figma", "Meta"]
+					"label": "Mobile & Design"
 				},
 				"apis": {
-					"label": "APIs",
-					"items": [
-						"REST API",
-						"GraphQL",
-						"Stripe",
-						"Socket.IO",
-						"Slack",
-						"Webhooks"
-					]
+					"label": "APIs"
 				}
 			}
 		}

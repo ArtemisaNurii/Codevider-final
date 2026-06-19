@@ -25,6 +25,11 @@ import { useTranslations } from "next-intl";
 import type { CSSProperties } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import SectionHead from "./section-head";
+import {
+	ENGINEERING_DEMO_CODE,
+	ENGINEERING_DEMO_TABS,
+	type EngineeringDemoTab,
+} from "@/data/engineering-demo-code";
 
 const ENGINEERING_CODE_LANGUAGES = {
 	orders: "typescript",
@@ -183,7 +188,7 @@ function AiDemo() {
 		<div ref={ref} className="home-demo min-h-[420px]">
 			<div className="home-demo-head home-demo-head--wrap">
 				<div
-					className="flex flex-wrap justify-start gap-1.5"
+					className="home-demo-chip-list"
 					role="group"
 					aria-label={t("title")}
 				>
@@ -224,10 +229,10 @@ function AiDemo() {
 
 function CodeDemo() {
 	const t = useTranslations("home.features.engineering.demo");
-	const tabs = ["orders", "schema", "deploy"] as const;
-	const [active, setActive] = useState<(typeof tabs)[number]>("orders");
+	const tabs = Object.keys(ENGINEERING_DEMO_TABS) as EngineeringDemoTab[];
+	const [active, setActive] = useState<EngineeringDemoTab>("orders");
 	const shouldReduceMotion = useReducedMotion();
-	const code = t.raw(`code_${active}`) as string;
+	const code = ENGINEERING_DEMO_CODE[active];
 
 	return (
 		<div className="home-demo home-code-editor">
@@ -254,7 +259,7 @@ function CodeDemo() {
 							onClick={() => setActive(tab)}
 							className={`home-code-editor__tab ${active === tab ? "home-code-editor__tab--active" : ""}`}
 						>
-							{t(`tab_${tab}`)}
+							{ENGINEERING_DEMO_TABS[tab]}
 						</button>
 					))}
 				</div>
@@ -599,7 +604,7 @@ function FeatureSection({
 				</motion.div>
 
 				<motion.div
-					className={`relative ${feature.reverse ? "lg:order-1" : ""}`}
+					className={`relative min-w-0 ${feature.reverse ? "lg:order-1" : ""}`}
 					initial={shouldReduceMotion ? false : "hidden"}
 					animate={inView ? "visible" : "hidden"}
 					variants={{

@@ -1,0 +1,65 @@
+export const TECH_STACK_CATEGORIES = [
+	"frontend",
+	"backend",
+	"databases",
+	"cloud_devops",
+	"ai",
+	"mobile_design",
+	"apis",
+] as const;
+
+export type TechStackCategoryId = (typeof TECH_STACK_CATEGORIES)[number];
+
+export const TECH_STACK_ITEMS: Record<TechStackCategoryId, readonly string[]> =
+	{
+		frontend: [
+			"React",
+			"Next.js",
+			"Vue.js",
+			"Angular",
+			"TypeScript",
+			"JavaScript",
+			"HTML5",
+			"CSS3",
+			"Sass",
+			"jQuery",
+		],
+		backend: [
+			"Node.js",
+			"Express",
+			"NestJS",
+			"Python",
+			"Django",
+			"Flask",
+			"FastAPI",
+			"PHP",
+			"Laravel",
+		],
+		databases: [
+			"PostgreSQL",
+			"MySQL",
+			"MongoDB",
+			"Redis",
+			"SQL Server",
+			"DynamoDB",
+			"Firebase",
+			"Elasticsearch",
+			"BigQuery",
+			"ClickHouse",
+		],
+		cloud_devops: [
+			"AWS",
+			"Google Cloud",
+			"Azure",
+			"Docker",
+			"Kubernetes",
+			"Jenkins",
+			"GitHub",
+			"GitLab",
+			"Nginx",
+			"Cloudflare",
+		],
+		ai: ["OpenAI", "Anthropic", "Ollama", "Gemini", "Mistral", "Hugging Face"],
+		mobile_design: ["iOS", "Android", "React Native", "Figma", "Meta"],
+		apis: ["REST API", "GraphQL", "Stripe", "Socket.IO", "Slack", "Webhooks"],
+	};

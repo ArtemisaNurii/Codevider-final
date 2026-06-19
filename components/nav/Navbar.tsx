@@ -23,8 +23,8 @@ const navVariants = {
 	},
 	scrolled: {
 		x: "-50%",
-		y: 20,
-		width: "100%",
+		y: 10,
+		width: "calc(100% - 1.5rem)",
 		height: 60,
 		borderRadius: 9999,
 		backgroundColor: "rgba(15, 23, 42, 0.85)",
