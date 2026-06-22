@@ -2,8 +2,14 @@ import type { Metadata } from "next";
 import en from "@/dictionaries/en.json";
 import { routing } from "@/i18n/routing";
 
-export const SITE_URL = "https://codevider.com";
+/** Production fallback when NEXT_PUBLIC_SITE_URL is not set at build time. */
+export const SITE_URL = "https://www.codevider.com";
 
+/**
+ * Canonical origin for metadata, sitemap, and OG image URLs.
+ * Set NEXT_PUBLIC_SITE_URL when building for staging or test domains, e.g.
+ * NEXT_PUBLIC_SITE_URL=https://staging.example.com npm run build
+ */
 export function getSiteUrl(): string {
 	if (process.env.NEXT_PUBLIC_SITE_URL) {
 		return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
@@ -67,6 +73,10 @@ export function getOgImagePath(locale: string, page: OgPage): string {
 	return `/images/og/${language}/${page}/og.png`;
 }
 
+export function getOgImageUrl(locale: string, page: OgPage): string {
+	return `${getSiteUrl()}${getOgImagePath(locale, page)}`;
+}
+
 type PageMetadataInput = {
 	locale: string;
 	title: string;
@@ -85,7 +95,7 @@ export function createPageMetadata({
 		locale as (typeof routing.locales)[number],
 		path,
 	);
-	const ogImage = getOgImagePath(locale, page);
+	const ogImageUrl = getOgImageUrl(locale, page);
 
 	return {
 		title,
@@ -101,13 +111,21 @@ export function createPageMetadata({
 			siteName: "Codevider",
 			locale,
 			type: "website",
-			images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+			images: [
+				{
+					url: ogImageUrl,
+					width: 1200,
+					height: 630,
+					alt: title,
+					type: "image/png",
+				},
+			],
 		},
 		twitter: {
 			card: "summary_large_image",
 			title,
 			description,
-			images: [ogImage],
+			images: [ogImageUrl],
 		},
 	};
 }
