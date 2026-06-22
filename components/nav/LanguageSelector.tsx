@@ -5,7 +5,13 @@ import { routing } from "@/i18n/routing";
 import { Check, ChevronDown } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+	useCallback,
+	useEffect,
+	useLayoutEffect,
+	useRef,
+	useState,
+} from "react";
 
 type LanguageSelectorProps = {
 	variant?: "light" | "dark";
@@ -45,10 +51,7 @@ export function LanguageSelector({
 				return;
 			}
 
-			sessionStorage.setItem(
-				LOCALE_SWITCH_SCROLL_KEY,
-				String(window.scrollY),
-			);
+			sessionStorage.setItem(LOCALE_SWITCH_SCROLL_KEY, String(window.scrollY));
 			router.replace(pathname, { locale: nextLocale, scroll: false });
 			setOpen(false);
 		},
@@ -90,7 +93,9 @@ export function LanguageSelector({
 	}, [open]);
 
 	const opensUpward = fullWidth;
-	const menuPositionClasses = opensUpward ? "bottom-full mb-2" : "top-full mt-2";
+	const menuPositionClasses = opensUpward
+		? "bottom-full mb-2"
+		: "top-full mt-2";
 
 	const triggerClasses = `relative flex items-center rounded-full border active:scale-[0.96] ${
 		fullWidth
@@ -116,10 +121,7 @@ export function LanguageSelector({
 				className={triggerClasses}
 			>
 				<span className="flex min-w-0 items-center gap-2">
-					<span
-						className="text-base leading-none"
-						aria-hidden
-					>
+					<span className="text-base leading-none" aria-hidden>
 						{LOCALE_FLAGS[locale as (typeof routing.locales)[number]]}
 					</span>
 					<span
@@ -190,10 +192,7 @@ export function LanguageSelector({
 										}`}
 									>
 										<span className="flex min-w-0 items-center gap-2.5">
-											<span
-												className="text-base leading-none"
-												aria-hidden
-											>
+											<span className="text-base leading-none" aria-hidden>
 												{LOCALE_FLAGS[code]}
 											</span>
 											<span className="truncate">{t(`languages.${code}`)}</span>

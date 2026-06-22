@@ -117,7 +117,11 @@ function StatCard({
 
 export default function WhoWeAre() {
 	const t = useTranslations("home");
-	const { ref: sectionRef, isRevealed, shouldAnimate } = useSectionReveal({
+	const {
+		ref: sectionRef,
+		isRevealed,
+		shouldAnimate,
+	} = useSectionReveal({
 		margin: "-10% 0px -10% 0px",
 	});
 	const shouldReduceMotion = useReducedMotion();

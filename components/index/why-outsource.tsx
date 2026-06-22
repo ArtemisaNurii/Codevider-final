@@ -3,10 +3,7 @@
 import { DollarSign, Link2, ShieldCheck } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import {
-	revealTransition,
-	useSectionReveal,
-} from "@/hooks/use-section-reveal";
+import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
 const PILLARS = [

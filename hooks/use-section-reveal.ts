@@ -72,7 +72,11 @@ function getRevealMode(
 
 	const visibleRatio = getVisibleRatio(rect, root);
 	const threshold =
-		amount === "all" ? 1 : amount === "some" || amount === undefined ? 0 : amount;
+		amount === "all"
+			? 1
+			: amount === "some" || amount === undefined
+				? 0
+				: amount;
 	const isIntersecting = visibleRatio > threshold;
 
 	if (!isIntersecting) {
@@ -88,8 +92,7 @@ export function useSectionReveal<T extends Element = HTMLElement>(
 	const ref = useRef<T>(null);
 	const [mode, setMode] = useState<RevealMode>("pending");
 	const margin = options.margin ?? "-10% 0px";
-	const marginForMeasure =
-		typeof margin === "string" ? margin : "-10% 0px";
+	const marginForMeasure = typeof margin === "string" ? margin : "-10% 0px";
 	const inView = useInView(ref, {
 		once: true,
 		margin,

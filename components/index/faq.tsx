@@ -4,10 +4,7 @@ import { Minus, Plus } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import {
-	revealTransition,
-	useSectionReveal,
-} from "@/hooks/use-section-reveal";
+import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
 const FAQ_IDS = [
@@ -71,7 +68,9 @@ function FaqItem({
 		<motion.div
 			className="home-faq-item"
 			data-open={isOpen}
-			initial={shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 12 }}
+			initial={
+				shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 12 }
+			}
 			animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
 			transition={itemTransition}
 		>

@@ -2,10 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import {
-	revealTransition,
-	useSectionReveal,
-} from "@/hooks/use-section-reveal";
+import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
 import WorldMap from "@/components/ui/world-map";
 import SectionHead from "./section-head";
 
@@ -42,7 +39,9 @@ export default function GlobalPartnerships() {
 
 			<motion.div
 				className="relative z-1 mt-[var(--home-stack)] w-full px-[var(--home-inline)] max-md:mt-[var(--home-stack-sm)]"
-				initial={shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }}
+				initial={
+					shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }
+				}
 				animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
 				transition={revealTransition(shouldAnimate, {
 					type: "spring" as const,

@@ -1,15 +1,9 @@
-"use client";
+import type { Metadata } from "next";
+import { LocaleRedirect } from "@/components/locale-redirect";
+import { createRedirectPageMetadata } from "@/lib/site";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { detectBrowserLocale } from "@/i18n/detect-locale";
+export const metadata: Metadata = createRedirectPageMetadata("home");
 
 export default function RootPage() {
-	const router = useRouter();
-
-	useEffect(() => {
-		router.replace(`/${detectBrowserLocale()}`);
-	}, [router]);
-
-	return null;
+	return <LocaleRedirect />;
 }

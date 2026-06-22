@@ -4,10 +4,7 @@ import { ArrowRight, Check, Mail, MapPin, Phone } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { FormEvent, ReactNode, useState } from "react";
 import { useTranslations } from "next-intl";
-import {
-	revealTransition,
-	useSectionReveal,
-} from "@/hooks/use-section-reveal";
+import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
 
 const inputClassName =
 	"w-full rounded-[10px] border-[1.5px] border-[var(--border)] bg-[var(--bg)] px-4 py-3.5 text-[inherit] placeholder:text-[var(--text)]/55 transition-[border-color,box-shadow] focus:border-[var(--dash-brand)] focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[var(--dash-brand)]/15";
@@ -62,7 +59,9 @@ export default function Contact() {
 			<div className="home-wrap grid items-center gap-[clamp(2.5rem,6vw,5rem)] lg:grid-cols-[2fr_3fr]">
 				<motion.div
 					className="flex flex-col justify-center lg:pr-[clamp(1.25rem,2.5vw,2rem)]"
-					initial={shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }}
+					initial={
+						shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }
+					}
 					animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
 					transition={revealTransition(shouldAnimate, {
 						type: "spring" as const,
@@ -95,6 +94,7 @@ export default function Contact() {
 							{
 								icon: MapPin,
 								title: t("address_title"),
+								href: "https://maps.app.goo.gl/T3FQyp46a1okGHr48",
 								value: t("address_value"),
 							},
 						].map(({ icon: Icon, title, href, value }) => (
@@ -126,7 +126,9 @@ export default function Contact() {
 
 				<motion.div
 					className="flex flex-col justify-center lg:pl-[clamp(1.25rem,2.5vw,2rem)]"
-					initial={shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }}
+					initial={
+						shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }
+					}
 					animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
 					transition={revealTransition(shouldAnimate, {
 						type: "spring" as const,

@@ -13,11 +13,7 @@ import {
 	Rocket,
 	Users,
 } from "lucide-react";
-import {
-	motion,
-	useReducedMotion,
-	AnimatePresence,
-} from "motion/react";
+import { motion, useReducedMotion, AnimatePresence } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";

@@ -40,7 +40,7 @@ export default function AboutWhoWeAre() {
 						animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
 						transition={stagger(1)}
 					>
-						{t("paragraph_2")}
+						{t("paragraph_2", { value: 20 })}
 					</motion.p>
 				</div>
 

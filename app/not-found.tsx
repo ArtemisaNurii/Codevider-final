@@ -12,7 +12,9 @@ export default function NotFound() {
 			<div className="home-hero__veil" aria-hidden />
 
 			<div className="relative z-10 flex flex-col items-center gap-4 px-6 text-center">
-				<h1 className="text-4xl font-bold text-(--text-h)">404 - Page Not Found</h1>
+				<h1 className="text-4xl font-bold text-(--text-h)">
+					404 - Page Not Found
+				</h1>
 				<p className="text-lg text-(--text)">
 					The page you are looking for does not exist.
 				</p>

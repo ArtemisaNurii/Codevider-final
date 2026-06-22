@@ -14,10 +14,30 @@ type LifeGridPhoto = {
 };
 
 const PHOTOS: LifeGridPhoto[] = [
-	{ src: "/images/members/members1.jpg", altKey: "photo_alt_1", variant: "human", span: 3 },
-	{ src: "/images/office/zyra9.jpg", altKey: "office_alt_1", variant: "office", span: 2 },
-	{ src: "/images/office/zyra10.jpg", altKey: "office_alt_2", variant: "office", span: 2 },
-	{ src: "/images/members/members2.jpg", altKey: "photo_alt_2", variant: "human", span: 3 },
+	{
+		src: "/images/members/members1.jpg",
+		altKey: "photo_alt_1",
+		variant: "human",
+		span: 3,
+	},
+	{
+		src: "/images/office/zyra9.jpg",
+		altKey: "office_alt_1",
+		variant: "office",
+		span: 2,
+	},
+	{
+		src: "/images/office/zyra10.jpg",
+		altKey: "office_alt_2",
+		variant: "office",
+		span: 2,
+	},
+	{
+		src: "/images/members/members2.jpg",
+		altKey: "photo_alt_2",
+		variant: "human",
+		span: 3,
+	},
 ];
 
 const revealEase = [0.22, 1, 0.36, 1] as const;

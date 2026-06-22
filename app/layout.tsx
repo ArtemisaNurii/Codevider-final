@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Alexandria, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { getSiteUrl } from "@/lib/site";
 
 const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})();`;
 
@@ -17,6 +18,7 @@ const libreBaskerville = Libre_Baskerville({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL(getSiteUrl()),
 	title: "Codevider",
 	description: "Your strategic partner in software development",
 };
@@ -33,6 +35,7 @@ export default function RootLayout({
 			className={`${alexandria.variable} ${libreBaskerville.variable} h-full antialiased`}
 		>
 			<head>
+				<meta name="apple-mobile-web-app-title" content="Codevider" />
 				<script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
 			</head>
 			<body className="min-h-full flex flex-col">

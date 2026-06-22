@@ -48,7 +48,9 @@ export function ThemeToggle({
 				onClick={handleToggle}
 				disabled={isThemeTransitioning}
 				aria-busy={isThemeTransitioning}
-				aria-label={isDark ? t("switch_to_light_mode") : t("switch_to_dark_mode")}
+				aria-label={
+					isDark ? t("switch_to_light_mode") : t("switch_to_dark_mode")
+				}
 				className={buttonClasses}
 			>
 				<span
@@ -56,7 +58,10 @@ export function ThemeToggle({
 						fullWidth ? "min-w-0 truncate text-sm font-medium" : ""
 					}`}
 				>
-					<span className="flex shrink-0 items-center justify-center" aria-hidden>
+					<span
+						className="flex shrink-0 items-center justify-center"
+						aria-hidden
+					>
 						{isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
 					</span>
 					{fullWidth ? <span className="truncate">{modeLabel}</span> : null}
