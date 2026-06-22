@@ -10,9 +10,12 @@ import {
 	PenLine,
 	Smartphone,
 } from "lucide-react";
-import { motion, useInView, useReducedMotion } from "motion/react";
-import { useRef } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import {
+	revealTransition,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
 const CARDS = [
@@ -30,14 +33,15 @@ const revealEase = [0.22, 1, 0.36, 1] as const;
 
 export default function WhoWeEmpower() {
 	const t = useTranslations("home.empower");
-	const ref = useRef<HTMLElement>(null);
-	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 
 	const cardTransition = (delay: number) =>
-		shouldReduceMotion
-			? { duration: 0 }
-			: { duration: 0.5, ease: revealEase, delay };
+		revealTransition(shouldAnimate, {
+			duration: 0.5,
+			ease: revealEase,
+			delay: shouldReduceMotion ? 0 : delay,
+		});
 
 	return (
 		<section ref={ref} className="home-section home-section--tight">
@@ -53,8 +57,8 @@ export default function WhoWeEmpower() {
 					{CARDS.map(({ id, icon: Icon }, index) => (
 						<motion.article
 							key={id}
-							initial={shouldReduceMotion ? false : { y: 18 }}
-							animate={inView || shouldReduceMotion ? { y: 0 } : { y: 18 }}
+							initial={shouldReduceMotion || !shouldAnimate ? false : { y: 18 }}
+							animate={isRevealed ? { y: 0 } : { y: 18 }}
 							transition={cardTransition(index * 0.05)}
 							className="home-ecard home-card-body"
 						>

@@ -1,8 +1,11 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "motion/react";
-import { useRef } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import {
+	revealTransition,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import WorldMap from "@/components/ui/world-map";
 import SectionHead from "./section-head";
 
@@ -19,8 +22,7 @@ const PARTNERSHIP_ROUTES = [
 
 export default function GlobalPartnerships() {
 	const t = useTranslations("home.global");
-	const ref = useRef<HTMLElement>(null);
-	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 
 	return (
@@ -40,13 +42,14 @@ export default function GlobalPartnerships() {
 
 			<motion.div
 				className="relative z-1 mt-[var(--home-stack)] w-full px-[var(--home-inline)] max-md:mt-[var(--home-stack-sm)]"
-				initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-				animate={
-					inView || shouldReduceMotion
-						? { opacity: 1, y: 0 }
-						: { opacity: 0, y: 16 }
-				}
-				transition={{ type: "spring", duration: 0.45, bounce: 0, delay: 0.1 }}
+				initial={shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }}
+				animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+				transition={revealTransition(shouldAnimate, {
+					type: "spring" as const,
+					duration: 0.45,
+					bounce: 0,
+					delay: 0.1,
+				})}
 			>
 				<div
 					className="pointer-events-none absolute inset-x-0 -bottom-6 top-1/3 bg-[radial-gradient(70%_55%_at_50%_100%,rgba(58,83,201,0.18),transparent_65%)] dark:bg-[radial-gradient(70%_55%_at_50%_100%,rgba(58,83,201,0.5),transparent_65%)] max-md:-bottom-2 max-md:top-1/2"

@@ -15,13 +15,13 @@ import {
 } from "lucide-react";
 import {
 	motion,
-	useInView,
 	useReducedMotion,
 	AnimatePresence,
 } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useSectionReveal } from "@/hooks/use-section-reveal";
 import type { CSSProperties } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import SectionHead from "./section-head";
@@ -125,9 +125,8 @@ function AiDemo() {
 	const [active, setActive] =
 		useState<(typeof chips.current)[number]["id"]>("tickets");
 	const [answer, setAnswer] = useState("");
-	const ref = useRef<HTMLDivElement>(null);
 	const typeTimerRef = useRef<number | null>(null);
-	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+	const { ref, isRevealed } = useSectionReveal<HTMLDivElement>();
 	const started = useRef(false);
 	const shouldReduceMotion = useReducedMotion();
 
@@ -166,11 +165,11 @@ function AiDemo() {
 	);
 
 	useEffect(() => {
-		if (inView && !started.current) {
+		if (isRevealed && !started.current) {
 			started.current = true;
 			selectChip(chips.current[0]);
 		}
-	}, [inView, selectChip]);
+	}, [isRevealed, selectChip]);
 
 	useEffect(
 		() => () => {
@@ -189,9 +188,9 @@ function AiDemo() {
 			ref={ref}
 			className="home-demo home-demo--ai min-h-[340px] sm:min-h-[420px]"
 		>
-			<div className="home-demo-head home-demo-head--wrap">
+			<div className="home-demo-head home-demo-head--wrap min-w-0 overflow-hidden">
 				<div
-					className="home-demo-chip-list"
+					className="home-demo-chip-list w-full min-w-0 max-w-full flex-nowrap overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 					role="group"
 					aria-label={t("title")}
 				>
@@ -398,8 +397,7 @@ function PipelineDemo() {
 	const [activeStage, setActiveStage] = useState(-1);
 	const [status, setStatus] = useState(t("idle"));
 	const [live, setLive] = useState(false);
-	const ref = useRef<HTMLDivElement>(null);
-	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+	const { ref, isRevealed } = useSectionReveal<HTMLDivElement>();
 	const started = useRef(false);
 	const shouldReduceMotion = useReducedMotion();
 
@@ -440,11 +438,11 @@ function PipelineDemo() {
 	}, [running, shouldReduceMotion, t]);
 
 	useEffect(() => {
-		if (inView && !started.current && !shouldReduceMotion) {
+		if (isRevealed && !started.current && !shouldReduceMotion) {
 			started.current = true;
 			run();
 		}
-	}, [inView, run, shouldReduceMotion]);
+	}, [isRevealed, run, shouldReduceMotion]);
 
 	return (
 		<div ref={ref} className="home-demo home-demo--pipeline">
@@ -590,8 +588,7 @@ function FeatureSection({
 	index: number;
 }) {
 	const t = useTranslations(`home.features.${feature.id}`);
-	const ref = useRef<HTMLElement>(null);
-	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 
 	const bullets = [t("bullet_1"), t("bullet_2"), t("bullet_3")];
@@ -606,8 +603,8 @@ function FeatureSection({
 			<div className="home-wrap grid items-center gap-[clamp(2.5rem,6vw,5.5rem)] lg:grid-cols-2">
 				<motion.div
 					className={`flex flex-col gap-7 sm:gap-8 ${feature.reverse ? "lg:order-2" : ""}`}
-					initial={shouldReduceMotion ? false : "hidden"}
-					animate={inView ? "visible" : "hidden"}
+					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
+					animate={isRevealed ? "visible" : "hidden"}
 					variants={reveal}
 				>
 					<span className="inline-flex w-fit items-center gap-3.5 text-sm font-semibold text-[#3a53c9]">
@@ -636,13 +633,15 @@ function FeatureSection({
 
 				<motion.div
 					className={`relative min-w-0 ${feature.reverse ? "lg:order-1" : ""}`}
-					initial={shouldReduceMotion ? false : "hidden"}
-					animate={inView ? "visible" : "hidden"}
+					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
+					animate={isRevealed ? "visible" : "hidden"}
 					variants={{
 						...reveal,
 						visible: {
 							...reveal.visible,
-							transition: { ...reveal.visible.transition, delay: 0.1 * index },
+							transition: shouldAnimate
+								? { ...reveal.visible.transition, delay: 0.1 * index }
+								: { duration: 0 },
 						},
 					}}
 				>

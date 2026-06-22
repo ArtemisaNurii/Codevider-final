@@ -1,9 +1,13 @@
 "use client";
 
 import { ArrowRight, Check, Mail, MapPin, Phone } from "lucide-react";
-import { motion, useInView, useReducedMotion } from "motion/react";
-import { FormEvent, ReactNode, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { FormEvent, ReactNode, useState } from "react";
 import { useTranslations } from "next-intl";
+import {
+	revealTransition,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 
 const inputClassName =
 	"w-full rounded-[10px] border-[1.5px] border-[var(--border)] bg-[var(--bg)] px-4 py-3.5 text-[inherit] placeholder:text-[var(--text)]/55 transition-[border-color,box-shadow] focus:border-[var(--dash-brand)] focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[var(--dash-brand)]/15";
@@ -39,8 +43,7 @@ function FormLabel({
 
 export default function Contact() {
 	const t = useTranslations("home.contact");
-	const ref = useRef<HTMLElement>(null);
-	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 	const [submitted, setSubmitted] = useState(false);
 
@@ -59,9 +62,13 @@ export default function Contact() {
 			<div className="home-wrap grid items-center gap-[clamp(2.5rem,6vw,5rem)] lg:grid-cols-[2fr_3fr]">
 				<motion.div
 					className="flex flex-col justify-center lg:pr-[clamp(1.25rem,2.5vw,2rem)]"
-					initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-					animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-					transition={{ type: "spring", duration: 0.45, bounce: 0 }}
+					initial={shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }}
+					animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+					transition={revealTransition(shouldAnimate, {
+						type: "spring" as const,
+						duration: 0.45,
+						bounce: 0,
+					})}
 				>
 					<p className="home-eyebrow">{t("eyebrow")}</p>
 					<h2 className="mt-[clamp(1.125rem,2.5vw,1.5rem)] max-w-xl text-balance text-[clamp(2rem,4.8vw,3.5rem)] leading-[1.05] tracking-[-0.02em] text-[var(--text-h)] lg:max-w-none">
@@ -119,9 +126,14 @@ export default function Contact() {
 
 				<motion.div
 					className="flex flex-col justify-center lg:pl-[clamp(1.25rem,2.5vw,2rem)]"
-					initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-					animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-					transition={{ type: "spring", duration: 0.45, bounce: 0, delay: 0.1 }}
+					initial={shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }}
+					animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+					transition={revealTransition(shouldAnimate, {
+						type: "spring" as const,
+						duration: 0.45,
+						bounce: 0,
+						delay: 0.1,
+					})}
 				>
 					{submitted ? (
 						<div className="surface-card rounded-3xl p-10 text-center">

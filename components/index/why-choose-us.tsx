@@ -1,9 +1,12 @@
 "use client";
 
 import { Clock, Lightbulb, Percent, SlidersHorizontal } from "lucide-react";
-import { motion, useInView, useReducedMotion } from "motion/react";
-import { useRef } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import {
+	revealTransition,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
 const BOTTOM_CARDS = [
@@ -17,18 +20,19 @@ const revealEase = [0.22, 1, 0.36, 1] as const;
 
 export default function WhyChooseUs() {
 	const t = useTranslations("home.why_choose");
-	const ref = useRef<HTMLElement>(null);
-	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 
 	const cardTransition = (delay: number) =>
-		shouldReduceMotion
-			? { duration: 0 }
-			: { duration: 0.5, ease: revealEase, delay };
+		revealTransition(shouldAnimate, {
+			duration: 0.5,
+			ease: revealEase,
+			delay: shouldReduceMotion ? 0 : delay,
+		});
 
 	const motionProps = (delay: number) => ({
-		initial: shouldReduceMotion ? false : { y: 18 },
-		animate: inView || shouldReduceMotion ? { y: 0 } : { y: 18 },
+		initial: shouldReduceMotion || !shouldAnimate ? false : { y: 18 },
+		animate: isRevealed ? { y: 0 } : { y: 18 },
 		transition: cardTransition(delay),
 	});
 

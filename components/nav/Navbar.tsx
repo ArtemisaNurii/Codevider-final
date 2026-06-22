@@ -6,6 +6,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { CodeviderLogo } from "./CodeviderLogo";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";
 
 const SCROLL_THRESHOLD = 50;
@@ -168,7 +169,7 @@ function DesktopNavLinks({ isScrolled }: { isScrolled: boolean }) {
 	return (
 		<div
 			ref={containerRef}
-			className="relative hidden items-center justify-center gap-1 md:flex"
+			className="relative hidden items-center justify-center gap-1 navbar:flex"
 		>
 			<motion.span
 				aria-hidden
@@ -216,6 +217,17 @@ export function Navbar() {
 	}, [pathname]);
 
 	useEffect(() => {
+		const mediaQuery = window.matchMedia("(min-width: 936px)");
+
+		const handleViewportChange = (event: MediaQueryListEvent) => {
+			if (event.matches) setMobileMenuOpen(false);
+		};
+
+		mediaQuery.addEventListener("change", handleViewportChange);
+		return () => mediaQuery.removeEventListener("change", handleViewportChange);
+	}, []);
+
+	useEffect(() => {
 		if (!mobileMenuOpen) return;
 
 		document.body.style.overflow = "hidden";
@@ -237,7 +249,7 @@ export function Navbar() {
 			<motion.nav
 				aria-label="Main navigation"
 				className={`fixed left-1/2 top-0 z-50 border border-transparent ${
-					isScrolled ? "w-full max-w-4xl" : "w-screen max-w-none"
+					isScrolled ? "w-full max-w-6xl" : "w-screen max-w-none"
 				}`}
 				initial={false}
 				animate={isScrolled ? "scrolled" : "initial"}
@@ -245,8 +257,8 @@ export function Navbar() {
 				transition={shouldReduceMotion ? instantTransition : springTransition}
 			>
 				<div
-					className={`flex h-full w-full items-center justify-between gap-4 px-4  ${
-						isScrolled ? "" : "mx-auto max-w-4xl"
+					className={`flex h-full w-full items-center justify-between gap-4 px-4 ${
+						isScrolled ? "" : "mx-auto max-w-6xl"
 					}`}
 				>
 					<Link
@@ -260,7 +272,8 @@ export function Navbar() {
 					<DesktopNavLinks isScrolled={isScrolled} />
 
 					<div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3">
-						<div className="hidden items-center gap-2 md:flex">
+						<div className="hidden items-center gap-2 navbar:flex">
+							<LanguageSelector variant="dark" />
 							<ThemeToggle variant="dark" />
 						</div>
 
@@ -274,7 +287,7 @@ export function Navbar() {
 
 						<button
 							type="button"
-							className="relative flex size-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition-[background-color,color] hover:bg-white/10 hover:text-white active:scale-[0.96] md:hidden"
+							className="relative flex size-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition-[background-color,color] hover:bg-white/10 hover:text-white active:scale-[0.96] navbar:hidden"
 							aria-expanded={mobileMenuOpen}
 							aria-controls="mobile-nav-menu"
 							aria-label={mobileMenuOpen ? t("close_menu") : t("open_menu")}
@@ -308,7 +321,7 @@ export function Navbar() {
 						<motion.button
 							type="button"
 							aria-label={t("close_menu")}
-							className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm md:hidden"
+							className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm navbar:hidden"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}
@@ -321,7 +334,7 @@ export function Navbar() {
 							role="dialog"
 							aria-modal="true"
 							aria-label={t("open_menu")}
-							className="fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col border-t border-white/10 bg-slate-900/95 px-4 pb-6 pt-6 shadow-[0_12px_40px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:px-6 md:hidden"
+							className="fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col border-t border-white/10 bg-slate-900/95 px-4 pb-6 pt-6 shadow-[0_12px_40px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:px-6 navbar:hidden"
 							initial={shouldReduceMotion ? false : { opacity: 0, y: -8 }}
 							animate={{ opacity: 1, y: 0 }}
 							exit={{ opacity: 0, y: -8 }}
@@ -333,7 +346,7 @@ export function Navbar() {
 						>
 							<nav
 								aria-label="Mobile navigation"
-								className="flex w-full flex-1 flex-col"
+								className="flex w-full flex-1 flex-col overflow-visible"
 							>
 								<ul className="flex flex-col gap-1">
 									{navLinks.map(({ href, key }, index) => (
@@ -360,7 +373,8 @@ export function Navbar() {
 									))}
 								</ul>
 
-								<div className="mt-auto flex gap-2 border-t border-white/10 pt-4">
+								<div className="mt-auto flex items-stretch gap-2 overflow-visible border-t border-white/10 pt-4">
+									<LanguageSelector variant="dark" fullWidth />
 									<ThemeToggle variant="dark" fullWidth />
 								</div>
 							</nav>

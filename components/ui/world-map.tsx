@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useInView, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/components/providers/ThemeProvider";
+import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
 
 type MapDot = {
 	start: { lat: number; lng: number; label?: string };
@@ -71,13 +72,15 @@ function createCurvedPath(
 function AnimatedPath({
 	d,
 	index,
-	inView,
+	isRevealed,
+	shouldAnimate,
 	shouldReduceMotion,
 	strokeWidth,
 }: {
 	d: string;
 	index: number;
-	inView: boolean;
+	isRevealed: boolean;
+	shouldAnimate: boolean;
 	shouldReduceMotion: boolean | null;
 	strokeWidth: number;
 }) {
@@ -87,15 +90,13 @@ function AnimatedPath({
 			fill="none"
 			stroke="url(#world-map-path-gradient)"
 			strokeWidth={strokeWidth}
-			initial={shouldReduceMotion ? false : { pathLength: 0 }}
-			animate={
-				inView || shouldReduceMotion ? { pathLength: 1 } : { pathLength: 0 }
-			}
-			transition={{
+			initial={shouldReduceMotion || !shouldAnimate ? false : { pathLength: 0 }}
+			animate={isRevealed ? { pathLength: 1 } : { pathLength: 0 }}
+			transition={revealTransition(shouldAnimate, {
 				duration: 1.5,
 				delay: 0.3 * index,
-				ease: "easeOut",
-			}}
+				ease: "easeOut" as const,
+			})}
 		/>
 	);
 }
@@ -103,8 +104,10 @@ function AnimatedPath({
 export default function WorldMap({ dots = [] }: WorldMapProps) {
 	const { theme } = useTheme();
 	const isCompact = useCompactViewport();
-	const ref = useRef<HTMLDivElement>(null);
-	const inView = useInView(ref, { once: true, margin: "0px", amount: 0.3 });
+	const { ref, isRevealed, shouldAnimate } = useSectionReveal<HTMLDivElement>({
+		margin: "0px",
+		amount: 0.3,
+	});
 	const shouldReduceMotion = useReducedMotion();
 	const [svgMaps, setSvgMaps] = useState<{
 		light: string;
@@ -200,7 +203,8 @@ export default function WorldMap({ dots = [] }: WorldMapProps) {
 							key={`path-${i}`}
 							d={createCurvedPath(startPoint, endPoint)}
 							index={i}
-							inView={inView}
+							isRevealed={isRevealed}
+							shouldAnimate={shouldAnimate}
 							shouldReduceMotion={shouldReduceMotion}
 							strokeWidth={styles.strokeWidth}
 						/>

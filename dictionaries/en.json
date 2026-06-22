@@ -29,11 +29,11 @@
 		"who_we_are_headline": "Transforming ideas into trusted digital solutions",
 		"who_we_are_description": "From web and mobile apps to cloud platforms and enterprise systems, we craft reliable software tailored to your business needs. Our teams blend modern technologies, scalable architectures, and intuitive design to deliver secure, high-performance solutions that help organizations innovate and grow.",
 		"read_more_about_us": "Read more about us",
-		"stat_global_partnerships_value": "30+",
+		"stat_global_partnerships_value": "{value}+",
 		"stat_global_partnerships": "Global partnerships across Europe",
-		"stat_delivery_velocity_value": "60%",
+		"stat_delivery_velocity_value": "{value}%",
 		"stat_delivery_velocity": "Average growth in delivery velocity",
-		"stat_elite_engineers_value": "25+",
+		"stat_elite_engineers_value": "{value}+",
 		"stat_elite_engineers": "Elite engineers with deep, full-stack expertise — ready to embed into your team within two weeks.",
 		"core_services": {
 			"eyebrow": "Our core services",
@@ -120,7 +120,7 @@
 					"status_test": "Running tests…",
 					"status_deploy": "Deploying…",
 					"status_live_label": "Live",
-					"status_live_uptime": "99% uptime"
+					"status_live_uptime": "98.5% uptime"
 				}
 			}
 		},
@@ -202,14 +202,8 @@
 			"flex_value": "100%",
 			"flex_title": "Flexibility & control",
 			"flex_description": "Manage and stay in control of your own project at all times — your roadmap, your priorities.",
-			"years_title": "Years of experience",
+			"years_title": "years of experience",
 			"years_description": "Benefit from the innovative viewpoints our team brings.",
-			"flags": {
-				"usa": "🇺🇸 USA",
-				"germany": "🇩🇪 Germany",
-				"london": "🇬🇧 London",
-				"europe": "🇪🇺 Europe"
-			},
 			"cards": {
 				"savings": {
 					"pin": "Avg. savings",
@@ -334,7 +328,7 @@
 		"address_line_2": "Barrikada Street",
 		"address_line_3": "Tirana, Albania 1001",
 		"contact_heading": "Contact",
-		"copyright": "© 2026 Codevider. All rights reserved. — Stay updated on our latest developments and opportunities."
+		"copyright": "© {year} Codevider. All rights reserved. — Stay updated on our latest developments and opportunities."
 	},
 	"about": {
 		"about_us": "About us",
@@ -356,7 +350,7 @@
 			"eyebrow": "Who we are",
 			"headline": "Built for partnership, engineered for scale",
 			"paragraph_1": "Founded in 2019 in Tirana, Albania, Codevider delivers high-performance, cost-efficient software development solutions for startups, SMEs, and enterprises across Europe and beyond. We specialize in web and mobile development, cloud-native microservices, and AI-powered integrations — helping you accelerate time-to-market and cut development costs by up to 60%.",
-			"paragraph_2": "Our team of 25+ developers excels in today's most advanced tech stacks. We integrate directly into your workflow using agile, sprint-based methodologies that keep you informed and in control, every step of the way. With a focus on quality, agility, and long-term partnership, we turn your ideas into scalable, future-ready digital products.",
+			"paragraph_2": "Our team of {value}+ developers excels in today's most advanced tech stacks. We integrate directly into your workflow using agile, sprint-based methodologies that keep you informed and in control, every step of the way. With a focus on quality, agility, and long-term partnership, we turn your ideas into scalable, future-ready digital products.",
 			"cta": "Let's build together"
 		},
 		"culture": {
@@ -409,8 +403,18 @@
 		"book_a_call": "Book a call",
 		"select_language": "Select language",
 		"language_options": "Language options",
+		"languages": {
+			"en": "English",
+			"es": "Español",
+			"sq": "Shqip",
+			"de": "Deutsch",
+			"fr": "Français",
+			"it": "Italiano"
+		},
 		"switch_to_light_mode": "Switch to light mode",
 		"switch_to_dark_mode": "Switch to dark mode",
+		"light_mode": "Light",
+		"dark_mode": "Dark",
 		"open_menu": "Open menu",
 		"close_menu": "Close menu",
 		"theme": "Theme"

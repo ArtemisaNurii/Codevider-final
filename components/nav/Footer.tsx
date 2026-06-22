@@ -77,7 +77,7 @@ export default function Footer() {
 				</div>
 
 				<div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 text-sm">
-					<span>{t("copyright")}</span>
+					<span>{t("copyright", { year: new Date().getFullYear() })}</span>
 					<FooterSocials />
 				</div>
 			</div>

@@ -1,10 +1,10 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { motion, useInView, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { Link } from "@/i18n/navigation";
-import { useRef } from "react";
 import { useTranslations } from "next-intl";
+import { useSectionReveal } from "@/hooks/use-section-reveal";
 
 const STAGGER = 0.1;
 
@@ -43,22 +43,25 @@ const statDescVariants = {
 
 const STATS = [
 	{
-		valueKey: "stat_global_partnerships_value",
+		valueKey: "stat_global_partnerships_value", // {value}+
 		labelKey: "stat_global_partnerships",
 		wide: false,
 		tone: "stat-card--partnerships",
+		value: 30,
 	},
 	{
-		valueKey: "stat_delivery_velocity_value",
+		valueKey: "stat_delivery_velocity_value", // {value}%
 		labelKey: "stat_delivery_velocity",
 		wide: false,
 		tone: "stat-card--accent",
+		value: 60,
 	},
 	{
-		valueKey: "stat_elite_engineers_value",
+		valueKey: "stat_elite_engineers_value", // {value}+
 		labelKey: "stat_elite_engineers",
 		wide: true,
 		tone: "stat-card--engineers",
+		value: 25,
 	},
 ] as const;
 
@@ -66,7 +69,8 @@ function StatCard({
 	value,
 	label,
 	index,
-	inView,
+	isRevealed,
+	shouldAnimate,
 	shouldReduceMotion,
 	wide,
 	tone,
@@ -74,16 +78,17 @@ function StatCard({
 	value: string;
 	label: string;
 	index: number;
-	inView: boolean;
+	isRevealed: boolean;
+	shouldAnimate: boolean;
 	shouldReduceMotion: boolean | null;
 	wide: boolean;
 	tone: string;
 }) {
 	return (
 		<motion.div
-			className={`stat-card ${tone} flex h-full flex-col justify-between gap-6 rounded-2xl p-7 sm:p-9 ${wide ? "sm:col-span-2" : ""}`}
-			initial={shouldReduceMotion ? false : "hidden"}
-			animate={inView ? "visible" : "hidden"}
+			className={`stat-card ${tone} flex h-full flex-col justify-between wrap-break-word gap-6 rounded-2xl p-7 sm:p-9 ${wide ? "sm:col-span-2" : ""}`}
+			initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
+			animate={isRevealed ? "visible" : "hidden"}
 			variants={{
 				hidden: {},
 				visible: {
@@ -95,7 +100,7 @@ function StatCard({
 			}}
 		>
 			<motion.p
-				className="font-[family-name:var(--mono)] text-[clamp(2rem,4vw,2.75rem)] font-medium tabular-nums tracking-tight text-white"
+				className="font-(family-name:--mono) text-[clamp(2rem,4vw,2.75rem)] font-medium tabular-nums tracking-tight text-white"
 				variants={itemVariants}
 			>
 				{value}
@@ -112,9 +117,7 @@ function StatCard({
 
 export default function WhoWeAre() {
 	const t = useTranslations("home");
-	const sectionRef = useRef<HTMLElement>(null);
-	const inView = useInView(sectionRef, {
-		once: true,
+	const { ref: sectionRef, isRevealed, shouldAnimate } = useSectionReveal({
 		margin: "-10% 0px -10% 0px",
 	});
 	const shouldReduceMotion = useReducedMotion();
@@ -127,8 +130,8 @@ export default function WhoWeAre() {
 		>
 			<div className="home-wrap grid w-full gap-14 lg:grid-cols-2 lg:gap-20 xl:gap-24">
 				<motion.div
-					initial={shouldReduceMotion ? false : "hidden"}
-					animate={inView ? "visible" : "hidden"}
+					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
+					animate={isRevealed ? "visible" : "hidden"}
 					variants={containerVariants}
 				>
 					<motion.p className="home-eyebrow mb-0" variants={itemVariants}>
@@ -159,13 +162,14 @@ export default function WhoWeAre() {
 				</motion.div>
 
 				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:pl-6">
-					{STATS.map(({ valueKey, labelKey, wide, tone }, index) => (
+					{STATS.map(({ valueKey, labelKey, wide, tone, value }, index) => (
 						<StatCard
 							key={valueKey}
-							value={t(valueKey)}
-							label={t(labelKey)}
+							value={t(valueKey, { value })}
+							label={t(labelKey, { value })}
 							index={index}
-							inView={inView}
+							isRevealed={isRevealed}
+							shouldAnimate={shouldAnimate}
 							shouldReduceMotion={shouldReduceMotion}
 							wide={wide}
 							tone={tone}

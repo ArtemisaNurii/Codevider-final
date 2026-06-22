@@ -1,9 +1,13 @@
 "use client";
 
 import { Minus, Plus } from "lucide-react";
-import { motion, useInView, useReducedMotion } from "motion/react";
-import { useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
+import {
+	revealTransition,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
 const FAQ_IDS = [
@@ -31,7 +35,8 @@ type FaqItemProps = {
 	question: string;
 	answer: string;
 	shouldReduceMotion: boolean | null;
-	inView: boolean;
+	isRevealed: boolean;
+	shouldAnimate: boolean;
 };
 
 function FaqItem({
@@ -42,14 +47,17 @@ function FaqItem({
 	question,
 	answer,
 	shouldReduceMotion,
-	inView,
+	isRevealed,
+	shouldAnimate,
 }: FaqItemProps) {
 	const panelId = `faq-panel-${id}`;
 	const triggerId = `faq-trigger-${id}`;
 
-	const itemTransition = shouldReduceMotion
-		? instantTransition
-		: { duration: 0.5, ease: revealEase, delay: index * 0.06 };
+	const itemTransition = revealTransition(shouldAnimate, {
+		duration: 0.5,
+		ease: revealEase,
+		delay: shouldReduceMotion ? 0 : index * 0.06,
+	});
 
 	const panelTransition = shouldReduceMotion ? instantTransition : springOpen;
 
@@ -63,12 +71,8 @@ function FaqItem({
 		<motion.div
 			className="home-faq-item"
 			data-open={isOpen}
-			initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-			animate={
-				inView || shouldReduceMotion
-					? { opacity: 1, y: 0 }
-					: { opacity: 0, y: 12 }
-			}
+			initial={shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 12 }}
+			animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
 			transition={itemTransition}
 		>
 			<motion.button
@@ -119,8 +123,7 @@ function FaqItem({
 
 export default function Faq() {
 	const t = useTranslations("home.faq");
-	const ref = useRef<HTMLElement>(null);
-	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 	const [openId, setOpenId] = useState<string | null>(null);
 
@@ -143,7 +146,8 @@ export default function Faq() {
 								question={t(`items.${id}.question`)}
 								answer={t(`items.${id}.answer`)}
 								shouldReduceMotion={shouldReduceMotion}
-								inView={inView}
+								isRevealed={isRevealed}
+								shouldAnimate={shouldAnimate}
 							/>
 						);
 					})}

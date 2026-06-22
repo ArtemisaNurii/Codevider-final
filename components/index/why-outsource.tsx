@@ -1,9 +1,12 @@
 "use client";
 
 import { DollarSign, Link2, ShieldCheck } from "lucide-react";
-import { motion, useInView, useReducedMotion } from "motion/react";
-import { useRef } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import {
+	revealTransition,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
 const PILLARS = [
@@ -16,21 +19,22 @@ const revealEase = [0.22, 1, 0.36, 1] as const;
 
 export default function WhyOutsource() {
 	const t = useTranslations("home.outsource");
-	const ref = useRef<HTMLElement>(null);
-	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 
 	const cardTransition = (delay: number) =>
-		shouldReduceMotion
-			? { duration: 0 }
-			: { duration: 0.5, ease: revealEase, delay };
+		revealTransition(shouldAnimate, {
+			duration: 0.5,
+			ease: revealEase,
+			delay: shouldReduceMotion ? 0 : delay,
+		});
 
 	return (
 		<section ref={ref} className="home-section home-feature-alt">
 			<div className="home-wrap">
 				<motion.div
-					initial={shouldReduceMotion ? false : { y: 18 }}
-					animate={inView || shouldReduceMotion ? { y: 0 } : { y: 18 }}
+					initial={shouldReduceMotion || !shouldAnimate ? false : { y: 18 }}
+					animate={isRevealed ? { y: 0 } : { y: 18 }}
 					transition={cardTransition(0)}
 				>
 					<SectionHead
@@ -45,8 +49,8 @@ export default function WhyOutsource() {
 					{PILLARS.map(({ id, icon: Icon }, index) => (
 						<motion.article
 							key={id}
-							initial={shouldReduceMotion ? false : { y: 18 }}
-							animate={inView || shouldReduceMotion ? { y: 0 } : { y: 18 }}
+							initial={shouldReduceMotion || !shouldAnimate ? false : { y: 18 }}
+							animate={isRevealed ? { y: 0 } : { y: 18 }}
 							transition={cardTransition(0.1 + index * 0.08)}
 							className="flex gap-3.5"
 						>
