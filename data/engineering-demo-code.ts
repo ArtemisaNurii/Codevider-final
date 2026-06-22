@@ -7,7 +7,7 @@ export const ENGINEERING_DEMO_TABS = {
 export type EngineeringDemoTab = keyof typeof ENGINEERING_DEMO_TABS;
 
 export const ENGINEERING_DEMO_CODE: Record<EngineeringDemoTab, string> = {
-	orders: `export async function createOrder(input: OrderInputDTO) {
+	orders: `function createOrder(input: OrderInputDTO) {
   const order = await db.insert(orders).values({
     userId: input.userId,
     total: input.amount,

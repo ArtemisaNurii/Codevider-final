@@ -185,7 +185,10 @@ function AiDemo() {
 		chips.current.find((c) => c.id === active) ?? chips.current[0];
 
 	return (
-		<div ref={ref} className="home-demo min-h-[420px]">
+		<div
+			ref={ref}
+			className="home-demo home-demo--ai min-h-[340px] sm:min-h-[420px]"
+		>
 			<div className="home-demo-head home-demo-head--wrap">
 				<div
 					className="home-demo-chip-list"
@@ -281,11 +284,7 @@ function CodeDemo() {
 						<SyntaxHighlighter
 							language={ENGINEERING_CODE_LANGUAGES[active]}
 							style={engineeringCodeTheme}
-							showLineNumbers
 							wrapLongLines={false}
-							lineNumberStyle={{
-								color: "#4b5563",
-							}}
 							customStyle={{
 								margin: 0,
 								padding: 0,
@@ -448,65 +447,96 @@ function PipelineDemo() {
 	}, [inView, run, shouldReduceMotion]);
 
 	return (
-		<div ref={ref} className="home-demo">
-			<div className="home-demo-head">
-				<span className="flex items-center gap-2">
-					<Cloud className="size-4 text-[#3a53c9]" aria-hidden />
-					{t("title")}
-				</span>
-				<span className="rounded-full bg-(--home-surface-muted) px-2.5 py-1 text-[11px] font-medium tracking-wide text-(--text) uppercase">
-					{t("subtitle")}
-				</span>
+		<div ref={ref} className="home-demo home-demo--pipeline">
+			<div className="home-demo-head home-demo-head--pipeline">
+				<div className="home-pipeline-head__row">
+					<span className="flex items-center gap-2">
+						<Cloud className="size-4 text-[#3a53c9]" aria-hidden />
+						{t("title")}
+					</span>
+					{live ? (
+						<div className="home-live-badge justify-between" role="status">
+							<span className="home-live-badge__dot" aria-hidden />
+							<span>{t("status_live_label")}</span>
+							<span className="home-live-badge__uptime home-live-badge__uptime--head tabular-nums">
+								{t("status_live_uptime")}
+							</span>
+						</div>
+					) : (
+						<span className="rounded-full bg-(--home-surface-muted) px-2.5 py-1 text-[11px] font-medium tracking-wide text-(--text) uppercase">
+							{t("subtitle")}
+						</span>
+					)}
+				</div>
+				{live ? (
+					<div className="home-pipeline-head__meta">
+						<span className="rounded-full bg-(--home-surface-muted) px-2.5 py-1 text-[11px] font-medium tracking-wide text-(--text) uppercase">
+							{t("subtitle")}
+						</span>
+						<span className="home-live-badge__uptime home-live-badge__uptime--mobile tabular-nums">
+							{t("status_live_uptime")}
+						</span>
+					</div>
+				) : null}
 			</div>
 			<div className="home-demo-body">
 				<div className="home-pipeline-stages">
-					<div className="flex items-center">
-						{stages.map((stage, i) => {
-							const StageIcon = stageIcons[stage];
+					<div className="flex flex-col gap-2">
+						<div className="flex items-center">
+							{stages.map((stage, i) => {
+								const StageIcon = stageIcons[stage];
 
-							return (
-								<div key={stage} className="contents">
-									<div className="flex flex-1 flex-col items-center gap-2 text-center">
-										<div
-											className={`grid size-10 place-items-center rounded-xl transition-[background-color,color,box-shadow] duration-300 ${
-												doneCount > i
-													? "bg-emerald-500/12 text-emerald-600 shadow-[0_1px_2px_rgba(16,185,129,0.12)]"
-													: activeStage === i
-														? "bg-[#3a53c9]/10 text-[#3a53c9] shadow-[0_1px_2px_rgba(58,83,201,0.12)]"
-														: "bg-(--bg) text-(--text) shadow-[0_1px_2px_color-mix(in_srgb,var(--text-h)_6%,transparent)]"
-											}`}
-										>
-											{doneCount > i ? (
-												<Check
-													className="size-5"
-													strokeWidth={2.5}
-													aria-hidden
-												/>
-											) : activeStage === i ? (
-												<Loader2
-													className="size-5 motion-reduce:animate-none animate-spin"
-													aria-hidden
-												/>
-											) : (
-												<StageIcon className="size-5" aria-hidden />
-											)}
+								return (
+									<div key={stage} className="contents">
+										<div className="flex flex-1 justify-center">
+											<div
+												className={`grid size-10 place-items-center rounded-xl transition-[background-color,color,box-shadow] duration-300 ${
+													doneCount > i
+														? "bg-emerald-500/12 text-emerald-600 shadow-[0_1px_2px_rgba(16,185,129,0.12)]"
+														: activeStage === i
+															? "bg-[#3a53c9]/10 text-[#3a53c9] shadow-[0_1px_2px_rgba(58,83,201,0.12)]"
+															: "bg-(--bg) text-(--text) shadow-[0_1px_2px_color-mix(in_srgb,var(--text-h)_6%,transparent)]"
+												}`}
+											>
+												{doneCount > i ? (
+													<Check
+														className="size-5"
+														strokeWidth={2.5}
+														aria-hidden
+													/>
+												) : activeStage === i ? (
+													<Loader2
+														className="size-5 motion-reduce:animate-none animate-spin"
+														aria-hidden
+													/>
+												) : (
+													<StageIcon className="size-5" aria-hidden />
+												)}
+											</div>
 										</div>
-										<span className="text-[13px] font-semibold text-(--text-h)/80">
-											{t(`stage_${stage}`)}
-										</span>
+										{i < stages.length - 1 ? (
+											<div
+												className={`h-[3px] w-[clamp(20px,5vw,60px)] shrink-0 overflow-hidden rounded-full bg-(--border) transition-[background] duration-500 ${
+													doneCount > i
+														? "bg-linear-to-r from-[#3a53c9] to-[#00bcff]"
+														: ""
+												}`}
+											/>
+										) : null}
 									</div>
-									{i < stages.length - 1 ? (
-										<div
-											className={`h-[3px] w-[clamp(20px,5vw,60px)] overflow-hidden rounded-full bg-(--border) transition-[background] duration-500 ${
-												doneCount > i
-													? "bg-linear-to-r from-[#3a53c9] to-[#00bcff]"
-													: ""
-											}`}
-										/>
-									) : null}
-								</div>
-							);
-						})}
+								);
+							})}
+						</div>
+						<div className="flex">
+							{stages.map((stage) => (
+								<span
+									key={stage}
+									className="flex-1 text-center text-[13px] font-semibold text-(--text-h)/80"
+								>
+									{t(`stage_${stage}`)}
+								</span>
+							))}
+						</div>
 					</div>
 				</div>
 				<div className="home-pipeline-foot">
@@ -524,10 +554,11 @@ function PipelineDemo() {
 								: t("run")}
 					</button>
 					{live ? (
-						<div className="home-live-badge" role="status">
-							<span className="home-live-badge__dot" aria-hidden />
-							<span>{t("status_live_label")}</span>
-							<span className="home-live-badge__uptime tabular-nums">
+						<div className="home-pipeline-foot__live-meta">
+							<span className="rounded-full bg-(--home-surface-muted) px-2.5 py-1 text-[11px] font-medium tracking-wide text-(--text) uppercase">
+								{t("subtitle")}
+							</span>
+							<span className="home-live-badge__uptime home-live-badge__uptime--foot tabular-nums">
 								{t("status_live_uptime")}
 							</span>
 						</div>

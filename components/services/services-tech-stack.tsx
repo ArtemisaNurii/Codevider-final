@@ -11,8 +11,10 @@ import { useTranslations } from "next-intl";
 import SectionHead from "@/components/index/section-head";
 import {
 	TECH_STACK_CATEGORIES,
-	TECH_STACK_ITEMS,
+	getTechStackCategory,
+	getTechStackInitials,
 	type TechStackCategoryId,
+	type TechStackItem,
 } from "@/data/tech-stack";
 
 type CategoryId = TechStackCategoryId;
@@ -23,19 +25,25 @@ const instantTransition = { duration: 0 };
 const revealEase = [0.22, 1, 0.36, 1] as const;
 
 function TechTile({
-	name,
+	item,
 	index,
 	sectionIndex,
 	shouldReduceMotion,
+	categoryId,
 }: {
-	name: string;
+	item: TechStackItem;
 	index: number;
 	sectionIndex: number;
 	shouldReduceMotion: boolean | null;
+	categoryId: CategoryId;
 }) {
 	const transition = shouldReduceMotion
 		? instantTransition
 		: { ...springOpen, delay: sectionIndex * 0.08 + index * 0.05 + 0.04 };
+
+	const iconHeight = item.iconDimensions?.height ?? 30;
+	const iconMaxWidth = item.iconDimensions?.maxWidth ?? 34;
+	const isWideIcon = iconMaxWidth > 34;
 
 	return (
 		<motion.div
@@ -44,7 +52,37 @@ function TechTile({
 			animate={{ opacity: 1, y: 0, scale: 1 }}
 			transition={transition}
 		>
-			{name}
+			{item.icon ? (
+				<span
+					className={
+						isWideIcon
+							? "svc-tech-tile__icon svc-tech-tile__icon--wide"
+							: "svc-tech-tile__icon"
+					}
+					aria-hidden
+				>
+					<span
+						className="svc-tech-tile__icon-slot"
+						style={{ width: iconMaxWidth, height: iconHeight }}
+					>
+						<img
+							src={`/icons/technologies/${categoryId}/${item.icon}`}
+							alt=""
+							width={iconMaxWidth}
+							height={iconHeight}
+							className="svc-tech-tile__icon-img"
+							style={{ height: iconHeight, maxWidth: iconMaxWidth }}
+							loading="lazy"
+							decoding="async"
+						/>
+					</span>
+				</span>
+			) : (
+				<span className="svc-tech-tile__badge" aria-hidden>
+					{getTechStackInitials(item.name)}
+				</span>
+			)}
+			<span className="svc-tech-tile__label">{item.name}</span>
 		</motion.div>
 	);
 }
@@ -59,8 +97,10 @@ function TechCategorySection({
 	shouldReduceMotion: boolean | null;
 }) {
 	const t = useTranslations("services.tech");
-	const items = TECH_STACK_ITEMS[categoryId];
+	const section = getTechStackCategory(categoryId);
 	const titleId = `tech-section-${categoryId}`;
+
+	if (!section) return null;
 
 	const sectionTransition = shouldReduceMotion
 		? instantTransition
@@ -79,11 +119,12 @@ function TechCategorySection({
 			</h3>
 
 			<div className="svc-tech-grid">
-				{items.map((name, index) => (
+				{section.items.map((item, index) => (
 					<TechTile
-						key={name}
-						name={name}
+						key={item.name}
+						item={item}
 						index={index}
+						categoryId={categoryId}
 						sectionIndex={sectionIndex}
 						shouldReduceMotion={shouldReduceMotion}
 					/>

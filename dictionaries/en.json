@@ -104,7 +104,7 @@
 				"description": "Streamline deployments with CI/CD pipelines, containerization, and secure cloud infrastructure on AWS — ensuring high availability and operational efficiency.",
 				"bullet_1": "Automated build, test & deploy pipelines",
 				"bullet_2": "Containerized, infrastructure-as-code setups",
-				"bullet_3": "High availability & 99.98% uptime SLAs",
+				"bullet_3": "High availability & 99% uptime SLAs",
 				"link": "Explore cloud & DevOps",
 				"demo": {
 					"title": "CI/CD pipeline",
@@ -120,7 +120,7 @@
 					"status_test": "Running tests…",
 					"status_deploy": "Deploying…",
 					"status_live_label": "Live",
-					"status_live_uptime": "99.98% uptime"
+					"status_live_uptime": "99% uptime"
 				}
 			}
 		},
@@ -656,7 +656,7 @@
 					"label": "Mobile & Design"
 				},
 				"apis": {
-					"label": "APIs"
+					"label": "APIs & Communication"
 				}
 			}
 		}
