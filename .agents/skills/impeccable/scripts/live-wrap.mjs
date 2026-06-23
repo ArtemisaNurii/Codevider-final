@@ -1110,14 +1110,14 @@ if (
 
 // Test exports (used by tests/live-wrap.test.mjs)
 export {
-	buildSearchQueries,
-	findElement,
-	findClosingLine,
-	detectCommentSyntax,
-	findAllElements,
-	filterByText,
-	findFileWithQuery,
-	detectStyleMode,
 	buildCssAuthoring,
 	buildCssSelectorPrefixExamples,
+	buildSearchQueries,
+	detectCommentSyntax,
+	detectStyleMode,
+	filterByText,
+	findAllElements,
+	findClosingLine,
+	findElement,
+	findFileWithQuery,
 };

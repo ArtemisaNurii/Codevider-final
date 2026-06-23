@@ -12,11 +12,11 @@
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { readLiveServerInfo } from "./lib/impeccable-paths.mjs";
 import {
 	completionAckForAcceptResult,
 	completionTypeForAcceptResult,
 } from "./live/completion.mjs";
-import { readLiveServerInfo } from "./lib/impeccable-paths.mjs";
 
 // Node's built-in fetch (undici under the hood) enforces a 300s headers
 // timeout that can't be lowered per-request. We cap each request below

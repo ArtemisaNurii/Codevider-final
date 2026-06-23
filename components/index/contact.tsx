@@ -1,13 +1,35 @@
 "use client";
 
-import { ArrowRight, Check, Mail, MapPin, Phone } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+	ArrowRight,
+	Check,
+	Mail,
+	MapPin,
+	Phone,
+	Plane,
+	Send,
+} from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { FormEvent, ReactNode, useState } from "react";
 import { useTranslations } from "next-intl";
+import { ReactNode, useMemo, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import {
+	TurnstileWidget,
+	type TurnstileWidgetHandle,
+} from "@/components/ui/turnstile-widget";
 import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
+import { submitContactLead } from "@/lib/api/contact-lead";
+import {
+	type ContactFormValues,
+	createContactSchema,
+} from "@/lib/schemas/contact";
 
 const inputClassName =
 	"w-full rounded-[10px] border-[1.5px] border-[var(--border)] bg-[var(--bg)] px-4 py-3.5 text-[inherit] placeholder:text-[var(--text)]/55 transition-[border-color,box-shadow] focus:border-[var(--dash-brand)] focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[var(--dash-brand)]/15";
+
+const inputErrorClassName =
+	"border-[var(--dash-warning)] focus:border-[var(--dash-warning)] focus-visible:ring-[var(--dash-warning)]/15";
 
 function FormLabel({
 	htmlFor,
@@ -38,20 +60,74 @@ function FormLabel({
 	);
 }
 
+function FieldError({ id, message }: { id?: string; message?: string }) {
+	if (!message) return null;
+
+	return (
+		<p
+			id={id}
+			className="mt-1.5 text-sm text-[var(--dash-warning)]"
+			role="alert"
+		>
+			{message}
+		</p>
+	);
+}
+
 export default function Contact() {
 	const t = useTranslations("home.contact");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 	const [submitted, setSubmitted] = useState(false);
+	const [submitError, setSubmitError] = useState<string | null>(null);
+	const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+	const turnstileRef = useRef<TurnstileWidgetHandle>(null);
 
-	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const form = event.currentTarget;
-		if (!form.checkValidity()) {
-			form.reportValidity();
+	const contactSchema = useMemo(
+		() =>
+			createContactSchema({
+				nameRequired: t("form_errors.name_required"),
+				nameMax: t("form_errors.name_max"),
+				emailRequired: t("form_errors.email_required"),
+				emailInvalid: t("form_errors.email_invalid"),
+				detailsRequired: t("form_errors.details_required"),
+				detailsMax: t("form_errors.details_max"),
+			}),
+		[t],
+	);
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+		reset,
+	} = useForm<ContactFormValues>({
+		resolver: zodResolver(contactSchema),
+		defaultValues: {
+			name: "",
+			email: "",
+			details: "",
+		},
+	});
+
+	const onSubmit = async (data: ContactFormValues) => {
+		setSubmitError(null);
+
+		if (!turnstileToken) {
+			setSubmitError(t("form_error_turnstile"));
 			return;
 		}
-		setSubmitted(true);
+
+		try {
+			await submitContactLead(data, turnstileToken);
+			setSubmitted(true);
+			reset();
+			setTurnstileToken(null);
+			turnstileRef.current?.reset();
+		} catch {
+			setSubmitError(t("form_error_submit"));
+			turnstileRef.current?.reset();
+		}
 	};
 
 	return (
@@ -103,9 +179,9 @@ export default function Contact() {
 									<Icon className="size-6" aria-hidden />
 								</span>
 								<div>
-									<h4 className="text-base font-semibold text-[var(--text-h)]">
+									<h3 className="text-base font-semibold text-[var(--text-h)]">
 										{title}
-									</h4>
+									</h3>
 									{href ? (
 										<a
 											href={href}
@@ -139,20 +215,20 @@ export default function Contact() {
 				>
 					{submitted ? (
 						<div className="surface-card rounded-3xl p-10 text-center">
-							<div className="mx-auto mb-[18px] grid size-16 place-items-center rounded-full bg-[var(--dash-brand-bg)] text-[var(--dash-brand)]">
+							<div className="mx-auto mb-[18px] grid size-16 place-items-center rounded-full bg-(--dash-brand-bg) text-(--dash-brand)">
 								<Check className="size-8" strokeWidth={2.4} aria-hidden />
 							</div>
-							<h3 className="text-xl font-semibold text-[var(--text-h)]">
+							<h3 className="text-xl font-semibold text-(--text-h)">
 								{t("success_title")}
 							</h3>
-							<p className="mt-2 text-pretty text-[var(--text)]">
+							<p className="mt-2 text-pretty text-(--text)">
 								{t("success_message")}
 							</p>
 						</div>
 					) : (
 						<form
-							onSubmit={handleSubmit}
-							className="surface-card rounded-3xl p-[clamp(28px,3.5vw,44px)] text-[var(--text-h)]"
+							onSubmit={handleSubmit(onSubmit)}
+							className="surface-card rounded-3xl p-[clamp(28px,3.5vw,44px)] text-(--text-h)"
 							noValidate
 						>
 							<div className=" grid gap-5 sm:grid-cols-2">
@@ -162,12 +238,20 @@ export default function Contact() {
 									</FormLabel>
 									<input
 										id="contact-name"
-										name="name"
 										type="text"
-										required
 										autoComplete="name"
+										maxLength={100}
 										placeholder={t("form_name_placeholder")}
-										className={inputClassName}
+										className={`${inputClassName}${errors.name ? ` ${inputErrorClassName}` : ""}`}
+										aria-invalid={errors.name ? true : undefined}
+										aria-describedby={
+											errors.name ? "contact-name-error" : undefined
+										}
+										{...register("name")}
+									/>
+									<FieldError
+										message={errors.name?.message}
+										id="contact-name-error"
 									/>
 								</div>
 								<div>
@@ -176,53 +260,70 @@ export default function Contact() {
 									</FormLabel>
 									<input
 										id="contact-email"
-										name="email"
 										type="email"
-										required
 										autoComplete="email"
 										placeholder={t("form_email_placeholder")}
-										className={inputClassName}
+										className={`${inputClassName}${errors.email ? ` ${inputErrorClassName}` : ""}`}
+										aria-invalid={errors.email ? true : undefined}
+										aria-describedby={
+											errors.email ? "contact-email-error" : undefined
+										}
+										{...register("email")}
+									/>
+									<FieldError
+										message={errors.email?.message}
+										id="contact-email-error"
 									/>
 								</div>
 							</div>
 
 							<div className="mt-5">
-								<FormLabel
-									htmlFor="contact-company"
-									optional={t("form_optional")}
-								>
-									{t("form_company")}
-								</FormLabel>
-								<input
-									id="contact-company"
-									name="company"
-									type="text"
-									autoComplete="organization"
-									placeholder={t("form_company_placeholder")}
-									className={inputClassName}
-								/>
-							</div>
-
-							<div className="mt-5">
-								<FormLabel htmlFor="contact-message" required>
+								<FormLabel htmlFor="contact-details" required>
 									{t("form_message")}
 								</FormLabel>
 								<textarea
-									id="contact-message"
-									name="message"
-									required
+									id="contact-details"
 									rows={5}
+									maxLength={1000}
 									placeholder={t("form_message_placeholder")}
-									className={`${inputClassName} min-h-[132px] resize-y`}
+									className={`${inputClassName} min-h-[132px] resize-y${errors.details ? ` ${inputErrorClassName}` : ""}`}
+									aria-invalid={errors.details ? true : undefined}
+									aria-describedby={
+										errors.details ? "contact-details-error" : undefined
+									}
+									{...register("details")}
+								/>
+								<FieldError
+									message={errors.details?.message}
+									id="contact-details-error"
 								/>
 							</div>
 
+							<div className="mt-5 w-full">
+								{/* to make the widge be visible to everyone, just change the className of data-appearance to "always" */}
+								{/* by default the token is automatically sent to the server and the server validates it */}
+								<TurnstileWidget
+									ref={turnstileRef}
+									onTokenChange={setTurnstileToken}
+								/>
+							</div>
+
+							{submitError ? (
+								<p
+									className="mt-5 text-sm text-[var(--dash-warning)]"
+									role="alert"
+								>
+									{submitError}
+								</p>
+							) : null}
+
 							<button
 								type="submit"
-								className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--dash-brand)] py-4 pl-7 pr-6 text-base font-semibold text-white transition-[background-color,transform] duration-150 ease-out hover:bg-[var(--dash-brand-end)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-brand)] active:scale-[0.96] motion-reduce:active:scale-100"
+								disabled={isSubmitting || !turnstileToken}
+								className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-(--dash-brand-solid) py-4 pl-7 pr-6 text-base font-semibold text-white transition-[background-color,transform] duration-150 ease-out hover:bg-(--dash-brand-solid-end) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--dash-brand) active:scale-[0.96] motion-reduce:active:scale-100 disabled:cursor-not-allowed disabled:opacity-60"
 							>
-								{t("form_submit")}
-								<ArrowRight className="size-4" aria-hidden />
+								{isSubmitting ? t("form_submitting") : t("form_submit")}
+								<Send className="size-4" aria-hidden />
 							</button>
 						</form>
 					)}

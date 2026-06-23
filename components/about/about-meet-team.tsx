@@ -3,8 +3,8 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import { useRef } from "react";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
 import SectionHead from "@/components/index/section-head";
 import { teamMembers } from "@/data/team-members";
 

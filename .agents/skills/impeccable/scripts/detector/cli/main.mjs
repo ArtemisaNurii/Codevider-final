@@ -1,22 +1,21 @@
 import fs from "node:fs";
 import path from "node:path";
-
-import { loadDesignSystemForCwd } from "../design-system.mjs";
-import {
-	createBrowserDetector,
-	detectUrl,
-} from "../engines/browser/detect-url.mjs";
-import { detectHtml } from "../engines/static-html/detect-html.mjs";
-import { detectText } from "../engines/regex/detect-text.mjs";
 import {
 	filterDetectionFindings,
 	readDetectionConfig,
 	shouldIgnoreDetectionFile,
 } from "../../lib/impeccable-config.mjs";
+import { loadDesignSystemForCwd } from "../design-system.mjs";
 import {
-	HTML_EXTENSIONS,
+	createBrowserDetector,
+	detectUrl,
+} from "../engines/browser/detect-url.mjs";
+import { detectText } from "../engines/regex/detect-text.mjs";
+import { detectHtml } from "../engines/static-html/detect-html.mjs";
+import {
 	buildImportGraph,
 	detectFrameworkConfig,
+	HTML_EXTENSIONS,
 	isPortListening,
 	walkDir,
 } from "../node/file-system.mjs";
@@ -332,4 +331,4 @@ async function detectCli() {
 	process.exit(0);
 }
 
-export { formatFindings, handleStdin, confirm, printUsage, detectCli };
+export { confirm, detectCli, formatFindings, handleStdin, printUsage };

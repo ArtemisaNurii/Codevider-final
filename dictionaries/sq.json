@@ -19,7 +19,8 @@
 	},
 	"home": {
 		"your_strategic_partner_in": "Partneri juaj strategjik në",
-		"we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Ne dizajnojmë, ndërtojmë dhe rritim softuerë të besueshëm për ueb, pajisje mobile dhe cloud — të integruar me ekipin tuaj dhe të ofruar pa kosto shtesë menaxhimi.",
+		"hero_lead_emphasis": "Ne dizajnojmë, ndërtojmë dhe rritim softuerë të besueshëm për ueb, pajisje mobile dhe cloud",
+		"hero_lead_rest": "— të integruar me ekipin tuaj dhe të ofruar pa kosto shtesë menaxhimi.",
 		"start_your_project": "Nisni projektin tuaj",
 		"explore_services": "Eksploroni shërbimet",
 		"years_delivering": "Vite eksperiencë",
@@ -116,7 +117,7 @@
 					"running": "Duke u ekzekutuar…",
 					"run": "Ekzekuto linjën",
 					"run_again": "Ekzekuto përsëri",
-					"status_building": "Duke u ndërtuar…",
+					"status_build": "Duke u ndërtuar…",
 					"status_test": "Duke ekzekutuar testet…",
 					"status_deploy": "Duke u hedhur në prodhim…",
 					"status_live_label": "Live",
@@ -281,8 +282,18 @@
 			"form_subtitle": "Ndani disa detaje rreth projektit tuaj dhe ne do t'ju kontaktojmë për hapat e ardhshëm.",
 			"form_required": "Fushat e detyrueshme",
 			"form_submit": "Dërgoni mesazhin tuaj",
+			"form_submitting": "Duke dërguar…",
 			"form_note": "Ne zakonisht përgjigjemi brenda një dite pune.",
 			"form_note_privacy": "Detajet tuaja mbeten private — ne kurrë nuk i ndajmë ato me palë të treta.",
+			"form_error_submit": "Diçka shkoi keq. Ju lutemi provoni përsëri.",
+			"form_errors": {
+				"name_required": "Ju lutemi shkruani emrin tuaj të plotë",
+				"name_max": "Emri duhet të jetë 100 karaktere ose më pak",
+				"email_required": "Ju lutemi shkruani adresën tuaj të e-mailit",
+				"email_invalid": "Ju lutemi shkruani një adresë e-maili të vlefshme",
+				"details_required": "Ju lutemi na tregoni rreth projektit tuaj",
+				"details_max": "Detajet duhet të jenë 1000 karaktere ose më pak"
+			},
 			"success_title": "Mesazhi u dërgua!",
 			"success_message": "Faleminderit që na kontaktuat — ne do t'ju kthejmë përgjigje brenda një dite pune."
 		},

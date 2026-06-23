@@ -19,7 +19,8 @@
 	},
 	"home": {
 		"your_strategic_partner_in": "Votre partenaire stratégique en",
-		"we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Nous concevons, développons et faisons évoluer des logiciels web, mobiles et cloud fiables — intégrés à votre équipe et livrés sans frais structurels superflus.",
+		"hero_lead_emphasis": "Nous concevons, développons et faisons évoluer des logiciels web, mobiles et cloud fiables",
+		"hero_lead_rest": "— intégrés à votre équipe et livrés sans frais structurels superflus.",
 		"start_your_project": "Démarrer votre projet",
 		"explore_services": "Explorer les services",
 		"years_delivering": "Années d'expérience",
@@ -116,7 +117,7 @@
 					"running": "En cours…",
 					"run": "Lancer le pipeline",
 					"run_again": "Relancer",
-					"status_building": "Build en cours…",
+					"status_build": "Build en cours…",
 					"status_test": "Tests en cours…",
 					"status_deploy": "Déploiement…",
 					"status_live_label": "En ligne",
@@ -281,8 +282,18 @@
 			"form_subtitle": "Partagez quelques détails sur votre projet et wir vous recontacterons pour la suite.",
 			"form_required": "Champs requis",
 			"form_submit": "Envoyer votre message",
+			"form_submitting": "Envoi en cours…",
 			"form_note": "Nous répondons généralement sous un jour ouvré.",
 			"form_note_privacy": "Vos informations restent privées — nous ne les partageons jamais avec des tiers.",
+			"form_error_submit": "Une erreur s'est produite. Veuillez réessayer.",
+			"form_errors": {
+				"name_required": "Veuillez saisir votre nom complet",
+				"name_max": "Le nom ne doit pas dépasser 100 caractères",
+				"email_required": "Veuillez saisir votre adresse e-mail",
+				"email_invalid": "Veuillez saisir une adresse e-mail valide",
+				"details_required": "Veuillez nous parler de votre projet",
+				"details_max": "Les détails ne doivent pas dépasser 1000 caractères"
+			},
 			"success_title": "Message envoyé !",
 			"success_message": "Merci de nous avoir contactés — nous vous répondrons sous un jour ouvré."
 		},

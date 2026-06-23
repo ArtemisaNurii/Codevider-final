@@ -68,7 +68,7 @@ export default function RotatingWord() {
 							shouldReduceMotion ? { duration: 0.15 } : enterTransition
 						}
 					>
-						{word}
+						<em>{word}</em>
 					</motion.span>
 				</AnimatePresence>
 			</span>

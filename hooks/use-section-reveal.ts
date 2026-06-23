@@ -1,9 +1,9 @@
 "use client";
 
 import {
+	type UseInViewOptions,
 	useInView,
 	useReducedMotion,
-	type UseInViewOptions,
 } from "motion/react";
 import { useLayoutEffect, useRef, useState } from "react";
 

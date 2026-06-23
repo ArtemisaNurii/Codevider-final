@@ -17,12 +17,12 @@
 
 import {
 	existsSync,
-	readFileSync,
-	writeFileSync,
 	mkdirSync,
+	readFileSync,
 	statSync,
+	writeFileSync,
 } from "node:fs";
-import { join, dirname, isAbsolute, relative, resolve, sep } from "node:path";
+import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 
 export function getConfigPath(root) {
 	return join(root, ".impeccable", "config.json");

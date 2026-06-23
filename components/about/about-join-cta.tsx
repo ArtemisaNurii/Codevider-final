@@ -2,9 +2,9 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { Link } from "@/i18n/navigation";
-import { useRef } from "react";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
+import { Link } from "@/i18n/navigation";
 
 const revealEase = [0.22, 1, 0.36, 1] as const;
 

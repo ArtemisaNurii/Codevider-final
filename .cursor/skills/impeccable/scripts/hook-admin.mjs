@@ -23,15 +23,15 @@ import fs from "node:fs";
 import path from "node:path";
 
 import {
-	getConfigPath,
-	getLocalConfigPath,
-	getCachePath,
-	getPendingPath,
-	readConfig,
 	DEFAULT_CONFIG,
 	ensureHookGitExcludes,
+	getCachePath,
+	getConfigPath,
+	getLocalConfigPath,
+	getPendingPath,
 	normalizeIgnoreValue,
 	normalizeIgnoreValueEntries,
+	readConfig,
 } from "./hook-lib.mjs";
 
 const ACTIONS = new Set([

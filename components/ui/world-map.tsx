@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
@@ -20,15 +20,17 @@ const MAP_STYLES = {
 		dots: "#1e3280",
 		line: "#2563eb",
 		dotRadius: 0.3,
-		strokeWidth: 2,
-		pointRadius: 4,
+		strokeWidth: 2.6,
+		glowStrokeWidth: 5,
+		pointRadius: 4.5,
 	},
 	dark: {
 		dots: "#ffffffd9",
 		line: "#38d4ff",
 		dotRadius: 0.24,
-		strokeWidth: 1.4,
-		pointRadius: 3.5,
+		strokeWidth: 2.2,
+		glowStrokeWidth: 4.5,
+		pointRadius: 4,
 	},
 } as const;
 
@@ -76,6 +78,7 @@ function AnimatedPath({
 	shouldAnimate,
 	shouldReduceMotion,
 	strokeWidth,
+	glowStrokeWidth,
 }: {
 	d: string;
 	index: number;
@@ -83,21 +86,42 @@ function AnimatedPath({
 	shouldAnimate: boolean;
 	shouldReduceMotion: boolean | null;
 	strokeWidth: number;
+	glowStrokeWidth: number;
 }) {
 	return (
-		<motion.path
-			d={d}
-			fill="none"
-			stroke="url(#world-map-path-gradient)"
-			strokeWidth={strokeWidth}
-			initial={shouldReduceMotion || !shouldAnimate ? false : { pathLength: 0 }}
-			animate={isRevealed ? { pathLength: 1 } : { pathLength: 0 }}
-			transition={revealTransition(shouldAnimate, {
-				duration: 1.5,
-				delay: 0.3 * index,
-				ease: "easeOut" as const,
-			})}
-		/>
+		<g>
+			<motion.path
+				d={d}
+				fill="none"
+				stroke="url(#world-map-path-gradient)"
+				strokeWidth={glowStrokeWidth}
+				strokeOpacity={0.22}
+				initial={
+					shouldReduceMotion || !shouldAnimate ? false : { pathLength: 0 }
+				}
+				animate={isRevealed ? { pathLength: 1 } : { pathLength: 0 }}
+				transition={revealTransition(shouldAnimate, {
+					duration: 1.5,
+					delay: 0.3 * index,
+					ease: "easeOut" as const,
+				})}
+			/>
+			<motion.path
+				d={d}
+				fill="none"
+				stroke="url(#world-map-path-gradient)"
+				strokeWidth={strokeWidth}
+				initial={
+					shouldReduceMotion || !shouldAnimate ? false : { pathLength: 0 }
+				}
+				animate={isRevealed ? { pathLength: 1 } : { pathLength: 0 }}
+				transition={revealTransition(shouldAnimate, {
+					duration: 1.5,
+					delay: 0.3 * index,
+					ease: "easeOut" as const,
+				})}
+			/>
+		</g>
 	);
 }
 
@@ -207,52 +231,55 @@ export default function WorldMap({ dots = [] }: WorldMapProps) {
 							shouldAnimate={shouldAnimate}
 							shouldReduceMotion={shouldReduceMotion}
 							strokeWidth={styles.strokeWidth}
+							glowStrokeWidth={styles.glowStrokeWidth}
 						/>
 					);
 				})}
 
-				{dots.map((dot, i) => {
+				{dots.flatMap((dot, i) => {
 					const startPoint = projectPoint(dot.start.lat, dot.start.lng);
 					const endPoint = projectPoint(dot.end.lat, dot.end.lng);
+					const points = [
+						{ point: startPoint, glow: i === 0 },
+						{ point: endPoint, glow: i < 3 },
+					];
 
-					return (
-						<g key={`points-${i}`}>
-							{[startPoint, endPoint].map((point, pointIndex) => (
-								<g key={pointIndex}>
-									<circle
-										cx={point.x}
-										cy={point.y}
-										r={styles.pointRadius}
-										fill={styles.line}
+					return points.map(({ point, glow }, pointIndex) => (
+						<g key={`points-${i}-${pointIndex}`}>
+							<circle
+								cx={point.x}
+								cy={point.y}
+								r={styles.pointRadius}
+								fill={styles.line}
+							/>
+							{glow ? (
+								<circle
+									cx={point.x}
+									cy={point.y}
+									r={styles.pointRadius}
+									fill={styles.line}
+									opacity="0.5"
+								>
+									<animate
+										attributeName="r"
+										from={styles.pointRadius}
+										to={styles.pointRadius + 8}
+										dur="1.8s"
+										begin={`${i * 0.2}s`}
+										repeatCount="indefinite"
 									/>
-									<circle
-										cx={point.x}
-										cy={point.y}
-										r={styles.pointRadius}
-										fill={styles.line}
-										opacity="0.45"
-									>
-										<animate
-											attributeName="r"
-											from={styles.pointRadius}
-											to={styles.pointRadius + 7}
-											dur="1.5s"
-											begin="0s"
-											repeatCount="indefinite"
-										/>
-										<animate
-											attributeName="opacity"
-											from="0.45"
-											to="0"
-											dur="1.5s"
-											begin="0s"
-											repeatCount="indefinite"
-										/>
-									</circle>
-								</g>
-							))}
+									<animate
+										attributeName="opacity"
+										from="0.5"
+										to="0"
+										dur="1.8s"
+										begin={`${i * 0.2}s`}
+										repeatCount="indefinite"
+									/>
+								</circle>
+							) : null}
 						</g>
-					);
+					));
 				})}
 			</svg>
 		</div>

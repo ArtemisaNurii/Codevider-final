@@ -1,13 +1,24 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
-	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-	"files": { "ignoreUnknown": false },
-	"formatter": { "enabled": true, "indentStyle": "tab" },
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": false
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {
 			"preset": "none",
-			"complexity": { "noUselessTypeConstraint": "error" },
+			"complexity": {
+				"noUselessTypeConstraint": "error"
+			},
 			"correctness": {
 				"noBeforeInteractiveScriptOutsideDocument": "warn",
 				"noNextAsyncClientComponent": "warn",
@@ -57,7 +68,17 @@
 			"!next-env.d.ts"
 		]
 	},
-	"javascript": { "formatter": { "quoteStyle": "double" }, "globals": [] },
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		},
+		"globals": []
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	},
 	"overrides": [
 		{
 			"includes": ["**/*.{js,jsx,mjs,ts,tsx,mts,cts}"],
@@ -216,8 +237,12 @@
 						"noUnwantedPolyfillio": "warn",
 						"useGoogleFontPreconnect": "warn"
 					},
-					"security": { "noDangerouslySetInnerHtmlWithChildren": "error" },
-					"style": { "noHeadElement": "warn" },
+					"security": {
+						"noDangerouslySetInnerHtmlWithChildren": "error"
+					},
+					"style": {
+						"noHeadElement": "warn"
+					},
 					"suspicious": {
 						"noCommentText": "error",
 						"noDocumentImportInPage": "error",
@@ -229,12 +254,19 @@
 				}
 			}
 		},
-		{ "includes": ["**/*.ts", "**/*.tsx"], "javascript": { "globals": [] } },
+		{
+			"includes": ["**/*.ts", "**/*.tsx"],
+			"javascript": {
+				"globals": []
+			}
+		},
 		{
 			"includes": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
 			"linter": {
 				"rules": {
-					"complexity": { "noArguments": "error" },
+					"complexity": {
+						"noArguments": "error"
+					},
 					"correctness": {
 						"noConstAssign": "off",
 						"noGlobalObjectCalls": "off",
@@ -245,7 +277,10 @@
 						"noUnreachable": "off",
 						"noUnreachableSuper": "off"
 					},
-					"style": { "useConst": "error", "useSpreadOverApply": "error" },
+					"style": {
+						"useConst": "error",
+						"useSpreadOverApply": "error"
+					},
 					"suspicious": {
 						"noClassAssign": "off",
 						"noDuplicateClassMembers": "off",
@@ -265,6 +300,10 @@
 	],
 	"assist": {
 		"enabled": true,
-		"actions": { "source": { "organizeImports": "on" } }
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
 	}
 }

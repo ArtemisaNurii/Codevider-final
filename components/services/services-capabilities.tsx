@@ -2,9 +2,9 @@
 
 import { ArrowRight, Check } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { Link } from "@/i18n/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "@/i18n/navigation";
 
 const SERVICE_IDS = [
 	"custom",

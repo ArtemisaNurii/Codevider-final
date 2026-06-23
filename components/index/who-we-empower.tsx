@@ -48,6 +48,7 @@ export default function WhoWeEmpower() {
 					headline={t("headline")}
 					description={t("description")}
 					centered
+					className="max-md:mx-0 max-md:text-left max-md:[&_.home-eyebrow--center]:justify-start"
 				/>
 
 				<div className="home-section-lead grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

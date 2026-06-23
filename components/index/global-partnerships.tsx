@@ -2,8 +2,8 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
 import WorldMap from "@/components/ui/world-map";
+import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
 const PARTNERSHIP_HUB = { lat: 32.1533, lng: 17.1683 } as const;
@@ -25,7 +25,11 @@ export default function GlobalPartnerships() {
 	return (
 		<section
 			ref={ref}
-			className="home-section home-section--tight relative overflow-visible max-md:pb-10"
+			className="home-section relative overflow-visible"
+			style={{
+				paddingTop: "var(--home-section-y-tight)",
+				paddingBottom: "1.1rem",
+			}}
 		>
 			<div className="home-wrap relative z-1">
 				<SectionHead

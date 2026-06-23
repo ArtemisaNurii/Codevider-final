@@ -1,11 +1,11 @@
 "use client";
 
-import { Link, usePathname } from "@/i18n/navigation";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import { CodeviderLogo } from "./CodeviderLogo";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link, usePathname } from "@/i18n/navigation";
+import { CodeviderLogo } from "./CodeviderLogo";
 import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -278,7 +278,7 @@ export function Navbar() {
 						</div>
 
 						<Link
-							href="/about"
+							href="https://calendly.com/codevider/pasho"
 							className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#3a53c9] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#2f46a8] active:scale-[0.96] sm:px-5"
 						>
 							{t("book_a_call")}

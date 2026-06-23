@@ -34,7 +34,7 @@ export default function WhyChooseUs() {
 	});
 
 	return (
-		<section ref={ref} className="home-section">
+		<section ref={ref} className="home-section home-feature-alt">
 			<div className="home-wrap">
 				<SectionHead
 					eyebrow={t("eyebrow")}
@@ -54,7 +54,7 @@ export default function WhyChooseUs() {
 						<p className="text-balance text-[17px] font-semibold text-[var(--dash-brand)]">
 							{t("value_flow")}
 						</p>
-						<p className="text-pretty text-[15px] leading-relaxed text-[var(--text-h)]/80">
+						<p className="max-w-[58ch] text-pretty text-[15px] leading-relaxed text-[var(--text-h)]/80">
 							{t("value_description")}
 						</p>
 					</motion.article>

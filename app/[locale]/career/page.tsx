@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { createPageMetadata } from "@/lib/site";
 import CareerHero from "@/components/career/career-hero";
 import CareerHiringProcess from "@/components/career/career-hiring-process";
 import CareerOpenings from "@/components/career/career-openings";
 import CareerWhyJoin from "@/components/career/career-why-join";
+import { createPageMetadata } from "@/lib/site";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { locale } = await params;

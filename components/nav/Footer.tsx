@@ -1,7 +1,7 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { CodeviderLogo } from "./CodeviderLogo";
 import { FooterSocials } from "./footer-socials";
 

@@ -1,10 +1,10 @@
-import { GENERIC_FONTS } from "../../shared/constants.mjs";
-import { isNeutralColor } from "../../shared/color.mjs";
 import { checkSourceDesignSystem } from "../../design-system.mjs";
-import { isFullPage } from "../../shared/page.mjs";
 import { finding } from "../../findings.mjs";
-import { filterByProviders } from "../../registry/antipatterns.mjs";
 import { profileFindings, profileStep } from "../../profile/profiler.mjs";
+import { filterByProviders } from "../../registry/antipatterns.mjs";
+import { isNeutralColor } from "../../shared/color.mjs";
+import { GENERIC_FONTS } from "../../shared/constants.mjs";
+import { isFullPage } from "../../shared/page.mjs";
 
 // ---------------------------------------------------------------------------
 // Regex fallback (non-HTML files: CSS, JSX, TSX, etc.)
@@ -861,12 +861,12 @@ function detectText(content, filePath, options = {}) {
 }
 
 export {
-	REGEX_MATCHERS,
-	REGEX_ANALYZERS,
-	TEXT_CONTENT_ANALYZER_IDS,
-	extractStyleBlocks,
+	detectText,
 	extractCSSinJS,
+	extractStyleBlocks,
+	REGEX_ANALYZERS,
+	REGEX_MATCHERS,
 	runRegexMatchers,
 	runTextContentAnalyzers,
-	detectText,
+	TEXT_CONTENT_ANALYZER_IDS,
 };

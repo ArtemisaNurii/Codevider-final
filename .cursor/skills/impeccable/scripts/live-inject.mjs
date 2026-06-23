@@ -685,5 +685,5 @@ if (
 	injectCli();
 }
 
-export { insertTag, removeTag, validateConfig, buildTagBlock };
+export { buildTagBlock, insertTag, removeTag, validateConfig };
 // patchCspMeta + revertCspMeta are exported above where they're defined.

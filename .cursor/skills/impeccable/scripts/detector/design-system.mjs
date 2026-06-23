@@ -2,8 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { finding } from "./findings.mjs";
-import { GENERIC_FONTS } from "./shared/constants.mjs";
 import { parseAnyColor, resolveLengthPx } from "./rules/checks.mjs";
+import { GENERIC_FONTS } from "./shared/constants.mjs";
 
 const DESIGN_NAMES = ["DESIGN.md", "Design.md", "design.md"];
 const FALLBACK_DIRS = [".agents/context", "docs"];
@@ -889,13 +889,13 @@ function dedupeDesignFindings(findings) {
 }
 
 export {
-	parseFrontmatter,
-	normalizeDesignSystem,
-	loadDesignSystemForCwd,
-	isAllowedFont,
-	isAllowedColorRaw,
-	isAllowedRadiusRaw,
 	checkSourceDesignSystem,
 	collectStaticDesignSystemFindings,
+	isAllowedColorRaw,
+	isAllowedFont,
+	isAllowedRadiusRaw,
+	loadDesignSystemForCwd,
 	mergeDesignSystemFindings,
+	normalizeDesignSystem,
+	parseFrontmatter,
 };

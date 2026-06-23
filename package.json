@@ -11,6 +11,7 @@
 		"check": "biome check --write ."
 	},
 	"dependencies": {
+		"@hookform/resolvers": "^5.4.0",
 		"dotted-map": "^2.2.3",
 		"lucide-react": "^1.21.0",
 		"motion": "^12.40.0",
@@ -19,8 +20,10 @@
 		"postprocessing": "^6.39.1",
 		"react": "19.2.4",
 		"react-dom": "19.2.4",
+		"react-hook-form": "^7.80.0",
 		"react-syntax-highlighter": "^16.1.1",
-		"three": "^0.184.0"
+		"three": "^0.184.0",
+		"zod": "^4.4.3"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.5.0",

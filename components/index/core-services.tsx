@@ -2,6 +2,7 @@
 
 import {
 	ArrowRight,
+	ArrowUpRight,
 	Bot,
 	Check,
 	Cloud,
@@ -13,19 +14,19 @@ import {
 	Rocket,
 	Users,
 } from "lucide-react";
-import { motion, useReducedMotion, AnimatePresence } from "motion/react";
-import { Link } from "@/i18n/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useSectionReveal } from "@/hooks/use-section-reveal";
 import type { CSSProperties } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import SectionHead from "./section-head";
 import {
 	ENGINEERING_DEMO_CODE,
 	ENGINEERING_DEMO_TABS,
 	type EngineeringDemoTab,
 } from "@/data/engineering-demo-code";
+import { useSectionReveal } from "@/hooks/use-section-reveal";
+import { Link } from "@/i18n/navigation";
+import SectionHead from "./section-head";
 
 const ENGINEERING_CODE_LANGUAGES = {
 	orders: "typescript",
@@ -196,7 +197,7 @@ function AiDemo() {
 							type="button"
 							aria-pressed={active === chip.id}
 							onClick={() => selectChip(chip)}
-							className={`home-demo-chip ${active === chip.id ? "home-demo-chip--active" : ""}`}
+							className={`home-demo-chip cursor-pointer ${active === chip.id ? "home-demo-chip--active" : ""}`}
 						>
 							{t(`chip_${chip.id}_label`)}
 						</button>
@@ -255,7 +256,7 @@ function CodeDemo() {
 							aria-selected={active === tab}
 							tabIndex={active === tab ? 0 : -1}
 							onClick={() => setActive(tab)}
-							className={`home-code-editor__tab ${active === tab ? "home-code-editor__tab--active" : ""}`}
+							className={`home-code-editor__tab cursor-pointer ${active === tab ? "home-code-editor__tab--active" : ""}`}
 						>
 							{ENGINEERING_DEMO_TABS[tab]}
 						</button>
@@ -322,10 +323,10 @@ function PodDemo() {
 	};
 
 	const colors: Record<(typeof POD_ROLES)[number], string> = {
-		frontend: "bg-[#3a53c9]",
-		backend: "bg-violet-500",
-		qa: "bg-emerald-500",
-		pm: "bg-sky-500",
+		frontend: "bg-(--dash-brand-solid)",
+		backend: "bg-(--dash-brand-solid)",
+		qa: "bg-(--dash-brand-solid)",
+		pm: "bg-(--dash-brand-solid)",
 	};
 
 	return (
@@ -341,7 +342,7 @@ function PodDemo() {
 					<span className="home-pod-ring absolute inset-0 rounded-full border-[1.5px] border-dashed border-(--border)" />
 					<span className="home-pod-ring home-pod-ring--reverse absolute inset-[55px] rounded-full border-[1.5px] border-dashed border-(--border)" />
 					<div className="absolute inset-0 grid place-items-center">
-						<div className="relative z-[2] grid size-[108px] place-items-center rounded-full bg-[#3a53c9] text-center text-sm font-semibold leading-tight whitespace-pre-line text-white shadow-[0_12px_30px_rgba(58,83,201,0.4)]">
+						<div className="relative z-[2] grid size-[108px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-white shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)]">
 							{t("center")}
 						</div>
 					</div>
@@ -445,7 +446,7 @@ function PipelineDemo() {
 			<div className="home-demo-head home-demo-head--pipeline">
 				<div className="home-pipeline-head__row">
 					<span className="flex items-center gap-2">
-						<Cloud className="size-4 text-[#3a53c9]" aria-hidden />
+						<Cloud className="size-4 text-(--dash-brand)" aria-hidden />
 						{t("title")}
 					</span>
 					{live ? (
@@ -475,62 +476,60 @@ function PipelineDemo() {
 			</div>
 			<div className="home-demo-body">
 				<div className="home-pipeline-stages">
-					<div className="flex flex-col gap-2">
-						<div className="flex items-center">
-							{stages.map((stage, i) => {
-								const StageIcon = stageIcons[stage];
+					<div className="home-pipeline-track">
+						{stages.map((stage, i) => {
+							const StageIcon = stageIcons[stage];
 
-								return (
-									<div key={stage} className="contents">
-										<div className="flex flex-1 justify-center">
-											<div
-												className={`grid size-10 place-items-center rounded-xl transition-[background-color,color,box-shadow] duration-300 ${
-													doneCount > i
-														? "bg-emerald-500/12 text-emerald-600 shadow-[0_1px_2px_rgba(16,185,129,0.12)]"
-														: activeStage === i
-															? "bg-[#3a53c9]/10 text-[#3a53c9] shadow-[0_1px_2px_rgba(58,83,201,0.12)]"
-															: "bg-(--bg) text-(--text) shadow-[0_1px_2px_color-mix(in_srgb,var(--text-h)_6%,transparent)]"
-												}`}
-											>
-												{doneCount > i ? (
-													<Check
-														className="size-5"
-														strokeWidth={2.5}
-														aria-hidden
-													/>
-												) : activeStage === i ? (
-													<Loader2
-														className="size-5 motion-reduce:animate-none animate-spin"
-														aria-hidden
-													/>
-												) : (
-													<StageIcon className="size-5" aria-hidden />
-												)}
-											</div>
+							return (
+								<Fragment key={stage}>
+									<div className="home-pipeline-track__cell">
+										<div
+											className={`grid size-10 place-items-center rounded-xl transition-[background-color,color,box-shadow] duration-300 ${
+												doneCount > i
+													? "bg-emerald-500/12 text-emerald-600 shadow-[0_1px_2px_rgba(16,185,129,0.12)]"
+													: activeStage === i
+														? "bg-(--dash-brand-bg) text-(--dash-brand) shadow-[0_1px_2px_color-mix(in_srgb,var(--dash-brand)_12%,transparent)]"
+														: "bg-(--bg) text-(--text) shadow-[0_1px_2px_color-mix(in_srgb,var(--text-h)_6%,transparent)]"
+											}`}
+										>
+											{doneCount > i ? (
+												<Check
+													className="size-5"
+													strokeWidth={2.5}
+													aria-hidden
+												/>
+											) : activeStage === i ? (
+												<Loader2
+													className="size-5 motion-reduce:animate-none animate-spin"
+													aria-hidden
+												/>
+											) : (
+												<StageIcon className="size-5" aria-hidden />
+											)}
 										</div>
-										{i < stages.length - 1 ? (
-											<div
-												className={`h-[3px] w-[clamp(20px,5vw,60px)] shrink-0 overflow-hidden rounded-full bg-(--border) transition-[background] duration-500 ${
-													doneCount > i
-														? "bg-linear-to-r from-[#3a53c9] to-[#00bcff]"
-														: ""
-												}`}
-											/>
-										) : null}
 									</div>
-								);
-							})}
-						</div>
-						<div className="flex">
-							{stages.map((stage) => (
-								<span
-									key={stage}
-									className="flex-1 text-center text-[13px] font-semibold text-(--text-h)/80"
-								>
+									{i < stages.length - 1 ? (
+										<div
+											className={`home-pipeline-track__connector ${
+												doneCount > i
+													? "home-pipeline-track__connector--done"
+													: ""
+											}`}
+										/>
+									) : null}
+								</Fragment>
+							);
+						})}
+						{stages.map((stage, i) => (
+							<Fragment key={`label-${stage}`}>
+								<span className="home-pipeline-track__label">
 									{t(`stage_${stage}`)}
 								</span>
-							))}
-						</div>
+								{i < stages.length - 1 ? (
+									<span className="home-pipeline-track__gap" aria-hidden />
+								) : null}
+							</Fragment>
+						))}
 					</div>
 				</div>
 				<div className="home-pipeline-foot">
@@ -538,7 +537,7 @@ function PipelineDemo() {
 						type="button"
 						onClick={run}
 						disabled={running}
-						className="inline-flex min-h-11 items-center gap-2 rounded-full bg-(--text-h) px-[18px] py-2.5 text-sm font-semibold text-(--bg) transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--dash-brand) disabled:cursor-default disabled:opacity-50 disabled:transform-none active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
+						className={`inline-flex min-h-11 items-center gap-2 rounded-full bg-(--text-h) px-[18px] py-2.5 text-sm font-semibold text-(--bg) transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--dash-brand) disabled:cursor-default disabled:opacity-50 disabled:transform-none active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 ${running ? "cursor-not-allowed" : "cursor-pointer"}`}
 					>
 						<Play className="size-4 fill-current" aria-hidden />
 						{running
@@ -567,8 +566,10 @@ function PipelineDemo() {
 	);
 }
 
+type FeatureId = "ai" | "engineering" | "pod" | "devops";
+
 type FeatureConfig = {
-	id: string;
+	id: FeatureId;
 	icon: React.ReactNode;
 	reverse?: boolean;
 	alt?: boolean;
@@ -603,10 +604,8 @@ function FeatureSection({
 					animate={isRevealed ? "visible" : "hidden"}
 					variants={reveal}
 				>
-					<span className="inline-flex w-fit items-center gap-3.5 text-sm font-semibold text-[#3a53c9]">
-						<span className="grid size-11 shrink-0 place-items-center rounded-[11px] bg-[#3a53c9]/10 text-[#3a53c9]">
-							{feature.icon}
-						</span>
+					<span className="home-feature-badge">
+						<span className="home-feature-badge__icon">{feature.icon}</span>
 						{t("badge")}
 					</span>
 					<div>
@@ -622,7 +621,7 @@ function FeatureSection({
 						<FeatureCheckList items={bullets} />
 						<Link href={feature.href} className="home-link-arrow mt-8">
 							{t("link")}
-							<ArrowRight className="size-4" aria-hidden />
+							<ArrowUpRight className="size-4" aria-hidden />
 						</Link>
 					</div>
 				</motion.div>
@@ -641,14 +640,7 @@ function FeatureSection({
 						},
 					}}
 				>
-					<div
-						className="pointer-events-none absolute inset-[12%_8%_-6%] -z-10 blur-[48px]"
-						style={{
-							background:
-								"radial-gradient(60% 60% at 50% 50%, rgba(58, 83, 201, 0.22), transparent 70%)",
-						}}
-						aria-hidden
-					/>
+					<div className="home-feature-glow" aria-hidden />
 					{feature.demo}
 				</motion.div>
 			</div>

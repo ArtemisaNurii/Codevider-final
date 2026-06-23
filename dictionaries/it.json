@@ -19,7 +19,8 @@
 	},
 	"home": {
 		"your_strategic_partner_in": "Il tuo partner strategico in",
-		"we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Progettiamo, sviluppiamo e scaliamo software affidabile per web, mobile e cloud — integrato nel tuo team e fornito senza costi strutturali superflui.",
+		"hero_lead_emphasis": "Progettiamo, sviluppiamo e scaliamo software affidabile per web, mobile e cloud",
+		"hero_lead_rest": "— integrato nel tuo team e fornito senza costi strutturali superflui.",
 		"start_your_project": "Inizia il tuo progetto",
 		"explore_services": "Esplora i servizi",
 		"years_delivering": "Anni di esperienza",
@@ -116,7 +117,7 @@
 					"running": "In corso…",
 					"run": "Avvia pipeline",
 					"run_again": "Avvia di nuovo",
-					"status_building": "Compilazione…",
+					"status_build": "Compilazione…",
 					"status_test": "Esecuzione test…",
 					"status_deploy": "Distribuzione…",
 					"status_live_label": "Live",
@@ -281,8 +282,18 @@
 			"form_subtitle": "Condividi alcuni dettagli sul tuo progetto e ti ricontatteremo con i passaggi successivi.",
 			"form_required": "Campi obbligatori",
 			"form_submit": "Invia il tuo messaggio",
+			"form_submitting": "Invio in corso…",
 			"form_note": "Di solito rispondiamo entro un giorno lavorativo.",
 			"form_note_privacy": "I tuoi dati rimangono privati — non li condividiamo mai con terze parti.",
+			"form_error_submit": "Qualcosa è andato storto. Riprova.",
+			"form_errors": {
+				"name_required": "Inserisci il tuo nome completo",
+				"name_max": "Il nome deve contenere al massimo 100 caratteri",
+				"email_required": "Inserisci il tuo indirizzo email",
+				"email_invalid": "Inserisci un indirizzo email valido",
+				"details_required": "Raccontaci del tuo progetto",
+				"details_max": "I dettagli devono contenere al massimo 1000 caratteri"
+			},
 			"success_title": "Messaggio inviato!",
 			"success_message": "Grazie per averci contattato — ti risponderemo entro un giorno lavorativo."
 		},

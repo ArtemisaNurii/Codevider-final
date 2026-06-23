@@ -1,9 +1,9 @@
 "use client";
 
 import { Minus, Plus } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
-import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
@@ -81,15 +81,43 @@ function FaqItem({
 				aria-expanded={isOpen}
 				aria-controls={panelId}
 				onClick={onToggle}
-				whileTap={shouldReduceMotion ? undefined : { scale: 0.995 }}
+				whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
 			>
 				{question}
 				<span className="home-faq-icon" aria-hidden>
-					{isOpen ? (
-						<Minus className="size-3.5 stroke-[2.5]" />
-					) : (
-						<Plus className="size-3.5 stroke-[2.5]" />
-					)}
+					<AnimatePresence mode="popLayout" initial={false}>
+						<motion.span
+							key={isOpen ? "minus" : "plus"}
+							className="flex size-full items-center justify-center"
+							initial={
+								shouldReduceMotion
+									? false
+									: { opacity: 0, scale: 0.25, filter: "blur(4px)" }
+							}
+							animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+							exit={
+								shouldReduceMotion
+									? { opacity: 0, transition: { duration: 0.15 } }
+									: {
+											opacity: 0,
+											scale: 0.25,
+											filter: "blur(4px)",
+											transition: { duration: 0.15, ease: "easeIn" },
+										}
+							}
+							transition={
+								shouldReduceMotion
+									? { duration: 0.15 }
+									: { type: "spring", duration: 0.3, bounce: 0 }
+							}
+						>
+							{isOpen ? (
+								<Minus className="size-3.5 stroke-[2.5]" />
+							) : (
+								<Plus className="size-3.5 stroke-[2.5]" />
+							)}
+						</motion.span>
+					</AnimatePresence>
 				</span>
 			</motion.button>
 
@@ -104,7 +132,7 @@ function FaqItem({
 				className="overflow-hidden"
 			>
 				<motion.p
-					className="max-w-[70ch] px-1 pb-8 pt-1 text-base leading-relaxed text-[var(--text)] text-pretty"
+					className="max-w-[58ch] px-1 pb-8 pt-1 text-base leading-relaxed text-[var(--text)] text-pretty"
 					initial={false}
 					animate={
 						isOpen

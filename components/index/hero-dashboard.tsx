@@ -1,28 +1,52 @@
 "use client";
 
-import { Activity, Rocket, Target, TrendingUp, Users } from "lucide-react";
-import { motion } from "motion/react";
+import { Activity, Target, TrendingUp, Users } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 
 const REVENUE_BARS = [38, 52, 44, 58, 49, 64, 55, 71, 63, 77, 68, 84];
+const PEAK_BAR_INDEX = REVENUE_BARS.indexOf(Math.max(...REVENUE_BARS));
+const LATEST_BAR_INDEX = REVENUE_BARS.length - 1;
 
-const TRANSACTION_KEYS = ["tx_1", "tx_2", "tx_3"] as const;
+const cardReveal = {
+	hidden: { opacity: 0, y: 14 },
+	visible: (delay: number) => ({
+		opacity: 1,
+		y: 0,
+		transition: {
+			type: "spring" as const,
+			duration: 0.45,
+			bounce: 0,
+			delay,
+		},
+	}),
+};
 
 function MetricCard({
 	label,
 	value,
 	delta,
 	icon: Icon,
+	delay,
 }: {
 	label: string;
 	value: string;
 	delta: string;
 	icon: React.ElementType;
+	delay: number;
 }) {
+	const shouldReduceMotion = useReducedMotion();
+
 	return (
-		<div className="hero-dash-surface rounded-xl p-4 sm:p-5">
+		<motion.div
+			className="hero-dash-surface rounded-xl p-4 sm:p-5"
+			initial={shouldReduceMotion ? false : "hidden"}
+			animate="visible"
+			variants={cardReveal}
+			custom={shouldReduceMotion ? 0 : delay}
+		>
 			<div className="mb-3 flex items-center justify-between gap-2">
-				<span className="text-[11px] font-medium uppercase tracking-wide text-[var(--dash-muted)]">
+				<span className="text-xs font-medium uppercase tracking-wide text-[var(--dash-muted)]">
 					{label}
 				</span>
 				<Icon
@@ -34,25 +58,32 @@ function MetricCard({
 				{value}
 			</p>
 			<p className="mt-1.5 text-xs text-[var(--dash-success)]">{delta}</p>
-		</div>
+		</motion.div>
 	);
 }
 
 export default function HeroDashboard() {
 	const t = useTranslations("home.dashboard");
+	const shouldReduceMotion = useReducedMotion();
 
 	return (
 		<motion.div
 			className="hero-dash-window relative w-full overflow-hidden rounded-2xl border border-[var(--dash-border)] bg-[var(--dash-canvas)] shadow-[var(--dash-shadow)]"
-			initial={false}
+			initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={
+				shouldReduceMotion
+					? { duration: 0 }
+					: { type: "spring", duration: 0.5, bounce: 0, delay: 0.15 }
+			}
 		>
-			<div className="flex items-center gap-3 border-b border-[var(--dash-border)] px-4 py-3 sm:px-5">
+			<div className="hero-dash-titlebar flex items-center gap-3 border-b border-[var(--dash-border)] px-4 py-3 sm:px-5">
 				<div className="flex items-center gap-1.5" aria-hidden>
 					<span className="size-2.5 rounded-full bg-[#ff5f57]" />
 					<span className="size-2.5 rounded-full bg-[#febc2e]" />
 					<span className="size-2.5 rounded-full bg-[#28c840]" />
 				</div>
-				<div className="min-w-0 flex-1 truncate rounded-md bg-[var(--dash-surface)] px-2.5 py-1 text-center text-[10px] text-[var(--dash-muted)] sm:text-[11px]">
+				<div className="min-w-0 flex-1 truncate rounded-md bg-[var(--dash-surface)] px-2.5 py-1 text-center text-xs text-[var(--dash-muted)]">
 					{t("window_url")}
 				</div>
 			</div>
@@ -64,31 +95,41 @@ export default function HeroDashboard() {
 						value="$284K"
 						delta={t("performance_delta")}
 						icon={TrendingUp}
+						delay={0.2}
 					/>
 					<MetricCard
 						label={t("growth")}
 						value="12.4K"
 						delta={t("growth_delta")}
 						icon={Users}
+						delay={0.3}
 					/>
 					<MetricCard
 						label={t("system_health")}
 						value="99.9%"
 						delta={t("system_health_delta")}
 						icon={Activity}
+						delay={0.4}
 					/>
 					<MetricCard
 						label={t("leads")}
 						value="68%"
 						delta={t("leads_delta")}
 						icon={Target}
+						delay={0.5}
 					/>
 				</div>
 
-				<div className="hero-dash-surface rounded-xl p-4 sm:p-5">
+				<motion.div
+					className="hero-dash-surface rounded-xl p-4 sm:p-5"
+					initial={shouldReduceMotion ? false : "hidden"}
+					animate="visible"
+					variants={cardReveal}
+					custom={shouldReduceMotion ? 0 : 0.55}
+				>
 					<div className="mb-4 flex items-end justify-between gap-2">
 						<div>
-							<p className="text-[11px] font-medium uppercase tracking-wide text-[var(--dash-muted)]">
+							<p className="text-xs font-medium uppercase tracking-wide text-[var(--dash-muted)]">
 								{t("revenue_overview")}
 							</p>
 							<p className="mt-0.5 font-[family-name:var(--mono)] text-lg font-medium tabular-nums text-[var(--dash-text)]">
@@ -111,73 +152,21 @@ export default function HeroDashboard() {
 								className="flex h-full flex-col justify-end rounded-sm bg-[var(--dash-bar-track)] p-0.5 sm:rounded-md sm:p-1"
 							>
 								<div
-									className="hero-dash-bar w-full rounded-[3px] sm:rounded-sm"
+									className={`hero-dash-bar w-full rounded-[3px] sm:rounded-sm${
+										index === PEAK_BAR_INDEX ? " hero-dash-bar--peak" : ""
+									}${index === LATEST_BAR_INDEX ? " hero-dash-bar--latest" : ""}`}
 									style={{ height: `${height}%`, minHeight: "10px" }}
 								/>
 							</div>
 						))}
 					</div>
 
-					<div className="mt-2 flex justify-between text-[9px] text-[var(--dash-muted)] sm:text-[10px]">
+					<div className="mt-2 flex justify-between text-xs text-[var(--dash-muted)]">
 						<span>{t("week_1")}</span>
 						<span>{t("week_6")}</span>
 						<span>{t("week_12")}</span>
 					</div>
-				</div>
-
-				<div className="relative pb-2 sm:pb-3">
-					<div className="hero-dash-surface rounded-xl p-4 sm:p-5">
-						<p className="mb-3 text-[11px] font-medium uppercase tracking-wide text-[var(--dash-muted)]">
-							{t("transactions")}
-						</p>
-						<ul className="space-y-3">
-							{TRANSACTION_KEYS.map((key) => (
-								<li
-									key={key}
-									className="flex items-center justify-between gap-3 border-b border-[var(--dash-border)] pb-3 last:border-0 last:pb-0"
-								>
-									<div className="min-w-0">
-										<p className="truncate text-xs font-medium text-[var(--dash-text)]">
-											{t(`${key}_title`)}
-										</p>
-										<p className="text-[10px] text-[var(--dash-muted)]">
-											{t(`${key}_meta`)}
-										</p>
-									</div>
-									<span
-										className={`shrink-0 font-[family-name:var(--mono)] text-xs tabular-nums ${
-											key === "tx_3"
-												? "text-[var(--dash-warning)]"
-												: "text-[var(--dash-success)]"
-										}`}
-									>
-										{t(`${key}_amount`)}
-									</span>
-								</li>
-							))}
-						</ul>
-					</div>
-
-					<div
-						className="absolute -bottom-1 right-0 z-10 max-w-[85%] rounded-xl border border-[var(--dash-border)] bg-[var(--dash-surface)] p-4 shadow-[var(--dash-toast-shadow)] sm:-bottom-2 sm:max-w-[72%]"
-						role="status"
-						aria-live="polite"
-					>
-						<div className="flex items-start gap-2.5">
-							<span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[var(--dash-brand-bg)] text-[var(--dash-brand)]">
-								<Rocket className="size-3.5" aria-hidden />
-							</span>
-							<div className="min-w-0">
-								<p className="text-xs font-medium text-[var(--dash-text)]">
-									{t("toast_title")}
-								</p>
-								<p className="mt-0.5 text-[10px] leading-snug text-[var(--dash-muted)]">
-									{t("toast_message")}
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				</motion.div>
 			</div>
 		</motion.div>
 	);

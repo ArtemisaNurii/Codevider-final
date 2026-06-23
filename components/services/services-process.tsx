@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { useRef } from "react";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
 import SectionHead from "@/components/index/section-head";
 
 const STEP_IDS = [

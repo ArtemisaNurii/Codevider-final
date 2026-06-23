@@ -82,6 +82,7 @@ type PageMetadataInput = {
 	title: string;
 	description: string;
 	page: OgPage;
+	path?: string;
 };
 
 export function createPageMetadata({
@@ -89,20 +90,38 @@ export function createPageMetadata({
 	title,
 	description,
 	page,
+	path: pathOverride,
 }: PageMetadataInput): Metadata {
-	const path = OG_PAGE_TO_ROUTE[page];
-	const canonical = getLocalizedUrl(
-		locale as (typeof routing.locales)[number],
-		path,
-	);
+	const siteRoute = OG_PAGE_TO_ROUTE[page];
+	const canonical = pathOverride
+		? `${getSiteUrl()}/${locale}${pathOverride}`
+		: getLocalizedUrl(locale as (typeof routing.locales)[number], siteRoute);
 	const ogImageUrl = getOgImageUrl(locale, page);
+	const languageAlternates = pathOverride
+		? Object.fromEntries(
+				routing.locales.map((entry) => [
+					entry,
+					`${getSiteUrl()}/${entry}${pathOverride}`,
+				]),
+			)
+		: getLanguageAlternates(siteRoute);
+
+	if (!pathOverride) {
+		languageAlternates["x-default"] = getLocalizedUrl(
+			routing.defaultLocale,
+			siteRoute,
+		);
+	} else {
+		languageAlternates["x-default"] =
+			`${getSiteUrl()}/${routing.defaultLocale}${pathOverride}`;
+	}
 
 	return {
 		title,
 		description,
 		alternates: {
 			canonical,
-			languages: getLanguageAlternates(path),
+			languages: languageAlternates,
 		},
 		openGraph: {
 			title,

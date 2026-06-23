@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Contact from "@/components/index/contact";
 import CoreServices from "@/components/index/core-services";
@@ -8,7 +9,6 @@ import WhoWeAre from "@/components/index/who-we-are";
 import WhoWeEmpower from "@/components/index/who-we-empower";
 import WhyChooseUs from "@/components/index/why-choose-us";
 import WhyOutsource from "@/components/index/why-outsource";
-import type { Metadata } from "next";
 import { createPageMetadata } from "@/lib/site";
 
 type Props = {

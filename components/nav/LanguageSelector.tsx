@@ -1,7 +1,5 @@
 "use client";
 
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
 import { Check, ChevronDown } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
@@ -12,6 +10,8 @@ import {
 	useRef,
 	useState,
 } from "react";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 
 type LanguageSelectorProps = {
 	variant?: "light" | "dark";

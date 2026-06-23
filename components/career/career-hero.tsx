@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { useRef } from "react";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
 
 const revealEase = [0.22, 1, 0.36, 1] as const;
 

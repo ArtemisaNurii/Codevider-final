@@ -19,7 +19,8 @@
 	},
 	"home": {
 		"your_strategic_partner_in": "Tu socio estratégico en",
-		"we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Diseñamos, construimos y escalamos software confiable para web, móvil y cloud — integrados en tu equipo y entregados sin costes estructurales innecesarios.",
+		"hero_lead_emphasis": "Diseñamos, construimos y escalamos software confiable para web, móvil y cloud",
+		"hero_lead_rest": "— integrados en tu equipo y entregados sin costes estructurales innecesarios.",
 		"start_your_project": "Iniciar tu proyecto",
 		"explore_services": "Explorar servicios",
 		"years_delivering": "Años entregando resultados",
@@ -116,7 +117,7 @@
 					"running": "Ejecutando…",
 					"run": "Ejecutar pipeline",
 					"run_again": "Ejecutar de nuevo",
-					"status_building": "Construyendo…",
+					"status_build": "Construyendo…",
 					"status_test": "Ejecutando tests…",
 					"status_deploy": "Desplegando…",
 					"status_live_label": "En vivo",
@@ -281,8 +282,18 @@
 			"form_subtitle": "Comparte algunos detalles sobre tu proyecto y nos pondremos en contacto contigo para los siguientes pasos.",
 			"form_required": "Campos obligatorios",
 			"form_submit": "Enviar tu mensaje",
+			"form_submitting": "Enviando…",
 			"form_note": "Normalmente respondemos en el plazo de un día laborable.",
 			"form_note_privacy": "Tus datos se mantienen privados — nunca los compartimos con terceros.",
+			"form_error_submit": "Algo salió mal. Por favor, inténtalo de nuevo.",
+			"form_errors": {
+				"name_required": "Por favor, introduce tu nombre completo",
+				"name_max": "El nombre debe tener 100 caracteres o menos",
+				"email_required": "Por favor, introduce tu correo electrónico",
+				"email_invalid": "Por favor, introduce un correo electrónico válido",
+				"details_required": "Por favor, cuéntanos sobre tu proyecto",
+				"details_max": "Los detalles deben tener 1000 caracteres o menos"
+			},
 			"success_title": "¡Mensaje enviado!",
 			"success_message": "Gracias por contactar con nosotros — te responderemos en el plazo de un día laborable."
 		},

@@ -15,12 +15,11 @@ import path from "node:path";
 
 import {
 	ALLOWED_EXTS,
-	EDIT_COUNT_THRESHOLD,
-	GENERATED_PATH,
-	SENSITIVE_PATH,
 	appendDesignSystemNote,
 	designSystemOptions,
+	EDIT_COUNT_THRESHOLD,
 	filterFindings,
+	GENERATED_PATH,
 	loadDetector,
 	matchesAnyGlob,
 	persistCache,
@@ -28,6 +27,7 @@ import {
 	readConfig,
 	renderTemplate,
 	resolveProjectCwd,
+	SENSITIVE_PATH,
 	truthy,
 	writeAuditLog,
 } from "./hook-lib.mjs";

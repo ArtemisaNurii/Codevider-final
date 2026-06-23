@@ -10,71 +10,71 @@
 
 import { detectCli } from "./cli/main.mjs";
 
+export { detectCli, formatFindings } from "./cli/main.mjs";
 export {
-	ANTIPATTERNS,
-	RULE_ENGINE_SUPPORT,
-	getAntipattern,
-	getRulesForCategory,
-	getRuleEngineSupport,
-} from "./registry/antipatterns.mjs";
+	checkSourceDesignSystem,
+	collectStaticDesignSystemFindings,
+	loadDesignSystemForCwd,
+	normalizeDesignSystem,
+	parseFrontmatter as parseDesignFrontmatter,
+} from "./design-system.mjs";
 export {
-	SAFE_TAGS,
-	BORDER_SAFE_TAGS,
-	OVERUSED_FONTS,
-	GENERIC_FONTS,
-	KNOWN_SERIF_FONTS,
-} from "./shared/constants.mjs";
+	createBrowserDetector,
+	detectUrl,
+} from "./engines/browser/detect-url.mjs";
 export {
-	isNeutralColor,
-	parseRgb,
-	relativeLuminance,
-	contrastRatio,
-	parseGradientColors,
-	hasChroma,
-	getHue,
-	colorToHex,
-} from "./shared/color.mjs";
-export { isFullPage } from "./shared/page.mjs";
+	detectText,
+	extractCSSinJS,
+	extractStyleBlocks,
+} from "./engines/regex/detect-text.mjs";
+export { detectHtml } from "./engines/static-html/detect-html.mjs";
 export {
-	checkElementBorders,
-	checkElementMotion,
-	checkElementGlow,
-	checkPageTypography,
-	checkPageLayout,
-	checkHtmlPatterns,
-} from "./rules/checks.mjs";
+	buildImportGraph,
+	detectFrameworkConfig,
+	FRAMEWORK_CONFIGS,
+	isPortListening,
+	resolveImport,
+	SCANNABLE_EXTENSIONS,
+	SKIP_DIRS,
+	walkDir,
+} from "./node/file-system.mjs";
 export {
 	createDetectorProfile,
 	summarizeDetectorProfile,
 } from "./profile/profiler.mjs";
 export {
-	parseFrontmatter as parseDesignFrontmatter,
-	normalizeDesignSystem,
-	loadDesignSystemForCwd,
-	checkSourceDesignSystem,
-	collectStaticDesignSystemFindings,
-} from "./design-system.mjs";
-export { detectHtml } from "./engines/static-html/detect-html.mjs";
+	ANTIPATTERNS,
+	getAntipattern,
+	getRuleEngineSupport,
+	getRulesForCategory,
+	RULE_ENGINE_SUPPORT,
+} from "./registry/antipatterns.mjs";
 export {
-	detectUrl,
-	createBrowserDetector,
-} from "./engines/browser/detect-url.mjs";
+	checkElementBorders,
+	checkElementGlow,
+	checkElementMotion,
+	checkHtmlPatterns,
+	checkPageLayout,
+	checkPageTypography,
+} from "./rules/checks.mjs";
 export {
-	detectText,
-	extractStyleBlocks,
-	extractCSSinJS,
-} from "./engines/regex/detect-text.mjs";
+	colorToHex,
+	contrastRatio,
+	getHue,
+	hasChroma,
+	isNeutralColor,
+	parseGradientColors,
+	parseRgb,
+	relativeLuminance,
+} from "./shared/color.mjs";
 export {
-	walkDir,
-	SCANNABLE_EXTENSIONS,
-	SKIP_DIRS,
-	buildImportGraph,
-	resolveImport,
-	detectFrameworkConfig,
-	isPortListening,
-	FRAMEWORK_CONFIGS,
-} from "./node/file-system.mjs";
-export { formatFindings, detectCli } from "./cli/main.mjs";
+	BORDER_SAFE_TAGS,
+	GENERIC_FONTS,
+	KNOWN_SERIF_FONTS,
+	OVERUSED_FONTS,
+	SAFE_TAGS,
+} from "./shared/constants.mjs";
+export { isFullPage } from "./shared/page.mjs";
 
 const isMainModule =
 	process.argv[1]?.endsWith("detect-antipatterns.mjs") ||

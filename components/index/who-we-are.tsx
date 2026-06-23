@@ -2,9 +2,9 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useSectionReveal } from "@/hooks/use-section-reveal";
+import { Link } from "@/i18n/navigation";
 
 const STAGGER = 0.1;
 
@@ -100,13 +100,13 @@ function StatCard({
 			}}
 		>
 			<motion.p
-				className="font-(family-name:--mono) text-[clamp(2rem,4vw,2.75rem)] font-medium tabular-nums tracking-tight text-white"
+				className="stat-card-value font-(family-name:--mono) text-[clamp(2rem,4vw,2.75rem)] font-medium tabular-nums tracking-tight"
 				variants={itemVariants}
 			>
 				{value}
 			</motion.p>
 			<motion.p
-				className={`stat-card-cap text-pretty text-sm leading-relaxed text-blue-100/75 sm:text-base ${wide ? "max-w-2xl" : ""}`}
+				className={`stat-card-cap text-pretty text-sm leading-relaxed sm:text-base ${wide ? "max-w-2xl" : ""}`}
 				variants={statDescVariants}
 			>
 				{label}
@@ -130,7 +130,7 @@ export default function WhoWeAre() {
 		<section
 			ref={sectionRef}
 			aria-labelledby="who-we-are-heading"
-			className="home-section"
+			className="home-section home-feature-alt"
 		>
 			<div className="home-wrap grid w-full gap-14 lg:grid-cols-2 lg:gap-20 xl:gap-24">
 				<motion.div
@@ -138,7 +138,7 @@ export default function WhoWeAre() {
 					animate={isRevealed ? "visible" : "hidden"}
 					variants={containerVariants}
 				>
-					<motion.p className="home-eyebrow mb-0" variants={itemVariants}>
+					<motion.p className="home-eyebrow" variants={itemVariants}>
 						{t("who_we_are_eyebrow")}
 					</motion.p>
 

@@ -3,12 +3,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { finding } from "../../findings.mjs";
-import { filterByProviders } from "../../registry/antipatterns.mjs";
 import {
 	profileFindingsAsync,
 	profileStep,
 	profileStepAsync,
 } from "../../profile/profiler.mjs";
+import { filterByProviders } from "../../registry/antipatterns.mjs";
 import { captureVisualContrastCandidate } from "../visual/screenshot-contrast.mjs";
 
 function serializeDesignSystemForBrowser(designSystem) {
@@ -404,4 +404,4 @@ async function createBrowserDetector(options = {}) {
 	};
 }
 
-export { runVisualContrastFallback, detectUrl, createBrowserDetector };
+export { createBrowserDetector, detectUrl, runVisualContrastFallback };

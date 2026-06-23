@@ -1,48 +1,314 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import {
+	ArrowRight,
+	ArrowUpRight,
+	Briefcase,
+	Building2,
+	ChevronLeft,
+	ChevronRight,
+	Clock3,
+	Loader2,
+} from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { useRef } from "react";
 import { useTranslations } from "next-intl";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "@/i18n/navigation";
+import { fetchOpenJobs } from "@/lib/api/recruit-jobs";
+import type { OpenJob, PaginatedMeta } from "@/lib/types/recruit";
 
 const revealEase = [0.22, 1, 0.36, 1] as const;
+const JOBS_PAGE_SIZE = 5;
+
+const initialMeta: PaginatedMeta = {
+	page: 1,
+	limit: JOBS_PAGE_SIZE,
+	total: 0,
+	totalPages: 0,
+	hasNextPage: false,
+	hasPreviousPage: false,
+};
 
 export default function CareerOpenings() {
 	const t = useTranslations("career.openings");
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 	const shouldReduceMotion = useReducedMotion();
+	const [jobs, setJobs] = useState<OpenJob[]>([]);
+	const [status, setStatus] = useState<"loading" | "ready" | "error">(
+		"loading",
+	);
+	const [meta, setMeta] = useState<PaginatedMeta>(initialMeta);
+	const [isPageLoading, setIsPageLoading] = useState(false);
 
 	const emailHref = `mailto:info@codevider.com?subject=${encodeURIComponent(t("email_subject"))}`;
 
+	const loadJobsPage = useCallback(async (nextPage: number) => {
+		const response = await fetchOpenJobs({
+			page: nextPage,
+			limit: JOBS_PAGE_SIZE,
+		});
+		setJobs(response.data);
+		setMeta(response.meta);
+	}, []);
+
+	useEffect(() => {
+		let cancelled = false;
+
+		async function loadInitialJobs() {
+			try {
+				const response = await fetchOpenJobs({
+					page: 1,
+					limit: JOBS_PAGE_SIZE,
+				});
+				if (!cancelled) {
+					setJobs(response.data);
+					setMeta(response.meta);
+					setStatus("ready");
+				}
+			} catch {
+				if (!cancelled) {
+					setStatus("error");
+				}
+			}
+		}
+
+		void loadInitialJobs();
+
+		return () => {
+			cancelled = true;
+		};
+	}, []);
+
+	const goToPage = useCallback(
+		async (nextPage: number) => {
+			if (
+				isPageLoading ||
+				nextPage < 1 ||
+				nextPage > meta.totalPages ||
+				nextPage === meta.page
+			) {
+				return;
+			}
+
+			setIsPageLoading(true);
+
+			try {
+				await loadJobsPage(nextPage);
+				ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+			} catch {
+				// Keep the current page visible if pagination fails.
+			} finally {
+				setIsPageLoading(false);
+			}
+		},
+		[isPageLoading, loadJobsPage, meta.page, meta.totalPages],
+	);
+
+	const hasJobs = status === "ready" && jobs.length > 0;
+	const showPagination = hasJobs && meta.totalPages > 1;
+	const showEmptyState =
+		status === "ready" && jobs.length === 0 ? true : status === "error";
+
+	const headReveal = (delay: number) => ({
+		initial: shouldReduceMotion ? false : { opacity: 0, y: 14 },
+		animate: inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 },
+		transition: shouldReduceMotion
+			? { duration: 0 }
+			: { duration: 0.45, ease: revealEase, delay },
+	});
+
+	const outreachReveal = (delay: number) => ({
+		initial: shouldReduceMotion ? false : { opacity: 0, y: 12 },
+		animate: inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 },
+		transition: shouldReduceMotion
+			? { duration: 0 }
+			: { duration: 0.45, ease: revealEase, delay },
+	});
+
 	return (
-		<section ref={ref} className="home-section">
-			<div className="home-wrap">
-				<motion.div
-					className="career-empty"
-					initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-					animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-					transition={
-						shouldReduceMotion
-							? { duration: 0 }
-							: { duration: 0.55, ease: revealEase }
-					}
-				>
-					<p className="home-eyebrow home-eyebrow--center">{t("eyebrow")}</p>
-					<h2 className="mt-[clamp(0.875rem,2vw,1.125rem)] text-balance text-[clamp(1.75rem,4.6vw,2.75rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]">
-						{t("headline")}
-					</h2>
-					<p className="mx-auto mt-[clamp(1rem,2vw,1.25rem)] max-w-[54ch] text-pretty text-[clamp(1rem,1.4vw,1.125rem)] leading-relaxed text-[var(--text)]">
-						{t("description")}
-					</p>
-					<a
-						href={emailHref}
-						className="svc-cta__btn mt-[clamp(1.75rem,3vw,2.25rem)]"
-					>
-						{t("cta")}
-						<ArrowRight className="size-4" aria-hidden />
-					</a>
-				</motion.div>
+		<section ref={ref} className="home-section" id="openings">
+			<div className="home-wrap career-openings__stack">
+				{status === "loading" || hasJobs ? (
+					<div className="career-openings-card">
+						<div className="career-openings__head">
+							<motion.p
+								className="home-eyebrow home-eyebrow--center"
+								{...headReveal(0)}
+							>
+								{t("eyebrow")}
+							</motion.p>
+							<motion.h2
+								className="mt-[clamp(0.875rem,2vw,1.125rem)] text-balance text-[clamp(1.75rem,4.6vw,2.75rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
+								{...headReveal(0.08)}
+							>
+								{t("headline_active")}
+							</motion.h2>
+							<motion.p className="career-openings__lead" {...headReveal(0.16)}>
+								{status === "loading" ? t("loading") : t("description_active")}
+							</motion.p>
+						</div>
+
+						{hasJobs ? (
+							<div
+								className="career-jobs__panel"
+								aria-busy={isPageLoading}
+								aria-live="polite"
+							>
+								<ul className="career-jobs">
+									{jobs.map((job, index) => {
+										const transition = shouldReduceMotion
+											? { duration: 0 }
+											: {
+													duration: 0.45,
+													ease: revealEase,
+													delay: 0.22 + index * 0.08,
+												};
+
+										return (
+											<motion.li
+												key={job.id}
+												initial={
+													shouldReduceMotion ? false : { opacity: 0, y: 14 }
+												}
+												animate={
+													inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }
+												}
+												transition={transition}
+											>
+												<article className="career-job-card">
+													<div className="career-job-card__main">
+														<h3 className="career-job-card__title">
+															{job.title}
+														</h3>
+														<ul
+															className="career-job-card__meta"
+															aria-label={t("meta_label")}
+														>
+															<li>
+																<Building2 className="size-4" aria-hidden />
+																<span>{job.department.name}</span>
+															</li>
+															<li>
+																<Clock3 className="size-4" aria-hidden />
+																<span>{job.job_type.job_type}</span>
+															</li>
+															<li>
+																<Briefcase className="size-4" aria-hidden />
+																<span className="tabular-nums">
+																	{t("openings_count", {
+																		count: job.remaining_openings,
+																	})}
+																</span>
+															</li>
+														</ul>
+													</div>
+													<Link
+														href={`/career/apply/${job.id}`}
+														className="career-job-card__cta"
+														aria-label={t("apply_for", { title: job.title })}
+													>
+														{t("view_details")}
+														<ArrowUpRight className="size-4" aria-hidden />
+													</Link>
+												</article>
+											</motion.li>
+										);
+									})}
+								</ul>
+
+								{isPageLoading ? (
+									<div className="career-jobs__loading" aria-hidden>
+										<Loader2 className="size-5 animate-spin" />
+									</div>
+								) : null}
+							</div>
+						) : null}
+
+						{showPagination ? (
+							<nav
+								className="career-jobs__pagination"
+								aria-label={t("pagination_label")}
+							>
+								<button
+									type="button"
+									className="career-jobs__page-btn"
+									onClick={() => void goToPage(meta.page - 1)}
+									disabled={!meta.hasPreviousPage || isPageLoading}
+									aria-label={t("previous_page")}
+								>
+									<ChevronLeft className="size-4" aria-hidden />
+									<span>{t("previous")}</span>
+								</button>
+
+								<p className="career-jobs__page-status tabular-nums">
+									{t("page_status", {
+										current: meta.page,
+										total: meta.totalPages,
+									})}
+								</p>
+
+								<button
+									type="button"
+									className="career-jobs__page-btn"
+									onClick={() => void goToPage(meta.page + 1)}
+									disabled={!meta.hasNextPage || isPageLoading}
+									aria-label={t("next_page")}
+								>
+									<span>{t("next")}</span>
+									<ChevronRight className="size-4" aria-hidden />
+								</button>
+							</nav>
+						) : null}
+
+						{hasJobs ? (
+							<div className="career-openings__outreach">
+								<motion.h3
+									className="text-balance text-[clamp(1.25rem,3vw,1.625rem)] leading-[1.15] tracking-[-0.015em] text-[var(--text-h)]"
+									{...outreachReveal(0.28 + jobs.length * 0.08)}
+								>
+									{t("outreach_headline")}
+								</motion.h3>
+								<motion.p
+									className="career-openings__lead career-openings__lead--compact"
+									{...outreachReveal(0.36 + jobs.length * 0.08)}
+								>
+									{t("description")}
+								</motion.p>
+								<motion.a
+									href={emailHref}
+									className="svc-cta__btn mt-[clamp(1.5rem,2.5vw,2rem)]"
+									{...outreachReveal(0.44 + jobs.length * 0.08)}
+								>
+									{t("cta")}
+									<ArrowRight className="size-4" aria-hidden />
+								</motion.a>
+							</div>
+						) : null}
+					</div>
+				) : null}
+
+				{showEmptyState && !hasJobs ? (
+					<div className="career-empty">
+						<motion.h2
+							className="text-balance text-[clamp(1.75rem,4.6vw,2.75rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
+							{...headReveal(0)}
+						>
+							{t("headline")}
+						</motion.h2>
+						<motion.p className="career-openings__lead" {...headReveal(0.1)}>
+							{status === "error" ? t("error") : t("description")}
+						</motion.p>
+						<motion.a
+							href={emailHref}
+							className="svc-cta__btn mt-[clamp(1.75rem,3vw,2.25rem)]"
+							{...headReveal(0.2)}
+						>
+							{t("cta")}
+							<ArrowRight className="size-4" aria-hidden />
+						</motion.a>
+					</div>
+				) : null}
 			</div>
 		</section>
 	);

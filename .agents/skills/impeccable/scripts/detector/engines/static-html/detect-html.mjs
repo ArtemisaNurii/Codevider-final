@@ -1,20 +1,19 @@
 import fs from "node:fs";
 import path from "node:path";
-
-import { GENERIC_FONTS, OVERUSED_FONTS } from "../../shared/constants.mjs";
 import {
 	checkSourceDesignSystem,
 	collectStaticDesignSystemFindings,
 	mergeDesignSystemFindings,
 } from "../../design-system.mjs";
-import { isFullPage } from "../../shared/page.mjs";
 import { finding } from "../../findings.mjs";
 import {
 	profileFindings,
 	profileStep,
 	profileStepAsync,
 } from "../../profile/profiler.mjs";
+import { filterByProviders } from "../../registry/antipatterns.mjs";
 import {
+	checkCreamPalette,
 	checkElementBorders,
 	checkElementClippedOverflow,
 	checkElementColors,
@@ -26,7 +25,6 @@ import {
 	checkElementMotion,
 	checkElementOversizedH1,
 	checkElementQuality,
-	checkCreamPalette,
 	checkHtmlPatterns,
 	checkPageLayout,
 	checkPageQualityFromDoc,
@@ -34,13 +32,14 @@ import {
 	resolveBackground,
 	resolveBorderRadiusPx,
 } from "../../rules/checks.mjs";
-import { filterByProviders } from "../../registry/antipatterns.mjs";
+import { GENERIC_FONTS, OVERUSED_FONTS } from "../../shared/constants.mjs";
+import { isFullPage } from "../../shared/page.mjs";
 import { detectText, runTextContentAnalyzers } from "../regex/detect-text.mjs";
 import {
-	StaticDocument,
 	buildStaticStyleMap,
 	buildStaticWindow,
 	collectStaticCssText,
+	StaticDocument,
 } from "./css-cascade.mjs";
 
 function checkStaticPageTypography(document, window) {
@@ -380,4 +379,4 @@ async function detectHtml(filePath, options = {}) {
 	return filterByProviders(findings, options.providers);
 }
 
-export { checkStaticPageTypography, STATIC_ELEMENT_RULES, detectHtml };
+export { checkStaticPageTypography, detectHtml, STATIC_ELEMENT_RULES };

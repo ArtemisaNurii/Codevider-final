@@ -19,7 +19,8 @@
 	},
 	"home": {
 		"your_strategic_partner_in": "Ihr strategischer Partner für",
-		"we_design_build_and_scale_reliable_web_mobile_and_cloud_software_embedded_with_your_team_and_delivered_without_the_overhead": "Wir entwerfen, bauen und skalieren zuverlässige Web-, Mobil- und Cloud-Software — integriert in Ihr Team und ohne zusätzlichen Verwaltungsaufwand.",
+		"hero_lead_emphasis": "Wir entwerfen, bauen und skalieren zuverlässige Web-, Mobil- und Cloud-Software",
+		"hero_lead_rest": "— integriert in Ihr Team und ohne zusätzlichen Verwaltungsaufwand.",
 		"start_your_project": "Projekt starten",
 		"explore_services": "Dienstleistungen entdecken",
 		"years_delivering": "Jahre erfolgreicher Projektabwicklung",
@@ -116,7 +117,7 @@
 					"running": "Läuft…",
 					"run": "Pipeline starten",
 					"run_again": "Erneut starten",
-					"status_building": "Bauen…",
+					"status_build": "Bauen…",
 					"status_test": "Tests laufen…",
 					"status_deploy": "Bereitstellen…",
 					"status_live_label": "Live",
@@ -281,8 +282,18 @@
 			"form_subtitle": "Teilen Sie uns ein paar Details zu Ihrem Projekt mit und wir melden uns mit den nächsten Schritten.",
 			"form_required": "Pflichtfelder",
 			"form_submit": "Nachricht senden",
+			"form_submitting": "Wird gesendet…",
 			"form_note": "Wir antworten in der Regel innerhalb eines Werktages.",
 			"form_note_privacy": "Ihre Daten bleiben vertraulich — wir geben sie niemals an Dritte weiter.",
+			"form_error_submit": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+			"form_errors": {
+				"name_required": "Bitte geben Sie Ihren vollständigen Namen ein",
+				"name_max": "Der Name darf maximal 100 Zeichen lang sein",
+				"email_required": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+				"email_invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+				"details_required": "Bitte erzählen Sie uns von Ihrem Projekt",
+				"details_max": "Die Details dürfen maximal 1000 Zeichen lang sein"
+			},
 			"success_title": "Nachricht gesendet!",
 			"success_message": "Vielen Dank für Ihre Kontaktaufnahme — wir melden uns innerhalb eines Werktages bei Ihnen."
 		},

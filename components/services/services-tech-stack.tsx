@@ -6,13 +6,13 @@ import {
 	useInView,
 	useReducedMotion,
 } from "motion/react";
-import { useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useMemo, useRef, useState } from "react";
 import SectionHead from "@/components/index/section-head";
 import {
-	TECH_STACK_CATEGORIES,
 	getTechStackCategory,
 	getTechStackInitials,
+	TECH_STACK_CATEGORIES,
 	type TechStackCategoryId,
 	type TechStackItem,
 } from "@/data/tech-stack";
