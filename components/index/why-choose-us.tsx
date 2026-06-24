@@ -3,7 +3,11 @@
 import { Clock, Lightbulb, Percent, SlidersHorizontal } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
+import {
+	sectionItemTransition,
+	sectionRevealItem,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
 const BOTTOM_CARDS = [
@@ -13,24 +17,20 @@ const BOTTOM_CARDS = [
 	{ id: "expertise", icon: Lightbulb },
 ] as const;
 
-const revealEase = [0.22, 1, 0.36, 1] as const;
-
 export default function WhyChooseUs() {
 	const t = useTranslations("home.why_choose");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 
-	const cardTransition = (delay: number) =>
-		revealTransition(shouldAnimate, {
-			duration: 0.5,
-			ease: revealEase,
-			delay: shouldReduceMotion ? 0 : delay,
-		});
-
 	const motionProps = (delay: number) => ({
-		initial: shouldReduceMotion || !shouldAnimate ? false : { y: 18 },
-		animate: isRevealed ? { y: 0 } : { y: 18 },
-		transition: cardTransition(delay),
+		initial:
+			shouldReduceMotion || !shouldAnimate ? false : sectionRevealItem.hidden,
+		animate: isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden,
+		transition: sectionItemTransition(
+			shouldAnimate,
+			delay,
+			!!shouldReduceMotion,
+		),
 	});
 
 	return (
@@ -43,10 +43,10 @@ export default function WhyChooseUs() {
 					centered
 				/>
 
-				<div className="home-section-lead grid items-stretch gap-5 lg:grid-cols-4">
+				<div className="home-section-lead grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4">
 					<motion.article
 						{...motionProps(0)}
-						className="home-vp-card home-vp-card--tint home-card-body lg:col-span-3"
+						className="home-vp-card home-vp-card--tint home-card-body order-1 sm:col-span-2 lg:order-none lg:col-span-3"
 					>
 						<span className="inline-block w-fit rounded-full bg-[var(--text-h)] px-3.5 py-1.5 text-[13px] font-semibold text-[var(--bg)]">
 							{t("value_badge")}
@@ -61,21 +61,19 @@ export default function WhyChooseUs() {
 
 					<motion.article
 						{...motionProps(0.08)}
-						className="home-vp-card home-vp-card--dark home-card-body lg:col-span-1"
+						className="home-vp-card home-vp-card--dark home-card-body order-last sm:col-span-2 lg:order-none lg:col-span-1"
 					>
-						<p className="font-[family-name:var(--mono)] text-[clamp(2rem,4vw,2.75rem)] font-semibold tabular-nums tracking-[-0.03em] text-white">
+						<p className="font-[family-name:var(--mono)] text-[clamp(2rem,4vw,2.75rem)] font-semibold tabular-nums tracking-[-0.03em] text-(--on-brand)">
 							{`${new Date().getFullYear() - 2019}+`}
 						</p>
-						<p className="font-semibold text-balance text-white">
+						<p className="font-semibold text-balance text-(--on-brand)">
 							{t("years_title")}
 						</p>
-						<p className="text-pretty text-sm leading-relaxed text-blue-100/70">
+						<p className="text-pretty text-sm leading-relaxed text-(--on-brand)/70">
 							{t("years_description")}
 						</p>
 					</motion.article>
-				</div>
 
-				<div className="mt-6 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4">
 					{BOTTOM_CARDS.map(({ id, icon: Icon, ...rest }, index) => {
 						const flexKeys = "flexKeys" in rest;
 						const pin = flexKeys ? t("flex_value") : t(`cards.${id}.pin`);
@@ -88,7 +86,7 @@ export default function WhyChooseUs() {
 							<motion.article
 								key={id}
 								{...motionProps(0.16 + index * 0.08)}
-								className="home-ecard home-card-body"
+								className="home-ecard home-card-body order-2 lg:order-none"
 							>
 								<div className="home-ecard-icon">
 									<Icon className="size-[22px]" aria-hidden />

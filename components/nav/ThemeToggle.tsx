@@ -27,7 +27,7 @@ export function ThemeToggle({
 	} ${
 		variant === "dark"
 			? "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white"
-			: "border-[var(--border)] bg-[var(--social-bg)] text-[var(--text)] hover:bg-[var(--accent-bg)] hover:text-[var(--text-h)]"
+			: "border-slate-200 bg-slate-900/5 text-slate-600 hover:bg-slate-900/10 hover:text-slate-900"
 	} ${className}`;
 
 	const handleToggle = (event: React.MouseEvent<HTMLButtonElement>) => {

@@ -125,8 +125,7 @@
 					"status_build": "Building…",
 					"status_test": "Running tests…",
 					"status_deploy": "Deploying…",
-					"status_live_label": "Live",
-					"status_live_uptime": "98.5% uptime"
+					"status_live_label": "Live"
 				}
 			}
 		},

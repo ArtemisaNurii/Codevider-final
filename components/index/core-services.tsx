@@ -1,7 +1,6 @@
 "use client";
 
 import {
-	ArrowRight,
 	ArrowUpRight,
 	Bot,
 	Check,
@@ -24,7 +23,13 @@ import {
 	ENGINEERING_DEMO_TABS,
 	type EngineeringDemoTab,
 } from "@/data/engineering-demo-code";
-import { useSectionReveal } from "@/hooks/use-section-reveal";
+import {
+	appleRevealEase,
+	sectionItemTransition,
+	sectionRevealItem,
+	sectionRevealStagger,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import { Link } from "@/i18n/navigation";
 import SectionHead from "./section-head";
 
@@ -81,30 +86,31 @@ const engineeringCodeTheme: Record<string, CSSProperties> = {
 	italic: { fontStyle: "italic" },
 };
 
-const reveal = {
-	hidden: { opacity: 0, y: 16 },
+const reveal = sectionRevealItem;
+
+const listReveal = {
+	hidden: {},
 	visible: {
-		opacity: 1,
-		y: 0,
-		transition: { type: "spring" as const, duration: 0.45, bounce: 0 },
+		transition: { staggerChildren: 0.08 },
 	},
-};
+} as const;
 
 function FeatureCheckList({ items }: { items: string[] }) {
 	return (
-		<ul className="mt-8 grid gap-4">
+		<motion.ul className="grid gap-4" variants={listReveal}>
 			{items.map((item) => (
-				<li
+				<motion.li
 					key={item}
-					className="flex items-start gap-3.5 text-[15px] leading-relaxed text-[var(--text-h)]/80"
+					variants={reveal}
+					className="flex items-start gap-3.5 text-pretty text-[15px] leading-relaxed text-[var(--text-h)]/80"
 				>
 					<span className="home-check mt-0.5">
 						<Check className="size-3.5" strokeWidth={3} aria-hidden />
 					</span>
 					{item}
-				</li>
+				</motion.li>
 			))}
-		</ul>
+		</motion.ul>
 	);
 }
 
@@ -323,10 +329,17 @@ function PodDemo() {
 	};
 
 	const colors: Record<(typeof POD_ROLES)[number], string> = {
-		frontend: "bg-(--dash-brand-solid)",
-		backend: "bg-(--dash-brand-solid)",
-		qa: "bg-(--dash-brand-solid)",
-		pm: "bg-(--dash-brand-solid)",
+		frontend: "bg-(--pod-fe)",
+		backend: "bg-(--pod-be)",
+		qa: "bg-(--pod-qa)",
+		pm: "bg-(--pod-pm)",
+	};
+
+	const titleColors: Record<(typeof POD_ROLES)[number], string> = {
+		frontend: "text-(--pod-fe)",
+		backend: "text-(--pod-be)",
+		qa: "text-(--pod-qa)",
+		pm: "text-(--pod-pm)",
 	};
 
 	return (
@@ -354,7 +367,7 @@ function PodDemo() {
 							onMouseEnter={() => setActive(role)}
 							onFocus={() => setActive(role)}
 							onClick={() => setActive(role)}
-							className={`absolute z-[3] flex min-h-11 items-center gap-2 rounded-full border bg-(--bg) px-3.5 py-2 text-[13.5px] font-semibold shadow-sm transition-[transform,box-shadow,border-color] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--dash-brand) motion-reduce:transition-none motion-reduce:hover:scale-100 ${positions[role]} ${
+							className={`absolute z-[3] flex min-h-11 items-center gap-2 rounded-full border bg-(--bg) px-3.5 py-2 text-[13.5px] font-semibold shadow-sm transition-[transform,box-shadow,border-color] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--dash-brand) active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100 ${positions[role]} ${
 								active === role
 									? "scale-105 border-[var(--dash-brand)] shadow-md"
 									: "border-(--border) hover:scale-105 hover:border-[var(--dash-brand)]"
@@ -371,7 +384,7 @@ function PodDemo() {
 				</div>
 			</div>
 			<p className="home-demo-body min-h-6 pt-0 text-center text-sm leading-relaxed text-[var(--text)]">
-				<span className="font-semibold text-(--text-h)">
+				<span className={`font-semibold ${titleColors[active]}`}>
 					{t(`role_${active}`)}
 				</span>
 				{" — "}
@@ -450,12 +463,9 @@ function PipelineDemo() {
 						{t("title")}
 					</span>
 					{live ? (
-						<div className="home-live-badge justify-between" role="status">
+						<div className="home-live-badge" role="status">
 							<span className="home-live-badge__dot" aria-hidden />
 							<span>{t("status_live_label")}</span>
-							<span className="home-live-badge__uptime home-live-badge__uptime--head tabular-nums">
-								{t("status_live_uptime")}
-							</span>
 						</div>
 					) : (
 						<span className="rounded-full bg-(--home-surface-muted) px-2.5 py-1 text-[11px] font-medium tracking-wide text-(--text) uppercase">
@@ -467,9 +477,6 @@ function PipelineDemo() {
 					<div className="home-pipeline-head__meta">
 						<span className="rounded-full bg-(--home-surface-muted) px-2.5 py-1 text-[11px] font-medium tracking-wide text-(--text) uppercase">
 							{t("subtitle")}
-						</span>
-						<span className="home-live-badge__uptime home-live-badge__uptime--mobile tabular-nums">
-							{t("status_live_uptime")}
 						</span>
 					</div>
 				) : null}
@@ -547,14 +554,9 @@ function PipelineDemo() {
 								: t("run")}
 					</button>
 					{live ? (
-						<div className="home-pipeline-foot__live-meta">
-							<span className="rounded-full bg-(--home-surface-muted) px-2.5 py-1 text-[11px] font-medium tracking-wide text-(--text) uppercase">
-								{t("subtitle")}
-							</span>
-							<span className="home-live-badge__uptime home-live-badge__uptime--foot tabular-nums">
-								{t("status_live_uptime")}
-							</span>
-						</div>
+						<p className="home-pipeline-status" role="status">
+							{t("status_live_label")}
+						</p>
 					) : (
 						<p className="home-pipeline-status" role="status">
 							{status}
@@ -591,6 +593,8 @@ function FeatureSection({
 	const bullets = [t("bullet_1"), t("bullet_2"), t("bullet_3")];
 	const headlineId = `${feature.id}-headline`;
 
+	const textDelay = index * 0.04;
+
 	return (
 		<section
 			ref={ref}
@@ -602,28 +606,32 @@ function FeatureSection({
 					className={`flex flex-col gap-7 sm:gap-8 ${feature.reverse ? "lg:order-2" : ""}`}
 					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
 					animate={isRevealed ? "visible" : "hidden"}
-					variants={reveal}
+					variants={sectionRevealStagger}
 				>
-					<span className="home-feature-badge">
+					<motion.span className="home-feature-badge" variants={reveal}>
 						<span className="home-feature-badge__icon">{feature.icon}</span>
 						{t("badge")}
-					</span>
-					<div>
-						<h2
-							id={headlineId}
-							className="m-0 text-balance text-[clamp(1.75rem,3.7vw,2.875rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
-						>
-							{t("headline")}
-						</h2>
-						<p className="mt-5 max-w-[52ch] text-pretty text-[17px] leading-relaxed text-[var(--text)]">
-							{t("description")}
-						</p>
-						<FeatureCheckList items={bullets} />
-						<Link href={feature.href} className="home-link-arrow mt-8">
+					</motion.span>
+					<motion.h2
+						id={headlineId}
+						variants={reveal}
+						className="m-0 text-balance text-[clamp(1.75rem,3.7vw,2.875rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
+					>
+						{t("headline")}
+					</motion.h2>
+					<motion.p
+						variants={reveal}
+						className="max-w-[52ch] text-pretty text-[17px] leading-relaxed text-[var(--text)]"
+					>
+						{t("description")}
+					</motion.p>
+					<FeatureCheckList items={bullets} />
+					<motion.div variants={reveal}>
+						<Link href={feature.href} className="home-link-arrow">
 							{t("link")}
 							<ArrowUpRight className="size-4" aria-hidden />
 						</Link>
-					</div>
+					</motion.div>
 				</motion.div>
 
 				<motion.div
@@ -635,12 +643,15 @@ function FeatureSection({
 						visible: {
 							...reveal.visible,
 							transition: shouldAnimate
-								? { ...reveal.visible.transition, delay: 0.1 * index }
+								? {
+										duration: 0.55,
+										ease: appleRevealEase,
+										delay: 0.12 + textDelay,
+									}
 								: { duration: 0 },
 						},
 					}}
 				>
-					<div className="home-feature-glow" aria-hidden />
 					{feature.demo}
 				</motion.div>
 			</div>
@@ -650,6 +661,8 @@ function FeatureSection({
 
 export default function CoreServices() {
 	const t = useTranslations("home.core_services");
+	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
+	const shouldReduceMotion = useReducedMotion();
 
 	const features: FeatureConfig[] = [
 		{
@@ -685,16 +698,33 @@ export default function CoreServices() {
 	return (
 		<>
 			<section
+				ref={ref}
 				id="services"
 				className="home-section--tight pt-[clamp(72px,10vw,120px)] pb-[clamp(40px,6vw,64px)]"
 			>
 				<div className="home-wrap">
-					<SectionHead
-						eyebrow={t("eyebrow")}
-						headline={t("headline")}
-						description={t("description")}
-						centered
-					/>
+					<motion.div
+						initial={
+							shouldReduceMotion || !shouldAnimate
+								? false
+								: sectionRevealItem.hidden
+						}
+						animate={
+							isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
+						}
+						transition={sectionItemTransition(
+							shouldAnimate,
+							0,
+							!!shouldReduceMotion,
+						)}
+					>
+						<SectionHead
+							eyebrow={t("eyebrow")}
+							headline={t("headline")}
+							description={t("description")}
+							centered
+						/>
+					</motion.div>
 				</div>
 			</section>
 

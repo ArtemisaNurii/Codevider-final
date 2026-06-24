@@ -1,679 +1,776 @@
 {
 	"metadata": {
-		"home": {
-			"title": "Codevider",
-			"description": "Partneri juaj strategjik në zhvillimin e softuerit"
-		},
-		"about": {
-			"title": "Rreth nesh — Codevider",
-			"description": "E themeluar në vitin 2019 në Tiranë, Shqipëri, Codevider krijon softuerë që sjellin sukses në biznes — strategji, dizajnim dhe inxhinieri në harmoni të plotë."
-		},
-		"services": {
-			"title": "Shërbimet — Codevider",
-			"description": "Zbuloni se si Codevider dizajnon, ndërton dhe rrit softuerë të besueshëm: zhvillim i personalizuar, aplikacione ueb, integrim i Inteligjencës Artificiale (AI), automatizim, integrim sistemesh, cloud dhe zgjerim i skuadrave."
-		},
-		"career": {
-			"title": "Karriera — Codevider",
-			"description": "Bashkohuni me Codevider dhe ndihmoni në ndërtimin e së ardhmes së zhvillimit të softuerit. Eksploroni procesin tonë të punësimit dhe lidhuni me ekipin tonë në Tiranë, Shqipëri."
-		}
+	 "home": {
+	  "title": "Codevider",
+	  "description": "Partneri juaj strategjik në zhvillimin e softuerit"
+	 },
+	 "about": {
+	  "title": "Rreth nesh — Codevider",
+	  "description": "Themeluar në vitin 2019 në Tiranë, Shqipëri, Codevider krijon softuerë me vlerë për biznesin — strategji, dizajn dhe inxhinieri në harmoni të plotë."
+	 },
+	 "services": {
+	  "title": "Shërbimet — Codevider",
+	  "description": "Zbuloni se si Codevider projekton, ndërton dhe skalon softuerë të besueshëm: zhvillim i personalizuar, aplikacione web, integrim i inteligjencës artificiale (AI), automatizim, integrim i sistemeve, cloud dhe shtim i skuadrës."
+	 },
+	 "career": {
+	  "title": "Karriera — Codevider",
+	  "description": "Bashkohuni me Codevider dhe ndihmoni në ndërtimin e së ardhmes së zhvillimit të softuerit. Eksploroni procesin tonë të punësimit dhe lidhuni me skuadrën tonë në Tiranë, Shqipëri."
+	 },
+	 "career_apply": {
+	  "title": "Aplikoni — Codevider",
+	  "title_with_role": "{title} — Aplikoni — Codevider",
+	  "description": "Shikoni detajet e pozicionit dhe aplikoni për t'u bërë pjesë e skuadrës Codevider."
+	 }
 	},
 	"home": {
-		"your_strategic_partner_in": "Partneri juaj strategjik në",
-		"hero_lead_emphasis": "Ne dizajnojmë, ndërtojmë dhe rritim softuerë të besueshëm për ueb, pajisje mobile dhe cloud",
-		"hero_lead_rest": "— të integruar me ekipin tuaj dhe të ofruar pa kosto shtesë menaxhimi.",
-		"start_your_project": "Nisni projektin tuaj",
-		"explore_services": "Eksploroni shërbimet",
-		"years_delivering": "Vite eksperiencë",
-		"global_projects": "Projekte globale",
-		"engineers": "Inxhinierë",
-		"who_we_are_eyebrow": "Kush jemi ne",
-		"who_we_are_headline": "Shndërrojmë idetë në zgjidhje digjitale të besueshme",
-		"who_we_are_description": "Nga aplikacionet ueb dhe mobile deri te platformat cloud dhe sistemet e ndërmarrjeve, ne krijojmë softuerë të besueshëm të përshtatur për nevojat e biznesit tuaj. Ekipet tona ndërthurin teknologjitë moderne, arkitekturat e shkallëzueshme dhe dizajnin intuitiv për të ofruar zgjidhje të sigurta dhe me performancë të lartë që ndihmojnë organizatat të inovojnë dhe të rriten.",
-		"read_more_about_us": "Lexoni më shumë rreth nesh",
-		"stat_global_partnerships_value": "{value}+",
-		"stat_global_partnerships": "Partneritete globale anembanë Evropës",
-		"stat_delivery_velocity_value": "{value}%",
-		"stat_delivery_velocity": "Rritja mesatare në shpejtësinë e dërgesës",
-		"stat_elite_engineers_value": "{value}+",
-		"stat_elite_engineers": "Inxhinierë elitë me ekspertizë të thellë full-stack — të gatshëm për t'u integruar në ekipin tuaj brenda dy javësh.",
-		"core_services": {
-			"eyebrow": "Shërbimet tona kryesore",
-			"headline": "Gjithçka që ju nevojitet për të lançuar, rritur dhe qëndruar përpara",
-			"description": "Ne ndihmojmë ndërmarrjet dhe startup-et të lançojnë më shpejt me ekipe të shkallëzueshme, teknologji moderne dhe dërgesë të besueshme — pa kosto të tepërta operative. Katër mënyra se si ne bashkohemi me ju:"
-		},
-		"features": {
-			"ai": {
-				"badge": "01 · Integrimi i AI",
-				"headline": "Lanconi funksionalitete të Inteligjencës Artificiale që përdoruesit tuaj i ndiejnë vërtet",
-				"description": "Nga aplikacionet e personalizuara të bazuara në LLM dhe chatbot-et inteligjentë deri tek automatizimi i proceseve të punës dhe analizat e vlefshme — të integruara pa probleme në ekosistemin tuaj ekzistues.",
-				"bullet_1": "Aplikacione dhe asistentë LLM të personalizuar të trajnuar me të dhënat tuaja",
-				"bullet_2": "Chatbot-e inteligjentë dhe automatizim i mbështetjes teknike",
-				"bullet_3": "Analiza të të dhënave të lidhura drejtpërdrejt me proceset tuaja të punës",
-				"link": "Eksploroni shërbimet e AI",
-				"demo": {
-					"title": "Asistent AI",
-					"status": "I udhëhequr nga të dhënat tuaja, i siguruar që në dizajnim.",
-					"chip_tickets_label": "Përmblidh biletat",
-					"chip_tickets_q": "Përmblidh biletat e sotme të mbështetjes",
-					"chip_tickets_a": "Ja një pasqyrë e shpejtë e aktivitetit të sotëm të mbështetjes:\n\n• Bileta #1023 – Problem me hyrjen (u zgjidh për 12 min)\n• Bileta #1024 – Kërkesë për funksionalitet: eksport në PDF (në pritje të rishikimit)\n• Bileta #1025 – Bug: vonesë në sinkronizimin e të dhënave (u rregullua, 3 min)\n\nTotali i biletave të trajtuara: 3 – 2 të zgjidhura, 1 në pritje.",
-					"chip_leads_label": "Klasifiko klientët",
-					"chip_leads_q": "Klasifiko klientët e rinj potencialë sipas qëllimit",
-					"chip_leads_a": "Ndarja e klientëve potencialë (24 orët e fundit):\n\n• Qëllim i Lartë – 4 klientë (buxheti > $5k, kërkesë për demo)\n• Qëllim i Mesëm – 7 klientë (krahasim produktesh, pyetje mbi çmimet)\n• Qëllim i Ulët – 3 klientë (informacion i përgjithshëm, regjistrim në buletin)\n\nVeorimi: prioritizoni klientët me qëllim të lartë për kontaktim.",
-					"chip_schedule_label": "Krijo një planifikim",
-					"chip_schedule_q": "Shto një planifikim të ri për nesër",
-					"chip_schedule_a": "Planifikimi u krijua për Klientin: BrightWave Solutions – nesër, 9:00 paradite – 10:00 paradite (UTC+2).\n\n Agjenda: 9:00 – Hyrje & Qëllimet, 9:30 – Demo, 9:55 – Pyetje & Përgjigje, 10:00 – Mbyllje.\n\n E-maili i konfirmimit iu dërgua klientit dhe ekipit."
-				}
-			},
-			"engineering": {
-				"badge": "02 · Inxhinieria e Produktit",
-				"headline": "Arkitekturë e pastër, e dërguar në mënyrë të rregullt",
-				"description": "Ne dizajnojmë dhe zhvillojmë aplikacione ueb të shkallëzueshme kopsht dhe produkte intuitive me arkitekturë të pastër dhe cikle lançimi agjile — duke siguruar dalje më të shpejtë në treg dhe mirëmbajtje afatgjatë.",
-				"bullet_1": "Kodet bazë moderne, të tipizuara dhe të testuara mirë",
-				"bullet_2": "Dërgesë e vazhdueshme (Continuous Delivery) që nga dita e parë",
-				"bullet_3": "Sisteme të mirëmbajtshme që rriten bashkë me ju",
-				"link": "Eksploroni inxhinierinë",
-				"demo": {
-					"tabs_aria": "Shembuj kodi",
-					"status": "Ndërtimi kaloi me sukses · 0 gabime tipi · u hodh në prodhim"
-				}
-			},
-			"pod": {
-				"badge": "03 · Skuadra të Dedikuara (Pod)",
-				"headline": "Një skuadër e plotë, e integruar brenda dy javësh",
-				"description": "Ngritni me shpejtësi ekipe ndërfunktsionale (pods) — frontend, backend dhe QA — që përshtaten me procesin tuaj. Rrituni pa sforcim me angazhime fleksibël, të mbështetura nga SLA-të dhe të përshtatura për nevojat tuaja.",
-				"bullet_1": "Ndërfunktsionalë që nga sprinti i parë",
-				"bullet_2": "Mbledhje të përditshme (Standups), raportim javor, transparencë e plotë",
-				"bullet_3": "Zgjaroni ose zvogëloni ekipin sipas kërkesës",
-				"link": "Eksploroni skuadrat tona",
-				"demo": {
-					"title": "Skuadra juaj e dedikuar",
-					"subtitle": "kaloni mausin mbi një rol",
-					"center": "Produkti\njuaj",
-					"role_frontend": "Frontend",
-					"role_frontend_desc": "React, Next.js & ndërfaqe përdoruesi (UI) e kuruar dhe e aksesueshme.",
-					"role_backend": "Backend",
-					"role_backend_desc": "API, modele të dhënash & logjikë biznesi që rriten.",
-					"role_qa": "QA",
-					"role_qa_desc": "Teste të automatizuara & siguri në lançim.",
-					"role_pm": "PM",
-					"role_pm_desc": "Mbledhje, raportime & një pikë e vetme kontakti."
-				}
-			},
-			"devops": {
-				"badge": "04 · Cloud & DevOps",
-				"headline": "Lanconi në prodhim me besim të plotë",
-				"description": "Thjeshtoni punët e hedhjes në prodhim me linjat e CI/CD, kontenerizimin dhe infrastrukturën e sigurt cloud në AWS — duke siguruar disponueshmëri të lartë dhe efikasitet operacional.",
-				"bullet_1": "Linja të automatizuara për ndërtim, testim dhe hedhje në prodhim",
-				"bullet_2": "Konfigurime të kontenerizuara, infrastrukturë si kod (IaC)",
-				"bullet_3": "Disponueshmëri e lartë & SLA me 99% kohë funksionale",
-				"link": "Eksploroni cloud & DevOps",
-				"demo": {
-					"title": "Linja CI/CD",
-					"subtitle": "main → prodhim",
-					"stage_build": "Build",
-					"stage_test": "Test",
-					"stage_deploy": "Deploy",
-					"idle": "Në pritje",
-					"running": "Duke u ekzekutuar…",
-					"run": "Ekzekuto linjën",
-					"run_again": "Ekzekuto përsëri",
-					"status_build": "Duke u ndërtuar…",
-					"status_test": "Duke ekzekutuar testet…",
-					"status_deploy": "Duke u hedhur në prodhim…",
-					"status_live_label": "Live",
-					"status_live_uptime": "98.5% kohë funksionale"
-				}
-			}
-		},
-		"empower": {
-			"eyebrow": "Kë ndihmojmë ne",
-			"headline": "Ne ndihmojmë startup-et teknologjike, IMM-të & markat globale",
-			"description": "Nga ekipet e produkteve në fazat e hershme deri tek modernizimi i ndërmarrjeve — ne përshtatim modelin e duhur inxhinierik me fazën, teknologjitë dhe qëllimet tuaja të rritjes.",
-			"featured_pin": "Aftësia kryesore",
-			"cards": {
-				"startups": {
-					"title": "Startupe të Serive A/B",
-					"description": "Ne ndihmojmë startup-et me rritje të shpejtë të zgjerohen me ekipe agjile dhe zgjidhje cloud-native — nga përshpejtimi i MVP-ve deri te rritja e sistemeve kryesore."
-				},
-				"enterprise": {
-					"title": "Modernizimi i Ndërmarrjeve",
-					"description": "Ne modernizojmë sistemet ekzistuese me zgjidhje cloud-native — duke reduktuar borxhin teknik, përmirësuar performancën dhe mundësuar inovacionin."
-				},
-				"crm": {
-					"title": "Organizatat e Fokusuara në CRM",
-					"description": "Ne dizajnojmë struktura të përshtatshme të fokusuara në CRM dhe HubSpot që centralizojnë të dhënat, përmirësojnë eksperiencat dhe mundësojnë vendime më të zgjuara."
-				},
-				"custom": {
-					"title": "Zgjidhje Softuerike të Personalizuara",
-					"description": "Mjetet e gatshme nuk përshtaten me çdo nevojë. Ne ndërtojmë softuerë të shkallëzueshëm dhe fleksibël që evoluojnë me biznesin tuaj dhe sjellin rezultate të matshme."
-				},
-				"fintech": {
-					"title": "Fintech & Pagesat",
-					"description": "Nga bankat digjitale deri te platformat e tregtisë, ne krijojmë zgjidhje fintech të sigurta dhe në përputhje me rregulloret që rriten globalisht me një UX të përsosur."
-				},
-				"ai": {
-					"title": "AI & Automatizim",
-					"description": "Ne implementojmë chatbot-e të fuqizuar nga AI, analiza parashikuese dhe sisteme automatizimi që pakësojnë punën manuale dhe nxisin të ardhura të reja."
-				},
-				"data": {
-					"title": "Të Dhënat & Analizat",
-					"description": "Ne i kthejmë të dhënat e papërpunuara në informacione të vlefshme me panele BI, depo të dhënash (data warehouses) dhe analiza në kohë reale të ndërtuara për vendime më të zgjuara."
-				},
-				"mobile": {
-					"title": "Zhvillimi i Aplikacioneve Mobile",
-					"description": "Ne ndërtojmë aplikacione me performancë të lartë për iOS, Android dhe cross-platform me një UX të rrjedhshme — duke e mbajtur markën tuaj të lidhur në çdo kohë dhe vend."
-				}
-			}
-		},
-		"outsource": {
-			"eyebrow": "Pse të bëni outsourcing me ne",
-			"headline": "Kalo inxhinierinë jashtë, përshpejto rritjen",
-			"description": "Arritni efikasitet në kosto dhe saktësi ekspertësh. Rrituni me përshtatshmëri agjile dhe përqendrohuni në pikat tuaja të forta kryesore.",
-			"pillars": {
-				"collaboration": {
-					"title": "Bashkëpunim Transparent",
-					"description": "Si partneri juaj i zhvillimit të jashtëm, ne integrohemi pa probleme me ekipet tuaja të brendshme përmes komunikimit të hapur, planeve të përbashkëta të punës dhe transparencës së plotë në çdo fazë të procesit tonë."
-				},
-				"legal": {
-					"title": "Mbrojtja Ligjore",
-					"description": "Zhvilluesit tanë ndërtojnë aplikacione vetëm për klientët — ju gëzoni 100% të të drejtave të pronësisë intelektuale mbi softuerin tuaj. Ne gjithashtu nënshkruajmë marrëveshje mosdisklozimi (NDA) dhe marrëveshje moskonkurrence për mbrojtje të plotë ligjore."
-				},
-				"cost": {
-					"title": "Zhvillim me Kosto Efikase",
-					"description": "Punoni pa sakrifikuar cilësinë e kodit. Codevider e ka qendrën e saj në Tiranë, Shqipëri — një qendër e njohur për zhvilluesit më të mirë të aplikacioneve ueb me çmime mjaft ekonomike."
-				}
-			}
-		},
-		"global": {
-			"eyebrow": "Partneritetet globale",
-			"headline": "Duke ndërtuar ura përtej kufijve",
-			"description": "Ne mundësojmë bashkëpunim pa probleme në projekte në mbarë botën — duke fuqizuar startup-et, ndërmarrjet dhe novatorët që të rriten së bashku.",
-			"tirana": "Tiranë",
-			"germany": "Gjermani",
-			"usa": "Shtetet e Bashkuara",
-			"uk": "Mbretëria e Bashkuar"
-		},
-		"why_choose": {
-			"eyebrow": "Pse na zgjedhin klientët",
-			"headline": "Një partneritet i ndërtuar mbi tre shtylla",
-			"description": "Efikasiteti, fleksibiliteti dhe ekspertiza e thellë — themeli i çdo angazhimi.",
-			"value_badge": "Propozimi ynë i vlerës",
-			"value_flow": "Efikasitet → Fleksibilitet → Ekspertizë",
-			"value_description": "Ne ofrojmë më shumë sesa thjesht kod — një partneritet strategjik i projektuar për rritje, ku ju mbani kontrollin në çdo hap.",
-			"flex_value": "100%",
-			"flex_title": "Fleksibilitet & kontroll",
-			"flex_description": "Menaxhoni dhe mbani kontrollin e projektit tuaj në çdo kohë — plani juaj, prioritetet tuaja.",
-			"years_title": "vite eksperiencë",
-			"years_description": "Përfitoni nga këndvështrimet inovative që sjell ekipi ynë.",
-			"cards": {
-				"savings": {
-					"pin": "Kursimi mesatar",
-					"title": "Kursime të konsiderueshme në kosto dhe kohë",
-					"description": "Shmangni proceset e shtrenjta të punësimit dhe trajnimit. Procesi ynë i thjeshtuar ju nxjerr më shpejt në treg — duke kursyer kohë dhe burime jetike."
-				},
-				"control": {
-					"pin": "Kontrolli",
-					"title": "Fleksibilitet & kontroll i plotë",
-					"description": "Zgjeroni ekipin tuaj sipas kërkesës dhe mbani kontrollin në disa projekte njëkohësisht — duke bashkëpunuar përmes Slack, Jira, GitHub dhe mjeteve tuaja ekzistuese."
-				},
-				"expertise": {
-					"pin": "Këndvështrim",
-					"title": "Ekspertizë kreative sipas kërkesës",
-					"description": "Injektoni kreativitet të ri. Profesionistët tanë tejet të motivuar sjellin këndvështrime të reja dhe zgjidhje inovative në tryezë."
-				}
-			}
-		},
-		"faq": {
-			"eyebrow": "Pyetjet e Shpeshta",
-			"headline": "Pyetjet që na bëhen më shpesh",
-			"items": {
-				"projects": {
-					"question": "Çfarë lloj projektesh softuerike merrni përsipër?",
-					"answer": "Nga aplikacionet ueb dhe mobile të nisura nga e para deri te platformat e ndërmarrjeve, migrimet në cloud dhe integrimet e AI — ne menaxhojmë zhvillimin e plotë të ciklit të jetës për startup-et, IMM-të dhe ndërmarrjet e mëdha në projekte të shkallës së mesme deri në atë të gjerë tregtar."
-				},
-				"technologies": {
-					"question": "Në cilat teknologji dhe korniza (frameworks) jeni të specializuar?",
-					"answer": "Teknologjitë tona kryesore përfshijnë React, Next.js, Angular, Vue dhe React Native në frontend; Node.js, Python, Django, Laravel dhe PHP në backend; si dhe PostgreSQL, MySQL, MongoDB dhe AWS për të dhënat dhe infrastrukturën cloud."
-				},
-				"estimates": {
-					"question": "Si i vlerësoni afatet kohore dhe buxhetet e projekteve?",
-					"answer": "Ne fillojmë me një fazë zbulimi (discovery) për të specifikuar kërkesat tuaja, më pas ofrojmë një vlerësim transparent me etapa (milestones). Angazhimet funksionojnë me orë ose mbi bazë mujore të dedikuar, kështu që ju gjithmonë e dini se për çfarë po paguani."
-				},
-				"ownership": {
-					"question": "A do të jem unë pronar i kodit burim dhe i pronësisë intelektuale?",
-					"answer": "Po — 100% të kohës. Zhvilluesit tanë ndërtojnë vetëm për klientët dhe ju gëzoni të drejta të plota të pronësisë intelektuale mbi softuerin tuaj. Ne gjithashtu nënshkruajmë NDA dhe marrëveshje moskonkurrence për mbrojtje të plotë ligjore."
-				},
-				"communication": {
-					"question": "Si do të komunikojmë gjatë projektit?",
-					"answer": "Ju do të keni mbledhje të përditshme (standups) med zhvilluesit tuaj të përzgjedhur dhe raporte javore të progresit nga menaxheri i projektit tuaj. Ne bashkëpunojmë përmes mjeteve tuaja të preferuara — Slack, Jira, GitHub dhe më shumë."
-				},
-				"quality": {
-					"question": "Cili është procesi juaj i sigurimit të cilësisë (QA)?",
-					"answer": "Cilësia është e ndërtuar brenda që në fillim, jo e shtuar në fund. Çdo skuadër (pod) përfshin QA, me testime të automatizuara, rishikim kodi dhe një server zhvillimi të dedikuar ku mund të testoni projektin tuaj përpara se ai të hidhet në prodhim."
-				},
-				"support": {
-					"question": "A ofroni mbështetje dhe mirëmbajtje pas lançimit?",
-					"answer": "Absolutisht. Pas hedhjes në serverët tuaj, ne ofrojmë mbështetje të vazhdueshme, mirëmbajtje dhe përmirësime të vazhdueshme për ta mbajtur produktin tuaj të sigurt, performues dhe në zhvillim e sipër bashkë me biznesin tuaj."
-				},
-				"legacy": {
-					"question": "A mund të punoni me një kod bazë ekzistues ose të vjetër (legacy)?",
-					"answer": "Po. Ne jemi të specializuar në modernizimin e sistemeve të vjetra — duke reduktuar borxhin teknik, përmirësuar performancën dhe duke u integruar me arkitekturën tuaj ekzistuese pa ndërprerë operacionet tuaja."
-				}
-			}
-		},
-		"contact": {
-			"eyebrow": "Le të lidhemi",
-			"headline": "Gati për të ndërtuar idenë tuaj të radhës të madhe?",
-			"description": "Nëse keni një projekt specifik në mendje apo dëshironi thjesht të eksploroni mundësitë, ekipi ynë është këtu për t'ju ndihmuar. Plotësoni formularin, ose na kontaktoni drejtpërdrejt.",
-			"email_title": "Na shkruani drejtpërdrejt",
-			"phone_title": "Na telefononi tani",
-			"address_title": "Na vizitoni",
-			"address_value": "Rruga e Barrikadave, Tiranë, Shqipëri 1001",
-			"form_name": "Emri i plotë",
-			"form_name_placeholder": "Filan Fisteku",
-			"form_email": "Adresa e e-mailit",
-			"form_email_placeholder": "filan@kompania.com",
-			"form_company": "Kompania",
-			"form_optional": "opsionale",
-			"form_company_placeholder": "Acme Inc.",
-			"form_message": "Na tregoni rreth projektit tuaj",
-			"form_message_placeholder": "Çfarë po ndërtoni? Afati kohor, shtrirja, teknologjitë…",
-			"form_title": "Na dërgoni një mesazh",
-			"form_subtitle": "Ndani disa detaje rreth projektit tuaj dhe ne do t'ju kontaktojmë për hapat e ardhshëm.",
-			"form_required": "Fushat e detyrueshme",
-			"form_submit": "Dërgoni mesazhin tuaj",
-			"form_submitting": "Duke dërguar…",
-			"form_note": "Ne zakonisht përgjigjemi brenda një dite pune.",
-			"form_note_privacy": "Detajet tuaja mbeten private — ne kurrë nuk i ndajmë ato me palë të treta.",
-			"form_error_submit": "Diçka shkoi keq. Ju lutemi provoni përsëri.",
-			"form_errors": {
-				"name_required": "Ju lutemi shkruani emrin tuaj të plotë",
-				"name_max": "Emri duhet të jetë 100 karaktere ose më pak",
-				"email_required": "Ju lutemi shkruani adresën tuaj të e-mailit",
-				"email_invalid": "Ju lutemi shkruani një adresë e-maili të vlefshme",
-				"details_required": "Ju lutemi na tregoni rreth projektit tuaj",
-				"details_max": "Detajet duhet të jenë 1000 karaktere ose më pak"
-			},
-			"success_title": "Mesazhi u dërgua!",
-			"success_message": "Faleminderit që na kontaktuat — ne do t'ju kthejmë përgjigje brenda një dite pune."
-		},
-		"dashboard": {
-			"window_url": "app.codevider.io/analytics",
-			"live": "Live",
-			"performance": "Performanca",
-			"performance_delta": "+18.2% krahasuar me muajin e kaluar",
-			"growth": "Rritja",
-			"growth_delta": "+842 përdorues të rinj",
-			"system_health": "Shëndeti i sistemit",
-			"system_health_delta": "Të gjitha sistemet në funksion",
-			"leads": "Klientë potencialë",
-			"leads_delta": "+12% konvertim",
-			"revenue_overview": "Pasqyra e të ardhurave",
-			"revenue_period": "12 javët e fundit",
-			"revenue_chart_label": "Trendi i të ardhurave javore gjatë 12 javëve",
-			"week_1": "J1",
-			"week_6": "J6",
-			"week_12": "J12",
-			"transactions": "Transaksionet e fundit",
-			"tx_1_title": "Pagesë nga Stripe",
-			"tx_1_meta": "Sot · 09:42",
-			"tx_1_amount": "+$12,400",
-			"tx_2_title": "Abonim Pro",
-			"tx_2_meta": "Sot · 08:15",
-			"tx_2_amount": "+$299",
-			"tx_3_title": "Tërheqje nga furnizuesi",
-			"tx_3_meta": "Dje · 16:30",
-			"tx_3_amount": "-$4,200",
-			"toast_title": "Hedhja në prodhim e suksesshme",
-			"toast_message": "v2.4.1 u hodh në prodhim · 2 minuta më parë"
-		}
+	 "your_strategic_partner_in": "Partneri juaj strategjik në",
+	 "hero_lead_emphasis": "Ne projektojmë, ndërtojmë dhe skalojmë softuerë të besueshëm për web, mobile dhe cloud",
+	 "hero_lead_rest": "— të integruar me skuadrën tuaj dhe të ofruar pa kosto shtesë administrative.",
+	 "start_your_project": "Nisni projektin tuaj",
+	 "explore_services": "Eksploroni shërbimet",
+	 "years_delivering": "Vite eksperiencë",
+	 "global_projects": "Projekte globale",
+	 "engineers": "Inxhinierë",
+	 "who_we_are_eyebrow": "Kush jemi ne",
+	 "who_we_are_headline": "Shndërrojmë idetë në zgjidhje digjitale të besueshme",
+	 "who_we_are_description": "Nga aplikacionet për web dhe mobile te platformat cloud dhe sistemet e ndërmarrjeve, ne krijojmë softuerë të besueshëm të përshtatur për nevojat e biznesit tuaj. Skuadrat tona ndërthurin teknologjitë moderne, arkitekturën e skalueshme dhe dizajnin intuitiv për të ofruar zgjidhje të sigurta dhe me performancë të lartë që ndihmojnë organizatat të inovojnë dhe të rriten.",
+	 "read_more_about_us": "Lexoni më shumë rreth nesh",
+	 "stat_global_partnerships_value": "{value}+",
+	 "stat_global_partnerships": "Partneritete globale në mbarë Evropën",
+	 "stat_delivery_velocity_value": "{value}%",
+	 "stat_delivery_velocity": "Rritja mesatare e shpejtësisë së dërgimit",
+	 "stat_elite_engineers_value": "{value}+",
+	 "stat_elite_engineers": "Inxhinierë elitë me ekspertizë të thellë full-stack — të gatshëm për t'u integruar në skuadrën tuaj brenda dy javësh.",
+	 "core_services": {
+	  "eyebrow": "Shërbimet tona kryesore",
+	  "headline": "Çdo gjë që ju nevojitet për të dërguar, skaluar dhe qëndruar para të tjerëve",
+	  "description": "Ne ndihmojmë ndërmarrjet dhe startup-et të dërgojnë softuer më shpejt me skuadra të skalueshme, teknologji moderne dhe procese të besueshme dërgimi — pa kosto të larta administrative. Katër mënyrat se si ne bashkëpunojmë:"
+	 },
+	 "features": {
+	  "ai": {
+	   "badge": "01 · Integrimi i AI",
+	   "headline": "Krijoni funksionalitete të bazuara në inteligjencën artificiale (AI) me impakt real",
+	   "description": "Nga aplikacionet e personalizuara të bazuara në LLM dhe chatbot-et inteligjentë deri te automatizimi i proceseve të punës dhe analizat e avancuara — të integruara pa probleme në ekosistemin tuaj ekzistues.",
+	   "bullet_1": "Aplikacione LLM të personalizuara të trajnuara me të dhënat tuaja",
+	   "bullet_2": "Chatbot-ë inteligjentë dhe automatizim i mbështetjes për klientët",
+	   "bullet_3": "Flukse analizash të dhënash të integruara në proceset tuaja",
+	   "link": "Eksploroni shërbimet e AI",
+	   "demo": {
+		"title": "Asistenti i AI",
+		"status": "I drejtuar nga të dhënat tuaja, i siguruar që në projektim.",
+		"chip_tickets_label": "Përmblidhni biletat",
+		"chip_tickets_q": "Përmblidh biletat e sotme të mbështetjes",
+		"chip_tickets_a": "Ja një pasqyrim i shpejtë i aktivitetit të sotëm të mbështetjes:\n\n• Bileta #1023 – Problem me llogarinë (zgjidhur për 12 min)\n• Bileta #1024 – Kërkesë për funksionalitet: eksport në PDF (në shqyrtim)\n• Bileta #1025 – Bug: vonesë në sinkronizim të dhënash (rregulluar, 3 min)\n\nTotali i biletave të trajtuara: 3 – 2 të zgjidhura, 1 në pritje.",
+		"chip_leads_label": "Klasifikoni lead-et",
+		"chip_leads_q": "Klasifiko lead-et e reja sipas interesit",
+		"chip_leads_a": "Ndarja e lead-eve (24 orët e fundit):\n\n• Interes i Lartë – 4 lead-e (buxheti > $5k, kërkesë për demo)\n• Interes Mesatar – 7 lead-e (krahasim produktesh, pyetje mbi çmimet)\n• Interes i Ulët – 3 lead-e (informacione të përgjithshme, abonim në newsletter)\n\nVeprim: Prioritizoni kontaktimin e lead-eve me interes të lartë.",
+		"chip_schedule_label": "Krijoni një orar",
+		"chip_schedule_q": "Shto një takim të ri për nesër",
+		"chip_schedule_a": "Takimi u krijua për klientin: BrightWave Solutions – nesër, 9:00 AM – 10:00 AM (UTC+2).\n\n Agjenda: 9:00 AM – Prezantim & Synime, 9:30 AM – Demo, 9:55 AM – Pyetje & Përgjigje, 10:00 AM – Mbyllje.\n\n Email-i i konfirmimit iu dërgua klientit dhe skuadrës."
+	   }
+	  },
+	  "engineering": {
+	   "badge": "02 · Inxhinieria e Produktit",
+	   "headline": "Arkitekturë e pastër, e dërguar me ritëm të rregullt",
+	   "description": "Ne projektojmë dhe zhvillojmë aplikacione web të skalueshme dhe produkte intuitive me arkitekturë të pastër dhe cikle agile të publikimit — duke siguruar kohë më të shpejtë të daljes në treg dhe mirëmbajtje të lehtë afatgjatë.",
+	   "bullet_1": "Baza kodi moderne, të tipizuara dhe të testuara mirë",
+	   "bullet_2": "Dërgim i vazhdueshëm (Continuous Delivery) që nga dita e parë",
+	   "bullet_3": "Sisteme të mirëmbajtshme që rriten bashkë me ju",
+	   "link": "Eksploroni inxhinierinë",
+	   "demo": {
+		"tabs_aria": "Mostrat e kodit",
+		"status": "Ndërtimi i kodit kaloi · 0 gabime tipizimi · dërguar në produksion"
+	   }
+	  },
+	  "pod": {
+	   "badge": "03 · Skuadra Pod të Dedikuara",
+	   "headline": "Një skuadër e plotë, e integruar për dy javë",
+	   "description": "Krijoni shpejt skuadra ndër-funksionale (Pods) — frontend, backend dhe QA — që integrohen drejtpërdrejt në proceset tuaja. Skaloni pa mundim me marrëveshje fleksibël të mbështetura nga SLA të përshtatura për nevojat tuaja.",
+	   "bullet_1": "Ndër-funksionale që nga sprinti i parë",
+	   "bullet_2": "Takime të shkurtra ditore, raportim javor dhe transparencë e plotë",
+	   "bullet_3": "Shtoni ose reduktoni madhësinë e skuadrës sipas kërkesës",
+	   "link": "Eksploroni skuadrat pod",
+	   "demo": {
+		"title": "Skuadra juaj e dedikuar Pod",
+		"subtitle": "kaloni mausin mbi një rol",
+		"center": "Produkti\njuaj",
+		"role_frontend": "Frontend",
+		"role_frontend_desc": "React, Next.js dhe ndërfaqe përdoruesi të rafinuara dhe të aksesueshme.",
+		"role_backend": "Backend",
+		"role_backend_desc": "API, modele të dhënash dhe logjikë biznesi e skalueshme.",
+		"role_qa": "QA",
+		"role_qa_desc": "Teste të automatizuara dhe siguri në çdo publikim.",
+		"role_pm": "PM",
+		"role_pm_desc": "Takime, raportim dhe një pikë e vetme kontakti."
+	   }
+	  },
+	  "devops": {
+	   "badge": "04 · Cloud & DevOps",
+	   "headline": "Publikoni në produksion me besim të plotë",
+	   "description": "Thjeshtoni dërgimet e softuerit me pipeline të CI/CD, kontejnerizim dhe infrastrukturë të sigurt cloud në AWS — duke siguruar disponueshmëri të lartë dhe efikasitet operacional.",
+	   "bullet_1": "Pipeline të automatizuara të ndërtimit, testimit dhe dërgimit",
+	   "bullet_2": "Konfigurime të kontejnerizuara (Infrastructure as Code)",
+	   "bullet_3": "Disponueshmëri e lartë dhe SLA për kohëzgjatje pune (uptime) prej 99%",
+	   "link": "Eksploroni cloud & DevOps",
+	   "demo": {
+		"title": "CI/CD Pipeline",
+		"subtitle": "main → produksion",
+		"stage_build": "Build",
+		"stage_test": "Test",
+		"stage_deploy": "Deploy",
+		"idle": "I lirë",
+		"running": "Në ekzekutim...",
+		"run": "Ekzekuto pipeline",
+		"run_again": "Ekzekuto sërish",
+		"status_build": "Duke u ndërtuar...",
+		"status_test": "Duke kryer testet...",
+		"status_deploy": "Duke u dërguar...",
+		"status_live_label": "Në linjë"
+	   }
+	  }
+	 },
+	 "empower": {
+	  "eyebrow": "Kë fuqizojmë",
+	  "headline": "Ne fuqizojmë startup-e teknologjike, SME dhe marka globale",
+	  "description": "Nga zhvillimi i produktit në hapat e parë deri te modernizimi i sistemeve ekzistuese të ndërmarrjeve — ne përshtatim modelin e duhur inxhinierik me fazën, teknologjitë dhe qëllimet tuaja të rritjes.",
+	  "featured_pin": "Aftësi kryesore",
+	  "cards": {
+	   "startups": {
+		"title": "Startup-e të Serisë A/B",
+		"description": "Ne ndihmojmë startup-et me rritje të shpejtë të skalojnë me skuadra agile dhe zgjidhje cloud-native — nga përshpejtimi i MVP-së deri te rritja e sistemeve kryesore."
+	   },
+	   "enterprise": {
+		"title": "Modernizimi i Ndërmarrjeve",
+		"description": "Ne modernizojmë sistemet e vjetra me zgjidhje cloud-native — duke reduktuar borxhin teknik, duke përmirësuar performancën dhe duke hapur rrugën për inovacion."
+	   },
+	   "crm": {
+		"title": "Organizatat e Fokusuara në CRM",
+		"description": "Ne projektojmë struktura të përshtatshme CRM dhe të fokusuara në HubSpot që centralizojnë të dhënat, përmirësojnë përvojat dhe mundësojnë vendime më të bazuara në të dhëna."
+	   },
+	   "custom": {
+		"title": "Zgjidhje Softuerike të Personalizuara",
+		"description": "Mjetet e gatshme nuk i përshtaten çdo nevoje. Ne ndërtojmë softuerë të skalueshëm dhe fleksibël që evoluojnë me biznesin tuaj dhe sjellin rezultate të matshme."
+	   },
+	   "fintech": {
+		"title": "Fintech & Pagesa",
+		"description": "Nga bankat digjitale te platformat e tregtimit, ne krijojmë zgjidhje të sigurta dhe në përputhje me rregulloret fintech që skalojnë globalisht me një UX të shkëlqyer."
+	   },
+	   "ai": {
+		"title": "AI & Automatizim",
+		"description": "Ne zbatojmë chatbot-ë të fuqizuar nga AI, analiza parashikuese dhe sisteme automatizimi që reduktojnë punën manuale dhe nxisin të ardhura të reja."
+	   },
+	   "data": {
+		"title": "Të dhëna & Analizë",
+		"description": "Ne i kthejmë të dhënat e papërpunuara në informacione të dobishme me panele BI (Business Intelligence), data warehouses dhe analiza në kohë reale për vendimmarrje më të zgjuara."
+	   },
+	   "mobile": {
+		"title": "Zhvillim i Aplikacioneve Mobile",
+		"description": "Ne ndërtojmë aplikacione me performancë të lartë për iOS, Android dhe cross-platform me një UX të rrjedhshme — duke e mbajtur markën tuaj të lidhur me përdoruesit në çdo kohë."
+	   }
+	  }
+	 },
+	 "outsource": {
+	  "eyebrow": "Pse të bëni outsourcing me ne",
+	  "headline": "Delegoni zhvillimin e softuerit, përshpejtoni rritjen",
+	  "description": "Arrini efikasitet në kosto dhe saktësi profesionale. Skaloni me përshtatshmëri agile dhe përqendrohuni në pikat tuaja më të forta.",
+	  "pillars": {
+	   "collaboration": {
+		"title": "Bashkëpunim Transparent",
+		"description": "Si partneri juaj i zhvillimit të softuerit, ne integrohemi pa probleme me skuadrat tuaja të brendshme përmes komunikimit të hapur, planeve të përbashkëta të punës dhe transparencës së plotë në çdo fazë."
+	   },
+	   "legal": {
+		"title": "Mbrojtje Ligjore",
+		"description": "Inxhinierët tanë zhvillojnë softuerë ekskluzivisht për klientët — ju mbani 100% të të drejtave të pronësisë intelektuale mbi softuerin tuaj. Ne gjithashtu nënshkruajmë marrëveshje NDA dhe mos-konkurrence për mbrojtje të plotë ligjore."
+	   },
+	   "cost": {
+		"title": "Zhvillim me Kosto Efikase",
+		"description": "Zhvilloni softuer pa sakrifikuar cilësinë e kodit. Codevider e ka selinë në Tiranë, Shqipëri — një qendër e njohur për zhvilluesit më të mirë të aplikacioneve web me çmime mjaft konkurruese."
+	   }
+	  }
+	 },
+	 "global": {
+	  "eyebrow": "Partneritete globale",
+	  "headline": "Duke ndërtuar ura mbi kufij",
+	  "description": "Ne mundësojmë bashkëpunim të pandërprerë në projekte në mbarë botën — duke fuqizuar startup-et, ndërmarrjet dhe inovatorët të rriten së bashku.",
+	  "tirana": "Tiranë",
+	  "germany": "Gjermani",
+	  "usa": "Shtetet e Bashkuara",
+	  "uk": "Mbretëri e Bashkuar"
+	 },
+	 "why_choose": {
+	  "eyebrow": "Pse na zgjedhin klientët",
+	  "headline": "Një partneritet i ndërtuar mbi tre shtylla",
+	  "description": "Efikasiteti, fleksibiliteti dhe ekspertiza e thellë — themeli i çdo bashkëpunimi.",
+	  "value_badge": "Propozimi ynë i vlerës",
+	  "value_flow": "Efikasitet → Fleksibilitet → Ekspertizë",
+	  "value_description": "Ne ofrojmë më shumë se thjesht kod — një partneritet strategjik i krijuar për rritje, ku ju mbani kontrollin në çdo hap.",
+	  "flex_value": "100%",
+	  "flex_title": "Fleksibilitet & kontroll",
+	  "flex_description": "Menaxhoni dhe mbani kontrollin e projektit tuaj në çdo kohë — plani juaj, prioritetet tuaja.",
+	  "years_title": "vite eksperiencë",
+	  "years_description": "Përfitoni nga këndvështrimet inovative që skuadra jonë sjell në projektin tuaj.",
+	  "cards": {
+	   "savings": {
+		"pin": "Kursim mesatar",
+		"title": "Kursim i konsiderueshëm në kosto dhe kohë",
+		"description": "Shmangni proceset e shtrenjta të rekrutimit dhe trajnimit. Procesi ynë i strukturuar ju ndihmon të dilni më shpejt në treg — duke kursyer kohë dhe burime të rëndësishme."
+	   },
+	   "control": {
+		"pin": "Kontroll",
+		"title": "Fleksibilitet & kontroll i plotë",
+		"description": "Skaloni skuadrën tuaj sipas kërkesës dhe mbani kontrollin në disa projekte njëkohësisht — duke bashkëpunuar përmes Slack, Jira, GitHub dhe mjeteve tuaja."
+	   },
+	   "expertise": {
+		"pin": "Këndvështrim",
+		"title": "Ekspertizë kreative sipas kërkesës",
+		"description": "Injektoni kreativitet të ri. Profesionistët tanë mjaft të motivuar sjellin këndvështrime të reja dhe zgjidhje inovative në punën tuaj."
+	   }
+	  }
+	 },
+	 "faq": {
+	  "eyebrow": "FAQ",
+	  "headline": "Pyetjet më të shpeshta",
+	  "items": {
+	   "projects": {
+		"question": "Çfarë llojesh të projekteve softuerike merrni përsipër?",
+		"answer": "Nga aplikacionet e reja për web dhe mobile deri te platformat e ndërmarrjeve, migrimet në cloud dhe integrimet e AI — ne trajtojmë zhvillimin e plotë të ciklit të jetës për startup-et, SME-të dhe ndërmarrjet e mëdha në projekte të shkallës së mesme deri në atë të gjerë."
+	   },
+	   "technologies": {
+		"question": "Në cilat teknologji dhe framework-e jeni të specializuar?",
+		"answer": "Stack-u ynë kryesor përfshin React, Next.js, Angular, Vue dhe React Native në frontend; Node.js, Python, Django, Laravel dhe PHP në backend; si dhe PostgreSQL, MySQL, MongoDB dhe AWS për të dhënat dhe infrastrukturën cloud."
+	   },
+	   "estimates": {
+		"question": "Si i vlerësoni afatet kohore dhe buxhetet e projekteve?",
+		"answer": "Ne fillojmë me një fazë zbulimi (discovery) për të kuptuar dhe specifikuar kërkesat tuaja, dhe më pas ofrojmë një vlerësim transparent me faza dhe milestones. Bashkëpunimet mund të jenë me orë ose në bazë mujore të dedikuar."
+	   },
+	   "ownership": {
+		"question": "A do të jem unë pronar i kodit burimor dhe pronësisë intelektuale?",
+		"answer": "Po — 100% të kohës. Zhvilluesit tanë punojnë ekskluzivisht për klientët dhe ju mbani të drejtat e plota të pronësisë intelektuale (IP) mbi softuerin tuaj. Ne gjithashtu nënshkruajmë marrëveshje NDA dhe mos-konkurrence për mbrojtje të plotë ligjore."
+	   },
+	   "communication": {
+		"question": "Si do të komunikojmë gjatë projektit?",
+		"answer": "Ju do të keni takime të shkurtra ditore (standups) me zhvilluesit e përzgjedhur dhe raporte javore të progresit nga menaxheri i projektit tuaj. Ne bashkëpunojmë përmes mjeteve tuaja të preferuara — Slack, Jira, GitHub dhe më shumë."
+	   },
+	   "quality": {
+		"question": "Cili është procesi juaj i sigurimit të cilësisë (QA)?",
+		"answer": "Cilësia është e integruar që në fillim të procesit, jo e shtuar në fund. Çdo skuadër (pod) përfshin inxhinierë QA, me testime të automatizuara, rishikim kodi (code review) dhe një server të dedikuar zhvillimi ku mund të testoni projektin para se të publikohet në produksion."
+	   },
+	   "support": {
+		"question": "A ofroni mbështetje dhe mirëmbajtje pas publikimit të produktit?",
+		"answer": "Absolutisht. Pas dërgimit të softuerit në serverët tuaj, ne ofrojmë mbështetje të vazhdueshme, mirëmbajtje dhe përmirësime iterative për ta mbajtur produktin tuaj të sigurt, me performancë të lartë dhe në rritje të vazhdueshme."
+	   },
+	   "legacy": {
+		"question": "A mund të punoni me një kod ekzistues ose të vjetër (legacy codebase)?",
+		"answer": "Po. Ne jemi të specializuar në modernizimin e sistemeve të vjetra — duke reduktuar borxhin teknik, duke përmirësuar performancën dhe duke u integruar me arkitekturën tuaj ekzistuese pa penguar operacionet tuaja të përditshme."
+	   }
+	  }
+	 },
+	 "contact": {
+	  "eyebrow": "Le të lidhemi",
+	  "headline": "Gati për të ndërtuar idenë tuaj të radhës?",
+	  "description": "Nëse keni një projekt specifik në mendje ose thjesht dëshironi të eksploroni mundësitë, skuadra jonë është këtu për t'ju ndihmuar. Plotësoni formularin ose na kontaktoni drejtpërdrejt.",
+	  "email_title": "Na shkruani drejtpërdrejt",
+	  "phone_title": "Na telefononi tani",
+	  "address_title": "Na vizitoni",
+	  "address_value": "Rruga Barrikada, Tiranë, Shqipëri 1001",
+	  "form_name": "Emri i plotë",
+	  "form_name_placeholder": "Jane Doe",
+	  "form_email": "Adresa e email-it",
+	  "form_email_placeholder": "jane@kompania.com",
+	  "form_company": "Kompania",
+	  "form_optional": "opsionale",
+	  "form_company_placeholder": "Acme Inc.",
+	  "form_message": "Na tregoni për projektin tuaj",
+	  "form_message_placeholder": "Çfarë po ndërtoni? Afati kohor, qëllimi, stack-u i teknologjisë...",
+	  "form_title": "Na dërgoni një mesazh",
+	  "form_subtitle": "Ndani disa detaje rreth projektit tuaj dhe ne do t'ju kontaktojmë për hapat e mëtejshëm.",
+	  "form_required": "Fushat e detyrueshme",
+	  "form_submit": "Dërgo mesazhin tuaj",
+	  "form_submitting": "Duke u dërguar...",
+	  "form_note": "Ne zakonisht kthejmë përgjigje brenda një dite pune.",
+	  "form_note_privacy": "Detajet tuaja mbeten private — ne kurrë nuk i ndajmë ato me palë të treta.",
+	  "form_error_submit": "Diçka shkoi keq. Ju lutem provoni përsëri.",
+	  "form_error_turnstile": "Ju lutem plotësoni kontrollin e sigurisë përpara se të dërgoni formularin.",
+	  "form_errors": {
+	   "name_required": "Ju lutem jepni emrin tuaj të plotë",
+	   "name_max": "Emri duhet të jetë 100 karaktere ose më pak",
+	   "email_required": "Ju lutem jepni adresën tuaj të email-it",
+	   "email_invalid": "Ju lutem jepni një adresë email-i të vlefshme",
+	   "details_required": "Ju lutem na tregoni për projektin tuaj",
+	   "details_max": "Detajet e projektit duhet të jenë 1000 karaktere ose më pak"
+	  },
+	  "success_title": "Mesazhi u dërgua!",
+	  "success_message": "Faleminderit që na kontaktuat — ne do t'ju përgjigjemi brenda një dite pune."
+	 },
+	 "dashboard": {
+	  "window_url": "app.codevider.io/analytics",
+	  "live": "Në linjë",
+	  "performance": "Performanca",
+	  "performance_delta": "+18.2% krahasuar me muajin e kaluar",
+	  "growth": "Rritja",
+	  "growth_delta": "+842 përdorues të rinj",
+	  "system_health": "Gjendja e sistemit",
+	  "system_health_delta": "Të gjitha sistemet në punë",
+	  "leads": "Lead-et",
+	  "leads_delta": "+12% konvertim",
+	  "revenue_overview": "Pasqyra e të ardhurave",
+	  "revenue_period": "12 javët e fundit",
+	  "revenue_chart_label": "Trendi javor i të ardhurave gjatë 12 javëve",
+	  "week_1": "J1",
+	  "week_6": "J6",
+	  "week_12": "J12"
+	 }
 	},
 	"footer": {
-		"description": "Partneri juaj strategjik për zhvillimin e softuerit — duke ndërtuar produkte të besueshme ueb, mobile dhe cloud që rriten.",
-		"company": "Kompania",
-		"about": "Rreth Nesh",
-		"services": "Shërbimet",
-		"careers": "Karriera",
-		"address_heading": "Adresa",
-		"address_line_1": "Codevider",
-		"address_line_2": "Rruga e Barrikadave",
-		"address_line_3": "Tiranë, Shqipëri 1001",
-		"contact_heading": "Kontakt",
-		"copyright": "© {year} Codevider. Të gjitha të drejtat e rezervuara. — Qëndroni të përditësuar me zhvillimet dhe mundësitë tona më të fundit."
+	 "description": "Partneri juaj strategjik për zhvillimin e softuerit — duke ndërtuar produkte të besueshme për web, mobile dhe cloud që skalojnë.",
+	 "company": "Kompania",
+	 "about": "Rreth nesh",
+	 "services": "Shërbimet",
+	 "careers": "Karriera",
+	 "address_heading": "Adresa",
+	 "address_line_1": "Codevider",
+	 "address_line_2": "Rruga Barrikada",
+	 "address_line_3": "Tiranë, Shqipëri 1001",
+	 "contact_heading": "Kontakt",
+	 "copyright": "© {year} Codevider. Të gjitha të drejtat e rezervuara. — Qëndroni të përditësuar me zhvillimet dhe mundësitë tona më të fundit."
 	},
 	"about": {
-		"about_us": "Rreth nesh",
-		"our_mission": "Misioni ynë",
-		"our_values": "Vlerat tona",
-		"our_team": "Ekipi ynë",
-		"our_story": "Historia jonë",
-		"meta_title": "Rreth nesh — Codevider",
-		"meta_description": "E themeluar në vitin 2019 në Tiranë, Shqipëri, Codevider krijon softuerë që sjellin sukses në biznes — strategji, dizajnim dhe inxhinieri në harmoni të plotë.",
-		"hero": {
-			"eyebrow": "Rreth nesh",
-			"headline": "Duke krijuar softuerë që sjellin sukses në biznes",
-			"lead": "Strategjia, dizajni dhe inxhinieria duke punuar në harmoni të plotë për të çuar përpara planet tuaja.",
-			"meta_years": "6+ vite duke dorëzuar softuerë",
-			"meta_projects": "45+ projekte globale ndërmarrjesh",
-			"meta_location": "Tiranë, Shqipëri · BE"
-		},
-		"who_we_are": {
-			"eyebrow": "Kush jemi ne",
-			"headline": "Ndërtuar për partneritet, inxhinieruar për rritje",
-			"paragraph_1": "E themeluar në vitin 2019 në Tiranë, Shqipëri, Codevider ofron zgjidhje të zhvillimit të softuerit me performancë të lartë dhe kosto-efikase për startup-et, IMM-të dhe ndërmarrjet e mëdha në mbarë Evropën dhe më gjerë. Ne jemi të specializuar në zhvillimin ueb dhe celular, mikroshërbimet cloud-native dhe integrimet e fuqizuara nga AI — duke ju ndihmuar të përshpejtoni daljen në treg dhe të ulni kostot e zhvillimit deri në 60%.",
-			"paragraph_2": "Ekipi ynë prej më shumë se {value} zhvilluesish shkëlqen në teknologjitë më të avancuara të ditëve të sotme. Ne integrohemi drejtpërdrejt në procesin tuaj të punës duke përdorur metodologji agjile të bazuara në sprinte, të cilat ju mbajnë të informuar dhe në kontroll në çdo hap të rrugës. Me fokus te cilësia, shkathtësia dhe partneriteti afatgjatë, ne i shndërrojmë idetë tuaja në produkte digjitale të shkallëzueshme dhe të gatshme për të ardhmen.",
-			"cta": "Le të ndërtojmë së bashku"
-		},
-		"culture": {
-			"eyebrow": "Kultura jonë",
-			"headline": "Si ndërtojmë ne në Codevider",
-			"description": "Në zemër të kompanisë sonë është një kulturë e ndërtuar mbi bashkëpunimin, krijimtarinë dhe llogaridhënien. Ne vlerësojmë komunikimin e hapur, mirëpresim këndvështrimet e ndryshme dhe fuqizojmë çdo anëtar të ekipit që të marrë përgjegjësinë për punën e tij.",
-			"principles": {
-				"vision": {
-					"title": "Vizion i Qartë",
-					"description": "Ne pajtohemi për qëllimet përpara se të shkruajmë qoftë edhe një rresht kod — kështu që çdo sprint e lëviz produktin tuaj drejt një rezultati të matshëm."
-				},
-				"code": {
-					"title": "Kod i Pastër",
-					"description": "Arkitektura e mirëmbajtshme dhe e testuar mirë është e padiskutueshme. Kodi juaj mbetet një aset i vlefshëm dhe kurrë një barrë."
-				},
-				"team": {
-					"title": "Ekip Mbështetës",
-					"description": "Rritja dhe mësimi janë pjesë e rrugëtimit tonë të përditshëm. Ne besojmë se produktet e shkëlqyera vijnë nga njerëz që mbështesin njëri-tjetrin."
-				}
-			}
-		},
-		"life": {
-			"eyebrow": "Jeta në Codevider",
-			"headline": "Ekipi ynë në studio",
-			"description": "Nga puna e thellë dhe e përqendruar te momentet e përbashkëta të ekipit — kjo është mënyra se si ne ndërtojmë së bashku çdo ditë.",
-			"office_alt_1": "Kabina xhami private dhe hapësirë e hapur pune në zyrat e Codevider",
-			"office_alt_2": "Zonë çlodhëse shumëngjyrëshe me karrige me thasë në zyrat e Codevider",
-			"photo_alt_1": "Dy anëtarë të ekipit të Codevider duke buzëqeshur në zyrë",
-			"photo_alt_2": "Anëtar i ekipit duke shijuar një pushim me kolegët në zyrë"
-		},
-		"team": {
-			"eyebrow": "Pas kodit",
-			"headline": "Njihuni me ekipin",
-			"description": "Themeluesit dhe inxhinierët që shndërrojnë idetë ambicioze në produkte të lançuara dhe të shkallëzueshme.",
-			"scroll_left": "Shfleto majtas",
-			"scroll_right": "Shfleto djathtas"
-		},
-		"join": {
-			"eyebrow": "Karriera",
-			"headline": "Bashkohuni me rrugëtimin tonë",
-			"description": "Ne jemi gjithmonë në kërkim të njerëzve pasionantë dhe të talentuar që duan të formësojnë të ardhmen e softuerit. Eksploroni rolet e hapura dhe bëhuni pjesë e ekipit tonë në rritje.",
-			"cta": "Shihni rolet e hapura"
-		}
+	 "about_us": "Rreth nesh",
+	 "our_mission": "Misioni ynë",
+	 "our_values": "Vlerat tona",
+	 "our_team": "Skuadra jonë",
+	 "our_story": "Historia jonë",
+	 "meta_title": "Rreth nesh — Codevider",
+	 "meta_description": "Themeluar në vitin 2019 në Tiranë, Shqipëri, Codevider krijon softuerë me vlerë për biznesin — strategji, dizajn dhe inxhinieri në harmoni të plotë.",
+	 "hero": {
+	  "eyebrow": "Rreth nesh",
+	  "headline": "Krijojmë softuerë që zhvillojnë biznesin",
+	  "lead": "Strategjia, dizajni dhe inxhinieria duke punuar në harmoni të plotë për të çuar përpara produktin tuaj.",
+	  "meta_years": "6+ vite duke ofruar softuerë",
+	  "meta_projects": "45+ projekte globale për ndërmarrje",
+	  "meta_location": "Tiranë, Shqipëri · UE"
+	 },
+	 "who_we_are": {
+	  "eyebrow": "Kush jemi ne",
+	  "headline": "Ndërtuar për partneritet, projektuar për të skaluar",
+	  "paragraph_1": "Themeluar në vitin 2019 në Tiranë, Shqipëri, Codevider ofron zgjidhje për zhvillim softueri me performancë të lartë dhe me kosto mjaft efikase për startup-e, SME-të dhe ndërmarrjet e mëdha në mbarë Evropën dhe më gjerë. Ne jemi të specializuar në zhvillimin e aplikacioneve web dhe mobile, mikroshërbimeve cloud-native dhe integrimeve të fuqizuara nga AI — duke ju ndihmuar të përshpejtoni kohën e daljes në treg dhe të ulni kostot e zhvillimit deri në 60%.",
+	  "paragraph_2": "Skuadra jonë me më shumë se {value} zhvillues shkëlqen në teknologjitë më të avancuara të sotme. Ne integrohemi drejtpërdrejt në proceset tuaja të punës duke përdorur metodologji agile dhe me sprinte, gjë që ju mban të informuar dhe në kontroll të plotë në çdo hap. Me fokus te cilësia, agiliteti dhe partneriteti afatgjatë, ne i shndërrojmë idetë tuaja në produkte digjitale të skalueshme dhe të gatshme për të ardhmen.",
+	  "cta": "Le të ndërtojmë së bashku"
+	 },
+	 "culture": {
+	  "eyebrow": "Kultura jonë",
+	  "headline": "Si ndërtojmë në Codevider",
+	  "description": "Në zemër të kompanisë sonë është një kulturë e ndërtuar mbi bashkëpunimin, kreativitetin dhe përgjegjshmërinë. Ne vlerësojmë komunikimin e hapur, mbështesim këndvështrimet e ndryshme dhe fuqizojmë çdo anëtar të skuadrës të marrë përgjegjësi mbi punën e tij.",
+	  "principles": {
+	   "vision": {
+		"title": "Vizion i Qartë",
+		"description": "Ne koordinohemi mbi qëllimet përpara se të shkruajmë kodin — në mënyrë që çdo sprint ta çojë produktin tuaj drejt një rezultati të matshëm."
+	   },
+	   "code": {
+		"title": "Kod i Pastër",
+		"description": "Arkitektura e mirëmbajtshme dhe e testuar mirë është e panegociueshme. Kodi juaj mbetet një aset i vlefshëm dhe asnjëherë një pengesë."
+	   },
+	   "team": {
+		"title": "Skuadër Mbështetëse",
+		"description": "Rritja dhe mësimi i vazhdueshëm janë pjesë e udhëtimit tonë të përditshëm. Ne besojmë se produktet e shkëlqyera vijnë nga njerëz që mbështesin njëri-tjetrin."
+	   }
+	  }
+	 },
+	 "life": {
+	  "eyebrow": "Jeta në Codevider",
+	  "headline": "Skuadra jonë në studio",
+	  "description": "Nga puna e përqendruar e përditshme deri te momentet e përbashkëta si skuadër — kjo është mënyra se si ndërtojmë bashkë çdo ditë.",
+	  "office_alt_1": "Kabina xhami private dhe hapësirë e hapur pune në zyrat e Codevider",
+	  "office_alt_2": "Hapësirë e gjallë dhe çlodhëse me beanbags në zyrat e Codevider",
+	  "photo_alt_1": "Dy anëtarë të skuadrës Codevider duke buzëqeshur në zyrat e punës",
+	  "photo_alt_2": "Anëtar i skuadrës duke shijuar një pushim me kolegët në zyrat e punës"
+	 },
+	 "team": {
+	  "eyebrow": "Prapa kodit",
+	  "headline": "Njihuni me skuadrën",
+	  "description": "Themeluesit dhe inxhinierët që kthejnë idetë ambicioze në produkte të dërguara dhe të skalueshme.",
+	  "scroll_left": "Shko majtas",
+	  "scroll_right": "Shko djathtas"
+	 },
+	 "join": {
+	  "eyebrow": "Karriera",
+	  "headline": "Bashkohuni në udhëtimin tonë",
+	  "description": "Ne jemi gjithmonë në kërkim të njerëzve të apasionuar dhe të talentuar që duan të formësojnë të ardhmen e softuerit. Eksploroni pozicionet e lira dhe bëhuni pjesë e skuadrës sonë.",
+	  "cta": "Shiko pozicionet e lira"
+	 }
 	},
 	"navbar": {
-		"home": "Ballina",
-		"career": "Karriera",
-		"about": "Rreth Nesh",
-		"services": "Shërbimet",
-		"book_a_call": "Rezervo një telefonatë",
-		"select_language": "Zgjidhni gjuhën",
-		"language_options": "Opsionet e gjuhës",
-		"languages": {
-			"en": "English",
-			"es": "Español",
-			"sq": "Shqip",
-			"de": "Deutsch",
-			"fr": "Français",
-			"it": "Italiano"
-		},
-		"switch_to_light_mode": "Ndrysho në modalitetin e dritës",
-		"switch_to_dark_mode": "Ndrysho në modalitetin e errët",
-		"light_mode": "Dritë",
-		"dark_mode": "Errësirë",
-		"open_menu": "Hap menunë",
-		"close_menu": "Mbyll menunë",
-		"theme": "Tema"
+	 "home": "Kreu",
+	 "career": "Karriera",
+	 "about": "Rreth nesh",
+	 "services": "Shërbimet",
+	 "book_a_call": "Rezervo një telefonatë",
+	 "select_language": "Zgjidhni gjuhën",
+	 "language_options": "Opsionet e gjuhës",
+	 "languages": {
+	  "en": "English",
+	  "es": "Español",
+	  "sq": "Shqip",
+	  "de": "Deutsch",
+	  "fr": "Français",
+	  "it": "Italiano"
+	 },
+	 "switch_to_light_mode": "Kalo në modalitetin e dritës",
+	 "switch_to_dark_mode": "Kalo në modalitetin e errët",
+	 "light_mode": "Dritë",
+	 "dark_mode": "Errësirë",
+	 "open_menu": "Hap menunë",
+	 "close_menu": "Mbyll menunë",
+	 "theme": "Tema"
 	},
 	"career": {
-		"meta_title": "Karriera — Codevider",
-		"meta_description": "Bashkohuni med Codevider dhe ndihmoni në ndërtimin e së ardhmes së zhvillimit të softuerit. Eksploroni procesin tonë të punësimit dhe lidhuni me ekipin tonë në Tiranë, Shqipëri.",
-		"hero": {
-			"eyebrow": "Karriera",
-			"headline": "Bëhuni pjesë e ekipit tonë jashtëzakonshëm",
-			"lead": "Bashkohuni me ne dhe ndihmoni në ndërtimin e së ardhmes së zhvillimit të softuerit. Ne jemi gjithmonë në kërkim të individëve të talentuar për t'u rritur së bashku me ekipin tonë."
-		},
-		"openings": {
-			"eyebrow": "Pozicionet e hapura",
-			"headline": "Nuk ka pozicione të hapura për momentin",
-			"description": "Edhe pse mund të mos kemi pozicione aktive aktualisht, ne jemi gjithmonë të etur për t'u lidhur me profesionistë të talentuar. Mos ngurroni të na dërgoni CV-në tuaj për konsideratë në të ardhmen.",
-			"cta": "Lidhuni me ne",
-			"email_subject": "Mundësi të ardhshme në Codevider"
-		},
-		"why_join": {
-			"eyebrow": "Pse Codevider",
-			"headline": "Aty ku zhvilluesit e mirë bëhen të shkëlqyer",
-			"values": {
-				"ownership": {
-					"title": "Përgjegjësi reale",
-					"description": "Çdo anëtar i ekipit merr përgjegjësi të plotë për punën e tij dhe lançon funksionalitete që arrijnë te përdoruesit realë në mbarë Evropën dhe më gjerë."
-				},
-				"growth": {
-					"title": "Rritje e vazhdueshme",
-					"description": "Të mësuarit është pjesë e rrugëtimit tonë të përditshëm. Ne investojmë në aftësitë tuaja me teknologji moderne, mentorim dhe takime rekreative çdo tremujor."
-				},
-				"culture": {
-					"title": "Kulturë mbështetëse",
-					"description": "Komunikim i hapur dhe këndvështrime të ndryshme. Ne mbështesim njëri-tjetrin dhe i festojmë fitoret si një ekip i vetëm."
-				}
-			}
-		},
-		"hiring": {
-			"eyebrow": "Si punësojmë ne",
-			"headline": "Procesi ynë i punësimit",
-			"description": "Katër hapa të qartë — të projektuar për të qenë transparentë, të drejtë dhe respektues ndaj kohës suaj.",
-			"steps": {
-				"application_review": {
-					"title": "Rishikimi i Aplikimit",
-					"description": "Ne rishikojmë me kujdes CV-në dhe portofolin tuaj për të vlerësuar se si aftësitë tuaja përputhen me nevojat tona. Ne kërkojmë potencial, jo vetëm përsosmëri — kapacitetin tuaj për rritje, bashkëpunim dhe ndikim."
-				},
-				"hr_interview": {
-					"title": "Intervista me Burimet Njerëzore (HR)",
-					"description": "Menaxhimi dhe burimet njerëzore zhvillojnë intervistën e parë për të kuptuar përvojën, talentet dhe qëllimet tuaja — si dhe për të ndarë më shumë rreth kulturës sonë të punës dhe parimeve tek të cilat besojmë."
-				},
-				"technical_review": {
-					"title": "Rishikimi Teknik",
-					"description": "Një vlerësim teknik analizon nivelin tuaj të ekspertizës, mendimin analitik dhe mënyrën se si i qaseni sfidave — duke ndërtuar një pasqyrë të plotë të profilit tuaj profesional."
-				},
-				"offer": {
-					"title": "Oferta",
-					"description": "Nëse jemi një përshtatje e shkëlqyer, ne do t'ju shtrijmë një ofertë konkurruese, do t'ju udhëzojmë në çdo detaj dhe do t'ju mbështesim gjatë fazës fillestare të përshtatjes (onboarding) në mënyrë që të filloni rolin tuaj me besim të plotë."
-				}
-			}
-		}
+	 "meta_title": "Karriera — Codevider",
+	 "meta_description": "Bashkohuni me Codevider dhe ndihmoni në ndërtimin e së ardhmes së zhvillimit të softuerit. Eksploroni procesin tonë të punësimit dhe lidhuni met skuadrën tonë në Tiranë, Shqipëri.",
+	 "hero": {
+	  "eyebrow": "Karriera",
+	  "headline": "Bëhuni pjesë e skuadrës sonë të shkëlqyer",
+	  "lead": "Bashkohuni me ne dhe ndihmoni në ndërtimin e së ardhmes së zhvillimit të softuerit. Ne jemi gjithmonë në kërkim të individëve të talentuar për t'u rritur bashkë me skuadrën tonë."
+	 },
+	 "openings": {
+	  "eyebrow": "Pozicione të lira",
+	  "headline": "Nuk ka pozicione të lira për momentin",
+	  "headline_active": "Pozicionet aktive",
+	  "outreach_headline": "Nuk shihni pozicionin e duhur?",
+	  "description": "Ne mund të mos kemi pozicione aktive aktualisht, por jemi gjithmonë të etur për t'u lidhur me profesionistë të talentuar. Mos ngurroni të na dërgoni CV-në tuaj për mundësi të ardhshme.",
+	  "description_active": "Eksploroni pozicionet tona aktuale të lira dhe gjeni rolin që i përshtatet më së miri aftësive dhe ambicieve tuaja.",
+	  "loading": "Duke ngarkuar pozicionet e lira...",
+	  "error": "Nuk mundëm t'i ngarkojmë pozicionet e lira për momentin. Mund të na kontaktoni drejtpërdrejt ndërkohë që po e rregullojmë këtë problem.",
+	  "cta": "Lidhuni me ne",
+	  "apply": "Aplikoni",
+	  "view_details": "Shiko detajet",
+	  "apply_for": "Apliko për {title}",
+	  "apply_email_subject": "Aplikim: {title}",
+	  "email_subject": "Mundësi të ardhshme në Codevider",
+	  "meta_label": "Detajet e rolit",
+	  "openings_count": "{count, plural, one {# pozicion i lirë} other {# pozicione të lira}}",
+	  "pagination_label": "Faqëzimi i pozicioneve të punës",
+	  "previous": "Paraardhëse",
+	  "next": "Pasardhëse",
+	  "previous_page": "Shko te faqja paraardhëse",
+	  "next_page": "Shko te faqja pasardhëse",
+	  "page_status": "Faqja {current} nga {total}"
+	 },
+	 "apply": {
+	  "eyebrow": "Aplikoni",
+	  "back": "Kthehu te pozicionet e lira",
+	  "loading_title": "Duke ngarkuar rolin...",
+	  "loading": "Duke ngarkuar detajet e rolit...",
+	  "error": "Nuk mundëm ta ngarkonim këtë rol për momentin. Ju lutem provoni përsëri.",
+	  "retry": "Provo sërish",
+	  "no_description": "Detajet e plota të rolit do të ndahen gjatë procesit të intervistës.",
+	  "openings": "Pozicione të lira",
+	  "openings_count": "{count, plural, one {# pozicion i lirë} other {# pozicione të lira}}",
+	  "compensation": "Pagesa",
+	  "compensation_single": "{amount, number} / {period}",
+	  "compensation_range": "{start, number} – {end, number} / {period}",
+	  "details_heading": "Detajet e rolit",
+	  "job_type": "Lloji i punësimit",
+	  "department": "Departamenti",
+	  "total_positions": "Numri i pozicioneve",
+	  "pay_type": "Lloji i pagesës",
+	  "application_period": "Periudha e aplikimit",
+	  "application_period_range": "{start} – {end}",
+	  "requirements_heading": "Çfarë ju nevojitet për të aplikuar",
+	  "requirement_photo": "Foto profili",
+	  "requirement_resume": "Resume / CV",
+	  "requirement_dob": "Datëlindja",
+	  "requirement_gender": "Gjinia",
+	  "pay_type_salary": "Pagë",
+	  "pay_type_hourly": "Me orë",
+	  "pay_type_contract": "Me kontratë",
+	  "pay_period_month": "muaj",
+	  "pay_period_year": "vit",
+	  "pay_period_hour": "orë",
+	  "pay_period_day": "ditë",
+	  "apply_button": "Apliko për këtë rol",
+	  "collapse_form": "Mbyll formularin e aplikimit",
+	  "form": {
+	   "intro": "Plotësoni të dhënat tuaja më poshtë. Ne do të shqyrtojmë aplikimin tuaj dhe do t'ju kontaktojmë së shpejti.",
+	   "full_name": "Emri i plotë",
+	   "full_name_placeholder": "John Doe",
+	   "email": "Email",
+	   "email_placeholder": "you@example.com",
+	   "phone": "Telefon",
+	   "phone_placeholder": "+355 69 000 0000",
+	   "date_of_birth": "Datëlindja",
+	   "gender": "Gjinia",
+	   "gender_placeholder": "Zgjidhni gjininë",
+	   "gender_male": "Mashkull",
+	   "gender_female": "Femër",
+	   "gender_non_binary": "Jo-binare",
+	   "gender_prefer_not_to_say": "Preferoj të mos e deklaroj",
+	   "profile_image": "Foto profili",
+	   "profile_image_hint": "JPG, PNG, ose WebP",
+	   "resume": "Resume / CV",
+	   "resume_hint": "Dokument PDF ose Word",
+	   "skills": "Aftësitë",
+	   "skills_placeholder": "React, Node.js, TypeScript",
+	   "bio": "Biografia e shkurtër",
+	   "bio_placeholder": "Një përmbledhje e shkurtër e formimit dhe interesave tuaja",
+	   "cover_letter": "Letër motivimi",
+	   "cover_letter_placeholder": "Na tregoni pse jeni kandidati i duhur për këtë rol",
+	   "optional": "opsionale",
+	   "submit": "Dërgo aplikimin",
+	   "submitting": "Duke u dërguar...",
+	   "success_title": "Aplikimi u dërgua",
+	   "success_message": "Faleminderit që aplikuat. Skuadra jonë do të shqyrtojë aplikimin tuaj dhe do t'ju kontaktojë së shpejti.",
+	   "errors": {
+		"full_name_required": "Emri i plotë është i detyrueshëm",
+		"full_name_max": "Emri i plotë duhet të jetë 100 karaktere ose më pak",
+		"email_required": "Adresa e email-it është e detyrueshme",
+		"email_invalid": "Vendosni një adresë email-i të vlefshme",
+		"phone_max": "Telefoni duhet të jetë 30 karaktere ose më pak",
+		"dob_required": "Datëlindja është e detyrueshme",
+		"gender_required": "Ju lutem zgjidhni gjininë",
+		"profile_image_required": "Fotoja e profilit është e detyrueshme",
+		"resume_required": "CV-ja është e detyrueshme",
+		"bio_max": "Biografia duhet të jetë 2,000 karaktere ose më pak",
+		"cover_letter_max": "Letra e motivimit duhet të jetë 5,000 karaktere ose më pak",
+		"skills_max": "Aftësitë duhet të jenë 500 karaktere ose më pak",
+		"validation": "Ju lutem kontrolloni të dhënat tuaja dhe provoni përsëri",
+		"file_too_large": "Një ose më shumë skedarë janë shumë të mëdhenj. Ju lutem përdorni skedarë më të vegjël.",
+		"invalid_file_type": "Format i pavlefshëm. Përdorni një imazh për foton tuaj dhe PDF/Word për CV-në.",
+		"rate_limit": "Shumë kërkesa të dërguara. Ju lutem prisni një moment dhe provoni përsëri.",
+		"server_config": "Aplikimet janë përkohësisht të padisponueshme. Ju lutem provoni përsëri më vonë.",
+		"submit": "Diçka shkoi keq. Ju lutem provoni përsëri.",
+		"turnstile": "Ju lutem plotësoni kontrollin e sigurisë përpara se të dërgoni formularin."
+	   }
+	  }
+	 },
+	 "why_join": {
+	  "eyebrow": "Pse Codevider",
+	  "headline": "Aty ku inxhinierët e mirë bëhen të shkëlqyer",
+	  "values": {
+	   "ownership": {
+		"title": "Përgjegjësi reale",
+		"description": "Çdo anëtar i skuadrës merr përgjegjësi të plotë për punën e tij dhe dërgon funksionalitete që arrijnë te përdoruesit realë në mbarë Evropën."
+	   },
+	   "growth": {
+		"title": "Rritje e vazhdueshme",
+		"description": "Mësimi është pjesë e përditshmërisë sonë. Ne investojmë në aftësitë tuaja me teknologji moderne, mentorim dhe evente dypalëshe dymbëdhjetëmujore."
+	   },
+	   "culture": {
+		"title": "Kulturë mbështetëse",
+		"description": "Komunikim i hapur dhe këndvështrime të ndryshme. Ne mbështesim njëri-tjetrin dhe festojmë arritjet si një skuadër e vetme."
+	   }
+	  }
+	 },
+	 "hiring": {
+	  "eyebrow": "Si punësojmë",
+	  "headline": "Procesi ynë i punësimit",
+	  "description": "Katër hapa të qartë — të projektuar për të qenë transparentë, të drejtë dhe respektues të kohës suaj.",
+	  "steps": {
+	   "application_review": {
+		"title": "Shqyrtimi i Aplikimit",
+		"description": "Ne shqyrtojmë me kujdes CV-në dhe portofolin tuaj për të vlerësuar se si aftësitë tuaja përputhen me nevojat tona. Ne kërkojmë potencial, jo thjesht perfeksion — kapacitetin tuaj për rritje, bashkëpunim dhe impakt."
+	   },
+	   "hr_interview": {
+		"title": "Intervista HR",
+		"description": "Menaxhimi dhe HR kryejnë intervistën e parë për të kuptuar përvojën tuaj, talentet dhe qëllimet tuaja — si dhe për të ndarë më shumë rreth kulturës sonë të punës dhe parimeve që ne besojmë."
+	   },
+	   "technical_review": {
+		"title": "Vlerësimi Teknik",
+		"description": "Një vlerësim teknik analizon nivelin tuaj të ekspertizës, mendimin analitik dhe mënyrën se si u qaseni sfidave — duke ndërtuar një tablo të plotë të profilit tuaj profesional."
+	   },
+	   "offer": {
+		"title": "Oferta",
+		"description": "Nëse jemi një përshtatje e shkëlqyer, ne do t'ju ofrojmë një ofertë konkurruese, do t'ju udhëheqim në çdo detaj dhe do t'ju mbështesim gjatë fazës së integrimit në skuadër që të nisni rolin tuaj me besim të plotë."
+	   }
+	  }
+	 }
 	},
 	"services": {
-		"meta_title": "Shërbimet — Codevider",
-		"meta_description": "Eksploroni se si Codevider dizajnon, ndërton dhe rrit softuerë të besueshëm: zhvillim i personalizuar, aplikacione ueb, integrim i Inteligjencës Artificiale (AI), automatizim, integrim sistemesh, cloud dhe zgjerim i skuadrave.",
-		"hero": {
-			"eyebrow": "Aftësitë tona",
-			"headline": "Shërbime që çojnë përpara planet tuaja",
-			"lead": "Eksploroni se si ne dizajnojmë, ndërtojmë dhe rritim produkte të besueshme. Arkitekturë e pastër, dërgesë e qartë dhe një ekip që integrohet direkt me tuajin.",
-			"meta_capabilities": "7 aftësi kryesore",
-			"meta_engagement": "Me orë ose angazhim mujor i dedikuar",
-			"meta_location": "Me bazë në BE, duke punuar në mbarë botën"
+	 "meta_title": "Shërbimet — Codevider",
+	 "meta_description": "Zbuloni se si Codevider projekton, ndërton dhe skalon softuerë të besueshëm: zhvillim i personalizuar, aplikacione web, integrim i inteligjencës artificiale (AI), automatizim, integrim i sistemeve, cloud dhe shtim i skuadrës.",
+	 "hero": {
+	  "eyebrow": "Aftësitë tona",
+	  "headline": "Shërbime që çojnë përpara produktin tuaj",
+	  "lead": "Eksploroni se si ne projektojmë, ndërtojmë dhe skalojmë produkte të besueshme. Arkitekturë e pastër, proces i qartë i punës dhe një skuadër që integrohet drejtpërdrejt me tuajën.",
+	  "meta_capabilities": "7 aftësi kryesore",
+	  "meta_engagement": "Me orë ose bazë mujore të dedikuar",
+	  "meta_location": "Me bazë në BE, duke punuar në mbarë botën"
+	 },
+	 "capabilities": {
+	  "solutions_heading": "Zgjidhjet tona",
+	  "outcomes_heading": "Rezultatet",
+	  "nav_aria": "Kategoritë e shërbimeve",
+	  "cta_title": "Nuk po shihni përshtatjen perfekte?",
+	  "cta_body": "Ne i përshtatim bashkëpunimet me planet tuaja të punës — na tregoni rastin tuaj dhe ne do t'ju sugjerojmë rrugën më efektive përpara.",
+	  "cta_button": "Flisni me ne",
+	  "nav": {
+	   "custom": "Softuerë të Personalizuar",
+	   "web": "Aplikacione Web",
+	   "ai": "Integrimi i AI",
+	   "automation": "Automatizimi",
+	   "systems": "Integrimi i Sistemeve",
+	   "cloud": "Infrastruktura Cloud",
+	   "team": "Shtimi i Skuadrës"
+	  },
+	  "items": {
+	   "custom": {
+		"num": "01",
+		"title": "Zhvillimi i Softuerëve të Personalizuar",
+		"description": "Ne projektojmë dhe ndërtojmë softuerë të përshtatur saktësisht për biznesin tuaj. Nga fillimi deri në publikim, ne përqendrohemi në rezultate reale — procese pune më të shpejta, kosto më të ulëta dhe teknologji të skalueshme që rritet me ju.",
+		"solutions": {
+		 "1": "Platforma të përshtatshme të ndërtuara rreth proceseve tuaja të punës",
+		 "2": "Skalueshmëri afatgjatë me kod të pastër dhe të mirëmbajtshëm",
+		 "3": "Integrim pa probleme me sistemet tuaja ekzistuese të biznesit"
 		},
-		"capabilities": {
-			"solutions_heading": "Zgjidhjet tona",
-			"outcomes_heading": "Rezultatet",
-			"nav_aria": "Kategoritë e shërbimeve",
-			"cta_title": "Nuk po shihni një përshtatje të përsosur?",
-			"cta_body": "Ne i përshtatim angazhimet tona për t'iu përgjigjur planeve tuaja — na tregoni rastin tuaj të përdorimit dhe ne do të sugjerojmë rrugën më efektive përpara.",
-			"cta_button": "Flisni me ne",
-			"nav": {
-				"custom": "Softuer i Personalizuar",
-				"web": "Aplikacione Ueb",
-				"ai": "Integrim i AI",
-				"automation": "Automatizim",
-				"systems": "Integrim Sistemesh",
-				"cloud": "Infrastrukturë Cloud",
-				"team": "Zgjerim i Skuadrave"
-			},
-			"items": {
-				"custom": {
-					"num": "01",
-					"title": "Zhvillim Softueri i Personalizuar",
-					"description": "Ne dizajnojmë dhe ndërtojmë softuerë të përshtatur për biznesin tuaj. Nga zbulimi deri te lançimi, ne fokusohemi në rezultate reale — procese më të shpejta pune, kosto më të ulëta dhe teknologji të shkallëzueshme që rritet bashkë me ju.",
-					"solutions": {
-						"1": "Platforma të përshtatura të ndërtuara saktësisht rreth proceseve tuaja të punës",
-						"2": "Shkallëzueshmëri afatgjatë me kod të pastër dhe të mirëmbajtshëm",
-						"3": "Integrim pa probleme me sistemet ekzistuese të biznesit"
-					},
-					"outcomes": {
-						"1": "Kosto të reduktuara operative dhe administrative",
-						"2": "Produktivitet më i lartë i punonjësve",
-						"3": "Teknologji e siguruar për të ardhmen, e përputhur me planet e rritjes"
-					}
-				},
-				"web": {
-					"num": "02",
-					"title": "Zhvillimi i Aplikacioneve Ueb",
-					"description": "Aplikacione ueb me performancë të lartë që ngarkohen shpejt, duken shkëlqyeshëm në çdo pajisje dhe i kthejnë vizitorët në klientë. Ideale për portale, panele kontrolli (dashboards) dhe mjete me ngarkesë të madhe të dhënash.",
-					"solutions": {
-						"1": "Aplikacione responsive të optimizuara për performancë maksimale",
-						"2": "Panele kontrolli në kohë reale me informacione të vlefshme",
-						"3": "Zgjidhje ueb të sigurta dhe intuitive të orientuara nga klienti"
-					},
-					"outcomes": {
-						"1": "Angazhim më i mirë i klientit dhe konvertim më i lartë",
-						"2": "Shkallë më e ulët e largimit të vizitorëve falë kohës së shpejtë të ngarkimit",
-						"3": "Procese të thjeshtuara të brendshme përmes portaleve të personalizuara"
-					}
-				},
-				"ai": {
-					"num": "03",
-					"title": "Integrimi i AI",
-					"description": "Ne integrojmë Inteligjencën Artificiale në proceset tuaja ekzistuese të punës. Nga aplikacionet e personalizuara të fuqizuara nga LLM deri te chatbot-et inteligjentë dhe automatizimi i punës, ne bëjmë që AI të punojë për ju.",
-					"solutions": {
-						"1": "Aplikacione të personalizuara të bazuara në LLM dhe chatbot-e inteligjentë",
-						"2": "Automatizim i proceseve të punës dhe analiza të vlefshme",
-						"3": "Integrim pa probleme në ekosistemet ekzistuese"
-					},
-					"outcomes": {
-						"1": "Kohë më të shpejta përgjigjeje me chatbot-et e fuqizuar nga AI",
-						"2": "Më pak hedhje manuale të të dhënash dhe përpunim dokumentesh",
-						"3": "Analiza të bazuara në të dhëna që përmirësojnë saktësinë e vendimeve"
-					}
-				},
-				"automation": {
-					"num": "04",
-					"title": "Automatizim",
-					"description": "Eliminoni punën e përsëritur dhe reduktoni gabimet. Ne automatizojmë hedhjet në prodhim, testimet dhe operacionet në mënyrë që ekipi juaj të përqendrohet në detyrat që sjellin të ardhura.",
-					"solutions": {
-						"1": "Linja plotësisht të automatizuara të hedhjes në prodhim (deployment)",
-						"2": "Procese të QA që ekzekutohen me ndërhyrje minimale",
-						"3": "Automatizime të procesit të punës të përshtatura me rregullat e biznesit"
-					},
-					"outcomes": {
-						"1": "Më pak gabime manuale në të gjitha departamentet",
-						"2": "Afate kohore të përshpejtuara të dërgesës",
-						"3": "Përqendrim i shtuar në aktivitetet që nxisin të ardhura"
-					}
-				},
-				"systems": {
-					"num": "05",
-					"title": "Integrimi i Sistemeve",
-					"description": "Lidhni mjetet tuaja në një rrjedhë të vetme dhe të besueshme. Ne unifikojmë aplikacionet dhe të dhënat, largojmë ndarjet e mbyllura (silos) dhe e bëjmë informacionin e disponueshëm aty ku ekipi juaj ka nevojë.",
-					"solutions": {
-						"1": "Të dhëna të unifikuara në të gjitha departamentet dhe platformat",
-						"2": "Sinkronizim pa probleme midis CRM, ERP dhe mjetet e palëve të treta",
-						"3": "Raportim i centralizuar për vendimmarrje më të shpejtë"
-					},
-					"outcomes": {
-						"1": "Bashkëpunim më i mirë me mjetet e unifikuara",
-						"2": "Informacione në kohë reale në të gjitha njësitë e biznesit",
-						"3": "Ekzekutim më i shpejtë i iniciativave në mbarë kompaninë"
-					}
-				},
-				"cloud": {
-					"num": "06",
-					"title": "Infrastruktura Cloud",
-					"description": "Një themel i sigurt dhe i shkallëzueshëm cloud i ndërtuar me 'Infrastrukturën si Kod'. Ne optimizojmë për performancë, kohë funksionale dhe kosto — kështu që paguani vetëm për atë që përdorni.",
-					"solutions": {
-						"1": "Infrastrukturë si Kod për dërgesa të përsëritshme me saktësi",
-						"2": "Ngarkesa pune të optimizuara me rritje kosto-efikase",
-						"3": "Konfigurime të disponueshmërisë së lartë dhe rikuperimit nga fatkeqësitë"
-					},
-					"outcomes": {
-						"1": "Kohë e reduktuar e ndërprerjeve falë sistemeve elastike",
-						"2": "Kosto më të ulëta të infrastrukturës përmes rritjes së duhur",
-						"3": "Kohë më e shpejtë e hedhjes në prodhim për produktet e reja"
-					}
-				},
-				"team": {
-					"num": "07",
-					"title": "Zgjerim i Skuadrave (Team Augmentation)",
-					"description": "Shtoni inxhinierë të certifikuar dhe talente produkti që përshtaten në procesin tuaj. Rrituni shpejt, mbani ritmin dhe dorëzoni më shumë pa cikle të gjata punësimi.",
-					"solutions": {
-						"1": "Inxhinierë të specializuar të integruar në procesin tuaj të punës",
-						"2": "Angazhim fleksibël — zgjerim ose zvogëlim sipas nevojës",
-						"3": "Kapacitet i menjëhershëm pa cikle të gjata tmerrësisht të punësimit"
-					},
-					"outcomes": {
-						"1": "Dorëzim në kohë i projekteve kritike",
-						"2": "Inovacion i shtuar me grupe të ndryshme aftësish",
-						"3": "Përgjigje më e shpejtë ndaj nevojave në ndryshim të biznesit"
-					}
-				}
-			}
-		},
-		"process": {
-			"eyebrow": "Si punojmë ne",
-			"headline": "Një proces i ndërtuar rreth nevojave tuaja",
-			"description": "Nevojat tuaja udhëheqin çdo hap. Ne fillojmë me një fazë zbulimi (discovery) praktike, më pas dorëzojmë në sprinte agjile me transparencë të plotë.",
-			"steps": {
-				"discovery": {
-					"title": "Zbulimi (Discovery)",
-					"description": "Ne mbledhim kërkesat tuaja, pajtohemi për qëllimet dhe dokumentojmë vizionin e produktit në një fletë pune të përbashkët."
-				},
-				"team_selection": {
-					"title": "Përzgjedhja e ekipit",
-					"description": "Ne montojmë një skuadër të fokusuar (pod) — frontend, backend dhe QA — e përshtatur me teknologjitë dhe afatin tuaj kohor."
-				},
-				"agile_delivery": {
-					"title": "Dërgesa agjile",
-					"description": "Mbledhjet e përditshme dhe raportet javore të progresit ju mbajnë të informuar dhe në kontroll, sprint pas sprinti."
-				},
-				"test_deploy": {
-					"title": "Testimi & Hedhja në prodhim",
-					"description": "Ju testoni në serverët tanë të zhvillimit, pastaj ne e hedhim produktin në infrastrukturën tuaj duke ofruar mbështetje të vazhdueshme."
-				}
-			}
-		},
-		"tech": {
-			"eyebrow": "Teknologjia",
-			"headline": "Teknologjitë tona kryesore",
-			"description": "Një grup i përzgjedhur mjetesh, kornizash (frameworks) dhe gjuhësh që përdorim për të ndërtuar aplikacione ueb dhe mobile moderne dhe me performancë të lartë.",
-			"categories_aria": "Kategoritë e teknologjisë",
-			"all": "Të gjitha",
-			"categories": {
-				"frontend": {
-					"label": "Frontend"
-				},
-				"backend": {
-					"label": "Backend"
-				},
-				"databases": {
-					"label": "Databases"
-				},
-				"cloud_devops": {
-					"label": "Cloud & DevOps"
-				},
-				"ai": {
-					"label": "AI"
-				},
-				"mobile_design": {
-					"label": "Mobile & Dizajn"
-				},
-				"apis": {
-					"label": "API & Komunikim"
-				}
-			}
+		"outcomes": {
+		 "1": "Reduktim i kostove dhe kohës administrative",
+		 "2": "Produktivitet më i lartë i punonjësve",
+		 "3": "Teknologji e sigurt për të ardhmen dhe e përshtatur me planet e rritjes"
 		}
+	   },
+	   "web": {
+		"num": "02",
+		"title": "Zhvillimi i Aplikacioneve Web",
+		"description": "Aplikacione web me performancë të lartë që ngarkohen shpejt, duken shkëlqyeshëm në çdo pajisje dhe kthejnë vizitorët në klientë. Ideale për portale, panele monitorimi (dashboards) dhe mjete me shumë të dhëna.",
+		"solutions": {
+		 "1": "Aplikacione responsive të optimizuara për performancë",
+		 "2": "Panele kontrolli në kohë reale me të dhëna të rëndësishme",
+		 "3": "Zgjidhje web të sigurta dhe intuitive të orientuara drejt klientit"
+		},
+		"outcomes": {
+		 "1": "Angazhim më i mirë i klientit dhe rritje e konvertimit",
+		 "2": "Më pak vizitorë që largohen shpejt nga faqja falë ngarkimit të shpejtë",
+		 "3": "Thjeshtim i proceseve të brendshme përmes portaleve të personalizuara"
+		}
+	   },
+	   "ai": {
+		"num": "03",
+		"title": "Integrimi i AI",
+		"description": "Ne integrojmë inteligjencën artificiale (AI) në proceset tuaja ekzistuese të punës. Nga aplikacionet e personalizuara të bazuara në LLM deri te chatbot-et inteligjentë, ne bëjmë që AI të punojë për ju.",
+		"solutions": {
+		 "1": "Aplikacione të bazuara në LLM dhe chatbot-ë inteligjentë",
+		 "2": "Automatizim i proceseve të punës dhe analiza parashikuese",
+		 "3": "Integrim pa probleme në ekosistemet ekzistuese të punës"
+		},
+		"outcomes": {
+		 "1": "Kohë më të shpejta reagimi me chatbot-ë të fuqizuar nga AI",
+		 "2": "Më pak punë manuale me të dhënat dhe përpunimin e dokumenteve",
+		 "3": "Vendime më të sakta të bazuara në analizën e të dhënave"
+		}
+	   },
+	   "automation": {
+		"num": "04",
+		"title": "Automatizimi",
+		"description": "Eliminoni punën e përsëritur dhe reduktoni gabimet. Ne automatizojmë dërgimet e softuerit, testimin dhe operacionet në mënyrë që skuadra juaj të fokusohet në detyra më strategjike.",
+		"solutions": {
+		 "1": "Pipeline plotësisht të automatizuara të dërgimit të softuerit",
+		 "2": "Procese të sigurimit të cilësisë (QA) që ekzekutohen automatikisht",
+		 "3": "Automatizime të procesit të punës të përshtatura me rregullat e biznesit tuaj"
+		},
+		"outcomes": {
+		 "1": "Më pak gabime manuale në të gjitha departamentet",
+		 "2": "Përshpejtim i afateve të dërgimit të projekteve",
+		 "3": "Fokus më i madh në aktivitetet që sjellin të ardhura"
+		}
+	   },
+	   "systems": {
+		"num": "05",
+		"title": "Integrimi i Sistemeve",
+		"description": "Lidhni mjetet tuaja të punës në një fluks të vetëm dhe të besueshëm. Ne bashkojmë aplikacionet dhe të dhënat, duke thyer barrierat e informacionit në mënyrë që të dhënat të jenë aty ku skuadra juaj ka nevojë.",
+		"solutions": {
+		 "1": "Të dhëna të unifikuara nëpër departamente dhe platforma",
+		 "2": "Sinkronizim i vazhdueshëm midis CRM, ERP dhe mjeteve të palëve të treta",
+		 "3": "Raportim i centralizuar për vendimmarrje më të shpejtë"
+		},
+		"outcomes": {
+		 "1": "Bashkëpunim më i mirë falë mjeteve të unifikuara",
+		 "2": "Transparencë në kohë reale mbi ecurinë e biznesit",
+		 "3": "Zbatim më i shpejtë i nismave në nivel kompanie"
+		}
+	   },
+	   "cloud": {
+		"num": "06",
+		"title": "Infrastruktura Cloud",
+		"description": "Një bazë cloud e sigurt dhe e skalueshme e ndërtuar me standartet e Infrastructure as Code (IaC). Ne optimizojmë performancën dhe koston — kështu që paguani vetëm për atë që përdorni.",
+		"solutions": {
+		 "1": "Infrastrukturë as Code për dërgime të softuerit në mënyrë të përsëritshme",
+		 "2": "Procese të optimizuara të punës me skalim efikas të kostos",
+		 "3": "Sisteme me disponueshmëri të lartë dhe plane për rikuperim nga katastrofat"
+		},
+		"outcomes": {
+		 "1": "Vonesa dhe ndërprerje minimale të punës falë sistemeve elastike",
+		 "2": "Kosto më të ulëta të infrastrukturës përmes skalimit dinamik",
+		 "3": "Kohë më e shpejtë e dërgimit të softuerëve të rinj"
+		}
+	   },
+	   "team": {
+		"num": "07",
+		"title": "Shtimi i Skuadrës",
+		"description": "Shtoni inxhinierë të kualifikuar dhe talente produkti që integrohen në proceset tuaja. Skaloni shpejt, mbani ritmin e zhvillimit dhe dërgoni më shumë pa cikle të gjata rekrutimi.",
+		"solutions": {
+		 "1": "Inxhinierë të specializuar të integruar në procesin tuaj të punës",
+		 "2": "Angazhim fleksibël — shtoni ose reduktoni numrin sipas nevojave",
+		 "3": "Kapacitet i menjëhershëm teknik pa vonesa administrative"
+		},
+		"outcomes": {
+		 "1": "Dërgim në kohë i projekteve kritike të biznesit",
+		 "2": "Më shumë inovacion me sjelljen e aftësive të reja në skuadër",
+		 "3": "Përgjigje më e shpejtë ndaj nevojave në ndryshim të tregut"
+		}
+	   }
+	  }
+	 },
+	 "process": {
+	  "eyebrow": "Si punojmë",
+	  "headline": "Një proces i ndërtuar rreth nevojave tuaja",
+	  "description": "Nevojat tuaja udhëheqin çdo hap. Ne fillojmë me një fazë të detajuar zbulimi (discovery), dhe më pas dërgojmë softuer në sprinte agile me transparencë të plotë.",
+	  "steps": {
+	   "discovery": {
+		"title": "Analizë & Konceptim",
+		"description": "Ne analizojmë kërkesat tuaja, koordinohemi mbi qëllimet dhe dokumentojmë vizionin e produktit në një plan të përbashkët pune."
+	   },
+	   "team_selection": {
+		"title": "Përzgjedhja e skuadrës",
+		"description": "Ne bashkojmë një skuadër të fokusuar (frontend, backend dhe QA) të përshtatur me teknologjitë dhe afatet tuaja kohore."
+	   },
+	   "agile_delivery": {
+		"title": "Zhvillim Agile",
+		"description": "Takimet e shkurtra ditore dhe raportet javore të progresit ju mbajnë të informuar dhe në kontroll të plotë, sprint pas sprinti."
+	   },
+	   "test_deploy": {
+		"title": "Testim & Publikim",
+		"description": "Ju testoni produktin në serverët tanë të zhvillimit, dhe më pas ne e dërgojmë softuerin në infrastrukturën tuaj me mbështetje të vazhdueshme."
+	   }
+	  }
+	 },
+	 "tech": {
+	  "eyebrow": "Teknologjia",
+	  "headline": "Stack-u ynë i teknologjisë",
+	  "description": "Një përzgjedhje e kuruar mjetesh, framework-esh dhe gjuhësh programimi që përdorim për të ndërtuar aplikacione web dhe mobile me performancë të lartë.",
+	  "categories_aria": "Kategoritë e teknologjisë",
+	  "all": "Të gjitha",
+	  "categories": {
+	   "frontend": {
+		"label": "Frontend"
+	   },
+	   "backend": {
+		"label": "Backend"
+	   },
+	   "databases": {
+		"label": "Baza të dhënash"
+	   },
+	   "cloud_devops": {
+		"label": "Cloud & DevOps"
+	   },
+	   "ai": {
+		"label": "AI"
+	   },
+	   "mobile_design": {
+		"label": "Mobile & Dizajn"
+	   },
+	   "apis": {
+		"label": "API & Komunikim"
+	   }
+	  }
+	 }
 	}
-}
+   }

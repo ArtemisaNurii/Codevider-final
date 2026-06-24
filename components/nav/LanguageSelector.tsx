@@ -104,7 +104,7 @@ export function LanguageSelector({
 	} ${
 		variant === "dark"
 			? "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white"
-			: "border-[var(--border)] bg-[var(--social-bg)] text-[var(--text)] hover:bg-[var(--accent-bg)] hover:text-[var(--text-h)]"
+			: "border-slate-200 bg-slate-900/5 text-slate-600 hover:bg-slate-900/10 hover:text-slate-900"
 	} ${className}`;
 
 	return (
@@ -152,7 +152,7 @@ export function LanguageSelector({
 						} ${
 							variant === "dark"
 								? "border-white/10 bg-slate-900/95 text-slate-200 backdrop-blur-xl"
-								: "border-[var(--border)] bg-[var(--surface)] text-[var(--text)] backdrop-blur-xl"
+								: "border-slate-200 bg-white/95 text-slate-700 backdrop-blur-xl"
 						}`}
 						initial={
 							shouldReduceMotion
@@ -185,10 +185,10 @@ export function LanguageSelector({
 											isActive
 												? variant === "dark"
 													? "bg-white/10 text-white"
-													: "bg-[var(--accent-bg)] text-[var(--text-h)]"
+													: "bg-slate-900/8 text-slate-900"
 												: variant === "dark"
 													? "text-slate-300 hover:bg-white/5 hover:text-white"
-													: "text-[var(--text)] hover:bg-[var(--accent-bg)] hover:text-[var(--text-h)]"
+													: "text-slate-600 hover:bg-slate-900/5 hover:text-slate-900"
 										}`}
 									>
 										<span className="flex min-w-0 items-center gap-2.5">

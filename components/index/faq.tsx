@@ -1,10 +1,16 @@
 "use client";
 
-import { Minus, Plus } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { ChevronDown } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
+import {
+	applePanelEase,
+	appleRevealEase,
+	sectionItemTransition,
+	sectionRevealItem,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
 const FAQ_IDS = [
@@ -18,8 +24,6 @@ const FAQ_IDS = [
 	"legacy",
 ] as const;
 
-const revealEase = [0.22, 1, 0.36, 1] as const;
-const springOpen = { type: "spring" as const, duration: 0.45, bounce: 0 };
 const instantTransition = { duration: 0 };
 
 type FaqId = (typeof FAQ_IDS)[number];
@@ -50,29 +54,31 @@ function FaqItem({
 	const panelId = `faq-panel-${id}`;
 	const triggerId = `faq-trigger-${id}`;
 
-	const itemTransition = revealTransition(shouldAnimate, {
-		duration: 0.5,
-		ease: revealEase,
-		delay: shouldReduceMotion ? 0 : index * 0.06,
-	});
-
-	const panelTransition = shouldReduceMotion ? instantTransition : springOpen;
+	const panelTransition = shouldReduceMotion
+		? instantTransition
+		: applePanelEase;
 
 	const contentTransition = shouldReduceMotion
 		? instantTransition
 		: isOpen
-			? { ...springOpen, delay: 0.04 }
-			: { duration: 0.15, ease: "easeIn" as const };
+			? { ...applePanelEase, delay: 0.06 }
+			: { duration: 0.2, ease: appleRevealEase };
 
 	return (
 		<motion.div
 			className="home-faq-item"
 			data-open={isOpen}
 			initial={
-				shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 12 }
+				shouldReduceMotion || !shouldAnimate ? false : sectionRevealItem.hidden
 			}
-			animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-			transition={itemTransition}
+			animate={
+				isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
+			}
+			transition={sectionItemTransition(
+				shouldAnimate,
+				index * 0.06,
+				!!shouldReduceMotion,
+			)}
 		>
 			<motion.button
 				type="button"
@@ -81,44 +87,21 @@ function FaqItem({
 				aria-expanded={isOpen}
 				aria-controls={panelId}
 				onClick={onToggle}
-				whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
+				whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
 			>
-				{question}
-				<span className="home-faq-icon" aria-hidden>
-					<AnimatePresence mode="popLayout" initial={false}>
-						<motion.span
-							key={isOpen ? "minus" : "plus"}
-							className="flex size-full items-center justify-center"
-							initial={
-								shouldReduceMotion
-									? false
-									: { opacity: 0, scale: 0.25, filter: "blur(4px)" }
-							}
-							animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-							exit={
-								shouldReduceMotion
-									? { opacity: 0, transition: { duration: 0.15 } }
-									: {
-											opacity: 0,
-											scale: 0.25,
-											filter: "blur(4px)",
-											transition: { duration: 0.15, ease: "easeIn" },
-										}
-							}
-							transition={
-								shouldReduceMotion
-									? { duration: 0.15 }
-									: { type: "spring", duration: 0.3, bounce: 0 }
-							}
-						>
-							{isOpen ? (
-								<Minus className="size-3.5 stroke-[2.5]" />
-							) : (
-								<Plus className="size-3.5 stroke-[2.5]" />
-							)}
-						</motion.span>
-					</AnimatePresence>
-				</span>
+				<span className="min-w-0">{question}</span>
+				<motion.span
+					className="home-faq-icon"
+					aria-hidden
+					animate={{ rotate: isOpen ? 180 : 0 }}
+					transition={
+						shouldReduceMotion
+							? instantTransition
+							: { duration: 0.45, ease: appleRevealEase }
+					}
+				>
+					<ChevronDown className="size-[18px] stroke-[2]" />
+				</motion.span>
 			</motion.button>
 
 			<motion.div
@@ -132,12 +115,12 @@ function FaqItem({
 				className="overflow-hidden"
 			>
 				<motion.p
-					className="max-w-[58ch] px-1 pb-8 pt-1 text-base leading-relaxed text-[var(--text)] text-pretty"
+					className="max-w-[58ch] px-1 pb-8 pt-0.5 text-base leading-relaxed text-[var(--text)] text-pretty"
 					initial={false}
 					animate={
 						isOpen
 							? { opacity: 1, y: 0, filter: "blur(0px)" }
-							: { opacity: 0, y: -8, filter: "blur(4px)" }
+							: { opacity: 0, y: -6, filter: "blur(4px)" }
 					}
 					transition={contentTransition}
 				>

@@ -16,6 +16,31 @@ export type SectionRevealOptions = {
 
 const instantRevealTransition = { duration: 0 } as const;
 
+/** Apple-like ease — cubic-bezier(0.2, 0, 0, 1) */
+export const appleRevealEase = [0.2, 0, 0, 1] as const;
+
+export const sectionRevealItem = {
+	hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
+	visible: {
+		opacity: 1,
+		y: 0,
+		filter: "blur(0px)",
+		transition: { duration: 0.55, ease: appleRevealEase },
+	},
+} as const;
+
+export const sectionRevealStagger = {
+	hidden: {},
+	visible: {
+		transition: { staggerChildren: 0.1, delayChildren: 0.04 },
+	},
+} as const;
+
+export const applePanelEase = {
+	duration: 0.45,
+	ease: appleRevealEase,
+} as const;
+
 function parseMargin(value: string, axis: "x" | "y") {
 	if (value.endsWith("%")) {
 		const size = axis === "y" ? window.innerHeight : window.innerWidth;
@@ -108,12 +133,19 @@ export function useSectionReveal<T extends Element = HTMLElement>(
 			setMode(getRevealMode(ref.current, marginForMeasure, options.amount));
 		};
 
+		// Measure before paint so above-viewport sections don't flash hidden.
+		measure();
+
+		// Re-measure after the browser finishes restoring scroll on refresh.
 		requestAnimationFrame(() => {
 			requestAnimationFrame(measure);
 		});
 
+		window.addEventListener("pageshow", measure);
+
 		return () => {
 			cancelled = true;
+			window.removeEventListener("pageshow", measure);
 		};
 	}, [marginForMeasure, options.amount]);
 
@@ -131,9 +163,28 @@ export function useSectionReveal<T extends Element = HTMLElement>(
 	return { ref, isRevealed, shouldAnimate, mode };
 }
 
+/** Use as motion `initial` — avoids a visible→hidden flash while reveal mode is pending. */
+export function sectionRevealInitial(
+	shouldReduceMotion: boolean | null,
+): false | "hidden" {
+	return shouldReduceMotion ? false : "hidden";
+}
+
 export function revealTransition<T extends object>(
 	shouldAnimate: boolean,
 	transition: T,
 ) {
 	return shouldAnimate ? transition : instantRevealTransition;
+}
+
+export function sectionItemTransition(
+	shouldAnimate: boolean,
+	delay = 0,
+	shouldReduceMotion = false,
+) {
+	return revealTransition(shouldAnimate, {
+		duration: 0.55,
+		ease: appleRevealEase,
+		delay: shouldReduceMotion ? 0 : delay,
+	});
 }

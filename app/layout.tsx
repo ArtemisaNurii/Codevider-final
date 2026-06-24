@@ -9,12 +9,14 @@ const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');if(
 const alexandria = Alexandria({
 	variable: "--font-sans",
 	subsets: ["latin"],
+	style: ["normal"],
 });
 
 const libreBaskerville = Libre_Baskerville({
 	variable: "--font-heading",
 	subsets: ["latin"],
 	weight: ["400", "700"],
+	style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {

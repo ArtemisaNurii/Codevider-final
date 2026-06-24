@@ -12,13 +12,17 @@ import {
 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { ReactNode, useMemo, useRef, useState } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
 	TurnstileWidget,
 	type TurnstileWidgetHandle,
 } from "@/components/ui/turnstile-widget";
-import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
+import {
+	sectionItemTransition,
+	sectionRevealItem,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import { submitContactLead } from "@/lib/api/contact-lead";
 import {
 	type ContactFormValues,
@@ -81,7 +85,12 @@ export default function Contact() {
 	const [submitted, setSubmitted] = useState(false);
 	const [submitError, setSubmitError] = useState<string | null>(null);
 	const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+	const [hasMounted, setHasMounted] = useState(false);
 	const turnstileRef = useRef<TurnstileWidgetHandle>(null);
+
+	useEffect(() => {
+		setHasMounted(true);
+	}, []);
 
 	const contactSchema = useMemo(
 		() =>
@@ -136,14 +145,18 @@ export default function Contact() {
 				<motion.div
 					className="flex flex-col justify-center lg:pr-[clamp(1.25rem,2.5vw,2rem)]"
 					initial={
-						shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }
+						shouldReduceMotion || !shouldAnimate
+							? false
+							: sectionRevealItem.hidden
 					}
-					animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-					transition={revealTransition(shouldAnimate, {
-						type: "spring" as const,
-						duration: 0.45,
-						bounce: 0,
-					})}
+					animate={
+						isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
+					}
+					transition={sectionItemTransition(
+						shouldAnimate,
+						0,
+						!!shouldReduceMotion,
+					)}
 				>
 					<p className="home-eyebrow">{t("eyebrow")}</p>
 					<h2 className="mt-[clamp(1.125rem,2.5vw,1.5rem)] max-w-xl text-balance text-[clamp(2rem,4.8vw,3.5rem)] leading-[1.05] tracking-[-0.02em] text-[var(--text-h)] lg:max-w-none">
@@ -203,15 +216,18 @@ export default function Contact() {
 				<motion.div
 					className="flex flex-col justify-center lg:pl-[clamp(1.25rem,2.5vw,2rem)]"
 					initial={
-						shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }
+						shouldReduceMotion || !shouldAnimate
+							? false
+							: sectionRevealItem.hidden
 					}
-					animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-					transition={revealTransition(shouldAnimate, {
-						type: "spring" as const,
-						duration: 0.45,
-						bounce: 0,
-						delay: 0.1,
-					})}
+					animate={
+						isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
+					}
+					transition={sectionItemTransition(
+						shouldAnimate,
+						0.1,
+						!!shouldReduceMotion,
+					)}
 				>
 					{submitted ? (
 						<div className="surface-card rounded-3xl p-10 text-center">
@@ -319,8 +335,8 @@ export default function Contact() {
 
 							<button
 								type="submit"
-								disabled={isSubmitting || !turnstileToken}
-								className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-(--dash-brand-solid) py-4 pl-7 pr-6 text-base font-semibold text-white transition-[background-color,transform] duration-150 ease-out hover:bg-(--dash-brand-solid-end) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--dash-brand) active:scale-[0.96] motion-reduce:active:scale-100 disabled:cursor-not-allowed disabled:opacity-60"
+								disabled={isSubmitting || (hasMounted && !turnstileToken)}
+								className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-(--dash-brand-solid) py-4 pl-7 pr-6 text-base font-semibold text-(--on-brand) transition-[background-color,transform] duration-150 ease-out hover:bg-(--dash-brand-solid-hover) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--focus-ring) active:scale-[0.96] motion-reduce:active:scale-100 disabled:cursor-not-allowed disabled:opacity-60"
 							>
 								{isSubmitting ? t("form_submitting") : t("form_submit")}
 								<Send className="size-4" aria-hidden />

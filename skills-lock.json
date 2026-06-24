@@ -1,6 +1,12 @@
 {
 	"version": 1,
 	"skills": {
+		"dark-mode-helper": {
+			"source": "v4sj4n/skills",
+			"sourceType": "github",
+			"skillPath": "skills/dark-mode-helper/SKILL.md",
+			"computedHash": "7d18c727bb01ea6272df5b95ad218e805c2c7896404bcd9434d544cdad0f0597"
+		},
 		"make-interfaces-feel-better": {
 			"source": "jakubkrehel/make-interfaces-feel-better",
 			"sourceType": "github",

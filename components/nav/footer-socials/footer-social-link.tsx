@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 type FooterSocialLinkProps = {
@@ -14,7 +15,7 @@ export function FooterSocialLink({
 	const isExternal = href.startsWith("http");
 
 	return (
-		<a
+		<Link
 			href={href}
 			target={isExternal ? "_blank" : undefined}
 			rel={isExternal ? "noopener noreferrer" : undefined}
@@ -22,6 +23,6 @@ export function FooterSocialLink({
 			className="footer-social-link grid size-[38px] place-items-center rounded-[10px] hover:-translate-y-0.5"
 		>
 			{children}
-		</a>
+		</Link>
 	);
 }

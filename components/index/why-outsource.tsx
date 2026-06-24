@@ -3,36 +3,41 @@
 import { DollarSign, Link2, ShieldCheck } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
+import {
+	sectionItemTransition,
+	sectionRevealItem,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
 const PILLARS = [
 	{ id: "collaboration", icon: Link2 },
-	{ id: "legal", icon: ShieldCheck },
 	{ id: "cost", icon: DollarSign },
+	{ id: "legal", icon: ShieldCheck },
 ] as const;
-
-const revealEase = [0.22, 1, 0.36, 1] as const;
 
 export default function WhyOutsource() {
 	const t = useTranslations("home.outsource");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 
-	const cardTransition = (delay: number) =>
-		revealTransition(shouldAnimate, {
-			duration: 0.5,
-			ease: revealEase,
-			delay: shouldReduceMotion ? 0 : delay,
-		});
-
 	return (
 		<section ref={ref} className="home-section home-feature-alt">
 			<div className="home-wrap">
 				<motion.div
-					initial={shouldReduceMotion || !shouldAnimate ? false : { y: 18 }}
-					animate={isRevealed ? { y: 0 } : { y: 18 }}
-					transition={cardTransition(0)}
+					initial={
+						shouldReduceMotion || !shouldAnimate
+							? false
+							: sectionRevealItem.hidden
+					}
+					animate={
+						isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
+					}
+					transition={sectionItemTransition(
+						shouldAnimate,
+						0,
+						!!shouldReduceMotion,
+					)}
 				>
 					<SectionHead
 						eyebrow={t("eyebrow")}
@@ -46,9 +51,21 @@ export default function WhyOutsource() {
 					{PILLARS.map(({ id, icon: Icon }, index) => (
 						<motion.article
 							key={id}
-							initial={shouldReduceMotion || !shouldAnimate ? false : { y: 18 }}
-							animate={isRevealed ? { y: 0 } : { y: 18 }}
-							transition={cardTransition(0.1 + index * 0.08)}
+							initial={
+								shouldReduceMotion || !shouldAnimate
+									? false
+									: sectionRevealItem.hidden
+							}
+							animate={
+								isRevealed
+									? sectionRevealItem.visible
+									: sectionRevealItem.hidden
+							}
+							transition={sectionItemTransition(
+								shouldAnimate,
+								0.1 + index * 0.08,
+								!!shouldReduceMotion,
+							)}
 							className="flex gap-3.5"
 						>
 							<div className="home-ecard-icon shrink-0">

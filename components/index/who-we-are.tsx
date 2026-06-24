@@ -3,39 +3,26 @@
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useSectionReveal } from "@/hooks/use-section-reveal";
+import {
+	sectionRevealItem,
+	sectionRevealStagger,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import { Link } from "@/i18n/navigation";
 
 const STAGGER = 0.1;
 
-const containerVariants = {
-	hidden: {},
-	visible: {
-		transition: {
-			staggerChildren: STAGGER,
-			delayChildren: 0.05,
-		},
-	},
-};
-
-const itemVariants = {
-	hidden: { opacity: 0, y: 16 },
-	visible: {
-		opacity: 1,
-		y: 0,
-		transition: { type: "spring" as const, duration: 0.45, bounce: 0 },
-	},
-};
+const itemVariants = sectionRevealItem;
 
 const statDescVariants = {
-	hidden: { opacity: 0, y: 8 },
+	hidden: { opacity: 0, y: 8, filter: "blur(4px)" },
 	visible: {
 		opacity: 1,
 		y: 0,
+		filter: "blur(0px)",
 		transition: {
-			type: "spring" as const,
-			duration: 0.4,
-			bounce: 0,
+			duration: 0.5,
+			ease: [0.2, 0, 0, 1] as const,
 			delay: 0.12,
 		},
 	},
@@ -136,7 +123,7 @@ export default function WhoWeAre() {
 				<motion.div
 					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
 					animate={isRevealed ? "visible" : "hidden"}
-					variants={containerVariants}
+					variants={sectionRevealStagger}
 				>
 					<motion.p className="home-eyebrow" variants={itemVariants}>
 						{t("who_we_are_eyebrow")}
@@ -144,14 +131,14 @@ export default function WhoWeAre() {
 
 					<motion.h2
 						id="who-we-are-heading"
-						className="mt-[clamp(1.125rem,2.5vw,1.5rem)] max-w-xl text-balance text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[1.12] tracking-[-0.02em] text-[var(--text-h)]"
+						className="mt-[clamp(1.125rem,2.5vw,1.5rem)] max-w-xl text-balance text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[1.12] tracking-[-0.02em] text-(--text-h)"
 						variants={itemVariants}
 					>
 						{t("who_we_are_headline")}
 					</motion.h2>
 
 					<motion.p
-						className="mt-8 max-w-xl text-pretty text-base leading-relaxed text-[var(--text)] sm:mt-10 sm:text-lg"
+						className="mt-8  text-pretty text-base leading-relaxed text-[var(--text)] sm:mt-10 sm:text-lg"
 						variants={itemVariants}
 					>
 						{t("who_we_are_description")}

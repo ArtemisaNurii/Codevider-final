@@ -5,13 +5,16 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
+import { useTheme } from "../providers/ThemeProvider";
 import { CodeviderLogo } from "./CodeviderLogo";
 import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";
 
 const SCROLL_THRESHOLD = 50;
 
-const navVariants = {
+type NavAppearance = "dark" | "light";
+
+const darkNavVariants = {
 	initial: {
 		x: "-50%",
 		y: 0,
@@ -34,6 +37,34 @@ const navVariants = {
 		backdropFilter: "blur(12px)",
 	},
 } as const;
+
+const lightNavVariants = {
+	initial: {
+		x: "-50%",
+		y: 0,
+		width: "100vw",
+		height: 72,
+		borderRadius: 0,
+		backgroundColor: "#f8fafc",
+		boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
+		backdropFilter: "blur(0px)",
+	},
+	scrolled: {
+		x: "-50%",
+		y: 10,
+		width: "calc(100% - 1.5rem)",
+		height: 60,
+		borderRadius: 9999,
+		backgroundColor: "rgba(248, 250, 252, 0.9)",
+		boxShadow:
+			"0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04)",
+		backdropFilter: "blur(12px)",
+	},
+} as const;
+
+function getNavAppearance(theme: "light" | "dark"): NavAppearance {
+	return theme === "dark" ? "light" : "dark";
+}
 
 const springTransition = {
 	type: "spring" as const,
@@ -66,6 +97,7 @@ function NavLink({
 	className = "",
 	linkRef,
 	showStaticPill = false,
+	appearance = "dark",
 }: {
 	href: string;
 	label: string;
@@ -74,7 +106,10 @@ function NavLink({
 	className?: string;
 	linkRef?: (node: HTMLAnchorElement | null) => void;
 	showStaticPill?: boolean;
+	appearance?: NavAppearance;
 }) {
+	const isDarkNav = appearance === "dark";
+
 	return (
 		<Link
 			ref={linkRef}
@@ -82,13 +117,19 @@ function NavLink({
 			onClick={onClick}
 			className={`relative rounded-full px-3 py-1.5 text-sm font-medium transition-[color,transform] active:scale-[0.96] ${
 				isActive
-					? "text-white"
-					: "text-slate-300 hover:bg-white/5 hover:text-white"
+					? isDarkNav
+						? "text-white"
+						: "text-slate-900"
+					: isDarkNav
+						? "text-slate-300 hover:bg-white/5 hover:text-white"
+						: "text-slate-600 hover:bg-slate-900/5 hover:text-slate-900"
 			} ${className}`}
 		>
 			{isActive && showStaticPill ? (
 				<span
-					className="absolute inset-0 rounded-full bg-white/12"
+					className={`absolute inset-0 rounded-full ${
+						isDarkNav ? "bg-white/12" : "bg-slate-900/8"
+					}`}
 					aria-hidden
 				/>
 			) : null}
@@ -105,7 +146,13 @@ type PillRect = {
 	opacity: number;
 };
 
-function DesktopNavLinks({ isScrolled }: { isScrolled: boolean }) {
+function DesktopNavLinks({
+	isScrolled,
+	appearance,
+}: {
+	isScrolled: boolean;
+	appearance: NavAppearance;
+}) {
 	const t = useTranslations("navbar");
 	const pathname = usePathname();
 	const shouldReduceMotion = useReducedMotion();
@@ -166,6 +213,8 @@ function DesktopNavLinks({ isScrolled }: { isScrolled: boolean }) {
 		return () => cancelAnimationFrame(frame);
 	}, [isScrolled, updatePill]);
 
+	const isDarkNav = appearance === "dark";
+
 	return (
 		<div
 			ref={containerRef}
@@ -173,7 +222,9 @@ function DesktopNavLinks({ isScrolled }: { isScrolled: boolean }) {
 		>
 			<motion.span
 				aria-hidden
-				className="pointer-events-none absolute rounded-full bg-white/12"
+				className={`pointer-events-none absolute rounded-full ${
+					isDarkNav ? "bg-white/12" : "bg-slate-900/8"
+				}`}
 				initial={false}
 				animate={pill}
 				transition={
@@ -186,6 +237,7 @@ function DesktopNavLinks({ isScrolled }: { isScrolled: boolean }) {
 					href={href}
 					label={t(key)}
 					isActive={pathname === href}
+					appearance={appearance}
 					linkRef={(node) => {
 						linkRefs.current[href] = node;
 					}}
@@ -198,9 +250,13 @@ function DesktopNavLinks({ isScrolled }: { isScrolled: boolean }) {
 export function Navbar() {
 	const t = useTranslations("navbar");
 	const pathname = usePathname();
+	const { theme } = useTheme();
 	const shouldReduceMotion = useReducedMotion();
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const navAppearance = getNavAppearance(theme);
+	const isDarkNav = navAppearance === "dark";
+	const navVariants = isDarkNav ? darkNavVariants : lightNavVariants;
 
 	useEffect(() => {
 		const onScroll = () => {
@@ -266,20 +322,20 @@ export function Navbar() {
 						aria-label="Codevider"
 						className="shrink-0 transition-opacity hover:opacity-90 active:scale-[0.96]"
 					>
-						<CodeviderLogo compact={isScrolled} />
+						<CodeviderLogo compact={isScrolled} variant={navAppearance} />
 					</Link>
 
-					<DesktopNavLinks isScrolled={isScrolled} />
+					<DesktopNavLinks isScrolled={isScrolled} appearance={navAppearance} />
 
 					<div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3">
 						<div className="hidden items-center gap-2 navbar:flex">
-							<LanguageSelector variant="dark" />
-							<ThemeToggle variant="dark" />
+							<LanguageSelector variant={navAppearance} />
+							<ThemeToggle variant={navAppearance} />
 						</div>
 
 						<Link
 							href="https://calendly.com/codevider/pasho"
-							className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#3a53c9] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#2f46a8] active:scale-[0.96] sm:px-5"
+							className="home-brand-btn gap-1.5 px-4 py-2 text-sm sm:px-5"
 						>
 							{t("book_a_call")}
 							<ArrowUpRight className="size-4 shrink-0" aria-hidden />
@@ -287,7 +343,11 @@ export function Navbar() {
 
 						<button
 							type="button"
-							className="relative flex size-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition-[background-color,color] hover:bg-white/10 hover:text-white active:scale-[0.96] navbar:hidden"
+							className={`relative flex size-9 items-center justify-center rounded-full border transition-[background-color,color] active:scale-[0.96] navbar:hidden ${
+								isDarkNav
+									? "border-white/10 bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white"
+									: "border-slate-200 bg-slate-900/5 text-slate-600 hover:bg-slate-900/10 hover:text-slate-900"
+							}`}
 							aria-expanded={mobileMenuOpen}
 							aria-controls="mobile-nav-menu"
 							aria-label={mobileMenuOpen ? t("close_menu") : t("open_menu")}
@@ -334,7 +394,11 @@ export function Navbar() {
 							role="dialog"
 							aria-modal="true"
 							aria-label={t("open_menu")}
-							className="fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col border-t border-white/10 bg-slate-900/95 px-4 pb-6 pt-6 shadow-[0_12px_40px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:px-6 navbar:hidden"
+							className={`fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col px-4 pb-6 pt-6 backdrop-blur-xl sm:px-6 navbar:hidden ${
+								isDarkNav
+									? "border-t border-white/10 bg-slate-900/95 shadow-[0_12px_40px_rgba(0,0,0,0.28)]"
+									: "border-t border-slate-200 bg-white/95 shadow-[0_12px_40px_rgba(0,0,0,0.08)]"
+							}`}
 							initial={shouldReduceMotion ? false : { opacity: 0, y: -8 }}
 							animate={{ opacity: 1, y: 0 }}
 							exit={{ opacity: 0, y: -8 }}
@@ -365,6 +429,7 @@ export function Navbar() {
 												href={href}
 												label={t(key)}
 												isActive={pathname === href}
+												appearance={navAppearance}
 												onClick={closeMobileMenu}
 												className="block w-full px-4 py-3 text-base"
 												showStaticPill
@@ -373,9 +438,13 @@ export function Navbar() {
 									))}
 								</ul>
 
-								<div className="mt-auto flex items-stretch gap-2 overflow-visible border-t border-white/10 pt-4">
-									<LanguageSelector variant="dark" fullWidth />
-									<ThemeToggle variant="dark" fullWidth />
+								<div
+									className={`mt-auto flex items-stretch gap-2 overflow-visible border-t pt-4 ${
+										isDarkNav ? "border-white/10" : "border-slate-200"
+									}`}
+								>
+									<LanguageSelector variant={navAppearance} fullWidth />
+									<ThemeToggle variant={navAppearance} fullWidth />
 								</div>
 							</nav>
 						</motion.div>

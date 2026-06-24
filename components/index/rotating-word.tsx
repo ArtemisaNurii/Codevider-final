@@ -36,22 +36,20 @@ export default function RotatingWord() {
 
 	return (
 		<span
-			className="relative mt-1 inline-grid font-sans text-[#3a53c9]"
+			className="relative mt-1 inline-grid font-sans text-(--brand-accent-text)"
 			aria-live="polite"
 		>
-			<span className="invisible col-start-1 row-start-1" aria-hidden>
-				Healthcare
-			</span>
-
-			<span className="col-start-1 row-start-1 overflow-hidden">
+			<span className="col-start-1 row-start-1 overflow-hidden px-2">
 				<AnimatePresence mode="wait" initial={false}>
 					<motion.span
 						key={word}
-						className="block"
+						className="block italic font-serif font-bold"
 						initial={
 							shouldReduceMotion
 								? { opacity: 0 }
-								: { y: "100%", opacity: 0, filter: "blur(8px)" }
+								: index === 0
+									? false
+									: { y: "100%", opacity: 0, filter: "blur(8px)" }
 						}
 						animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
 						exit={
@@ -68,7 +66,7 @@ export default function RotatingWord() {
 							shouldReduceMotion ? { duration: 0.15 } : enterTransition
 						}
 					>
-						<em>{word}</em>
+						{word}
 					</motion.span>
 				</AnimatePresence>
 			</span>

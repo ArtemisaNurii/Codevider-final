@@ -18,9 +18,14 @@ const instantTransition = { duration: 0 };
 
 type CodeviderLogoProps = {
 	compact?: boolean;
+	variant?: "dark" | "light";
 };
 
-export function CodeviderLogo({ compact = false }: CodeviderLogoProps) {
+export function CodeviderLogo({
+	compact = false,
+	variant = "dark",
+}: CodeviderLogoProps) {
+	const textFill = variant === "dark" ? "#fff" : "#0f172a";
 	const shouldReduceMotion = useReducedMotion();
 	const transition = shouldReduceMotion ? instantTransition : springTransition;
 
@@ -68,7 +73,7 @@ export function CodeviderLogo({ compact = false }: CodeviderLogoProps) {
 					d="M94.71,183.51a3.47,3.47,0,0,1-3-1.74L61,128.58a3.47,3.47,0,0,1,0-3.47L91.7,71.92a3.47,3.47,0,1,1,6,3.47L68,126.85,97.71,178.3A3.47,3.47,0,0,1,96.44,183,3.39,3.39,0,0,1,94.71,183.51Z"
 				/>
 				<motion.g
-					fill="#fff"
+					fill={textFill}
 					initial={false}
 					animate={{
 						opacity: compact ? 0 : 1,

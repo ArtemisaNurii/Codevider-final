@@ -3,6 +3,12 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import {
+	appleRevealEase,
+	sectionRevealInitial,
+	sectionRevealItem,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import HeroDashboard from "./hero-dashboard";
 import RotatingWord from "./rotating-word";
 
@@ -16,19 +22,7 @@ const heroStagger = {
 	},
 };
 
-const heroItemReveal = {
-	hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
-	visible: {
-		opacity: 1,
-		y: 0,
-		filter: "blur(0px)",
-		transition: {
-			type: "spring" as const,
-			duration: 0.45,
-			bounce: 0,
-		},
-	},
-};
+const heroItemReveal = sectionRevealItem;
 
 const statReveal = {
 	hidden: { opacity: 0, y: 12 },
@@ -36,9 +30,8 @@ const statReveal = {
 		opacity: 1,
 		y: 0,
 		transition: {
-			type: "spring" as const,
-			duration: 0.45,
-			bounce: 0,
+			duration: 0.55,
+			ease: appleRevealEase,
 			delay,
 		},
 	}),
@@ -46,6 +39,9 @@ const statReveal = {
 
 export default function Hero() {
 	const t = useTranslations("home");
+	const { ref, isRevealed, shouldAnimate } = useSectionReveal<HTMLElement>({
+		margin: "-10% 0px",
+	});
 	const shouldReduceMotion = useReducedMotion();
 	const yearsDelivering = new Date().getFullYear() - 2019;
 
@@ -56,7 +52,10 @@ export default function Hero() {
 	];
 
 	return (
-		<section className="home-hero relative isolate min-h-svh overflow-hidden">
+		<section
+			ref={ref}
+			className="home-hero relative isolate min-h-svh overflow-hidden"
+		>
 			<div className="home-hero__blobs" aria-hidden>
 				<div className="home-hero__blob home-hero__blob--primary" />
 				<div className="home-hero__blob home-hero__blob--secondary" />
@@ -69,15 +68,17 @@ export default function Hero() {
 			<div className="home-wrap relative z-10 flex min-h-svh flex-col justify-center pb-[clamp(5rem,10vw,8rem)] pt-[clamp(6rem,12vw,9rem)]">
 				<div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] lg:gap-14 xl:gap-16">
 					<motion.div
-						initial={shouldReduceMotion ? false : "hidden"}
-						animate="visible"
+						initial={sectionRevealInitial(shouldReduceMotion)}
+						animate={isRevealed ? "visible" : "hidden"}
 						variants={heroStagger}
 					>
 						<motion.h1
 							className="mb-8 max-w-2xl text-balance text-left text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.05] tracking-[-0.03em] text-(--hero-text-h)"
 							variants={heroItemReveal}
 						>
-							<span className="block">{t("your_strategic_partner_in")}</span>
+							<span className="block font-sans">
+								{t("your_strategic_partner_in")}
+							</span>
 							<RotatingWord />
 						</motion.h1>
 
@@ -97,13 +98,13 @@ export default function Hero() {
 						>
 							<Link
 								href="#contact"
-								className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#3a53c9] px-7 py-3.5 text-sm font-medium text-white transition-[background-color,transform] hover:bg-[#2f46a8] active:scale-[0.96] focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#3a53c9]"
+								className="home-brand-btn min-h-11 px-7 py-3.5 text-sm"
 							>
 								{t("start_your_project")}
 							</Link>
 							<Link
 								href="#services"
-								className="inline-flex min-h-11 items-center justify-center rounded-full border border-(--border) bg-(--bg)/80 px-7 py-3.5 text-sm font-medium text-(--hero-text-h) backdrop-blur-sm transition-[background-color,border-color,transform] hover:border-[#3a53c9]/40 hover:bg-(--accent-bg) active:scale-[0.96] focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#3a53c9]"
+								className="inline-flex min-h-11 items-center justify-center rounded-full border border-(--border) bg-(--bg)/80 px-7 py-3.5 text-sm font-medium text-(--hero-text-h) backdrop-blur-sm transition-[background-color,border-color,transform] hover:border-(--accent-border) hover:bg-(--accent-bg) active:scale-[0.96] focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-(--focus-ring)"
 							>
 								{t("explore_services")}
 							</Link>
@@ -114,10 +115,12 @@ export default function Hero() {
 								<motion.div
 									key={label}
 									className="text-left"
-									initial={shouldReduceMotion ? false : "hidden"}
-									animate="visible"
+									initial={sectionRevealInitial(shouldReduceMotion)}
+									animate={isRevealed ? "visible" : "hidden"}
 									variants={statReveal}
-									custom={shouldReduceMotion ? 0 : index * 0.1}
+									custom={
+										shouldReduceMotion || !shouldAnimate ? 0 : index * 0.1
+									}
 								>
 									<p className="font-(family-name:--mono) text-2xl font-medium tabular-nums tracking-tight text-(--hero-text-h) sm:text-3xl">
 										{value}
@@ -131,7 +134,10 @@ export default function Hero() {
 					</motion.div>
 
 					<div className="hero-dash-bleed relative w-full min-w-0 lg:min-w-[28rem] xl:min-w-[32rem]">
-						<HeroDashboard />
+						<HeroDashboard
+							isRevealed={isRevealed}
+							shouldAnimate={shouldAnimate}
+						/>
 					</div>
 				</div>
 			</div>

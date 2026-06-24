@@ -3,20 +3,24 @@
 import { Activity, Target, TrendingUp, Users } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import {
+	appleRevealEase,
+	revealTransition,
+	sectionRevealInitial,
+	sectionRevealItem,
+} from "@/hooks/use-section-reveal";
 
 const REVENUE_BARS = [38, 52, 44, 58, 49, 64, 55, 71, 63, 77, 68, 84];
 const PEAK_BAR_INDEX = REVENUE_BARS.indexOf(Math.max(...REVENUE_BARS));
 const LATEST_BAR_INDEX = REVENUE_BARS.length - 1;
 
 const cardReveal = {
-	hidden: { opacity: 0, y: 14 },
+	hidden: sectionRevealItem.hidden,
 	visible: (delay: number) => ({
-		opacity: 1,
-		y: 0,
+		...sectionRevealItem.visible,
 		transition: {
-			type: "spring" as const,
-			duration: 0.45,
-			bounce: 0,
+			duration: 0.55,
+			ease: appleRevealEase,
 			delay,
 		},
 	}),
@@ -28,22 +32,26 @@ function MetricCard({
 	delta,
 	icon: Icon,
 	delay,
+	isRevealed,
+	shouldAnimate,
 }: {
 	label: string;
 	value: string;
 	delta: string;
 	icon: React.ElementType;
 	delay: number;
+	isRevealed: boolean;
+	shouldAnimate: boolean;
 }) {
 	const shouldReduceMotion = useReducedMotion();
 
 	return (
 		<motion.div
 			className="hero-dash-surface rounded-xl p-4 sm:p-5"
-			initial={shouldReduceMotion ? false : "hidden"}
-			animate="visible"
+			initial={sectionRevealInitial(shouldReduceMotion)}
+			animate={isRevealed ? "visible" : "hidden"}
 			variants={cardReveal}
-			custom={shouldReduceMotion ? 0 : delay}
+			custom={shouldReduceMotion || !shouldAnimate ? 0 : delay}
 		>
 			<div className="mb-3 flex items-center justify-between gap-2">
 				<span className="text-xs font-medium uppercase tracking-wide text-[var(--dash-muted)]">
@@ -62,20 +70,28 @@ function MetricCard({
 	);
 }
 
-export default function HeroDashboard() {
+export default function HeroDashboard({
+	isRevealed,
+	shouldAnimate,
+}: {
+	isRevealed: boolean;
+	shouldAnimate: boolean;
+}) {
 	const t = useTranslations("home.dashboard");
 	const shouldReduceMotion = useReducedMotion();
 
 	return (
 		<motion.div
 			className="hero-dash-window relative w-full overflow-hidden rounded-2xl border border-[var(--dash-border)] bg-[var(--dash-canvas)] shadow-[var(--dash-shadow)]"
-			initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-			animate={{ opacity: 1, y: 0 }}
-			transition={
-				shouldReduceMotion
-					? { duration: 0 }
-					: { type: "spring", duration: 0.5, bounce: 0, delay: 0.15 }
+			initial={shouldReduceMotion ? false : sectionRevealItem.hidden}
+			animate={
+				isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
 			}
+			transition={revealTransition(shouldAnimate, {
+				duration: 0.55,
+				ease: appleRevealEase,
+				delay: 0.15,
+			})}
 		>
 			<div className="hero-dash-titlebar flex items-center gap-3 border-b border-[var(--dash-border)] px-4 py-3 sm:px-5">
 				<div className="flex items-center gap-1.5" aria-hidden>
@@ -96,6 +112,8 @@ export default function HeroDashboard() {
 						delta={t("performance_delta")}
 						icon={TrendingUp}
 						delay={0.2}
+						isRevealed={isRevealed}
+						shouldAnimate={shouldAnimate}
 					/>
 					<MetricCard
 						label={t("growth")}
@@ -103,6 +121,8 @@ export default function HeroDashboard() {
 						delta={t("growth_delta")}
 						icon={Users}
 						delay={0.3}
+						isRevealed={isRevealed}
+						shouldAnimate={shouldAnimate}
 					/>
 					<MetricCard
 						label={t("system_health")}
@@ -110,6 +130,8 @@ export default function HeroDashboard() {
 						delta={t("system_health_delta")}
 						icon={Activity}
 						delay={0.4}
+						isRevealed={isRevealed}
+						shouldAnimate={shouldAnimate}
 					/>
 					<MetricCard
 						label={t("leads")}
@@ -117,15 +139,17 @@ export default function HeroDashboard() {
 						delta={t("leads_delta")}
 						icon={Target}
 						delay={0.5}
+						isRevealed={isRevealed}
+						shouldAnimate={shouldAnimate}
 					/>
 				</div>
 
 				<motion.div
 					className="hero-dash-surface rounded-xl p-4 sm:p-5"
-					initial={shouldReduceMotion ? false : "hidden"}
-					animate="visible"
+					initial={sectionRevealInitial(shouldReduceMotion)}
+					animate={isRevealed ? "visible" : "hidden"}
 					variants={cardReveal}
-					custom={shouldReduceMotion ? 0 : 0.55}
+					custom={shouldReduceMotion || !shouldAnimate ? 0 : 0.55}
 				>
 					<div className="mb-4 flex items-end justify-between gap-2">
 						<div>

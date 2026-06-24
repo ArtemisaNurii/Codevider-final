@@ -3,7 +3,12 @@
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import WorldMap from "@/components/ui/world-map";
-import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
+import {
+	appleRevealEase,
+	revealTransition,
+	sectionRevealItem,
+	useSectionReveal,
+} from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
 const PARTNERSHIP_HUB = { lat: 32.1533, lng: 17.1683 } as const;
@@ -37,27 +42,26 @@ export default function GlobalPartnerships() {
 					headline={t("headline")}
 					description={t("description")}
 					centered
-					className="dark:[&_.home-eyebrow]:text-[#00bcff] dark:[&_.home-eyebrow]:before:bg-[#00bcff]"
+					className="[&_.home-eyebrow]:text-(--home-eyebrow-highlight) [&_.home-eyebrow]:before:bg-(--home-eyebrow-highlight)"
 				/>
 			</div>
 
 			<motion.div
 				className="relative z-1 mt-[var(--home-stack)] w-full px-[var(--home-inline)] max-md:mt-[var(--home-stack-sm)]"
 				initial={
-					shouldReduceMotion || !shouldAnimate ? false : { opacity: 0, y: 16 }
+					shouldReduceMotion || !shouldAnimate
+						? false
+						: sectionRevealItem.hidden
 				}
-				animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+				animate={
+					isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
+				}
 				transition={revealTransition(shouldAnimate, {
-					type: "spring" as const,
-					duration: 0.45,
-					bounce: 0,
+					duration: 0.55,
+					ease: appleRevealEase,
 					delay: 0.1,
 				})}
 			>
-				<div
-					className="pointer-events-none absolute inset-x-0 -bottom-6 top-1/3 bg-[radial-gradient(70%_55%_at_50%_100%,rgba(58,83,201,0.18),transparent_65%)] dark:bg-[radial-gradient(70%_55%_at_50%_100%,rgba(58,83,201,0.5),transparent_65%)] max-md:-bottom-2 max-md:top-1/2"
-					aria-hidden
-				/>
 				<WorldMap dots={[...PARTNERSHIP_ROUTES]} />
 			</motion.div>
 		</section>

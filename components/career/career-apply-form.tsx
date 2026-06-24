@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { type ReactNode, useMemo, useRef, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
 	TurnstileWidget,
@@ -85,7 +85,12 @@ export default function CareerApplyForm({ job }: CareerApplyFormProps) {
 	const [submitted, setSubmitted] = useState(false);
 	const [submitError, setSubmitError] = useState<string | null>(null);
 	const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+	const [hasMounted, setHasMounted] = useState(false);
 	const turnstileRef = useRef<TurnstileWidgetHandle>(null);
+
+	useEffect(() => {
+		setHasMounted(true);
+	}, []);
 
 	const schema = useMemo(
 		() =>
@@ -469,7 +474,7 @@ export default function CareerApplyForm({ job }: CareerApplyFormProps) {
 
 			<button
 				type="submit"
-				disabled={isSubmitting || !turnstileToken}
+				disabled={isSubmitting || (hasMounted && !turnstileToken)}
 				className="career-apply-form__submit"
 			>
 				{isSubmitting ? (
