@@ -20,6 +20,14 @@
 			"title": "Apply — Codevider",
 			"title_with_role": "{title} — Apply — Codevider",
 			"description": "Review the role details and apply to join the Codevider team."
+		},
+		"privacy": {
+			"title": "Privacy Policy — Codevider",
+			"description": "Learn how Codevider collects, uses, retains, and protects personal data under GDPR, CCPA/CPRA, and global privacy frameworks."
+		},
+		"terms": {
+			"title": "Terms of Service — Codevider",
+			"description": "Review the Terms governing use of the Codevider website, B2B services disclaimers, intellectual property, and governing law."
 		}
 	},
 	"home": {
@@ -321,12 +329,293 @@
 			"week_12": "W12"
 		}
 	},
+	"not_found": {
+		"title": "404 — Page Not Found",
+		"description": "The page you are looking for does not exist or may have moved.",
+		"home_link": "Go back to the home page"
+	},
+	"legal": {
+		"shared": {
+			"toc_label": "Table of contents",
+			"toc_heading": "Contents"
+		},
+		"privacy": {
+			"eyebrow": "Legal",
+			"title": "Privacy Policy",
+			"last_updated": "Last Updated: June 24, 2026",
+			"intro_paragraphs": [
+				"This Privacy Policy explains how Codevider (\"we,\" \"us,\" or \"our\") collects, uses, protects, and discloses personal information when you visit our website (codevider.com), contact us via email, submit forms, book a discovery call, or apply for an open role.",
+				"Codevider is a strategic software development partner registered at Barrikada Street, Tirana, Albania 1001. For the purposes of the General Data Protection Regulation (GDPR), we act as the Data Controller for the personal data collected through this website."
+			],
+			"sections": {
+				"collection": {
+					"title": "Information We Collect",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "We collect information that you voluntarily provide to us, as well as data that is generated automatically when you interact with our website."
+						},
+						{
+							"type": "h3",
+							"text": "Active Data (Provided directly by you)"
+						},
+						{
+							"type": "ul",
+							"items": [
+								"Contact Forms & Inquiries: When you contact us or click \"Book a call,\" we collect your name, business email address, corporate phone number, company name, geographic location, and the contents of any message you send.",
+								"Career Applications: If you submit an application through our Careers page, we collect your full name, contact information, curriculum vitae (CV/resume), cover letter, portfolio/GitHub links, work history, and educational background."
+							]
+						},
+						{
+							"type": "h3",
+							"text": "Passive Data (Collected automatically)"
+						},
+						{
+							"type": "ul",
+							"items": [
+								"Technical Usage Data: When you browse our website, we automatically collect technical details via cookies, web beacons, and server logs. This includes your Internet Protocol (IP) address, browser type and version, time zone setting, operating system, device type, and detailed usage statistics (e.g., pages viewed, duration of visit, clickstream data)."
+							]
+						}
+					]
+				},
+				"legal_basis": {
+					"title": "Legal Basis and How We Use Information",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "We process your personal data under the following legal bases recognized by global data protection laws (including Article 6 of the GDPR):"
+						},
+						{
+							"type": "ol",
+							"items": [
+								"Legitimate Interests: To respond to your B2B inquiries, schedule discovery calls, maintain the security and technical integrity of our website, and optimize user experience.",
+								"Pre-contractual / Contractual Necessity: To evaluate your qualifications if you apply for a career opportunity or prepare a commercial software development proposal at your request.",
+								"Consent: Where you explicitly agree to the placement of non-essential cookies or subscribe to marketing communications."
+							]
+						},
+						{
+							"type": "p",
+							"text": "We use this information to:"
+						},
+						{
+							"type": "ul",
+							"items": [
+								"Facilitate business communications and schedule discovery meetings.",
+								"Assess job applicants and manage our recruitment processes.",
+								"Analyze website traffic to improve our technical performance, layouts, and service descriptions.",
+								"Protect our website from cyber threats, fraud, or malicious activity."
+							]
+						}
+					]
+				},
+				"transfers": {
+					"title": "International Data Transfers & Third-Party Sharing",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "Because Codevider operates globally and is headquartered in Albania (outside the European Economic Area), your data will be transferred across international borders."
+						},
+						{
+							"type": "h3",
+							"text": "Data Transfers"
+						},
+						{
+							"type": "p",
+							"text": "If you are located within the EU/EEA or the UK, please note that your personal data will be transferred to, stored, and processed in Albania and/or the United States. To guarantee a high level of protection, we ensure that all cross-border data transfers comply with appropriate legal safeguards, including the execution of EU Standard Contractual Clauses (SCCs) or relying on adequacy frameworks where applicable."
+						},
+						{
+							"type": "h3",
+							"text": "Third-Party Processors"
+						},
+						{
+							"type": "p",
+							"text": "We do not sell or rent your personal data to third parties. We share data only with trusted service providers who operate strictly under our instructions, including:"
+						},
+						{
+							"type": "ul",
+							"items": [
+								"Customer Relationship Management (CRM) and sales sequencing tools (e.g., HubSpot, Salesforce).",
+								"Online scheduling platforms used for booking calls (e.g., Calendly).",
+								"Cloud hosting, analytics providers (e.g., Google Analytics), and internal collaboration tools."
+							]
+						}
+					]
+				},
+				"retention": {
+					"title": "Data Retention",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "We retain your personal data only for as long as necessary to fulfill the purposes outlined in this policy:"
+						},
+						{
+							"type": "ul",
+							"items": [
+								"Inquiries & Lead Data: Retained for the duration of our commercial relationship or up to two (2) years following your last active communication if no contract is signed.",
+								"Application Data: CVs and recruitment materials for unsuccessful candidates are safely deleted twelve (12) months after the role is filled, unless you grant explicit consent for us to keep them on file for future opportunities.",
+								"Technical Data: Analytics and cookie logs are retained for a maximum of fourteen (14) months before automated deletion or anonymization."
+							]
+						}
+					]
+				},
+				"rights": {
+					"title": "Your Rights (GDPR & US Privacy Laws)",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "Depending on your jurisdiction (e.g., EU/UK under GDPR, or US states like California under CCPA/CPRA), you possess specific, legally enforceable rights regarding your personal information:"
+						},
+						{
+							"type": "ul",
+							"items": [
+								"Access and Portability: The right to request a copy of the personal data we hold about you in a structured, machine-readable format.",
+								"Rectification: The right to compel us to correct inaccurate or incomplete personal data.",
+								"Erasure (\"Right to be Forgotten\"): The right to request that we permanently delete your data, subject to certain legal exceptions (e.g., tax or compliance obligations).",
+								"Restriction & Objection: The right to object to or restrict our processing of your data based on legitimate interests or direct marketing.",
+								"Non-Discrimination: US residents have the absolute right not to receive discriminatory service or price adjustments for exercising their privacy choices."
+							]
+						},
+						{
+							"type": "p",
+							"text": "To exercise any of these rights, please contact us at info@codevider.com. We will respond to your verified request within thirty (30) days as required by law."
+						}
+					]
+				},
+				"contact": {
+					"title": "Contact Information",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "For privacy-related requests, compliance inquiries, or to lodge a formal complaint, please contact us at:"
+						},
+						{
+							"type": "contact",
+							"name": "Codevider",
+							"address": "Barrikada Street, Tirana, Albania 1001",
+							"email": "info@codevider.com",
+							"phone": "+355 69 587 7742"
+						}
+					]
+				}
+			}
+		},
+		"terms": {
+			"eyebrow": "Legal",
+			"title": "Terms of Service",
+			"last_updated": "Last Updated: June 24, 2026",
+			"intro_paragraphs": [
+				"Welcome to codevider.com. These Terms of Service (\"Terms\") constitute a legally binding agreement between you (\"User,\" \"Visitor,\" or \"Client\") and Codevider (\"we,\" \"us,\" or \"our\") governing your access to and use of our website, digital content, and online contact features.",
+				"By navigating or using this website, you explicitly acknowledge that you have read, understood, and agreed to be bound by these Terms. If you do not agree, you must immediately cease using this website."
+			],
+			"sections": {
+				"scope": {
+					"title": "Website Scope & B2B Services Disclaimer",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "The Codevider website is designed exclusively to provide informational overviews of our strategic software development, web, mobile, and cloud engineering services, as well as to facilitate B2B communication and recruitment."
+						},
+						{
+							"type": "ul",
+							"items": [
+								"No Commercial Binding: The informational content on this website does not constitute a formal, binding commercial offer or a professional services agreement.",
+								"Separate Agreements: All specific project engagements, software delivery metrics, SLAs, payment terms, and intellectual property transfers regarding client software development are governed strictly by separate, written bilateral agreements (such as a Master Services Agreement and Statement of Work) signed and executed between Codevider and the Client."
+							]
+						}
+					]
+				},
+				"ip": {
+					"title": "Intellectual Property Rights",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "All assets, content, and materials available on this website—including but not limited to source code, layouts, text, designs, graphics, branding, logos, case studies, whitepapers, and interface elements—are the exclusive intellectual property of Codevider or its licensors, protected by Albanian copyright laws and international intellectual property treaties."
+						},
+						{
+							"type": "ul",
+							"items": [
+								"Prohibited Actions: You may not copy, reproduce, republish, scrape, modify, distribute, or reverse-engineer any portion of this website or its underlying code without our explicit, prior written consent.",
+								"Permitted Use: Visitors are granted a limited, revocable, non-exclusive license to view and download content solely for individual caching purposes and for evaluating Codevider as a potential B2B vendor."
+							]
+						}
+					]
+				},
+				"acceptable_use": {
+					"title": "Acceptable Use Policy",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "You agree to use our website only for lawful purposes. You are strictly prohibited from:"
+						},
+						{
+							"type": "ul",
+							"items": [
+								"Using the website or contact forms in any way that violates applicable local, national, or international regulations (such as sending spam or phishing links).",
+								"Introducing malicious software, including viruses, trojans, worms, logic bombs, or any code intended to disrupt or damage server infrastructure.",
+								"Attempting to gain unauthorized access to our web servers, database systems, or hosting environments."
+							]
+						}
+					]
+				},
+				"liability": {
+					"title": "Disclaimer of Warranties and Limitation of Liability",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "THE CODEVIDER WEBSITE AND ALL ACCESSIBLE CONTENT ARE PROVIDED ENTIRELY ON AN \"AS IS\" AND \"AS AVAILABLE\" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED.",
+							"variant": "disclaimer"
+						},
+						{
+							"type": "p",
+							"text": "TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, CODEVIDER DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE WEBSITE WILL OPERATE UNINTERRUPTED, SECURELY, OR ERROR-FREE.",
+							"variant": "disclaimer"
+						},
+						{
+							"type": "p",
+							"text": "IN NO EVENT SHALL CODEVIDER, ITS DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES—INCLUDING LOSS OF PROFITS, REVENUE, DATA, OR BUSINESS OPPORTUNITY—ARISING OUT OF OR IN CONNECTION WITH YOUR USE, OR INABILITY TO USE, THIS WEBSITE, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.",
+							"variant": "disclaimer"
+						}
+					]
+				},
+				"governing_law": {
+					"title": "Governing Law and Dispute Resolution",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "These Terms of Service, along with your access to and use of this website, are governed exclusively by, and construed in accordance with, the laws of the Republic of Albania, without regard to conflict of law principles."
+						},
+						{
+							"type": "p",
+							"text": "Any dispute, controversy, or claim arising out of or relating to these Terms, including their validity, invalidity, breach, or termination, which cannot be resolved amicably through good-faith negotiation, shall be submitted to the exclusive jurisdiction of the competent courts located in Tirana, Albania."
+						}
+					]
+				},
+				"contact": {
+					"title": "Contact Information",
+					"blocks": [
+						{
+							"type": "p",
+							"text": "If you have questions, comments, or require legal clarification regarding these Terms of Service, please reach out to us at:"
+						},
+						{
+							"type": "contact",
+							"name": "Codevider Legal Department",
+							"address": "Barrikada Street, Tirana, Albania 1001",
+							"email": "info@codevider.com"
+						}
+					]
+				}
+			}
+		}
+	},
 	"footer": {
 		"description": "Your strategic software development partner — building reliable web, mobile, and cloud products that scale.",
 		"company": "Company",
 		"about": "About Us",
 		"services": "Services",
 		"careers": "Careers",
+		"privacy": "Privacy Policy",
+		"terms": "Terms of Service",
 		"address_heading": "Address",
 		"address_line_1": "Codevider",
 		"address_line_2": "Barrikada Street",
@@ -413,7 +702,8 @@
 			"sq": "Shqip",
 			"de": "Deutsch",
 			"fr": "Français",
-			"it": "Italiano"
+			"it": "Italiano",
+			"zh": "中文"
 		},
 		"switch_to_light_mode": "Switch to light mode",
 		"switch_to_dark_mode": "Switch to dark mode",

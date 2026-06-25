@@ -15,6 +15,7 @@ export default function Footer() {
 					<div>
 						<Link
 							href="/"
+							aria-label="Home"
 							className="inline-flex items-center gap-2.5 -ml-1 text-white"
 						>
 							<CodeviderLogo />
@@ -45,6 +46,18 @@ export default function Footer() {
 							className="block py-1.5 text-[15px] transition-colors hover:text-white"
 						>
 							{t("careers")}
+						</Link>
+						<Link
+							href="/privacy"
+							className="block py-1.5 text-[15px] transition-colors hover:text-white"
+						>
+							{t("privacy")}
+						</Link>
+						<Link
+							href="/terms"
+							className="block py-1.5 text-[15px] transition-colors hover:text-white"
+						>
+							{t("terms")}
 						</Link>
 					</div>
 

@@ -413,7 +413,8 @@
 			"sq": "Shqip",
 			"de": "Deutsch",
 			"fr": "Français",
-			"it": "Italiano"
+			"it": "Italiano",
+			"zh": "中文"
 		},
 		"switch_to_light_mode": "In den Light-Mode wechseln",
 		"switch_to_dark_mode": "In den Dark-Mode wechseln",

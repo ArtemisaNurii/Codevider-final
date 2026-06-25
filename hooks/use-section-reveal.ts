@@ -188,3 +188,34 @@ export function sectionItemTransition(
 		delay: shouldReduceMotion ? 0 : delay,
 	});
 }
+
+/** Above-the-fold hero reveal — animates on mount, no intersection observer delay. */
+export const heroRevealEase = appleRevealEase;
+
+export function useHeroMountReveal() {
+	const shouldReduceMotion = useReducedMotion();
+
+	const stagger = (index: number, y = 18, blur?: number) => {
+		const useBlur = !shouldReduceMotion && blur !== undefined && blur > 0;
+
+		return {
+			initial: shouldReduceMotion
+				? false
+				: {
+						opacity: 0,
+						y,
+						...(useBlur ? { filter: `blur(${blur}px)` } : {}),
+					},
+			animate: {
+				opacity: 1,
+				y: 0,
+				...(useBlur ? { filter: "blur(0px)" } : {}),
+			} as const,
+			transition: shouldReduceMotion
+				? instantRevealTransition
+				: { duration: 0.62, ease: heroRevealEase, delay: index * 0.08 },
+		};
+	};
+
+	return { stagger, shouldReduceMotion };
+}

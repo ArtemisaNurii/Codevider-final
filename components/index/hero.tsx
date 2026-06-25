@@ -1,48 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import {
-	appleRevealEase,
-	sectionRevealInitial,
-	sectionRevealItem,
-	useSectionReveal,
-} from "@/hooks/use-section-reveal";
+import { useHeroMountReveal } from "@/hooks/use-section-reveal";
 import HeroDashboard from "./hero-dashboard";
 import RotatingWord from "./rotating-word";
 
-const heroStagger = {
-	hidden: {},
-	visible: {
-		transition: {
-			staggerChildren: 0.1,
-			delayChildren: 0.05,
-		},
-	},
-};
-
-const heroItemReveal = sectionRevealItem;
-
-const statReveal = {
-	hidden: { opacity: 0, y: 12 },
-	visible: (delay: number) => ({
-		opacity: 1,
-		y: 0,
-		transition: {
-			duration: 0.55,
-			ease: appleRevealEase,
-			delay,
-		},
-	}),
-};
-
 export default function Hero() {
 	const t = useTranslations("home");
-	const { ref, isRevealed, shouldAnimate } = useSectionReveal<HTMLElement>({
-		margin: "-10% 0px",
-	});
-	const shouldReduceMotion = useReducedMotion();
+	const { stagger } = useHeroMountReveal();
 	const yearsDelivering = new Date().getFullYear() - 2019;
 
 	const stats = [
@@ -52,10 +19,7 @@ export default function Hero() {
 	];
 
 	return (
-		<section
-			ref={ref}
-			className="home-hero relative isolate min-h-svh overflow-hidden"
-		>
+		<section className="home-hero relative isolate min-h-svh overflow-hidden">
 			<div className="home-hero__blobs" aria-hidden>
 				<div className="home-hero__blob home-hero__blob--primary" />
 				<div className="home-hero__blob home-hero__blob--secondary" />
@@ -67,14 +31,10 @@ export default function Hero() {
 
 			<div className="home-wrap relative z-10 flex min-h-svh flex-col justify-center pb-[clamp(5rem,10vw,8rem)] pt-[clamp(6rem,12vw,9rem)]">
 				<div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] lg:gap-14 xl:gap-16">
-					<motion.div
-						initial={sectionRevealInitial(shouldReduceMotion)}
-						animate={isRevealed ? "visible" : "hidden"}
-						variants={heroStagger}
-					>
+					<div>
 						<motion.h1
 							className="mb-8 max-w-2xl text-balance text-left text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.05] tracking-[-0.03em] text-(--hero-text-h)"
-							variants={heroItemReveal}
+							{...stagger(0, 18, 3)}
 						>
 							<span className="block font-sans">
 								{t("your_strategic_partner_in")}
@@ -84,7 +44,7 @@ export default function Hero() {
 
 						<motion.p
 							className="max-w-xl text-pretty text-left font-sans text-lg leading-relaxed text-(--hero-text-lead) sm:text-xl sm:leading-8"
-							variants={heroItemReveal}
+							{...stagger(1, 16, 3)}
 						>
 							<span className="font-medium text-(--hero-text-h)">
 								{t("hero_lead_emphasis")}
@@ -94,7 +54,7 @@ export default function Hero() {
 
 						<motion.div
 							className="mb-10 mt-14 flex flex-wrap items-center justify-start gap-4 sm:mb-14 sm:mt-16 sm:gap-5"
-							variants={heroItemReveal}
+							{...stagger(2, 14)}
 						>
 							<Link
 								href="#contact"
@@ -115,12 +75,7 @@ export default function Hero() {
 								<motion.div
 									key={label}
 									className="text-left"
-									initial={sectionRevealInitial(shouldReduceMotion)}
-									animate={isRevealed ? "visible" : "hidden"}
-									variants={statReveal}
-									custom={
-										shouldReduceMotion || !shouldAnimate ? 0 : index * 0.1
-									}
+									{...stagger(3 + index, 14)}
 								>
 									<p className="font-(family-name:--mono) text-2xl font-medium tabular-nums tracking-tight text-(--hero-text-h) sm:text-3xl">
 										{value}
@@ -131,13 +86,10 @@ export default function Hero() {
 								</motion.div>
 							))}
 						</div>
-					</motion.div>
+					</div>
 
 					<div className="hero-dash-bleed relative w-full min-w-0 lg:min-w-[28rem] xl:min-w-[32rem]">
-						<HeroDashboard
-							isRevealed={isRevealed}
-							shouldAnimate={shouldAnimate}
-						/>
+						<HeroDashboard />
 					</div>
 				</div>
 			</div>

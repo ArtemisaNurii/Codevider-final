@@ -17,7 +17,12 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import type { CSSProperties } from "react";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import dynamic from "next/dynamic";
+
+const SyntaxHighlighter = dynamic(
+	() => import("react-syntax-highlighter").then((mod) => mod.Prism),
+	{ ssr: false },
+);
 import {
 	ENGINEERING_DEMO_CODE,
 	ENGINEERING_DEMO_TABS,

@@ -3,56 +3,61 @@
 import { Activity, Target, TrendingUp, Users } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import {
-	appleRevealEase,
-	revealTransition,
-	sectionRevealInitial,
-	sectionRevealItem,
-} from "@/hooks/use-section-reveal";
+import { appleRevealEase } from "@/hooks/use-section-reveal";
 
-const REVENUE_BARS = [38, 52, 44, 58, 49, 64, 55, 71, 63, 77, 68, 84];
-const PEAK_BAR_INDEX = REVENUE_BARS.indexOf(Math.max(...REVENUE_BARS));
+const REVENUE_BARS = [38, 52, 44, 58, 49, 64, 55, 71, 63, 77, 68, 84] as const;
+const PEAK_BAR_INDEX = REVENUE_BARS.findIndex((bar) => bar === 84);
 const LATEST_BAR_INDEX = REVENUE_BARS.length - 1;
+const CHART_HEIGHT_PX = 112;
+const CHART_HEIGHT_PX_SM = 128;
+const BAR_MIN_HEIGHT_PX = 10;
 
-const cardReveal = {
-	hidden: sectionRevealItem.hidden,
-	visible: (delay: number) => ({
-		...sectionRevealItem.visible,
-		transition: {
-			duration: 0.55,
-			ease: appleRevealEase,
-			delay,
-		},
-	}),
-};
+const instantTransition = { duration: 0 } as const;
+
+function barHeightPx(value: number) {
+	return Math.max(
+		BAR_MIN_HEIGHT_PX,
+		Math.round((value / 100) * CHART_HEIGHT_PX),
+	);
+}
+
+function barHeightPxSm(value: number) {
+	return Math.max(
+		BAR_MIN_HEIGHT_PX,
+		Math.round((value / 100) * CHART_HEIGHT_PX_SM),
+	);
+}
+
+const METRICS = [
+	{
+		key: "performance",
+		value: "$284K",
+		deltaKey: "performance_delta",
+		icon: TrendingUp,
+	},
+	{ key: "growth", value: "12.4K", deltaKey: "growth_delta", icon: Users },
+	{
+		key: "system_health",
+		value: "99.9%",
+		deltaKey: "system_health_delta",
+		icon: Activity,
+	},
+	{ key: "leads", value: "68%", deltaKey: "leads_delta", icon: Target },
+] as const;
 
 function MetricCard({
 	label,
 	value,
 	delta,
 	icon: Icon,
-	delay,
-	isRevealed,
-	shouldAnimate,
 }: {
 	label: string;
 	value: string;
 	delta: string;
 	icon: React.ElementType;
-	delay: number;
-	isRevealed: boolean;
-	shouldAnimate: boolean;
 }) {
-	const shouldReduceMotion = useReducedMotion();
-
 	return (
-		<motion.div
-			className="hero-dash-surface rounded-xl p-4 sm:p-5"
-			initial={sectionRevealInitial(shouldReduceMotion)}
-			animate={isRevealed ? "visible" : "hidden"}
-			variants={cardReveal}
-			custom={shouldReduceMotion || !shouldAnimate ? 0 : delay}
-		>
+		<>
 			<div className="mb-3 flex items-center justify-between gap-2">
 				<span className="text-xs font-medium uppercase tracking-wide text-[var(--dash-muted)]">
 					{label}
@@ -66,34 +71,40 @@ function MetricCard({
 				{value}
 			</p>
 			<p className="mt-1.5 text-xs text-[var(--dash-success)]">{delta}</p>
-		</motion.div>
+		</>
 	);
 }
 
-export default function HeroDashboard({
-	isRevealed,
-	shouldAnimate,
-}: {
-	isRevealed: boolean;
-	shouldAnimate: boolean;
-}) {
+export default function HeroDashboard() {
 	const t = useTranslations("home.dashboard");
 	const shouldReduceMotion = useReducedMotion();
+
+	const shellTransition = shouldReduceMotion
+		? instantTransition
+		: { duration: 0.65, ease: appleRevealEase, delay: 0.36 };
+
+	const cardTransition = (index: number) =>
+		shouldReduceMotion
+			? instantTransition
+			: { duration: 0.45, ease: appleRevealEase, delay: 0.5 + index * 0.06 };
+
+	const chartTransition = shouldReduceMotion
+		? instantTransition
+		: { duration: 0.45, ease: appleRevealEase, delay: 0.74 };
+
+	const barTransition = (index: number) =>
+		shouldReduceMotion
+			? instantTransition
+			: { duration: 0.5, ease: appleRevealEase, delay: 0.82 + index * 0.03 };
 
 	return (
 		<motion.div
 			className="hero-dash-window relative w-full overflow-hidden rounded-2xl border border-[var(--dash-border)] bg-[var(--dash-canvas)] shadow-[var(--dash-shadow)]"
-			initial={shouldReduceMotion ? false : sectionRevealItem.hidden}
-			animate={
-				isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
-			}
-			transition={revealTransition(shouldAnimate, {
-				duration: 0.55,
-				ease: appleRevealEase,
-				delay: 0.15,
-			})}
+			initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
+			animate={{ opacity: 1, x: 0 }}
+			transition={shellTransition}
 		>
-			<div className="hero-dash-titlebar flex items-center gap-3 border-b border-[var(--dash-border)] px-4 py-3 sm:px-5">
+			<div className="hero-dash-titlebar flex h-12 items-center gap-3 border-b border-[var(--dash-border)] px-4 sm:px-5">
 				<div className="flex items-center gap-1.5" aria-hidden>
 					<span className="size-2.5 rounded-full bg-[#ff5f57]" />
 					<span className="size-2.5 rounded-full bg-[#febc2e]" />
@@ -106,50 +117,29 @@ export default function HeroDashboard({
 
 			<div className="space-y-4 p-4 sm:space-y-5 sm:p-5">
 				<div className="grid grid-cols-2 gap-3 sm:gap-4">
-					<MetricCard
-						label={t("performance")}
-						value="$284K"
-						delta={t("performance_delta")}
-						icon={TrendingUp}
-						delay={0.2}
-						isRevealed={isRevealed}
-						shouldAnimate={shouldAnimate}
-					/>
-					<MetricCard
-						label={t("growth")}
-						value="12.4K"
-						delta={t("growth_delta")}
-						icon={Users}
-						delay={0.3}
-						isRevealed={isRevealed}
-						shouldAnimate={shouldAnimate}
-					/>
-					<MetricCard
-						label={t("system_health")}
-						value="99.9%"
-						delta={t("system_health_delta")}
-						icon={Activity}
-						delay={0.4}
-						isRevealed={isRevealed}
-						shouldAnimate={shouldAnimate}
-					/>
-					<MetricCard
-						label={t("leads")}
-						value="68%"
-						delta={t("leads_delta")}
-						icon={Target}
-						delay={0.5}
-						isRevealed={isRevealed}
-						shouldAnimate={shouldAnimate}
-					/>
+					{METRICS.map(({ key, value, deltaKey, icon }, index) => (
+						<motion.div
+							key={key}
+							className="hero-dash-surface rounded-xl p-4 sm:p-5"
+							initial={shouldReduceMotion ? false : { opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={cardTransition(index)}
+						>
+							<MetricCard
+								label={t(key)}
+								value={value}
+								delta={t(deltaKey)}
+								icon={icon}
+							/>
+						</motion.div>
+					))}
 				</div>
 
 				<motion.div
 					className="hero-dash-surface rounded-xl p-4 sm:p-5"
-					initial={sectionRevealInitial(shouldReduceMotion)}
-					animate={isRevealed ? "visible" : "hidden"}
-					variants={cardReveal}
-					custom={shouldReduceMotion || !shouldAnimate ? 0 : 0.55}
+					initial={shouldReduceMotion ? false : { opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={chartTransition}
 				>
 					<div className="mb-4 flex items-end justify-between gap-2">
 						<div>
@@ -166,20 +156,34 @@ export default function HeroDashboard({
 					</div>
 
 					<div
-						className="grid h-28 grid-cols-12 gap-1 sm:h-32 sm:gap-1.5"
+						className="hero-dash-chart grid grid-cols-12 gap-1 sm:gap-1.5"
+						style={
+							{
+								"--hero-dash-chart-h": `${CHART_HEIGHT_PX}px`,
+								"--hero-dash-chart-h-sm": `${CHART_HEIGHT_PX_SM}px`,
+							} as React.CSSProperties
+						}
 						role="img"
 						aria-label={t("revenue_chart_label")}
 					>
-						{REVENUE_BARS.map((height, index) => (
+						{REVENUE_BARS.map((value, index) => (
 							<div
 								key={index}
-								className="flex h-full flex-col justify-end rounded-sm bg-[var(--dash-bar-track)] p-0.5 sm:rounded-md sm:p-1"
+								className="flex h-[var(--hero-dash-chart-h)] flex-col justify-end rounded-sm bg-[var(--dash-bar-track)] p-0.5 sm:h-[var(--hero-dash-chart-h-sm)] sm:rounded-md sm:p-1"
 							>
-								<div
-									className={`hero-dash-bar w-full rounded-[3px] sm:rounded-sm${
+								<motion.div
+									className={`hero-dash-bar w-full origin-bottom rounded-[3px] sm:rounded-sm${
 										index === PEAK_BAR_INDEX ? " hero-dash-bar--peak" : ""
 									}${index === LATEST_BAR_INDEX ? " hero-dash-bar--latest" : ""}`}
-									style={{ height: `${height}%`, minHeight: "10px" }}
+									style={
+										{
+											"--hero-dash-bar-h": `${barHeightPx(value)}px`,
+											"--hero-dash-bar-h-sm": `${barHeightPxSm(value)}px`,
+										} as React.CSSProperties
+									}
+									initial={shouldReduceMotion ? false : { scaleY: 0 }}
+									animate={{ scaleY: 1 }}
+									transition={barTransition(index)}
 								/>
 							</div>
 						))}

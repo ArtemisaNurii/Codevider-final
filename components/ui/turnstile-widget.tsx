@@ -1,17 +1,90 @@
 "use client";
 
-import Script from "next/script";
 import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 import { getTurnstileSiteKey } from "@/lib/turnstile";
 
-type TurnstileWindow = Window & {
-	turnstileContactOnSuccess?: (token: string) => void;
-	turnstileContactOnExpired?: () => void;
-	turnstileContactOnError?: () => void;
-	turnstile?: {
-		reset: (widgetId?: string) => void;
-	};
+type TurnstileRenderOptions = {
+	sitekey: string;
+	size?: "normal" | "compact" | "flexible";
+	appearance?: "always" | "execute" | "interaction-only";
+	callback?: (token: string) => void;
+	"expired-callback"?: () => void;
+	"error-callback"?: () => void;
 };
+
+type TurnstileApi = {
+	render: (container: HTMLElement, options: TurnstileRenderOptions) => string;
+	reset: (widgetId: string) => void;
+	remove: (widgetId: string) => void;
+};
+
+type TurnstileWindow = Window & {
+	turnstile?: TurnstileApi;
+};
+
+const TURNSTILE_SCRIPT_SRC =
+	"https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+
+let turnstileScriptPromise: Promise<void> | null = null;
+
+function loadTurnstileScript(): Promise<void> {
+	if (typeof window === "undefined") {
+		return Promise.resolve();
+	}
+
+	const win = window as TurnstileWindow;
+	if (win.turnstile) {
+		return Promise.resolve();
+	}
+
+	if (turnstileScriptPromise) {
+		return turnstileScriptPromise;
+	}
+
+	turnstileScriptPromise = new Promise((resolve, reject) => {
+		const existing = document.querySelector<HTMLScriptElement>(
+			'script[src*="challenges.cloudflare.com/turnstile"]',
+		);
+
+		if (existing) {
+			if (win.turnstile) {
+				resolve();
+				return;
+			}
+
+			existing.addEventListener("load", () => resolve(), { once: true });
+			existing.addEventListener(
+				"error",
+				() => reject(new Error("Failed to load Turnstile")),
+				{ once: true },
+			);
+			return;
+		}
+
+		const script = document.createElement("script");
+		script.src = TURNSTILE_SCRIPT_SRC;
+		script.async = true;
+		script.defer = true;
+		script.onload = () => resolve();
+		script.onerror = () => reject(new Error("Failed to load Turnstile"));
+		document.head.appendChild(script);
+	});
+
+	return turnstileScriptPromise;
+}
+
+function removeWidget(widgetId: string | null) {
+	if (!widgetId) return;
+
+	const win = window as TurnstileWindow;
+	if (!win.turnstile) return;
+
+	try {
+		win.turnstile.remove(widgetId);
+	} catch {
+		// Widget may already be gone after navigation or strict-mode remount.
+	}
+}
 
 export type TurnstileWidgetHandle = {
 	reset: () => void;
@@ -25,58 +98,69 @@ export const TurnstileWidget = forwardRef<
 	TurnstileWidgetHandle,
 	TurnstileWidgetProps
 >(function TurnstileWidget({ onTokenChange }, ref) {
+	const containerRef = useRef<HTMLDivElement>(null);
 	const widgetIdRef = useRef<string | null>(null);
+	const onTokenChangeRef = useRef(onTokenChange);
+
+	onTokenChangeRef.current = onTokenChange;
 
 	useEffect(() => {
-		const win = window as TurnstileWindow;
+		let cancelled = false;
 
-		win.turnstileContactOnSuccess = (token: string) => {
-			onTokenChange(token);
+		const renderWidget = () => {
+			const win = window as TurnstileWindow;
+			const container = containerRef.current;
+
+			if (!win.turnstile || !container || cancelled) {
+				return;
+			}
+
+			removeWidget(widgetIdRef.current);
+			widgetIdRef.current = null;
+			container.replaceChildren();
+
+			widgetIdRef.current = win.turnstile.render(container, {
+				sitekey: getTurnstileSiteKey(),
+				size: "flexible",
+				appearance: "interaction-only",
+				callback: (token) => {
+					onTokenChangeRef.current(token);
+				},
+				"expired-callback": () => {
+					onTokenChangeRef.current(null);
+				},
+				"error-callback": () => {
+					onTokenChangeRef.current(null);
+				},
+			});
 		};
-		win.turnstileContactOnExpired = () => {
-			onTokenChange(null);
-		};
-		win.turnstileContactOnError = () => {
-			onTokenChange(null);
-		};
+
+		loadTurnstileScript()
+			.then(() => {
+				if (!cancelled) {
+					renderWidget();
+				}
+			})
+			.catch(() => {
+				onTokenChangeRef.current(null);
+			});
 
 		return () => {
-			delete win.turnstileContactOnSuccess;
-			delete win.turnstileContactOnExpired;
-			delete win.turnstileContactOnError;
+			cancelled = true;
+			removeWidget(widgetIdRef.current);
+			widgetIdRef.current = null;
 		};
-	}, [onTokenChange]);
+	}, []);
 
 	useImperativeHandle(ref, () => ({
 		reset: () => {
 			const win = window as TurnstileWindow;
-			if (win.turnstile) {
-				win.turnstile.reset(widgetIdRef.current ?? undefined);
+			if (win.turnstile && widgetIdRef.current) {
+				win.turnstile.reset(widgetIdRef.current);
 			}
-			onTokenChange(null);
+			onTokenChangeRef.current(null);
 		},
 	}));
 
-	return (
-		<>
-			<Script
-				src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-				strategy="afterInteractive"
-			/>
-			<div className="w-full min-w-0">
-				<div
-					className="cf-turnstile w-full"
-					data-sitekey={getTurnstileSiteKey()}
-					data-size="flexible"
-					data-appearance="interaction-only"
-					data-callback="turnstileContactOnSuccess"
-					data-expired-callback="turnstileContactOnExpired"
-					data-error-callback="turnstileContactOnError"
-					ref={(node) => {
-						widgetIdRef.current = node?.getAttribute("data-widget-id") ?? null;
-					}}
-				/>
-			</div>
-		</>
-	);
+	return <div ref={containerRef} className="w-full min-w-0" />;
 });

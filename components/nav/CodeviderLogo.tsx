@@ -6,12 +6,11 @@ const FULL_VIEWBOX = "0 0 1026 254";
 const LOGO_HEIGHT = 35.2;
 const LOGO_WIDTH = 145.2;
 const ICON_WIDTH = 39.6;
+const WORDMARK_CLIP_RIGHT = LOGO_WIDTH - ICON_WIDTH;
 
-const springTransition = {
-	type: "spring" as const,
-	stiffness: 260,
-	damping: 32,
-	mass: 0.85,
+const navScrollTransition = {
+	duration: 0.5,
+	ease: [0.22, 1, 0.36, 1] as const,
 };
 
 const instantTransition = { duration: 0 };
@@ -19,21 +18,39 @@ const instantTransition = { duration: 0 };
 type CodeviderLogoProps = {
 	compact?: boolean;
 	variant?: "dark" | "light";
+	stableLayout?: boolean;
 };
 
 export function CodeviderLogo({
 	compact = false,
 	variant = "dark",
+	stableLayout = false,
 }: CodeviderLogoProps) {
 	const textFill = variant === "dark" ? "#fff" : "#0f172a";
 	const shouldReduceMotion = useReducedMotion();
-	const transition = shouldReduceMotion ? instantTransition : springTransition;
+	const transition = shouldReduceMotion
+		? instantTransition
+		: navScrollTransition;
+	const containerAnimate = stableLayout
+		? {
+				clipPath: compact
+					? `inset(0 ${WORDMARK_CLIP_RIGHT}px 0 0)`
+					: "inset(0 0px 0 0)",
+			}
+		: { width: compact ? ICON_WIDTH : LOGO_WIDTH };
+	const containerStyle = stableLayout
+		? {
+				width: LOGO_WIDTH,
+				height: LOGO_HEIGHT,
+				willChange: "clip-path",
+			}
+		: { height: LOGO_HEIGHT };
 
 	return (
 		<motion.div
 			className="shrink-0 overflow-hidden"
-			style={{ height: LOGO_HEIGHT }}
-			animate={{ width: compact ? ICON_WIDTH : LOGO_WIDTH }}
+			style={containerStyle}
+			animate={containerAnimate}
 			initial={false}
 			transition={transition}
 		>

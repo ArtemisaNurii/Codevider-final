@@ -28,6 +28,7 @@ const LOCALE_FLAGS: Record<(typeof routing.locales)[number], string> = {
 	fr: "🇫🇷",
 	es: "🇪🇸",
 	it: "🇮🇹",
+	zh: "🇨🇳",
 	sq: "🇦🇱",
 };
 

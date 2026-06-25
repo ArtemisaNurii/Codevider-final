@@ -1,0 +1,844 @@
+{
+	"metadata": {
+		"home": {
+			"title": "Codevider",
+			"description": "您的软件开发战略合作伙伴"
+		},
+		"about": {
+			"title": "关于我们 — Codevider",
+			"description": "Codevider 于 2019 年创立于阿尔巴尼亚地拉那，致力于打造助力业务增长的软件 — 实现战略、设计与工程的和谐统一。"
+		},
+		"services": {
+			"title": "服务 — Codevider",
+			"description": "了解 Codevider 如何设计、构建和扩展可靠的软件：定制开发、Web 应用、AI 集成、自动化、系统集成、云计算和团队增补。"
+		},
+		"career": {
+			"title": "职业生涯 — Codevider",
+			"description": "加入 Codevider，共同构建软件开发的未来。了解我们的招聘流程并联系我们位于阿尔巴尼亚地拉那的团队。"
+		},
+		"career_apply": {
+			"title": "申请 — Codevider",
+			"title_with_role": "{title} — 申请 — Codevider",
+			"description": "查看职位详情并申请加入 Codevider 团队。"
+		},
+		"privacy": {
+			"title": "隐私政策 — Codevider",
+			"description": "了解 Codevider 如何在我们的网站和服务中收集、使用和保护个人数据。"
+		},
+		"terms": {
+			"title": "服务条款 — Codevider",
+			"description": "查看管理 Codevider 网站使用及软件开发服务参与的条款。"
+		}
+	},
+	"home": {
+		"your_strategic_partner_in": "您的战略合作伙伴，专注于",
+		"hero_lead_emphasis": "我们设计、构建并扩展可靠的 Web、移动和云软件",
+		"hero_lead_rest": " — 深度嵌入您的团队，无需额外管理开销。",
+		"start_your_project": "开始您的项目",
+		"explore_services": "探索服务",
+		"years_delivering": "交付年限",
+		"global_projects": "全球项目",
+		"engineers": "工程师",
+		"who_we_are_eyebrow": "我们是谁",
+		"who_we_are_headline": "将创意转化为值得信赖的数字解决方案",
+		"who_we_are_description": "从 Web 和移动应用到云平台和企业系统，我们根据您的业务需求量身打造可靠的软件。我们的团队融合了现代技术、可扩展架构和直观设计，交付安全、高性能的解决方案，助力组织创新与增长。",
+		"read_more_about_us": "阅读更多关于我们的信息",
+		"stat_global_partnerships_value": "{value}+",
+		"stat_global_partnerships": "遍布欧洲的全球合作伙伴",
+		"stat_delivery_velocity_value": "{value}%",
+		"stat_delivery_velocity": "平均交付速度增长",
+		"stat_elite_engineers_value": "{value}+",
+		"stat_elite_engineers": "拥有深厚全栈专业知识的精英工程师 — 准备在两周内嵌入您的团队。",
+		"core_services": {
+			"eyebrow": "我们的核心服务",
+			"headline": "助力您快速交付、扩展并保持领先的一切所需",
+			"description": "我们通过可扩展的团队、现代技术栈和可靠的交付，帮助企业和初创公司以更低的开销实现更快的交付。我们提供四种协作方式："
+		},
+		"features": {
+			"ai": {
+				"badge": "01 · AI 集成",
+				"headline": "交付用户真正能感受到的 AI 功能",
+				"description": "从定制的 LLM 驱动应用和智能聊天机器人到工作流自动化和行动洞察 — 无缝嵌入您现有的生态系统。",
+				"bullet_1": "基于您的数据训练的定制 LLM 应用与助手",
+				"bullet_2": "智能聊天机器人与支持自动化",
+				"bullet_3": "接入工作流的洞察数据流水线",
+				"link": "探索 AI 服务",
+				"demo": {
+					"title": "AI 助手",
+					"status": "由您的数据驱动，设计确保安全。",
+					"chip_tickets_label": "总结工单",
+					"chip_tickets_q": "总结今天的支持工单",
+					"chip_tickets_a": "这是今日支持活动的快速快照：\n\n• 工单 #1023 – 登录问题（12分钟内解决）\n• 工单 #1024 – 功能请求：导出为 PDF（待审核）\n• 工单 #1025 – Bug：数据同步延迟（已修复，3分钟）\n\n处理工单总数：3 – 2个已解决，1个待处理。",
+					"chip_leads_label": "分类潜在客户",
+					"chip_leads_q": "按意向分类新潜在客户",
+					"chip_leads_a": "潜在客户意向细分（过去24小时）：\n\n• 高意向 – 4个（预算 > $5k，已请求演示）\n• 中意向 – 7个（产品对比，定价咨询）\n• 低意向 – 3个（一般信息，订阅资讯）\n\n操作：优先跟进高意向潜在客户。",
+					"chip_schedule_label": "创建日程",
+					"chip_schedule_q": "为明天添加新日程",
+					"chip_schedule_a": "已为客户创建日程：BrightWave Solutions – 明天，9 AM – 10 AM (UTC+2)。\n\n议程：9 AM – 介绍与目标，9:30 AM – 演示，9:55 AM – 问答，10 AM – 总结。\n\n确认邮件已发送至客户及团队。"
+				}
+			},
+			"engineering": {
+				"badge": "02 · 产品工程",
+				"headline": "整洁的架构，稳定的交付节奏",
+				"description": "我们采用整洁架构和敏捷发布周期，设计并开发可扩展的 Web 应用程序和直观的产品 — 确保更短的上市时间和长期的可维护性。",
+				"bullet_1": "现代、强类型、经过充分测试的代码库",
+				"bullet_2": "从第一天起实现持续交付",
+				"bullet_3": "随您业务扩展的可维护系统",
+				"link": "探索工程服务",
+				"demo": {
+					"tabs_aria": "代码示例",
+					"status": "构建通过 · 0 个类型错误 · 已部署到生产环境"
+				}
+			},
+			"pod": {
+				"badge": "03 · 专属 Pod 小组",
+				"headline": "两周内完成全能团队嵌入",
+				"description": "快速组建跨职能小组 (Pod) — 涵盖前端、后端和 QA — 直接融入您的流程。通过为您量身定制、有 SLA 保障的灵活协议，实现轻松扩展。",
+				"bullet_1": "从第一个冲刺阶段起实现跨职能协作",
+				"bullet_2": "每日站会、每周报告、全面透明",
+				"bullet_3": "根据需求随时扩大或缩小小组规模",
+				"link": "探索 Pod 团队",
+				"demo": {
+					"title": "您的专属 Pod",
+					"subtitle": "悬停查看角色",
+					"center": "您的\n产品",
+					"role_frontend": "前端",
+					"role_frontend_desc": "React, Next.js 以及精致、易用的 UI。",
+					"role_backend": "后端",
+					"role_backend_desc": "可扩展的 API、数据模型和业务逻辑。",
+					"role_qa": "QA",
+					"role_qa_desc": "自动化测试与发布信心。",
+					"role_pm": "PM",
+					"role_pm_desc": "站会、报告以及单一联系点。"
+				}
+			},
+			"devops": {
+				"badge": "04 · 云与 DevOps",
+				"headline": "信心十足地发布到生产环境",
+				"description": "通过 CI/CD 流水线、容器化和 AWS 上的安全云基础设施简化部署 — 确保高可用性和运营效率。",
+				"bullet_1": "自动化的构建、测试和部署流水线",
+				"bullet_2": "容器化、基础设施即代码 (IaC) 设置",
+				"bullet_3": "高可用性及 99% 正常运行时间 SLA",
+				"link": "探索云与 DevOps",
+				"demo": {
+					"title": "CI/CD 流水线",
+					"subtitle": "main → production",
+					"stage_build": "构建",
+					"stage_test": "测试",
+					"stage_deploy": "部署",
+					"idle": "闲置",
+					"running": "运行中…",
+					"run": "运行流水线",
+					"run_again": "再次运行",
+					"status_build": "构建中…",
+					"status_test": "运行测试中…",
+					"status_deploy": "部署中…",
+					"status_live_label": "已上线"
+				}
+			}
+		},
+		"empower": {
+			"eyebrow": "我们赋能的对象",
+			"headline": "我们赋能科技初创公司、中小企业和全球品牌",
+			"description": "从早期产品团队到企业现代化转型 — 我们根据您的阶段、技术栈和增长目标匹配合适的工程模型。",
+			"featured_pin": "核心能力",
+			"cards": {
+				"startups": {
+					"title": "A/B 轮初创公司",
+					"description": "我们通过敏捷团队和云原生解决方案帮助快速增长的初创公司实现扩展 — 从 MVP 加速到核心系统增长。"
+				},
+				"enterprise": {
+					"title": "企业现代化",
+					"description": "我们利用云原生解决方案对遗留系统进行现代化改造 — 减少技术债，提升性能，解锁创新空间。"
+				},
+				"crm": {
+					"title": "以 CRM 为中心的组织",
+					"description": "我们设计以 HubSpot 为中心的定制 CRM 结构，集中数据，优化体验，并赋能更智能的决策。"
+				},
+				"custom": {
+					"title": "定制软件解决方案",
+					"description": "现成的工具并非总能满足需求。我们构建可扩展、灵活的软件，随您的业务进化并交付可衡量的成果。"
+				},
+				"fintech": {
+					"title": "金融科技与支付",
+					"description": "从数字银行到交易平台，我们创建安全、合规的金融科技解决方案，凭借出色的 UX 实现全球扩展。"
+				},
+				"ai": {
+					"title": "AI 与自动化",
+					"description": "我们实施 AI 驱动的聊天机器人、预测性分析和自动化系统，减少人工操作并驱动新收入。"
+				},
+				"data": {
+					"title": "数据与分析",
+					"description": "我们通过 BI 仪表板、数据仓库和实时分析，将原始数据转化为可操作的见解，实现更智能的决策。"
+				},
+				"mobile": {
+					"title": "移动应用开发",
+					"description": "我们构建具有无缝体验的高性能 iOS、Android 和跨平台应用 — 让您的品牌随时随地与用户连接。"
+				}
+			}
+		},
+		"outsource": {
+			"eyebrow": "为什么选择我们的外包服务",
+			"headline": "外包工程，加速增长",
+			"description": "实现成本效益和专家级精准度。凭借敏捷的适应能力进行扩展，并专注于您的核心优势。",
+			"pillars": {
+				"collaboration": {
+					"title": "透明协作",
+					"description": "作为您的外包开发合作伙伴，我们通过公开沟通、共享路线图以及各阶段工作流的全透明化，与您的内部团队实现无缝集成。"
+				},
+				"legal": {
+					"title": "法律保护",
+					"description": "我们的开发人员专为客户构建应用 — 您保留 100% 的软件知识产权。我们还会签署 NDA 和竞业限制协议，以提供全面的法律保护。"
+				},
+				"cost": {
+					"title": "具成本效益的开发",
+					"description": "在不牺牲代码质量的前提下开展工作。Codevider 总部位于阿尔巴尼亚地拉那 — 这里是以预算友好的价格提供顶级 Web 开发人才的知名枢纽。"
+				}
+			}
+		},
+		"global": {
+			"eyebrow": "全球合作伙伴",
+			"headline": "跨越国界搭建桥梁",
+			"description": "我们助力全球项目实现无缝协作 — 赋能初创公司、企业和创新者共同成长。",
+			"tirana": "地拉那",
+			"germany": "德国",
+			"usa": "美国",
+			"uk": "英国"
+		},
+		"why_choose": {
+			"eyebrow": "为什么客户选择我们",
+			"headline": "建立在三大支柱上的合作伙伴关系",
+			"description": "效率、灵活性和深厚的专业知识 — 每一项合作的基石。",
+			"value_badge": "我们的价值主张",
+			"value_flow": "效率 → 灵活性 → 专业知识",
+			"value_description": "我们交付的不只是代码 — 而是为增长设计的战略伙伴关系，让您在每一步都保持掌控。",
+			"flex_value": "100%",
+			"flex_title": "灵活性与控制权",
+			"flex_description": "始终管理并掌控您自己的项目 — 您的路线图，您的优先级。",
+			"years_title": "年经验",
+			"years_description": "受益于我们团队带来的创新视角。",
+			"cards": {
+				"savings": {
+					"pin": "平均节省",
+					"title": "显著的成本与时间节省",
+					"description": "绕过昂贵的招聘和培训。我们精简的流程助力您更快上市 — 节省关键的时间和资源。"
+				},
+				"control": {
+					"pin": "控制",
+					"title": "完全的灵活性与控制权",
+					"description": "按需扩展您的团队，并在多个项目中保持控制权 — 通过 Slack, Jira, GitHub 等工具进行协作。"
+				},
+				"expertise": {
+					"pin": "视角",
+					"title": "按需获取创意专家支持",
+					"description": "注入新鲜的创意。我们积极进取的专业人才会为您带来全新的视角和创新的解决方案。"
+				}
+			}
+		},
+		"faq": {
+			"eyebrow": "常见问题",
+			"headline": "常见问题解答",
+			"items": {
+				"projects": {
+					"question": "你们承担哪些类型的软件项目？",
+					"answer": "从全新的 Web 和移动应用到企业平台、云迁移和 AI 集成 — 我们为初创公司、中小企业和大型企业处理中大型规模的商业级全生命周期开发。"
+				},
+				"technologies": {
+					"question": "你们擅长哪些技术和框架？",
+					"answer": "我们的核心技术栈包括前端的 React, Next.js, Angular, Vue 和 React Native；后端的 Node.js, Python, Django, Laravel 和 PHP；以及用于数据和云基础设施的 PostgreSQL, MySQL, MongoDB 和 AWS。"
+				},
+				"estimates": {
+					"question": "你们如何估算项目时间表和预算？",
+					"answer": "我们从探索阶段开始明确您的需求，然后提供带有里程碑的透明估算。合作可以按小时计费，也可以按月固定投入，让您清楚每一分钱的去向。"
+				},
+				"ownership": {
+					"question": "我是否拥有源代码和知识产权？",
+					"answer": "是的 — 100% 拥有。我们的开发人员仅为客户构建，您保留软件的完整知识产权。我们还会签署 NDA 和竞业限制协议，以实现完整的法律保护。"
+				},
+				"communication": {
+					"question": "项目期间我们如何沟通？",
+					"answer": "您将与选定的开发人员进行每日站会，并收到项目经理的每周进度报告。我们通过您偏好的工具（如 Slack, Jira, GitHub 等）进行协作。"
+				},
+				"quality": {
+					"question": "你们的质量保证流程是怎样的？",
+					"answer": "质量是内置的，而非事后补救。每个 Pod 都包含 QA，配备自动化测试、代码审查和专门的开发服务器，供您在项目上线生产环境前进行测试。"
+				},
+				"support": {
+					"question": "你们提供上线后的支持和维护吗？",
+					"answer": "当然。部署到您的服务器后，我们提供持续的支持、维护和迭代改进，确保您的产品保持安全、高性能并随业务不断演进。"
+				},
+				"legacy": {
+					"question": "你们能处理现有或遗留的代码库吗？",
+					"answer": "是的。我们专注于对遗留系统进行现代化改造 — 在不影响您运营的前提下，减少技术债，提升性能，并与您现有的架构集成。"
+				}
+			}
+		},
+		"contact": {
+			"eyebrow": "联系我们",
+			"headline": "准备好构建您的下一个宏伟蓝图了吗？",
+			"description": "无论您有一个具体的项目想法，还是只想探索可能性，我们的团队随时为您提供帮助。请填写表格，或直接联系我们。",
+			"email_title": "直接发送电子邮件",
+			"phone_title": "现在致电",
+			"address_title": "到访办公地点",
+			"address_value": "Barrikada Street, Tirana, Albania 1001",
+			"form_name": "全名",
+			"form_name_placeholder": "Jane Doe",
+			"form_email": "电子邮箱地址",
+			"form_email_placeholder": "jane@company.com",
+			"form_company": "公司名称",
+			"form_optional": "可选",
+			"form_company_placeholder": "Acme Inc.",
+			"form_message": "向我们介绍您的项目",
+			"form_message_placeholder": "您正在构建什么？时间表、范围、技术栈…",
+			"form_title": "给我们发送消息",
+			"form_subtitle": "分享一些关于您项目的细节，我们将跟进后续步骤。",
+			"form_required": "必填项",
+			"form_submit": "发送您的消息",
+			"form_submitting": "发送中…",
+			"form_note": "我们通常在一个工作日内回复。",
+			"form_note_privacy": "您的信息将保持私密 — 我们绝不会与第三方共享。",
+			"form_error_submit": "出错了，请重试。",
+			"form_error_turnstile": "发送前请完成安全检查。",
+			"form_errors": {
+				"name_required": "请输入您的全名",
+				"name_max": "姓名长度不能超过 100 个字符",
+				"email_required": "请输入您的电子邮箱地址",
+				"email_invalid": "请输入有效的电子邮箱地址",
+				"details_required": "请告诉我们您的项目细节",
+				"details_max": "细节长度不能超过 1000 个字符"
+			},
+			"success_title": "消息已发送！",
+			"success_message": "感谢您的联系 — 我们将在一个工作日内给您答复。"
+		},
+		"dashboard": {
+			"window_url": "app.codevider.io/analytics",
+			"live": "直播中",
+			"performance": "性能",
+			"performance_delta": "较上月 +18.2%",
+			"growth": "增长",
+			"growth_delta": "+842 名新用户",
+			"system_health": "系统健康",
+			"system_health_delta": "所有系统运行正常",
+			"leads": "潜在客户",
+			"leads_delta": "+12% 转化率",
+			"revenue_overview": "营收概览",
+			"revenue_period": "过去 12 周",
+			"revenue_chart_label": "12 周周营收趋势",
+			"week_1": "第1周",
+			"week_6": "第6周",
+			"week_12": "第12周"
+		}
+	},
+	"not_found": {
+		"title": "404 — 页面未找到",
+		"description": "您查找的页面不存在或已被移动。",
+		"home_link": "返回首页"
+	},
+	"legal": {
+		"shared": {
+			"toc_label": "目录",
+			"toc_heading": "内容"
+		},
+		"privacy": {
+			"eyebrow": "法律信息",
+			"title": "隐私政策",
+			"intro": "本政策说明了当您访问我们的网站、联系我们或申请职位时，Codevider 如何收集、使用和保护个人信息。",
+			"sections": {
+				"collection": {
+					"title": "我们收集的信息",
+					"body": "当您提交表格、申请工作或与我们的网站互动时，我们可能会收集联系详情、申请材料和技术使用数据。"
+				},
+				"use": {
+					"title": "我们如何使用信息",
+					"body": "我们使用个人数据来响应查询、评估申请、改进服务，并维护我们网站的安全与性能。"
+				},
+				"rights": {
+					"title": "您的权利",
+					"body": "根据您所在的地点，您可能拥有访问、更正、删除或限制处理您个人数据的权利。联系我们以行使这些权利。"
+				},
+				"contact": {
+					"title": "联系方式",
+					"body": "有关隐私相关的请求，请通过 info@codevider.com 或 Barrikada Street, Tirana, Albania 1001 联系 Codevider。"
+				}
+			}
+		},
+		"terms": {
+			"eyebrow": "法律信息",
+			"title": "服务条款",
+			"intro": "这些条款管理您对 Codevider 网站的使用，并描述了我们提供软件开发服务信息的基础。",
+			"sections": {
+				"services": {
+					"title": "网站与服务",
+					"body": "Codevider 网站提供公司信息及联系我们团队的方式。具体的项目参与受单独的商业协议约束。"
+				},
+				"ip": {
+					"title": "知识产权",
+					"body": "网站内容、品牌和材料归 Codevider 或其许可方所有，未经许可不得复制或重复使用。"
+				},
+				"liability": {
+					"title": "免责声明",
+					"body": "我们力求保持网站信息的准确和及时，但内容仅供一般参考，在法律允许的范围内不作任何保证。"
+				},
+				"contact": {
+					"title": "联系方式",
+					"body": "关于这些条款的问题可发送至 info@codevider.com。"
+				}
+			}
+		}
+	},
+	"footer": {
+		"description": "您的战略软件开发合作伙伴 — 构建可扩展的可靠 Web、移动和云产品。",
+		"company": "公司",
+		"about": "关于我们",
+		"services": "服务",
+		"careers": "职业生涯",
+		"privacy": "隐私政策",
+		"terms": "服务条款",
+		"address_heading": "地址",
+		"address_line_1": "Codevider",
+		"address_line_2": "Barrikada Street",
+		"address_line_3": "Tirana, Albania 1001",
+		"contact_heading": "联系我们",
+		"copyright": "© {year} Codevider. 版权所有。 — 关注我们的最新进展与机遇。"
+	},
+	"about": {
+		"about_us": "关于我们",
+		"our_mission": "我们的使命",
+		"our_values": "我们的价值观",
+		"our_team": "我们的团队",
+		"our_story": "我们的故事",
+		"meta_title": "关于 — Codevider",
+		"meta_description": "Codevider 于 2019 年创立于阿尔巴尼亚地拉那，打造助力业务增长的软件 — 实现战略、设计与工程的和谐统一。",
+		"hero": {
+			"eyebrow": "关于我们",
+			"headline": "打造助力业务增长的软件",
+			"lead": "战略、设计与工程和谐协作，推动您的产品路线图不断前进。",
+			"meta_years": "6年+ 软件交付经验",
+			"meta_projects": "45+ 全球企业项目",
+			"meta_location": "阿尔巴尼亚地拉那 · 欧盟"
+		},
+		"who_we_are": {
+			"eyebrow": "我们是谁",
+			"headline": "为伙伴关系而生，为规模扩展而造",
+			"paragraph_1": "Codevider 于 2019 年创立于阿尔巴尼亚地拉那，为欧洲及其他地区的初创公司、中小企业和大型企业交付高性能、具成本效益的软件开发解决方案。我们专注于 Web 和移动开发、云原生微服务以及 AI 驱动的集成 — 帮助您加速上市并降低高达 60% 的开发成本。",
+			"paragraph_2": "我们拥有由 {value} 多名开发人员组成的团队，精通当今最先进的技术栈。我们采用敏捷的冲刺式方法直接融入您的工作流，让您在每一步中都知情并保持掌控。通过对质量、敏捷性和长期伙伴关系的专注，我们将您的创意转化为可扩展、面向未来的数字产品。",
+			"cta": "让我们共同构建"
+		},
+		"culture": {
+			"eyebrow": "我们的文化",
+			"headline": "在 Codevider 我们如何构建",
+			"description": "我们公司的核心是建立在协作、创意和责任感之上的文化。我们重视公开沟通，尊重多元观点，并赋能每位团队成员对其工作负责。",
+			"principles": {
+				"vision": {
+					"title": "愿景清晰",
+					"description": "我们在写第一行代码前先对齐目标 — 确保每个冲刺都能推动您的产品实现可衡量的成果。"
+				},
+				"code": {
+					"title": "整洁代码",
+					"description": "可维护且经过充分测试的架构是不可妥协的。您的代码库将始终是资产，而非负担。"
+				},
+				"team": {
+					"title": "支持性团队",
+					"description": "成长与学习是我们日常旅程的一部分。我们相信伟大的产品源于彼此支持的团队。"
+				}
+			}
+		},
+		"life": {
+			"eyebrow": "在 Codevider 的生活",
+			"headline": "我们在工作室的团队",
+			"description": "从专注的深度工作到团队欢聚时刻 — 这就是我们每天共同构建的方式。",
+			"office_alt_1": "Codevider 办公室的私人玻璃亭和开放工作区",
+			"office_alt_2": "Codevider 办公室带豆袋椅的彩色休息区",
+			"photo_alt_1": "两名 Codevider 团队成员在办公室微笑",
+			"photo_alt_2": "团队成员在办公室与同事共度休息时光"
+		},
+		"team": {
+			"eyebrow": "代码背后",
+			"headline": "见见我们的团队",
+			"description": "由创始人与工程师共同将雄心勃勃的创意转化为已交付的可扩展产品。",
+			"scroll_left": "向左滚动",
+			"scroll_right": "向右滚动"
+		},
+		"join": {
+			"eyebrow": "职业生涯",
+			"headline": "加入我们的旅程",
+			"description": "我们始终在寻找热爱并有才华的人，共同塑造软件的未来。探索开放职位，成为我们成长中团队的一员。",
+			"cta": "查看开放职位"
+		}
+	},
+	"navbar": {
+		"home": "首页",
+		"career": "职业生涯",
+		"about": "关于",
+		"services": "服务",
+		"book_a_call": "预约通话",
+		"select_language": "选择语言",
+		"language_options": "语言选项",
+		"languages": {
+			"en": "English",
+			"es": "Español",
+			"sq": "Shqip",
+			"de": "Deutsch",
+			"fr": "Français",
+			"it": "Italiano",
+			"zh": "中文"
+		},
+		"switch_to_light_mode": "切换到亮色模式",
+		"switch_to_dark_mode": "切换到暗色模式",
+		"light_mode": "亮色",
+		"dark_mode": "暗色",
+		"open_menu": "打开菜单",
+		"close_menu": "关闭菜单",
+		"theme": "主题"
+	},
+	"career": {
+		"meta_title": "职业生涯 — Codevider",
+		"meta_description": "加入 Codevider，共同构建软件开发的未来。探索招聘流程并联系我们地拉那的团队。",
+		"hero": {
+			"eyebrow": "职业生涯",
+			"headline": "成为我们卓越团队的一员",
+			"lead": "加入我们，共同构建软件开发的未来。我们始终在寻找能与团队共同成长的优秀人才。"
+		},
+		"openings": {
+			"eyebrow": "开放职位",
+			"headline": "目前没有开放职位",
+			"headline_active": "当前的职位空缺",
+			"outreach_headline": "没看到合适的职位？",
+			"description": "虽然目前可能没有活跃的招聘，但我们一直渴望与优秀的专业人士建立联系。欢迎发送您的简历，以便未来考虑。",
+			"description_active": "探索我们的当前职位空缺，寻找适合您技能与雄心的角色。",
+			"loading": "正在加载开放职位…",
+			"error": "目前无法加载职位。在我们修复此问题时，您可以直接联系我们。",
+			"cta": "与我们建立联系",
+			"apply": "申请",
+			"view_details": "查看详情",
+			"apply_for": "申请 {title}",
+			"apply_email_subject": "应聘职位：{title}",
+			"email_subject": "Codevider 未来机会咨询",
+			"meta_label": "职位详情",
+			"openings_count": "{count} 个职位",
+			"pagination_label": "职位列表分页",
+			"previous": "上一页",
+			"next": "下一页",
+			"previous_page": "转到上一页",
+			"next_page": "转到下一页",
+			"page_status": "第 {current} 页，共 {total} 页"
+		},
+		"apply": {
+			"eyebrow": "申请",
+			"back": "返回职位列表",
+			"loading_title": "正在加载职位…",
+			"loading": "正在加载职位详情…",
+			"error": "目前无法加载该职位信息。请重试。",
+			"retry": "重试",
+			"no_description": "完整的职位详情将在面试过程中分享。",
+			"openings": "开放职位",
+			"openings_count": "{count} 个职位",
+			"compensation": "薪酬",
+			"compensation_single": "{amount} / {period}",
+			"compensation_range": "{start} – {end} / {period}",
+			"details_heading": "职位详情",
+			"job_type": "雇用类型",
+			"department": "部门",
+			"total_positions": "职位总数",
+			"pay_type": "计薪方式",
+			"application_period": "申请期限",
+			"application_period_range": "{start} – {end}",
+			"requirements_heading": "申请所需资料",
+			"requirement_photo": "个人照片",
+			"requirement_resume": "简历 / CV",
+			"requirement_dob": "出生日期",
+			"requirement_gender": "性别",
+			"pay_type_salary": "月薪/年薪",
+			"pay_type_hourly": "时薪",
+			"pay_type_contract": "合同制",
+			"pay_period_month": "月",
+			"pay_period_year": "年",
+			"pay_period_hour": "小时",
+			"pay_period_day": "天",
+			"apply_button": "申请此职位",
+			"collapse_form": "收起申请表",
+			"form": {
+				"intro": "请在下方填写您的详细信息。我们将审核您的申请并与您联系。",
+				"full_name": "全名",
+				"full_name_placeholder": "John Doe",
+				"email": "邮箱",
+				"email_placeholder": "you@example.com",
+				"phone": "电话",
+				"phone_placeholder": "+355 69 000 0000",
+				"date_of_birth": "出生日期",
+				"gender": "性别",
+				"gender_placeholder": "选择性别",
+				"gender_male": "男",
+				"gender_female": "女",
+				"gender_non_binary": "非二元性别",
+				"gender_prefer_not_to_say": "不愿透露",
+				"profile_image": "个人照片",
+				"profile_image_hint": "JPG, PNG 或 WebP",
+				"resume": "简历 / CV",
+				"resume_hint": "PDF 或 Word 文档",
+				"skills": "技能",
+				"skills_placeholder": "React, Node.js, TypeScript",
+				"bio": "个人简介",
+				"bio_placeholder": "简要介绍您的背景和兴趣",
+				"cover_letter": "求职信",
+				"cover_letter_placeholder": "告诉我们为什么您适合这个职位",
+				"optional": "可选",
+				"submit": "提交申请",
+				"submitting": "提交中…",
+				"success_title": "申请已发送",
+				"success_message": "感谢您的申请。我们的团队将审核您的资料并尽快与您联系。",
+				"errors": {
+					"full_name_required": "全名是必填项",
+					"full_name_max": "全名不得超过 100 个字符",
+					"email_required": "邮箱是必填项",
+					"email_invalid": "请输入有效的邮箱地址",
+					"phone_max": "电话不得超过 30 个字符",
+					"dob_required": "出生日期是必填项",
+					"gender_required": "请选择性别",
+					"profile_image_required": "请上传个人照片",
+					"resume_required": "请上传简历",
+					"bio_max": "简介不得超过 2,000 个字符",
+					"cover_letter_max": "求职信不得超过 5,000 个字符",
+					"skills_max": "技能描述不得超过 500 个字符",
+					"validation": "请检查您的信息并重试",
+					"file_too_large": "一个或多个文件过大。请使用较小的文件。",
+					"invalid_file_type": "无效的文件类型。照片请使用图片格式，简历请使用 PDF/Word 格式。",
+					"rate_limit": "请求过多。请稍候再试。",
+					"server_config": "申请通道暂时关闭。请稍后再试。",
+					"submit": "提交出错，请重试。",
+					"turnstile": "请在提交前完成安全检查。"
+				}
+			}
+		},
+		"why_join": {
+			"eyebrow": "为什么选择 Codevider",
+			"headline": "让优秀工程师蜕变为卓越大师的地方",
+			"values": {
+				"ownership": {
+					"title": "真实的所有权",
+					"description": "每位团队成员都对自己的工作负责，并交付能触达欧洲及全球真实用户的功能。"
+				},
+				"growth": {
+					"title": "持续增长",
+					"description": "学习是我们每日旅程的一部分。我们通过现代技术栈、导师制度和季度团建来投资您的技能。"
+				},
+				"culture": {
+					"title": "支持性文化",
+					"description": "公开的沟通和多元的视角。我们彼此支持，并作为一个整体庆祝胜利。"
+				}
+			}
+		},
+		"hiring": {
+			"eyebrow": "我们如何招聘",
+			"headline": "我们的招聘流程",
+			"description": "四个清晰的步骤 — 旨在透明、公平，并尊重您的时间。",
+			"steps": {
+				"application_review": {
+					"title": "申请审核",
+					"description": "我们会仔细审核您的简历和作品集，评估您的技能与我们需求的契合度。我们看重潜力而非单纯的完美 — 您的成长空间、协作能力和影响力。"
+				},
+				"hr_interview": {
+					"title": "HR 面试",
+					"description": "管理层和 HR 进行初步面试，了解您的经验、天赋和目标 — 并分享更多关于我们的工作文化和我们信仰的原则。"
+				},
+				"technical_review": {
+					"title": "技术评估",
+					"description": "通过技术考核评估您的专业水平、分析思维及解决问题的方式 — 从而构建一份完整的专业画像。"
+				},
+				"offer": {
+					"title": "录用通知 (Offer)",
+					"description": "如果我们彼此契合，我们将发出一份具有竞争力的 Offer，指导您了解每一个细节，并支持您完成入职，让您充满信心地开启新角色。"
+				}
+			}
+		}
+	},
+	"services": {
+		"meta_title": "服务 — Codevider",
+		"meta_description": "探索 Codevider 如何设计、构建和扩展可靠的软件：定制开发、Web 应用、AI 集成、自动化、系统集成、云计算及团队增补。",
+		"hero": {
+			"eyebrow": "我们的能力",
+			"headline": "推动您路线图前进的服务",
+			"lead": "探索我们如何设计、构建和扩展可靠的产品。整洁的架构、清晰的交付，以及一支能直接融入您团队的专家力量。",
+			"meta_capabilities": "7 项核心能力",
+			"meta_engagement": "按小时或按月固定投入",
+			"meta_location": "总部位于欧盟，服务全球"
+		},
+		"capabilities": {
+			"solutions_heading": "我们的解决方案",
+			"outcomes_heading": "成果",
+			"nav_aria": "服务类别",
+			"cta_title": "没看到完全契合的需求？",
+			"cta_body": "我们会根据您的路线图量身定制合作方案 — 告诉我们您的用例，我们将建议最有效的推进路径。",
+			"cta_button": "与我们洽谈",
+			"nav": {
+				"custom": "定制软件",
+				"web": "Web 应用程序",
+				"ai": "AI 集成",
+				"automation": "自动化",
+				"systems": "系统集成",
+				"cloud": "云基础设施",
+				"team": "团队增补"
+			},
+			"items": {
+				"custom": {
+					"num": "01",
+					"title": "定制软件开发",
+					"description": "我们根据您的业务量身设计和构建软件。从探索到上线，我们专注于真实成果 — 更快的工作流、更低的成本，以及随您业务增长的可扩展技术。",
+					"solutions": {
+						"1": "围绕您的精确工作流构建的定制平台",
+						"2": "通过整洁、可维护的代码实现长期可扩展性",
+						"3": "与现有业务系统的无缝集成"
+					},
+					"outcomes": {
+						"1": "减少运营开销",
+						"2": "提升员工生产力",
+						"3": "与增长计划对齐的、面向未来的技术"
+					}
+				},
+				"web": {
+					"num": "02",
+					"title": "Web 应用程序开发",
+					"description": "高性能的 Web 应用，加载速度快，适配所有设备，并将访问者转化为客户。非常适合门户、仪表板和数据密集型工具。",
+					"solutions": {
+						"1": "针对性能优化的响应式应用",
+						"2": "带有行动洞察的实时仪表板",
+						"3": "安全且直观的面各客户的 Web 解决方案"
+					},
+					"outcomes": {
+						"1": "提升客户参与度和转化率",
+						"2": "通过更快的加载速度降低跳出率",
+						"3": "通过定制门户简化内部流程"
+					}
+				},
+				"ai": {
+					"num": "03",
+					"title": "AI 集成",
+					"description": "我们将 AI 集成到您现有的工作流中。从定制的 LLM 驱动应用到智能聊天机器人和工作流自动化，我们让 AI 为您所用。",
+					"solutions": {
+						"1": "定制 LLM 驱动应用和智能聊天机器人",
+						"2": "工作流自动化与行动洞察",
+						"3": "无缝集成到现有生态系统"
+					},
+					"outcomes": {
+						"1": "通过 AI 聊天机器人实现更快的响应时间",
+						"2": "减少手动数据录入和文档处理",
+						"3": "提升决策准确性的数据驱动洞察"
+					}
+				},
+				"automation": {
+					"num": "04",
+					"title": "自动化",
+					"description": "消除重复性工作并减少错误。我们自动化部署、测试和运营，让您的团队能够专注于驱动收入的任务。",
+					"solutions": {
+						"1": "完全自动化的部署流水线",
+						"2": "干预极少的 QA 自动化流程",
+						"3": "根据业务规则定制的工作流自动化"
+					},
+					"outcomes": {
+						"1": "减少跨部门的人为错误",
+						"2": "缩短交付周期",
+						"3": "更加专注于能够产生收入的活动"
+					}
+				},
+				"systems": {
+					"num": "05",
+					"title": "系统集成",
+					"description": "将您的工具连接成一个可靠的流。我们统一应用和数据，打破信息孤岛，并将信息传递到您的团队需要的地方。",
+					"solutions": {
+						"1": "跨部门、跨平台的统一数据",
+						"2": "CRM, ERP 及第三方工具间的无缝同步",
+						"3": "助力快速决策的集中式报告"
+					},
+					"outcomes": {
+						"1": "通过统一的工具实现更好的协作",
+						"2": "跨业务单元的实时见解",
+						"3": "更快地执行公司级计划"
+					}
+				},
+				"cloud": {
+					"num": "06",
+					"title": "云基础设施",
+					"description": "采用基础设施即代码 (IaC) 构建的安全、可扩展的云基础。我们优化性能、运行时间和成本 — 确保您只为所用的资源付费。",
+					"solutions": {
+						"1": "基础设施即代码，实现可重复的部署",
+						"2": "通过具有成本效益的扩展优化工作负载",
+						"3": "高可用性和容灾设置"
+					},
+					"outcomes": {
+						"1": "通过韧性系统减少停机时间",
+						"2": "通过自动扩展降低基础设施成本",
+						"3": "缩短新产品的部署时间"
+					}
+				},
+				"team": {
+					"num": "07",
+					"title": "团队增补",
+					"description": "引入经过筛选的、能直接融入您流程的工程师和产品人才。快速扩展，保持势头，无需漫长的招聘周期即可交付更多成果。",
+					"solutions": {
+						"1": "嵌入您工作流的专业工程师",
+						"2": "灵活的合作方式 — 随需扩大或缩小规模",
+						"3": "无需漫长招聘即可获得的即时产能"
+					},
+					"outcomes": {
+						"1": "按时交付关键项目",
+						"2": "利用多元化技能组合增加创新",
+						"3": "更快响应不断变化的业务需求"
+					}
+				}
+			}
+		},
+		"process": {
+			"eyebrow": "我们如何工作",
+			"headline": "围绕您的需求构建的流程",
+			"description": "您的需求指引着每一步。我们从亲力亲为的探索阶段开始，然后通过敏捷冲刺进行交付，全程保持透明。",
+			"steps": {
+				"discovery": {
+					"title": "探索阶段",
+					"description": "我们获取您的需求，对齐目标，并在共享的工作表中记录产品愿景。"
+				},
+				"team_selection": {
+					"title": "团队选拔",
+					"description": "我们组建一支专注的小组 (Pod) — 涵盖前端、后端和 QA — 与您的技术栈和时间表完美匹配。"
+				},
+				"agile_delivery": {
+					"title": "敏捷交付",
+					"description": "每日站会和每周进度报告让您在每个冲刺阶段都知情并保持掌控。"
+				},
+				"test_deploy": {
+					"title": "测试与部署",
+					"description": "您在我们的开发服务器上进行测试，然后我们部署到您的基础设施并提供后续支持。"
+				}
+			}
+		},
+		"tech": {
+			"eyebrow": "技术",
+			"headline": "我们的技术栈",
+			"description": "我们精心挑选的一套用于构建现代、高性能 Web 和移动应用的工具、框架和语言。",
+			"categories_aria": "技术类别",
+			"all": "全部",
+			"categories": {
+				"frontend": {
+					"label": "前端"
+				},
+				"backend": {
+					"label": "后端"
+				},
+				"databases": {
+					"label": "数据库"
+				},
+				"cloud_devops": {
+					"label": "云与 DevOps"
+				},
+				"ai": {
+					"label": "AI"
+				},
+				"mobile_design": {
+					"label": "移动与设计"
+				},
+				"apis": {
+					"label": "API 与通信"
+				}
+			}
+		}
+	}
+}

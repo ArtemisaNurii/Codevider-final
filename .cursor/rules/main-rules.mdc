@@ -8,3 +8,4 @@ Use Lucide-react for icons
 Use motion for animations
 When you add new sections remind the user for internationalizations also when adding new content add the internationalizations of english in the en.json then the user will have a script to convert them but just remind him
 Dont put a ton of styling on something if that something can be used somewhere else or can be in the globals.css, try to be pragmatic and organized
+The pages should be able to be exported for a client side page only, so basically it will be MPA CLIENT-SIDE and will only connect to the backend

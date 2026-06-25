@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
 import { Alexandria, Libre_Baskerville } from "next/font/google";
-import "./globals.css";
+import type { ReactNode } from "react";
+import "@/app/globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { getSiteUrl } from "@/lib/site";
 
-const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})();`;
+const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d){document.documentElement.classList.add('dark')}document.documentElement.dataset.theme=d?'dark':'light'}catch(e){}})();`;
 
 const alexandria = Alexandria({
 	variable: "--font-sans",
@@ -19,25 +18,24 @@ const libreBaskerville = Libre_Baskerville({
 	style: ["normal", "italic"],
 });
 
-export const metadata: Metadata = {
-	metadataBase: new URL(getSiteUrl()),
-	title: "Codevider",
-	description: "Your strategic partner in software development",
+type Props = {
+	locale: string;
+	children: ReactNode;
 };
 
-export default function RootLayout({
-	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+export function SiteDocument({ locale, children }: Props) {
 	return (
 		<html
-			lang="en"
+			lang={locale}
 			suppressHydrationWarning
 			className={`${alexandria.variable} ${libreBaskerville.variable} h-full antialiased`}
 		>
 			<head>
 				<meta name="apple-mobile-web-app-title" content="Codevider" />
+				<meta
+					name="google-site-verification"
+					content="icvkJSNSGcApy6ogZHuUBc-qCeN1kIXiFF6_7lN74J0"
+				/>
 				<script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
 			</head>
 			<body className="min-h-full flex flex-col">

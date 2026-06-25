@@ -22,12 +22,42 @@ export function getSiteUrl(): string {
 	return SITE_URL;
 }
 
-export const SITE_ROUTES = ["", "/about", "/services", "/career"] as const;
+export const SITE_ROUTES = [
+	"",
+	"/about",
+	"/services",
+	"/career",
+	"/privacy",
+	"/terms",
+] as const;
 
 export const OG_PAGES = ["home", "about", "services", "career"] as const;
 
 export type OgPage = (typeof OG_PAGES)[number];
 
+const LOCALE_TO_OG_BCP47: Record<(typeof routing.locales)[number], string> = {
+	en: "en_US",
+	de: "de_DE",
+	fr: "fr_FR",
+	es: "es_ES",
+	it: "it_IT",
+	sq: "sq_AL",
+	zh: "zh_CN",
+};
+
+function getOpenGraphLocale(locale: string): string {
+	return (
+		LOCALE_TO_OG_BCP47[locale as (typeof routing.locales)[number]] ?? locale
+	);
+}
+
+function getOpenGraphAlternateLocales(
+	locale: string,
+): NonNullable<Metadata["openGraph"]>["alternateLocale"] {
+	return routing.locales
+		.filter((entry) => entry !== locale)
+		.map((entry) => getOpenGraphLocale(entry));
+}
 const LOCALE_TO_OG_LANGUAGE: Record<(typeof routing.locales)[number], string> =
 	{
 		en: "english",
@@ -36,6 +66,7 @@ const LOCALE_TO_OG_LANGUAGE: Record<(typeof routing.locales)[number], string> =
 		es: "spanish",
 		it: "italian",
 		sq: "albanian",
+		zh: "english",
 	};
 
 const OG_PAGE_TO_ROUTE: Record<OgPage, (typeof SITE_ROUTES)[number]> = {
@@ -56,11 +87,20 @@ export function getLocalizedUrl(
 export function getLanguageAlternates(
 	path: (typeof SITE_ROUTES)[number],
 ): Record<string, string> {
+	return getPathLanguageAlternates(path);
+}
+
+export function getPathLanguageAlternates(
+	path: string,
+): Record<string, string> {
 	const languages = Object.fromEntries(
-		routing.locales.map((locale) => [locale, getLocalizedUrl(locale, path)]),
+		routing.locales.map((locale) => [
+			locale,
+			`${getSiteUrl()}/${locale}${path}`,
+		]),
 	);
 
-	languages["x-default"] = getLocalizedUrl(routing.defaultLocale, path);
+	languages["x-default"] = `${getSiteUrl()}/${routing.defaultLocale}${path}`;
 
 	return languages;
 }
@@ -128,7 +168,8 @@ export function createPageMetadata({
 			description,
 			url: canonical,
 			siteName: "Codevider",
-			locale,
+			locale: getOpenGraphLocale(locale),
+			alternateLocale: getOpenGraphAlternateLocales(locale),
 			type: "website",
 			images: [
 				{

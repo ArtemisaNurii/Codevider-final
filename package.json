@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
+		"build:production": "NEXT_PUBLIC_SITE_URL=https://www.codevider.com next build",
 		"start": "next start",
 		"lint": "biome lint .",
 		"format": "biome format --write .",
@@ -27,6 +28,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.5.0",
+		"@next/bundle-analyzer": "^16.2.9",
 		"@tailwindcss/postcss": "^4",
 		"@types/node": "^20",
 		"@types/react": "^19",

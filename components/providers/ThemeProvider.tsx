@@ -7,6 +7,7 @@ import {
 	useEffect,
 	useRef,
 	useState,
+	useSyncExternalStore,
 } from "react";
 import { flushSync } from "react-dom";
 
@@ -72,8 +73,29 @@ function getRevealRadius(x: number, y: number) {
 	);
 }
 
+function subscribeToTheme(callback: () => void) {
+	const observer = new MutationObserver(callback);
+	observer.observe(document.documentElement, {
+		attributes: true,
+		attributeFilter: ["class"],
+	});
+	return () => observer.disconnect();
+}
+
+function getThemeSnapshot(): Theme {
+	return document.documentElement.classList.contains("dark") ? "dark" : "light";
+}
+
+function getServerThemeSnapshot(): Theme {
+	return "light";
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-	const [theme, setThemeState] = useState<Theme>("light");
+	const theme = useSyncExternalStore(
+		subscribeToTheme,
+		getThemeSnapshot,
+		getServerThemeSnapshot,
+	);
 	const [isThemeTransitioning, setIsThemeTransitioning] = useState(false);
 	const themeRef = useRef(theme);
 	const isTransitioning = useRef(false);
@@ -81,12 +103,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 	useEffect(() => {
 		const initial = getStoredTheme() ?? getSystemTheme();
-		setThemeState(initial);
-		applyTheme(initial);
+		if (getThemeSnapshot() !== initial) {
+			applyTheme(initial);
+		}
 	}, []);
 
 	const setTheme = useCallback((nextTheme: Theme) => {
-		setThemeState(nextTheme);
 		localStorage.setItem(STORAGE_KEY, nextTheme);
 		applyTheme(nextTheme);
 	}, []);
@@ -102,7 +124,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 		const updateTheme = (holdTransitions = false) => {
 			flushSync(() => {
-				setThemeState(nextTheme);
 				localStorage.setItem(STORAGE_KEY, nextTheme);
 				applyTheme(nextTheme, { holdTransitions });
 			});

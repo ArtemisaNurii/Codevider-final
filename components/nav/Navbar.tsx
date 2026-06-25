@@ -3,84 +3,39 @@
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useTheme } from "../providers/ThemeProvider";
 import { CodeviderLogo } from "./CodeviderLogo";
 import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";
 
-const SCROLL_THRESHOLD = 50;
+const SCROLL_ON = 56;
+const SCROLL_OFF = 24;
+const NAV_MAX_WIDTH = 1152;
+const NAV_FLOAT_INSET = 12;
 
 type NavAppearance = "dark" | "light";
 
-const darkNavVariants = {
-	initial: {
-		x: "-50%",
-		y: 0,
-		width: "100vw",
-		height: 72,
-		borderRadius: 0,
-		backgroundColor: "#1e293b",
-		boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
-		backdropFilter: "blur(0px)",
-	},
-	scrolled: {
-		x: "-50%",
-		y: 10,
-		width: "calc(100% - 1.5rem)",
-		height: 60,
-		borderRadius: 9999,
-		backgroundColor: "rgba(15, 23, 42, 0.85)",
-		boxShadow:
-			"0 12px 40px rgba(0, 0, 0, 0.28), 0 4px 12px rgba(0, 0, 0, 0.16)",
-		backdropFilter: "blur(12px)",
-	},
-} as const;
+const navScrollTransition = {
+	duration: 0.5,
+	ease: [0.22, 1, 0.36, 1] as const,
+};
 
-const lightNavVariants = {
-	initial: {
-		x: "-50%",
-		y: 0,
-		width: "100vw",
-		height: 72,
-		borderRadius: 0,
-		backgroundColor: "#f8fafc",
-		boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
-		backdropFilter: "blur(0px)",
-	},
-	scrolled: {
-		x: "-50%",
-		y: 10,
-		width: "calc(100% - 1.5rem)",
-		height: 60,
-		borderRadius: 9999,
-		backgroundColor: "rgba(248, 250, 252, 0.9)",
-		boxShadow:
-			"0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04)",
-		backdropFilter: "blur(12px)",
-	},
-} as const;
+const instantTransition = { duration: 0 };
+
+function navShellClass(appearance: NavAppearance, isScrolled: boolean): string {
+	if (appearance === "dark") {
+		return isScrolled ? "nav-shell--scrolled-dark" : "nav-shell--surface-dark";
+	}
+	return isScrolled ? "nav-shell--scrolled-light" : "nav-shell--surface-light";
+}
 
 function getNavAppearance(theme: "light" | "dark"): NavAppearance {
 	return theme === "dark" ? "light" : "dark";
 }
 
-const springTransition = {
-	type: "spring" as const,
-	stiffness: 260,
-	damping: 32,
-	mass: 0.85,
-};
-
-const pillSpringTransition = {
-	type: "spring" as const,
-	stiffness: 380,
-	damping: 34,
-	mass: 0.75,
-};
-
-const instantTransition = { duration: 0 };
+const navTransition = navScrollTransition;
 
 const navLinks = [
 	{ href: "/", key: "home" as const },
@@ -115,7 +70,7 @@ function NavLink({
 			ref={linkRef}
 			href={href}
 			onClick={onClick}
-			className={`relative rounded-full px-3 py-1.5 text-sm font-medium transition-[color,transform] active:scale-[0.96] ${
+			className={`relative overflow-hidden rounded-full px-3 py-1.5 text-sm font-medium transition-[color,background-color,transform] active:scale-[0.96] ${
 				isActive
 					? isDarkNav
 						? "text-white"
@@ -138,99 +93,12 @@ function NavLink({
 	);
 }
 
-type PillRect = {
-	left: number;
-	top: number;
-	width: number;
-	height: number;
-	opacity: number;
-};
-
-function DesktopNavLinks({
-	isScrolled,
-	appearance,
-}: {
-	isScrolled: boolean;
-	appearance: NavAppearance;
-}) {
+function DesktopNavLinks({ appearance }: { appearance: NavAppearance }) {
 	const t = useTranslations("navbar");
 	const pathname = usePathname();
-	const shouldReduceMotion = useReducedMotion();
-	const containerRef = useRef<HTMLDivElement>(null);
-	const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
-	const [pill, setPill] = useState<PillRect>({
-		left: 0,
-		top: 0,
-		width: 0,
-		height: 0,
-		opacity: 0,
-	});
-
-	const updatePill = useCallback(() => {
-		const container = containerRef.current;
-		const activeLink = linkRefs.current[pathname];
-
-		if (!container || !activeLink) {
-			setPill((current) => ({ ...current, opacity: 0 }));
-			return;
-		}
-
-		const containerRect = container.getBoundingClientRect();
-		const linkRect = activeLink.getBoundingClientRect();
-
-		setPill({
-			left: linkRect.left - containerRect.left,
-			top: linkRect.top - containerRect.top,
-			width: linkRect.width,
-			height: linkRect.height,
-			opacity: 1,
-		});
-	}, [pathname]);
-
-	useEffect(() => {
-		updatePill();
-	}, [updatePill, isScrolled]);
-
-	useEffect(() => {
-		const container = containerRef.current;
-		if (!container) return;
-
-		const observer = new ResizeObserver(() => updatePill());
-		observer.observe(container);
-
-		window.addEventListener("resize", updatePill);
-		return () => {
-			observer.disconnect();
-			window.removeEventListener("resize", updatePill);
-		};
-	}, [updatePill]);
-
-	useEffect(() => {
-		const frame = requestAnimationFrame(() => {
-			requestAnimationFrame(updatePill);
-		});
-
-		return () => cancelAnimationFrame(frame);
-	}, [isScrolled, updatePill]);
-
-	const isDarkNav = appearance === "dark";
 
 	return (
-		<div
-			ref={containerRef}
-			className="relative hidden items-center justify-center gap-1 navbar:flex"
-		>
-			<motion.span
-				aria-hidden
-				className={`pointer-events-none absolute rounded-full ${
-					isDarkNav ? "bg-white/12" : "bg-slate-900/8"
-				}`}
-				initial={false}
-				animate={pill}
-				transition={
-					shouldReduceMotion ? instantTransition : pillSpringTransition
-				}
-			/>
+		<div className="relative isolate hidden items-center justify-center gap-1 navbar:flex">
 			{navLinks.map(({ href, key }) => (
 				<NavLink
 					key={href}
@@ -238,9 +106,7 @@ function DesktopNavLinks({
 					label={t(key)}
 					isActive={pathname === href}
 					appearance={appearance}
-					linkRef={(node) => {
-						linkRefs.current[href] = node;
-					}}
+					showStaticPill
 				/>
 			))}
 		</div>
@@ -253,14 +119,22 @@ export function Navbar() {
 	const { theme } = useTheme();
 	const shouldReduceMotion = useReducedMotion();
 	const [isScrolled, setIsScrolled] = useState(false);
+	const isScrolledRef = useRef(false);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const navAppearance = getNavAppearance(theme);
 	const isDarkNav = navAppearance === "dark";
-	const navVariants = isDarkNav ? darkNavVariants : lightNavVariants;
 
 	useEffect(() => {
 		const onScroll = () => {
-			setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
+			const scrollY = window.scrollY;
+			const nextIsScrolled = isScrolledRef.current
+				? scrollY > SCROLL_OFF
+				: scrollY > SCROLL_ON;
+
+			if (nextIsScrolled === isScrolledRef.current) return;
+
+			isScrolledRef.current = nextIsScrolled;
+			setIsScrolled(nextIsScrolled);
 		};
 
 		onScroll();
@@ -269,6 +143,7 @@ export function Navbar() {
 	}, []);
 
 	useEffect(() => {
+		if (!pathname) return;
 		setMobileMenuOpen(false);
 	}, [pathname]);
 
@@ -302,78 +177,90 @@ export function Navbar() {
 
 	return (
 		<>
-			<motion.nav
-				aria-label="Main navigation"
-				className={`fixed left-1/2 top-0 z-50 border border-transparent ${
-					isScrolled ? "w-full max-w-6xl" : "w-screen max-w-none"
-				}`}
+			<motion.div
+				className="fixed inset-x-0 top-0 z-50"
 				initial={false}
-				animate={isScrolled ? "scrolled" : "initial"}
-				variants={navVariants}
-				transition={shouldReduceMotion ? instantTransition : springTransition}
+				animate={{
+					paddingTop: isScrolled ? 10 : 0,
+					paddingLeft: isScrolled ? NAV_FLOAT_INSET : 0,
+					paddingRight: isScrolled ? NAV_FLOAT_INSET : 0,
+				}}
+				transition={shouldReduceMotion ? instantTransition : navTransition}
 			>
-				<div
-					className={`flex h-full w-full items-center justify-between gap-4 px-4 ${
-						isScrolled ? "" : "mx-auto max-w-6xl"
-					}`}
+				<motion.nav
+					aria-label="Main navigation"
+					className={`mx-auto w-full border border-transparent ${navShellClass(navAppearance, isScrolled)}`}
+					initial={false}
+					animate={{
+						height: isScrolled ? 60 : 72,
+						borderRadius: isScrolled ? 20 : 0,
+						maxWidth: isScrolled ? NAV_MAX_WIDTH : 10000,
+					}}
+					transition={shouldReduceMotion ? instantTransition : navTransition}
 				>
-					<Link
-						href="/"
-						aria-label="Codevider"
-						className="shrink-0 transition-opacity hover:opacity-90 active:scale-[0.96]"
-					>
-						<CodeviderLogo compact={isScrolled} variant={navAppearance} />
-					</Link>
-
-					<DesktopNavLinks isScrolled={isScrolled} appearance={navAppearance} />
-
-					<div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3">
-						<div className="hidden items-center gap-2 navbar:flex">
-							<LanguageSelector variant={navAppearance} />
-							<ThemeToggle variant={navAppearance} />
-						</div>
-
+					<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 px-4">
 						<Link
-							href="https://calendly.com/codevider/pasho"
-							className="home-brand-btn gap-1.5 px-4 py-2 text-sm sm:px-5"
+							href="/"
+							aria-label="Codevider"
+							className="shrink-0 transition-opacity hover:opacity-90 active:scale-[0.96]"
 						>
-							{t("book_a_call")}
-							<ArrowUpRight className="size-4 shrink-0" aria-hidden />
+							<CodeviderLogo
+								compact={isScrolled}
+								variant={navAppearance}
+								stableLayout
+							/>
 						</Link>
 
-						<button
-							type="button"
-							className={`relative flex size-9 items-center justify-center rounded-full border transition-[background-color,color] active:scale-[0.96] navbar:hidden ${
-								isDarkNav
-									? "border-white/10 bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white"
-									: "border-slate-200 bg-slate-900/5 text-slate-600 hover:bg-slate-900/10 hover:text-slate-900"
-							}`}
-							aria-expanded={mobileMenuOpen}
-							aria-controls="mobile-nav-menu"
-							aria-label={mobileMenuOpen ? t("close_menu") : t("open_menu")}
-							onClick={() => setMobileMenuOpen((open) => !open)}
-						>
-							<motion.span
-								key={mobileMenuOpen ? "close" : "open"}
-								initial={
-									shouldReduceMotion
-										? false
-										: { opacity: 0, scale: 0.25, filter: "blur(4px)" }
-								}
-								animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-								transition={{ type: "spring", duration: 0.3, bounce: 0 }}
-								className="absolute flex items-center justify-center"
+						<DesktopNavLinks appearance={navAppearance} />
+
+						<div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3">
+							<div className="hidden items-center gap-2 navbar:flex">
+								<LanguageSelector variant={navAppearance} />
+								<ThemeToggle variant={navAppearance} />
+							</div>
+
+							<Link
+								href="https://calendly.com/codevider/pasho"
+								className="home-brand-btn gap-1.5 px-4 py-2 text-sm sm:px-5"
 							>
-								{mobileMenuOpen ? (
-									<X className="size-5" aria-hidden />
-								) : (
-									<Menu className="size-5" aria-hidden />
-								)}
-							</motion.span>
-						</button>
+								{t("book_a_call")}
+								<ArrowUpRight className="size-4 shrink-0" aria-hidden />
+							</Link>
+
+							<button
+								type="button"
+								className={`relative flex size-9 items-center justify-center rounded-full border transition-[background-color,color] active:scale-[0.96] navbar:hidden ${
+									isDarkNav
+										? "border-white/10 bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white"
+										: "border-slate-200 bg-slate-900/5 text-slate-600 hover:bg-slate-900/10 hover:text-slate-900"
+								}`}
+								aria-expanded={mobileMenuOpen}
+								aria-controls="mobile-nav-menu"
+								aria-label={mobileMenuOpen ? t("close_menu") : t("open_menu")}
+								onClick={() => setMobileMenuOpen((open) => !open)}
+							>
+								<motion.span
+									key={mobileMenuOpen ? "close" : "open"}
+									initial={
+										shouldReduceMotion
+											? false
+											: { opacity: 0, scale: 0.25, filter: "blur(4px)" }
+									}
+									animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+									transition={{ type: "spring", duration: 0.3, bounce: 0 }}
+									className="absolute flex items-center justify-center"
+								>
+									{mobileMenuOpen ? (
+										<X className="size-5" aria-hidden />
+									) : (
+										<Menu className="size-5" aria-hidden />
+									)}
+								</motion.span>
+							</button>
+						</div>
 					</div>
-				</div>
-			</motion.nav>
+				</motion.nav>
+			</motion.div>
 
 			<AnimatePresence initial={false}>
 				{mobileMenuOpen ? (
