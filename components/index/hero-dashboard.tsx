@@ -192,11 +192,13 @@ export default function HeroDashboard() {
 									className={`hero-dash-bar w-full origin-bottom rounded-[3px] sm:rounded-sm${
 										index === PEAK_BAR_INDEX ? " hero-dash-bar--peak" : ""
 									}${index === LATEST_BAR_INDEX ? " hero-dash-bar--latest" : ""}`}
-									style={{
-										"--hero-dash-bar-h": `${barHeightPx(value)}px`,
-										"--hero-dash-bar-h-sm": `${barHeightPxSm(value)}px`,
-										willChange: "transform",
-									}}
+									style={
+										{
+											"--hero-dash-bar-h": `${barHeightPx(value)}px`,
+											"--hero-dash-bar-h-sm": `${barHeightPxSm(value)}px`,
+											willChange: "transform",
+										} as React.CSSProperties
+									}
 									initial={animate ? { scaleY: 0 } : false}
 									animate={{ scaleY: 1 }}
 									transition={barTransition(index)}
