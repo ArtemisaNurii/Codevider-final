@@ -121,15 +121,15 @@ export function Navbar() {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const isScrolledRef = useRef(false);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const initializedRef = useRef(false);
+	const [shouldAnimate, setShouldAnimate] = useState(false);
 	const navAppearance = getNavAppearance(theme);
 	const isDarkNav = navAppearance === "dark";
 
 	useEffect(() => {
 		const onScroll = () => {
 			const scrollY = window.scrollY;
-			const nextIsScrolled = isScrolledRef.current
-				? scrollY > SCROLL_OFF
-				: scrollY > SCROLL_ON;
+			const nextIsScrolled = scrollY > SCROLL_ON;
 
 			if (nextIsScrolled === isScrolledRef.current) return;
 
@@ -137,9 +137,30 @@ export function Navbar() {
 			setIsScrolled(nextIsScrolled);
 		};
 
-		onScroll();
+		// Initialize scroll state immediately on mount
+		if (!initializedRef.current) {
+			const scrollY = window.scrollY;
+			const initialIsScrolled = scrollY > SCROLL_ON;
+			isScrolledRef.current = initialIsScrolled;
+			setIsScrolled(initialIsScrolled);
+			initializedRef.current = true;
+
+			// Enable animations after initial state is set
+			requestAnimationFrame(() => {
+				setShouldAnimate(true);
+			});
+		}
+
+		// Re-measure after browser restores scroll position on refresh
+		const timer = setTimeout(() => {
+			onScroll();
+		}, 50);
+
 		window.addEventListener("scroll", onScroll, { passive: true });
-		return () => window.removeEventListener("scroll", onScroll);
+		return () => {
+			clearTimeout(timer);
+			window.removeEventListener("scroll", onScroll);
+		};
 	}, []);
 
 	useEffect(() => {
@@ -185,7 +206,7 @@ export function Navbar() {
 					paddingLeft: isScrolled ? NAV_FLOAT_INSET : 0,
 					paddingRight: isScrolled ? NAV_FLOAT_INSET : 0,
 				}}
-				transition={shouldReduceMotion ? instantTransition : navTransition}
+				transition={shouldReduceMotion || !shouldAnimate ? instantTransition : navTransition}
 			>
 				<motion.nav
 					aria-label="Main navigation"
@@ -196,7 +217,7 @@ export function Navbar() {
 						borderRadius: isScrolled ? 20 : 0,
 						maxWidth: isScrolled ? NAV_MAX_WIDTH : 10000,
 					}}
-					transition={shouldReduceMotion ? instantTransition : navTransition}
+					transition={shouldReduceMotion || !shouldAnimate ? instantTransition : navTransition}
 				>
 					<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 px-4">
 						<Link
@@ -218,14 +239,6 @@ export function Navbar() {
 								<LanguageSelector variant={navAppearance} />
 								<ThemeToggle variant={navAppearance} />
 							</div>
-
-							<Link
-								href="https://calendly.com/codevider/pasho"
-								className="home-brand-btn gap-1.5 px-4 py-2 text-sm sm:px-5"
-							>
-								{t("book_a_call")}
-								<ArrowUpRight className="size-4 shrink-0" aria-hidden />
-							</Link>
 
 							<button
 								type="button"
@@ -338,6 +351,16 @@ export function Navbar() {
 					</>
 				) : null}
 			</AnimatePresence>
+
+			{/* Mobile floating button */}
+			<Link
+				href="https://calendly.com/codevider/pasho"
+				className="home-brand-btn gap-2 fixed bottom-6 right-6 z-50 px-5 py-3 navbar:hidden shadow-lg"
+				aria-label={t("book_a_call")}
+			>
+				{t("book_a_call")}
+				<ArrowUpRight className="size-4 shrink-0" aria-hidden />
+			</Link>
 		</>
 	);
 }

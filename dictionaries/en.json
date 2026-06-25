@@ -54,6 +54,15 @@
 			"headline": "Everything you need to ship, scale, and stay ahead",
 			"description": "We help enterprises and startups ship faster with scalable teams, modern stacks, and reliable delivery — without the overhead. Four ways we plug in:"
 		},
+		"rotating_word": {
+			"saas": "SaaS",
+			"ai": "AI",
+			"commerce": "Commerce",
+			"fintech": "Fintech",
+			"healthcare": "Healthcare"
+		},
+		"base_currency": "$",
+		"base_currency_position": "before",
 		"features": {
 			"ai": {
 				"badge": "01 · AI Integration",

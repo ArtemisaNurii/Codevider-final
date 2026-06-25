@@ -1,16 +1,34 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useHeroMountReveal } from "@/hooks/use-section-reveal";
+import { useEffect, useState } from "react";
 import HeroDashboard from "./hero-dashboard";
 import RotatingWord from "./rotating-word";
 
+const revealEase = [0.22, 1, 0.36, 1] as const;
+
 export default function Hero() {
 	const t = useTranslations("home");
-	const { stagger } = useHeroMountReveal();
+	const shouldReduceMotion = useReducedMotion();
 	const yearsDelivering = new Date().getFullYear() - 2019;
+
+	/*
+	 * animationKey increments on every mount (including page refreshes)
+	 * so motion re-runs the entrance sequence even when the browser
+	 * restores scroll position back to this section.
+	 */
+	const [animationKey, setAnimationKey] = useState(0);
+
+	useEffect(() => {
+		setAnimationKey((k) => k + 1);
+	}, []);
+
+	const stagger = (index: number) =>
+		shouldReduceMotion
+			? { duration: 0 }
+			: { duration: 0.55, ease: revealEase, delay: index * 0.09 };
 
 	const stats = [
 		{ value: `${yearsDelivering}+`, label: t("years_delivering") },
@@ -18,8 +36,12 @@ export default function Hero() {
 		{ value: "25+", label: t("engineers") },
 	];
 
+	// SSR: render fully visible (no opacity:0 flash on hydration).
+	// Client: after mount animationKey > 0 triggers the entrance sequence.
+	const hidden = animationKey > 0 && !shouldReduceMotion;
+
 	return (
-		<section className="home-hero relative isolate min-h-svh overflow-hidden">
+		<section className="home-hero relative isolate min-h-[100dvh] overflow-hidden">
 			<div className="home-hero__blobs" aria-hidden>
 				<div className="home-hero__blob home-hero__blob--primary" />
 				<div className="home-hero__blob home-hero__blob--secondary" />
@@ -29,12 +51,15 @@ export default function Hero() {
 
 			<div className="home-hero__veil" aria-hidden />
 
-			<div className="home-wrap relative z-10 flex min-h-svh flex-col justify-center pb-[clamp(5rem,10vw,8rem)] pt-[clamp(6rem,12vw,9rem)]">
+			<div className="home-wrap relative z-10 flex min-h-[100dvh] flex-col justify-center pb-[clamp(5rem,10vw,8rem)] pt-[clamp(6rem,12vw,9rem)]">
 				<div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] lg:gap-14 xl:gap-16">
 					<div>
 						<motion.h1
+							key={`h1-${animationKey}`}
 							className="mb-8 max-w-2xl text-balance text-left text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.05] tracking-[-0.03em] text-(--hero-text-h)"
-							{...stagger(0, 18, 3)}
+							initial={hidden ? { opacity: 0, y: 20 } : false}
+							animate={{ opacity: 1, y: 0 }}
+							transition={stagger(0)}
 						>
 							<span className="block font-sans">
 								{t("your_strategic_partner_in")}
@@ -43,8 +68,11 @@ export default function Hero() {
 						</motion.h1>
 
 						<motion.p
+							key={`lead-${animationKey}`}
 							className="max-w-xl text-pretty text-left font-sans text-lg leading-relaxed text-(--hero-text-lead) sm:text-xl sm:leading-8"
-							{...stagger(1, 16, 3)}
+							initial={hidden ? { opacity: 0, y: 20 } : false}
+							animate={{ opacity: 1, y: 0 }}
+							transition={stagger(1)}
 						>
 							<span className="font-medium text-(--hero-text-h)">
 								{t("hero_lead_emphasis")}
@@ -53,8 +81,11 @@ export default function Hero() {
 						</motion.p>
 
 						<motion.div
+							key={`cta-${animationKey}`}
 							className="mb-10 mt-14 flex flex-wrap items-center justify-start gap-4 sm:mb-14 sm:mt-16 sm:gap-5"
-							{...stagger(2, 14)}
+							initial={hidden ? { opacity: 0, y: 20 } : false}
+							animate={{ opacity: 1, y: 0 }}
+							transition={stagger(2)}
 						>
 							<Link
 								href="#contact"
@@ -70,27 +101,35 @@ export default function Hero() {
 							</Link>
 						</motion.div>
 
-						<div className="grid grid-cols-3 gap-5 border-t border-(--border) pt-10 sm:gap-10 sm:pt-12">
-							{stats.map(({ value, label }, index) => (
-								<motion.div
-									key={label}
-									className="text-left"
-									{...stagger(3 + index, 14)}
-								>
+						<motion.div
+							key={`stats-${animationKey}`}
+							className="grid grid-cols-3 gap-5 border-t border-(--border) pt-10 sm:gap-10 sm:pt-12"
+							initial={hidden ? { opacity: 0, y: 20 } : false}
+							animate={{ opacity: 1, y: 0 }}
+							transition={stagger(3)}
+						>
+							{stats.map(({ value, label }) => (
+								<div key={label} className="text-left">
 									<p className="font-(family-name:--mono) text-2xl font-medium tabular-nums tracking-tight text-(--hero-text-h) sm:text-3xl">
 										{value}
 									</p>
 									<p className="mt-1 text-xs text-(--hero-text-lead) sm:text-sm">
 										{label}
 									</p>
-								</motion.div>
+								</div>
 							))}
-						</div>
+						</motion.div>
 					</div>
 
-					<div className="hero-dash-bleed relative w-full min-w-0 lg:min-w-[28rem] xl:min-w-[32rem]">
+					<motion.div
+						key={`dash-${animationKey}`}
+						className="hero-dash-bleed relative w-full min-w-0 lg:min-w-[28rem] xl:min-w-[32rem]"
+						initial={hidden ? { opacity: 0, y: 28 } : false}
+						animate={{ opacity: 1, y: 0 }}
+						transition={stagger(1.5)}
+					>
 						<HeroDashboard />
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</section>

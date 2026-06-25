@@ -3,7 +3,7 @@
 import { Activity, Target, TrendingUp, Users } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { appleRevealEase } from "@/hooks/use-section-reveal";
+import { appleRevealEase, useMounted } from "@/hooks/use-section-reveal";
 
 const REVENUE_BARS = [38, 52, 44, 58, 49, 64, 55, 71, 63, 77, 68, 84] as const;
 const PEAK_BAR_INDEX = REVENUE_BARS.findIndex((bar) => bar === 84);
@@ -28,21 +28,23 @@ function barHeightPxSm(value: number) {
 	);
 }
 
-const METRICS = [
+const METRICS_BASE = [
 	{
 		key: "performance",
-		value: "$284K",
+		amount: "284K",
+		useCurrency: true,
 		deltaKey: "performance_delta",
 		icon: TrendingUp,
 	},
-	{ key: "growth", value: "12.4K", deltaKey: "growth_delta", icon: Users },
+	{ key: "growth", amount: "12.4K", useCurrency: false, deltaKey: "growth_delta", icon: Users },
 	{
 		key: "system_health",
-		value: "99.9%",
+		amount: "99.9%",
+		useCurrency: false,
 		deltaKey: "system_health_delta",
 		icon: Activity,
 	},
-	{ key: "leads", value: "68%", deltaKey: "leads_delta", icon: Target },
+	{ key: "leads", amount: "68%", useCurrency: false, deltaKey: "leads_delta", icon: Target },
 ] as const;
 
 function MetricCard({
@@ -77,31 +79,41 @@ function MetricCard({
 
 export default function HeroDashboard() {
 	const t = useTranslations("home.dashboard");
+	const tHome = useTranslations("home");
+	const currency = tHome("base_currency");
+	const currencyAfter = tHome("base_currency_position") === "after";
+	const fmt = (amount: string) =>
+		currencyAfter ? `${amount}${currency}` : `${currency}${amount}`;
+	const mounted = useMounted();
 	const shouldReduceMotion = useReducedMotion();
 
-	const shellTransition = shouldReduceMotion
-		? instantTransition
-		: { duration: 0.65, ease: appleRevealEase, delay: 0.36 };
+	// Before mount: initial=false so SSR HTML is fully visible, no opacity:0 mismatch.
+	// After mount: animate normally.
+	const animate = mounted && !shouldReduceMotion;
+
+	const shellTransition = animate
+		? { duration: 0.65, ease: appleRevealEase, delay: 0.36 }
+		: instantTransition;
 
 	const cardTransition = (index: number) =>
-		shouldReduceMotion
-			? instantTransition
-			: { duration: 0.45, ease: appleRevealEase, delay: 0.5 + index * 0.06 };
+		animate
+			? { duration: 0.45, ease: appleRevealEase, delay: 0.5 + index * 0.06 }
+			: instantTransition;
 
-	const chartTransition = shouldReduceMotion
-		? instantTransition
-		: { duration: 0.45, ease: appleRevealEase, delay: 0.74 };
+	const chartTransition = animate
+		? { duration: 0.45, ease: appleRevealEase, delay: 0.74 }
+		: instantTransition;
 
 	const barTransition = (index: number) =>
-		shouldReduceMotion
-			? instantTransition
-			: { duration: 0.5, ease: appleRevealEase, delay: 0.82 + index * 0.03 };
+		animate
+			? { duration: 0.5, ease: appleRevealEase, delay: 0.82 + index * 0.03 }
+			: instantTransition;
 
 	return (
 		<motion.div
 			className="hero-dash-window relative w-full overflow-hidden rounded-2xl border border-[var(--dash-border)] bg-[var(--dash-canvas)] shadow-[var(--dash-shadow)]"
-			initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
-			animate={{ opacity: 1, x: 0 }}
+			initial={animate ? { opacity: 0 } : false}
+			animate={{ opacity: 1 }}
 			transition={shellTransition}
 		>
 			<div className="hero-dash-titlebar flex h-12 items-center gap-3 border-b border-[var(--dash-border)] px-4 sm:px-5">
@@ -117,13 +129,16 @@ export default function HeroDashboard() {
 
 			<div className="space-y-4 p-4 sm:space-y-5 sm:p-5">
 				<div className="grid grid-cols-2 gap-3 sm:gap-4">
-					{METRICS.map(({ key, value, deltaKey, icon }, index) => (
+					{METRICS_BASE.map(({ key, amount, useCurrency, deltaKey, icon }, index) => {
+					const value = useCurrency ? fmt(amount) : amount;
+					return (
 						<motion.div
 							key={key}
 							className="hero-dash-surface rounded-xl p-4 sm:p-5"
-							initial={shouldReduceMotion ? false : { opacity: 0 }}
+							initial={animate ? { opacity: 0 } : false}
 							animate={{ opacity: 1 }}
 							transition={cardTransition(index)}
+							style={{ willChange: "opacity" }}
 						>
 							<MetricCard
 								label={t(key)}
@@ -132,14 +147,16 @@ export default function HeroDashboard() {
 								icon={icon}
 							/>
 						</motion.div>
-					))}
+					);
+					})}
 				</div>
 
 				<motion.div
 					className="hero-dash-surface rounded-xl p-4 sm:p-5"
-					initial={shouldReduceMotion ? false : { opacity: 0 }}
-					animate={{ opacity: 1 }}
+					initial={animate ? { opacity: 0, y: 12 } : false}
+					animate={{ opacity: 1, y: 0 }}
 					transition={chartTransition}
+					style={{ willChange: "opacity, transform" }}
 				>
 					<div className="mb-4 flex items-end justify-between gap-2">
 						<div>
@@ -147,7 +164,7 @@ export default function HeroDashboard() {
 								{t("revenue_overview")}
 							</p>
 							<p className="mt-0.5 font-[family-name:var(--mono)] text-lg font-medium tabular-nums text-[var(--dash-text)]">
-								$1.2M
+								{fmt("1.2M")}
 							</p>
 						</div>
 						<span className="text-xs text-[var(--dash-warning)]">
@@ -175,13 +192,12 @@ export default function HeroDashboard() {
 									className={`hero-dash-bar w-full origin-bottom rounded-[3px] sm:rounded-sm${
 										index === PEAK_BAR_INDEX ? " hero-dash-bar--peak" : ""
 									}${index === LATEST_BAR_INDEX ? " hero-dash-bar--latest" : ""}`}
-									style={
-										{
-											"--hero-dash-bar-h": `${barHeightPx(value)}px`,
-											"--hero-dash-bar-h-sm": `${barHeightPxSm(value)}px`,
-										} as React.CSSProperties
-									}
-									initial={shouldReduceMotion ? false : { scaleY: 0 }}
+									style={{
+										"--hero-dash-bar-h": `${barHeightPx(value)}px`,
+										"--hero-dash-bar-h-sm": `${barHeightPxSm(value)}px`,
+										willChange: "transform",
+									}}
+									initial={animate ? { scaleY: 0 } : false}
 									animate={{ scaleY: 1 }}
 									transition={barTransition(index)}
 								/>
