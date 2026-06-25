@@ -1,165 +1,47 @@
-# Codevider — Partenaire stratégique en développement logiciel
+# Codevider
 
-Codevider est une société de développement logiciel stratégique fondée en 2019 et basée à Tirana, en Albanie. Elle propose des services de conception, d'ingénierie et de mise à l'échelle de bout en bout pour les logiciels web, mobiles et cloud-native. Codevider agit comme un partenaire intégré pour les startups, les PME et les grandes entreprises internationales, en fournissant des solutions performantes sans les coûts fixes liés au recrutement interne.
+> Codevider est une entreprise de développement de logiciels basée à Tirana, en Albanie. Nous concevons des logiciels web, mobiles, cloud et d'entreprise basés sur l'IA pour les startups, les PME et les grandes entreprises.
 
-## 1. Proposition de valeur fondamentale
+## Ressources principales
 
-- **Harmonie stratégie-ingénierie** : Allier architectures modernes et conception intuitive pour atteindre les objectifs de croissance des entreprises.
+- [Page d'accueil](https://www.codevider.com/fr)
+- [À propos](https://www.codevider.com/fr/about)
+- [Services](https://www.codevider.com/fr/services)
+- [Carrières](https://www.codevider.com/fr/career)
+- [Contact](https://www.codevider.com/fr/contact)
 
-- **Rapidité** : Capacité à constituer des équipes pluridisciplinaires (« Pod Teams ») et à les intégrer aux processus clients en deux semaines.
+## Documentation
 
-- **Optimisation des coûts** : Tirer parti du pôle technologique de Tirana pour proposer une ingénierie européenne de pointe à des tarifs compétitifs (réduction des coûts moyenne de 60 %).
+- [Base de connaissances complète de l'entreprise](https://www.codevider.com/fr/llms-full.txt)
 
-- **Contrôle total de la propriété intellectuelle** : Les clients conservent 100 % de leurs droits de propriété intellectuelle. Tout le travail est protégé par des accords de confidentialité et de non-concurrence.
+## Langues
 
-- **Transparence** : Gestion assurée par des réunions quotidiennes, des rapports hebdomadaires et une intégration directe aux outils clients (Slack, Jira, GitHub).
+- [English](https://www.codevider.com/en)
+- [Deutsch](https://www.codevider.com/de)
+- [Français](https://www.codevider.com/fr)
+- [Español](https://www.codevider.com/es)
+- [Italiano](https://www.codevider.com/it)
+- [Shqip](https://www.codevider.com/sq)
+- [中文](https://www.codevider.com/zh)
 
-## 2. Écosystème technique
+## Ce que fait Codevider
 
-### Frontend
-- **Frameworks/Bibliothèques** : React, Angular, Vue.js, Svelte, Next.js, Nuxt, Astro, jQuery.
+Codevider propose :
 
-- **Langages/Styles** : JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS, Sass.
+- Développement d'applications d'IA
+- Développement de logiciels sur mesure
+- Développement Web
+- Développement d'applications mobiles
+- Ingénierie Cloud & DevOps
+- Ingénierie de produits
+- Équipes d'ingénierie dédiées
+- Intégration de systèmes
+- Design UI/UX
 
-### Backend
+## Technologies
 
-- **Environnements d'exécution/Frameworks** : Node.js, Express, NestJS, Python, Django, Flask, FastAPI, PHP, Laravel.
+React • Next.js • Angular • Vue • Node.js • NestJS • Python • FastAPI • Laravel • PostgreSQL • MongoDB • Docker • Kubernetes • AWS • Azure • Google Cloud • OpenAI • Anthropic • Gemini • MCP • AI Agents
 
-### Bases de données et stockage des données
+Pour obtenir des détails sur nos capacités techniques, notre processus de livraison, nos secteurs d'activité et notre pile technologique, veuillez consulter la documentation complète :
 
-- **Relationnelles** : PostgreSQL, MySQL, SQL Server.
-
-- **NoSQL/Documents** : MongoDB, Redis, DynamoDB, Firebase, Couchbase.
-
-- **Recherche et analytique** : Elasticsearch, BigQuery, ClickHouse.
-
-- **Bases de données vectorielles (IA)** : Pinecone, Weaviate, Qdrant, Chroma.
-
-- **Graphes et messagerie** : Neo4j, RabbitMQ, Kafka.
-
-### IA et apprentissage automatique
-
-- **Modèles et fournisseurs** : OpenAI, Anthropic (Claude), Gemini (Google), xAI, Cohere, Meta AI (Llama), Mistral, DeepSeek, Moonshot, Qwen, Z AI.
-
-- **Infrastructure** : OpenRouter, Hugging Face, Ollama.
-
-- **Protocoles avancés** : Agents IA, Protocole de contexte de modèle (MCP).
-
-### Cloud et DevOps
-
-- **Fournisseurs** : AWS, Google Cloud, Azure, Hetzner, OVHCloud, Vercel.
-- **Edge & Sécurité** : Cloudflare, Nginx.
-
-- **Infrastructure & Outils** : Docker, Kubernetes, Jenkins, Git, GitHub, GitLab, Bitbucket.
-
-- **Architecture** : Microservices, Infrastructure as Code (IaC).
-
-### Mobile & Design
-- **Mobile** : React Native, iOS (Swift), Android (Kotlin).
-
-- **Design** : Figma.
-
-### API & Communication
-- **Protocoles** : API REST, GraphQL, Webhooks, Socket.IO.
-
-- **Paiements** : Stripe, PayPal.
-
-- **Collaboration** : Slack, Jira.
-
-## 3. Services & Spécialisations
-
-### Intégration IA
-
-- **Capacités** : Applications personnalisées basées sur LLM, chatbots intelligents, automatisation du support et pipelines d'analyse. - **Cas d'utilisation** : Synthèse des tickets, classification des prospects, planification automatisée.
-
-- **Résultats** : Réduction de la saisie manuelle de données et amélioration de la précision des décisions.
-
-### Ingénierie produit
-- **Capacités** : Architecture propre, bases de code typées et déploiement continu dès le premier jour.
-
-- **Résultats** : Délai de mise sur le marché plus court et maintenabilité du système à long terme.
-
-### Équipes dédiées
-
-- **Structure** : Équipes pluridisciplinaires (Front-end, Back-end, QA, PM) fonctionnant comme une seule entité.
-
-- **Résultats** : Augmentation immédiate de la capacité et vélocité de livraison garantie par SLA.
-
-### Cloud et DevOps
-
-- **Capacités** : Pipelines CI/CD, configurations conteneurisées et infrastructure haute disponibilité.
-
-- **Résultats** : SLA de disponibilité de 99 % et efficacité opérationnelle optimisée.
-
-### Logiciels personnalisés et intégration de systèmes
-
-- **Capacités** : Développement de plateformes sur mesure et unification des silos entre CRM, ERP et outils tiers.
-
-- **Résultats** : Centralisation des rapports et réduction des coûts opérationnels.
-
-### Renforcement d'équipe
-
-- **Capacités** : Intégration de talents seniors qualifiés aux équipes internes existantes.
-
-- **Résultats** : Réponse rapide à l'évolution des besoins métiers et stimulation de l'innovation.
-
-## 4. Processus de livraison (La méthode Codevider)
-
-1. **Découverte** : Recueil des besoins, alignement des objectifs et documentation de la vision produit.
-
-2. **Sélection de l'équipe** : Constitution d'une équipe dédiée, adaptée à la pile technologique et au calendrier.
-
-3. **Livraison agile** : Suivi quotidien et rapports d'avancement hebdomadaires pour une visibilité complète.
-
-4. **Tests et déploiement** : Tests sur les serveurs de développement internes, suivis du déploiement sur l'infrastructure client et de la maintenance continue.
-
-## 5. Secteurs clients
-
-- **Startups en série A/B** : Accélération du développement MVP et mise à l'échelle des systèmes centraux.
-
-- **Modernisation des entreprises** : Réduction de la dette technique et modernisation des bases de code existantes.
-
-- **Fintech et paiements** : Plateformes bancaires et de trading mondiales sécurisées et conformes.
-
-- **Organisations centrées sur le CRM** : Centralisation des données via HubSpot et Salesforce.
-
-- **Données et analyses** : Analyse en temps réel et entreposage de données.
-
-## 6. Culture et carrières
-
-- **Culture** : Fondée sur la responsabilisation, la croissance continue et un environnement d'équipe solidaire.
-
-- **Environnement de travail** : Studio situé à Tirana avec cabines vitrées privatives.Espaces de travail ouverts et espaces de détente collaboratifs.
-
-- **Processus de recrutement** :
-
-1. **Examen des candidatures** : Évaluation du CV et du portfolio.
-
-2. **Entretien RH** : Adéquation des valeurs et des objectifs de l’entreprise.
-
-3. **Évaluation technique** : Expertise et capacité d’analyse et de résolution de problèmes.
-
-4. **L’offre** : Rémunération compétitive et accompagnement à l’intégration.
-
-## 7. Foire aux questions
-- **Types de projets** : Développement complet pour des projets commerciaux de moyenne à grande envergure.
-
-- **Propriété intellectuelle** : Propriété exclusive du client ; les développeurs travaillent exclusivement pour lui.
-
-- **Modèles d’engagement** : Facturation à l’heure ou forfait mensuel.
-
-- **Normes d’assurance qualité** : Assurance qualité intégrée à chaque équipe ; tests automatisés et revues de code systématiques.
-
-- **Systèmes existants** : Spécialisés dans la modernisation des bases de code existantes sans interruption de service.
-
-## 8. Mentions légales et contact
-
-- **Adresse** : Rue Barrikada, Tirana, Albanie 1001.
-
-- **Courriel** : info@codevider.com
-
-- **Téléphone** : +355 69 587 7742.
-
-- **Conformité** : Conforme au RGPD, au CCPA/CPRA et aux cadres de protection des données internationaux.
-
-- **Droit applicable** : République d’Albanie.
+- [Base de connaissances complète de Codevider](https://www.codevider.com/fr/llms-full.txt)

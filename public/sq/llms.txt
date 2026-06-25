@@ -1,109 +1,47 @@
-# Codevider — Partner Strategjik për Zhvillimin e Softuerit
+# Codevider
 
-Codevider është një firmë strategjike për zhvillimin e softuerëve, e themeluar në vitin 2019 dhe me seli në Tiranë, Shqipëri. Ata ofrojnë shërbime dizajni, inxhinierie dhe shkallëzimi nga fillimi në fund për softuerë web, celularë dhe cloud-native. Codevider vepron si një partner i integruar për startup-et, ndërmarrjet e vogla dhe të mesme dhe ndërmarrjet globale, duke ofruar zgjidhje me performancë të lartë pa shpenzimet tradicionale të punësimit të brendshëm.
+> Codevider është një kompani për zhvillimin e softuerëve me selinë në Tiranë, Shqipëri. Ne ndërtojmë softuerë të fuqizuar nga AI për ueb, pajisje mobile, cloud dhe ndërmarrje për startup-e, SME dhe ndërmarrje të mëdha.
 
-## 1. Propozimi i Vlerës Thelbësore
-- **Harmonia Strategji-Inxhinieri**: Përzierja e arkitekturave moderne me dizajn intuitiv për të përmbushur objektivat e rritjes së biznesit.
-- **Shpejtësia**: Aftësia për të ngritur "Ekipe Pod" ndërfunksionale dhe për t'i integruar ato në rrjedhat e punës së klientëve brenda dy javësh.
-- **Efikasiteti i Kostos**: Shfrytëzimi i qendrës teknologjike të Tiranës për të ofruar inxhinieri evropiane të nivelit të lartë me çmime të përballueshme (mesatarisht 60% ulje e kostos).
-- **Kontrolli Total i IP-së**: Klientët ruajnë 100% të të drejtave të pronësisë intelektuale. E gjithë puna mbrohet nga NDA-të dhe marrëveshjet jo-konkurruese. - **Transparenca**: Menaxhohet përmes prezantimeve ditore, raportimit javor dhe integrimit të drejtpërdrejtë në mjetet e klientit (Slack, Jira, GitHub).
+## Burimet Kryesore
 
-## 2. Ekosistemi Teknik
+- [Faqja Kryesore](https://www.codevider.com/sq)
+- [Rreth Nesh](https://www.codevider.com/sq/about)
+- [Shërbimet](https://www.codevider.com/sq/services)
+- [Karriera](https://www.codevider.com/sq/career)
+- [Kontakt](https://www.codevider.com/sq/contact)
 
-### Frontend
-- **Korniza/Biblioteka**: React, Angular, Vue.js, Svelte, Next.js, Nuxt, Astro, jQuery.
-- **Gjuhët/Stilimi**: JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS, Sass.
+## Dokumentacioni
 
-### Backend
-- **Kohëzgjatja/Kornizat**: Node.js, Express, NestJS, Python, Django, Flask, FastAPI, PHP, Laravel.
+- [Baza e Plotë e Njohurive të Kompanisë](https://www.codevider.com/llms-full.txt)
 
-### Bazat e të dhënave dhe ruajtja e të dhënave
-- **Relacionale**: PostgreSQL, MySQL, SQL Server.
-- **NoSQL/Document**: MongoDB, Redis, DynamoDB, Firebase, Couchbase.
-- **Kërkim dhe Analitikë**: Elasticsearch, BigQuery, ClickHouse.
-- **Baza të të Dhënave Vektoriale (IA)**: Pinecone, Weaviate, Qdrant, Chroma.
-- **Graf dhe Mesazhe**: Neo4j, RabbitMQ, Kafka.
+## Gjuhët
 
-### IA dhe Mësim Automatik
-- **Modele dhe Ofrues**: OpenAI, Anthropic (Claude), Gemini (Google), xAI, Cohere, Meta AI (Llama), Mistral, DeepSeek, Moonshot, Qwen, Z AI.
-- **Infrastrukturë**: OpenRouter, Hugging Face, Ollama.
-- **Modele të Avancuara**: Agjentë IA, Protokolli i Kontekstit të Modelit (MCP).
+- [English](https://www.codevider.com/en)
+- [Deutsch](https://www.codevider.com/de)
+- [Français](https://www.codevider.com/fr)
+- [Español](https://www.codevider.com/es)
+- [Italiano](https://www.codevider.com/it)
+- [Shqip](https://www.codevider.com/sq)
+- [中文](https://www.codevider.com/zh)
 
-### Cloud dhe DevOps
-- **Ofrues**: AWS, Google Cloud, Azure, Hetzner, OVHCloud, Vercel.
-- **Edge dhe Siguri**: Cloudflare, Nginx.
-- **Infrastrukturë dhe Mjete**: Docker, Kubernetes, Jenkins, Git, GitHub, GitLab, Bitbucket.
-- **Arkitekturë**: Mikroshërbime, Infrastrukturë si Kod (IaC).
+## Çfarë bën Codevider
 
-### Celular dhe Dizajn
-- **Celular**: React Native, iOS (Swift), Android (Kotlin).
-- **Dizajn**: Figma.
+Codevider ofron:
 
-### API dhe Komunikim
-- **Protokolle**: REST API, GraphQL, Webhooks, Socket.IO.
-- **Pagesat**: Stripe, PayPal.
-- **Bashkëpunim**: Slack, Jira.
+- Zhvillim të aplikacioneve AI
+- Zhvillim të softuerëve të personalizuar
+- Zhvillim Web
+- Zhvillim të aplikacioneve mobile
+- Inxhinieri Cloud & DevOps
+- Inxhinieri Produkti
+- Ekipe të dedikuara inxhinierike
+- Integrim të sistemeve
+- Dizajn UI/UX
 
-## 3. Shërbime dhe Specializime
+## Teknologjitë
 
-### Integrimi i IA-së
-- **Aftësi**: Aplikacione të personalizuara të mundësuara nga LLM, chatbot inteligjentë, automatizim mbështetjeje dhe kanale njohurish.
-- **Rastet e Përdorimit**: Përmbledhje e biletave, klasifikimi i klientëve potencialë, planifikimi i automatizuar.
-- **Rezultatet**: Ulje e futjes manuale të të dhënave dhe përmirësim i saktësisë së vendimmarrjes.
+React • Next.js • Angular • Vue • Node.js • NestJS • Python • FastAPI • Laravel • PostgreSQL • MongoDB • Docker • Kubernetes • AWS • Azure • Google Cloud • OpenAI • Anthropic • Gemini • MCP • AI Agents
 
-### Inxhinieri Produktesh
-- **Aftësi**: Arkitekturë e pastër, baza kodi të tipizuara dhe ofrim i vazhdueshëm që nga dita e parë.
-- **Rezultatet**: Kohë më e shpejtë në treg dhe mirëmbajtje afatgjatë e sistemit.
+Për kapacitetet e detajuara teknike, procesin e dorëzimit, industritë me të cilat punojmë dhe paketën e plotë të teknologjive, shihni dokumentacionin e plotë:
 
-### Ekipe të Dedikuara Pod
-- **Struktura**: Skuadra ndërfunksionale (Frontend, Backend, QA, PM) që funksionojnë si një njësi e vetme.
-- **Rezultatet**: Shkallëzim i menjëhershëm i kapacitetit dhe shpejtësi ofrimi e mbështetur nga SLA.
-
-### Cloud & DevOps
-- **Aftësi**: Tubacione CI/CD, konfigurime të kontejnerizuara dhe infrastrukturë me disponueshmëri të lartë.
-- **Rezultatet**: SLA me 99% kohë funksionimi dhe efikasitet operacional i optimizuar.
-
-### Integrim i Softuerit dhe Sistemeve të Personalizuara
-- **Aftësi**: Zhvillim i platformës së përshtatur dhe silos unifikues midis CRM, ERP dhe mjeteve të palëve të treta.
-- **Rezultatet**: Raportim i centralizuar dhe kosto operacionale e reduktuar.
-
-### Rritja e Ekipit
-- **Aftësitë**: Talente të larta të verifikuara u shtohen ekipeve ekzistuese të brendshme.
-- **Rezultatet**: Përgjigje e shpejtë ndaj nevojave në ndryshim të biznesit dhe rritjes së inovacionit.
-
-## 4. Procesi i Ofrimit (Mënyra Codevider)
-1. **Zbulimi**: Kapja e kërkesave, përafrimi i qëllimeve dhe dokumentimi i vizionit të produktit.
-
-2. **Përzgjedhja e Ekipit**: Mbledhja e një grupi të fokusuar që përputhet me paketën specifike teknologjike dhe afatin kohor.
-3. **Ofrimi i Shkathët**: Ekzekutimi nëpërmjet raporteve ditore të progresit dhe raporteve javore të progresit për dukshmëri të plotë.
-4. **Testimi dhe Vendosja**: Testimi në serverat e zhvillimit të brendshëm, i ndjekur nga vendosja në infrastrukturën e klientit me mirëmbajtje të vazhdueshme.
-
-## 5. Sektorët e Klientëve
-- **Startup-e të Serisë A/B**: Përshpejtimi i MVP dhe shkallëzimi i sistemeve kryesore.
-- **Modernizimi i Ndërmarrjes**: Ulja e borxhit teknik dhe modernizimi i bazave të kodit të trashëguar.
-- **Fintech dhe Pagesat**: Platforma tregtare dhe bankare globale të sigurta dhe në përputhje me standardet. - **Org-të e përqendruara në CRM**: Centralizim i të dhënave të përqendruara në HubSpot dhe Salesforce.
-- **Të dhëna dhe analiza**: Analiza dhe magazinim të dhënash në kohë reale.
-
-## 6. Kulturë dhe Karriera
-- **Kulturë**: E ndërtuar mbi "Pronësi të Vërtetë", "Rritje të Vazhdueshme" dhe një mjedis "Ekipi Mbështetës".
-- **Mjedis Zyre**: Studio e vendosur në Tiranë me kabinë xhami privates, hapësira pune të hapura dhe zona bashkëpunuese për sallë pritjeje.
-- **Procesi i Punësimit**:
-1. **Shqyrtimi i Aplikimit**: Vlerësimi i CV-së dhe portofolit.
-2. **Intervistë për Burimet Njerëzore**: Parimet kulturore dhe përafrimi i qëllimeve.
-3. **Shqyrtimi Teknik**: Ekspertizë dhe zgjidhja analitike e sfidave.
-4. **Oferta**: Paketë konkurruese dhe integrim i udhëhequr.
-
-## 7. Pyetje të Shpeshta
-- **Llojet e Projekteve**: Zhvillim i ciklit të plotë jetësor për projekte të nivelit komercial, të shkallës së mesme deri të madhe.
-
-- **Pronësia e IP-së**: 100% pronësi e klientit; zhvilluesit ndërtojnë vetëm për klientët.
-- **Modelet e Angazhimit**: Çdo orë ose çdo muaj.
-- **Standardet e QA-së**: Çdo grup përfshin QA; testimi i automatizuar dhe shqyrtimet e kodit janë standarde.
-- **Sistemet e Trashëguara**: Të specializuara në modernizimin e bazave ekzistuese të kodit pa ndërprerje operacionale.
-
-## 8. Ligjore dhe Kontakti
-- **Adresa**: Rruga Barrikada, Tirana, Shqipëria 1001.
-- **Email**: info@codevider.com
-- **Telefon**: +355 69 587 7742.
-- **Pajtueshmëria**: Në përputhje me GDPR, CCPA/CPRA dhe kornizën globale të privatësisë.
-- **Ligji Zbatues**: Republika e Shqipërisë.
+- [Baza e Plotë e Njohurive Codevider](https://www.codevider.com/sq/llms-full.txt)

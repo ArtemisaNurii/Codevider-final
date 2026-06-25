@@ -1,173 +1,47 @@
-# Codevider — 战略软件开发合作伙伴
+# Codevider
 
-Codevider 是一家战略软件开发公司，成立于 2019 年，总部位于阿尔巴尼亚地拉那。他们为 Web、移动和云原生软件提供端到端的设计、工程和扩展服务。Codevider 作为初创公司、中小企业和全球企业的嵌入式合作伙伴，提供高性能解决方案，而无需承担传统内部招聘的成本。
+> Codevider 是一家总部位于阿尔巴尼亚地拉那的软件开发公司。我们为初创公司、中小企业和大型企业构建 AI 驱动的 Web、移动、云和企业软件。
 
-## 1. 核心价值主张
+## 主要资源
 
-- **战略与工程的和谐统一**：融合现代架构和直观设计，助力企业实现增长目标。
+- [官方首页](https://www.codevider.com/)
+- [关于我们](https://www.codevider.com/en/about)
+- [服务范围](https://www.codevider.com/en/services)
+- [招贤纳士](https://www.codevider.com/en/career)
+- [联系我们](https://www.codevider.com/en/contact)
 
-- **高效快速**：能够在两周内组建跨职能“Pod Teams”团队并将其融入客户的工作流程。
+## 相关文档
 
-- **成本效益**：利用地拉那科技中心的优势，以经济实惠的价格提供顶尖的欧洲工程技术（平均成本降低 60%）。
+- [完整公司知识库](https://www.codevider.com/zh/llms-full.txt)
 
-- **完全知识产权控制**：客户保留 100% 的知识产权。所有工作均受保密协议和竞业禁止协议保护。
+## 语言版本
 
-- **透明度**：通过每日站会、每周报告以及与客户工具（Slack、Jira、GitHub）的直接集成进行管理。
+- [English](https://www.codevider.com/en)
+- [Deutsch](https://www.codevider.com/de)
+- [Français](https://www.codevider.com/fr)
+- [Español](https://www.codevider.com/es)
+- [Italiano](https://www.codevider.com/it)
+- [Shqip](https://www.codevider.com/sq)
+- [中文](https://www.codevider.com/zh)
 
-## 2. 技术生态系统
+## Codevider 的业务范围
 
-### 前端
+Codevider 提供以下服务：
 
-- **框架/库**：React、Angular、Vue.js、Svelte、Next.js、Nuxt、Astro、jQuery。
+- AI 应用开发
+- 定制软件开发
+- Web 开发
+- 移动应用开发
+- 云与 DevOps 工程
+- 产品工程
+- 专属工程团队
+- 系统集成
+- UI/UX 设计
 
-- **语言/样式**：JavaScript、TypeScript、HTML5、CSS3、Tailwind CSS、Sass。
+## 技术栈
 
-### 后端
+React • Next.js • Angular • Vue • Node.js • NestJS • Python • FastAPI • Laravel • PostgreSQL • MongoDB • Docker • Kubernetes • AWS • Azure • Google Cloud • OpenAI • Anthropic • Gemini • MCP • AI Agents
 
-- **运行时/框架**：Node.js、Express、NestJS、Python、Django、Flask、FastAPI、PHP、Laravel。
+关于详细的技术能力、交付流程、服务行业和完整技术栈，请参阅完整文档：
 
-### 数据库和数据存储
-
-- **关系型数据库**：PostgreSQL、MySQL、SQL Server。
-
-- **NoSQL/文档型数据库**：MongoDB、Redis、DynamoDB、Firebase、Couchbase。
-
-- **搜索与分析**：Elasticsearch、BigQuery、ClickHouse。
-
-- **向量数据库（AI）**：Pinecone、Weaviate、Qdrant、Chroma。
-
-- **图数据库与消息传递**：Neo4j、RabbitMQ、Kafka。
-
-### 人工智能与机器学习
-
-- **模型与提供商**：OpenAI、Anthropic（Claude）、Gemini（Google）、xAI、Cohere、Meta AI（Llama）、Mistral、DeepSeek、Moonshot、Qwen、Z AI。
-
-- **基础设施**：OpenRouter、Hugging Face、Ollama。
-
-- **高级模式**：AI 代理、模型上下文协议 (MCP)。
-
-### 云计算与 DevOps
-
-- **云服务提供商**：AWS、Google Cloud、Azure、Hetzner、OVHCloud、Vercel。
-
-- **边缘计算与安全**：Cloudflare、Nginx。
-
-- **基础设施与工具**：Docker、Kubernetes、Jenkins、Git、GitHub、GitLab、Bitbucket。
-
-- **架构**：微服务、基础设施即代码 (IaC)。
-
-### 移动端与设计
-
-- **移动端**：React Native、iOS (Swift)、Android (Kotlin)。
-
-- **设计**：Figma。
-
-### API 与通信
-
-- **协议**：REST API、GraphQL、Webhooks、Socket.IO。
-
-- **支付**：Stripe、PayPal。
-
-- **协作**：Slack、Jira。
-
-## 3. 服务与专长
-
-### AI 集成
-
-- **功能**：定制化的 LLM 应用、智能聊天机器人、支持自动化和洞察管道。
-
-- **应用案例**：工单摘要、线索分类、自动排班。
-
-- **成果**：减少手动数据录入，提高决策准确性。
-
-### 产品工程
-
-- **功能**：清晰的架构、类型化的代码库以及从第一天起就持续交付。
-
-- **成果**：更快的产品上市速度和长期的系统可维护性。
-
-### 专属团队
-
-- **结构**：跨职能团队（前端、后端、QA、PM），作为一个整体运作。
-
-- **成果**：快速扩展产能，并以 SLA 为保障，确保交付速度。
-
-### 云计算与 DevOps
-
-- **能力**：CI/CD 流水线、容器化部署和高可用性基础设施。
-
-- **成果**：99% 的正常运行时间 SLA 和优化的运营效率。
-
-### 定制软件与系统集成
-
-- **能力**：量身定制的平台开发，以及 CRM、ERP 和第三方工具之间的信息孤岛整合。
-
-- **成果**：集中式报告和降低运营成本。
-
-### 团队扩充
-
-- **能力**：为现有内部团队增添经过严格筛选的高级人才。
-
-- **成果**：快速响应不断变化的业务需求和创新增长。
-
-## 4. 交付流程（Codevider 模式）
-
-1. **探索**：需求收集、目标明确和产品愿景文档化。
-
-2. **团队组建**：组建与特定技术栈和时间安排相匹配的专注团队。
-
-3. **敏捷交付**：通过每日站会和每周进度报告进行执行，确保项目全程透明。
-
-4. **测试与部署**：在内部开发服务器上进行测试，然后部署到客户基础设施，并进行持续维护。
-
-## 5. 客户领域
-
-- **A/B轮初创公司**：加速MVP开发和扩展核心系统。
-
-- **企业现代化**：减少技术债务并实现遗留代码库的现代化。
-
-- **金融科技与支付**：安全合规的全球交易和银行平台。
-
-- **以CRM为中心的企业**：以HubSpot和Salesforce为中心的集中式数据管理。
-
-- **数据与分析**：实时分析和数据仓库。
-
-## 6. 企业文化与职业发展
-
-- **企业文化**：建立在“真正的主人翁精神”、“持续成长”和“支持型团队”的氛围之上。
-
-- **办公环境**：位于地拉那的工作室，设有独立玻璃隔间开放式办公空间和协作休息区。
-
-- **招聘流程**：
-
-1. **申请审核**：简历和作品集评估。
-
-2. **人力资源面试**：文化理念和目标契合度。
-
-3. **技术审核**：专业知识和分析解决问题的能力。
-
-4. **录用**：具有竞争力的薪酬待遇和入职指导。
-
-## 7. 常见问题解答
-
-- **项目类型**：面向商业级中大型项目的全生命周期开发。
-
-- **知识产权所有权**：100% 客户所有权；开发人员仅为客户构建项目。
-
-- **合作模式**：按小时或按月付费。
-
-- **质量保证标准**：每个开发团队都包含质量保证人员；自动化测试和代码审查是标准流程。
-
-- **遗留系统**：专注于在不中断业务运营的情况下对现有代码库进行现代化改造。
-
-## 8. 法律与联系方式
-
-- **地址**：阿尔巴尼亚地拉那，巴里卡达街，邮编1001。
-
-- **邮箱**：info@codevider.com
-
-- **电话**：+355 69 587 7742。
-
-- **合规性**：符合GDPR、CCPA/CPRA及全球隐私框架。
-
-- **适用法律**：阿尔巴尼亚共和国法律。
+- [Codevider 完整知识库](https://www.codevider.com/zh/llms-full.txt)

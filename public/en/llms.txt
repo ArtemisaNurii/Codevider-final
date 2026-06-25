@@ -1,109 +1,47 @@
-# Codevider — Strategic Software Development Partner
+# Codevider
 
-Codevider is a strategic software development firm founded in 2019 and headquartered in Tirana, Albania. They provide end-to-end design, engineering, and scaling services for web, mobile, and cloud-native software. Codevider acts as an embedded partner for startups, SMEs, and global enterprises, delivering high-performance solutions without the traditional overhead of internal hiring.
+> Codevider is a software development company based in Tirana, Albania. We build AI-powered web, mobile, cloud, and enterprise software for startups, SMEs, and enterprises.
 
-## 1. Core Value Proposition
-- **Strategy-Engineering Harmony**: Blending modern architectures with intuitive design to meet business growth goals.
-- **Velocity**: Ability to stand up cross-functional "Pod Teams" and embed them into client workflows within two weeks.
-- **Cost Efficiency**: Leveraging the Tirana tech hub to provide top-tier European engineering at budget-friendly rates (average 60% cost reduction).
-- **Total IP Control**: Clients retain 100% intellectual property rights. All work is protected by NDAs and non-competition agreements.
-- **Transparency**: Managed through daily standups, weekly reporting, and direct integration into client tools (Slack, Jira, GitHub).
+## Primary Resources
 
-## 2. Technical Ecosystem
+- [Homepage](https://www.codevider.com/en)
+- [About](https://www.codevider.com/en/about)
+- [Services](https://www.codevider.com/en/services)
+- [Careers](https://www.codevider.com/en/career)
+- [Contact](https://www.codevider.com/en/contact)
 
-### Frontend
-- **Frameworks/Libraries**: React, Angular, Vue.js, Svelte, Next.js, Nuxt, Astro, jQuery.
-- **Languages/Styling**: JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS, Sass.
+## Documentation
 
-### Backend
-- **Runtimes/Frameworks**: Node.js, Express, NestJS, Python, Django, Flask, FastAPI, PHP, Laravel.
+- [Complete Company Knowledge](https://www.codevider.com/en/llms-full.txt)
 
-### Databases & Data Storage
-- **Relational**: PostgreSQL, MySQL, SQL Server.
-- **NoSQL/Document**: MongoDB, Redis, DynamoDB, Firebase, Couchbase.
-- **Search & Analytics**: Elasticsearch, BigQuery, ClickHouse.
-- **Vector Databases (AI)**: Pinecone, Weaviate, Qdrant, Chroma.
-- **Graph & Messaging**: Neo4j, RabbitMQ, Kafka.
+## Languages
 
-### AI & Machine Learning
-- **Models & Providers**: OpenAI, Anthropic (Claude), Gemini (Google), xAI, Cohere, Meta AI (Llama), Mistral, DeepSeek, Moonshot, Qwen, Z AI.
-- **Infrastructure**: OpenRouter, Hugging Face, Ollama.
-- **Advanced Patterns**: AI Agents, Model Context Protocol (MCP).
+- [English](https://www.codevider.com/en)
+- [Deutsch](https://www.codevider.com/de)
+- [Français](https://www.codevider.com/fr)
+- [Español](https://www.codevider.com/es)
+- [Italiano](https://www.codevider.com/it)
+- [Shqip](https://www.codevider.com/sq)
+- [中文](https://www.codevider.com/zh)
 
-### Cloud & DevOps
-- **Providers**: AWS, Google Cloud, Azure, Hetzner, OVHCloud, Vercel.
-- **Edge & Security**: Cloudflare, Nginx.
-- **Infrastructure & Tooling**: Docker, Kubernetes, Jenkins, Git, GitHub, GitLab, Bitbucket.
-- **Architecture**: Microservices, Infrastructure as Code (IaC).
+## What Codevider Does
 
-### Mobile & Design
-- **Mobile**: React Native, iOS (Swift), Android (Kotlin).
-- **Design**: Figma.
+Codevider provides:
 
-### APIs & Communication
-- **Protocols**: REST API, GraphQL, Webhooks, Socket.IO.
-- **Payments**: Stripe, PayPal.
-- **Collaboration**: Slack, Jira.
+- AI Application Development
+- Custom Software Development
+- Web Development
+- Mobile App Development
+- Cloud & DevOps Engineering
+- Product Engineering
+- Dedicated Engineering Teams
+- System Integration
+- UI/UX Design
 
-## 3. Services & Specializations
+## Technologies
 
-### AI Integration
-- **Capabilities**: Custom LLM-powered apps, intelligent chatbots, support automation, and insight pipelines.
-- **Use Cases**: Ticket summarization, lead classification, automated scheduling.
-- **Outcomes**: Reduced manual data entry and improved decision accuracy.
+React • Next.js • Angular • Vue • Node.js • NestJS • Python • FastAPI • Laravel • PostgreSQL • MongoDB • Docker • Kubernetes • AWS • Azure • Google Cloud • OpenAI • Anthropic • Gemini • MCP • AI Agents
 
-### Product Engineering
-- **Capabilities**: Clean architecture, typed codebases, and continuous delivery from day one.
-- **Outcomes**: Faster time-to-market and long-term system maintainability.
+For detailed technical capabilities, delivery process, industries, and technology stack, see the complete documentation:
 
-### Dedicated Pod Teams
-- **Structure**: Cross-functional squads (Frontend, Backend, QA, PM) that operate as a single unit.
-- **Outcomes**: Immediate capacity scaling and SLA-backed delivery velocity.
-
-### Cloud & DevOps
-- **Capabilities**: CI/CD pipelines, containerized setups, and high-availability infrastructure.
-- **Outcomes**: 99% uptime SLAs and optimized operational efficiency.
-
-### Custom Software & Systems Integration
-- **Capabilities**: Tailored platform development and unifying silos between CRM, ERP, and third-party tools.
-- **Outcomes**: Centralized reporting and reduced operational overhead.
-
-### Team Augmentation
-- **Capabilities**: Vetted senior talent added to existing in-house teams.
-- **Outcomes**: Rapid response to shifting business needs and innovation growth.
-
-## 4. Delivery Process (The Codevider Way)
-1. **Discovery**: Requirements capture, goal alignment, and product vision documentation.
-2. **Team Selection**: Assembling a focused pod matched to the specific tech stack and timeline.
-3. **Agile Delivery**: Execution via daily standups and weekly progress reports for full visibility.
-4. **Test & Deploy**: Testing on internal development servers followed by deployment to client infrastructure with ongoing maintenance.
-
-## 5. Client Sectors
-- **Series A/B Startups**: MVP acceleration and scaling core systems.
-- **Enterprise Modernization**: Reducing technical debt and modernizing legacy codebases.
-- **Fintech & Payments**: Secure, compliant global trading and banking platforms.
-- **CRM-Centric Orgs**: HubSpot and Salesforce-centric data centralization.
-- **Data & Analytics**: Real-time analytics and data warehousing.
-
-## 6. Culture & Careers
-- **Culture**: Built on "Real Ownership," "Continuous Growth," and a "Supportive Team" environment.
-- **Office Environment**: Studio located in Tirana featuring private glass booths, open workspaces, and collaborative lounge areas.
-- **Hiring Process**:
-    1. **Application Review**: Resume and portfolio assessment.
-    2. **HR Interview**: Cultural principles and goal alignment.
-    3. **Technical Review**: Expertise and analytical challenge-solving.
-    4. **The Offer**: Competitive package and guided onboarding.
-
-## 7. Frequently Asked Questions
-- **Project Types**: Full-lifecycle development for commercial-grade, mid-to-large-scale projects.
-- **IP Ownership**: 100% client ownership; developers build for clients only.
-- **Engagement Models**: Hourly or dedicated monthly basis.
-- **QA Standards**: Every pod includes QA; automated testing and code reviews are standard.
-- **Legacy Systems**: Specialized in modernizing existing codebases without operational disruption.
-
-## 8. Legal & Contact
-- **Address**: Barrikada Street, Tirana, Albania 1001.
-- **Email**: info@codevider.com
-- **Phone**: +355 69 587 7742.
-- **Compliance**: GDPR, CCPA/CPRA, and global privacy framework compliant.
-- **Governing Law**: Republic of Albania.
+- [Codevider Full Knowledge Base](https://www.codevider.com/en/llms-full.txt)

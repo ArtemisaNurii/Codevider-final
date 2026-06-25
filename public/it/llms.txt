@@ -1,153 +1,47 @@
-# Codevider — Partner strategico per lo sviluppo software
+# Codevider
 
-Codevider è un'azienda di sviluppo software strategico fondata nel 2019 con sede a Tirana, in Albania. Offre servizi end-to-end di progettazione, ingegneria e scalabilità per software web, mobile e cloud-native. Codevider agisce come partner integrato per startup, PMI e aziende globali, fornendo soluzioni ad alte prestazioni senza i tradizionali costi fissi di assunzione interna.
+> Codevider è un'azienda di sviluppo software con sede a Tirana, Albania. Sviluppiamo software web, mobile, cloud e aziendale basato sull'IA per startup, PMI e grandi aziende.
 
-## 1. Proposta di valore principale
-- **Armonia tra strategia e ingegneria**: Integrazione di architetture moderne con un design intuitivo per raggiungere gli obiettivi di crescita aziendale.
+## Risorse principali
 
-- **Velocità**: Capacità di creare "team" interfunzionali e integrarli nei flussi di lavoro dei clienti entro due settimane.
+- [Homepage](https://www.codevider.com/it)
+- [Chi siamo](https://www.codevider.com/it/about)
+- [Servizi](https://www.codevider.com/it/services)
+- [Carriere](https://www.codevider.com/it/career)
+- [Contatti](https://www.codevider.com/it/contact)
 
-- **Efficienza dei costi**: Sfruttamento del polo tecnologico di Tirana per fornire ingegneria europea di alto livello a tariffe competitive (riduzione media dei costi del 60%).
+## Documentazione
 
-- **Controllo totale della proprietà intellettuale**: I clienti mantengono il 100% dei diritti di proprietà intellettuale. Tutto il lavoro è protetto da accordi di riservatezza (NDA) e patti di non concorrenza.
+- [Informazioni aziendali complete](https://www.codevider.com/it/llms-full.txt)
 
-- **Trasparenza**: Gestita tramite stand-up meeting giornalieri, report settimanali e integrazione diretta con gli strumenti del cliente (Slack, Jira, GitHub).
+## Lingue
 
-## 2. Ecosistema Tecnico
+- [English](https://www.codevider.com/en)
+- [Deutsch](https://www.codevider.com/de)
+- [Français](https://www.codevider.com/fr)
+- [Español](https://www.codevider.com/es)
+- [Italiano](https://www.codevider.com/it)
+- [Shqip](https://www.codevider.com/sq)
+- [中文](https://www.codevider.com/zh)
 
-### Frontend
-- **Framework/Librerie**: React, Angular, Vue.js, Svelte, Next.js, Nuxt, Astro, jQuery.
+## Cosa fa Codevider
 
-- **Linguaggi/Styling**: JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS, Sass.
+Codevider offre:
 
-### Backend
-- **Runtime/Framework**: Node.js, Express, NestJS, Python, Django, Flask, FastAPI, PHP, Laravel.
+- Sviluppo di applicazioni di IA
+- Sviluppo di software personalizzato
+- Sviluppo Web
+- Sviluppo di app mobili
+- Ingegneria Cloud & DevOps
+- Ingegneria di prodotto
+- Team di ingegneria dedicati
+- Integrazione di sistemi
+- Design UI/UX
 
-### Database e Archiviazione Dati
-- **Relazionali**: PostgreSQL, MySQL, SQL Server.
+## Tecnologie
 
-- **NoSQL/Documentazione**: MongoDB, Redis, DynamoDB, Firebase, Couchbase.
+React • Next.js • Angular • Vue • Node.js • NestJS • Python • FastAPI • Laravel • PostgreSQL • MongoDB • Docker • Kubernetes • AWS • Azure • Google Cloud • OpenAI • Anthropic • Gemini • MCP • AI Agents
 
-- **Ricerca e analisi**: Elasticsearch, BigQuery, ClickHouse.
+Per dettagli sulle capacità tecniche, sul processo di consegna, sui settori di attività e sullo stack tecnologico, consultare la documentazione completa:
 
-- **Database vettoriali (IA)**: Pinecone, Weaviate, Qdrant, Chroma.
-
-- **Grafi e messaggistica**: Neo4j, RabbitMQ, Kafka.
-
-### IA e apprendimento automatico
-- **Modelli e provider**: OpenAI, Anthropic (Claude), Gemini (Google), xAI, Cohere, Meta AI (Llama), Mistral, DeepSeek, Moonshot, Qwen, Z AI.
-
-- **Infrastruttura**: OpenRouter, Hugging Face, Ollama.
-
-- **Pattern avanzati**: Agenti IA, Model Context Protocol (MCP).
-
-### Cloud e DevOps
-- **Provider**: AWS, Google Cloud, Azure, Hetzner, OVHCloud, Vercel.
-
-- **Sicurezza e protezione dei dati**: Cloudflare, Nginx.
-
-- **Infrastruttura e strumenti**: Docker, Kubernetes, Jenkins, Git, GitHub, GitLab, Bitbucket.
-
-- **Architettura**: Microservizi, Infrastructure as Code (IaC).
-
-### Mobile e design
-- **Mobile**: React Native, iOS (Swift), Android (Kotlin).
-
-- **Design**: Figma.
-
-### API e comunicazione
-- **Protocolli**: API REST, GraphQL, Webhook, Socket.IO.
-
-- **Pagamenti**: Stripe, PayPal.
-
-- **Collaborazione**: Slack, Jira.
-
-## 3. Servizi e specializzazioni
-
-### Integrazione AI
-- **Capacità**: App personalizzate basate su LLM, chatbot intelligenti, automazione dell'assistenza e pipeline di analisi.
-
-- **Casi d'uso**: Riepilogo dei ticket, classificazione dei lead, pianificazione automatizzata.
-
-- **Risultati**: Riduzione dell'inserimento manuale dei dati e miglioramento dell'accuratezza decisionale.
-
-### Ingegneria di prodotto
-- **Capacità**: Architettura pulita, codebase tipizzate e continuous delivery fin dal primo giorno.
-
-- **Risultati**: Time-to-market più rapido e manutenibilità del sistema a lungo termine.
-
-### Team dedicati
-- **Struttura**: Team interfunzionali (Frontend, Backend, QA, PM) che operano come un'unica unità.
-
-- **Risultati**: Scalabilità immediata della capacità e velocità di consegna garantita da SLA.
-
-### Cloud e DevOps
-- **Capacità**: Pipeline CI/CD, configurazioni containerizzate e infrastruttura ad alta disponibilità.
-
-- **Risultati**: SLA di uptime del 99% ed efficienza operativa ottimizzata.
-
-### Integrazione di software e sistemi personalizzati
-- **Capacità**: Sviluppo di piattaforme su misura e unificazione dei silos tra CRM, ERP e strumenti di terze parti.
-
-- **Risultati**: Reportistica centralizzata e riduzione dei costi operativi.
-
-### Ampliamento del team
-- **Capacità**: Inserimento di talenti senior selezionati nei team interni esistenti.
-
-- **Risultati**: Risposta rapida alle mutevoli esigenze aziendali e crescita dell'innovazione.
-
-## 4. Processo di consegna (Il metodo Codevider)
-1. **Analisi**: Raccolta dei requisiti, allineamento degli obiettivi e documentazione della visione del prodotto.
-
-2. **Selezione del team**: Creazione di un team focalizzato e in linea con lo specifico stack tecnologico e la tempistica.
-
-3. **Consegna Agile**: Esecuzione tramite stand-up meeting giornalieri e report settimanali sui progressi per una visibilità completa.
-
-4. **Test e implementazione**: Test sui server di sviluppo interni seguiti dall'implementazione sull'infrastruttura del cliente con manutenzione continua.
-
-
-## 5. Settori Clienti
-- **Startup Serie A/B**: Accelerazione MVP e scalabilità dei sistemi core.
-
-- **Modernizzazione Aziendale**: Riduzione del debito tecnico e modernizzazione dei codebase legacy.
-
-- **Fintech e Pagamenti**: Piattaforme bancarie e di trading globali sicure e conformi.
-
-- **Organizzazioni incentrate sul CRM**: Centralizzazione dei dati basata su HubSpot e Salesforce.
-
-- **Dati e Analisi**: Analisi in tempo reale e data warehousing.
-
-## 6. Cultura e Carriere
-- **Cultura**: Basata su "Reale Responsabilità", "Crescita Continua" e un ambiente di "Team di Supporto".
-
-- **Ambiente di Lavoro**: Studio situato a Tirana con cabina privata in vetro.Spazi di lavoro aperti e aree lounge collaborative.
-
-- **Processo di assunzione**:
-
-1. **Valutazione delle candidature**: Valutazione del curriculum e del portfolio.
-
-2. **Colloquio con le Risorse Umane**: Principi culturali e allineamento degli obiettivi.
-
-3. **Valutazione tecnica**: Competenza e capacità di analisi e risoluzione dei problemi.
-
-4. **L'offerta**: Pacchetto retributivo competitivo e onboarding guidato.
-
-## 7. Domande frequenti
-- **Tipologie di progetto**: Sviluppo completo per progetti di medie e grandi dimensioni di livello commerciale.
-
-- **Proprietà della proprietà intellettuale**: Proprietà al 100% del cliente; gli sviluppatori lavorano esclusivamente per i clienti.
-
-- **Modelli di collaborazione**: A ore o su base mensile dedicata.
-
-- **Standard di QA**: Ogni team include il controllo qualità; test automatizzati e revisioni del codice sono standard.
-
-- **Sistemi legacy**: Specializzati nella modernizzazione di codebase esistenti senza interruzioni operative.
-
-
-## 8. Informazioni legali e contatti
-- **Indirizzo**: Via Barrikada, Tirana, Albania 1001.
-- **Email**: info@codevider.com
-- **Telefono**: +355 69 587 7742.
-- **Conformità**: Conforme al GDPR, CCPA/CPRA e al quadro normativo globale sulla privacy.
-
-- **Legge applicabile**: Repubblica d'Albania.
+- [Base di conoscenza completa di Codevider](https://www.codevider.com/it/llms-full.txt)
