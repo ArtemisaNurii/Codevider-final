@@ -695,8 +695,19 @@ code {
 
 @media (max-width: 1023px) {
 	.hero-dash-bleed {
-		margin-right: calc(-1 * var(--home-inline));
-		width: calc(100% + var(--home-inline) * 0.65);
+		margin-right: auto;
+		margin-left: auto;
+		width: 100%;
+		max-width: 56rem;
+	}
+}
+
+@media (max-width: 639px) {
+	.hero-dash-bleed {
+		margin-left: -1rem;
+		margin-right: -1rem;
+		width: calc(100% + 2rem);
+		max-width: none;
 	}
 }
 

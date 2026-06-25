@@ -53,10 +53,10 @@ export default function Hero() {
 
 			<div className="home-wrap relative z-10 flex min-h-[100dvh] flex-col justify-center pb-[clamp(5rem,10vw,8rem)] pt-[clamp(6rem,12vw,9rem)]">
 				<div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] lg:gap-14 xl:gap-16">
-					<div>
+					<div className="flex flex-col items-center lg:items-start pt-8 lg:pt-0">
 						<motion.h1
 							key={`h1-${animationKey}`}
-							className="mb-8 max-w-2xl text-balance text-left text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.05] tracking-[-0.03em] text-(--hero-text-h)"
+							className="mb-8 max-w-2xl text-balance text-center lg:text-left text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.05] tracking-[-0.03em] text-(--hero-text-h)"
 							initial={hidden ? { opacity: 0, y: 20 } : false}
 							animate={{ opacity: 1, y: 0 }}
 							transition={stagger(0)}
@@ -69,7 +69,7 @@ export default function Hero() {
 
 						<motion.p
 							key={`lead-${animationKey}`}
-							className="max-w-xl text-pretty text-left font-sans text-lg leading-relaxed text-(--hero-text-lead) sm:text-xl sm:leading-8"
+							className="max-w-xl text-pretty text-center lg:text-left font-sans text-lg leading-relaxed text-(--hero-text-lead) sm:text-xl sm:leading-8"
 							initial={hidden ? { opacity: 0, y: 20 } : false}
 							animate={{ opacity: 1, y: 0 }}
 							transition={stagger(1)}
@@ -82,7 +82,7 @@ export default function Hero() {
 
 						<motion.div
 							key={`cta-${animationKey}`}
-							className="mb-10 mt-14 flex flex-wrap items-center justify-start gap-4 sm:mb-14 sm:mt-16 sm:gap-5"
+							className="mb-10 mt-14 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:mb-14 sm:mt-16 sm:gap-5"
 							initial={hidden ? { opacity: 0, y: 20 } : false}
 							animate={{ opacity: 1, y: 0 }}
 							transition={stagger(2)}
@@ -103,13 +103,13 @@ export default function Hero() {
 
 						<motion.div
 							key={`stats-${animationKey}`}
-							className="grid grid-cols-3 gap-5 border-t border-(--border) pt-10 sm:gap-10 sm:pt-12"
+							className="grid grid-cols-3 gap-5 border-t border-(--border) pt-10 sm:gap-10 sm:pt-12 w-full"
 							initial={hidden ? { opacity: 0, y: 20 } : false}
 							animate={{ opacity: 1, y: 0 }}
 							transition={stagger(3)}
 						>
 							{stats.map(({ value, label }) => (
-								<div key={label} className="text-left">
+								<div key={label} className="text-center lg:text-left">
 									<p className="font-(family-name:--mono) text-2xl font-medium tabular-nums tracking-tight text-(--hero-text-h) sm:text-3xl">
 										{value}
 									</p>

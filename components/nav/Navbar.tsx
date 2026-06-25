@@ -336,6 +336,26 @@ export function Navbar() {
 											/>
 										</motion.li>
 									))}
+
+									<motion.li
+										key="book-a-call"
+										initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{
+											delay: shouldReduceMotion ? 0 : navLinks.length * 0.05,
+											duration: 0.25,
+										}}
+									>
+										<Link
+											href="https://calendly.com/codevider/pasho"
+											className="home-brand-btn gap-2 flex w-full items-center justify-center px-4 py-3 text-base"
+											onClick={closeMobileMenu}
+										>
+											{t("book_a_call")}
+											<ArrowUpRight className="size-4 shrink-0" aria-hidden />
+										</Link>
+									</motion.li>
+
 								</ul>
 
 								<div
@@ -352,10 +372,10 @@ export function Navbar() {
 				) : null}
 			</AnimatePresence>
 
-			{/* Mobile floating button */}
+			{/* Floating Book a Call — hidden when mobile menu is open */}
 			<Link
 				href="https://calendly.com/codevider/pasho"
-				className="home-brand-btn gap-2 fixed bottom-6 right-6 z-50 px-5 py-3 navbar:hidden shadow-lg"
+				className={`home-brand-btn gap-2 fixed bottom-6 right-6 z-50 px-5 py-3 navbar:hidden shadow-lg transition-opacity duration-200 ${mobileMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
 				aria-label={t("book_a_call")}
 			>
 				{t("book_a_call")}
