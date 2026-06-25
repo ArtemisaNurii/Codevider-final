@@ -1,3 +1,4 @@
+/** Type representing a file uploaded to the backend. */
 export type UploadedFile = {
 	filename: string;
 	relativepath: string;
@@ -5,11 +6,13 @@ export type UploadedFile = {
 	size: number;
 };
 
+/** Response type from file upload endpoint for job application. */
 export type JobApplicationUploadResponse = {
 	profile_image: UploadedFile;
 	resume: UploadedFile;
 };
 
+/** Type representing work experience for a job application. */
 export type JobApplicationExperience = {
 	start_date: string;
 	end_date: string | null;
@@ -18,6 +21,7 @@ export type JobApplicationExperience = {
 	description: string;
 };
 
+/** Type representing education history for a job application. */
 export type JobApplicationEducation = {
 	start_date: string;
 	end_date: string;
@@ -26,12 +30,14 @@ export type JobApplicationEducation = {
 	field_of_study: string;
 };
 
+/** Type representing a project for a job application. */
 export type JobApplicationProject = {
 	name: string;
 	repo: string;
 	public_link: string;
 };
 
+/** Full payload for submitting a job application to the backend. */
 export type JobApplicationPayload = {
 	full_name: string;
 	email: string;

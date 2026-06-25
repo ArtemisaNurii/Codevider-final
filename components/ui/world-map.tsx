@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { useTheme } from "@/components/providers/ThemeProvider";
+import { useTheme } from "next-themes";
 import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
 
 type MapDot = {
@@ -126,7 +126,8 @@ function AnimatedPath({
 }
 
 export default function WorldMap({ dots = [] }: WorldMapProps) {
-	const { theme } = useTheme();
+	const { resolvedTheme } = useTheme();
+	const theme = (resolvedTheme ?? "light") as "light" | "dark";
 	const isCompact = useCompactViewport();
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal<HTMLDivElement>({
 		margin: "0px",

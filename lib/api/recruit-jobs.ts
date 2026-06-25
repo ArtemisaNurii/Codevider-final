@@ -5,6 +5,13 @@ import type {
 	OpenJobsResponse,
 } from "@/lib/types/recruit";
 
+/**
+ * Fetches open job positions from the backend API.
+ *
+ * @param query - Pagination query parameters
+ * @returns Paginated open jobs response
+ * @throws If request fails
+ */
 export async function fetchOpenJobs(
 	query: OpenJobsQuery = {},
 ): Promise<OpenJobsResponse> {
@@ -30,6 +37,13 @@ export async function fetchOpenJobs(
 	return response.json() as Promise<OpenJobsResponse>;
 }
 
+/**
+ * Fetches a single job detail by ID from the backend API.
+ *
+ * @param id - Job ID
+ * @returns Job detail
+ * @throws If request fails
+ */
 export async function fetchJobById(id: number): Promise<JobDetail> {
 	const response = await fetch(
 		`${getBackendUrl()}/landing-page/recruit/jobs/${id}`,

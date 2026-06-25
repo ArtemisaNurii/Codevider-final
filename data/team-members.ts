@@ -1,10 +1,10 @@
 export type TeamMember = {
-	name: string;
-	role: string;
-	image: string;
+	readonly name: string;
+	readonly role: string;
+	readonly image: string;
 };
 
-export const teamMembers: TeamMember[] = [
+export const teamMembers: readonly TeamMember[] = [
 	{
 		name: "Pasho Toska",
 		role: "Co-Founder",

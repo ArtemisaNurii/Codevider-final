@@ -1,6 +1,13 @@
 import { getBackendUrl } from "@/lib/api/backend";
 import type { ContactFormValues } from "@/lib/schemas/contact";
 
+/**
+ * Submits a contact form lead to the backend API.
+ *
+ * @param data - Validated contact form values
+ * @param turnstileToken - Cloudflare Turnstile verification token
+ * @throws If submission fails
+ */
 export async function submitContactLead(
 	data: ContactFormValues,
 	turnstileToken: string,

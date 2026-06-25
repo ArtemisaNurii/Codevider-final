@@ -14,6 +14,12 @@ const BAR_MIN_HEIGHT_PX = 10;
 
 const instantTransition = { duration: 0 } as const;
 
+/**
+ * Calculates bar height in pixels for standard breakpoint.
+ *
+ * @param value - Percentage value for the bar.
+ * @returns Calculated height in pixels (minimum 10px).
+ */
 function barHeightPx(value: number) {
 	return Math.max(
 		BAR_MIN_HEIGHT_PX,
@@ -21,6 +27,12 @@ function barHeightPx(value: number) {
 	);
 }
 
+/**
+ * Calculates bar height in pixels for small screens breakpoint.
+ *
+ * @param value - Percentage value for the bar.
+ * @returns Calculated height in pixels (minimum 10px).
+ */
 function barHeightPxSm(value: number) {
 	return Math.max(
 		BAR_MIN_HEIGHT_PX,
@@ -36,7 +48,13 @@ const METRICS_BASE = [
 		deltaKey: "performance_delta",
 		icon: TrendingUp,
 	},
-	{ key: "growth", amount: "12.4K", useCurrency: false, deltaKey: "growth_delta", icon: Users },
+	{
+		key: "growth",
+		amount: "12.4K",
+		useCurrency: false,
+		deltaKey: "growth_delta",
+		icon: Users,
+	},
 	{
 		key: "system_health",
 		amount: "99.9%",
@@ -44,9 +62,25 @@ const METRICS_BASE = [
 		deltaKey: "system_health_delta",
 		icon: Activity,
 	},
-	{ key: "leads", amount: "68%", useCurrency: false, deltaKey: "leads_delta", icon: Target },
+	{
+		key: "leads",
+		amount: "68%",
+		useCurrency: false,
+		deltaKey: "leads_delta",
+		icon: Target,
+	},
 ] as const;
 
+/**
+ * Metric card component displaying label, value, delta, and icon.
+ *
+ * @param props - Component props.
+ * @param props.label - Metric label.
+ * @param props.value - Metric value.
+ * @param props.delta - Change delta (percentage).
+ * @param props.icon - Lucide icon component.
+ * @returns The metric card component.
+ */
 function MetricCard({
 	label,
 	value,
@@ -77,6 +111,11 @@ function MetricCard({
 	);
 }
 
+/**
+ * Hero dashboard component with animated metrics and revenue chart.
+ *
+ * @returns The dashboard window component.
+ */
 export default function HeroDashboard() {
 	const t = useTranslations("home.dashboard");
 	const tHome = useTranslations("home");
@@ -87,8 +126,6 @@ export default function HeroDashboard() {
 	const mounted = useMounted();
 	const shouldReduceMotion = useReducedMotion();
 
-	// Before mount: initial=false so SSR HTML is fully visible, no opacity:0 mismatch.
-	// After mount: animate normally.
 	const animate = mounted && !shouldReduceMotion;
 
 	const shellTransition = animate
@@ -129,26 +166,28 @@ export default function HeroDashboard() {
 
 			<div className="space-y-4 p-4 sm:space-y-5 sm:p-5">
 				<div className="grid grid-cols-2 gap-3 sm:gap-4">
-					{METRICS_BASE.map(({ key, amount, useCurrency, deltaKey, icon }, index) => {
-					const value = useCurrency ? fmt(amount) : amount;
-					return (
-						<motion.div
-							key={key}
-							className="hero-dash-surface rounded-xl p-4 sm:p-5"
-							initial={animate ? { opacity: 0 } : false}
-							animate={{ opacity: 1 }}
-							transition={cardTransition(index)}
-							style={{ willChange: "opacity" }}
-						>
-							<MetricCard
-								label={t(key)}
-								value={value}
-								delta={t(deltaKey)}
-								icon={icon}
-							/>
-						</motion.div>
-					);
-					})}
+					{METRICS_BASE.map(
+						({ key, amount, useCurrency, deltaKey, icon }, index) => {
+							const value = useCurrency ? fmt(amount) : amount;
+							return (
+								<motion.div
+									key={key}
+									className="hero-dash-surface rounded-xl p-4 sm:p-5"
+									initial={animate ? { opacity: 0 } : false}
+									animate={{ opacity: 1 }}
+									transition={cardTransition(index)}
+									style={{ willChange: "opacity" }}
+								>
+									<MetricCard
+										label={t(key)}
+										value={value}
+										delta={t(deltaKey)}
+										icon={icon}
+									/>
+								</motion.div>
+							);
+						},
+					)}
 				</div>
 
 				<motion.div

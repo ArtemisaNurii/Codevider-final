@@ -4,6 +4,10 @@ import type {
 	JobApplicationUploadResponse,
 } from "@/lib/types/job-application";
 
+/**
+ * Custom error class for job application-related errors.
+ * Includes HTTP status code for handling different failure scenarios.
+ */
 export class JobApplicationError extends Error {
 	status: number;
 
@@ -14,6 +18,14 @@ export class JobApplicationError extends Error {
 	}
 }
 
+/**
+ * Uploads job application files (profile image and resume) to the backend.
+ *
+ * @param profileImage - Profile image file
+ * @param resume - Resume file
+ * @returns Uploaded file metadata
+ * @throws JobApplicationError If upload fails
+ */
 export async function uploadJobApplicationFiles(
 	profileImage: File,
 	resume: File,
@@ -37,6 +49,13 @@ export async function uploadJobApplicationFiles(
 	return response.json() as Promise<JobApplicationUploadResponse>;
 }
 
+/**
+ * Submits a complete job application to the backend.
+ *
+ * @param payload - Full job application payload with uploaded file metadata
+ * @param turnstileToken - Cloudflare Turnstile verification token
+ * @throws JobApplicationError If submission fails
+ */
 export async function submitJobApplication(
 	payload: JobApplicationPayload,
 	turnstileToken: string,

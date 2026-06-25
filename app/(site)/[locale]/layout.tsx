@@ -7,6 +7,7 @@ import { Navbar } from "@/components/nav/Navbar";
 import { LocaleProvider } from "@/components/providers/LocaleProvider";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SiteDocument } from "@/components/layout/site-document";
+import { HashScrollHandler } from "@/components/layout/hash-scroll-handler";
 import { DEFAULT_TIME_ZONE } from "@/dictionaries";
 import { routing } from "@/i18n/routing";
 import { getSiteUrl } from "@/lib/site";
@@ -50,6 +51,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 				timeZone={DEFAULT_TIME_ZONE}
 			>
 				<Navbar />
+				<HashScrollHandler />
 				<div id="root" className="flex flex-1 flex-col">
 					<main className="flex-1">{children}</main>
 					<Footer />

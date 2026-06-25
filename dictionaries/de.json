@@ -319,7 +319,16 @@
 			"week_1": "W1",
 			"week_6": "W6",
 			"week_12": "W12"
-		}
+		},
+		"rotating_word": {
+			"saas": "SaaS",
+			"ai": "KI",
+			"commerce": "Digitaler Handel",
+			"fintech": "Fintech",
+			"healthcare": "Gesundheitswesen"
+		},
+		"base_currency": "€",
+		"base_currency_position": "after"
 	},
 	"footer": {
 		"description": "Ihr strategischer Partner für Softwareentwicklung — wir bauen zuverlässige Web-, Mobile- und Cloud-Produkte, die skalieren.",

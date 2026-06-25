@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
-import { useTheme } from "../providers/ThemeProvider";
+import { useTheme } from "next-themes";
 import { CodeviderLogo } from "./CodeviderLogo";
 import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";
@@ -24,6 +24,13 @@ const navScrollTransition = {
 
 const instantTransition = { duration: 0 };
 
+/**
+ * Gets CSS class for nav shell styling.
+ *
+ * @param appearance - Nav appearance (dark/light)
+ * @param isScrolled - Whether user has scrolled past threshold
+ * @returns CSS class string
+ */
 function navShellClass(appearance: NavAppearance, isScrolled: boolean): string {
 	if (appearance === "dark") {
 		return isScrolled ? "nav-shell--scrolled-dark" : "nav-shell--surface-dark";
@@ -31,6 +38,12 @@ function navShellClass(appearance: NavAppearance, isScrolled: boolean): string {
 	return isScrolled ? "nav-shell--scrolled-light" : "nav-shell--surface-light";
 }
 
+/**
+ * Determines nav appearance based on current theme.
+ *
+ * @param theme - Current theme (light/dark)
+ * @returns Nav appearance
+ */
 function getNavAppearance(theme: "light" | "dark"): NavAppearance {
 	return theme === "dark" ? "light" : "dark";
 }
@@ -44,6 +57,20 @@ const navLinks = [
 	{ href: "/about", key: "about" as const },
 ];
 
+/**
+ * Navigation link component with active state and pill styling.
+ *
+ * @param props - Component props
+ * @param props.href - Link href
+ * @param props.label - Link text
+ * @param props.isActive - Whether link is active
+ * @param props.onClick - Click handler
+ * @param props.className - Additional CSS classes
+ * @param props.linkRef - Ref for anchor element
+ * @param props.showStaticPill - Show active state pill
+ * @param props.appearance - Nav appearance (dark/light)
+ * @returns Nav link component
+ */
 function NavLink({
 	href,
 	label,
@@ -93,6 +120,13 @@ function NavLink({
 	);
 }
 
+/**
+ * Desktop navigation links component.
+ *
+ * @param props - Component props
+ * @param props.appearance - Nav appearance (dark/light)
+ * @returns Desktop nav links component
+ */
 function DesktopNavLinks({ appearance }: { appearance: NavAppearance }) {
 	const t = useTranslations("navbar");
 	const pathname = usePathname();
@@ -113,18 +147,30 @@ function DesktopNavLinks({ appearance }: { appearance: NavAppearance }) {
 	);
 }
 
+/**
+ * Main navbar component with desktop/mobile views and scroll state handling.
+ *
+ * @returns Navbar component
+ */
 export function Navbar() {
 	const t = useTranslations("navbar");
 	const pathname = usePathname();
-	const { theme } = useTheme();
+	const { resolvedTheme } = useTheme();
+	const [mounted, setMounted] = useState(false);
 	const shouldReduceMotion = useReducedMotion();
 	const [isScrolled, setIsScrolled] = useState(false);
 	const isScrolledRef = useRef(false);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const initializedRef = useRef(false);
 	const [shouldAnimate, setShouldAnimate] = useState(false);
-	const navAppearance = getNavAppearance(theme);
+	const navAppearance = mounted
+		? getNavAppearance(resolvedTheme as "light" | "dark")
+		: "dark";
 	const isDarkNav = navAppearance === "dark";
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	useEffect(() => {
 		const onScroll = () => {
@@ -137,7 +183,6 @@ export function Navbar() {
 			setIsScrolled(nextIsScrolled);
 		};
 
-		// Initialize scroll state immediately on mount
 		if (!initializedRef.current) {
 			const scrollY = window.scrollY;
 			const initialIsScrolled = scrollY > SCROLL_ON;
@@ -145,13 +190,11 @@ export function Navbar() {
 			setIsScrolled(initialIsScrolled);
 			initializedRef.current = true;
 
-			// Enable animations after initial state is set
 			requestAnimationFrame(() => {
 				setShouldAnimate(true);
 			});
 		}
 
-		// Re-measure after browser restores scroll position on refresh
 		const timer = setTimeout(() => {
 			onScroll();
 		}, 50);
@@ -206,18 +249,26 @@ export function Navbar() {
 					paddingLeft: isScrolled ? NAV_FLOAT_INSET : 0,
 					paddingRight: isScrolled ? NAV_FLOAT_INSET : 0,
 				}}
-				transition={shouldReduceMotion || !shouldAnimate ? instantTransition : navTransition}
+				transition={
+					shouldReduceMotion || !shouldAnimate
+						? instantTransition
+						: navTransition
+				}
 			>
 				<motion.nav
 					aria-label="Main navigation"
-					className={`mx-auto w-full border border-transparent ${navShellClass(navAppearance, isScrolled)}`}
+					className={`mx-auto w-full border border-transparent ${mounted ? navShellClass(navAppearance, isScrolled) : ""}`}
 					initial={false}
 					animate={{
 						height: isScrolled ? 60 : 72,
 						borderRadius: isScrolled ? 20 : 0,
 						maxWidth: isScrolled ? NAV_MAX_WIDTH : 10000,
 					}}
-					transition={shouldReduceMotion || !shouldAnimate ? instantTransition : navTransition}
+					transition={
+						shouldReduceMotion || !shouldAnimate
+							? instantTransition
+							: navTransition
+					}
 				>
 					<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 px-4">
 						<Link
@@ -295,9 +346,11 @@ export function Navbar() {
 							aria-modal="true"
 							aria-label={t("open_menu")}
 							className={`fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col px-4 pb-6 pt-6 backdrop-blur-xl sm:px-6 navbar:hidden ${
-								isDarkNav
-									? "border-t border-white/10 bg-slate-900/95 shadow-[0_12px_40px_rgba(0,0,0,0.28)]"
-									: "border-t border-slate-200 bg-white/95 shadow-[0_12px_40px_rgba(0,0,0,0.08)]"
+								mounted
+									? isDarkNav
+										? "border-t border-white/10 bg-slate-900/95 shadow-[0_12px_40px_rgba(0,0,0,0.28)]"
+										: "border-t border-slate-200 bg-white/95 shadow-[0_12px_40px_rgba(0,0,0,0.08)]"
+									: ""
 							}`}
 							initial={shouldReduceMotion ? false : { opacity: 0, y: -8 }}
 							animate={{ opacity: 1, y: 0 }}
@@ -355,7 +408,6 @@ export function Navbar() {
 											<ArrowUpRight className="size-4 shrink-0" aria-hidden />
 										</Link>
 									</motion.li>
-
 								</ul>
 
 								<div
@@ -372,7 +424,6 @@ export function Navbar() {
 				) : null}
 			</AnimatePresence>
 
-			{/* Floating Book a Call — hidden when mobile menu is open */}
 			<Link
 				href="https://calendly.com/codevider/pasho"
 				className={`home-brand-btn gap-2 fixed bottom-6 right-6 z-50 px-5 py-3 navbar:hidden shadow-lg transition-opacity duration-200 ${mobileMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}

@@ -32,6 +32,15 @@ const LOCALE_FLAGS: Record<(typeof routing.locales)[number], string> = {
 	sq: "🇦🇱",
 };
 
+/**
+ * Language selector dropdown for switching locales.
+ *
+ * @param props - Component props
+ * @param props.variant - Button variant (light/dark)
+ * @param props.fullWidth - Whether button should take full width
+ * @param props.className - Additional CSS classes
+ * @returns Language selector component
+ */
 export function LanguageSelector({
 	variant = "light",
 	fullWidth = false,

@@ -11,17 +11,17 @@ export const TECH_STACK_CATEGORIES = [
 export type TechStackCategoryId = (typeof TECH_STACK_CATEGORIES)[number];
 
 export type TechStackItem = {
-	name: string;
-	icon?: string;
-	iconDimensions?: {
-		height: number;
-		maxWidth: number;
+	readonly name: string;
+	readonly icon?: string;
+	readonly iconDimensions?: {
+		readonly height: number;
+		readonly maxWidth: number;
 	};
 };
 
 export type TechStackCategory = {
-	id: TechStackCategoryId;
-	items: readonly TechStackItem[];
+	readonly id: TechStackCategoryId;
+	readonly items: readonly TechStackItem[];
 };
 
 export const TECH_STACK: readonly TechStackCategory[] = [

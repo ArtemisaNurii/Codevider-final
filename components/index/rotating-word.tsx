@@ -4,7 +4,6 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import { useMounted } from "@/hooks/use-section-reveal";
 
-const INDUSTRIES = ["SaaS", "AI", "Commerce", "Fintech", "Healthcare"];
 const INTERVAL_MS = 3200;
 
 const enterTransition = {
@@ -19,35 +18,50 @@ const exitTransition = {
 	ease: [0.4, 0, 0.2, 1] as const,
 };
 
-export default function RotatingWord() {
+/**
+ * Animated rotating word component for hero headline.
+ *
+ * @returns The rotating industry word component.
+ */
+interface RotatingWordProps {
+	words: string[];
+}
+
+export default function RotatingWord({ words }: RotatingWordProps) {
+	const [shuffled, setShuffled] = useState(words);
 	const [index, setIndex] = useState(0);
 	const mounted = useMounted();
+
+	useEffect(() => {
+		const arr = [...words];
+		for (let i = arr.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[arr[i], arr[j]] = [arr[j], arr[i]];
+		}
+		setShuffled(arr);
+		setIndex(0);
+	}, [words]);
 	const shouldReduceMotion = useReducedMotion();
 
 	useEffect(() => {
 		if (shouldReduceMotion) return;
 
 		const interval = window.setInterval(() => {
-			setIndex((current) => (current + 1) % INDUSTRIES.length);
+			setIndex((current) => (current + 1) % shuffled.length);
 		}, INTERVAL_MS);
 
 		return () => window.clearInterval(interval);
-	}, [shouldReduceMotion]);
+	}, [shouldReduceMotion, shuffled]);
 
-	const word = INDUSTRIES[index];
+	const word = shuffled[index];
 
 	return (
 		<span
 			className="relative mt-1 inline-grid font-sans text-(--brand-accent-text)"
 			aria-live="polite"
 		>
-			{/*
-			 * Sizer: all words stacked in the same grid cell, invisible.
-			 * The container always reserves the width of the longest word,
-			 * preventing h1 reflow as the visible word changes.
-			 */}
 			<span className="col-start-1 row-start-1 inline-grid px-2" aria-hidden>
-				{INDUSTRIES.map((w) => (
+				{shuffled.map((w) => (
 					<span
 						key={w}
 						className="invisible col-start-1 row-start-1 italic font-serif font-bold"
@@ -57,7 +71,6 @@ export default function RotatingWord() {
 				))}
 			</span>
 
-			{/* Visible animated word, absolutely positioned over the sizer */}
 			<span className="col-start-1 row-start-1 overflow-hidden px-2">
 				<AnimatePresence mode="wait" initial={false}>
 					<motion.span

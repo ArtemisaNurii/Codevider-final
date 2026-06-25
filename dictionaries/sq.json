@@ -319,7 +319,16 @@
 			"week_1": "J1",
 			"week_6": "J6",
 			"week_12": "J12"
-		}
+		},
+		"rotating_word": {
+			"saas": "SaaS",
+			"ai": "AI",
+			"commerce": "Tregti Digjitale",
+			"fintech": "Fintech",
+			"healthcare": "Shëndetësi"
+		},
+		"base_currency": "ALL",
+		"base_currency_position": "after"
 	},
 	"footer": {
 		"description": "Partneri juaj strategjik për zhvillimin e softuerit — duke ndërtuar produkte të besueshme për web, mobile dhe cloud që skalojnë.",

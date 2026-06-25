@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+/** Translated messages for job application form validation errors. */
 export type JobApplicationFormMessages = {
 	fullNameRequired: string;
 	fullNameMax: string;
@@ -15,11 +16,19 @@ export type JobApplicationFormMessages = {
 	skillsMax: string;
 };
 
+/** Flags indicating which optional fields are required for a specific job. */
 type JobRequirementFlags = {
 	isDobRequired: boolean;
 	isGenderRequired: boolean;
 };
 
+/**
+ * Creates a Zod validation schema for the job application form.
+ *
+ * @param flags - Job-specific requirement flags
+ * @param messages - Translated validation messages
+ * @returns Zod schema for job application form values
+ */
 export function createJobApplicationSchema(
 	flags: JobRequirementFlags,
 	messages: JobApplicationFormMessages,
@@ -94,6 +103,7 @@ export function createJobApplicationSchema(
 		});
 }
 
+/** Type representing validated job application form values. */
 export type JobApplicationFormValues = z.infer<
 	ReturnType<typeof createJobApplicationSchema>
 >;

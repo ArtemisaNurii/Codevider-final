@@ -22,18 +22,22 @@ export function useMounted() {
 	return mounted;
 }
 
+/** Possible reveal states for a section. */
 type RevealMode = "pending" | "instant" | "animate" | "waiting";
 
+/** Options for useSectionReveal hook. */
 export type SectionRevealOptions = {
 	margin?: UseInViewOptions["margin"];
 	amount?: UseInViewOptions["amount"];
 };
 
+/** Instant transition with zero duration. */
 const instantRevealTransition = { duration: 0 } as const;
 
 /** Apple-like ease — cubic-bezier(0.2, 0, 0, 1) */
 export const appleRevealEase = [0.2, 0, 0, 1] as const;
 
+/** Motion variant for a single revealed item. */
 export const sectionRevealItem = {
 	hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
 	visible: {
@@ -44,6 +48,7 @@ export const sectionRevealItem = {
 	},
 } as const;
 
+/** Motion variant for a container with staggered revealed items. */
 export const sectionRevealStagger = {
 	hidden: {},
 	visible: {
@@ -51,11 +56,19 @@ export const sectionRevealStagger = {
 	},
 } as const;
 
+/** Standard apple panel transition settings. */
 export const applePanelEase = {
 	duration: 0.45,
 	ease: appleRevealEase,
 } as const;
 
+/**
+ * Parses a margin string (percentage or pixels) into pixels for a given axis.
+ *
+ * @param value - Margin string (e.g., "10%", "50px")
+ * @param axis - Axis (x or y)
+ * @returns Margin in pixels
+ */
 function parseMargin(value: string, axis: "x" | "y") {
 	if (value.endsWith("%")) {
 		const size = axis === "y" ? window.innerHeight : window.innerWidth;
@@ -65,6 +78,12 @@ function parseMargin(value: string, axis: "x" | "y") {
 	return parseFloat(value) || 0;
 }
 
+/**
+ * Converts a margin string into a root object for intersection calculation.
+ *
+ * @param margin - Margin string
+ * @returns Root bounds object
+ */
 function getIntersectionRoot(margin: string) {
 	const parts = margin.trim().split(/\s+/);
 	const [top, right = top, bottom = top, left = right] = parts;
@@ -77,6 +96,13 @@ function getIntersectionRoot(margin: string) {
 	};
 }
 
+/**
+ * Calculates the visible ratio of an element within a root bounds.
+ *
+ * @param rect - Element bounding rectangle
+ * @param root - Root bounds
+ * @returns Visible ratio (0 to 1)
+ */
 function getVisibleRatio(
 	rect: DOMRectReadOnly,
 	root: { top: number; right: number; bottom: number; left: number },
@@ -96,6 +122,14 @@ function getVisibleRatio(
 	return (intersectionWidth * intersectionHeight) / elementArea;
 }
 
+/**
+ * Determines the reveal mode for an element.
+ *
+ * @param el - Element to check
+ * @param margin - Margin string for intersection
+ * @param amount - Visibility amount threshold
+ * @returns Reveal mode
+ */
 function getRevealMode(
 	el: Element,
 	margin: string,
@@ -126,6 +160,12 @@ function getRevealMode(
 	return "animate";
 }
 
+/**
+ * Hook to manage section reveal animations with SSR safety.
+ *
+ * @param options - Reveal options
+ * @returns Ref and reveal state
+ */
 export function useSectionReveal<T extends Element = HTMLElement>(
 	options: SectionRevealOptions = {},
 ) {
@@ -185,6 +225,13 @@ export function sectionRevealInitial(
 	return shouldReduceMotion ? false : "hidden";
 }
 
+/**
+ * Returns a transition object that respects shouldAnimate flag.
+ *
+ * @param shouldAnimate - Whether to animate
+ * @param transition - Transition to use when animating
+ * @returns Transition object
+ */
 export function revealTransition<T extends object>(
 	shouldAnimate: boolean,
 	transition: T,
@@ -192,6 +239,14 @@ export function revealTransition<T extends object>(
 	return shouldAnimate ? transition : instantRevealTransition;
 }
 
+/**
+ * Standardized transition for section items with optional delay.
+ *
+ * @param shouldAnimate - Whether to animate
+ * @param delay - Animation delay
+ * @param shouldReduceMotion - Whether reduced motion is enabled
+ * @returns Transition object
+ */
 export function sectionItemTransition(
 	shouldAnimate: boolean,
 	delay = 0,
@@ -220,7 +275,9 @@ export const heroRevealEase = appleRevealEase;
  *
  * @param sectionRef - ref attached to the outer scroll-tunnel <section>
  */
-export function useHeroScrollProgress(sectionRef: React.RefObject<HTMLElement | null>) {
+export function useHeroScrollProgress(
+	sectionRef: React.RefObject<HTMLElement | null>,
+) {
 	const shouldReduceMotion = useReducedMotion();
 
 	// Track scroll progress over the full section (0 = top of section enters
@@ -246,23 +303,43 @@ export function useHeroScrollProgress(sectionRef: React.RefObject<HTMLElement | 
 	// --- Per-element transform maps ---
 
 	// Heading: fully visible 0→0.15, then fades/lifts out by 0.4
-	const headingOpacity = useTransform(progress, [0, 0.05, 0.35, 0.55], [1, 1, 0.35, 0]);
+	const headingOpacity = useTransform(
+		progress,
+		[0, 0.05, 0.35, 0.55],
+		[1, 1, 0.35, 0],
+	);
 	const headingY = useTransform(progress, [0, 0.55], [0, -60]);
 
 	// Lead: slightly behind heading
-	const leadOpacity = useTransform(progress, [0, 0.08, 0.4, 0.58], [1, 1, 0.35, 0]);
+	const leadOpacity = useTransform(
+		progress,
+		[0, 0.08, 0.4, 0.58],
+		[1, 1, 0.35, 0],
+	);
 	const leadY = useTransform(progress, [0, 0.58], [0, -50]);
 
 	// CTAs
-	const ctaOpacity = useTransform(progress, [0, 0.1, 0.45, 0.62], [1, 1, 0.35, 0]);
+	const ctaOpacity = useTransform(
+		progress,
+		[0, 0.1, 0.45, 0.62],
+		[1, 1, 0.35, 0],
+	);
 	const ctaY = useTransform(progress, [0, 0.62], [0, -40]);
 
 	// Stats
-	const statsOpacity = useTransform(progress, [0, 0.12, 0.5, 0.68], [1, 1, 0.3, 0]);
+	const statsOpacity = useTransform(
+		progress,
+		[0, 0.12, 0.5, 0.68],
+		[1, 1, 0.3, 0],
+	);
 	const statsY = useTransform(progress, [0, 0.68], [0, -32]);
 
 	// Dashboard: scales slightly and fades out later (feels "heavier")
-	const dashOpacity = useTransform(progress, [0, 0.2, 0.6, 0.82], [1, 1, 0.4, 0]);
+	const dashOpacity = useTransform(
+		progress,
+		[0, 0.2, 0.6, 0.82],
+		[1, 1, 0.4, 0],
+	);
 	const dashScale = useTransform(progress, [0, 0.82], [1, 0.93]);
 	const dashY = useTransform(progress, [0, 0.82], [0, 20]);
 
@@ -289,6 +366,11 @@ export function useHeroScrollProgress(sectionRef: React.RefObject<HTMLElement | 
 	};
 }
 
+/**
+ * Hook for hero mount reveal animations with SSR safety.
+ *
+ * @returns Stagger function and motion settings
+ */
 export function useHeroMountReveal() {
 	const mounted = useMounted();
 	const shouldReduceMotion = useReducedMotion();
@@ -296,7 +378,8 @@ export function useHeroMountReveal() {
 	// Until mounted, initial=false so SSR HTML is fully visible.
 	// After mount, animate from the hidden state — no hydration mismatch.
 	const stagger = (index: number, y = 18, blur?: number) => {
-		const useBlur = mounted && !shouldReduceMotion && blur !== undefined && blur > 0;
+		const useBlur =
+			mounted && !shouldReduceMotion && blur !== undefined && blur > 0;
 		const animate = !mounted || shouldReduceMotion;
 
 		return {

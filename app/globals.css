@@ -711,10 +711,46 @@ code {
 	}
 }
 
+/* Hero entrance — @starting-style triggers the transition the moment the element
+   first paints (no JS needed, no hydration flash, ~95% browser support Jun 2025). */
+.hero-reveal {
+	opacity: 1;
+	transform: translateY(0);
+	transition:
+		opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@starting-style {
+	.hero-reveal {
+		opacity: 0;
+		transform: translateY(18px);
+	}
+}
+
+.hero-reveal-1 {
+	transition-delay: 0s;
+}
+.hero-reveal-2 {
+	transition-delay: 0.09s;
+}
+.hero-reveal-3 {
+	transition-delay: 0.18s;
+}
+.hero-reveal-4 {
+	transition-delay: 0.27s;
+}
+.hero-reveal-5 {
+	transition-delay: 0.36s;
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.hero-dash-bar--latest,
 	.hero-dash-live-dot {
 		animation: none;
+	}
+	.hero-reveal {
+		transition: none;
 	}
 }
 

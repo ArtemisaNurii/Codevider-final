@@ -5,6 +5,11 @@ import { Link } from "@/i18n/navigation";
 import { CodeviderLogo } from "./CodeviderLogo";
 import { FooterSocials } from "./footer-socials";
 
+/**
+ * Site footer component with company info, links, and socials.
+ *
+ * @returns Footer component
+ */
 export default function Footer() {
 	const t = useTranslations("footer");
 

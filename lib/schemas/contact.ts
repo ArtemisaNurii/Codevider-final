@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+/** Translated messages for contact form validation errors. */
 export type ContactFormMessages = {
 	nameRequired: string;
 	nameMax: string;
@@ -9,6 +10,12 @@ export type ContactFormMessages = {
 	detailsMax: string;
 };
 
+/**
+ * Creates a Zod validation schema for the contact form.
+ *
+ * @param messages - Translated validation messages
+ * @returns Zod schema for contact form values
+ */
 export function createContactSchema(messages: ContactFormMessages) {
 	return z.object({
 		name: z
@@ -29,4 +36,5 @@ export function createContactSchema(messages: ContactFormMessages) {
 	});
 }
 
+/** Type representing validated contact form values. */
 export type ContactFormValues = z.infer<ReturnType<typeof createContactSchema>>;

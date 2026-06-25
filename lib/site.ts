@@ -22,6 +22,7 @@ export function getSiteUrl(): string {
 	return SITE_URL;
 }
 
+/** List of all site routes available for localization. */
 export const SITE_ROUTES = [
 	"",
 	"/about",
@@ -31,10 +32,13 @@ export const SITE_ROUTES = [
 	"/terms",
 ] as const;
 
+/** List of pages that have custom Open Graph images. */
 export const OG_PAGES = ["home", "about", "services", "career"] as const;
 
+/** Type representing a page that has a custom Open Graph image. */
 export type OgPage = (typeof OG_PAGES)[number];
 
+/** Maps internal locale codes to BCP47 Open Graph locale strings. */
 const LOCALE_TO_OG_BCP47: Record<(typeof routing.locales)[number], string> = {
 	en: "en_US",
 	de: "de_DE",
@@ -45,12 +49,24 @@ const LOCALE_TO_OG_BCP47: Record<(typeof routing.locales)[number], string> = {
 	zh: "zh_CN",
 };
 
+/**
+ * Converts an internal locale code to an Open Graph BCP47 locale string.
+ *
+ * @param locale - Internal locale code (e.g., "en", "de")
+ * @returns Open Graph locale string (e.g., "en_US")
+ */
 function getOpenGraphLocale(locale: string): string {
 	return (
 		LOCALE_TO_OG_BCP47[locale as (typeof routing.locales)[number]] ?? locale
 	);
 }
 
+/**
+ * Gets list of alternate Open Graph locales for a given locale.
+ *
+ * @param locale - Current locale to exclude from alternates
+ * @returns Array of alternate Open Graph locale strings
+ */
 function getOpenGraphAlternateLocales(
 	locale: string,
 ): NonNullable<Metadata["openGraph"]>["alternateLocale"] {
@@ -58,6 +74,8 @@ function getOpenGraphAlternateLocales(
 		.filter((entry) => entry !== locale)
 		.map((entry) => getOpenGraphLocale(entry));
 }
+
+/** Maps internal locale codes to English language names for OG image paths. */
 const LOCALE_TO_OG_LANGUAGE: Record<(typeof routing.locales)[number], string> =
 	{
 		en: "english",
@@ -69,6 +87,7 @@ const LOCALE_TO_OG_LANGUAGE: Record<(typeof routing.locales)[number], string> =
 		zh: "english",
 	};
 
+/** Maps OG page keys to their corresponding site routes. */
 const OG_PAGE_TO_ROUTE: Record<OgPage, (typeof SITE_ROUTES)[number]> = {
 	home: "",
 	about: "/about",
@@ -76,6 +95,13 @@ const OG_PAGE_TO_ROUTE: Record<OgPage, (typeof SITE_ROUTES)[number]> = {
 	career: "/career",
 };
 
+/**
+ * Builds a fully qualified localized URL for a given locale and path.
+ *
+ * @param locale - Locale to use
+ * @param path - Site route
+ * @returns Full localized URL
+ */
 export function getLocalizedUrl(
 	locale: (typeof routing.locales)[number],
 	path: (typeof SITE_ROUTES)[number],
@@ -84,12 +110,24 @@ export function getLocalizedUrl(
 	return path === "" ? `${base}/${locale}` : `${base}/${locale}${path}`;
 }
 
+/**
+ * Gets language alternates for a specific site route.
+ *
+ * @param path - Site route
+ * @returns Record of locale to full URL
+ */
 export function getLanguageAlternates(
 	path: (typeof SITE_ROUTES)[number],
 ): Record<string, string> {
 	return getPathLanguageAlternates(path);
 }
 
+/**
+ * Gets language alternates for any given path string.
+ *
+ * @param path - Path string
+ * @returns Record of locale to full URL
+ */
 export function getPathLanguageAlternates(
 	path: string,
 ): Record<string, string> {
@@ -105,6 +143,13 @@ export function getPathLanguageAlternates(
 	return languages;
 }
 
+/**
+ * Gets the path to the Open Graph image for a locale and page.
+ *
+ * @param locale - Locale to use
+ * @param page - Page key
+ * @returns Path to OG image (e.g., /images/og/english/home/og.png)
+ */
 export function getOgImagePath(locale: string, page: OgPage): string {
 	const language =
 		LOCALE_TO_OG_LANGUAGE[locale as (typeof routing.locales)[number]] ??
@@ -113,10 +158,18 @@ export function getOgImagePath(locale: string, page: OgPage): string {
 	return `/images/og/${language}/${page}/og.png`;
 }
 
+/**
+ * Gets the full URL to the Open Graph image for a locale and page.
+ *
+ * @param locale - Locale to use
+ * @param page - Page key
+ * @returns Full URL to OG image
+ */
 export function getOgImageUrl(locale: string, page: OgPage): string {
 	return `${getSiteUrl()}${getOgImagePath(locale, page)}`;
 }
 
+/** Input options for creating page metadata. */
 type PageMetadataInput = {
 	locale: string;
 	title: string;
@@ -125,6 +178,17 @@ type PageMetadataInput = {
 	path?: string;
 };
 
+/**
+ * Creates Next.js Metadata object for a localized page.
+ *
+ * @param options - Metadata options
+ * @param options.locale - Page locale
+ * @param options.title - Page title
+ * @param options.description - Page description
+ * @param options.page - OG page key
+ * @param options.path - Optional path override
+ * @returns Next.js Metadata object
+ */
 export function createPageMetadata({
 	locale,
 	title,
@@ -190,6 +254,12 @@ export function createPageMetadata({
 	};
 }
 
+/**
+ * Creates metadata for a redirect page using default locale translations.
+ *
+ * @param page - OG page key
+ * @returns Next.js Metadata object
+ */
 export function createRedirectPageMetadata(page: OgPage): Metadata {
 	const meta = en.metadata[page];
 

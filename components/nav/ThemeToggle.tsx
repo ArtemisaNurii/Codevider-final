@@ -2,7 +2,7 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useTheme } from "../providers/ThemeProvider";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 type ThemeToggleProps = {
 	variant?: "light" | "dark";
@@ -32,8 +32,6 @@ export function ThemeToggle({
 
 	const handleToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
-		if (isThemeTransitioning) return;
-
 		const rect = event.currentTarget.getBoundingClientRect();
 		toggleTheme({
 			x: rect.left + rect.width / 2,
