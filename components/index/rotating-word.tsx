@@ -71,7 +71,7 @@ export default function RotatingWord({ words }: RotatingWordProps) {
 				))}
 			</span>
 
-			<span className="col-start-1 row-start-1 overflow-hidden px-2">
+			<span className="col-start-1 row-start-1 overflow-hidden py-1 px-2">
 				<AnimatePresence mode="wait" initial={false}>
 					<motion.span
 						key={word}

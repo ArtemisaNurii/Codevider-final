@@ -2,19 +2,19 @@
 	"metadata": {
 		"home": {
 			"title": "Codevider",
-			"description": "Votre partenaire stratégique en développement de logiciels"
+			"description": "Votre partenaire stratégique en développement logiciel"
 		},
 		"about": {
 			"title": "À propos — Codevider",
-			"description": "Fondée en 2019 à Tirana, en Albanie, Codevider conçoit des logiciels performants : stratégie, design et ingénierie en parfaite harmonie."
+			"description": "Fondée en 2019 à Tirana, en Albanie, Codevider conçoit des logiciels performants — alliant stratégie, design et ingénierie en toute harmonie."
 		},
 		"services": {
 			"title": "Services — Codevider",
-			"description": "Découvrez comment Codevider conçoit, développe et met à l'échelle des logiciels fiables : développement sur mesure, applications web, intégration d'IA, automatisation, intégration de systèmes, cloud et augmentation d'équipe."
+			"description": "Découvrez comment Codevider conçoit, développe et fait évoluer des logiciels fiables : développement sur mesure, applications web, intégration de l'IA, automatisation, intégration de systèmes, cloud et augmentation d'équipes."
 		},
 		"career": {
 			"title": "Carrières — Codevider",
-			"description": "Rejoignez Codevider et contribuez à façonner l'avenir du développement de logiciels. Découvrez notre processus de recrutement et connectez-vous avec notre équipe à Tirana, en Albanie."
+			"description": "Rejoignez Codevider et participez à la création de l'avenir du développement logiciel. Découvrez notre processus de recrutement et contactez notre équipe à Tirana, en Albanie."
 		},
 		"career_apply": {
 			"title": "Postuler — Codevider",
@@ -23,36 +23,36 @@
 		},
 		"privacy": {
 			"title": "Politique de confidentialité — Codevider",
-			"description": "Découvrez comment Codevider collecte, utilise, conserve et protège les données personnelles conformément au RGPD, au CCPA/CPRA et aux cadres mondiaux de protection de la vie privée."
+			"description": "Découvrez comment Codevider collecte, utilise, conserve et protège les données personnelles conformément au RGPD, à la CCPA/CPRA et aux cadres mondiaux de protection de la vie privée."
 		},
 		"terms": {
 			"title": "Conditions d'utilisation — Codevider",
-			"description": "Consultez les conditions régissant l'utilisation du site web de Codevider, les clauses de non-responsabilité pour les services B2B, la propriété intellectuelle et la loi applicable."
+			"description": "Consultez les conditions régissant l'utilisation du site web de Codevider, les clauses de non-responsabilité relatives aux services B2B, la propriété intellectuelle et la loi applicable."
 		}
 	},
 	"home": {
 		"your_strategic_partner_in": "Votre partenaire stratégique en",
-		"hero_lead_emphasis": "Nous concevons, développons et mettons à l'échelle des logiciels web, mobiles et cloud fiables",
-		"hero_lead_rest": "— intégrés à vos équipes et livrés sans les contraintes de gestion.",
+		"hero_lead_emphasis": "Nous concevons, développons et faisons évoluer des logiciels web, mobiles et cloud fiables",
+		"hero_lead_rest": "— intégrés à votre équipe et livrés sans frais généraux.",
 		"start_your_project": "Démarrer votre projet",
-		"explore_services": "Explorer les services",
+		"explore_services": "Découvrir nos services",
 		"years_delivering": "Années d'expérience",
-		"global_projects": "Projets mondiaux",
+		"global_projects": "Projets internationaux",
 		"engineers": "Ingénieurs",
-		"who_we_are_eyebrow": "Qui sommes-nous",
-		"who_we_are_headline": "Transformer vos idées en solutions numériques de confiance",
-		"who_we_are_description": "Des applications web et mobiles aux plateformes cloud et systèmes d'entreprise, nous concevons des logiciels fiables et adaptés aux besoins de votre activité. Nos équipes associent technologies modernes, architectures évolutives et design intuitif pour livrer des solutions sécurisées et performantes qui favorisent l'innovation et la croissance.",
+		"who_we_are_eyebrow": "Qui nous sommes",
+		"who_we_are_headline": "Transformer les idées en solutions numériques fiables",
+		"who_we_are_description": "Des applications web et mobiles aux plateformes cloud et systèmes d'entreprise, nous concevons des logiciels fiables et adaptés à vos besoins. Nos équipes associent technologies modernes, architectures évolutives et design intuitif pour livrer des solutions sécurisées et performantes qui favorisent l'innovation et la croissance.",
 		"read_more_about_us": "En savoir plus sur nous",
 		"stat_global_partnerships_value": "{value}+",
-		"stat_global_partnerships": "Partenariats mondiaux en Europe",
+		"stat_global_partnerships": "Partenariats mondiaux à travers l'Europe",
 		"stat_delivery_velocity_value": "{value}%",
 		"stat_delivery_velocity": "Croissance moyenne de la vitesse de livraison",
 		"stat_elite_engineers_value": "{value}+",
-		"stat_elite_engineers": "Ingénieurs d'élite dotés d'une expertise full-stack complète — prêts à intégrer votre équipe en moins de deux semaines.",
+		"stat_elite_engineers": "Ingénieurs qualifiés dotés d'une expertise full-stack approfondie — prêts à intégrer votre équipe sous deux semaines.",
 		"core_services": {
-			"eyebrow": "Nos services clés",
+			"eyebrow": "Nos services fondamentaux",
 			"headline": "Tout ce dont vous avez besoin pour livrer, évoluer et garder une longueur d'avance",
-			"description": "Nous aidons les entreprises et les startups à accélérer leurs livraisons grâce à des équipes évolutives, des technologies modernes et une exécution fiable — sans surcharge opérationnelle. Quatre modes d'intervention :"
+			"description": "Nous aidons les entreprises et les startups à livrer plus rapidement grâce à des équipes évolutives, des technologies modernes et une livraison fiable — sans frais généraux. Nos quatre modes d'intervention :"
 		},
 		"rotating_word": {
 			"saas": "SaaS",
@@ -66,33 +66,33 @@
 		"features": {
 			"ai": {
 				"badge": "01 · Intégration de l'IA",
-				"headline": "Déployez des fonctionnalités d'IA concrètes pour vos utilisateurs",
-				"description": "Des applications personnalisées basées sur les LLM et des chatbots intelligents à l'automatisation des flux de travail et aux analyses exploitables — intégrées de manière transparente dans votre écosystème existant.",
+				"headline": "Proposez des fonctionnalités d'IA concrètes pour vos utilisateurs",
+				"description": "Des applications personnalisées basées sur les LLM aux chatbots intelligents, en passant par l'automatisation des flux de travail et les analyses exploitables — intégrés de manière transparente à votre écosystème existant.",
 				"bullet_1": "Applications et assistants LLM personnalisés entraînés sur vos données",
-				"bullet_2": "Chatbots intelligents et automatisation du support client",
-				"bullet_3": "Flux d'analyses intégrés à vos processus de travail",
-				"link": "Explorer les services d'IA",
+				"bullet_2": "Chatbots intelligents et automatisation du support",
+				"bullet_3": "Flux de données analytiques intégrés à vos processus de travail",
+				"link": "Explorer nos services d'IA",
 				"demo": {
-					"title": "Assistant IA",
-					"status": "Piloté par vos données, sécurisé par conception.",
-					"chip_tickets_label": "Résumer les tickets",
-					"chip_tickets_q": "Résumer les tickets de support d'aujourd'hui",
-					"chip_tickets_a": "Voici un aperçu de l'activité du support aujourd'hui :\n\n• Ticket #1023 – Problème de connexion (résolu en 12 min)\n• Ticket #1024 – Demande de fonctionnalité : export en PDF (en attente d'examen)\n• Ticket #1025 – Bug : retard de synchronisation des données (corrigé, 3 min)\n\nTotal des tickets traités : 3 – 2 résolus, 1 en attente.",
-					"chip_leads_label": "Classifier les leads",
-					"chip_leads_q": "Classifier les nouveaux leads par intention d'achat",
-					"chip_leads_a": "Répartition de l'intention des leads (dernières 24h) :\n\n• Intention forte – 4 leads (budget > 5 000 €, démo demandée)\n• Intention moyenne – 7 leads (comparaison de produits, questions sur les tarifs)\n• Intention faible – 3 leads (informations générales, inscriptions à la newsletter)\n\nAction : prioriser les leads à forte intention pour la prise de contact.",
-					"chip_schedule_label": "Créer un planning",
-					"chip_schedule_q": "Ajouter un nouveau rendez-vous pour demain",
-					"chip_schedule_a": "Rendez-vous créé pour le client : BrightWave Solutions – demain, de 9h à 10h (UTC+2).\n\n Ordre du jour : 9h – Introduction & Objectifs, 9h30 – Démo, 9h55 – Questions-réponses, 10h – Clôture.\n\n E-mail de confirmation envoyé au client et à l'équipe."
+					"title": "Assistant d'IA",
+					"status": "Guidé par vos données, sécurisé par conception.",
+					"chip_tickets_label": "Synthétiser les tickets",
+					"chip_tickets_q": "Synthétiser les tickets de support du jour",
+					"chip_tickets_a": "Voici un aperçu rapide de l'activité du support aujourd'hui :\n\n• Ticket n°1023 – Problème de connexion (résolu en 12 min)\n• Ticket n°1024 – Demande de fonctionnalité : export PDF (en attente d'examen)\n• Ticket n°1025 – Bug : délai de synchronisation des données (corrigé, 3 min)\n\nTotal des tickets traités : 3 – 2 résolus, 1 en attente.",
+					"chip_leads_label": "Classifier les prospects",
+					"chip_leads_q": "Classifier les nouveaux prospects par intention",
+					"chip_leads_a": "Répartition de l'intention des prospects (dernières 24 h) :\n\n• Forte intention – 4 prospects (budget > 5 000 €, démo demandée)\n• Intention moyenne – 7 prospects (comparaison de produits, questions sur les tarifs)\n• Faible intention – 3 prospects (informations générales, inscriptions à la newsletter)\n\nAction : prioriser les prospects à forte intention.",
+					"chip_schedule_label": "Créer un calendrier",
+					"chip_schedule_q": "Ajouter un nouveau calendrier pour demain",
+					"chip_schedule_a": "Calendrier créé pour le client : BrightWave Solutions – demain, 9h00 – 10h00 (UTC+2). \n\n Ordre du jour : 9h00 – Intro et objectifs, 9h30 – Démo, 9h55 – Questions-réponses, 10h00 – Synthèse.\n\n E-mail de confirmation envoyé au client et à l'équipe."
 				}
 			},
 			"engineering": {
-				"badge": "02 · Ingénierie produit",
-				"headline": "Une architecture propre, livrée à un rythme régulier",
-				"description": "Nous concevons et développons des applications web évolutives et des produits intuitifs avec une architecture propre et des cycles de publication agiles — garantissant un délai de mise sur le marché plus court et une maintenance simplifiée à long terme.",
+				"badge": "02 · Ingénierie de produit",
+				"headline": "Architecture propre, livrée à un rythme régulier",
+				"description": "Nous concevons et développons des applications web évolutives et des produits intuitifs dotés d'une architecture propre et de cycles de livraison agiles — garantissant un délai de commercialisation réduit et une maintenance à long terme facilitée.",
 				"bullet_1": "Bases de code modernes, typées et rigoureusement testées",
 				"bullet_2": "Livraison continue dès le premier jour",
-				"bullet_3": "Systèmes faciles à maintenir qui évoluent avec vous",
+				"bullet_3": "Systèmes maintenables qui évoluent avec votre activité",
 				"link": "Explorer l'ingénierie",
 				"demo": {
 					"tabs_aria": "Exemples de code",
@@ -102,33 +102,33 @@
 			"pod": {
 				"badge": "03 · Équipes dédiées (Pods)",
 				"headline": "Une équipe complète, intégrée en deux semaines",
-				"description": "Constituez rapidement des équipes pluridisciplinaires — frontend, backend et QA — parfaitement intégrées à vos méthodes. Évoluez sans effort grâce à des contrats flexibles, assortis de garanties de niveau de service (SLA) adaptées à vos besoins.",
-				"bullet_1": "Pluridisciplinarité opérationnelle dès le premier sprint",
+				"description": "Mettez rapidement en place des équipes transverses — frontend, backend et assurance qualité (QA) — qui s'intègrent à vos processus. Évoluez sans effort grâce à des contrats flexibles, assortis d'engagements de niveau de service (SLA) adaptés à vos besoins.",
+				"bullet_1": "Équipe pluridisciplinaire dès le premier sprint",
 				"bullet_2": "Réunions quotidiennes, rapports hebdomadaires, visibilité totale",
 				"bullet_3": "Ajustement de la taille de l'équipe à la demande",
-				"link": "Explorer les équipes dédiées",
+				"link": "Explorer nos équipes dédiées",
 				"demo": {
 					"title": "Votre équipe dédiée",
-					"subtitle": "survolez un rôle",
+					"subtitle": "survoler un rôle",
 					"center": "Votre\nproduit",
 					"role_frontend": "Frontend",
-					"role_frontend_desc": "React, Next.js & interfaces soignées et accessibles.",
+					"role_frontend_desc": "React, Next.js et interfaces soignées et accessibles.",
 					"role_backend": "Backend",
-					"role_backend_desc": "API, modèles de données & logique métier évolutive.",
+					"role_backend_desc": "API, modèles de données et logique métier évolutive.",
 					"role_qa": "QA",
-					"role_qa_desc": "Tests automatisés & fiabilité des livraisons.",
+					"role_qa_desc": "Tests automatisés et déploiements sereins.",
 					"role_pm": "PM",
-					"role_pm_desc": "Réunions, rapports & point de contact unique."
+					"role_pm_desc": "Réunions d'équipe, rapports et point de contact unique."
 				}
 			},
 			"devops": {
 				"badge": "04 · Cloud & DevOps",
 				"headline": "Déployez en production en toute confiance",
-				"description": "Optimisez vos déploiements grâce à des pipelines de CI/CD, la conteneurisation et une infrastructure cloud sécurisée sur AWS — assurant une haute disponibilité et une efficacité opérationnelle.",
-				"bullet_1": "Pipelines automatisés de build, test & déploiement",
-				"bullet_2": "Configurations conteneurisées basées sur l'Infrastructure-as-Code",
-				"bullet_3": "Haute disponibilité & accords de niveau de service à 99 %",
-				"link": "Explorer le cloud & le DevOps",
+				"description": "Simplifiez vos déploiements grâce aux pipelines CI/CD, à la conteneurisation et à une infrastructure cloud sécurisée sur AWS — garantissant une haute disponibilité et une efficacité opérationnelle.",
+				"bullet_1": "Pipelines automatisés de build, de test et de déploiement",
+				"bullet_2": "Configurations conteneurisées et infrastructure managée par le code (IaC)",
+				"bullet_3": "Haute disponibilité et engagements de niveau de service (SLA) à 99 %",
+				"link": "Explorer le Cloud & DevOps",
 				"demo": {
 					"title": "Pipeline CI/CD",
 					"subtitle": "main → production",
@@ -139,76 +139,76 @@
 					"running": "En cours…",
 					"run": "Lancer le pipeline",
 					"run_again": "Relancer",
-					"status_build": "Construction…",
-					"status_test": "Exécution des tests…",
+					"status_build": "Build en cours…",
+					"status_test": "Tests en cours…",
 					"status_deploy": "Déploiement en cours…",
 					"status_live_label": "En ligne"
 				}
 			}
 		},
 		"empower": {
-			"eyebrow": "Qui nous accompagnons",
-			"headline": "Nous accompagnons les startups technologiques, les PME et les marques mondiales",
-			"description": "De la phase d'amorçage à la modernisation des systèmes d'entreprise, nous associons le modèle d'ingénierie idéal à votre étape de croissance, votre pile technologique et vos objectifs.",
+			"eyebrow": "À qui nous nous adressons",
+			"headline": "Nous accompagnons les startups technologiques, les PME et les marques internationales",
+			"description": "De l'accompagnement des jeunes entreprises à la modernisation des systèmes existants de grands groupes — nous associons le modèle d'ingénierie idéal à votre niveau de maturité, votre stack et vos objectifs de croissance.",
 			"featured_pin": "Compétence clé",
 			"cards": {
 				"startups": {
 					"title": "Startups en Série A/B",
-					"description": "Nous aidons les startups en forte croissance à se développer grâce à des équipes agiles et des solutions cloud-native, de l'accélération de MVP à l'évolutivité des architectures principales."
+					"description": "Nous aidons les startups en forte croissance à évoluer grâce à des équipes agiles et des solutions cloud natives — de l'accélération du MVP au développement des systèmes fondamentaux."
 				},
 				"enterprise": {
 					"title": "Modernisation d'entreprise",
-					"description": "Nous modernisons les systèmes existants avec des solutions cloud-native, réduisant la dette technique, améliorant les performances et libérant l'innovation."
+					"description": "Nous modernisons les systèmes existants à l'aide de solutions cloud natives — réduisant la dette technique, améliorant les performances et libérant le potentiel d'innovation."
 				},
 				"crm": {
-					"title": "Organisations centrées sur le CRM",
-					"description": "Nous concevons des structures sur mesure axées sur les CRM et HubSpot pour centraliser les données, améliorer l'expérience client et éclairer la prise de décision."
+					"title": "Entreprises orientées CRM",
+					"description": "Nous concevons des structures personnalisées autour de votre CRM et de HubSpot afin de centraliser vos données, d'optimiser l'expérience client et de faciliter vos prises de décision."
 				},
 				"custom": {
 					"title": "Solutions logicielles sur mesure",
-					"description": "Les outils standards ne conviennent pas à tous les besoins. Nous construisons des logiciels évolutifs et flexibles qui s'adaptent à votre activité et apportent des résultats mesurables."
+					"description": "Les outils standard ne conviennent pas à tous les besoins. Nous concevons des logiciels évolutifs et flexibles qui s'adaptent à vos activités et génèrent des résultats mesurables."
 				},
 				"fintech": {
-					"title": "Fintech & Paiements",
-					"description": "Des services bancaires numériques aux plateformes de trading, nous créons des solutions fintech sécurisées et conformes qui se déploient à l'échelle mondiale avec une expérience utilisateur fluide."
+					"title": "Fintech et Paiements",
+					"description": "De la banque en ligne aux plateformes de trading, nous développons des solutions fintech sécurisées et conformes qui se déploient à l'échelle mondiale avec une expérience utilisateur fluide."
 				},
 				"ai": {
-					"title": "IA & Automatisation",
-					"description": "Nous mettons en œuvre des chatbots alimentés par l'IA, des analyses prédictives et des systèmes d'automatisation qui réduisent les tâches manuelles et génèrent de nouveaux revenus."
+					"title": "IA et Automatisation",
+					"description": "Nous mettons en place des chatbots optimisés par l'IA, des analyses prédictives et des systèmes d'automatisation qui allègent les tâches manuelles et ouvrent de nouvelles opportunités de revenus."
 				},
 				"data": {
-					"title": "Données & Analyses",
-					"description": "Nous transformons les données brutes en informations exploitables grâce à des tableaux de bord BI, des entrepôts de données et des analyses en temps réel conçus pour des décisions plus stratégiques."
+					"title": "Données et Analyses",
+					"description": "Nous transformons les données brutes en informations exploitables grâce à des tableaux de bord décisionnels, des entrepôts de données et des analyses en temps réel adaptés à vos choix stratégiques."
 				},
 				"mobile": {
 					"title": "Développement d'applications mobiles",
-					"description": "We build high-performance iOS, Android, and cross-platform apps with seamless UX — keeping your brand connected anytime, anywhere."
+					"description": "Nous développons des applications iOS, Android et multiplateformes performantes dotées d'une expérience utilisateur fluide — pour garder votre marque connectée partout et à tout moment."
 				}
 			}
 		},
 		"outsource": {
 			"eyebrow": "Pourquoi externaliser avec nous",
-			"headline": "Externalisez l'ingénierie, accélérez la croissance",
-			"description": "Gagnez en efficacité financière et en précision technique. Évoluez avec agilité et concentrez vos forces sur votre cœur de métier.",
+			"headline": "Externalisez votre ingénierie, accélérez votre croissance",
+			"description": "Bénéficiez d'une efficacité financière et d'une rigueur professionnelle. Évoluez avec agilité et recentrez-vous sur vos compétences clés.",
 			"pillars": {
 				"collaboration": {
 					"title": "Collaboration transparente",
-					"description": "En tant que partenaire de développement externalisé, nous nous intégrons de manière transparente à vos équipes internes grâce à une communication ouverte, des feuilles de route partagées et une visibilité totale sur chaque étape de notre travail."
+					"description": "En tant que partenaire de développement externalisé, nous nous intégrons de manière transparente à vos équipes internes grâce à une communication ouverte, des feuilles de route partagées et une visibilité totale à chaque étape de notre travail."
 				},
 				"legal": {
 					"title": "Protection juridique",
-					"description": "Nos développeurs créent des applications exclusivement pour nos clients. Vous conservez 100 % des droits de propriété intellectuelle de vos logiciels. Nous signons également des accords de confidentialité (NDA) et de non-concurrence pour garantir une protection juridique totale."
+					"description": "Nos développeurs conçoivent des applications exclusivement pour nos clients — vous conservez 100 % des droits de propriété intellectuelle sur vos logiciels. Nous signons également des accords de confidentialité (NDA) et de non-concurrence pour une protection juridique totale."
 				},
 				"cost": {
-					"title": "Développement économiquement avantageux",
-					"description": "Développez sans sacrifier la qualité du code. Codevider a son siège social à Tirana, en Albanie — un pôle reconnu pour ses développeurs d'applications de premier plan à des tarifs compétitifs."
+					"title": "Développement optimisé en coûts",
+					"description": "Travaillez sans transiger sur la qualité du code. Le siège de Codevider est basé à Tirana, en Albanie — un pôle reconnu pour ses développeurs web de premier plan à des tarifs compétitifs."
 				}
 			}
 		},
 		"global": {
 			"eyebrow": "Partenariats mondiaux",
-			"headline": "Construire des ponts au-delà des frontières",
-			"description": "Nous facilitons une collaboration fluide sur des projets internationaux, permettant aux startups, aux entreprises et aux innovateurs de progresser ensemble.",
+			"headline": "Créer des ponts par-delà les frontières",
+			"description": "Nous favorisons une collaboration fluide sur des projets internationaux — permettant aux startups, aux entreprises et aux innovateurs de se développer ensemble.",
 			"tirana": "Tirana",
 			"germany": "Allemagne",
 			"usa": "États-Unis",
@@ -217,75 +217,75 @@
 		"why_choose": {
 			"eyebrow": "Pourquoi nos clients nous choisissent",
 			"headline": "Un partenariat fondé sur trois piliers",
-			"description": "Efficacité, flexibilité et expertise approfondie — le socle de chacun de nos engagements.",
+			"description": "Efficacité, flexibilité et expertise approfondie — la base de chacune de nos collaborations.",
 			"value_badge": "Notre proposition de valeur",
 			"value_flow": "Efficacité → Flexibilité → Expertise",
-			"value_description": "Nous livrons bien plus que du code : nous vous proposons un partenariat stratégique conçu pour la croissance, où vous gardez le contrôle à chaque étape.",
-			"flex_value": "100 %",
-			"flex_title": "Flexibilité & contrôle",
-			"flex_description": "Gérez et gardez le contrôle de votre propre projet à tout moment — votre feuille de route, vos priorités.",
+			"value_description": "Nous livrons bien plus que du code — nous vous proposons un partenariat stratégique conçu pour la croissance, où vous gardez le contrôle à chaque étape.",
+			"flex_value": "100%",
+			"flex_title": "Flexibility et contrôle",
+			"flex_description": "Gérez et gardez le contrôle de votre projet à tout moment — votre feuille de route, vos priorités.",
 			"years_title": "années d'expérience",
-			"years_description": "Bénéficiez des perspectives innovantes que notre équipe apporte.",
+			"years_description": "Bénéficiez des perspectives innovantes apportées par notre équipe.",
 			"cards": {
 				"savings": {
-					"pin": "Économie moy.",
-					"title": "Économies substantielles de temps et d'argent",
-					"description": "Évitez les processus coûteux de recrutement et de formation. Notre méthode optimisée accélère votre mise sur le marché — préservant ainsi vos ressources essentielles."
+					"pin": "Économies moy.",
+					"title": "Économies de temps et de coûts significatives",
+					"description": "Évitez les processus coûteux de recrutement et de formation. Notre organisation rationalisée accélère votre mise sur le marché — préservant ainsi vos ressources essentielles."
 				},
 				"control": {
 					"pin": "Contrôle",
-					"title": "Flexibilité & contrôle absolus",
-					"description": "Ajustez la taille de votre équipe à la demande et gardez le contrôle sur plusieurs projets — en collaborant via Slack, Jira, GitHub et vos propres outils."
+					"title": "Flexibilité et contrôle absolus",
+					"description": "Ajustez la taille de votre équipe à la demande et gardez la maîtrise de vos différents projets — en collaborant via Slack, Jira, GitHub et vos outils habituels."
 				},
 				"expertise": {
 					"pin": "Perspective",
 					"title": "Expertise créative à la demande",
-					"description": "Apportez un souffle de créativité. Nos professionnels hautement motivés proposent des perspectives inédites et des solutions innovantes."
+					"description": "Apportez un élan de créativité. Nos professionnels motivés apportent de nouvelles perspectives et des solutions innovantes à vos défis."
 				}
 			}
 		},
 		"faq": {
 			"eyebrow": "FAQ",
-			"headline": "Foire aux questions",
+			"headline": "Questions fréquemment posées",
 			"items": {
 				"projects": {
 					"question": "Quels types de projets logiciels prenez-vous en charge ?",
-					"answer": "Des nouvelles applications web et mobiles aux plateformes d'entreprise, en passant par les migrations cloud et les intégrations d'IA — nous gérons le cycle complet de développement pour les startups, les PME et les grandes entreprises sur des projets commerciaux de moyenne et grande envergure."
+					"answer": "Des applications web et mobiles initiales aux plateformes d'entreprise, migrations cloud et intégrations d'IA — nous prenons en charge le cycle complet de développement pour les startups, PME et grands groupes sur des projets commerciaux de moyenne et grande envergure."
 				},
 				"technologies": {
 					"question": "Dans quelles technologies et frameworks vous spécialisez-vous ?",
-					"answer": "Notre pile technologique principale comprend React, Next.js, Angular, Vue et React Native pour le frontend ; Node.js, Python, Django, Laravel et PHP pour le backend ; ainsi que PostgreSQL, MySQL, MongoDB et AWS pour l'infrastructure de données et de cloud."
+					"answer": "Notre stack principale comprend React, Next.js, Angular, Vue et React Native pour le frontend ; Node.js, Python, Django, Laravel et PHP pour le backend ; ainsi que PostgreSQL, MySQL, MongoDB et AWS pour la gestion des données et l'infrastructure cloud."
 				},
 				"estimates": {
 					"question": "Comment estimez-vous les délais et les budgets des projets ?",
-					"answer": "Nous commençons par une phase de cadrage pour définir vos besoins, puis nous vous fournissons une estimation transparente associée à des jalons précis. Nos engagements s'effectuent sur une base horaire ou mensuelle dédiée, garantissant ainsi que vous sachiez exactement ce que vous financez."
+					"answer": "Nous commençons par une phase de découverte pour cadrer vos besoins, puis nous vous fournissons une estimation transparente avec des jalons précis. Nos interventions s'effectuent sur une base horaire ou mensuelle dédiée, garantissant une parfaite visibilité de vos dépenses."
 				},
 				"ownership": {
-					"question": "Serais-je propriétaire du code source et de la propriété intellectuelle ?",
-					"answer": "Oui, sans exception. Nos développeurs travaillent exclusivement pour le compte de nos clients, et vous conservez l'intégralité des droits de propriété intellectuelle sur vos logiciels. Nous signons également des accords de confidentialité (NDA) et de non-concurrence pour vous garantir une protection juridique totale."
+					"question": "Serai-je propriétaire du code source et de la propriété intellectuelle ?",
+					"answer": "Oui — dans tous les cas. Nos développeurs créent des solutions exclusivement pour nos clients, et vous conservez l'intégralité des droits de propriété intellectuelle. Nous signons également des accords de confidentialité (NDA) et de non-concurrence pour vous garantir une protection juridique complète."
 				},
 				"communication": {
 					"question": "Comment communiquerons-nous pendant le projet ?",
-					"answer": "Vous participerez à des points quotidiens avec vos développeurs dédiés et recevrez des rapports d'avancement hebdomadaires de votre chef de projet. Nous collaborons via vos outils préférés — Slack, Jira, GitHub, etc."
+					"answer": "Vous aurez des points quotidiens (standups) avec vos développeurs dédiés et des rapports d'avancement hebdomadaires de votre chef de projet. Nous collaborons via vos outils préférés — Slack, Jira, GitHub, etc."
 				},
 				"quality": {
 					"question": "Quel est votre processus d'assurance qualité ?",
-					"answer": "La qualité est intégrée dès le départ, et non ajoutée après coup. Chaque équipe dédiée intègre un ingénieur QA, avec des tests automatisés, des revues de code et un serveur de développement dédié où vous pouvez tester votre projet avant son déploiement en production."
+					"answer": "La qualité est intégrée dès le départ, pas ajoutée après coup. Chaque équipe comprend un profil QA, réalisant des tests automatisés, des revues de code et un suivi sur un serveur de développement dédié afin que vous puissiez tester votre projet avant son déploiement en production."
 				},
 				"support": {
-					"question": "Fournissez-vous un support et une maintenance après le lancement ?",
-					"answer": "Absolument. Après le déploiement sur vos serveurs, nous proposons un support continu, de la maintenance et des améliorations régulières afin de garantir que votre produit reste sécurisé, performant et adapté à l'évolution de votre activité."
+					"question": "Assurez-vous le support et la maintenance après le lancement ?",
+					"answer": "Absolument. Après le déploiement sur vos serveurs, nous proposons un support continu, de la maintenance et des améliorations régulières pour que votre produit reste sécurisé, performant et adapté à l'évolution de vos activités."
 				},
 				"legacy": {
-					"question": "Can you work with an existing or legacy codebase?",
-					"answer": "Oui. Nous sommes spécialisés dans la modernisation des architectures existantes — en réduisant la dette technique, en améliorant les performances et en intégrant de nouvelles solutions à vos systèmes actuels sans perturber vos opérations."
+					"question": "Pouvez-vous travailler à partir d'une base de code existante ou obsolète ?",
+					"answer": "Oui. Nous sommes spécialisés dans la modernisation des systèmes existants — réduction de la dette technique, optimisation des performances et intégration à votre architecture actuelle sans perturber vos activités."
 				}
 			}
 		},
 		"contact": {
-			"eyebrow": "Restons en contact",
+			"eyebrow": "Contactez-nous",
 			"headline": "Prêt à concrétiser votre prochain projet ?",
-			"description": "Que vous ayez un projet précis en tête ou que vous souhaitiez simplement explorer les possibilités, notre équipe est à votre écoute. Remplissez le formulaire ou contactez-nous directement.",
+			"description": "Que vous ayez un projet précis à l'esprit ou que vous souhaitiez simplement explorer les possibilités, notre équipe est là pour vous guider. Remplissez le formulaire ou contactez-nous directement.",
 			"email_title": "Écrivez-nous directement",
 			"phone_title": "Appelez-nous",
 			"address_title": "Rencontrez-nous",
@@ -298,23 +298,23 @@
 			"form_optional": "facultatif",
 			"form_company_placeholder": "Acme Inc.",
 			"form_message": "Parlez-nous de votre projet",
-			"form_message_placeholder": "Que souhaitez-vous construire ? Calendrier, portée, pile technologique…",
+			"form_message_placeholder": "Que souhaitez-vous développer ? Délais, périmètre, stack technique…",
 			"form_title": "Envoyez-nous un message",
-			"form_subtitle": "Partagez quelques détails sur votre projet et nous vous recontacterons rapidement pour définir les prochaines étapes.",
+			"form_subtitle": "Partagez quelques détails sur votre projet et nous vous recontacterons rapidement.",
 			"form_required": "Champs obligatoires",
-			"form_submit": "Envoyer le message",
+			"form_submit": "Envoyer votre message",
 			"form_submitting": "Envoi en cours…",
 			"form_note": "Nous répondons généralement sous un jour ouvrable.",
-			"form_note_privacy": "Vos coordonnées restent strictement confidentielles — nous ne les partageons jamais avec des tiers.",
+			"form_note_privacy": "Vos données restent confidentielles — nous ne les partageons jamais avec des tiers.",
 			"form_error_submit": "Une erreur est survenue. Veuillez réessayer.",
 			"form_error_turnstile": "Veuillez valider la vérification de sécurité avant d'envoyer.",
 			"form_errors": {
 				"name_required": "Veuillez saisir votre nom complet",
-				"name_max": "Le nom doit comporter 100 caractères au maximum",
+				"name_max": "Le nom doit comporter au maximum 100 caractères",
 				"email_required": "Veuillez saisir votre adresse e-mail",
 				"email_invalid": "Veuillez saisir une adresse e-mail valide",
-				"details_required": "Veuillez nous décrire votre projet",
-				"details_max": "Les détails doivent comporter 1000 caractères au maximum"
+				"details_required": "Veuillez décrire votre projet",
+				"details_max": "La description doit comporter au maximum 1000 caractères"
 			},
 			"success_title": "Message envoyé !",
 			"success_message": "Merci de nous avoir contactés — nous vous répondrons sous un jour ouvrable."
@@ -326,22 +326,22 @@
 			"performance_delta": "+18,2 % par rapport au mois dernier",
 			"growth": "Croissance",
 			"growth_delta": "+842 nouveaux utilisateurs",
-			"system_health": "Santé du système",
+			"system_health": "État du système",
 			"system_health_delta": "Tous les systèmes sont opérationnels",
-			"leads": "Leads",
-			"leads_delta": "+12 % de conversion",
+			"leads": "Prospects",
+			"leads_delta": "Conversion +12 %",
 			"revenue_overview": "Aperçu des revenus",
 			"revenue_period": "12 dernières semaines",
-			"revenue_chart_label": "Tendance des revenus hebdomadaires sur 12 semaines",
+			"revenue_chart_label": "Évolution hebdomadaire des revenus sur 12 semaines",
 			"week_1": "S1",
 			"week_6": "S6",
 			"week_12": "S12"
 		}
 	},
 	"not_found": {
-		"title": "404 — Page introuvable",
+		"title": "404 — Page non trouvée",
 		"description": "La page que vous recherchez n'existe pas ou a été déplacée.",
-		"home_link": "Retourner à la page d'accueil"
+		"home_link": "Retourner à l'accueil"
 	},
 	"legal": {
 		"shared": {
@@ -349,57 +349,57 @@
 			"toc_heading": "Sommaire"
 		},
 		"privacy": {
-			"eyebrow": "Mentions légales",
+			"eyebrow": "Juridique",
 			"title": "Politique de confidentialité",
 			"last_updated": "Dernière mise à jour : 24 juin 2026",
 			"intro_paragraphs": [
-				"La présente Politique de confidentialité explique comment Codevider (« nous », « notre » ou « nos ») collecte, utilise, protège et divulgue vos données personnelles lorsque vous visitez notre site web (codevider.com), nous contactez par e-mail, soumettez des formulaires, réservez un appel de cadrage ou postulez à un poste ouvert.",
-				"Codevider est un partenaire de développement logiciel stratégique enregistré à l'adresse suivante : Rue Barrikada, Tirana, Albanie 1001. Aux fins du Règlement général sur la protection des données (RGPD), nous agissons en tant que Responsable du traitement des données personnelles collectées via ce site web."
+				"La présente Politique de confidentialité explique comment Codevider (« nous », « notre » ou « nos ») collecte, utilise, protège et divulgue vos données personnelles lorsque vous visitez notre site web (codevider.com), nous contactez par e-mail, soumettez des formulaires, planifiez un appel de découverte ou postulez à un poste vacant.",
+				"Codevider est un partenaire stratégique de développement de logiciels enregistré au Rue Barrikada, Tirana, Albanie 1001. Conformément au Règlement Général sur la Protection des Données (RGPD), nous agissons en tant que responsable du traitement des données personnelles collectées via ce site web."
 			],
 			"sections": {
 				"collection": {
-					"title": "Informations que nous collectons",
+					"title": "Données que nous collectons",
 					"blocks": [
 						{
 							"type": "p",
-							"text": "Nous collectons les informations que vous nous fournissez volontairement, ainsi que les données générées automatiquement lorsque vous interagissez avec notre site web."
+							"text": "Nous collectons les données que vous nous fournissez volontairement, ainsi que les données générées automatiquement lorsque vous interagissez avec notre site web."
 						},
 						{
 							"type": "h3",
-							"text": "Données actives (Fournies directement par vous)"
+							"text": "Données actives (fournies directement par vous)"
 						},
 						{
 							"type": "ul",
 							"items": [
-								"Formulaires de contact & demandes : Lorsque vous nous contactez ou cliquez sur « Réserver un appel », nous collectons votre nom, votre adresse e-mail professionnelle, votre numéro de téléphone professionnel, le nom de votre entreprise, votre situation géographique et le contenu de votre message.",
-								"Candidatures : Si vous soumettez une candidature via notre page Carrières, nous collectons votre nom complet, vos coordonnées, votre curriculum vitae (CV), votre lettre de motivation, les liens vers votre portfolio ou GitHub, votre historique professionnel et votre parcours universitaire."
+								"Formulaires de contact et demandes : Lorsque vous nous contactez ou cliquez sur « Planifier un appel », nous collectons votre nom, votre adresse e-mail professionnelle, votre numéro de téléphone professionnel, le nom de votre entreprise, votre emplacement géographique et le contenu des messages envoyés.",
+								"Candidatures : Si vous soumettez une candidature via notre page Carrières, nous collectons votre nom complet, vos coordonnées, votre curriculum vitae (CV), votre lettre de motivation, vos liens vers votre portfolio ou GitHub, votre historique professionnel et votre parcours universitaire."
 							]
 						},
 						{
 							"type": "h3",
-							"text": "Données passives (Collectées automatiquement)"
+							"text": "Données passives (collectées automatiquement)"
 						},
 						{
 							"type": "ul",
 							"items": [
-								"Données techniques d'utilisation : Lorsque vous naviguez sur notre site, nous collectons automatiquement des données techniques à l'aide de cookies, de balises web et de journaux de serveur. Cela inclut votre adresse IP (Internet Protocol), le type et la version de votre navigateur, votre fuseau horaire, votre système d'exploitation, le type d'appareil et des statistiques d'utilisation détaillées (par exemple, les pages consultées, la durée de la visite, le parcours de navigation)."
+								"Données techniques d'utilisation : Lorsque vous naviguez sur notre site web, nous collectons automatiquement des informations techniques via des cookies, des balises web et des journaux de serveur. Cela inclut votre adresse IP (Internet Protocol), le type et la version de votre navigateur, votre fuseau horaire, votre système d'exploitation, le type d'appareil et des statistiques d'utilisation détaillées (ex. pages consultées, durée de la visite, parcours de navigation)."
 							]
 						}
 					]
 				},
 				"legal_basis": {
-					"title": "Bases légales et utilisation des informations",
+					"title": "Bases légales et utilisation de vos données",
 					"blocks": [
 						{
 							"type": "p",
-							"text": "Nous traitons vos données personnelles conformément aux bases légales suivantes reconnues par les lois mondiales sur la protection des données (notamment l'article 6 du RGPD) :"
+							"text": "Nous traitons vos données personnelles sur la base des fondements juridiques suivants reconnus par les lois mondiales sur la protection des données (y compris l'article 6 du RGPD) :"
 						},
 						{
 							"type": "ol",
 							"items": [
-								"Intérêts légitimes : Pour répondre à vos demandes B2B, planifier des appels de cadrage, maintenir la sécurité et l'intégrité technique de notre site web, et optimiser l'expérience utilisateur.",
-								"Nécessité précontractuelle / contractuelle : Pour évaluer vos qualifications si vous postulez à un emploi ou pour préparer une proposition commerciale de développement logiciel à votre demande.",
-								"Consentement : Lorsque vous acceptez explicitement le dépôt de cookies non essentiels ou que vous vous inscrivez à nos communications marketing."
+								"Intérêts légitimes : Répondre à vos demandes d'informations B2B, planifier des appels de découverte, assurer la sécurité et l'intégrité technique de notre site web et optimiser l'expérience utilisateur.",
+								"Nécessité précontractuelle / contractuelle : Évaluer vos qualifications si vous postulez à une offre d'emploi ou préparer une proposition commerciale de développement de logiciels à votre demande.",
+								"Consentement : Lorsque vous acceptez expressément l'utilisation de cookies non essentiels ou que vous vous abonnez à nos communications marketing."
 							]
 						},
 						{
@@ -409,20 +409,20 @@
 						{
 							"type": "ul",
 							"items": [
-								"Faciliter les communications professionnelles et planifier des réunions de découverte.",
-								"Évaluer les candidats à un emploi et gérer nos processus de recrutement.",
-								"Analyser le trafic du site web afin d'améliorer nos performances techniques, nos mises en page et la description de nos services.",
+								"Faciliter les communications commerciales et planifier les réunions de découverte.",
+								"Évaluer les candidatures et gérer nos processus de recrutement.",
+								"Analyser le trafic du site web pour améliorer nos performances techniques, nos mises en page et la description de nos services.",
 								"Protéger notre site web contre les cybermenaces, la fraude ou toute activité malveillante."
 							]
 						}
 					]
 				},
 				"transfers": {
-					"title": "Transferts internationaux de données & partage avec des tiers",
+					"title": "Transferts internationaux de données et partage avec des tiers",
 					"blocks": [
 						{
 							"type": "p",
-							"text": "Dans la mesure où Codevider opère à l'échelle mondiale et a son siège social en Albanie (en dehors de l'Espace économique européen), vos données seront transférées au-delà des frontières internationales."
+							"text": "Étant donné que Codevider opère à l'échelle mondiale et a son siège social en Albanie (en dehors de l'Espace économique européen), vos données seront transférées au-delà des frontières internationales."
 						},
 						{
 							"type": "h3",
@@ -430,7 +430,7 @@
 						},
 						{
 							"type": "p",
-							"text": "Si vous êtes situé au sein de l'UE/EEE ou au Royaume-Uni, veuillez noter que vos données personnelles seront transférées, stockées et traitées en Albanie et/ou aux États-Unis. Afin de garantir un niveau de protection élevé, nous veillons à ce que tous les transferts transfrontaliers de données soient conformes aux garanties juridiques appropriées, notamment par l'exécution des clauses contractuelles types (CCT) de l'Union européenne ou en nous appuyant sur des cadres d'adéquation applicables."
+							"text": "Si vous résidez au sein de l'UE/EEE ou au Royaume-Uni, veuillez noter que vos données personnelles seront transférées, stockées et traitées en Albanie et/ou aux États-Unis. Afin de garantir un niveau élevé de protection, nous veillons à ce que tous les transferts de données transfrontaliers respectent les garanties juridiques appropriées, notamment par l'application des clauses contractuelles types (CCT) de l'UE ou par le recours à des cadres d'adéquation applicables."
 						},
 						{
 							"type": "h3",
@@ -438,14 +438,14 @@
 						},
 						{
 							"type": "p",
-							"text": "Nous ne vendons ni ne louons vos données personnelles à des tiers. Nous partageons vos données uniquement avec des prestataires de services de confiance qui agissent strictement selon nos instructions, notamment :"
+							"text": "Nous ne vendons ni ne louons vos données personnelles à des tiers. Nous partageons vos données uniquement avec des prestataires de services de confiance agissant sous nos instructions directes, notamment :"
 						},
 						{
 							"type": "ul",
 							"items": [
-								"Des outils de gestion de la relation client (CRM) et de prospection commerciale (par exemple, HubSpot, Salesforce).",
-								"Des plateformes de planification en ligne utilisées pour la réservation d'appels (par exemple, Calendly).",
-								"Des solutions d'hébergement cloud, des outils d'analyse (par exemple, Google Analytics) et des outils de collaboration interne."
+								"Des outils de gestion de la relation client (CRM) et de gestion commerciale (ex. HubSpot, Salesforce).",
+								"Des plateformes de planification en ligne pour la réservation d'appels (ex. Calendly).",
+								"Des hébergeurs cloud, des outils d'analyse (ex. Google Analytics) et des outils de collaboration interne."
 							]
 						}
 					]
@@ -455,47 +455,47 @@
 					"blocks": [
 						{
 							"type": "p",
-							"text": "Nous ne conservons vos données personnelles que pendant la durée nécessaire à la réalisation des objectifs décrits dans la présente politique :"
+							"text": "Nous conservons vos données personnelles uniquement pendant la durée nécessaire à la réalisation des finalités détaillées dans cette politique :"
 						},
 						{
 							"type": "ul",
 							"items": [
-								"Demandes d'information & données de prospects : Conservées pendant la durée de notre relation commerciale, ou jusqu'à deux (2) ans après votre dernière communication active si aucun contrat n'est signé.",
-								"Données de candidature : Les CV et documents de recrutement des candidats non retenus sont supprimés de manière sécurisée douze (12) mois après l'attribution du poste, sauf si vous nous donnez votre accord explicite pour les conserver en vue d'opportunités futures.",
-								"Données techniques : Les journaux d'analyse et de cookies sont conservés pendant une durée maximale de quatorze (14) mois avant suppression automatique ou anonymisation."
+								"Demandes et données prospects : Conservées pour la durée de notre relation commerciale ou jusqu'à deux (2) ans après votre dernière communication active si aucun contrat n'est signé.",
+								"Données de candidature : Les CV et documents de recrutement des candidats non retenus sont supprimés de manière sécurisée douze (12) mois après l'attribution du poste, sauf accord explicite de votre part pour les conserver en vue d'opportunités futures.",
+								"Données techniques : Les données d'analyse et les journaux de cookies sont conservés pendant un maximum de quatorze (14) mois avant d'être supprimés ou anonymisés automatiquement."
 							]
 						}
 					]
 				},
 				"rights": {
-					"title": "Vos droits (RGPD & lois américaines sur la protection de la vie privée)",
+					"title": "Vos droits (RGPD et lois américaines sur la protection de la vie privée)",
 					"blocks": [
 						{
 							"type": "p",
-							"text": "Selon votre juridiction (par exemple, l'UE/RU sous le RGPD, ou certains États américains comme la Californie sous le CCPA/CPRA), vous disposez de droits spécifiques et légalement applicables concernant vos données personnelles :"
+							"text": "Selon votre juridiction (ex. UE/Royaume-Uni sous le RGPD, ou États américains comme la Californie sous la CCPA/CPRA), vous disposez de droits spécifiques applicables concernant vos données personnelles :"
 						},
 						{
 							"type": "ul",
 							"items": [
 								"Accès et portabilité : Le droit de demander une copie des données personnelles que nous détenons à votre sujet dans un format structuré et lisible par machine.",
-								"Rectification : Le droit de nous demander de corriger des données personnelles inexactes ou incomplètes.",
-								"Suppression (« Droit à l'oubli ») : Le droit de demander la suppression définitive de vos données, sous réserve de certaines exceptions légales (par exemple, obligations fiscales ou de conformité).",
-								"Limitation & opposition : Le droit de vous opposer au traitement de vos données ou d'en demander la limitation en fonction d'intérêts légitimes ou de prospection commerciale directe.",
-								"Non-discrimination : Les résidents américains ont le droit absolu de ne pas faire l'objet d'un service discriminatoire ou d'ajustements tarifaires pour avoir exercé leurs choix en matière de confidentialité."
+								"Rectification : Le droit d'obtenir la correction de données personnelles inexactes ou incomplètes.",
+								"Suppression (« Droit à l'oubli ») : Le droit de demander la suppression définitive de vos données, sous réserve de certaines exceptions légales (ex. obligations fiscales ou de conformité).",
+								"Limitation et opposition : Le droit de s'opposer au traitement de vos données ou d'en demander la limitation sur la base de nos intérêts légitimes ou à des fins de marketing direct.",
+								"Non-discrimination : Les résidents des États-Unis ont le droit absolu de ne pas subir de discrimination tarifaire ou de service pour avoir exercé leurs choix en matière de confidentialité."
 							]
 						},
 						{
 							"type": "p",
-							"text": "Pour exercer l'un de ces droits, veuillez nous contacter à l'adresse info@codevider.com. Nous répondrons à votre demande vérifiée dans un délai de trente (30) jours, conformément à la loi."
+							"text": "Pour exercer l'un de ces droits, veuillez nous contacter à info@codevider.com. Nous répondrons à votre demande vérifiée dans un délai de trente (30) jours, conformément à la loi."
 						}
 					]
 				},
 				"contact": {
-					"title": "Coordonnées",
+					"title": "Coordonnées de contact",
 					"blocks": [
 						{
 							"type": "p",
-							"text": "Pour toute demande relative à la protection de la vie privée, pour toute question de conformité ou pour déposer une réclamation officielle, veuillez nous contacter à l'adresse suivante :"
+							"text": "Pour toute demande relative à la confidentialité, question de conformité ou pour déposer une réclamation formelle, vous pouvez nous contacter à l'adresse suivante :"
 						},
 						{
 							"type": "contact",
@@ -509,26 +509,26 @@
 			}
 		},
 		"terms": {
-			"eyebrow": "Mentions légales",
+			"eyebrow": "Juridique",
 			"title": "Conditions d'utilisation",
 			"last_updated": "Dernière mise à jour : 24 juin 2026",
 			"intro_paragraphs": [
 				"Bienvenue sur codevider.com. Les présentes Conditions d'utilisation (« Conditions ») constituent un accord juridiquement contraignant entre vous (« Utilisateur », « Visiteur » ou « Client ») et Codevider (« nous », « notre » ou « nos ») régissant votre accès et votre utilisation de notre site web, de nos contenus numériques et de nos fonctionnalités de contact en ligne.",
-				"En naviguant ou en utilisant ce site web, vous reconnaissez explicitement avoir lu, compris et accepté d'être lié par ces Conditions. Si vous n'êtes pas d'accord, vous devez immédiatement cesser d'utiliser ce site web."
+				"En naviguant ou en utilisant ce site web, vous reconnaissez expressément avoir lu, compris et accepté d'être lié par ces Conditions. Si vous n'êtes pas d'accord, vous devez immédiatement cesser d'utiliser ce site."
 			],
 			"sections": {
 				"scope": {
-					"title": "Portée du site web & clause de non-responsabilité pour les services B2B",
+					"title": "Champ d'application du site et clause de non-responsabilité des services B2B",
 					"blocks": [
 						{
 							"type": "p",
-							"text": "Le site web de Codevider est conçu exclusivement pour fournir des présentations informatives de nos services stratégiques de développement de logiciels et d'ingénierie web, mobile et cloud, ainsi que pour faciliter la communication B2B et le recrutement."
+							"text": "Le site web de Codevider est conçu exclusivement pour présenter des aperçus informatifs de nos services de développement de logiciels, d'ingénierie web, mobile et cloud, ainsi que pour faciliter la communication et le recrutement B2B."
 						},
 						{
 							"type": "ul",
 							"items": [
-								"Aucun engagement commercial : Le contenu informatif de ce site web ne constitue pas une offre commerciale contraignante ou un contrat de services professionnels.",
-								"Contrats distincts : Tous les engagements liés à un projet spécifique, les indicateurs de livraison de logiciels, les accords de niveau de service (SLA), les modalités de paiement et les transferts de propriété intellectuelle concernant les logiciels clients sont strictement régis par des contrats écrits distincts (tels qu'un contrat-cadre de services et un énoncé des travaux) signés et exécutés entre Codevider et le Client."
+								"Absence d'engagement commercial : Le contenu informatif de ce site web ne constitue pas une offre commerciale formelle ou un contrat d'engagement de services professionnels.",
+								"Contrats distincts : Tous les engagements de projets spécifiques, indicateurs de livraison de logiciels, niveaux de service (SLA), conditions de paiement et transferts de propriété intellectuelle relatifs au développement logiciel d'un client sont régis exclusivement par des accords bilatéraux écrits distincts (tels qu'un contrat-cadre de services et un cahier des charges) signés et exécutés entre Codevider et le Client."
 							]
 						}
 					]
@@ -538,13 +538,13 @@
 					"blocks": [
 						{
 							"type": "p",
-							"text": "Tous les actifs, contenus et éléments disponibles sur ce site web — y compris, sans s'y limiter, le code source, les mises en page, les textes, les designs, les graphismes, l'identité de marque, les logos, les études de cas, les livres blancs et les éléments d'interface — sont la propriété intellectuelle exclusive de Codevider ou de ses concédants de licence, et sont protégés par les lois albanaises sur le droit d'auteur et les traités internationaux sur la propriété intellectuelle."
+							"text": "Tous les éléments, contenus et fichiers disponibles sur ce site web — y compris, mais sans s'y limiter, le code source, les mises en page, les textes, les concepts, les graphiques, l'image de marque, les logos, les études de cas, les livres blancs et les éléments d'interface — sont la propriété intellectuelle exclusive de Codevider ou de ses concédants de licence, protégés par les lois albanaises sur le droit d'auteur et les traités internationaux sur la propriété intellectuelle."
 						},
 						{
 							"type": "ul",
 							"items": [
-								"Actions interdites : Vous ne pouvez pas copier, reproduire, republier, aspirer (scraping), modifier, distribuer ou rétroconcevoir toute partie de ce site web ou de son code sous-jacent sans notre consentement écrit préalable et explicite.",
-								"Utilisation autorisée : Les visiteurs bénéficient d'une licence limitée, révocable et non exclusive pour consulter et télécharger du contenu uniquement à des fins de mise en cache individuelle et d'évaluation de Codevider en tant que fournisseur B2B potentiel."
+								"Actions interdites : Vous ne pouvez pas copier, reproduire, republier, extraire (scraper), modifier, distribuer ou rétro-concevoir toute partie de ce site ou de son code sous-jacent sans notre consentement écrit préalable.",
+								"Utilisation autorisée : Les visiteurs bénéficient d'une licence limitée, révocable et non exclusive pour consulter et télécharger le contenu uniquement à des fins de mise en cache individuelle et d'évaluation de Codevider comme prestataire B2B potentiel."
 							]
 						}
 					]
@@ -554,53 +554,53 @@
 					"blocks": [
 						{
 							"type": "p",
-							"text": "Vous acceptez d'utiliser notre site web uniquement à des fins licites. Il vous est strictement interdit de :"
+							"text": "Vous acceptez d'utiliser notre site web uniquement à des fins légales. Il vous est strictement interdit de :"
 						},
 						{
 							"type": "ul",
 							"items": [
 								"Utiliser le site web ou les formulaires de contact d'une manière qui enfreint les réglementations locales, nationales ou internationales applicables (comme l'envoi de spams ou de liens d'hameçonnage).",
-								"Introduire des logiciels malveillants, notamment des virus, chevaux de Troie, vers, bombes logiques ou tout code destiné à perturber ou endommager l'infrastructure du serveur.",
+								"Introduire des logiciels malveillants, notamment des virus, chevaux de Troie, vers, bombes logiques ou tout code conçu pour perturber ou endommager l'infrastructure du serveur.",
 								"Tenter d'accéder sans autorisation à nos serveurs web, systèmes de bases de données ou environnements d'hébergement."
 							]
 						}
 					]
 				},
 				"liability": {
-					"title": "Exclusion de garanties et limitation de responsabilité",
+					"title": "Clause de non-responsabilité des garanties et limitation de responsabilité",
 					"blocks": [
 						{
 							"type": "p",
-							"text": "LE SITE WEB DE CODEVIDER ET TOUT SON CONTENU ACCESSIBLE SONT FOURNIS ENTIÈREMENT « EN L'ÉTAT » ET « SELON DISPONIBILITÉ », SANS AUCUNE GARANTIE DE QUELQUE NATURE QUE CE SOIT, EXPRESSE OU IMPLICITE.",
+							"text": "LE SITE WEB DE CODEVIDER ET TOUT SON CONTENU ACCESSIBLE SONT FOURNIS ENTIÈREMENT « EN L'ÉTAT » ET « SELON LA DISPONIBILITÉ », SANS GARANTIE D'AUCUNE SORTE, QU'ELLE SOIT EXPRESSE OU IMPLICITE.",
 							"variant": "disclaimer"
 						},
 						{
 							"type": "p",
-							"text": "DANS TOUTE LA MESURE PERMISE PAR LA LOI APPLICABLE, CODEVIDER EXCLUT TOUTE GARANTIE, EXPRESSE OU IMPLICITE, Y COMPRIS MAIS SANS S'Y LIMITER, LES GARANTIES IMPLICITES DE QUALITÉ MARCHANDE, D'ADÉQUATION À UN USAGE PARTICULIER ET DE NON-CONTREFAÇON. NOUS NE GARANTISSONS PAS QUE LE SITE WEB FONCTIONNERA SANS INTERRUPTION, DE MANIÈRE SÉCURISÉE OU SANS ERREUR.",
+							"text": "DANS LA MESURE MAXIMALE AUTORISÉE PAR LA LOI APPLICABLE, CODEVIDER EXCLUT TOUTE GARANTIE, Y COMPRIS, MAIS SANS S'Y LIMITER, LES GARANTIES IMPLICITES DE QUALITÉ MARCHANDE, D'ADÉQUATION À UN USAGE PARTICULIER ET DE NON-CONTREFAÇON. NOUS NE GARANTISSONS PAS QUE LE SITE WEB FONCTIONNERA DE MANIÈRE ININTERROMPUE, SÉCURISÉE OU SANS ERREUR.",
 							"variant": "disclaimer"
 						},
 						{
 							"type": "p",
-							"text": "EN AUCUN CAS CODEVIDER, SES ADMINISTRATEURS, EMPLOYÉS OU AGENTS NE POURRONT ÊTRE TENUS RESPONSABLES DE DOMMAGES INDIRECTS, ACCESSOIRES, SPÉCIAUX, CONSÉCUTIFS OU PUNITIFS — Y COMPRIS LA PERTE DE PROFITS, DE REVENUS, DE DONNÉES OU D'OPPORTUNITÉS COMMERCIALES — DÉCOULANT DE OU EN RELATION AVEC VOTRE UTILISATION OU IMPOSSIBILITÉ D'UTILISER CE SITE WEB, MÊME SI NOUS AVONS ÉTÉ INFORMÉS DE LA POSSIBILITÉ DE TELS DOMMAGES.",
+							"text": "EN AUCUN CAS CODEVIDER, SES ADMINISTRATEURS, EMPLOYÉS OU AGENTS NE SERONT TENUS RESPONSABLES DE DOMMAGES INDIRECTS, ACCESSOIRES, SPÉCIAUX, CONSÉCUTIFS OU PUNITIFS — Y COMPRIS LA PERTE DE PROFITS, DE REVENUS, DE DONNÉES OU D'OPPORTUNITÉS COMMERCIALES — DÉCOULANT DE OU EN RELATION AVEC VOTRE UTILISATION OU VOTRE INCAPACITÉ À UTILISER CE SITE WEB, MÊME SI NOUS AVONS ÉTÉ INFORMÉS DE LA POSSIBILITÉ DE TELS DOMMAGES.",
 							"variant": "disclaimer"
 						}
 					]
 				},
 				"governing_law": {
-					"title": "Loi applicable et règlement des différends",
+					"title": "Loi applicable et règlement des litiges",
 					"blocks": [
 						{
 							"type": "p",
-							"text": "Les présentes Conditions d'utilisation, ainsi que votre accès et votre utilisation de ce site web, sont régis exclusivement par les lois de la République d'Albanie, et interprétés conformément à celles-ci, sans égard aux principes de conflit de lois."
+							"text": "Les présentes Conditions d'utilisation, ainsi que votre accès et votre utilisation de ce site web, sont exclusivement régis et interprétés conformément aux lois de la République d'Albanie, sans égard aux principes de conflit de lois."
 						},
 						{
 							"type": "p",
-							"text": "Tout litige, controverse ou réclamation découlant de ou lié aux présentes Conditions, y compris leur validité, leur nullité, leur violation ou leur résiliation, qui ne peut être résolu à l'amiable par des négociations de bonne foi, sera soumis à la compétence exclusive des tribunaux compétents situés à Tirana, Albanie."
+							"text": "Tout litige, controverse ou réclamation découlant de ou lié aux présentes Conditions, y compris leur validité, nullité, violation ou résiliation, qui ne peut être résolu à l'amiable par une négociation de bonne foi, sera soumis à la compétence exclusive des tribunaux compétents situés à Tirana, en Albanie."
 						}
 					]
 				},
 				"contact": {
-					"title": "Coordonnées",
+					"title": "Coordonnées de contact",
 					"blocks": [
 						{
 							"type": "p",
@@ -618,7 +618,7 @@
 		}
 	},
 	"footer": {
-		"description": "Votre partenaire de développement logiciel stratégique — nous concevons des produits web, mobiles et cloud fiables et évolutifs.",
+		"description": "Votre partenaire stratégique en développement de logiciels — concevant des produits web, mobiles et cloud fiables et évolutifs.",
 		"company": "Entreprise",
 		"about": "À propos",
 		"services": "Services",
@@ -630,70 +630,70 @@
 		"address_line_2": "Rue Barrikada",
 		"address_line_3": "Tirana, Albanie 1001",
 		"contact_heading": "Contact",
-		"copyright": "© {year} Codevider. Tous droits réservés. — Restez informé de nos derniers développements et opportunités."
+		"copyright": "© {year} Codevider. Tous droits réservés. — Tenez-vous informé de nos dernières actualités et opportunités."
 	},
 	"about": {
-		"about_us": "À propos",
+		"about_us": "À propos de nous",
 		"our_mission": "Notre mission",
 		"our_values": "Nos valeurs",
 		"our_team": "Notre équipe",
 		"our_story": "Notre histoire",
 		"meta_title": "À propos — Codevider",
-		"meta_description": "Fondée en 2019 à Tirana, en Albanie, Codevider conçoit des logiciels performants : stratégie, design et ingénierie en parfaite harmonie.",
+		"meta_description": "Fondée en 2019 à Tirana, en Albanie, Codevider conçoit des logiciels performants — alliant stratégie, design et ingénierie en toute harmonie.",
 		"hero": {
-			"eyebrow": "À propos",
+			"eyebrow": "À propos de nous",
 			"headline": "Concevoir des logiciels performants",
-			"lead": "Stratégie, design et ingénierie travaillant en harmonie pour faire avancer votre feuille de route.",
-			"meta_years": "Plus de 6 ans de développement logiciel",
-			"meta_projects": "Plus de 45 projets d'entreprise d'envergure mondiale",
+			"lead": "Stratégie, design et ingénierie collaborant en harmonie pour faire progresser votre feuille de route.",
+			"meta_years": "Plus de 6 ans de livraison de logiciels",
+			"meta_projects": "Plus de 45 projets d'envergure internationale",
 			"meta_location": "Tirana, Albanie · Europe"
 		},
 		"who_we_are": {
 			"eyebrow": "Qui nous sommes",
-			"headline": "Conçu pour le partenariat, développé pour durer",
-			"paragraph_1": "Fondé en 2019 à Tirana, en Albanie, Codevider propose des solutions de développement logiciel performantes et économiquement avantageuses pour les startups, les PME et les grandes entreprises en Europe et au-delà. Nous sommes spécialisés dans le développement web et mobile, les microservices cloud-native et les intégrations basées sur l'IA — vous aidant à accélérer votre mise sur le marché et à réduire vos coûts de développement jusqu'à 60 %.",
-			"paragraph_2": "Notre équipe de plus de {value} développeurs maîtrise les piles technologiques les plus avancées du marché. Nous nous intégrons directement dans votre flux de travail grâce à des méthodologies agiles basées sur des sprints qui vous maintiennent informé et maître de votre projet à chaque étape. Axés sur la qualité, la réactivité et un partenariat durable, nous transformons vos idées en produits numériques évolutifs et prêts pour l'avenir.",
+			"headline": "Conçu pour le partenariat, développé pour l'évolution",
+			"paragraph_1": "Fondée en 2019 à Tirana, en Albanie, Codevider propose des solutions de développement de logiciels performantes et compétitives pour les startups, les PME et les entreprises en Europe et au-delà. Nous sommes spécialisés dans le développement web et mobile, les microservices cloud-natives et les intégrations optimisées par l'IA — vous aidant à accélérer votre mise sur le marché et à réduire vos coûts de développement jusqu'à 60 %.",
+			"paragraph_2": "Notre équipe de plus de {value} développeurs maîtrise les technologies les plus avancées du marché. Nous nous intégrons directement dans vos flux de travail à l'aide de méthodologies agiles basées sur des sprints, vous permettant de rester informé et maître du projet à chaque étape. En mettant l'accent sur la qualité, la flexibilité et le partenariat à long terme, nous transformons vos idées en produits numériques évolutifs et pérennes.",
 			"cta": "Bâtissons ensemble"
 		},
 		"culture": {
 			"eyebrow": "Notre culture",
-			"headline": "Notre approche de la conception chez Codevider",
-			"description": "Au cœur de notre entreprise se trouve une culture fondée sur la collaboration, la créativité et la responsabilité. Nous privilégions une communication ouverte, valorisons les différents points de vue et encourageons chaque membre de l'équipe à s'approprier pleinement ses missions.",
-			"principles": {
-				"vision": {
-					"title": "Vision claire",
-					"description": "We align on goals before writing a line of code — so every sprint moves your product toward a measurable outcome."
-				},
-				"code": {
-					"title": "Code propre",
-					"description": "Une architecture propre et rigoureusement testée est indispensable. Votre base de code reste un actif précieux, jamais une contrainte."
-				},
-				"team": {
-					"title": "Équipe solidaire",
-					"description": "La progression et l'apprentissage font partie de notre quotidien. Nous sommes convaincus que les meilleurs produits naissent de l'entraide collective."
-				}
+			"headline": "Comment nous construisons chez Codevider",
+			"description": "Au cœur de notre entreprise se trouve une culture fondée sur la collaboration, la créativité et la responsabilité. Nous valorisons la communication ouverte, célébrons la diversité des points de vue et donnons à chaque membre de l'équipe les moyens de s'approprier son travail."
+		},
+		"principles": {
+			"vision": {
+				"title": "Vision claire",
+				"description": "Nous nous accordons sur les objectifs avant de rédiger la moindre ligne de code — afin que chaque sprint oriente votre produit vers des résultats mesurables."
+			},
+			"code": {
+				"title": "Code propre",
+				"description": "Une architecture maintenable et rigoureusement testée est indispensable. Votre base de code reste un atout, jamais une contrainte."
+			},
+			"team": {
+				"title": "Entraide d'équipe",
+				"description": "Le développement et l'apprentissage font partie de notre quotidien. Nous croyons que les grands produits sont le fruit de l'entraide collective."
 			}
 		},
 		"life": {
 			"eyebrow": "La vie chez Codevider",
 			"headline": "Notre équipe au studio",
-			"description": "Du travail individuel de haute concentration aux moments partagés en équipe — voici comment nous construisons ensemble au quotidien.",
-			"office_alt_1": "Cabines vitrées privées et espace de travail ouvert dans les bureaux de Codevider",
-			"office_alt_2": "Espace détente coloré avec poufs dans les bureaux de Codevider",
-			"photo_alt_1": "Deux membres de l'équipe Codevider souriant au bureau",
+			"description": "Du travail de concentration intense aux moments de partage d'équipe — voici comment nous construisons ensemble chaque jour.",
+			"office_alt_1": "Cabines privées vitrées et espace de travail ouvert au bureau de Codevider",
+			"office_alt_2": "Espace détente coloré avec poufs au bureau de Codevider",
+			"photo_alt_1": "Deux membres de l'équipe de Codevider souriant au bureau",
 			"photo_alt_2": "Un membre de l'équipe profitant d'une pause avec ses collègues au bureau"
 		},
 		"team": {
 			"eyebrow": "Derrière le code",
 			"headline": "Rencontrez l'équipe",
-			"description": "Les fondateurs et les ingénieurs qui transforment les idées ambitieuses en produits concrets et évolutifs.",
+			"description": "Les fondateurs et ingénieurs qui transforment des idées ambitieuses en produits déployés et évolutifs.",
 			"scroll_left": "Faire défiler à gauche",
 			"scroll_right": "Faire défiler à droite"
 		},
 		"join": {
 			"eyebrow": "Carrières",
 			"headline": "Rejoignez l'aventure",
-			"description": "Nous sommes toujours à la recherche de profils passionnés et talentueux désireux de façonner l'avenir du logiciel. Découvrez nos postes ouverts et intégrez une équipe en pleine croissance.",
+			"description": "Nous sommes constamment à la recherche de profils passionnés et talentueux désireux de façonner l'avenir du logiciel. Découvrez nos opportunités et intégrez notre équipe en pleine croissance.",
 			"cta": "Voir les postes ouverts"
 		}
 	},
@@ -702,8 +702,8 @@
 		"career": "Carrières",
 		"about": "À propos",
 		"services": "Services",
-		"book_a_call": "Réserver un appel",
-		"select_language": "Choisir la langue",
+		"book_a_call": "Prendre rendez-vous",
+		"select_language": "Sélectionner la langue",
 		"language_options": "Options de langue",
 		"languages": {
 			"en": "English",
@@ -714,8 +714,8 @@
 			"it": "Italiano",
 			"zh": "中文"
 		},
-		"switch_to_light_mode": "Passer en mode clair",
-		"switch_to_dark_mode": "Passer en mode sombre",
+		"switch_to_light_mode": "Passer au mode clair",
+		"switch_to_dark_mode": "Passer au mode sombre",
 		"light_mode": "Clair",
 		"dark_mode": "Sombre",
 		"open_menu": "Ouvrir le menu",
@@ -724,25 +724,25 @@
 	},
 	"career": {
 		"meta_title": "Carrières — Codevider",
-		"meta_description": "Rejoignez Codevider et contribuez à façonner l'avenir du développement de logiciels. Découvrez notre processus de recrutement et connectez-vous avec notre équipe à Tirana, en Albanie.",
+		"meta_description": "Rejoignez Codevider et participez à la création de l'avenir du développement logiciel. Découvrez notre processus de recrutement et contactez notre équipe à Tirana, en Albanie.",
 		"hero": {
 			"eyebrow": "Carrières",
-			"headline": "Faites partie de notre équipe d'exception",
-			"lead": "Rejoignez-nous pour construire l'avenir du développement de logiciels. Nous recherchons continuellement des talents désireux d'évoluer à nos côtés."
+			"headline": "Faites partie de notre équipe",
+			"lead": "Rejoignez-nous et aidez-nous à bâtir l'avenir du développement de logiciels. Nous recherchons constamment des personnes talentueuses prêtes à évoluer avec nous."
 		},
 		"openings": {
 			"eyebrow": "Postes ouverts",
-			"headline": "Aucun poste n'est ouvert pour le moment",
-			"headline_active": "Opportunités actuelles",
-			"outreach_headline": "Vous ne trouvez pas le poste idéal ?",
-			"description": "Nous n'avons pas d'opportunités actives actuellement, mais nous sommes toujours ravis d'entrer en contact avec des professionnels talentueux. N'hésitez pas à nous envoyer votre CV pour de futures opportunités.",
-			"description_active": "Découvrez nos offres actuelles et trouvez le poste qui correspond à vos compétences et à vos ambitions.",
-			"loading": "Chargement des opportunités…",
-			"error": "Nous n'avons pas pu charger les offres pour le moment. N'hésitez pas à nous contacter directement pendant que nous résolvons ce problème.",
-			"cta": "Contactez-nous",
+			"headline": "Aucun poste disponible pour le moment",
+			"headline_active": "Postes actuellement vacants",
+			"outreach_headline": "Vous ne trouvez pas de poste adapté ?",
+			"description": "Nous n'avons peut-être pas de poste disponible pour le moment, mais nous sommes toujours ravis d'échanger avec des professionnels talentueux. N'hésitez pas à nous envoyer votre CV pour de futures opportunités.",
+			"description_active": "Découvrez nos postes ouverts et trouvez l'opportunité qui correspond à vos compétences et à vos ambitions.",
+			"loading": "Chargement des postes ouverts…",
+			"error": "Nous ne parvenons pas à charger les offres d'emploi pour le moment. N'hésitez pas à nous contacter directement pendant que nous résolvons ce problème.",
+			"cta": "Prendre contact",
 			"apply": "Postuler",
 			"view_details": "Voir les détails",
-			"apply_for": "Postuler pour le poste de {title}",
+			"apply_for": "Postuler pour le poste : {title}",
 			"apply_email_subject": "Candidature : {title}",
 			"email_subject": "Opportunités futures chez Codevider",
 			"meta_label": "Détails du poste",
@@ -756,17 +756,17 @@
 		},
 		"apply": {
 			"eyebrow": "Postuler",
-			"back": "Retour aux offres",
+			"back": "Retour aux postes",
 			"loading_title": "Chargement du poste…",
 			"loading": "Chargement des détails du poste…",
-			"error": "Nous n'avons pas pu charger ce poste pour le moment. Veuillez réessayer.",
+			"error": "Impossible de charger ce poste pour le moment. Veuillez réessayer.",
 			"retry": "Réessayer",
 			"no_description": "Les détails complets du poste seront partagés lors du processus d'entretien.",
-			"openings": "Offres",
+			"openings": "Postes ouverts",
 			"openings_count": "{count, plural, one {# offre} other {# offres}}",
 			"compensation": "Rémunération",
-			"compensation_single": "{amount, number} € / {period}",
-			"compensation_range": "{start, number} € – {end, number} € / {period}",
+			"compensation_single": "{amount, number} / {period}",
+			"compensation_range": "{start, number} – {end, number} / {period}",
 			"details_heading": "Détails du poste",
 			"job_type": "Type d'emploi",
 			"department": "Département",
@@ -774,22 +774,22 @@
 			"pay_type": "Type de rémunération",
 			"application_period": "Période de candidature",
 			"application_period_range": "{start} – {end}",
-			"requirements_heading": "Éléments requis pour postuler",
+			"requirements_heading": "Ce dont vous aurez besoin pour postuler",
 			"requirement_photo": "Photo de profil",
 			"requirement_resume": "CV / Résumé",
 			"requirement_dob": "Date de naissance",
 			"requirement_gender": "Genre",
 			"pay_type_salary": "Salaire",
-			"pay_type_hourly": "Taux horaire",
-			"pay_type_contract": "Contrat",
+			"pay_type_hourly": "Horaire",
+			"pay_type_contract": "Contractuel",
 			"pay_period_month": "mois",
 			"pay_period_year": "an",
 			"pay_period_hour": "heure",
 			"pay_period_day": "jour",
 			"apply_button": "Postuler à ce poste",
-			"collapse_form": "Masquer le formulaire de candidature",
+			"collapse_form": "Réduire le formulaire de candidature",
 			"form": {
-				"intro": "Veuillez renseigner vos coordonnées ci-dessous. Nous examinerons votre candidature et vous recontacterons rapidement.",
+				"intro": "Saisissez vos coordonnées ci-dessous. Nous étudierons votre candidature et vous recontacterons.",
 				"full_name": "Nom complet",
 				"full_name_placeholder": "John Doe",
 				"email": "Adresse e-mail",
@@ -809,244 +809,244 @@
 				"resume_hint": "Document PDF ou Word",
 				"skills": "Compétences",
 				"skills_placeholder": "React, Node.js, TypeScript",
-				"bio": "Courte bio",
-				"bio_placeholder": "Un bref résumé de votre parcours et de vos intérêts",
+				"bio": "Courte biographie",
+				"bio_placeholder": "Un bref résumé de votre parcours et de vos centres d'intérêt",
 				"cover_letter": "Lettre de motivation",
-				"cover_letter_placeholder": "Expliquez-nous pourquoi vous êtes le candidat idéal pour ce poste",
+				"cover_letter_placeholder": "Expliquez-nous pourquoi vous correspondez à ce poste",
 				"optional": "facultatif",
 				"submit": "Envoyer la candidature",
 				"submitting": "Envoi en cours…",
 				"success_title": "Candidature envoyée",
-				"success_message": "Merci pour votre candidature. Notre équipe va l'étudier avec attention et vous recontactera rapidement.",
+				"success_message": "Merci d'avoir postulé. Notre équipe va étudier votre candidature et vous recontactera rapidement.",
 				"errors": {
 					"full_name_required": "Le nom complet est obligatoire",
-					"full_name_max": "Le nom complet doit comporter 100 caractères au maximum",
+					"full_name_max": "Le nom complet doit comporter au maximum 100 caractères",
 					"email_required": "L'adresse e-mail est obligatoire",
 					"email_invalid": "Saisissez une adresse e-mail valide",
-					"phone_max": "Le numéro de téléphone doit comporter 30 caractères au maximum",
+					"phone_max": "Le numéro de téléphone doit comporter au maximum 30 caractères",
 					"dob_required": "La date de naissance est obligatoire",
 					"gender_required": "Veuillez sélectionner un genre",
-					"profile_image_required": "Une photo de profil est requise",
-					"resume_required": "Un CV est requis",
-					"bio_max": "La bio doit comporter 2 000 caractères au maximum",
-					"cover_letter_max": "La lettre de motivation doit comporter 5 000 caractères au maximum",
-					"skills_max": "Les compétences doivent comporter 500 caractères au maximum",
+					"profile_image_required": "La photo de profil est obligatoire",
+					"resume_required": "Le CV est obligatoire",
+					"bio_max": "La biographie doit comporter au maximum 2 000 caractères",
+					"cover_letter_max": "La lettre de motivation doit comporter au maximum 5 000 caractères",
+					"skills_max": "Les compétences doivent comporter au maximum 500 caractères",
 					"validation": "Veuillez vérifier vos informations et réessayer",
-					"file_too_large": "Un ou plusieurs fichiers sont trop volumineux. Veuillez utiliser des fichiers de taille plus réduite.",
-					"invalid_file_type": "Type de fichier non valide. Utilisez une image pour votre photo et un fichier PDF/Word pour votre CV.",
-					"rate_limit": "Trop de requêtes. Veuillez patienter quelques instants avant de réessayer.",
+					"file_too_large": "Un ou plusieurs fichiers sont trop volumineux. Veuillez utiliser des fichiers plus légers.",
+					"invalid_file_type": "Type de fichier invalide. Utilisez une image pour votre photo et un fichier PDF/Word pour votre CV.",
+					"rate_limit": "Trop de requêtes. Veuillez patienter un instant et réessayer.",
 					"server_config": "Les candidatures sont temporairement indisponibles. Veuillez réessayer plus tard.",
 					"submit": "Une erreur est survenue. Veuillez réessayer.",
-					"turnstile": "Veuillez valider la vérification de sécurité avant de soumettre."
+					"turnstile": "Veuillez valider la vérification de sécurité avant d'envoyer."
 				}
 			}
 		},
 		"why_join": {
 			"eyebrow": "Pourquoi Codevider",
-			"headline": "Là où les bons ingénieurs deviennent d'excellents ingénieurs",
+			"headline": "Où les ingénieurs développent leur plein potentiel",
 			"values": {
 				"ownership": {
-					"title": "Une réelle autonomie",
-					"description": "Chaque membre de l'équipe s'approprie ses missions et déploie des fonctionnalités qui touchent de vrais utilisateurs en Europe et au-delà."
+					"title": "Véritable autonomie",
+					"description": "Chaque membre de l'équipe est autonome et déploie des fonctionnalités qui touchent de réels utilisateurs en Europe et au-delà."
 				},
 				"growth": {
-					"title": "Une croissance continue",
-					"description": "L'apprentissage permanent fait partie de notre quotidien. Nous investissons dans vos compétences grâce à des technologies modernes, du mentorat et des séminaires trimestriels."
+					"title": "Croissance continue",
+					"description": "L'apprentissage est au cœur de notre quotidien. Nous investissons dans vos compétences grâce à des technologies modernes, du mentorat et des séminaires trimestriels."
 				},
 				"culture": {
-					"title": "Une culture solidaire",
-					"description": "Une communication ouverte et le respect des différentes perspectives. Nous nous entraidons et célébrons chaque succès d'équipe."
+					"title": "Culture d'entraide",
+					"description": "Une communication ouverte et le respect de la diversité des points de vue. Nous nous soutenons mutuellement et célébrons les succès collectivement."
 				}
 			}
 		},
 		"hiring": {
-			"eyebrow": "Notre méthode",
-			"headline": "Notre processus de recrutement",
-			"description": "Quatre étapes claires — conçues pour être transparentes, équitables et respectueuses de votre temps.",
+			"eyebrow": "Notre méthode de recrutement",
+			"headline": "Our hiring process",
+			"description": "Quatre étapes claires — pensées pour être transparentes, équitables et respectueuses de votre temps.",
 			"steps": {
 				"application_review": {
-					"title": "Examen de la candidature",
-					"description": "Nous étudions attentivement votre CV et votre portfolio pour évaluer la correspondance de vos compétences avec nos besoins. Nous recherchons du potentiel avant tout : votre capacité à progresser, à collaborer et à avoir un impact."
+					"title": "Examen des candidatures",
+					"description": "Nous examinons attentivement votre CV et votre portfolio pour évaluer la correspondance de vos compétences avec nos besoins. Nous recherchons du potentiel avant tout : votre capacité d'apprentissage, de collaboration et d'impact."
 				},
 				"hr_interview": {
 					"title": "Entretien RH",
-					"description": "L'équipe managériale et les RH mènent un premier entretien pour comprendre votre parcours, vos talents et vos objectifs, et pour vous présenter notre culture de travail et les principes qui nous animent."
+					"description": "Les managers et les RH mènent un premier entretien pour comprendre votre parcours, vos talents et vos objectifs — et pour vous faire découvrir notre culture de travail et nos valeurs."
 				},
 				"technical_review": {
 					"title": "Évaluation technique",
-					"description": "Un test technique permet d'évaluer votre niveau d'expertise, votre esprit d'analyse et votre façon de résoudre les problèmes, afin de dresser un portrait complet de votre profil professionnel."
+					"description": "Une évaluation technique permet de mesurer votre niveau d'expertise, votre esprit d'analyse et votre approche face aux problèmes, afin de dresser un portrait complet de votre profil professionnel."
 				},
 				"offer": {
-					"title": "La proposition",
-					"description": "Si nos attentes correspondent, nous vous transmettons une offre compétitive, détaillons l'ensemble des conditions avec vous, et vous accompagnons durant votre intégration afin que vous preniez vos fonctions en toute confiance."
+					"title": "L'Offre",
+					"description": "Si nos profils correspondent, nous vous ferons une offre compétitive, vous guiderons à travers chaque détail et vous accompagnerons lors de votre intégration pour débuter sereinement."
 				}
 			}
 		}
 	},
 	"services": {
 		"meta_title": "Services — Codevider",
-		"meta_description": "Découvrez comment Codevider conçoit, développe et met à l'échelle des logiciels fiables : développement sur mesure, applications web, intégration IA, automatisation, intégration de systèmes, cloud et augmentation d'équipe.",
+		"meta_description": "Découvrez comment Codevider conçoit, développe et fait évoluer des logiciels fiables : développement sur mesure, applications web, intégration de l'IA, automatisation, intégration de systèmes, cloud et augmentation d'équipes.",
 		"hero": {
 			"eyebrow": "Nos compétences",
-			"headline": "Des services conçus pour faire avancer votre feuille de route",
-			"lead": "Découvrez comment nous concevons, développons et mettons à l'échelle des produits fiables. Une architecture propre, des livraisons transparentes et une équipe qui s'intègre parfaitement à la vôtre.",
+			"headline": "Des services pour faire progresser votre feuille de route",
+			"lead": "Découvrez comment nous concevons, développons et faisons évoluer des produits fiables. Une architecture propre, une livraison transparente et une équipe qui s'intègre directement à la vôtre.",
 			"meta_capabilities": "7 expertises clés",
-			"meta_engagement": "Facturation horaire ou mensuelle dédiée",
-			"meta_location": "Basé en Europe, intervenant dans le monde entier"
+			"meta_engagement": "Tarif horaire ou formule mensuelle dédiée",
+			"meta_location": "Basé en Europe, actif à l'international"
 		},
 		"capabilities": {
 			"solutions_heading": "Nos solutions",
 			"outcomes_heading": "Résultats",
 			"nav_aria": "Catégories de services",
-			"cta_title": "Vous ne trouvez pas la formule idéale ?",
-			"cta_body": "Nous adaptons nos interventions à votre feuille de route — décrivez-nous votre besoin et nous vous proposerons la trajectoire la plus efficace.",
-			"cta_button": "Discutons-en",
+			"cta_title": "Vous ne trouvez pas l'offre qui vous convient ?",
+			"cta_body": "Nous adaptons nos interventions à votre feuille de route — décrivez-nous votre projet et nous vous proposerons la trajectoire la plus adaptée.",
+			"cta_button": "Discuter avec nous",
 			"nav": {
 				"custom": "Logiciels sur mesure",
 				"web": "Applications web",
 				"ai": "Intégration de l'IA",
 				"automation": "Automatisation",
 				"systems": "Intégration de systèmes",
-				"cloud": "Infrastructures cloud",
+				"cloud": "Infrastructure Cloud",
 				"team": "Augmentation d'équipe"
 			},
 			"items": {
 				"custom": {
 					"num": "01",
 					"title": "Développement de logiciels sur mesure",
-					"description": "Nous concevons et développons des logiciels adaptés à votre activité. Du cadrage au lancement, nous ciblons des résultats concrets : des flux de travail accélérés, des coûts réduits et une technologie évolutive qui soutient votre croissance.",
+					"description": "Nous concevons et développons des logiciels adaptés à vos activités. De la phase de découverte au lancement, nous visons des résultats concrets — accélération des processus, réduction des coûts et technologies évolutives à vos côtés.",
 					"solutions": {
-						"1": "Plateformes personnalisées construites autour de vos processus métiers",
-						"2": "Évolutivité à long terme grâce à un code propre et facile à maintenir",
-						"3": "Intégration fluide avec vos systèmes d'information existants"
+						"1": "Plateformes sur mesure structurées autour de vos processus réels",
+						"2": "Évolutivité à long terme grâce à un code propre et maintenable",
+						"3": "Intégration transparente avec vos systèmes d'entreprise existants"
 					},
 					"outcomes": {
 						"1": "Réduction des coûts opérationnels",
-						"2": "Amélioration de la productivité des collaborateurs",
-						"3": "Technologie pérenne alignée sur vos objectifs de croissance"
+						"2": "Hausse de la productivité des équipes",
+						"3": "Technologie pérenne alignée sur vos plans de croissance"
 					}
 				},
 				"web": {
 					"num": "02",
 					"title": "Développement d'applications web",
-					"description": "Des applications web ultra-performantes, au chargement rapide, adaptées à tous les écrans et conçues pour convertir vos visiteurs en clients. Idéal pour les portails, les tableaux de bord et les outils d'analyse de données.",
+					"description": "Des applications web performantes qui chargent rapidement, s'adaptent à tous les écrans et convertissent vos visiteurs en clients. Idéal pour les portails, les tableaux de bord et les outils riches en données.",
 					"solutions": {
 						"1": "Applications réactives optimisées pour la performance",
-						"2": "Tableaux de bord en temps réel avec indicateurs exploitables",
+						"2": "Real-time dashboards with actionable insights",
 						"3": "Solutions web sécurisées et intuitives orientées client"
 					},
 					"outcomes": {
-						"1": "Engagement client et taux de conversion accrus",
-						"2": "Taux de rebond réduit grâce à des temps de chargement optimisés",
-						"3": "Processus internes simplifiés via des portails personnalisés"
+						"1": "Optimisation de l'engagement client et des taux de conversion",
+						"2": "Baisse du taux de rebond grâce à des temps de chargement réduits",
+						"3": "Simplification des processus internes via des portails personnalisés"
 					}
 				},
 				"ai": {
 					"num": "03",
 					"title": "Intégration de l'IA",
-					"description": "Nous intégrons l'IA à vos processus existants. De la création d'applications basées sur des modèles de langage (LLM) aux chatbots intelligents et à l'automatisation, nous mettons l'IA au service de votre rentabilité.",
+					"description": "Nous intégrons l'intelligence artificielle au sein de vos flux de travail existants. Des applications basées sur des modèles linguistiques (LLM) aux assistants virtuels et à l'automatisation des processus, nous rendons l'IA opérationnelle pour vous.",
 					"solutions": {
-						"1": "Applications basées sur les LLM et chatbots intelligents sur mesure",
-						"2": "Automatisation des flux de travail et analyses exploitables",
-						"3": "Intégration transparente dans les écosystèmes existants"
+						"1": "Applications LLM personnalisées et assistants conversationnels intelligents",
+						"2": "Automatisation des flux de travail et analyses décisionnelles",
+						"3": "Intégration transparente dans vos écosystèmes actuels"
 					},
 					"outcomes": {
-						"1": "Délais de réponse écourtés grâce à l'assistance automatisée par IA",
-						"2": "Diminution de la saisie manuelle et du traitement de documents",
-						"3": "Analyses prédictives améliorant la pertinence de vos décisions"
+						"1": "Délais de réponse écourtés grâce aux assistants virtuels d'IA",
+						"2": "Diminution de la saisie manuelle de données et du traitement de documents",
+						"3": "Indicateurs orientés données améliorant la précision des décisions"
 					}
 				},
 				"automation": {
 					"num": "04",
 					"title": "Automatisation",
-					"description": "Éliminez les tâches répétitives et réduisez les risques d'erreur. Nous automatisons vos déploiements, vos tests et vos opérations de manière à libérer du temps pour vos projets stratégiques.",
+					"description": "Éliminez les tâches répétitives et réduisez les erreurs. Nous automatisons les déploiements, les phases de tests et les opérations pour que vos équipes se concentrent sur vos priorités commerciales.",
 					"solutions": {
 						"1": "Pipelines de déploiement entièrement automatisés",
-						"2": "Processus d'assurance qualité exécutés sans intervention humaine",
-						"3": "Automatisations de flux de travail adaptées à vos règles métiers"
+						"2": "Processus d'assurance qualité s'exécutant avec un minimum d'intervention",
+						"3": "Automatisations de flux calquées sur vos règles métier"
 					},
 					"outcomes": {
-						"1": "Diminution drastique des erreurs manuelles interservices",
-						"2": "Accélération des cycles de livraison",
-						"3": "Focus accru sur les initiatives génératrices de revenus"
+						"1": "Moins d'erreurs manuelles au sein de vos services",
+						"2": "Délais de livraison accélérés",
+						"3": "Disponibilité accrue pour les activités à forte valeur ajoutée"
 					}
 				},
 				"systems": {
 					"num": "05",
 					"title": "Intégration de systèmes",
-					"description": "Connectez vos différents outils au sein d'un flux d'information unifié. Nous connectons vos applications et bases de données, éliminons les silos et rendons l'information accessible partout où vos équipes en ont besoin.",
+					"description": "Connectez vos outils au sein d'un flux d'activité fiable. Nous unifions les applications et les données, éliminons les silos et mettons l'information à disposition de vos équipes au bon moment.",
 					"solutions": {
-						"1": "Données unifiées entre les différents services et plateformes",
+						"1": "Centralisation des données entre les services et les plateformes",
 						"2": "Synchronisation fluide entre CRM, ERP et outils tiers",
-						"3": "Centralisation des rapports pour des décisions plus rapides"
+						"3": "Rapports consolidés pour des décisions de gestion accélérées"
 					},
 					"outcomes": {
-						"1": "Collaboration interservices optimisée grâce à des outils connectés",
+						"1": "Collaboration améliorée grâce à des outils unifiés",
 						"2": "Visibilité en temps réel sur l'ensemble de vos divisions",
-						"3": "Exécution plus rapide des projets transverses de l'entreprise"
+						"3": "Mise en œuvre accélérée des projets transverses de l'entreprise"
 					}
 				},
 				"cloud": {
 					"num": "06",
-					"title": "Infrastructures cloud",
-					"description": "Bâtissez un socle cloud sécurisé et évolutif grâce à l'Infrastructure-as-Code. Nous optimisons les performances, la disponibilité et les dépenses pour que vous ne payiez que ce que vous consommez.",
+					"title": "Infrastructure Cloud",
+					"description": "Une infrastructure cloud sécurisée et évolutive conçue par le code (IaC). Nous optimisons les performances, la disponibilité et les coûts — pour que vous ne payiez que ce que vous consommez.",
 					"solutions": {
-						"1": "Infrastructure-as-Code pour des déploiements reproductibles",
-						"2": "Charges de travail optimisées avec mise à l'échelle économique",
-						"3": "Architectures hautement disponibles et plans de reprise d'activité"
+						"1": "Infrastructure managée par le code pour des déploiements reproductibles",
+						"2": "Charges de travail optimisées avec un dimensionnement ajusté aux coûts",
+						"3": "Configurations de haute disponibilité et plans de reprise d'activité"
 					},
 					"outcomes": {
-						"1": "Temps d'arrêt minimisés grâce à des systèmes résilients",
-						"2": "Réduction des coûts d'infrastructure par l'optimisation des ressources",
-						"3": "Déploiements accélérés de vos nouveaux produits"
+						"1": "Temps d'arrêt minimisés grâce à des architectures résilientes",
+						"2": "Coûts d'infrastructure réduits par l'ajustement dynamique",
+						"3": "Déploiement accéléré de vos nouveaux produits"
 					}
 				},
 				"team": {
 					"num": "07",
 					"title": "Augmentation d'équipe",
-					"description": "Intégrez des ingénieurs et experts produits qualifiés directement dans votre organisation. Augmentez rapidement votre capacité de production sans subir les lenteurs d'un recrutement classique.",
+					"description": "Intégrez des ingénieurs qualifiés et des profils produits qui s'adaptent à vos processus de développement. Augmentez rapidement vos effectifs, maintenez votre élan et produisez davantage sans la contrainte des longs processus d'embauche.",
 					"solutions": {
-						"1": "Ingénieurs spécialisés pleinement intégrés à vos processus de travail",
-						"2": "Collaboration flexible — ajustement des effectifs à la hausse ou à la baisse",
-						"3": "Capacité opérationnelle immédiate sans processus d'embauche fastidieux"
+						"1": "Ingénieurs spécialisés intégrés au sein de votre flux de travail",
+						"2": "Contrats flexibles — ajustement de l'équipe à la hausse ou à la baisse",
+						"3": "Renfort immédiat évitant les longs cycles de recrutement"
 					},
 					"outcomes": {
-						"1": "Respect rigoureux des délais de vos projets critiques",
-						"2": "Dynamique d'innovation renforcée par des compétences complémentaires",
-						"3": "Grande agilité face aux évolutions de votre marché"
+						"1": "Livraison de vos projets critiques dans les délais convenus",
+						"2": "Capacité d'innovation stimulée par des compétences variées",
+						"3": "Grande réactivité face à l'évolution de vos enjeux commerciaux"
 					}
 				}
 			}
 		},
 		"process": {
-			"eyebrow": "Notre méthode",
-			"headline": "Un processus articulé autour de vos enjeux",
-			"description": "Vos besoins guident chaque étape de notre travail. Nous débutons par un cadrage complet avant de procéder par sprints agiles en toute visibilité.",
+			"eyebrow": "Notre méthode de travail",
+			"headline": "Un accompagnement articulé autour de vos enjeux",
+			"description": "Vos enjeux guident chacune de nos étapes. Nous commençons par une phase d'étude concrète, puis nous livrons par sprints agiles avec une visibilité totale.",
 			"steps": {
 				"discovery": {
-					"title": "Cadrage",
+					"title": "Découverte",
 					"description": "Nous recueillons vos exigences, nous nous accordons sur les objectifs et formalisons la vision du produit dans un document partagé."
 				},
 				"team_selection": {
-					"title": "Sélection de l'équipe",
-					"description": "Nous constituons une équipe dédiée (frontend, backend et QA) adaptée à vos choix technologiques et à votre calendrier."
+					"title": "Composition de l'équipe",
+					"description": "Nous formons une équipe dédiée (pod) — frontend, backend et QA — correspondant à vos technologies et à votre calendrier."
 				},
 				"agile_delivery": {
 					"title": "Livraison agile",
-					"description": "Des points quotidiens et des rapports d'activité hebdomadaires vous garantissent visibilité et maîtrise, sprint après sprint."
+					"description": "Des réunions d'équipe quotidiennes et des rapports d'avancement hebdomadaires vous permettent de suivre et de piloter le projet, sprint après sprint."
 				},
 				"test_deploy": {
-					"title": "Test & déploiement",
-					"description": "Vous validez les fonctionnalités sur nos serveurs de test, puis nous assurons le déploiement sur vos infrastructures avec un support continu."
+					"title": "Test et Déploiement",
+					"description": "Vous effectuez les tests sur nos serveurs de développement, puis nous déployons sur vos infrastructures en vous assurant un support technique continu."
 				}
 			}
 		},
 		"tech": {
-			"eyebrow": "Technologies",
-			"headline": "Notre pile technologique",
-			"description": "Une sélection rigoureuse d'outils, de frameworks et de langages que nous exploitons pour concevoir des applications web et mobiles modernes et performantes.",
+			"eyebrow": "Technologie",
+			"headline": "Notre stack technologique",
+			"description": "Une sélection d'outils, de frameworks et de langages de programmation que nous utilisons pour concevoir des applications web et mobiles modernes et performantes.",
 			"categories_aria": "Catégories de technologies",
-			"all": "Toutes",
+			"all": "Tout",
 			"categories": {
 				"frontend": {
 					"label": "Frontend"

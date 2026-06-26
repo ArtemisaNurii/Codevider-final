@@ -132,7 +132,7 @@ export const TECH_STACK: readonly TechStackCategory[] = [
 				icon: "figma.svg",
 				iconDimensions: { height: 40, maxWidth: 32 },
 			},
-			{ name: "iOS", icon: "ios.svg" },
+			{ name: "iOS", icon: "iOS.svg" },
 			{
 				name: "Android",
 				icon: "android.svg",

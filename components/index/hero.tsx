@@ -29,7 +29,7 @@ export default function Hero() {
 	];
 
 	return (
-		<section className="home-hero relative isolate min-h-[100dvh] overflow-hidden">
+		<section className="home-hero relative isolate min-h-dvh overflow-hidden">
 			<div className="home-hero__blobs" aria-hidden>
 				<div className="home-hero__blob home-hero__blob--primary" />
 				<div className="home-hero__blob home-hero__blob--secondary" />
@@ -39,7 +39,7 @@ export default function Hero() {
 
 			<div className="home-hero__veil" aria-hidden />
 
-			<div className="home-wrap relative z-10 flex min-h-[100dvh] flex-col justify-center pb-[clamp(5rem,10vw,8rem)] pt-[clamp(6rem,12vw,9rem)]">
+			<div className="home-wrap relative z-10 flex min-h-dvh flex-col justify-center pb-[clamp(5rem,10vw,8rem)] pt-[clamp(6rem,12vw,9rem)]">
 				<div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] lg:gap-14 xl:gap-16">
 					<div className="flex flex-col items-center lg:items-start pt-8 lg:pt-0">
 						<h1 className="hero-reveal hero-reveal-1 mb-8 max-w-2xl text-balance text-center lg:text-left text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.05] tracking-[-0.03em] text-(--hero-text-h)">

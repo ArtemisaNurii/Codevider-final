@@ -8,8 +8,7 @@ export const metadata: Metadata = createPageMetadata({
 	locale: routing.defaultLocale,
 	title: en.metadata.privacy.title,
 	description: en.metadata.privacy.description,
-	page: "about",
-	path: "/privacy",
+	page: "privacy",
 });
 
 export default function PrivacyRedirectPage() {

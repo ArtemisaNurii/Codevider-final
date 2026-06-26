@@ -43,13 +43,7 @@ export async function getOpenJobsForBuild() {
 	}
 }
 
-/** Job IDs pre-rendered at build/dev time; new roles use the `_` shell via edge rewrite. */
+/** Only the placeholder shell is pre-rendered; specific job pages are handled via edge rewrite. */
 export async function getCareerApplyJobIds(): Promise<string[]> {
-	const jobIds = new Set<string>([CAREER_APPLY_PLACEHOLDER_ID]);
-
-	for (const job of await getOpenJobsForBuild()) {
-		jobIds.add(String(job.id));
-	}
-
-	return [...jobIds];
+	return [CAREER_APPLY_PLACEHOLDER_ID];
 }

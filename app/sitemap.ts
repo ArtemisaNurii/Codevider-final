@@ -1,11 +1,8 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
-import { getOpenJobsForBuild } from "@/lib/career-apply";
 import {
 	getLanguageAlternates,
 	getLocalizedUrl,
-	getPathLanguageAlternates,
-	getSiteUrl,
 	SITE_ROUTES,
 } from "@/lib/site";
 
@@ -23,21 +20,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			},
 		})),
 	);
-
-	const jobs = await getOpenJobsForBuild();
-	const careerApplyEntries = jobs.flatMap((job) => {
-		const path = `/career/apply/${job.id}`;
-
-		return routing.locales.map((locale) => ({
-			url: `${getSiteUrl()}/${locale}${path}`,
-			lastModified: new Date(),
-			changeFrequency: "weekly" as const,
-			priority: 0.7,
-			alternates: {
-				languages: getPathLanguageAlternates(path),
-			},
-		}));
-	});
-
-	return [...mainEntries, ...careerApplyEntries];
+	return mainEntries;
 }

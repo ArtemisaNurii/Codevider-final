@@ -8,8 +8,7 @@ export const metadata: Metadata = createPageMetadata({
 	locale: routing.defaultLocale,
 	title: en.metadata.terms.title,
 	description: en.metadata.terms.description,
-	page: "about",
-	path: "/terms",
+	page: "terms",
 });
 
 export default function TermsRedirectPage() {

@@ -33,7 +33,7 @@ export const SITE_ROUTES = [
 ] as const;
 
 /** List of pages that have custom Open Graph images. */
-export const OG_PAGES = ["home", "about", "services", "career"] as const;
+export const OG_PAGES = ["home", "about", "services", "career", "privacy", "terms"] as const;
 
 /** Type representing a page that has a custom Open Graph image. */
 export type OgPage = (typeof OG_PAGES)[number];
@@ -84,7 +84,7 @@ const LOCALE_TO_OG_LANGUAGE: Record<(typeof routing.locales)[number], string> =
 		es: "spanish",
 		it: "italian",
 		sq: "albanian",
-		zh: "english",
+		zh: "chinese",
 	};
 
 /** Maps OG page keys to their corresponding site routes. */
@@ -93,6 +93,8 @@ const OG_PAGE_TO_ROUTE: Record<OgPage, (typeof SITE_ROUTES)[number]> = {
 	about: "/about",
 	services: "/services",
 	career: "/career",
+	privacy: "/privacy",
+	terms: "/terms",
 };
 
 /**

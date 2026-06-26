@@ -26,7 +26,7 @@ export function mergeWithEnglishFallback(
 			continue;
 		}
 
-		if (isUsableTranslation(overrideValue)) {
+		if (isUsableTranslation(overrideValue) || Array.isArray(overrideValue)) {
 			result[key] = overrideValue;
 			continue;
 		}
