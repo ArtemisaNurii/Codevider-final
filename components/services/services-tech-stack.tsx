@@ -7,7 +7,7 @@ import {
 	useReducedMotion,
 } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import SectionHead from "@/components/index/section-head";
 import {
 	getTechStackCategory,
@@ -18,7 +18,8 @@ import {
 } from "@/data/tech-stack";
 
 type CategoryId = TechStackCategoryId;
-type FilterId = "all" | CategoryId;
+
+const CYCLE_MS = 7000;
 
 const springOpen = { type: "spring" as const, duration: 0.4, bounce: 0 };
 const instantTransition = { duration: 0 };
@@ -139,23 +140,46 @@ export default function ServicesTechStack() {
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 	const shouldReduceMotion = useReducedMotion();
-	const [activeFilter, setActiveFilter] = useState<FilterId>("all");
+	const [activeIndex, setActiveIndex] = useState(0);
+	const [cycleKey, setCycleKey] = useState(0);
+	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-	const visibleCategories = useMemo(
-		() =>
-			activeFilter === "all" ? [...TECH_STACK_CATEGORIES] : [activeFilter],
-		[activeFilter],
-	);
+	const activeCategory = TECH_STACK_CATEGORIES[activeIndex];
 
 	const canAnimate = inView || shouldReduceMotion;
 
-	const filters: { id: FilterId; label: string }[] = [
-		{ id: "all", label: t("all") },
-		...TECH_STACK_CATEGORIES.map((id) => ({
-			id,
-			label: t(`categories.${id}.label`),
-		})),
-	];
+	const startCycle = useCallback(() => {
+		if (intervalRef.current) clearInterval(intervalRef.current);
+		intervalRef.current = setInterval(() => {
+			setActiveIndex((i) => (i + 1) % TECH_STACK_CATEGORIES.length);
+			setCycleKey((k) => k + 1);
+		}, CYCLE_MS);
+	}, []);
+
+	useEffect(() => {
+		startCycle();
+		return () => {
+			if (intervalRef.current) clearInterval(intervalRef.current);
+		};
+	}, [startCycle]);
+
+	const goTo = useCallback(
+		(idx: number) => {
+			setActiveIndex(idx);
+			setCycleKey((k) => k + 1);
+			startCycle();
+		},
+		[startCycle],
+	);
+
+	const filters = useMemo(
+		() =>
+			TECH_STACK_CATEGORIES.map((id) => ({
+				id,
+				label: t(`categories.${id}.label`),
+			})),
+		[t],
+	);
 
 	return (
 		<section ref={ref} className="home-section home-section--tight">
@@ -173,8 +197,8 @@ export default function ServicesTechStack() {
 						role="tablist"
 						aria-label={t("categories_aria")}
 					>
-						{filters.map((filter) => {
-							const isActive = activeFilter === filter.id;
+						{filters.map((filter, i) => {
+							const isActive = i === activeIndex;
 
 							return (
 								<button
@@ -182,10 +206,22 @@ export default function ServicesTechStack() {
 									type="button"
 									role="tab"
 									aria-selected={isActive}
-									className={`svc-tech-filter ${isActive ? "svc-tech-filter--active" : ""}`}
-									onClick={() => setActiveFilter(filter.id)}
+									className={`svc-tech-filter relative overflow-hidden ${isActive ? "svc-tech-filter--active" : ""}`}
+									onClick={() => goTo(i)}
 								>
 									{filter.label}
+									{isActive && (
+										<motion.span
+											key={cycleKey}
+											className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] origin-left bg-current opacity-40"
+											initial={{ scaleX: 0 }}
+											animate={{ scaleX: 1 }}
+											transition={{
+												duration: CYCLE_MS / 1000,
+												ease: "linear",
+											}}
+										/>
+									)}
 								</button>
 							);
 						})}
@@ -194,7 +230,7 @@ export default function ServicesTechStack() {
 					<AnimatePresence mode="wait" initial={false}>
 						{canAnimate ? (
 							<motion.div
-								key={activeFilter}
+								key={activeCategory}
 								role="tabpanel"
 								aria-live="polite"
 								className="svc-tech-groups"
@@ -210,14 +246,12 @@ export default function ServicesTechStack() {
 								}
 								transition={{ duration: 0.15 }}
 							>
-								{visibleCategories.map((categoryId, sectionIndex) => (
-									<TechCategorySection
-										key={categoryId}
-										categoryId={categoryId}
-										sectionIndex={sectionIndex}
-										shouldReduceMotion={shouldReduceMotion}
-									/>
-								))}
+								<TechCategorySection
+									key={activeCategory}
+									categoryId={activeCategory}
+									sectionIndex={0}
+									shouldReduceMotion={shouldReduceMotion}
+								/>
 							</motion.div>
 						) : null}
 					</AnimatePresence>
