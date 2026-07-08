@@ -174,6 +174,22 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 		void transition.finished.finally(finish);
 	}, []);
 
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key !== "d" && e.key !== "D") return;
+			const target = e.target as Element;
+			if (
+				target.tagName === "INPUT" ||
+				target.tagName === "TEXTAREA" ||
+				(target as HTMLElement).isContentEditable
+			)
+				return;
+			toggleTheme();
+		};
+		document.addEventListener("keydown", handleKeyDown);
+		return () => document.removeEventListener("keydown", handleKeyDown);
+	}, [toggleTheme]);
+
 	return (
 		<ThemeContext.Provider
 			value={{ theme, isThemeTransitioning, setTheme, toggleTheme }}

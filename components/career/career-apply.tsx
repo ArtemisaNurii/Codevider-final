@@ -95,7 +95,7 @@ export default function CareerApply() {
 
 	const morphLayoutTransition = shouldReduceMotion
 		? { duration: 0 }
-		: { type: "spring" as const, duration: 0.58, bounce: 0 };
+		: { type: "spring" as const, duration: 0.609, bounce: 0 };
 
 	const morphContentEnter = shouldReduceMotion
 		? { duration: 0 }
@@ -103,7 +103,7 @@ export default function CareerApply() {
 
 	const morphContentExit = shouldReduceMotion
 		? { duration: 0 }
-		: { duration: 0.22, ease: morphExitEase };
+		: { duration: 0.231, ease: morphExitEase };
 
 	const job = loadState.status === "ready" ? loadState.job : null;
 
