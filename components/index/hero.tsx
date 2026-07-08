@@ -85,7 +85,7 @@ export default function Hero() {
 						</div>
 					</div>
 
-					<div className="hero-reveal hero-reveal-5 hero-dash-bleed relative w-full min-w-0 lg:min-w-[28rem] xl:min-w-[32rem]">
+					<div className="hero-reveal hero-reveal-5 hero-dash-bleed relative w-full min-w-0 lg:min-w-md xl:min-w-lg">
 						<HeroDashboard />
 					</div>
 				</div>

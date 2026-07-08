@@ -70,10 +70,10 @@ export default function WhoWeEmpower() {
 							<div className="home-ecard-icon">
 								<Icon className="size-[22px]" aria-hidden />
 							</div>
-							<h3 className="text-[17px] font-semibold text-balance leading-snug tracking-[-0.01em] text-[var(--text-h)]">
+							<h3 className="text-[17px] font-semibold text-balance leading-snug tracking-[-0.01em] text-(--text-h)">
 								{t(`cards.${id}.title`)}
 							</h3>
-							<p className="text-sm leading-relaxed text-balance text-[var(--text)]">
+							<p className="text-sm leading-relaxed text-balance text-(--text)">
 								{t(`cards.${id}.description`)}
 							</p>
 						</motion.article>

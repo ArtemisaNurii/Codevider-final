@@ -5,7 +5,6 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import Footer from "@/components/nav/Footer";
 import { Navbar } from "@/components/nav/Navbar";
 import { LocaleProvider } from "@/components/providers/LocaleProvider";
-import { StructuredData } from "@/components/seo/structured-data";
 import { SiteDocument } from "@/components/layout/site-document";
 import { HashScrollHandler } from "@/components/layout/hash-scroll-handler";
 import { DEFAULT_TIME_ZONE } from "@/dictionaries";
@@ -44,7 +43,6 @@ export default async function LocaleLayout({ children, params }: Props) {
 
 	return (
 		<SiteDocument locale={locale}>
-			<StructuredData />
 			<LocaleProvider
 				locale={locale}
 				messages={messages}

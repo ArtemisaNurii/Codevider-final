@@ -11,7 +11,8 @@ import {
 	WhyChooseUs,
 	WhyOutsource,
 } from "@/components/index/home-below-fold";
-import { createPageMetadata } from "@/lib/site";
+import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
+import { StructuredData } from "@/components/seo/structured-data";
 
 type Props = {
 	params: Promise<{ locale: string }>;
@@ -32,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Home({ params }: Props) {
 	const { locale } = await params;
 	setRequestLocale(locale);
+	const t = await getTranslations({ locale });
 
 	return (
 		<div className="home-page">
@@ -44,6 +46,12 @@ export default async function Home({ params }: Props) {
 			<WhyChooseUs />
 			<Faq />
 			<Contact />
+			<StructuredData
+				title={t("metadata.home.title")}
+				description={t("metadata.home.description")}
+				image={getOgImageUrl(locale, "home")}
+				url={`${getSiteUrl()}/${locale}`}
+			/>
 		</div>
 	);
 }

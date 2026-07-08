@@ -26,6 +26,27 @@ export type TechStackCategory = {
 
 export const TECH_STACK: readonly TechStackCategory[] = [
 	{
+		id: "ai",
+		items: [
+			{ name: "OpenAI", icon: "openai.svg" },
+			{ name: "Anthropic", icon: "anthropic.svg" },
+			{ name: "Gemini", icon: "gemini.svg" },
+			{ name: "xAI", icon: "xai.svg" },
+			{ name: "Cohere", icon: "cohere.svg" },
+			{ name: "Meta AI", icon: "metaai.svg" },
+			{ name: "Mistral", icon: "mistral.svg" },
+			{ name: "DeepSeek", icon: "deepseek.svg" },
+			{ name: "Moonshot", icon: "moonshot.svg" },
+			{ name: "Qwen", icon: "qwen.svg" },
+			{ name: "Z AI", icon: "zai.svg" },
+			{ name: "OpenRouter", icon: "openrouter.svg" },
+			{ name: "Hugging Face", icon: "huggingface.svg" },
+			{ name: "AI Agents", icon: "agents.svg" },
+			{ name: "MCP", icon: "mcp.svg" },
+			{ name: "Ollama", icon: "ollama.svg" },
+		],
+	},
+	{
 		id: "frontend",
 		items: [
 			{ name: "React", icon: "react.svg" },
@@ -102,27 +123,7 @@ export const TECH_STACK: readonly TechStackCategory[] = [
 			{ name: "Vercel", icon: "vercel.svg" },
 		],
 	},
-	{
-		id: "ai",
-		items: [
-			{ name: "OpenAI", icon: "openai.svg" },
-			{ name: "Anthropic", icon: "anthropic.svg" },
-			{ name: "Gemini", icon: "gemini.svg" },
-			{ name: "xAI", icon: "xai.svg" },
-			{ name: "Cohere", icon: "cohere.svg" },
-			{ name: "Meta AI", icon: "metaai.svg" },
-			{ name: "Mistral", icon: "mistral.svg" },
-			{ name: "DeepSeek", icon: "deepseek.svg" },
-			{ name: "Moonshot", icon: "moonshot.svg" },
-			{ name: "Qwen", icon: "qwen.svg" },
-			{ name: "Z AI", icon: "zai.svg" },
-			{ name: "OpenRouter", icon: "openrouter.svg" },
-			{ name: "Hugging Face", icon: "huggingface.svg" },
-			{ name: "AI Agents", icon: "agents.svg" },
-			{ name: "MCP", icon: "mcp.svg" },
-			{ name: "Ollama", icon: "ollama.svg" },
-		],
-	},
+
 	{
 		id: "mobile_design",
 		items: [

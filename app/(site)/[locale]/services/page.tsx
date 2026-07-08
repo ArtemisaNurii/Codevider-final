@@ -4,7 +4,8 @@ import ServicesCapabilities from "@/components/services/services-capabilities";
 import ServicesHero from "@/components/services/services-hero";
 import ServicesProcess from "@/components/services/services-process";
 import ServicesTechStack from "@/components/services/services-tech-stack";
-import { createPageMetadata } from "@/lib/site";
+import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
+import { StructuredData } from "@/components/seo/structured-data";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { locale } = await params;
@@ -25,9 +26,16 @@ type Props = {
 export default async function ServicesPage({ params }: Props) {
 	const { locale } = await params;
 	setRequestLocale(locale);
+	const t = await getTranslations({ locale });
 
 	return (
 		<div className="home-page">
+			<StructuredData
+				title={t("metadata.services.title")}
+				description={t("metadata.services.description")}
+				image={getOgImageUrl(locale, "services")}
+				url={`${getSiteUrl()}/${locale}/services`}
+			/>
 			<ServicesHero />
 			<ServicesCapabilities />
 			<ServicesProcess />

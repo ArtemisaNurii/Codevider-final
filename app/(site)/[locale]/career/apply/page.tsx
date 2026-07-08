@@ -3,7 +3,8 @@ import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import CareerApply from "@/components/career/career-apply";
 import { routing } from "@/i18n/routing";
-import { createPageMetadata } from "@/lib/site";
+import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
+import { StructuredData } from "@/components/seo/structured-data";
 
 type Props = {
 	params: Promise<{ locale: string }>;
@@ -29,9 +30,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CareerApplyPage({ params }: Props) {
 	const { locale } = await params;
 	setRequestLocale(locale);
+	const t = await getTranslations({ locale });
 
 	return (
 		<div className="home-page">
+			<StructuredData
+				title={t("metadata.career_apply.title")}
+				description={t("metadata.career_apply.description")}
+				image={getOgImageUrl(locale, "career")}
+				url={`${getSiteUrl()}/${locale}/career/apply`}
+			/>
 			<Suspense>
 				<CareerApply />
 			</Suspense>
