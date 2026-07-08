@@ -2,7 +2,7 @@
 
 import { motion, useInView, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import LegalContentBlocks from "@/components/legal/legal-content-blocks";
 import { isLegalBlockArray } from "@/lib/legal-content";
 
@@ -23,6 +23,37 @@ export default function LegalDocument({
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 	const shouldReduceMotion = useReducedMotion();
+	const [activeSection, setActiveSection] = useState<string>(sections[0]);
+
+	useEffect(() => {
+		const observers: IntersectionObserver[] = [];
+		const visible = new Map<string, number>();
+
+		sections.forEach((section) => {
+			const el = document.getElementById(section);
+			if (!el) return;
+			const obs = new IntersectionObserver(
+				([entry]) => {
+					if (entry.isIntersecting) {
+						visible.set(section, entry.intersectionRatio);
+					} else {
+						visible.delete(section);
+					}
+					if (visible.size > 0) {
+						const top = [...visible.entries()].reduce((a, b) =>
+							a[1] >= b[1] ? a : b,
+						)[0];
+						setActiveSection(top);
+					}
+				},
+				{ rootMargin: "-10% 0px -60% 0px", threshold: [0, 0.25, 0.5, 1] },
+			);
+			obs.observe(el);
+			observers.push(obs);
+		});
+
+		return () => observers.forEach((o) => o.disconnect());
+	}, [sections]);
 
 	return (
 		<section ref={ref} className="legal-doc">
@@ -33,7 +64,10 @@ export default function LegalDocument({
 						<ol>
 							{sections.map((section, index) => (
 								<li key={section}>
-									<a href={`#${section}`} className="legal-doc__toc-link">
+									<a
+										href={`#${section}`}
+										className={`legal-doc__toc-link${activeSection === section ? " legal-doc__toc-link--active" : ""}`}
+									>
 										<span className="legal-doc__toc-num" aria-hidden>
 											{String(index + 1).padStart(2, "0")}
 										</span>

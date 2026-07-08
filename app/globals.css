@@ -2002,12 +2002,18 @@ code {
 	color: var(--dash-brand);
 }
 .svc-tech-filter--active {
-	border-color: var(--dash-brand);
-	background: var(--dash-brand);
+	border-color: transparent;
+	background: linear-gradient(145deg, #0d1f3c 0%, #1a3a6e 100%);
 	color: #fff;
+	box-shadow:
+		0 4px 18px rgba(13, 31, 60, 0.28),
+		0 0 0 1px rgba(43, 127, 255, 0.2);
 }
 .svc-tech-filter--active:hover {
 	color: #fff;
+	box-shadow:
+		0 8px 24px rgba(13, 31, 60, 0.36),
+		0 0 0 1px rgba(43, 127, 255, 0.3);
 }
 .svc-tech-filter:focus-visible {
 	outline: 2px solid var(--dash-brand);
@@ -3058,7 +3064,8 @@ code {
 }
 
 .legal-doc__toc-link:hover,
-.legal-doc__toc-link:focus-visible {
+.legal-doc__toc-link:focus-visible,
+.legal-doc__toc-link--active {
 	color: var(--dash-brand);
 	border-inline-start-color: var(--dash-brand);
 	outline: none;
@@ -3066,7 +3073,8 @@ code {
 
 @media (max-width: 1023px) {
 	.legal-doc__toc-link:hover,
-	.legal-doc__toc-link:focus-visible {
+	.legal-doc__toc-link:focus-visible,
+	.legal-doc__toc-link--active {
 		border-color: color-mix(in srgb, var(--dash-brand) 35%, var(--border));
 		background: var(--dash-brand-bg);
 	}
