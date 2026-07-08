@@ -30,16 +30,16 @@ export default async function ServicesPage({ params }: Props) {
 
 	return (
 		<div className="home-page">
+			<ServicesHero />
+			<ServicesCapabilities />
+			<ServicesProcess />
+			<ServicesTechStack />
 			<StructuredData
 				title={t("metadata.services.title")}
 				description={t("metadata.services.description")}
 				image={getOgImageUrl(locale, "services")}
 				url={`${getSiteUrl()}/${locale}/services`}
 			/>
-			<ServicesHero />
-			<ServicesCapabilities />
-			<ServicesProcess />
-			<ServicesTechStack />
 		</div>
 	);
 }
