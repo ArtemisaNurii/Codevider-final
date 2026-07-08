@@ -157,7 +157,7 @@ export function LanguageSelector({
 					<motion.ul
 						role="listbox"
 						aria-label={t("language_options")}
-						className={`absolute z-50 min-w-[10.5rem] overflow-hidden rounded-2xl border p-1 shadow-[0_12px_40px_rgba(0,0,0,0.28)] ${menuPositionClasses} ${
+						className={`absolute z-50 min-w-42 overflow-hidden rounded-2xl border p-1 shadow-[0_12px_40px_rgba(0,0,0,0.28)] ${menuPositionClasses} ${
 							fullWidth ? "inset-x-0 w-full" : "right-0"
 						} ${
 							variant === "dark"

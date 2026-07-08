@@ -72,10 +72,10 @@ export default function WhyOutsource() {
 								<Icon className="size-[22px]" aria-hidden />
 							</div>
 							<div className="min-w-0 flex-1">
-								<h3 className="text-[19px] font-semibold text-balance tracking-[-0.01em] text-[var(--text-h)]">
+								<h3 className="text-[19px] font-semibold text-balance tracking-[-0.01em] text-(--text-h)">
 									{t(`pillars.${id}.title`)}
 								</h3>
-								<p className="mt-3 text-pretty text-[15px] leading-relaxed text-[var(--text)]">
+								<p className="mt-3 text-pretty text-[15px] leading-relaxed text-(--text)">
 									{t(`pillars.${id}.description`)}
 								</p>
 							</div>

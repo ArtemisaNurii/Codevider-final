@@ -173,8 +173,8 @@ export default function WorldMap({ dots = [] }: WorldMapProps) {
 	}, [gridHeight]);
 
 	const mapShellClassName = isCompact
-		? "relative mx-auto w-full min-h-[clamp(70px,30vw,100px)] aspect-[2/1] max-w-[min(100%,96rem)]"
-		: "relative mx-auto w-full min-h-[clamp(300px,44vw,560px)] aspect-[2/1] max-w-[min(100%,96rem)]";
+		? "relative mx-auto w-full min-h-[clamp(70px,30vw,100px)] aspect-2/1 max-w-[min(100%,96rem)]"
+		: "relative mx-auto w-full min-h-[clamp(300px,44vw,560px)] aspect-2/1 max-w-[min(100%,96rem)]";
 
 	if (!svgMap) {
 		return (

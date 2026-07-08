@@ -95,18 +95,18 @@ function MetricCard({
 	return (
 		<>
 			<div className="mb-3 flex items-center justify-between gap-2">
-				<span className="text-xs font-medium uppercase tracking-wide text-[var(--dash-muted)]">
+				<span className="text-xs font-medium uppercase tracking-wide text-(--dash-muted)">
 					{label}
 				</span>
 				<Icon
-					className="size-3.5 shrink-0 text-[var(--dash-brand)]"
+					className="size-3.5 shrink-0 text-(--dash-brand)"
 					aria-hidden
 				/>
 			</div>
-			<p className="font-[family-name:var(--mono)] text-xl font-medium tabular-nums tracking-tight text-[var(--dash-text)] sm:text-2xl">
+			<p className="font-(family-name:--mono) text-xl font-medium tabular-nums tracking-tight text-(--dash-text) sm:text-2xl">
 				{value}
 			</p>
-			<p className="mt-1.5 text-xs text-[var(--dash-success)]">{delta}</p>
+			<p className="mt-1.5 text-xs text-(--dash-success)">{delta}</p>
 		</>
 	);
 }
@@ -148,18 +148,18 @@ export default function HeroDashboard() {
 
 	return (
 		<motion.div
-			className="hero-dash-window relative w-full overflow-hidden rounded-2xl border border-[var(--dash-border)] bg-[var(--dash-canvas)] shadow-[var(--dash-shadow)]"
+			className="hero-dash-window relative w-full overflow-hidden rounded-2xl border border-(--dash-border) bg-(--dash-canvas) shadow-(--dash-shadow)"
 			initial={animate ? { opacity: 0 } : false}
 			animate={{ opacity: 1 }}
 			transition={shellTransition}
 		>
-			<div className="hero-dash-titlebar flex h-12 items-center gap-3 border-b border-[var(--dash-border)] px-4 sm:px-5">
+			<div className="hero-dash-titlebar flex h-12 items-center gap-3 border-b border-(--dash-border) px-4 sm:px-5">
 				<div className="flex items-center gap-1.5" aria-hidden>
 					<span className="size-2.5 rounded-full bg-[#ff5f57]" />
 					<span className="size-2.5 rounded-full bg-[#febc2e]" />
 					<span className="size-2.5 rounded-full bg-[#28c840]" />
 				</div>
-				<div className="min-w-0 flex-1 truncate rounded-md bg-[var(--dash-surface)] px-2.5 py-1 text-center text-xs text-[var(--dash-muted)]">
+				<div className="min-w-0 flex-1 truncate rounded-md bg-(--dash-surface) px-2.5 py-1 text-center text-xs text-(--dash-muted)">
 					{t("window_url")}
 				</div>
 			</div>
@@ -199,14 +199,14 @@ export default function HeroDashboard() {
 				>
 					<div className="mb-4 flex items-end justify-between gap-2">
 						<div>
-							<p className="text-xs font-medium uppercase tracking-wide text-[var(--dash-muted)]">
+							<p className="text-xs font-medium uppercase tracking-wide text-(--dash-muted)">
 								{t("revenue_overview")}
 							</p>
-							<p className="mt-0.5 font-[family-name:var(--mono)] text-lg font-medium tabular-nums text-[var(--dash-text)]">
+							<p className="mt-0.5 font-(family-name:--mono) text-lg font-medium tabular-nums text-(--dash-text)">
 								{fmt("1.2M")}
 							</p>
 						</div>
-						<span className="text-xs text-[var(--dash-warning)]">
+						<span className="text-xs text-(--dash-warning)">
 							{t("revenue_period")}
 						</span>
 					</div>
@@ -225,7 +225,7 @@ export default function HeroDashboard() {
 						{REVENUE_BARS.map((value, index) => (
 							<div
 								key={index}
-								className="flex h-[var(--hero-dash-chart-h)] flex-col justify-end rounded-sm bg-[var(--dash-bar-track)] p-0.5 sm:h-[var(--hero-dash-chart-h-sm)] sm:rounded-md sm:p-1"
+								className="flex h-(--hero-dash-chart-h) flex-col justify-end rounded-sm bg-(--dash-bar-track) p-0.5 sm:h-(--hero-dash-chart-h-sm) sm:rounded-md sm:p-1"
 							>
 								<motion.div
 									className={`hero-dash-bar w-full origin-bottom rounded-[3px] sm:rounded-sm${
@@ -246,7 +246,7 @@ export default function HeroDashboard() {
 						))}
 					</div>
 
-					<div className="mt-2 flex justify-between text-xs text-[var(--dash-muted)]">
+					<div className="mt-2 flex justify-between text-xs text-(--dash-muted)">
 						<span>{t("week_1")}</span>
 						<span>{t("week_6")}</span>
 						<span>{t("week_12")}</span>

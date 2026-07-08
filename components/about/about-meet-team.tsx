@@ -112,7 +112,7 @@ export default function AboutMeetTeam() {
 				/>
 			</div>
 
-			<div className="relative mt-[var(--home-stack)]">
+			<div className="relative mt-(--home-stack)">
 				<div className="home-wrap relative">
 					<div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-1 sm:px-2">
 						<button
@@ -135,7 +135,7 @@ export default function AboutMeetTeam() {
 
 					<div
 						ref={carouselRef}
-						className="about-team-carousel flex gap-4 overflow-x-auto scroll-smooth pb-4 md:gap-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+						className="about-team-carousel flex gap-4 overflow-x-auto scroll-smooth pb-4 md:gap-6 scrollbar-none [&::-webkit-scrollbar]:hidden"
 					>
 						{teamMembers.map((member, index) => (
 							<motion.div
@@ -162,10 +162,10 @@ export default function AboutMeetTeam() {
 										/>
 									</div>
 									<div className="mt-4 text-center">
-										<h3 className="text-[17px] font-semibold text-[var(--text-h)]">
+										<h3 className="text-[17px] font-semibold text-(--text-h)">
 											{member.name}
 										</h3>
-										<p className="mt-0.5 text-sm text-[var(--text)]">
+										<p className="mt-0.5 text-sm text-(--text)">
 											{member.role}
 										</p>
 									</div>

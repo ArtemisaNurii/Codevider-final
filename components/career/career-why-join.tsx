@@ -45,10 +45,10 @@ export default function CareerWhyJoin() {
 								<div className="home-ecard-icon mx-auto md:mx-0">
 									<Icon className="size-[22px]" aria-hidden />
 								</div>
-								<h3 className="text-xl font-semibold text-balance tracking-[-0.01em] text-[var(--text-h)]">
+								<h3 className="text-xl font-semibold text-balance tracking-[-0.01em] text-(--text-h)">
 									{t(`values.${id}.title`)}
 								</h3>
-								<p className="text-pretty text-[15px] leading-relaxed text-[var(--text)]">
+								<p className="text-pretty text-[15px] leading-relaxed text-(--text)">
 									{t(`values.${id}.description`)}
 								</p>
 							</motion.article>

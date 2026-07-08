@@ -139,7 +139,7 @@ export default function CareerOpenings() {
 								{t("eyebrow")}
 							</motion.p>
 							<motion.h2
-								className="mt-[clamp(0.875rem,2vw,1.125rem)] text-balance text-[clamp(1.75rem,4.6vw,2.75rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
+								className="mt-[clamp(0.875rem,2vw,1.125rem)] text-balance text-[clamp(1.75rem,4.6vw,2.75rem)] leading-[1.08] tracking-[-0.02em] text-(--text-h)"
 								{...headReveal(0.08)}
 							>
 								{t("headline_active")}
@@ -264,7 +264,7 @@ export default function CareerOpenings() {
 						{hasJobs ? (
 							<div className="career-openings__outreach">
 								<motion.h3
-									className="text-balance text-[clamp(1.25rem,3vw,1.625rem)] leading-[1.15] tracking-[-0.015em] text-[var(--text-h)]"
+									className="text-balance text-[clamp(1.25rem,3vw,1.625rem)] leading-[1.15] tracking-[-0.015em] text-(--text-h)"
 									{...outreachReveal(0.28 + jobs.length * 0.08)}
 								>
 									{t("outreach_headline")}
@@ -291,7 +291,7 @@ export default function CareerOpenings() {
 				{showEmptyState && !hasJobs ? (
 					<div className="career-empty">
 						<motion.h2
-							className="text-balance text-[clamp(1.75rem,4.6vw,2.75rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
+							className="text-balance text-[clamp(1.75rem,4.6vw,2.75rem)] leading-[1.08] tracking-[-0.02em] text-(--text-h)"
 							{...headReveal(0)}
 						>
 							{t("headline")}

@@ -100,7 +100,7 @@ function FaqItem({
 							: { duration: 0.45, ease: appleRevealEase }
 					}
 				>
-					<ChevronDown className="size-[18px] stroke-[2]" />
+					<ChevronDown className="size-[18px] stroke-2" />
 				</motion.span>
 			</motion.button>
 
@@ -115,7 +115,7 @@ function FaqItem({
 				className="overflow-hidden"
 			>
 				<motion.p
-					className="max-w-[58ch] px-1 pb-8 pt-0.5 text-base leading-relaxed text-[var(--text)] text-pretty"
+					className="max-w-[58ch] px-1 pb-8 pt-0.5 text-base leading-relaxed text-(--text) text-pretty"
 					initial={false}
 					animate={
 						isOpen

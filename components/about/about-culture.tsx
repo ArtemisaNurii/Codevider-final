@@ -50,10 +50,10 @@ export default function AboutCulture() {
 								<div className="home-ecard-icon">
 									<Icon className="size-[22px]" aria-hidden />
 								</div>
-								<h3 className="text-xl font-semibold tracking-[-0.01em] text-[var(--text-h)]">
+								<h3 className="text-xl font-semibold tracking-[-0.01em] text-(--text-h)">
 									{t(`principles.${id}.title`)}
 								</h3>
-								<p className="text-pretty text-[15px] leading-relaxed text-[var(--text)]">
+								<p className="text-pretty text-[15px] leading-relaxed text-(--text)">
 									{t(`principles.${id}.description`)}
 								</p>
 							</motion.article>

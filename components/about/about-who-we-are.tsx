@@ -27,7 +27,7 @@ export default function AboutWhoWeAre() {
 
 				<div className="about-cols home-section-lead">
 					<motion.p
-						className="text-pretty text-base leading-relaxed text-[var(--text)] sm:text-[17px]"
+						className="text-pretty text-base leading-relaxed text-(--text) sm:text-[17px]"
 						initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
 						animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
 						transition={stagger(0)}
@@ -35,7 +35,7 @@ export default function AboutWhoWeAre() {
 						{t("paragraph_1")}
 					</motion.p>
 					<motion.p
-						className="text-pretty text-base leading-relaxed text-[var(--text)] sm:text-[17px]"
+						className="text-pretty text-base leading-relaxed text-(--text) sm:text-[17px]"
 						initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
 						animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
 						transition={stagger(1)}

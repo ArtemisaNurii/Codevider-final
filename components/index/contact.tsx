@@ -30,10 +30,10 @@ import {
 } from "@/lib/schemas/contact";
 
 const inputClassName =
-	"w-full rounded-[10px] border-[1.5px] border-[var(--border)] bg-[var(--bg)] px-4 py-3.5 text-[inherit] placeholder:text-[var(--text)]/55 transition-[border-color,box-shadow] focus:border-[var(--dash-brand)] focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[var(--dash-brand)]/15";
+	"w-full rounded-[10px] border-[1.5px] border-(--border) bg-(--bg) px-4 py-3.5 text-inherit placeholder:text-(--text)/55 transition-[border-color,box-shadow] focus:border-(--dash-brand) focus:outline-none focus-visible:ring-[3px] focus-visible:ring-(--dash-brand)/15";
 
 const inputErrorClassName =
-	"border-[var(--dash-warning)] focus:border-[var(--dash-warning)] focus-visible:ring-[var(--dash-warning)]/15";
+	"border-(--dash-warning) focus:border-(--dash-warning) focus-visible:ring-(--dash-warning)/15";
 
 function FormLabel({
 	htmlFor,
@@ -53,12 +53,12 @@ function FormLabel({
 		>
 			<span>{children}</span>
 			{required ? (
-				<span className="text-[var(--dash-brand)]" aria-hidden>
+				<span className="text-(--dash-brand)" aria-hidden>
 					*
 				</span>
 			) : null}
 			{optional ? (
-				<span className="font-normal text-[var(--text)]">({optional})</span>
+				<span className="font-normal text-(--text)">({optional})</span>
 			) : null}
 		</label>
 	);
@@ -70,7 +70,7 @@ function FieldError({ id, message }: { id?: string; message?: string }) {
 	return (
 		<p
 			id={id}
-			className="mt-1.5 text-sm text-[var(--dash-warning)]"
+			className="mt-1.5 text-sm text-(--dash-warning)"
 			role="alert"
 		>
 			{message}
@@ -159,10 +159,10 @@ export default function Contact() {
 					)}
 				>
 					<p className="home-eyebrow">{t("eyebrow")}</p>
-					<h2 className="mt-[clamp(1.125rem,2.5vw,1.5rem)] max-w-xl text-balance text-[clamp(2rem,4.8vw,3.5rem)] leading-[1.05] tracking-[-0.02em] text-[var(--text-h)] lg:max-w-none">
+					<h2 className="mt-[clamp(1.125rem,2.5vw,1.5rem)] max-w-xl text-balance text-[clamp(2rem,4.8vw,3.5rem)] leading-[1.05] tracking-[-0.02em] text-(--text-h) lg:max-w-none">
 						{t("headline")}
 					</h2>
-					<p className="mt-[clamp(1.25rem,2.5vw,1.5rem)] max-w-[46ch] text-pretty text-[17px] leading-relaxed text-[var(--text)] lg:max-w-none">
+					<p className="mt-[clamp(1.25rem,2.5vw,1.5rem)] max-w-[46ch] text-pretty text-[17px] leading-relaxed text-(--text) lg:max-w-none">
 						{t("description")}
 					</p>
 
@@ -188,22 +188,22 @@ export default function Contact() {
 							},
 						].map(({ icon: Icon, title, href, value }) => (
 							<div key={title} className="flex gap-5">
-								<span className="home-ecard-icon size-[3.25rem] rounded-xl">
+								<span className="home-ecard-icon size-13 rounded-xl">
 									<Icon className="size-6" aria-hidden />
 								</span>
 								<div>
-									<h3 className="text-base font-semibold text-[var(--text-h)]">
+									<h3 className="text-base font-semibold text-(--text-h)">
 										{title}
 									</h3>
 									{href ? (
 										<a
 											href={href}
-											className="mt-1.5 block text-base font-semibold text-[var(--dash-brand)] transition-colors hover:text-[var(--text-h)]"
+											className="mt-1.5 block text-base font-semibold text-(--dash-brand) transition-colors hover:text-(--text-h)"
 										>
 											{value}
 										</a>
 									) : (
-										<p className="mt-1.5 text-pretty text-base leading-relaxed text-[var(--text)]">
+										<p className="mt-1.5 text-pretty text-base leading-relaxed text-(--text)">
 											{value}
 										</p>
 									)}
@@ -326,7 +326,7 @@ export default function Contact() {
 
 							{submitError ? (
 								<p
-									className="mt-5 text-sm text-[var(--dash-warning)]"
+									className="mt-5 text-sm text-(--dash-warning)"
 									role="alert"
 								>
 									{submitError}

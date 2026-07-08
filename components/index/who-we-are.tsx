@@ -138,7 +138,7 @@ export default function WhoWeAre() {
 					</motion.h2>
 
 					<motion.p
-						className="mt-8  text-pretty text-base leading-relaxed text-[var(--text)] sm:mt-10 sm:text-lg"
+						className="mt-8  text-pretty text-base leading-relaxed text-(--text) sm:mt-10 sm:text-lg"
 						variants={itemVariants}
 					>
 						{t("who_we_are_description")}

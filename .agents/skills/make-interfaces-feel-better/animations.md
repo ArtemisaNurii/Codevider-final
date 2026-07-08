@@ -228,7 +228,7 @@ function IconButton({ isActive, ActiveIcon, InactiveIcon }) {
             "cubic-bezier(0.2, 0, 0, 1)",
             isActive
               ? "scale-100 opacity-100 blur-0"
-              : "scale-[0.25] opacity-0 blur-[4px]"
+              : "scale-[0.25] opacity-0 blur-xs"
           )}
         >
           <ActiveIcon />
@@ -238,7 +238,7 @@ function IconButton({ isActive, ActiveIcon, InactiveIcon }) {
             "transition-[opacity,filter,scale] duration-300",
             "cubic-bezier(0.2, 0, 0, 1)",
             isActive
-              ? "scale-[0.25] opacity-0 blur-[4px]"
+              ? "scale-[0.25] opacity-0 blur-xs"
               : "scale-100 opacity-100 blur-0"
           )}
         >

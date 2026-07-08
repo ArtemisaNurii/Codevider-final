@@ -150,7 +150,7 @@ In dark mode, simplify to a single white ring — layered depth shadows aren't v
 
 ### Usage with Hover Transition
 
-Apply the variable and add `transition-[box-shadow]` for a smooth hover:
+Apply the variable and add `transition-shadow` for a smooth hover:
 
 ```css
 .card {
@@ -208,7 +208,7 @@ img {
 
 ```tsx
 <img
-  className="outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10"
+  className="outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10"
   src={src}
   alt={alt}
 />
