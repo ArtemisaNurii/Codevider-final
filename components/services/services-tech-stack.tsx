@@ -19,7 +19,7 @@ import {
 
 type CategoryId = TechStackCategoryId;
 
-const CYCLE_MS = 1000000;
+const CYCLE_MS = 10000;
 
 const springOpen = { type: "spring" as const, duration: 0.4, bounce: 0 };
 const instantTransition = { duration: 0 };
