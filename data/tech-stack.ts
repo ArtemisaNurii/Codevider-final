@@ -1,9 +1,9 @@
 export const TECH_STACK_CATEGORIES = [
+	"ai",
 	"frontend",
 	"backend",
 	"databases",
 	"cloud_devops",
-	"ai",
 	"mobile_design",
 	"apis",
 ] as const;
