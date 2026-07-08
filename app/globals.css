@@ -97,8 +97,8 @@ html.theme-switching * {
 
 	/* --- Layout spacing --- */
 	--home-inline: clamp(24px, 6vw, 72px);
-	--home-section-y: clamp(96px, 12vw, 168px);
-	--home-section-y-tight: clamp(80px, 9vw, 128px);
+	--home-section-y: clamp(40px, 7vw, 100px);
+	--home-section-y-tight: clamp(32px, 5vw, 80px);
 	--home-stack: clamp(3.25rem, 6vw, 4.75rem);
 	--home-stack-sm: clamp(2rem, 4vw, 3rem);
 	--home-inset: clamp(1.5rem, 3vw, 2rem);
@@ -542,31 +542,35 @@ code {
 .nav-shell--scrolled-dark,
 .nav-shell--scrolled-light {
 	transition:
-		background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+		background-color 0.5s cubic-bezier(0.22, 1, 0.36, 0.9),
 		box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
 		backdrop-filter 0.5s cubic-bezier(0.22, 1, 0.36, 1),
 		-webkit-backdrop-filter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .nav-shell--surface-dark {
-	background-color: #1e293b;
+	background-color: rgba(30, 41, 59, 0.97);
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
 }
 .nav-shell--surface-light {
-	background-color: #f8fafc;
+	background-color: rgba(248, 250, 252, 0.97);
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
 }
 .nav-shell--scrolled-dark {
-	background-color: rgba(15, 23, 42, 0.82);
-	backdrop-filter: blur(20px) saturate(1.4);
-	-webkit-backdrop-filter: blur(20px) saturate(1.4);
+	background-color: rgba(15, 23, 42, 0.86);
+	backdrop-filter: blur(40px);
+	-webkit-backdrop-filter: blur(2px);
 	box-shadow:
 		0 1px 0 rgba(255, 255, 255, 0.06) inset,
 		0 12px 40px rgba(0, 0, 0, 0.28),
 		0 4px 12px rgba(0, 0, 0, 0.16);
 }
 .nav-shell--scrolled-light {
-	background-color: rgba(248, 250, 252, 0.84);
-	backdrop-filter: blur(20px) saturate(1.6);
-	-webkit-backdrop-filter: blur(20px) saturate(1.6);
+	background-color: rgb(248, 250, 252);
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
 	box-shadow:
 		0 1px 0 rgba(255, 255, 255, 0.9) inset,
 		0 12px 40px rgba(0, 0, 0, 0.08),

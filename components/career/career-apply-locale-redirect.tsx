@@ -1,16 +1,16 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { LocaleRedirect } from "@/components/locale-redirect";
-import { parseCareerApplyJobId } from "@/lib/career-apply";
 
 export function CareerApplyLocaleRedirect() {
-	const pathname = usePathname();
-	const jobId = parseCareerApplyJobId(pathname);
+	const searchParams = useSearchParams();
+	const id = searchParams.get("id");
+	const jobId = id && /^\d+$/.test(id) ? id : null;
 
 	if (!jobId) {
 		return <LocaleRedirect path="career" />;
 	}
 
-	return <LocaleRedirect path={`career/apply/${jobId}`} />;
+	return <LocaleRedirect path={`career/apply?id=${jobId}`} />;
 }

@@ -1,18 +1,21 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { rewriteCareerApplyPath } from "@/lib/career-apply";
+
+const CAREER_APPLY_PATH_PATTERN =
+	/^((?:\/[a-z]{2})?\/career\/apply)\/(\d+)\/?$/;
 
 /**
- * Rewrites numeric career apply URLs to the static-export shell route.
+ * Redirects legacy path-based career apply URLs to query param form.
  * Production uses `functions/_middleware.js` on Cloudflare Pages.
  */
 export function proxy(request: NextRequest) {
-	const rewrittenPath = rewriteCareerApplyPath(request.nextUrl.pathname);
+	const match = request.nextUrl.pathname.match(CAREER_APPLY_PATH_PATTERN);
 
-	if (rewrittenPath) {
+	if (match) {
 		const url = request.nextUrl.clone();
-		url.pathname = rewrittenPath;
-		return NextResponse.rewrite(url);
+		url.pathname = match[1];
+		url.searchParams.set("id", match[2]);
+		return NextResponse.redirect(url, 301);
 	}
 
 	return NextResponse.next();

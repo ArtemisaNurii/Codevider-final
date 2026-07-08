@@ -33,7 +33,14 @@ export const SITE_ROUTES = [
 ] as const;
 
 /** List of pages that have custom Open Graph images. */
-export const OG_PAGES = ["home", "about", "services", "career", "privacy", "terms"] as const;
+export const OG_PAGES = [
+	"home",
+	"about",
+	"services",
+	"career",
+	"privacy",
+	"terms",
+] as const;
 
 /** Type representing a page that has a custom Open Graph image. */
 export type OgPage = (typeof OG_PAGES)[number];

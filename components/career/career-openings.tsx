@@ -204,7 +204,7 @@ export default function CareerOpenings() {
 														</ul>
 													</div>
 													<Link
-														href={`/career/apply/${job.id}`}
+														href={`/career/apply?id=${job.id}`}
 														className="career-job-card__cta"
 														aria-label={t("apply_for", { title: job.title })}
 													>

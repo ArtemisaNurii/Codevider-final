@@ -11,8 +11,7 @@ import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";
 
 const SCROLL_ON = 56;
-const SCROLL_OFF = 24;
-const NAV_MAX_WIDTH = 1152;
+const HIDE_THRESHOLD = 200;
 const NAV_FLOAT_INSET = 12;
 
 type NavAppearance = "dark" | "light";
@@ -160,6 +159,8 @@ export function Navbar() {
 	const shouldReduceMotion = useReducedMotion();
 	const [isScrolled, setIsScrolled] = useState(false);
 	const isScrolledRef = useRef(false);
+	const [isHidden, setIsHidden] = useState(false);
+	const lastScrollYRef = useRef(0);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const initializedRef = useRef(false);
 	const [shouldAnimate, setShouldAnimate] = useState(false);
@@ -175,16 +176,28 @@ export function Navbar() {
 	useEffect(() => {
 		const onScroll = () => {
 			const scrollY = window.scrollY;
+			const delta = scrollY - lastScrollYRef.current;
+			lastScrollYRef.current = scrollY;
+
+			// Auto-hide: only after HIDE_THRESHOLD so morph completes first
+			if (scrollY <= SCROLL_ON) {
+				setIsHidden(false);
+			} else if (scrollY > HIDE_THRESHOLD && delta > 0) {
+				setIsHidden(true);
+			} else if (delta < 0) {
+				setIsHidden(false);
+			}
+
 			const nextIsScrolled = scrollY > SCROLL_ON;
-
-			if (nextIsScrolled === isScrolledRef.current) return;
-
-			isScrolledRef.current = nextIsScrolled;
-			setIsScrolled(nextIsScrolled);
+			if (nextIsScrolled !== isScrolledRef.current) {
+				isScrolledRef.current = nextIsScrolled;
+				setIsScrolled(nextIsScrolled);
+			}
 		};
 
 		if (!initializedRef.current) {
 			const scrollY = window.scrollY;
+			lastScrollYRef.current = scrollY;
 			const initialIsScrolled = scrollY > SCROLL_ON;
 			isScrolledRef.current = initialIsScrolled;
 			setIsScrolled(initialIsScrolled);
@@ -223,6 +236,10 @@ export function Navbar() {
 	}, []);
 
 	useEffect(() => {
+		if (isHidden) setMobileMenuOpen(false);
+	}, [isHidden]);
+
+	useEffect(() => {
 		if (!mobileMenuOpen) return;
 
 		document.body.style.overflow = "hidden";
@@ -241,28 +258,23 @@ export function Navbar() {
 
 	return (
 		<>
-			<motion.div
+			<div
 				className="fixed inset-x-0 top-0 z-50"
-				initial={false}
-				animate={{
-					paddingTop: isScrolled ? 10 : 0,
-					paddingLeft: isScrolled ? NAV_FLOAT_INSET : 0,
-					paddingRight: isScrolled ? NAV_FLOAT_INSET : 0,
+				style={{
+					transform: isHidden ? "translateY(-115%)" : undefined,
+					transition:
+						shouldReduceMotion || !shouldAnimate
+							? "none"
+							: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
 				}}
-				transition={
-					shouldReduceMotion || !shouldAnimate
-						? instantTransition
-						: navTransition
-				}
 			>
-				<motion.nav
-					aria-label="Main navigation"
-					className={`mx-auto w-full border border-transparent ${mounted ? navShellClass(navAppearance, isScrolled) : ""}`}
+				<motion.div
 					initial={false}
+					className="backdrop-blur-[2px]"
 					animate={{
-						height: isScrolled ? 60 : 72,
-						borderRadius: isScrolled ? 20 : 0,
-						maxWidth: isScrolled ? NAV_MAX_WIDTH : 10000,
+						paddingTop: isScrolled ? 10 : 0,
+						paddingLeft: isScrolled ? NAV_FLOAT_INSET : 0,
+						paddingRight: isScrolled ? NAV_FLOAT_INSET : 0,
 					}}
 					transition={
 						shouldReduceMotion || !shouldAnimate
@@ -270,61 +282,77 @@ export function Navbar() {
 							: navTransition
 					}
 				>
-					<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 px-4">
-						<Link
-							href="/"
-							aria-label="Codevider"
-							className="shrink-0 transition-opacity hover:opacity-90 active:scale-[0.96]"
-						>
-							<CodeviderLogo
-								compact={isScrolled}
-								variant={navAppearance}
-								stableLayout
-							/>
-						</Link>
-
-						<DesktopNavLinks appearance={navAppearance} />
-
-						<div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3">
-							<div className="hidden items-center gap-2 navbar:flex">
-								<LanguageSelector variant={navAppearance} />
-								<ThemeToggle variant={navAppearance} />
-							</div>
-
-							<button
-								type="button"
-								className={`relative flex size-9 items-center justify-center rounded-full border transition-[background-color,color] active:scale-[0.96] navbar:hidden ${
-									isDarkNav
-										? "border-white/10 bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white"
-										: "border-slate-200 bg-slate-900/5 text-slate-600 hover:bg-slate-900/10 hover:text-slate-900"
-								}`}
-								aria-expanded={mobileMenuOpen}
-								aria-controls="mobile-nav-menu"
-								aria-label={mobileMenuOpen ? t("close_menu") : t("open_menu")}
-								onClick={() => setMobileMenuOpen((open) => !open)}
+					<motion.nav
+						aria-label="Main navigation"
+						className={`mx-auto w-full border border-transparent ${mounted ? navShellClass(navAppearance, isScrolled) : ""}`}
+						initial={false}
+						animate={{
+							height: isScrolled ? 60 : 72,
+							borderRadius: isScrolled ? 20 : 0,
+							maxWidth: isScrolled ? 1310 : 10000,
+						}}
+						transition={
+							shouldReduceMotion || !shouldAnimate
+								? instantTransition
+								: navTransition
+						}
+					>
+						<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 px-4">
+							<Link
+								href="/"
+								aria-label="Codevider"
+								className="shrink-0 transition-opacity hover:opacity-90 active:scale-[0.96]"
 							>
-								<motion.span
-									key={mobileMenuOpen ? "close" : "open"}
-									initial={
-										shouldReduceMotion
-											? false
-											: { opacity: 0, scale: 0.25, filter: "blur(4px)" }
-									}
-									animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-									transition={{ type: "spring", duration: 0.3, bounce: 0 }}
-									className="absolute flex items-center justify-center"
+								<CodeviderLogo
+									compact={false}
+									variant={navAppearance}
+									stableLayout
+								/>
+							</Link>
+
+							<DesktopNavLinks appearance={navAppearance} />
+
+							<div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3">
+								<div className="hidden items-center gap-2 navbar:flex">
+									<LanguageSelector variant={navAppearance} />
+									<ThemeToggle variant={navAppearance} />
+								</div>
+
+								<button
+									type="button"
+									className={`relative flex size-9 items-center justify-center rounded-full border transition-[background-color,color] active:scale-[0.96] navbar:hidden ${
+										isDarkNav
+											? "border-white/10 bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white"
+											: "border-slate-200 bg-slate-900/5 text-slate-600 hover:bg-slate-900/10 hover:text-slate-900"
+									}`}
+									aria-expanded={mobileMenuOpen}
+									aria-controls="mobile-nav-menu"
+									aria-label={mobileMenuOpen ? t("close_menu") : t("open_menu")}
+									onClick={() => setMobileMenuOpen((open) => !open)}
 								>
-									{mobileMenuOpen ? (
-										<X className="size-5" aria-hidden />
-									) : (
-										<Menu className="size-5" aria-hidden />
-									)}
-								</motion.span>
-							</button>
+									<motion.span
+										key={mobileMenuOpen ? "close" : "open"}
+										initial={
+											shouldReduceMotion
+												? false
+												: { opacity: 0, scale: 0.25, filter: "blur(4px)" }
+										}
+										animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+										transition={{ type: "spring", duration: 0.3, bounce: 0 }}
+										className="absolute flex items-center justify-center"
+									>
+										{mobileMenuOpen ? (
+											<X className="size-5" aria-hidden />
+										) : (
+											<Menu className="size-5" aria-hidden />
+										)}
+									</motion.span>
+								</button>
+							</div>
 						</div>
-					</div>
-				</motion.nav>
-			</motion.div>
+					</motion.nav>
+				</motion.div>
+			</div>
 
 			<AnimatePresence initial={false}>
 				{mobileMenuOpen ? (

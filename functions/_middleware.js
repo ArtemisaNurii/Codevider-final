@@ -45,10 +45,9 @@ export async function onRequest(context) {
 		return Response.redirect(url.toString(), 301);
 	}
 
-	const rewrittenPath = rewriteCareerApplyPath(url.pathname);
-	if (rewrittenPath) {
-		url.pathname = rewrittenPath;
-		return context.env.ASSETS.fetch(new Request(url, context.request));
+	const redirectTarget = redirectCareerApplyPath(url);
+	if (redirectTarget) {
+		return Response.redirect(redirectTarget.toString(), 301);
 	}
 
 	return context.next();
@@ -73,10 +72,13 @@ function getLocalePrefixRedirect(pathname) {
 	return null;
 }
 
-function rewriteCareerApplyPath(pathname) {
-	if (!/\/career\/apply\/\d+\/?$/.test(pathname)) {
-		return null;
-	}
-
-	return pathname.replace(/\/\d+\/?$/, "/_");
+function redirectCareerApplyPath(url) {
+	const match = url.pathname.match(
+		/^((?:\/[a-z]{2})?\/career\/apply)\/(\d+)\/?$/,
+	);
+	if (!match) return null;
+	const target = new URL(url);
+	target.pathname = match[1];
+	target.searchParams.set("id", match[2]);
+	return target;
 }

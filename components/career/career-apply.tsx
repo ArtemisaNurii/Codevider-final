@@ -3,12 +3,11 @@
 import { ArrowLeft, ChevronUp, Loader2 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useFormatter, useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import CareerApplyForm from "@/components/career/career-apply-form";
 import { Link } from "@/i18n/navigation";
 import { fetchJobById } from "@/lib/api/recruit-jobs";
-import { parseCareerApplyJobId } from "@/lib/career-apply";
 import type { JobDetail } from "@/lib/types/recruit";
 
 const revealEase = [0.22, 1, 0.36, 1] as const;
@@ -45,8 +44,9 @@ export default function CareerApply() {
 	const t = useTranslations("career.apply");
 	const metadataT = useTranslations("metadata.career_apply");
 	const format = useFormatter();
-	const pathname = usePathname();
-	const jobId = parseCareerApplyJobId(pathname);
+	const searchParams = useSearchParams();
+	const rawId = searchParams.get("id");
+	const jobId = rawId && /^\d+$/.test(rawId) ? Number(rawId) : null;
 	const shouldReduceMotion = useReducedMotion();
 	const [loadState, setLoadState] = useState<LoadState>({ status: "loading" });
 	const [formOpen, setFormOpen] = useState(false);
