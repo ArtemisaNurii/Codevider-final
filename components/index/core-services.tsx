@@ -620,7 +620,7 @@ function FeatureSection({
 					<motion.h2
 						id={headlineId}
 						variants={reveal}
-						className="m-0 text-balance text-[clamp(1.75rem,3.7vw,2.875rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
+						className="m-0 text-balance text-[clamp(2rem,4.4vw,3.25rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
 					>
 						{t("headline")}
 					</motion.h2>
