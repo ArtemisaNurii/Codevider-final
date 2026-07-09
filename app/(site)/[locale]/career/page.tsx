@@ -4,8 +4,8 @@ import CareerHero from "@/components/career/career-hero";
 import CareerHiringProcess from "@/components/career/career-hiring-process";
 import CareerOpenings from "@/components/career/career-openings";
 import CareerWhyJoin from "@/components/career/career-why-join";
-import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
 import { StructuredData } from "@/components/seo/structured-data";
+import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { locale } = await params;

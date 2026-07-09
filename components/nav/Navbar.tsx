@@ -3,9 +3,9 @@
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
-import { useTheme } from "next-themes";
 import { CodeviderLogo } from "./CodeviderLogo";
 import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { StructuredData } from "@/components/seo/structured-data";
 import ServicesCapabilities from "@/components/services/services-capabilities";
 import ServicesHero from "@/components/services/services-hero";
 import ServicesProcess from "@/components/services/services-process";
 import ServicesTechStack from "@/components/services/services-tech-stack";
 import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
-import { StructuredData } from "@/components/seo/structured-data";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { locale } = await params;

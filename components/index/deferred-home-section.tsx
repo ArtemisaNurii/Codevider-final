@@ -1,8 +1,8 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useInView } from "motion/react";
-import { useRef, useState, useEffect, type ComponentType } from "react";
+import dynamic from "next/dynamic";
+import { type ComponentType, useEffect, useRef, useState } from "react";
 
 type SectionLoader = () => Promise<{ default: ComponentType }>;
 

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Suspense } from "react";
 import CareerApply from "@/components/career/career-apply";
+import { StructuredData } from "@/components/seo/structured-data";
 import { routing } from "@/i18n/routing";
 import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
-import { StructuredData } from "@/components/seo/structured-data";
 
 type Props = {
 	params: Promise<{ locale: string }>;

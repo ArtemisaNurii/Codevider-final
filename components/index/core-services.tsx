@@ -14,15 +14,16 @@ import {
 	Users,
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import type { CSSProperties } from "react";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
 
 const SyntaxHighlighter = dynamic(
 	() => import("react-syntax-highlighter").then((mod) => mod.Prism),
 	{ ssr: false },
 );
+
 import {
 	ENGINEERING_DEMO_CODE,
 	ENGINEERING_DEMO_TABS,

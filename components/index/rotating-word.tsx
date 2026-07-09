@@ -57,7 +57,7 @@ export default function RotatingWord({ words }: RotatingWordProps) {
 
 	return (
 		<span
-			className="relative mt-1 inline-grid font-sans text-(--brand-accent-text)"
+			className="relative mt-1 inline-grid font-sans text-(--hero-accent-text)"
 			aria-live="polite"
 		>
 			<span className="col-start-1 row-start-1 inline-grid px-2" aria-hidden>
