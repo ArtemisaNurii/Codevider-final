@@ -11,8 +11,8 @@ import {
 	WhyChooseUs,
 	WhyOutsource,
 } from "@/components/index/home-below-fold";
-import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
 import { StructuredData } from "@/components/seo/structured-data";
+import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
 
 type Props = {
 	params: Promise<{ locale: string }>;

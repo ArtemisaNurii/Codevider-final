@@ -2,8 +2,8 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
+import { useEffect, useRef, useState } from "react";
 import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
 
 type MapDot = {

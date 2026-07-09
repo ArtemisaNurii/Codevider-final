@@ -112,67 +112,65 @@ export default function AboutMeetTeam() {
 				/>
 			</div>
 
-			<div className="relative mt-(--home-stack)">
-				<div className="home-wrap relative">
-					<div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-1 sm:px-2">
-						<button
-							type="button"
-							onClick={() => scroll("left")}
-							aria-label={t("scroll_left")}
-							className="about-team-carousel__nav pointer-events-auto"
-						>
-							<ChevronLeft className="size-4" aria-hidden />
-						</button>
-						<button
-							type="button"
-							onClick={() => scroll("right")}
-							aria-label={t("scroll_right")}
-							className="about-team-carousel__nav pointer-events-auto"
-						>
-							<ChevronRight className="size-4" aria-hidden />
-						</button>
-					</div>
-
-					<div
-						ref={carouselRef}
-						className="about-team-carousel flex gap-4 overflow-x-auto scroll-smooth pb-4 md:gap-6 scrollbar-none [&::-webkit-scrollbar]:hidden"
+			<div className="relative mt-[var(--home-stack)]">
+				<div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-[var(--home-inline)]">
+					<button
+						type="button"
+						onClick={() => scroll("left")}
+						aria-label={t("scroll_left")}
+						className="about-team-carousel__nav pointer-events-auto"
 					>
-						{teamMembers.map((member, index) => (
-							<motion.div
-								key={member.name}
-								custom={index}
-								initial={shouldReduceMotion ? false : "hidden"}
-								animate={inView ? "visible" : "hidden"}
-								variants={cardVariants}
-								className="about-team-carousel__card shrink-0"
+						<ChevronLeft className="size-4" aria-hidden />
+					</button>
+					<button
+						type="button"
+						onClick={() => scroll("right")}
+						aria-label={t("scroll_right")}
+						className="about-team-carousel__nav pointer-events-auto"
+					>
+						<ChevronRight className="size-4" aria-hidden />
+					</button>
+				</div>
+
+				<div
+					ref={carouselRef}
+					className="about-team-carousel flex gap-4 overflow-x-auto scroll-smooth pb-4 md:gap-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+				>
+					{teamMembers.map((member, index) => (
+						<motion.div
+							key={member.name}
+							custom={index}
+							initial={shouldReduceMotion ? false : "hidden"}
+							animate={inView ? "visible" : "hidden"}
+							variants={cardVariants}
+							className="about-team-carousel__card shrink-0"
+						>
+							<button
+								type="button"
+								onClick={() => scrollToCard(index)}
+								className="group block w-full text-left"
 							>
-								<button
-									type="button"
-									onClick={() => scrollToCard(index)}
-									className="group block w-full text-left"
-								>
-									<div className="about-team-carousel__photo overflow-hidden">
-										<Image
-											src={member.image}
-											alt={member.name}
-											fill
-											sizes="(max-width: 640px) 72vw, (max-width: 1024px) 40vw, 22vw"
-											priority={index < 4}
-											className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-										/>
-									</div>
-									<div className="mt-4 text-center">
-										<h3 className="text-[17px] font-semibold text-(--text-h)">
-											{member.name}
-										</h3>
-										<p className="mt-0.5 text-sm text-(--text)">
-											{member.role}
-										</p>
-									</div>
-								</button>
-							</motion.div>
-						))}
-					</div>
+								<div className="about-team-carousel__photo overflow-hidden">
+									<Image
+										src={member.image}
+										alt={member.name}
+										fill
+										sizes="(max-width: 640px) 72vw, (max-width: 1024px) 40vw, 22vw"
+										priority={index < 4}
+										className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+									/>
+								</div>
+								<div className="mt-4 text-center">
+									<h3 className="text-[17px] font-semibold text-[var(--text-h)]">
+										{member.name}
+									</h3>
+									<p className="mt-0.5 text-sm text-[var(--text)]">
+										{member.role}
+									</p>
+								</div>
+							</button>
+						</motion.div>
+					))}
 				</div>
 			</div>
 		</section>

@@ -68,11 +68,7 @@ function FieldError({ id, message }: { id?: string; message?: string }) {
 	if (!message) return null;
 
 	return (
-		<p
-			id={id}
-			className="mt-1.5 text-sm text-(--dash-warning)"
-			role="alert"
-		>
+		<p id={id} className="mt-1.5 text-sm text-(--dash-warning)" role="alert">
 			{message}
 		</p>
 	);
@@ -325,10 +321,7 @@ export default function Contact() {
 							</div>
 
 							{submitError ? (
-								<p
-									className="mt-5 text-sm text-(--dash-warning)"
-									role="alert"
-								>
+								<p className="mt-5 text-sm text-(--dash-warning)" role="alert">
 									{submitError}
 								</p>
 							) : null}

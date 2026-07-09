@@ -3,9 +3,9 @@
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
+import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
-import { useTheme } from "next-themes";
 import { CodeviderLogo } from "./CodeviderLogo";
 import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";
@@ -297,7 +297,7 @@ export function Navbar() {
 								: navTransition
 						}
 					>
-						<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 px-4">
+						<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 px-[var(--home-inline)]">
 							<Link
 								href="/"
 								aria-label="Codevider"
@@ -373,7 +373,7 @@ export function Navbar() {
 							role="dialog"
 							aria-modal="true"
 							aria-label={t("open_menu")}
-							className={`fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col px-4 pb-6 pt-6 backdrop-blur-xl sm:px-6 navbar:hidden ${
+							className={`fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col px-[var(--home-inline)] pb-6 pt-6 backdrop-blur-xl navbar:hidden ${
 								mounted
 									? isDarkNav
 										? "border-t border-white/10 bg-slate-900/95 shadow-[0_12px_40px_rgba(0,0,0,0.28)]"

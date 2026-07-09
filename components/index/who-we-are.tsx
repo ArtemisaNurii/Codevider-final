@@ -73,7 +73,7 @@ function StatCard({
 }) {
 	return (
 		<motion.div
-			className={`stat-card ${tone} flex h-full flex-col justify-between wrap-break-word gap-6 rounded-2xl p-7 sm:p-9 ${wide ? "sm:col-span-2" : ""}`}
+			className={`stat-card ${tone} flex h-full flex-col justify-center rounded-2xl p-7 sm:p-9 ${wide ? "sm:col-span-2" : ""}`}
 			initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
 			animate={isRevealed ? "visible" : "hidden"}
 			variants={{
@@ -86,18 +86,22 @@ function StatCard({
 				},
 			}}
 		>
-			<motion.p
-				className="stat-card-value font-(family-name:--mono) text-[clamp(2rem,4vw,2.75rem)] font-medium tabular-nums tracking-tight"
-				variants={itemVariants}
+			<div
+				className={`flex flex-col gap-4 wrap-break-word ${wide ? "max-w-2xl" : ""}`}
 			>
-				{value}
-			</motion.p>
-			<motion.p
-				className={`stat-card-cap text-pretty text-sm leading-relaxed sm:text-base ${wide ? "max-w-2xl" : ""}`}
-				variants={statDescVariants}
-			>
-				{label}
-			</motion.p>
+				<motion.p
+					className="stat-card-value font-(family-name:--mono) text-[clamp(2rem,4vw,2.75rem)] font-medium tabular-nums tracking-tight"
+					variants={itemVariants}
+				>
+					{value}
+				</motion.p>
+				<motion.p
+					className="stat-card-cap text-pretty text-sm leading-relaxed sm:text-base"
+					variants={statDescVariants}
+				>
+					{label}
+				</motion.p>
+			</div>
 		</motion.div>
 	);
 }

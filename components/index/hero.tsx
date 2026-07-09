@@ -1,18 +1,53 @@
 "use client";
 
+import { useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import GradientBlinds from "@/components/ui/gradient-blinds";
 import HeroDashboard from "./hero-dashboard";
 import RotatingWord from "./rotating-word";
+
+const HERO_FINE_POINTER_QUERY = "(any-pointer: fine)";
 
 /**
  * Hero section for the home page.
  *
  * Entrance animations use CSS @starting-style — triggers the transition when
  * elements first paint, requiring zero JS and producing zero layout shift.
+ *
+ * Background, veil, and copy stay on the dark hero palette regardless of site
+ * theme — only the dashboard mockup follows light/dark mode.
  */
+const HERO_GRADIENT: string[] = ["#0e1624", "#3a5278", "#8499be", "#78a99e"];
+
 export default function Hero() {
 	const t = useTranslations("home");
+	const reducedMotion = useReducedMotion();
+	const [mouseMotion, setMouseMotion] = useState(false);
+
+	useEffect(() => {
+		const finePointerMq = window.matchMedia(HERO_FINE_POINTER_QUERY);
+
+		const syncMotion = () => {
+			setMouseMotion(finePointerMq.matches);
+		};
+
+		const enableOnFirstMouseMove = () => {
+			setMouseMotion(true);
+		};
+
+		syncMotion();
+		finePointerMq.addEventListener("change", syncMotion);
+		window.addEventListener("mousemove", enableOnFirstMouseMove, {
+			once: true,
+		});
+
+		return () => {
+			finePointerMq.removeEventListener("change", syncMotion);
+			window.removeEventListener("mousemove", enableOnFirstMouseMove);
+		};
+	}, []);
 	const yearsDelivering = new Date().getFullYear() - 2019;
 	const rotatingWords = [
 		t("rotating_word.saas"),
@@ -30,11 +65,27 @@ export default function Hero() {
 
 	return (
 		<section className="home-hero relative isolate min-h-dvh overflow-hidden">
-			<div className="home-hero__blobs" aria-hidden>
-				<div className="home-hero__blob home-hero__blob--primary" />
-				<div className="home-hero__blob home-hero__blob--secondary" />
-				<div className="home-hero__blob home-hero__blob--accent home-hero__blob--teal" />
-				<div className="home-hero__blob home-hero__blob--accent home-hero__blob--violet" />
+			<div className="home-hero__gradient-blinds" aria-hidden>
+				<GradientBlinds
+					className="home-hero__gradient-blinds-canvas"
+					gradientColors={HERO_GRADIENT}
+					spotlightMotion={mouseMotion ? "mouse" : "auto"}
+					trackPointer="section"
+					mouseDampening={0.24}
+					autoMotionSpeed={0.68}
+					angle={33}
+					noise={0.05}
+					blindCount={5}
+					blindMinWidth={14}
+					mirrorGradient
+					spotlightRadius={0.28}
+					spotlightSoftness={2}
+					spotlightOpacity={0.1}
+					distortAmount={0.2}
+					shineDirection="right"
+					mixBlendMode=""
+					paused={reducedMotion ?? false}
+				/>
 			</div>
 
 			<div className="home-hero__veil" aria-hidden />
@@ -65,13 +116,13 @@ export default function Hero() {
 							</Link>
 							<Link
 								href="#services"
-								className="inline-flex min-h-11 items-center justify-center rounded-full border border-(--border) bg-(--bg)/80 px-7 py-3.5 text-sm font-medium text-(--hero-text-h) backdrop-blur-sm transition-[background-color,border-color,transform] hover:border-(--accent-border) hover:bg-(--accent-bg) active:scale-[0.96] focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-(--focus-ring)"
+								className="inline-flex min-h-11 items-center justify-center rounded-full border border-(--hero-border) bg-(--hero-surface) px-7 py-3.5 text-sm font-medium text-(--hero-text-h) backdrop-blur-sm transition-[background-color,border-color,transform] hover:border-(--hero-accent-border) hover:bg-(--hero-accent-bg) active:scale-[0.96] focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-(--hero-focus-ring)"
 							>
 								{t("explore_services")}
 							</Link>
 						</div>
 
-						<div className="hero-reveal hero-reveal-4 grid grid-cols-3 gap-5 border-t border-(--border) pt-10 sm:gap-10 sm:pt-12 w-full">
+						<div className="hero-reveal hero-reveal-4 grid grid-cols-3 gap-5 border-t border-(--hero-border) pt-10 sm:gap-10 sm:pt-12 w-full">
 							{stats.map(({ value, label }) => (
 								<div key={label} className="text-center lg:text-left">
 									<p className="font-(family-name:--mono) text-2xl font-medium tabular-nums tracking-tight text-(--hero-text-h) sm:text-3xl">

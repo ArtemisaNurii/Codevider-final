@@ -2,8 +2,8 @@
 
 import { ArrowLeft, ChevronUp, Loader2 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useFormatter, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
+import { useFormatter, useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import CareerApplyForm from "@/components/career/career-apply-form";
 import { Link } from "@/i18n/navigation";

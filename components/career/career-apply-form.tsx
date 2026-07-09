@@ -66,11 +66,7 @@ function FieldError({ id, message }: { id?: string; message?: string }) {
 	if (!message) return null;
 
 	return (
-		<p
-			id={id}
-			className="mt-1.5 text-sm text-(--dash-warning)"
-			role="alert"
-		>
+		<p id={id} className="mt-1.5 text-sm text-(--dash-warning)" role="alert">
 			{message}
 		</p>
 	);

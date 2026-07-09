@@ -1,5 +1,5 @@
-import type { JobDetail } from "@/lib/types/recruit";
 import { getSiteUrl } from "@/lib/site";
+import type { JobDetail } from "@/lib/types/recruit";
 
 type Props = {
 	job: JobDetail;

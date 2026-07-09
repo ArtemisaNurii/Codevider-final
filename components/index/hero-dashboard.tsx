@@ -98,10 +98,7 @@ function MetricCard({
 				<span className="text-xs font-medium uppercase tracking-wide text-(--dash-muted)">
 					{label}
 				</span>
-				<Icon
-					className="size-3.5 shrink-0 text-(--dash-brand)"
-					aria-hidden
-				/>
+				<Icon className="size-3.5 shrink-0 text-(--dash-brand)" aria-hidden />
 			</div>
 			<p className="font-(family-name:--mono) text-xl font-medium tabular-nums tracking-tight text-(--dash-text) sm:text-2xl">
 				{value}

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import LegalDocument from "@/components/legal/legal-document";
 import LegalHero from "@/components/legal/legal-hero";
-import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
 import { StructuredData } from "@/components/seo/structured-data";
+import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
 
 const PRIVACY_SECTIONS = [
 	"collection",
