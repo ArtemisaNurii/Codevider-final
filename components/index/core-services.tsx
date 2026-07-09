@@ -355,12 +355,12 @@ function PodDemo() {
 					{t("subtitle")}
 				</span>
 			</div>
-			<div className="relative flex h-[360px] items-center justify-center px-8">
-				<div className="relative mx-auto size-[260px]">
+			<div className="relative flex h-[280px] items-center justify-center px-0 sm:h-[360px] sm:px-4">
+				<div className="relative mx-auto size-[min(260px,100%)]">
 					<span className="home-pod-ring absolute inset-0 rounded-full border-[1.5px] border-dashed border-(--border)" />
 					<span className="home-pod-ring home-pod-ring--reverse absolute inset-[55px] rounded-full border-[1.5px] border-dashed border-(--border)" />
 					<div className="absolute inset-0 grid place-items-center">
-						<div className="relative z-[2] grid size-[108px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-white shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)]">
+						<div className="relative z-[2] grid size-[88px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-white shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)] sm:size-[108px]">
 							{t("center")}
 						</div>
 					</div>
