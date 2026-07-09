@@ -1231,6 +1231,7 @@ code {
 }
 
 .home-code-editor__tab {
+	position: relative;
 	flex: none;
 	border: 1px solid transparent;
 	border-bottom: none;
@@ -1243,8 +1244,26 @@ code {
 	background: transparent;
 	transition:
 		color 150ms ease,
-		background-color 150ms ease,
-		border-color 150ms ease;
+		transform 100ms ease-out;
+}
+
+.home-code-editor__tab-indicator {
+	position: absolute;
+	inset: 0;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-bottom: none;
+	border-radius: 0.5rem 0.5rem 0 0;
+	background: #1a1d27;
+}
+
+.home-code-editor__tab:active:not(.home-code-editor__tab--active) {
+	transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.home-code-editor__tab:active:not(.home-code-editor__tab--active) {
+		transform: none;
+	}
 }
 
 .home-code-editor__tab:hover {
@@ -1253,8 +1272,6 @@ code {
 
 .home-code-editor__tab--active {
 	color: #e8ecf4;
-	background: #1a1d27;
-	border-color: rgba(255, 255, 255, 0.08);
 }
 
 .home-code-editor__viewport {

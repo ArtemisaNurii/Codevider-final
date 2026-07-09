@@ -3,9 +3,12 @@
 import { useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import GradientBlinds from "@/components/ui/gradient-blinds";
 import HeroDashboard from "./hero-dashboard";
 import RotatingWord from "./rotating-word";
+
+const HERO_FINE_POINTER_QUERY = "(any-pointer: fine)";
 
 /**
  * Hero section for the home page.
@@ -21,6 +24,30 @@ const HERO_GRADIENT: string[] = ["#0e1624", "#3a5278", "#8499be", "#78a99e"];
 export default function Hero() {
 	const t = useTranslations("home");
 	const reducedMotion = useReducedMotion();
+	const [mouseMotion, setMouseMotion] = useState(false);
+
+	useEffect(() => {
+		const finePointerMq = window.matchMedia(HERO_FINE_POINTER_QUERY);
+
+		const syncMotion = () => {
+			setMouseMotion(finePointerMq.matches);
+		};
+
+		const enableOnFirstMouseMove = () => {
+			setMouseMotion(true);
+		};
+
+		syncMotion();
+		finePointerMq.addEventListener("change", syncMotion);
+		window.addEventListener("mousemove", enableOnFirstMouseMove, {
+			once: true,
+		});
+
+		return () => {
+			finePointerMq.removeEventListener("change", syncMotion);
+			window.removeEventListener("mousemove", enableOnFirstMouseMove);
+		};
+	}, []);
 	const yearsDelivering = new Date().getFullYear() - 2019;
 	const rotatingWords = [
 		t("rotating_word.saas"),
@@ -42,7 +69,10 @@ export default function Hero() {
 				<GradientBlinds
 					className="home-hero__gradient-blinds-canvas"
 					gradientColors={HERO_GRADIENT}
-					spotlightMotion="auto"
+					spotlightMotion={mouseMotion ? "mouse" : "auto"}
+					trackPointer="section"
+					mouseDampening={0.24}
+					autoMotionSpeed={0.68}
 					angle={33}
 					noise={0.05}
 					blindCount={5}

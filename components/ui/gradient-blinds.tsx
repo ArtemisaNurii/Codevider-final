@@ -24,6 +24,8 @@ export interface GradientBlindsProps {
 	spotlightMotion?: "mouse" | "auto";
 	/** Where to listen for pointer movement when spotlightMotion is "mouse". */
 	trackPointer?: "canvas" | "section";
+	/** Scales auto-drift speed. Values below 1 slow the motion. */
+	autoMotionSpeed?: number;
 }
 
 const MAX_COLORS = 8;
@@ -51,9 +53,10 @@ const getAutoSpotlight = (
 	w: number,
 	h: number,
 	time: number,
+	speed = 1,
 ): [number, number] => [
-	w * (0.5 + 0.34 * Math.sin(time * 0.38 + 0.6)),
-	h * (0.5 + 0.26 * Math.cos(time * 0.29)),
+	w * (0.5 + 0.34 * Math.sin(time * 0.38 * speed + 0.6)),
+	h * (0.5 + 0.26 * Math.cos(time * 0.29 * speed)),
 ];
 
 const GradientBlinds: React.FC<GradientBlindsProps> = ({
@@ -75,6 +78,7 @@ const GradientBlinds: React.FC<GradientBlindsProps> = ({
 	mixBlendMode = "lighten",
 	spotlightMotion = "mouse",
 	trackPointer = "canvas",
+	autoMotionSpeed = 1,
 }) => {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const rafRef = useRef<number | null>(null);
@@ -318,7 +322,12 @@ void main() {
 			}
 
 			if (spotlightMotion === "auto") {
-				uniforms.iMouse.value = getAutoSpotlight(w, h, elapsedRef.current * 2);
+				uniforms.iMouse.value = getAutoSpotlight(
+					w,
+					h,
+					elapsedRef.current * 2,
+					autoMotionSpeed,
+				);
 			} else {
 				const cx = w / 2;
 				const cy = h / 2;
@@ -386,7 +395,7 @@ void main() {
 				const w = gl.drawingBufferWidth;
 				const h = gl.drawingBufferHeight;
 				if (w > 0 && h > 0) {
-					uniforms.iMouse.value = getAutoSpotlight(w, h, time);
+					uniforms.iMouse.value = getAutoSpotlight(w, h, time, autoMotionSpeed);
 				}
 			} else if (spotlightMotion === "mouse" && mouseDampening > 0) {
 				const tau = Math.max(1e-4, mouseDampening);
@@ -451,6 +460,7 @@ void main() {
 		shineDirection,
 		spotlightMotion,
 		trackPointer,
+		autoMotionSpeed,
 	]);
 
 	return (

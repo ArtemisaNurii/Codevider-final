@@ -94,6 +94,10 @@ const engineeringCodeTheme: Record<string, CSSProperties> = {
 
 const reveal = sectionRevealItem;
 
+/** Critically damped spring — Apple default for UI state changes. */
+const APPLE_SPRING = { type: "spring" as const, duration: 0.35, bounce: 0 };
+const APPLE_SPRING_FAST = { type: "spring" as const, duration: 0.3, bounce: 0 };
+
 const listReveal = {
 	hidden: {},
 	visible: {
@@ -217,15 +221,41 @@ function AiDemo() {
 				</div>
 			</div>
 			<div className="home-demo-body home-demo-body--chat">
-				<div className="home-demo-chat-bubble home-demo-chat-bubble--user">
-					{t(activeChip.qKey)}
-				</div>
+				<AnimatePresence mode="popLayout" initial={false}>
+					<motion.div
+						key={active}
+						className="home-demo-chat-bubble home-demo-chat-bubble--user"
+						initial={
+							shouldReduceMotion ? false : { opacity: 0, y: 8, scale: 0.98 }
+						}
+						animate={{ opacity: 1, y: 0, scale: 1 }}
+						exit={
+							shouldReduceMotion
+								? undefined
+								: { opacity: 0, y: -6, scale: 0.98 }
+						}
+						transition={APPLE_SPRING}
+					>
+						{t(activeChip.qKey)}
+					</motion.div>
+				</AnimatePresence>
 				<div
 					className="home-demo-chat-bubble home-demo-chat-bubble--assistant"
 					aria-live="polite"
 					aria-atomic="true"
 				>
-					{answer}
+					<AnimatePresence mode="popLayout" initial={false}>
+						<motion.span
+							key={active}
+							className="block"
+							initial={shouldReduceMotion ? false : { opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={shouldReduceMotion ? undefined : { opacity: 0 }}
+							transition={APPLE_SPRING_FAST}
+						>
+							{answer}
+						</motion.span>
+					</AnimatePresence>
 				</div>
 			</div>
 			<div className="home-code-editor__status">
@@ -270,7 +300,20 @@ function CodeDemo() {
 							onClick={() => setActive(tab)}
 							className={`home-code-editor__tab cursor-pointer ${active === tab ? "home-code-editor__tab--active" : ""}`}
 						>
-							{ENGINEERING_DEMO_TABS[tab]}
+							{active === tab ? (
+								shouldReduceMotion ? (
+									<span className="home-code-editor__tab-indicator" />
+								) : (
+									<motion.span
+										layoutId="engineering-tab-indicator"
+										className="home-code-editor__tab-indicator"
+										transition={APPLE_SPRING}
+									/>
+								)
+							) : null}
+							<span className="relative z-[1]">
+								{ENGINEERING_DEMO_TABS[tab]}
+							</span>
 						</button>
 					))}
 				</div>
@@ -281,28 +324,18 @@ function CodeDemo() {
 				id={`engineering-panel-${active}`}
 				aria-labelledby={`engineering-tab-${active}`}
 			>
-				<AnimatePresence mode="wait" initial={false}>
-					<motion.div
-						key={active}
-						initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
-						animate={{ opacity: 1, y: 0 }}
-						exit={shouldReduceMotion ? undefined : { opacity: 0, y: -6 }}
-						transition={{ type: "spring", duration: 0.35, bounce: 0 }}
-					>
-						<SyntaxHighlighter
-							language={ENGINEERING_CODE_LANGUAGES[active]}
-							style={engineeringCodeTheme}
-							wrapLongLines={false}
-							customStyle={{
-								margin: 0,
-								padding: 0,
-								background: "transparent",
-							}}
-						>
-							{code.trimEnd()}
-						</SyntaxHighlighter>
-					</motion.div>
-				</AnimatePresence>
+				<SyntaxHighlighter
+					language={ENGINEERING_CODE_LANGUAGES[active]}
+					style={engineeringCodeTheme}
+					wrapLongLines={false}
+					customStyle={{
+						margin: 0,
+						padding: 0,
+						background: "transparent",
+					}}
+				>
+					{code.trimEnd()}
+				</SyntaxHighlighter>
 			</div>
 			<div className="home-code-editor__status">
 				<span className="grid size-5 place-items-center rounded-full bg-emerald-500/15 text-emerald-600">
@@ -316,9 +349,54 @@ function CodeDemo() {
 
 const POD_ROLES = ["frontend", "backend", "qa", "pm"] as const;
 
+type PipelineStageState = "idle" | "active" | "done";
+
+function PipelineStageIcon({
+	state,
+	StageIcon,
+	shouldReduceMotion,
+}: {
+	state: PipelineStageState;
+	StageIcon: typeof Package;
+	shouldReduceMotion: boolean | null;
+}) {
+	return (
+		<AnimatePresence mode="popLayout" initial={false}>
+			<motion.span
+				key={state}
+				className="grid place-items-center"
+				initial={
+					shouldReduceMotion
+						? false
+						: { opacity: 0, scale: 0.25, filter: "blur(4px)" }
+				}
+				animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+				exit={
+					shouldReduceMotion
+						? undefined
+						: { opacity: 0, scale: 0.25, filter: "blur(4px)" }
+				}
+				transition={APPLE_SPRING_FAST}
+			>
+				{state === "done" ? (
+					<Check className="size-5" strokeWidth={2.5} aria-hidden />
+				) : state === "active" ? (
+					<Loader2
+						className="size-5 motion-reduce:animate-none animate-spin"
+						aria-hidden
+					/>
+				) : (
+					<StageIcon className="size-5" aria-hidden />
+				)}
+			</motion.span>
+		</AnimatePresence>
+	);
+}
+
 function PodDemo() {
 	const t = useTranslations("home.features.pod.demo");
 	const [active, setActive] = useState<(typeof POD_ROLES)[number]>("frontend");
+	const shouldReduceMotion = useReducedMotion();
 
 	const positions: Record<(typeof POD_ROLES)[number], string> = {
 		frontend: "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2",
@@ -389,13 +467,22 @@ function PodDemo() {
 					))}
 				</div>
 			</div>
-			<p className="home-demo-body min-h-6 pt-0 text-center text-sm leading-relaxed text-[var(--text)]">
-				<span className={`font-semibold ${titleColors[active]}`}>
-					{t(`role_${active}`)}
-				</span>
-				{" — "}
-				{t(`role_${active}_desc`)}
-			</p>
+			<AnimatePresence mode="popLayout" initial={false}>
+				<motion.p
+					key={active}
+					className="home-demo-body min-h-6 pt-0 text-center text-sm leading-relaxed text-[var(--text)]"
+					initial={shouldReduceMotion ? false : { opacity: 0, y: 6 }}
+					animate={{ opacity: 1, y: 0 }}
+					exit={shouldReduceMotion ? undefined : { opacity: 0, y: -4 }}
+					transition={APPLE_SPRING_FAST}
+				>
+					<span className={`font-semibold ${titleColors[active]}`}>
+						{t(`role_${active}`)}
+					</span>
+					{" — "}
+					{t(`role_${active}_desc`)}
+				</motion.p>
+			</AnimatePresence>
 		</div>
 	);
 }
@@ -469,10 +556,16 @@ function PipelineDemo() {
 						{t("title")}
 					</span>
 					{live ? (
-						<div className="home-live-badge" role="status">
+						<motion.div
+							className="home-live-badge"
+							role="status"
+							initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.92 }}
+							animate={{ opacity: 1, scale: 1 }}
+							transition={APPLE_SPRING}
+						>
 							<span className="home-live-badge__dot" aria-hidden />
 							<span>{t("status_live_label")}</span>
-						</div>
+						</motion.div>
 					) : (
 						<span className="rounded-full bg-(--home-surface-muted) px-2.5 py-1 text-[11px] font-medium tracking-wide text-(--text) uppercase">
 							{t("subtitle")}
@@ -496,30 +589,29 @@ function PipelineDemo() {
 							return (
 								<Fragment key={stage}>
 									<div className="home-pipeline-track__cell">
-										<div
-											className={`grid size-10 place-items-center rounded-xl transition-[background-color,color,box-shadow] duration-300 ${
+										<motion.div
+											className={`grid size-10 place-items-center rounded-xl ${
 												doneCount > i
 													? "bg-emerald-500/12 text-emerald-600 shadow-[0_1px_2px_rgba(16,185,129,0.12)]"
 													: activeStage === i
 														? "bg-(--dash-brand-bg) text-(--dash-brand) shadow-[0_1px_2px_color-mix(in_srgb,var(--dash-brand)_12%,transparent)]"
 														: "bg-(--bg) text-(--text) shadow-[0_1px_2px_color-mix(in_srgb,var(--text-h)_6%,transparent)]"
 											}`}
+											layout={!shouldReduceMotion}
+											transition={APPLE_SPRING_FAST}
 										>
-											{doneCount > i ? (
-												<Check
-													className="size-5"
-													strokeWidth={2.5}
-													aria-hidden
-												/>
-											) : activeStage === i ? (
-												<Loader2
-													className="size-5 motion-reduce:animate-none animate-spin"
-													aria-hidden
-												/>
-											) : (
-												<StageIcon className="size-5" aria-hidden />
-											)}
-										</div>
+											<PipelineStageIcon
+												state={
+													doneCount > i
+														? "done"
+														: activeStage === i
+															? "active"
+															: "idle"
+												}
+												StageIcon={StageIcon}
+												shouldReduceMotion={shouldReduceMotion}
+											/>
+										</motion.div>
 									</div>
 									{i < stages.length - 1 ? (
 										<div
