@@ -729,7 +729,6 @@ function FeatureStackCard({
 					</span>
 					<span
 						id={headlineId}
-						variants={reveal}
 						className="m-0 text-balance text-[clamp(2rem,4.4vw,3.25rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
 					>
 						{t("headline")}
