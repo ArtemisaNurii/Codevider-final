@@ -52,7 +52,11 @@
 		"core_services": {
 			"eyebrow": "Our core services",
 			"headline": "Everything you need to ship, scale, and stay ahead",
-			"description": "We help enterprises and startups ship faster with scalable teams, modern stacks, and reliable delivery — without the overhead. Four ways we plug in:"
+			"description": "We help enterprises and startups ship faster with scalable teams, modern stacks, and reliable delivery — without the overhead. Four ways we plug in:",
+			"accordion_aria": "Core services",
+			"prev_service": "Previous service",
+			"next_service": "Next service",
+			"select_service": "Show {service}"
 		},
 		"rotating_word": {
 			"saas": "SaaS",
@@ -72,6 +76,7 @@
 				"bullet_2": "Intelligent chatbots & support automation",
 				"bullet_3": "Insight pipelines wired into your workflows",
 				"link": "Explore AI services",
+				"short_label": "AI Integration",
 				"demo": {
 					"title": "AI Assistant",
 					"status": "Driven by your data, safeguarded by design.",
@@ -94,6 +99,7 @@
 				"bullet_2": "Continuous delivery from day one",
 				"bullet_3": "Maintainable systems that scale with you",
 				"link": "Explore engineering",
+				"short_label": "Engineering",
 				"demo": {
 					"tabs_aria": "Code samples",
 					"status": "Build passed · 0 type errors · deployed to production"
@@ -107,6 +113,7 @@
 				"bullet_2": "Daily standups, weekly reporting, full visibility",
 				"bullet_3": "Scale the pod up or down on demand",
 				"link": "Explore pod teams",
+				"short_label": "Pod Teams",
 				"demo": {
 					"title": "Your dedicated pod",
 					"subtitle": "hover a role",
@@ -129,6 +136,7 @@
 				"bullet_2": "Containerized, infrastructure-as-code setups",
 				"bullet_3": "High availability & 99% uptime SLAs",
 				"link": "Explore cloud & DevOps",
+				"short_label": "Cloud & DevOps",
 				"demo": {
 					"title": "CI/CD pipeline",
 					"subtitle": "main → production",

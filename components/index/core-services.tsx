@@ -4,6 +4,8 @@ import {
 	ArrowUpRight,
 	Bot,
 	Check,
+	ChevronLeft,
+	ChevronRight,
 	Cloud,
 	Code2,
 	FlaskConical,
@@ -32,7 +34,6 @@ import {
 	appleRevealEase,
 	sectionItemTransition,
 	sectionRevealItem,
-	sectionRevealStagger,
 	useSectionReveal,
 } from "@/hooks/use-section-reveal";
 import { Link } from "@/i18n/navigation";
@@ -194,7 +195,7 @@ function AiDemo() {
 	return (
 		<div
 			ref={ref}
-			className="home-demo home-demo--ai min-h-[340px] sm:min-h-[420px]"
+			className="home-demo home-demo--ai"
 		>
 			<div className="home-demo-head home-demo-head--wrap min-w-0 overflow-hidden">
 				<div
@@ -355,12 +356,12 @@ function PodDemo() {
 					{t("subtitle")}
 				</span>
 			</div>
-			<div className="relative flex h-[360px] items-center justify-center px-8">
-				<div className="relative mx-auto size-[260px]">
+			<div className="home-demo-pod-stage relative flex min-h-0 flex-1 items-center justify-center px-6">
+				<div className="relative mx-auto size-[280px]">
 					<span className="home-pod-ring absolute inset-0 rounded-full border-[1.5px] border-dashed border-(--border)" />
-					<span className="home-pod-ring home-pod-ring--reverse absolute inset-[55px] rounded-full border-[1.5px] border-dashed border-(--border)" />
+					<span className="home-pod-ring home-pod-ring--reverse absolute inset-[58px] rounded-full border-[1.5px] border-dashed border-(--border)" />
 					<div className="absolute inset-0 grid place-items-center">
-						<div className="relative z-[2] grid size-[108px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-white shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)]">
+						<div className="relative z-[2] grid size-[110px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-white shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)]">
 							{t("center")}
 						</div>
 					</div>
@@ -496,7 +497,7 @@ function PipelineDemo() {
 								<Fragment key={stage}>
 									<div className="home-pipeline-track__cell">
 										<div
-											className={`grid size-10 place-items-center rounded-xl transition-[background-color,color,box-shadow] duration-300 ${
+											className={`grid size-11 place-items-center rounded-xl transition-[background-color,color,box-shadow] duration-300 ${
 												doneCount > i
 													? "bg-emerald-500/12 text-emerald-600 shadow-[0_1px_2px_rgba(16,185,129,0.12)]"
 													: activeStage === i
@@ -578,89 +579,365 @@ type FeatureId = "ai" | "engineering" | "pod" | "devops";
 type FeatureConfig = {
 	id: FeatureId;
 	icon: React.ReactNode;
-	reverse?: boolean;
-	alt?: boolean;
+	shortLabel: string;
 	demo: React.ReactNode;
 	href: string;
 };
 
-function FeatureSection({
-	feature,
-	index,
-}: {
-	feature: FeatureConfig;
-	index: number;
-}) {
+const AUTOPLAY_MS = 6500;
+
+function ActiveIconRail({ feature }: { feature: FeatureConfig }) {
 	const t = useTranslations(`home.features.${feature.id}`);
-	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
-	const shouldReduceMotion = useReducedMotion();
-
-	const bullets = [t("bullet_1"), t("bullet_2"), t("bullet_3")];
-	const headlineId = `${feature.id}-headline`;
-
-	const textDelay = index * 0.04;
 
 	return (
-		<section
-			ref={ref}
-			aria-labelledby={headlineId}
-			className={`relative overflow-hidden py-[clamp(64px,9vw,112px)] ${feature.alt ? "home-feature-alt" : ""}`}
-		>
-			<div className="home-wrap grid items-center gap-[clamp(2.5rem,6vw,5.5rem)] lg:grid-cols-2">
-				<motion.div
-					className={`flex flex-col gap-7 sm:gap-8 ${feature.reverse ? "lg:order-2" : ""}`}
-					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
-					animate={isRevealed ? "visible" : "hidden"}
-					variants={sectionRevealStagger}
-				>
-					<motion.span className="home-feature-badge" variants={reveal}>
-						<span className="home-feature-badge__icon">{feature.icon}</span>
-						{t("badge")}
-					</motion.span>
-					<motion.h2
-						id={headlineId}
-						variants={reveal}
-						className="m-0 text-balance text-[clamp(1.75rem,3.7vw,2.875rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
-					>
-						{t("headline")}
-					</motion.h2>
-					<motion.p
-						variants={reveal}
-						className="max-w-[52ch] text-pretty text-[17px] leading-relaxed text-[var(--text)]"
-					>
-						{t("description")}
-					</motion.p>
-					<FeatureCheckList items={bullets} />
-					<motion.div variants={reveal}>
-						<Link href={feature.href} className="home-link-arrow">
-							{t("link")}
-							<ArrowUpRight className="size-4" aria-hidden />
-						</Link>
-					</motion.div>
-				</motion.div>
-
-				<motion.div
-					className={`relative min-w-0 ${feature.reverse ? "lg:order-1" : ""}`}
-					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
-					animate={isRevealed ? "visible" : "hidden"}
-					variants={{
-						...reveal,
-						visible: {
-							...reveal.visible,
-							transition: shouldAnimate
-								? {
-										duration: 0.55,
-										ease: appleRevealEase,
-										delay: 0.12 + textDelay,
-									}
-								: { duration: 0 },
-						},
-					}}
-				>
-					{feature.demo}
-				</motion.div>
+		<>
+			<div className="services-accordion__header-start">
+				<span className="services-accordion__strip-icon">{feature.icon}</span>
+				<span className="services-accordion__service-label">{t("badge")}</span>
 			</div>
-		</section>
+			<Link
+				href={feature.href}
+				className="home-link-arrow services-accordion__header-link shrink-0 whitespace-nowrap"
+			>
+				{t("link")}
+				<ArrowUpRight className="size-4" aria-hidden />
+			</Link>
+		</>
+	);
+}
+
+function ActivePanelContent({
+	feature,
+	headlineId,
+}: {
+	feature: FeatureConfig;
+	headlineId: string;
+}) {
+	const t = useTranslations(`home.features.${feature.id}`);
+	const bullets = [t("bullet_1"), t("bullet_2"), t("bullet_3")];
+
+	return (
+		<div className="services-accordion__active-grid">
+			<div className="services-accordion__top-bar">
+				<span className="services-accordion__service-label">{t("badge")}</span>
+				<Link
+					href={feature.href}
+					className="home-link-arrow shrink-0 whitespace-nowrap"
+				>
+					{t("link")}
+					<ArrowUpRight className="size-4" aria-hidden />
+				</Link>
+			</div>
+
+			<div className="services-accordion__copy">
+				<h3
+					id={headlineId}
+					className="m-0 text-balance text-[clamp(1.5rem,2.8vw,2.25rem)] leading-[1.1] tracking-[-0.02em] text-[var(--text-h)]"
+				>
+					{t("headline")}
+				</h3>
+				<p className="max-w-[62ch] text-pretty text-[16px] leading-relaxed text-[var(--text)] sm:text-[17px]">
+					{t("description")}
+				</p>
+				<FeatureCheckList items={bullets} />
+			</div>
+
+			<div className="services-accordion__demo">{feature.demo}</div>
+		</div>
+	);
+}
+
+const panelContentTransition = {
+	duration: 0.22,
+	ease: appleRevealEase,
+} as const;
+
+function ServicesAccordion({ features }: { features: FeatureConfig[] }) {
+	const tSection = useTranslations("home.core_services");
+	const shouldReduceMotion = useReducedMotion();
+	const [activeIndex, setActiveIndex] = useState(0);
+	const [progressKey, setProgressKey] = useState(0);
+	const [isPaused, setIsPaused] = useState(false);
+	const timerRef = useRef<number | null>(null);
+	const activeFeature = features[activeIndex] ?? features[0];
+	const headlineId = `${activeFeature.id}-headline`;
+
+	const clearTimer = useCallback(() => {
+		if (timerRef.current) {
+			window.clearInterval(timerRef.current);
+			timerRef.current = null;
+		}
+	}, []);
+
+	const selectIndex = useCallback(
+		(index: number) => {
+			const normalized =
+				((index % features.length) + features.length) % features.length;
+			setActiveIndex(normalized);
+			setProgressKey((key) => key + 1);
+		},
+		[features.length],
+	);
+
+	const goNext = useCallback(() => {
+		selectIndex(activeIndex + 1);
+	}, [activeIndex, selectIndex]);
+
+	const goPrev = useCallback(() => {
+		selectIndex(activeIndex - 1);
+	}, [activeIndex, selectIndex]);
+
+	const handleSelect = useCallback(
+		(index: number) => {
+			if (index === activeIndex) return;
+			selectIndex(index);
+			setIsPaused(true);
+		},
+		[activeIndex, selectIndex],
+	);
+
+	useEffect(() => {
+		clearTimer();
+		if (shouldReduceMotion || isPaused) return;
+
+		timerRef.current = window.setInterval(() => {
+			setActiveIndex((current) => (current + 1) % features.length);
+			setProgressKey((key) => key + 1);
+		}, AUTOPLAY_MS);
+
+		return clearTimer;
+	}, [
+		activeIndex,
+		clearTimer,
+		features.length,
+		isPaused,
+		shouldReduceMotion,
+	]);
+
+	useEffect(() => clearTimer, [clearTimer]);
+
+	const handlePointerLeave = useCallback(() => {
+		setIsPaused(false);
+		setProgressKey((key) => key + 1);
+	}, []);
+
+	return (
+		<div
+			className="services-accordion"
+			onMouseEnter={() => setIsPaused(true)}
+			onMouseLeave={handlePointerLeave}
+			onFocusCapture={() => setIsPaused(true)}
+			onBlurCapture={(event) => {
+				if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+					handlePointerLeave();
+				}
+			}}
+		>
+			<div
+				className="services-accordion__track"
+				role="tablist"
+				aria-label={tSection("accordion_aria")}
+			>
+				{features.map((feature, index) => {
+					const isActive = index === activeIndex;
+					const panelHeadlineId = `${feature.id}-headline`;
+
+					return (
+						<article
+							key={feature.id}
+							data-service={feature.id}
+							role="tab"
+							aria-selected={isActive}
+							aria-controls={`service-panel-${feature.id}`}
+							id={`service-tab-${feature.id}`}
+							className={
+								isActive
+									? "services-accordion__panel services-accordion__panel--active"
+									: "services-accordion__panel services-accordion__panel--collapsed"
+							}
+							onClick={
+								isActive
+									? undefined
+									: () => handleSelect(index)
+							}
+							onKeyDown={(event) => {
+								if (isActive) return;
+								if (event.key === "Enter" || event.key === " ") {
+									event.preventDefault();
+									handleSelect(index);
+								}
+							}}
+							tabIndex={isActive ? -1 : 0}
+						>
+							<div
+								className={
+									isActive
+										? "services-accordion__icon-rail services-accordion__icon-rail--active"
+										: "services-accordion__icon-rail"
+								}
+							>
+								{isActive ? (
+									<ActiveIconRail feature={feature} />
+								) : (
+									<span className="services-accordion__strip-icon">
+										{feature.icon}
+									</span>
+								)}
+							</div>
+
+							{isActive ? (
+								<div
+									id={`service-panel-${feature.id}`}
+									role="tabpanel"
+									aria-labelledby={panelHeadlineId}
+									className="services-accordion__active"
+								>
+									<AnimatePresence mode="wait" initial={false}>
+										<motion.div
+											key={feature.id}
+											className="services-accordion__active-body"
+											initial={
+												shouldReduceMotion ? false : { opacity: 0 }
+											}
+											animate={{ opacity: 1 }}
+											exit={
+												shouldReduceMotion ? undefined : { opacity: 0 }
+											}
+											transition={panelContentTransition}
+										>
+											<ActivePanelContent
+												feature={feature}
+												headlineId={panelHeadlineId}
+											/>
+										</motion.div>
+									</AnimatePresence>
+
+									<div className="services-accordion__nav">
+										<button
+											type="button"
+											className="services-accordion__nav-btn"
+											onClick={goPrev}
+											aria-label={tSection("prev_service")}
+										>
+											<ChevronLeft className="size-4" aria-hidden />
+										</button>
+										<button
+											type="button"
+											className="services-accordion__nav-btn"
+											onClick={goNext}
+											aria-label={tSection("next_service")}
+										>
+											<ChevronRight className="size-4" aria-hidden />
+										</button>
+									</div>
+
+									{!shouldReduceMotion && !isPaused ? (
+										<div
+											className="services-accordion__progress"
+											aria-hidden
+										>
+											<motion.div
+												key={progressKey}
+												className="services-accordion__progress-bar"
+												initial={{ scaleX: 0 }}
+												animate={{ scaleX: 1 }}
+												transition={{
+													duration: AUTOPLAY_MS / 1000,
+													ease: "linear",
+												}}
+											/>
+										</div>
+									) : null}
+								</div>
+							) : (
+								<div
+									className="services-accordion__strip"
+									aria-label={tSection("select_service", {
+										service: feature.shortLabel,
+									})}
+								>
+									<span className="services-accordion__strip-label">
+										{feature.shortLabel}
+									</span>
+								</div>
+							)}
+						</article>
+					);
+				})}
+			</div>
+
+			<div className="services-accordion__mobile flex flex-col gap-4">
+				<div
+					className="services-accordion__mobile-tabs"
+					role="tablist"
+					aria-label={tSection("accordion_aria")}
+				>
+					{features.map((feature, index) => (
+						<button
+							key={feature.id}
+							type="button"
+							role="tab"
+							data-service={feature.id}
+							aria-selected={index === activeIndex}
+							aria-controls={`service-mobile-panel-${feature.id}`}
+							id={`service-mobile-tab-${feature.id}`}
+							className="services-accordion__mobile-tab"
+							onClick={() => selectIndex(index)}
+						>
+							<span className="grid size-7 place-items-center rounded-lg bg-(--home-surface-muted) text-(--panel-accent)">
+								{feature.icon}
+							</span>
+							{feature.shortLabel}
+						</button>
+					))}
+				</div>
+
+				<article
+					data-service={activeFeature.id}
+					className="services-accordion__panel services-accordion__panel--active overflow-hidden"
+					role="tabpanel"
+					id={`service-mobile-panel-${activeFeature.id}`}
+					aria-labelledby={`service-mobile-tab-${activeFeature.id}`}
+				>
+					<div className="services-accordion__active">
+						<AnimatePresence mode="wait" initial={false}>
+							<motion.div
+								key={activeFeature.id}
+								className="services-accordion__active-body"
+								initial={shouldReduceMotion ? false : { opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={shouldReduceMotion ? undefined : { opacity: 0 }}
+								transition={panelContentTransition}
+							>
+								<ActivePanelContent
+									feature={activeFeature}
+									headlineId={headlineId}
+								/>
+							</motion.div>
+						</AnimatePresence>
+
+						<div className="services-accordion__nav">
+							<button
+								type="button"
+								className="services-accordion__nav-btn"
+								onClick={goPrev}
+								aria-label={tSection("prev_service")}
+							>
+								<ChevronLeft className="size-4" aria-hidden />
+							</button>
+							<button
+								type="button"
+								className="services-accordion__nav-btn"
+								onClick={goNext}
+								aria-label={tSection("next_service")}
+							>
+								<ChevronRight className="size-4" aria-hidden />
+							</button>
+						</div>
+					</div>
+				</article>
+			</div>
+		</div>
 	);
 }
 
@@ -669,73 +946,87 @@ export default function CoreServices() {
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 
+	const tFeatures = useTranslations("home.features");
+
 	const features: FeatureConfig[] = [
 		{
 			id: "ai",
-			icon: <Bot className="size-[22px]" aria-hidden />,
+			shortLabel: tFeatures("ai.short_label"),
+			icon: <Bot className="size-5" aria-hidden />,
 			demo: <AiDemo />,
 			href: "/services#ai",
 		},
 		{
 			id: "engineering",
-			icon: <Code2 className="size-[22px]" aria-hidden />,
-			reverse: true,
-			alt: true,
+			shortLabel: tFeatures("engineering.short_label"),
+			icon: <Code2 className="size-5" aria-hidden />,
 			demo: <CodeDemo />,
 			href: "/services#custom",
 		},
 		{
 			id: "pod",
-			icon: <Users className="size-[22px]" aria-hidden />,
+			shortLabel: tFeatures("pod.short_label"),
+			icon: <Users className="size-5" aria-hidden />,
 			demo: <PodDemo />,
 			href: "/services#team",
 		},
 		{
 			id: "devops",
-			icon: <Cloud className="size-[22px]" aria-hidden />,
-			reverse: true,
-			alt: true,
+			shortLabel: tFeatures("devops.short_label"),
+			icon: <Cloud className="size-5" aria-hidden />,
 			demo: <PipelineDemo />,
 			href: "/services#cloud",
 		},
 	];
 
 	return (
-		<>
-			<section
-				ref={ref}
-				id="services"
-				className="home-section--tight pt-[clamp(72px,10vw,120px)] pb-[clamp(40px,6vw,64px)]"
-			>
-				<div className="home-wrap">
-					<motion.div
-						initial={
-							shouldReduceMotion || !shouldAnimate
-								? false
-								: sectionRevealItem.hidden
-						}
-						animate={
-							isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
-						}
-						transition={sectionItemTransition(
-							shouldAnimate,
-							0,
-							!!shouldReduceMotion,
-						)}
-					>
-						<SectionHead
-							eyebrow={t("eyebrow")}
-							headline={t("headline")}
-							description={t("description")}
-							centered
-						/>
-					</motion.div>
-				</div>
-			</section>
+		<section
+			ref={ref}
+			id="services"
+			className="home-section--tight pt-[clamp(56px,8vw,96px)] pb-[clamp(48px,6vw,80px)]"
+		>
+			<div className="home-wrap flex flex-col gap-[clamp(2rem,5vw,3.5rem)]">
+				<motion.div
+					initial={
+						shouldReduceMotion || !shouldAnimate
+							? false
+							: sectionRevealItem.hidden
+					}
+					animate={
+						isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
+					}
+					transition={sectionItemTransition(
+						shouldAnimate,
+						0,
+						!!shouldReduceMotion,
+					)}
+				>
+					<SectionHead
+						eyebrow={t("eyebrow")}
+						headline={t("headline")}
+						description={t("description")}
+						centered
+					/>
+				</motion.div>
 
-			{features.map((feature, index) => (
-				<FeatureSection key={feature.id} feature={feature} index={index} />
-			))}
-		</>
+				<motion.div
+					initial={
+						shouldReduceMotion || !shouldAnimate
+							? false
+							: sectionRevealItem.hidden
+					}
+					animate={
+						isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
+					}
+					transition={sectionItemTransition(
+						shouldAnimate,
+						0.08,
+						!!shouldReduceMotion,
+					)}
+				>
+					<ServicesAccordion features={features} />
+				</motion.div>
+			</div>
+		</section>
 	);
 }

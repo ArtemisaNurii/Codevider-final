@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import HeroBlobs from "./hero-blobs";
 import HeroDashboard from "./hero-dashboard";
 import RotatingWord from "./rotating-word";
 
@@ -30,12 +31,7 @@ export default function Hero() {
 
 	return (
 		<section className="home-hero relative isolate min-h-dvh overflow-hidden">
-			<div className="home-hero__blobs" aria-hidden>
-				<div className="home-hero__blob home-hero__blob--primary" />
-				<div className="home-hero__blob home-hero__blob--secondary" />
-				<div className="home-hero__blob home-hero__blob--accent home-hero__blob--teal" />
-				<div className="home-hero__blob home-hero__blob--accent home-hero__blob--violet" />
-			</div>
+			<HeroBlobs />
 
 			<div className="home-hero__veil" aria-hidden />
 
