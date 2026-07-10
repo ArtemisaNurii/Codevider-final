@@ -100,7 +100,7 @@ function FaqItem({
 							: { duration: 0.45, ease: appleRevealEase }
 					}
 				>
-					<ChevronDown className="size-[18px] stroke-2" />
+					<ChevronDown className="size-4 stroke-2" />
 				</motion.span>
 			</motion.button>
 

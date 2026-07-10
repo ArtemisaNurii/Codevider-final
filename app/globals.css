@@ -1696,6 +1696,10 @@ code {
 	border-bottom: 1px solid var(--border);
 }
 
+.home-faq-item:last-child {
+	border-bottom: none;
+}
+
 .home-faq-q {
 	width: 100%;
 	display: grid;

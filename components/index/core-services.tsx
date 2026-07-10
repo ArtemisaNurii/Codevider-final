@@ -30,8 +30,10 @@ import {
 	type EngineeringDemoTab,
 } from "@/data/engineering-demo-code";
 import {
+	appleRevealEase,
 	sectionItemTransition,
 	sectionRevealItem,
+	sectionRevealStagger,
 	useSectionReveal,
 } from "@/hooks/use-section-reveal";
 import { Link } from "@/i18n/navigation";
@@ -110,7 +112,7 @@ function FeatureCheckList({ items }: { items: string[] }) {
 				<motion.li
 					key={item}
 					variants={reveal}
-					className="flex items-start gap-3.5 text-pretty text-[15px] leading-relaxed text-(--text-h)/80"
+					className="flex items-start gap-3.5 text-pretty text-[15px] leading-relaxed text-[var(--text-h)]/80"
 				>
 					<span className="home-check mt-0.5">
 						<Check className="size-3.5" strokeWidth={3} aria-hidden />
@@ -201,7 +203,7 @@ function AiDemo() {
 		>
 			<div className="home-demo-head home-demo-head--wrap min-w-0 overflow-hidden">
 				<div
-					className="home-demo-chip-list w-full min-w-0 max-w-full flex-nowrap overflow-x-auto overflow-y-hidden scrollbar-none [&::-webkit-scrollbar]:hidden"
+					className="home-demo-chip-list w-full min-w-0 max-w-full flex-nowrap overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 					role="group"
 					aria-label={t("title")}
 				>
@@ -449,10 +451,10 @@ function PodDemo() {
 							onMouseEnter={() => setActive(role)}
 							onFocus={() => setActive(role)}
 							onClick={() => setActive(role)}
-							className={`absolute z-3 flex min-h-11 items-center gap-2 rounded-full border bg-(--bg) px-3.5 py-2 text-[13.5px] font-semibold shadow-sm transition-[transform,box-shadow,border-color] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--dash-brand) active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100 ${positions[role]} ${
+							className={`absolute z-[3] flex min-h-11 items-center gap-2 rounded-full border bg-(--bg) px-3.5 py-2 text-[13.5px] font-semibold shadow-sm transition-[transform,box-shadow,border-color] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--dash-brand) active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100 ${positions[role]} ${
 								active === role
-									? "scale-105 border-(--dash-brand) shadow-md"
-									: "border-(--border) hover:scale-105 hover:border-(--dash-brand)"
+									? "scale-105 border-[var(--dash-brand)] shadow-md"
+									: "border-(--border) hover:scale-105 hover:border-[var(--dash-brand)]"
 							}`}
 						>
 							<span
@@ -675,90 +677,83 @@ type FeatureConfig = {
 	href: string;
 };
 
-const HEADER_PEEK = 88; // px of each stacked header left visible (>= header height)
-const STACK_TOP = 92; // px offset from viewport top (clears the 72px navbar)
-
-function FeatureStackCard({
+function FeatureSection({
 	feature,
 	index,
-	total,
 }: {
 	feature: FeatureConfig;
 	index: number;
-	total: number;
 }) {
 	const t = useTranslations(`home.features.${feature.id}`);
-	const bullets = [t("bullet_1"), t("bullet_2"), t("bullet_3")];
-	const headlineId = `${feature.id}-headline`;
-	const cardRef = useRef<HTMLDivElement>(null);
+	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 
-	// Rest position where this card pins in the stack.
-	const restTop = STACK_TOP + index * HEADER_PEEK;
+	const bullets = [t("bullet_1"), t("bullet_2"), t("bullet_3")];
+	const headlineId = `${feature.id}-headline`;
 
-	const scrollToCard = useCallback(() => {
-		cardRef.current?.scrollIntoView({
-			behavior: shouldReduceMotion ? "auto" : "smooth",
-			block: "start",
-		});
-	}, [shouldReduceMotion]);
+	const textDelay = index * 0.04;
 
 	return (
-		<div
-			ref={cardRef}
-			style={{
-				position: "sticky",
-				top: restTop,
-				scrollMarginTop: restTop,
-				zIndex: index + 1,
-			}}
-			className={`relative rounded-[26px] border border-(--border) bg-(--bg) shadow-[0_18px_44px_-26px_rgba(0,0,0,0.5)] transition-[border-color,box-shadow] duration-300 ease-out hover:border-[color-mix(in_srgb,var(--dash-brand)_25%,var(--border))] ${
-				index === total - 1 ? "" : "mb-5"
-			}`}
+		<section
+			ref={ref}
+			aria-labelledby={headlineId}
+			className={`relative overflow-hidden py-[clamp(64px,9vw,112px)] ${feature.alt ? "home-feature-alt" : ""}`}
 		>
-			{/* Header — always visible; click scrolls this card into full view */}
-			<button
-				type="button"
-				onClick={scrollToCard}
-				className="flex w-full cursor-pointer items-center gap-4 px-[clamp(1.1rem,2.5vw,1.75rem)] py-[clamp(0.9rem,1.6vw,1.15rem)] text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--dash-brand)"
-			>
-				<span className="home-feature-badge__icon">{feature.icon}</span>
-				<span className="min-w-0 flex-1">
-					<span className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-(--dash-brand)">
+			<div className="home-wrap grid items-center gap-[clamp(2.5rem,6vw,5.5rem)] lg:grid-cols-2">
+				<motion.div
+					className={`flex flex-col gap-7 sm:gap-8 ${feature.reverse ? "lg:order-2" : ""}`}
+					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
+					animate={isRevealed ? "visible" : "hidden"}
+					variants={sectionRevealStagger}
+				>
+					<motion.span className="home-feature-badge" variants={reveal}>
+						<span className="home-feature-badge__icon">{feature.icon}</span>
 						{t("badge")}
-					</span>
-					<span
+					</motion.span>
+					<motion.h2
 						id={headlineId}
+						variants={reveal}
 						className="m-0 text-balance text-[clamp(2rem,4.4vw,3.25rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
 					>
 						{t("headline")}
-					</span>
-				</span>
-				<span
-					className="grid size-9 shrink-0 place-items-center rounded-full border border-(--border) text-(--text)"
-					aria-hidden
-				>
-					<ArrowUpRight className="size-4" />
-				</span>
-			</button>
-
-			{/* Full content — always rendered; covered by the next card as you scroll */}
-			<div className="grid items-center gap-[clamp(1.5rem,4vw,3rem)] border-t border-(--border) px-[clamp(1.1rem,2.5vw,1.75rem)] pb-[clamp(1.4rem,3vw,2.25rem)] pt-[clamp(1.2rem,2.4vw,1.75rem)] lg:grid-cols-2">
-				<div className="flex flex-col gap-6">
-					<p className="max-w-[52ch] text-pretty text-[16px] leading-relaxed text-(--text)">
+					</motion.h2>
+					<motion.p
+						variants={reveal}
+						className="max-w-[52ch] text-pretty text-[17px] leading-relaxed text-[var(--text)]"
+					>
 						{t("description")}
-					</p>
+					</motion.p>
 					<FeatureCheckList items={bullets} />
-					<div>
+					<motion.div variants={reveal}>
 						<Link href={feature.href} className="home-link-arrow">
 							{t("link")}
 							<ArrowUpRight className="size-4" aria-hidden />
 						</Link>
-					</div>
-				</div>
-				<div className="relative min-w-0">{feature.demo}</div>
+					</motion.div>
+				</motion.div>
+
+				<motion.div
+					className={`relative min-w-0 ${feature.reverse ? "lg:order-1" : ""}`}
+					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
+					animate={isRevealed ? "visible" : "hidden"}
+					variants={{
+						...reveal,
+						visible: {
+							...reveal.visible,
+							transition: shouldAnimate
+								? {
+										duration: 0.55,
+										ease: appleRevealEase,
+										delay: 0.12 + textDelay,
+									}
+								: { duration: 0 },
+						},
+					}}
+				>
+					{feature.demo}
+				</motion.div>
 			</div>
-		</div>
+		</section>
 	);
 }
 
@@ -831,18 +826,9 @@ export default function CoreServices() {
 				</div>
 			</section>
 
-			<div className="home-wrap pb-[clamp(64px,12vh,140px)]">
-				<div className="mx-auto max-w-248">
-					{features.map((feature, index) => (
-						<FeatureStackCard
-							key={feature.id}
-							feature={feature}
-							index={index}
-							total={features.length}
-						/>
-					))}
-				</div>
-			</div>
+			{features.map((feature, index) => (
+				<FeatureSection key={feature.id} feature={feature} index={index} />
+			))}
 		</>
 	);
 }

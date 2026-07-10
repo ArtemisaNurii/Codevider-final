@@ -297,7 +297,7 @@ export function Navbar() {
 								: navTransition
 						}
 					>
-						<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 px-[var(--home-inline)]">
+						<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 px-4">
 							<Link
 								href="/"
 								aria-label="Codevider"

@@ -89,7 +89,7 @@ export default function WhyChooseUs() {
 								className="home-ecard home-card-body order-2 lg:order-0"
 							>
 								<div className="home-ecard-icon">
-									<Icon className="size-[22px]" aria-hidden />
+									<Icon className="size-5.5" aria-hidden />
 								</div>
 								<p className="text-xs font-semibold tabular-nums text-(--dash-brand)">
 									{pin}
@@ -97,7 +97,7 @@ export default function WhyChooseUs() {
 								<h3 className="text-xl font-semibold text-balance tracking-[-0.01em] text-(--text-h)">
 									{title}
 								</h3>
-								<p className="text-pretty text-[15px] leading-relaxed text-(--text)">
+								<p className="text-pretty text-sm leading-relaxed text-(--text)">
 									{description}
 								</p>
 							</motion.article>
