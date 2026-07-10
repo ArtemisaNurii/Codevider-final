@@ -297,12 +297,12 @@ small {
 
 .with-sidebar > :first-child {
   flex-basis: 300px;
-  grow: 1;
+  flex-grow: 1;
 }
 
 .with-sidebar > :last-child {
   flex-basis: 0;
-  grow: 999;
+  flex-grow: 999;
   min-width: 60%;
 }
 ```
@@ -350,7 +350,7 @@ small {
 
 .switcher > * {
   /* Items go vertical when container is narrower than threshold */
-  grow: 1;
+  flex-grow: 1;
   flex-basis: calc((30rem - 100%) * 999);
 }
 

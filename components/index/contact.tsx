@@ -28,6 +28,7 @@ import {
 	type ContactFormValues,
 	createContactSchema,
 } from "@/lib/schemas/contact";
+import SectionHead from "./section-head";
 
 const inputClassName =
 	"w-full rounded-[10px] border-[1.5px] border-(--border) bg-(--bg) px-4 py-3.5 text-inherit placeholder:text-(--text)/55 transition-[border-color,box-shadow] focus:border-(--dash-brand) focus:outline-none focus-visible:ring-[3px] focus-visible:ring-(--dash-brand)/15";
@@ -137,7 +138,9 @@ export default function Contact() {
 
 	return (
 		<section ref={ref} id="contact" className="home-section home-feature-alt">
-			<div className="home-wrap grid items-center gap-[clamp(2.5rem,6vw,5rem)] lg:grid-cols-[2fr_3fr]">
+			<SectionHead eyebrow={t("eyebrow")} headline={t("headline")} description={t("description")} centered />
+			
+			<div className="home-wrap grid items-center gap-[clamp(2.5rem,6vw,5rem)] lg:grid-cols-[2fr_3fr] mt-[clamp(2rem,4vw,3rem)]">
 				<motion.div
 					className="flex flex-col justify-center lg:pr-[clamp(1.25rem,2.5vw,2rem)]"
 					initial={
@@ -154,13 +157,7 @@ export default function Contact() {
 						!!shouldReduceMotion,
 					)}
 				>
-					<p className="home-eyebrow">{t("eyebrow")}</p>
-					<h2 className="mt-[clamp(1.125rem,2.5vw,1.5rem)] max-w-xl text-balance text-[clamp(2rem,4.8vw,3.5rem)] leading-[1.05] tracking-[-0.02em] text-(--text-h) lg:max-w-none">
-						{t("headline")}
-					</h2>
-					<p className="mt-[clamp(1.25rem,2.5vw,1.5rem)] max-w-[46ch] text-pretty text-[17px] leading-relaxed text-(--text) lg:max-w-none">
-						{t("description")}
-					</p>
+		
 
 					<div className="mt-[clamp(2rem,4vw,3rem)] flex flex-col gap-10">
 						{[

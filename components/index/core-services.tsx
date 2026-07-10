@@ -651,15 +651,7 @@ function PipelineDemo() {
 								? t("run_again")
 								: t("run")}
 					</button>
-					{live ? (
-						<p className="home-pipeline-status" role="status">
-							{t("status_live_label")}
-						</p>
-					) : (
-						<p className="home-pipeline-status" role="status">
-							{status}
-						</p>
-					)}
+
 				</div>
 			</div>
 		</div>
