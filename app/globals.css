@@ -914,6 +914,10 @@ code {
 	padding-inline: var(--home-inline);
 }
 
+.home-inline-x {
+	padding-inline: var(--home-inline);
+}
+
 .home-bleed {
 	margin-inline: var(--home-bleed);
 	width: calc(100% + 2 * var(--home-inline));

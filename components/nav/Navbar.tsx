@@ -3,7 +3,7 @@
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/providers/ThemeProvider";
 import { useEffect, useRef, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { CodeviderLogo } from "./CodeviderLogo";
@@ -154,7 +154,7 @@ function DesktopNavLinks({ appearance }: { appearance: NavAppearance }) {
 export function Navbar() {
 	const t = useTranslations("navbar");
 	const pathname = usePathname();
-	const { resolvedTheme } = useTheme();
+	const { theme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 	const shouldReduceMotion = useReducedMotion();
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -164,9 +164,7 @@ export function Navbar() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const initializedRef = useRef(false);
 	const [shouldAnimate, setShouldAnimate] = useState(false);
-	const navAppearance = mounted
-		? getNavAppearance(resolvedTheme as "light" | "dark")
-		: "dark";
+	const navAppearance = mounted ? getNavAppearance(theme) : "dark";
 	const isDarkNav = navAppearance === "dark";
 
 	useEffect(() => {
@@ -297,7 +295,7 @@ export function Navbar() {
 								: navTransition
 						}
 					>
-						<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 px-4">
+						<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 home-inline-x">
 							<Link
 								href="/"
 								aria-label="Codevider"
@@ -373,7 +371,7 @@ export function Navbar() {
 							role="dialog"
 							aria-modal="true"
 							aria-label={t("open_menu")}
-							className={`fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col px-(--home-inline) pb-6 pt-6 backdrop-blur-xl navbar:hidden ${
+							className={`fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col home-inline-x pb-6 pt-6 backdrop-blur-xl navbar:hidden ${
 								mounted
 									? isDarkNav
 										? "border-t border-white/10 bg-slate-900/95 shadow-[0_12px_40px_rgba(0,0,0,0.28)]"

@@ -14,7 +14,7 @@ export default function Footer() {
 	const t = useTranslations("footer");
 
 	return (
-		<footer className="bg-[#0f1424] px-(--home-inline) py-[clamp(54px,7vw,84px)] pb-[30px] text-blue-100/70">
+		<footer className="bg-[#0f1424] home-inline-x py-[clamp(54px,7vw,84px)] pb-[30px] text-blue-100/70">
 			<div className="mx-auto max-w-[1200px]">
 				<div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
 					<div>
@@ -95,7 +95,9 @@ export default function Footer() {
 				</div>
 
 				<div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 text-sm">
-					<span>{t("copyright", { year: new Date().getFullYear() })}</span>
+					<span suppressHydrationWarning>
+						{t("copyright", { year: new Date().getFullYear() })}
+					</span>
 					<FooterSocials />
 				</div>
 			</div>

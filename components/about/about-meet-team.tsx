@@ -113,7 +113,7 @@ export default function AboutMeetTeam() {
 			</div>
 
 			<div className="relative mt-(--home-stack)">
-				<div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-(--home-inline)">
+				<div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between home-inline-x">
 					<button
 						type="button"
 						onClick={() => scroll("left")}
