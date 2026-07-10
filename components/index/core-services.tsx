@@ -112,7 +112,7 @@ function FeatureCheckList({ items }: { items: string[] }) {
 				<motion.li
 					key={item}
 					variants={reveal}
-					className="flex items-start gap-3.5 text-pretty text-[15px] leading-relaxed text-[var(--text-h)]/80"
+					className="flex items-start gap-3.5 text-pretty text-[15px] leading-relaxed text-(--text-h)/80"
 				>
 					<span className="home-check mt-0.5">
 						<Check className="size-3.5" strokeWidth={3} aria-hidden />
@@ -203,7 +203,7 @@ function AiDemo() {
 		>
 			<div className="home-demo-head home-demo-head--wrap min-w-0 overflow-hidden">
 				<div
-					className="home-demo-chip-list w-full min-w-0 max-w-full flex-nowrap overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+					className="home-demo-chip-list w-full min-w-0 max-w-full flex-nowrap overflow-x-auto overflow-y-hidden scrollbar-none [&::-webkit-scrollbar]:hidden"
 					role="group"
 					aria-label={t("title")}
 				>
@@ -311,9 +311,7 @@ function CodeDemo() {
 									/>
 								)
 							) : null}
-							<span className="relative z-[1]">
-								{ENGINEERING_DEMO_TABS[tab]}
-							</span>
+							<span className="relative z-1">{ENGINEERING_DEMO_TABS[tab]}</span>
 						</button>
 					))}
 				</div>
@@ -426,36 +424,64 @@ function PodDemo() {
 		pm: "text-(--pod-pm)",
 	};
 
+	const roleButtonClass = (role: (typeof POD_ROLES)[number]) =>
+		`flex min-h-11 items-center gap-2 rounded-full border bg-(--bg) px-3.5 py-2 text-[13.5px] font-semibold shadow-sm transition-[transform,box-shadow,border-color] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--dash-brand) active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100 ${
+			active === role
+				? "scale-105 border-(--dash-brand) shadow-md"
+				: "border-(--border) hover:scale-105 hover:border-(--dash-brand)"
+		}`;
+
+	const roleButtonProps = (role: (typeof POD_ROLES)[number]) => ({
+		type: "button" as const,
+		"aria-pressed": active === role,
+		onMouseEnter: () => setActive(role),
+		onFocus: () => setActive(role),
+		onClick: () => setActive(role),
+	});
+
 	return (
-		<div className="home-demo">
+		<div className="home-demo home-demo--pod">
 			<div className="home-demo-head">
 				<span className="flex items-center gap-2">{t("title")}</span>
 				<span className="text-xs font-medium text-(--text)">
 					{t("subtitle")}
 				</span>
 			</div>
-			<div className="relative flex h-[280px] items-center justify-center px-0 sm:h-[360px] sm:px-4">
+			<div className="flex flex-col items-center gap-6 px-4 py-8 md:hidden">
+				<div className="grid size-[104px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-white shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)]">
+					{t("center")}
+				</div>
+				<div className="grid w-full max-w-[20rem] grid-cols-2 gap-2.5">
+					{POD_ROLES.map((role) => (
+						<button
+							key={role}
+							{...roleButtonProps(role)}
+							className={roleButtonClass(role)}
+						>
+							<span
+								className={`grid size-7 shrink-0 place-items-center rounded-full text-[11px] text-white ${colors[role]}`}
+							>
+								{avatars[role]}
+							</span>
+							<span className="truncate">{t(`role_${role}`)}</span>
+						</button>
+					))}
+				</div>
+			</div>
+			<div className="relative hidden h-[360px] items-center justify-center px-4 md:flex">
 				<div className="relative mx-auto size-[min(260px,100%)]">
 					<span className="home-pod-ring absolute inset-0 rounded-full border-[1.5px] border-dashed border-(--border)" />
 					<span className="home-pod-ring home-pod-ring--reverse absolute inset-[55px] rounded-full border-[1.5px] border-dashed border-(--border)" />
 					<div className="absolute inset-0 grid place-items-center">
-						<div className="relative z-[2] grid size-[88px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-white shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)] sm:size-[108px]">
+						<div className="relative z-2 grid size-[108px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-white shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)]">
 							{t("center")}
 						</div>
 					</div>
 					{POD_ROLES.map((role) => (
 						<button
 							key={role}
-							type="button"
-							aria-pressed={active === role}
-							onMouseEnter={() => setActive(role)}
-							onFocus={() => setActive(role)}
-							onClick={() => setActive(role)}
-							className={`absolute z-[3] flex min-h-11 items-center gap-2 rounded-full border bg-(--bg) px-3.5 py-2 text-[13.5px] font-semibold shadow-sm transition-[transform,box-shadow,border-color] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--dash-brand) active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100 ${positions[role]} ${
-								active === role
-									? "scale-105 border-[var(--dash-brand)] shadow-md"
-									: "border-(--border) hover:scale-105 hover:border-[var(--dash-brand)]"
-							}`}
+							{...roleButtonProps(role)}
+							className={`absolute z-3 ${roleButtonClass(role)} ${positions[role]}`}
 						>
 							<span
 								className={`grid size-7 place-items-center rounded-full text-[11px] text-white ${colors[role]}`}
@@ -470,7 +496,7 @@ function PodDemo() {
 			<AnimatePresence mode="popLayout" initial={false}>
 				<motion.p
 					key={active}
-					className="home-demo-body min-h-6 pt-0 text-center text-sm leading-relaxed text-[var(--text)]"
+					className="home-demo-body min-h-6 pt-0 text-center text-sm leading-relaxed text-(--text)"
 					initial={shouldReduceMotion ? false : { opacity: 0, y: 6 }}
 					animate={{ opacity: 1, y: 0 }}
 					exit={shouldReduceMotion ? undefined : { opacity: 0, y: -4 }}
@@ -651,7 +677,6 @@ function PipelineDemo() {
 								? t("run_again")
 								: t("run")}
 					</button>
-
 				</div>
 			</div>
 		</div>
@@ -691,9 +716,9 @@ function FeatureSection({
 			aria-labelledby={headlineId}
 			className={`relative overflow-hidden py-[clamp(64px,9vw,112px)] ${feature.alt ? "home-feature-alt" : ""}`}
 		>
-			<div className="home-wrap grid items-center gap-[clamp(2.5rem,6vw,5.5rem)] lg:grid-cols-2">
+			<div className="home-wrap flex flex-col gap-[clamp(2.5rem,6vw,5.5rem)] lg:grid lg:grid-cols-2 lg:items-center">
 				<motion.div
-					className={`flex flex-col gap-7 sm:gap-8 ${feature.reverse ? "lg:order-2" : ""}`}
+					className={`order-1 flex flex-col gap-7 sm:gap-8 ${feature.reverse ? "lg:order-2" : ""}`}
 					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
 					animate={isRevealed ? "visible" : "hidden"}
 					variants={sectionRevealStagger}
@@ -705,13 +730,13 @@ function FeatureSection({
 					<motion.h2
 						id={headlineId}
 						variants={reveal}
-						className="m-0 text-balance text-[clamp(2rem,4.4vw,3.25rem)] leading-[1.08] tracking-[-0.02em] text-[var(--text-h)]"
+						className="m-0 text-balance text-[clamp(2rem,4.4vw,3.25rem)] leading-[1.08] tracking-[-0.02em] text-(--text-h)"
 					>
 						{t("headline")}
 					</motion.h2>
 					<motion.p
 						variants={reveal}
-						className="max-w-[52ch] text-pretty text-[17px] leading-relaxed text-[var(--text)]"
+						className="max-w-[52ch] text-pretty text-[17px] leading-relaxed text-(--text)"
 					>
 						{t("description")}
 					</motion.p>
@@ -725,7 +750,7 @@ function FeatureSection({
 				</motion.div>
 
 				<motion.div
-					className={`relative min-w-0 ${feature.reverse ? "lg:order-1" : ""}`}
+					className={`order-2 relative min-w-0 ${feature.reverse ? "lg:order-1" : ""}`}
 					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
 					animate={isRevealed ? "visible" : "hidden"}
 					variants={{

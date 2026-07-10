@@ -1,29 +1,29 @@
 {
-  "version": 1,
-  "skills": {
-    "apple-design": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "skillPath": "skills/apple-design/SKILL.md",
-      "computedHash": "8b94db67cb9edaad5f1501010804caa610131f1d2dfda0a27664b2e858deade3"
-    },
-    "dark-mode-helper": {
-      "source": "v4sj4n/skills",
-      "sourceType": "github",
-      "skillPath": "skills/dark-mode-helper/SKILL.md",
-      "computedHash": "7d18c727bb01ea6272df5b95ad218e805c2c7896404bcd9434d544cdad0f0597"
-    },
-    "make-interfaces-feel-better": {
-      "source": "jakubkrehel/make-interfaces-feel-better",
-      "sourceType": "github",
-      "skillPath": "skills/make-interfaces-feel-better/SKILL.md",
-      "computedHash": "54b6e221bbe4e2d1a8461c3f9ecabe69daf891f964e9ee5e699c323daa018f2e"
-    },
-    "responsive-design": {
-      "source": "wshobson/agents",
-      "sourceType": "github",
-      "skillPath": "plugins/ui-design/skills/responsive-design/SKILL.md",
-      "computedHash": "794cc7f1b2f79d398135d19ef3fe32c406dde926b9bdf86ee3fe7b939a0be906"
-    }
-  }
+	"version": 1,
+	"skills": {
+		"apple-design": {
+			"source": "emilkowalski/skills",
+			"sourceType": "github",
+			"skillPath": "skills/apple-design/SKILL.md",
+			"computedHash": "8b94db67cb9edaad5f1501010804caa610131f1d2dfda0a27664b2e858deade3"
+		},
+		"dark-mode-helper": {
+			"source": "v4sj4n/skills",
+			"sourceType": "github",
+			"skillPath": "skills/dark-mode-helper/SKILL.md",
+			"computedHash": "7d18c727bb01ea6272df5b95ad218e805c2c7896404bcd9434d544cdad0f0597"
+		},
+		"make-interfaces-feel-better": {
+			"source": "jakubkrehel/make-interfaces-feel-better",
+			"sourceType": "github",
+			"skillPath": "skills/make-interfaces-feel-better/SKILL.md",
+			"computedHash": "54b6e221bbe4e2d1a8461c3f9ecabe69daf891f964e9ee5e699c323daa018f2e"
+		},
+		"responsive-design": {
+			"source": "wshobson/agents",
+			"sourceType": "github",
+			"skillPath": "plugins/ui-design/skills/responsive-design/SKILL.md",
+			"computedHash": "794cc7f1b2f79d398135d19ef3fe32c406dde926b9bdf86ee3fe7b939a0be906"
+		}
+	}
 }

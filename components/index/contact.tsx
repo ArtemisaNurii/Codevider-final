@@ -138,8 +138,13 @@ export default function Contact() {
 
 	return (
 		<section ref={ref} id="contact" className="home-section home-feature-alt">
-			<SectionHead eyebrow={t("eyebrow")} headline={t("headline")} description={t("description")} centered />
-			
+			<SectionHead
+				eyebrow={t("eyebrow")}
+				headline={t("headline")}
+				description={t("description")}
+				centered
+			/>
+
 			<div className="home-wrap grid items-center gap-[clamp(2.5rem,6vw,5rem)] lg:grid-cols-[2fr_3fr] mt-[clamp(2rem,4vw,3rem)]">
 				<motion.div
 					className="flex flex-col justify-center lg:pr-[clamp(1.25rem,2.5vw,2rem)]"
@@ -157,8 +162,6 @@ export default function Contact() {
 						!!shouldReduceMotion,
 					)}
 				>
-		
-
 					<div className="mt-[clamp(2rem,4vw,3rem)] flex flex-col gap-10">
 						{[
 							{

@@ -373,7 +373,7 @@ export function Navbar() {
 							role="dialog"
 							aria-modal="true"
 							aria-label={t("open_menu")}
-							className={`fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col px-[var(--home-inline)] pb-6 pt-6 backdrop-blur-xl navbar:hidden ${
+							className={`fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col px-(--home-inline) pb-6 pt-6 backdrop-blur-xl navbar:hidden ${
 								mounted
 									? isDarkNav
 										? "border-t border-white/10 bg-slate-900/95 shadow-[0_12px_40px_rgba(0,0,0,0.28)]"

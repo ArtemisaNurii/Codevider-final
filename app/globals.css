@@ -1065,6 +1065,13 @@ code {
 	white-space: nowrap;
 }
 
+@media (max-width: 1023px) {
+	.home-demo--pod .home-demo-body {
+		padding-inline: var(--home-inset-lg, 1rem);
+		padding-bottom: 1rem;
+	}
+}
+
 @media (max-width: 639px) {
 	.home-demo--ai {
 		--home-inset-lg: 0.875rem;

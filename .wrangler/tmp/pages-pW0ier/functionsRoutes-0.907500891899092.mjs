@@ -1,11 +1,11 @@
-import { onRequest as ___middleware_js_onRequest } from "/Users/vasi/Documents/Projects/Work/Codevider-final/functions/_middleware.js"
+import { onRequest as ___middleware_js_onRequest } from "/Users/vasi/Documents/Projects/Work/Codevider-final/functions/_middleware.js";
 
 export const routes = [
-    {
-      routePath: "/",
-      mountPath: "/",
-      method: "",
-      middlewares: [___middleware_js_onRequest],
-      modules: [],
-    },
-  ]
+	{
+		routePath: "/",
+		mountPath: "/",
+		method: "",
+		middlewares: [___middleware_js_onRequest],
+		modules: [],
+	},
+];
