@@ -25,7 +25,7 @@ export default function AboutWhoWeAre() {
 			<div className="home-wrap">
 				<SectionHead eyebrow={t("eyebrow")} headline={t("headline")} />
 
-				<div className="about-cols home-section-lead">
+				<div className="about-cols  home-section-lead">
 					<motion.p
 						className="text-pretty text-base leading-relaxed text-(--text) sm:text-[17px]"
 						initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}

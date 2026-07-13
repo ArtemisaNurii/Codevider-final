@@ -32,18 +32,19 @@ export default async function AboutPage({ params }: Props) {
 
 	return (
 		<div className="home-page">
-			<StructuredData
-				title={t("metadata.about.title")}
-				description={t("metadata.about.description")}
-				image={getOgImageUrl(locale, "about")}
-				url={`${getSiteUrl()}/${locale}/about`}
-			/>
+
 			<AboutHero />
 			<AboutWhoWeAre />
 			<AboutCulture />
 			<AboutLifeGrid />
 			<AboutMeetTeam />
 			<AboutJoinCta />
+			<StructuredData
+				title={t("metadata.about.title")}
+				description={t("metadata.about.description")}
+				image={getOgImageUrl(locale, "about")}
+				url={`${getSiteUrl()}/${locale}/about`}
+			/>
 		</div>
 	);
 }

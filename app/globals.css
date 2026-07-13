@@ -976,7 +976,7 @@ code {
 }
 
 .home-section-lead {
-	margin-top: var(--home-stack);
+	margin-top: 1.5rem
 }
 
 .home-section-stack {
