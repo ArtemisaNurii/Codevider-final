@@ -52,6 +52,7 @@ export default function AboutWhoWeAre() {
 				>
 					<Link
 						href={{ pathname: "/", hash: "contact" }}
+						scroll={false}
 						className="svc-cta__btn px-7 py-4 text-[15px]"
 					>
 						{t("cta")}

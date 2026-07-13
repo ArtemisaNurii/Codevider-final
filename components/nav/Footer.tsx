@@ -21,7 +21,7 @@ export default function Footer() {
 						<Link
 							href="/"
 							aria-label="Home"
-							className="inline-flex items-center gap-2.5 -ml-1 text-white"
+							className="inline-flex items-center gap-2.5 -ml-2 text-white"
 						>
 							<CodeviderLogo />
 						</Link>

@@ -33,6 +33,7 @@ export function SiteDocument({ locale, children }: Props) {
 	return (
 		<html
 			lang={locale}
+			data-scroll-behavior="smooth"
 			suppressHydrationWarning
 			className={`${alexandria.variable} ${libreBaskerville.variable} h-full antialiased`}
 		>

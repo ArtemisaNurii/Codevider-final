@@ -1,49 +1,37 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { scrollToHashTargetWhenReady } from "@/lib/wait-for-stable-layout";
 
 /**
- * Component that handles smooth scrolling to hash fragments on page navigation.
- *
- * @returns Null (renders nothing)
+ * Scrolls to a hash target after deferred sections mount and layout settles.
  */
 export function HashScrollHandler() {
 	const pathname = usePathname();
+	const [locationHash, setLocationHash] = useState("");
 
 	useEffect(() => {
-		const hash = window.location.hash;
-		if (!hash) return;
+		const syncHash = () => setLocationHash(window.location.hash);
 
-		const id = hash.slice(1);
+		syncHash();
+		window.addEventListener("hashchange", syncHash);
 
-		/**
-		 * Attempts to scroll to the target element.
-		 *
-		 * @returns True if element found and scrolled to
-		 */
-		const scrollToTarget = (): boolean => {
-			const el = document.getElementById(id);
-			if (el) {
-				el.scrollIntoView({ behavior: "smooth", block: "start" });
-				return true;
-			}
-			return false;
-		};
-
-		if (scrollToTarget()) return;
-
-		const interval = setInterval(() => {
-			if (scrollToTarget()) clearInterval(interval);
-		}, 100);
-
-		const timeout = setTimeout(() => clearInterval(interval), 5000);
-
-		return () => {
-			clearInterval(interval);
-			clearTimeout(timeout);
-		};
+		return () => window.removeEventListener("hashchange", syncHash);
 	}, [pathname]);
+
+	useEffect(() => {
+		if (!locationHash) return;
+
+		const id = locationHash.slice(1);
+		if (!id) return;
+
+		const controller = new AbortController();
+
+		void scrollToHashTargetWhenReady(id, controller.signal);
+
+		return () => controller.abort();
+	}, [pathname, locationHash]);
 
 	return null;
 }

@@ -2,9 +2,21 @@
 
 import { useInView } from "motion/react";
 import dynamic from "next/dynamic";
-import { type ComponentType, useEffect, useRef, useState } from "react";
+import { type ComponentType, useLayoutEffect, useRef, useState } from "react";
 
 type SectionLoader = () => Promise<{ default: ComponentType }>;
+
+function shouldForceMountOnLoad(): boolean {
+	if (typeof window === "undefined") return false;
+
+	if (window.location.hash.length > 1) return true;
+
+	const navEntries = performance.getEntriesByType("navigation");
+	if (navEntries.length === 0) return false;
+
+	const navEntry = navEntries[0] as PerformanceNavigationTiming;
+	return navEntry.type === "reload" || navEntry.type === "back_forward";
+}
 
 export function createDeferredHomeSection(
 	loader: SectionLoader,
@@ -21,27 +33,17 @@ export function createDeferredHomeSection(
 		});
 		const [forceMount, setForceMount] = useState(false);
 
-		useEffect(() => {
-			// Mount section if hash matches id
-			if (id && window.location.hash.slice(1) === id) {
+		useLayoutEffect(() => {
+			if (shouldForceMountOnLoad()) {
 				setForceMount(true);
-				return;
 			}
-
-			// Mount all sections on reload/back/forward for proper scroll restoration
-			const navEntries = performance.getEntriesByType("navigation");
-			if (navEntries.length > 0) {
-				const navEntry = navEntries[0] as PerformanceNavigationTiming;
-				if (navEntry.type === "reload" || navEntry.type === "back_forward") {
-					setForceMount(true);
-				}
-			}
-		}, [id]);
+		}, []);
 
 		return (
 			<div
 				id={id}
 				ref={ref}
+				className={forceMount ? "deferred-section--active" : undefined}
 				style={
 					isInView || forceMount
 						? undefined

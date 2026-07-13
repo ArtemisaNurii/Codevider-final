@@ -109,7 +109,11 @@ function ServiceCta() {
 			<p>
 				<strong>{t("cta_title")}</strong> {t("cta_body")}
 			</p>
-			<Link href={{ pathname: "/", hash: "contact" }} className="svc-cta__btn">
+			<Link
+				href={{ pathname: "/", hash: "contact" }}
+				scroll={false}
+				className="svc-cta__btn"
+			>
 				{t("cta_button")}
 				<ArrowRight className="size-4" aria-hidden />
 			</Link>

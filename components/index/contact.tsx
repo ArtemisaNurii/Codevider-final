@@ -137,7 +137,7 @@ export default function Contact() {
 	};
 
 	return (
-		<section ref={ref} id="contact" className="home-section home-feature-alt">
+		<section ref={ref} className="home-section home-feature-alt">
 			<SectionHead
 				eyebrow={t("eyebrow")}
 				headline={t("headline")}
@@ -162,7 +162,7 @@ export default function Contact() {
 						!!shouldReduceMotion,
 					)}
 				>
-					<div className="mt-[clamp(2rem,4vw,3rem)] flex flex-col gap-10">
+					<div className=" flex flex-col gap-10">
 						{[
 							{
 								icon: Mail,
