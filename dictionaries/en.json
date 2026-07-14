@@ -703,17 +703,6 @@
 		"about": "About",
 		"services": "Services",
 		"book_a_call": "Book a call",
-		"select_language": "Select language",
-		"language_options": "Language options",
-		"languages": {
-			"en": "English",
-			"es": "Español",
-			"sq": "Shqip",
-			"de": "Deutsch",
-			"fr": "Français",
-			"it": "Italiano",
-			"zh": "中文"
-		},
 		"switch_to_light_mode": "Switch to light mode",
 		"switch_to_dark_mode": "Switch to dark mode",
 		"light_mode": "Light",

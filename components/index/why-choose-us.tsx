@@ -2,7 +2,7 @@
 
 import { Clock, Lightbulb, Percent, SlidersHorizontal } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import {
 	sectionItemTransition,
 	sectionRevealItem,
@@ -18,7 +18,7 @@ const BOTTOM_CARDS = [
 ] as const;
 
 export default function WhyChooseUs() {
-	const t = useTranslations("home.why_choose");
+	const t = useCopy("home.why_choose");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 

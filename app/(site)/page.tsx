@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getCopy } from "@/lib/copy";
 import Hero from "@/components/index/hero";
 import {
 	Contact,
@@ -12,14 +12,12 @@ import {
 	WhyOutsource,
 } from "@/components/index/home-below-fold";
 import { StructuredData } from "@/components/seo/structured-data";
-import { routing } from "@/i18n/routing";
 import { createPageMetadata, getOgImageUrl, getPageUrl } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-	const t = await getTranslations();
+	const t = getCopy();
 
 	return createPageMetadata({
-		locale: routing.defaultLocale,
 		title: t("metadata.home.title"),
 		description: t("metadata.home.description"),
 		page: "home",
@@ -27,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-	const t = await getTranslations();
+	const t = getCopy();
 
 	return (
 		<div className="home-page">
@@ -43,7 +41,7 @@ export default async function Home() {
 			<StructuredData
 				title={t("metadata.home.title")}
 				description={t("metadata.home.description")}
-				image={getOgImageUrl(routing.defaultLocale, "home")}
+				image={getOgImageUrl("home")}
 				url={getPageUrl("")}
 			/>
 		</div>

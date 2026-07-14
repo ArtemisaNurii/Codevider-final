@@ -11,9 +11,9 @@ import {
 	Loader2,
 } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { fetchOpenJobs } from "@/lib/api/recruit-jobs";
 import type { OpenJob, PaginatedMeta } from "@/lib/types/recruit";
 
@@ -30,7 +30,7 @@ const initialMeta: PaginatedMeta = {
 };
 
 export default function CareerOpenings() {
-	const t = useTranslations("career.openings");
+	const t = useCopy("career.openings");
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 	const shouldReduceMotion = useReducedMotion();

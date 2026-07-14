@@ -3,7 +3,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useEffect, useRef, useState } from "react";
 import SectionHead from "@/components/index/section-head";
 import { teamMembers } from "@/data/team-members";
@@ -69,7 +69,7 @@ function scrollByPage(el: HTMLDivElement, direction: "left" | "right"): void {
 }
 
 export default function AboutMeetTeam() {
-	const t = useTranslations("about.team");
+	const t = useCopy("about.team");
 	const sectionRef = useRef<HTMLElement>(null);
 	const carouselRef = useRef<HTMLDivElement>(null);
 	const [photoCenterY, setPhotoCenterY] = useState<number | null>(null);

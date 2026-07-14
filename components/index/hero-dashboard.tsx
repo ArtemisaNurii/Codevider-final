@@ -2,7 +2,7 @@
 
 import { Activity, Target, TrendingUp, Users } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { appleRevealEase, useMounted } from "@/hooks/use-section-reveal";
 
 const REVENUE_BARS = [38, 52, 44, 58, 49, 64, 55, 71, 63, 77, 68, 84] as const;
@@ -114,8 +114,8 @@ function MetricCard({
  * @returns The dashboard window component.
  */
 export default function HeroDashboard() {
-	const t = useTranslations("home.dashboard");
-	const tHome = useTranslations("home");
+	const t = useCopy("home.dashboard");
+	const tHome = useCopy("home");
 	const currency = tHome("base_currency");
 	const currencyAfter = tHome("base_currency_position") === "after";
 	const fmt = (amount: string) =>

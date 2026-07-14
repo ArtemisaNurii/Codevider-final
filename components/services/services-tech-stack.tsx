@@ -6,7 +6,7 @@ import {
 	useInView,
 	useReducedMotion,
 } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import SectionHead from "@/components/index/section-head";
 import {
@@ -97,7 +97,7 @@ function TechCategorySection({
 	sectionIndex: number;
 	shouldReduceMotion: boolean | null;
 }) {
-	const t = useTranslations("services.tech");
+	const t = useCopy("services.tech");
 	const section = getTechStackCategory(categoryId);
 	const titleId = `tech-section-${categoryId}`;
 
@@ -136,7 +136,7 @@ function TechCategorySection({
 }
 
 export default function ServicesTechStack() {
-	const t = useTranslations("services.tech");
+	const t = useCopy("services.tech");
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 	const shouldReduceMotion = useReducedMotion();

@@ -11,7 +11,7 @@ import {
 	Smartphone,
 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import {
 	sectionItemTransition,
 	sectionRevealItem,
@@ -31,7 +31,7 @@ const CARDS = [
 ] as const;
 
 export default function WhoWeEmpower() {
-	const t = useTranslations("home.empower");
+	const t = useCopy("home.empower");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 

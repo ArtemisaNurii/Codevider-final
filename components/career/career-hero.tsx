@@ -1,13 +1,13 @@
 "use client";
 
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useRef } from "react";
 
 const revealEase = [0.22, 1, 0.36, 1] as const;
 
 export default function CareerHero() {
-	const t = useTranslations("career.hero");
+	const t = useCopy("career.hero");
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 	const shouldReduceMotion = useReducedMotion();

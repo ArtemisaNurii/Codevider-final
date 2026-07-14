@@ -2,7 +2,7 @@
 
 import { useReducedMotion } from "motion/react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useEffect, useState } from "react";
 import GradientBlinds from "@/components/ui/gradient-blinds";
 import HeroDashboard from "./hero-dashboard";
@@ -22,7 +22,7 @@ const HERO_FINE_POINTER_QUERY = "(any-pointer: fine)";
 const HERO_GRADIENT: string[] = ["#0e1624", "#3a5278", "#8499be", "#78a99e"];
 
 export default function Hero() {
-	const t = useTranslations("home");
+	const t = useCopy("home");
 	const reducedMotion = useReducedMotion();
 	const [mouseMotion, setMouseMotion] = useState(false);
 

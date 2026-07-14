@@ -2,7 +2,7 @@
 
 import { DollarSign, Link2, ShieldCheck } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import {
 	sectionItemTransition,
 	sectionRevealItem,
@@ -17,7 +17,7 @@ const PILLARS = [
 ] as const;
 
 export default function WhyOutsource() {
-	const t = useTranslations("home.outsource");
+	const t = useCopy("home.outsource");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 

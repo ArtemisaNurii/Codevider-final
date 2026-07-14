@@ -2,7 +2,7 @@
 
 import { Code2, Eye, Users } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useRef } from "react";
 import SectionHead from "@/components/index/section-head";
 
@@ -17,7 +17,7 @@ const PRINCIPLE_ICONS = {
 const revealEase = [0.22, 1, 0.36, 1] as const;
 
 export default function AboutCulture() {
-	const t = useTranslations("about.culture");
+	const t = useCopy("about.culture");
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 	const shouldReduceMotion = useReducedMotion();

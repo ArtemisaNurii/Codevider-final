@@ -1,7 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { useCopy } from "@/lib/copy";
+import Link from "next/link";
 import { CodeviderLogo } from "./CodeviderLogo";
 import { FooterSocials } from "./footer-socials";
 
@@ -11,7 +11,7 @@ import { FooterSocials } from "./footer-socials";
  * @returns Footer component
  */
 export default function Footer() {
-	const t = useTranslations("footer");
+	const t = useCopy("footer");
 
 	return (
 		<footer className="bg-[#0f1424] home-inline-x py-[clamp(54px,7vw,84px)] pb-[30px] text-blue-100/70">

@@ -2,7 +2,7 @@ import { SiteDocument } from "@/components/layout/site-document";
 
 export default function NotFound() {
 	return (
-		<SiteDocument locale="en">
+		<SiteDocument>
 			<div className="relative isolate flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
 				<div className="home-hero__blobs" aria-hidden>
 					<div className="home-hero__blob home-hero__blob--primary" />

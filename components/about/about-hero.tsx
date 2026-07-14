@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useRef } from "react";
 
 const revealEase = [0.22, 1, 0.36, 1] as const;
@@ -9,7 +9,7 @@ const revealEase = [0.22, 1, 0.36, 1] as const;
 const META_KEYS = ["meta_years", "meta_projects", "meta_location"] as const;
 
 export default function AboutHero() {
-	const t = useTranslations("about.hero");
+	const t = useCopy("about.hero");
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 	const shouldReduceMotion = useReducedMotion();

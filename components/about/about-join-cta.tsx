@@ -2,14 +2,14 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useRef } from "react";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 const revealEase = [0.22, 1, 0.36, 1] as const;
 
 export default function AboutJoinCta() {
-	const t = useTranslations("about.join");
+	const t = useCopy("about.join");
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 	const shouldReduceMotion = useReducedMotion();

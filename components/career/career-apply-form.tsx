@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, Check, Loader2, X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import {
 	type KeyboardEvent,
 	type ReactNode,
@@ -231,7 +231,7 @@ type CareerApplyFormProps = {
 };
 
 export default function CareerApplyForm({ job }: CareerApplyFormProps) {
-	const t = useTranslations("career.apply.form");
+	const t = useCopy("career.apply.form");
 	const [submitted, setSubmitted] = useState(false);
 	const [submitError, setSubmitError] = useState<string | null>(null);
 	const [turnstileToken, setTurnstileToken] = useState<string | null>(null);

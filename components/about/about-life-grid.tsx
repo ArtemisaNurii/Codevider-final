@@ -2,7 +2,7 @@
 
 import { motion, useInView, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useRef } from "react";
 import SectionHead from "@/components/index/section-head";
 
@@ -43,7 +43,7 @@ const PHOTOS: LifeGridPhoto[] = [
 const revealEase = [0.22, 1, 0.36, 1] as const;
 
 export default function AboutLifeGrid() {
-	const t = useTranslations("about.life");
+	const t = useCopy("about.life");
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 	const shouldReduceMotion = useReducedMotion();

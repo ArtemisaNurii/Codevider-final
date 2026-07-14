@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getCopy } from "@/lib/copy";
 import LegalDocument from "@/components/legal/legal-document";
 import LegalHero from "@/components/legal/legal-hero";
 import { StructuredData } from "@/components/seo/structured-data";
-import { routing } from "@/i18n/routing";
 import { createPageMetadata, getOgImageUrl, getPageUrl } from "@/lib/site";
 
 const TERMS_SECTIONS = [
@@ -16,10 +15,9 @@ const TERMS_SECTIONS = [
 ] as const;
 
 export async function generateMetadata(): Promise<Metadata> {
-	const t = await getTranslations();
+	const t = getCopy();
 
 	return createPageMetadata({
-		locale: routing.defaultLocale,
 		title: t("metadata.terms.title"),
 		description: t("metadata.terms.description"),
 		page: "terms",
@@ -27,14 +25,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function TermsPage() {
-	const t = await getTranslations();
+	const t = getCopy();
 
 	return (
 		<div className="home-page">
 			<StructuredData
 				title={t("metadata.terms.title")}
 				description={t("metadata.terms.description")}
-				image={getOgImageUrl(routing.defaultLocale, "terms")}
+				image={getOgImageUrl("terms")}
 				url={getPageUrl("/terms")}
 			/>
 			<LegalHero namespace="legal.terms" />

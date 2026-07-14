@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import WorldMap from "@/components/ui/world-map";
 import {
 	appleRevealEase,
@@ -23,7 +23,7 @@ const PARTNERSHIP_ROUTES = [
 ] as const;
 
 export default function GlobalPartnerships() {
-	const t = useTranslations("home.global");
+	const t = useCopy("home.global");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 

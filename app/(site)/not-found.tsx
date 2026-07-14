@@ -1,8 +1,8 @@
-import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import { getCopy } from "@/lib/copy";
+import Link from "next/link";
 
 export default async function LocaleNotFound() {
-	const t = await getTranslations("not_found");
+	const t = getCopy("not_found");
 
 	return (
 		<div className="relative isolate flex min-h-[60vh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center">

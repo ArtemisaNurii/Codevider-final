@@ -1,7 +1,7 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useTheme } from "@/components/providers/ThemeProvider";
 
 type ThemeToggleProps = {
@@ -16,7 +16,7 @@ export function ThemeToggle({
 	className = "",
 }: ThemeToggleProps) {
 	const { theme, isThemeTransitioning, toggleTheme } = useTheme();
-	const t = useTranslations("navbar");
+	const t = useCopy("navbar");
 	const isDark = theme === "dark";
 	const modeLabel = isDark ? t("light_mode") : t("dark_mode");
 

@@ -2,12 +2,12 @@
 
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { useEffect, useRef, useState } from "react";
-import { Link, usePathname } from "@/i18n/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { CodeviderLogo } from "./CodeviderLogo";
-import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "./ThemeToggle";
 
 const SCROLL_ON = 56;
@@ -127,7 +127,7 @@ function NavLink({
  * @returns Desktop nav links component
  */
 function DesktopNavLinks({ appearance }: { appearance: NavAppearance }) {
-	const t = useTranslations("navbar");
+	const t = useCopy("navbar");
 	const pathname = usePathname();
 
 	return (
@@ -152,7 +152,7 @@ function DesktopNavLinks({ appearance }: { appearance: NavAppearance }) {
  * @returns Navbar component
  */
 export function Navbar() {
-	const t = useTranslations("navbar");
+	const t = useCopy("navbar");
 	const pathname = usePathname();
 	const { theme } = useTheme();
 	const [mounted, setMounted] = useState(false);
@@ -312,7 +312,6 @@ export function Navbar() {
 
 							<div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3">
 								<div className="hidden items-center gap-2 navbar:flex">
-									{/* <LanguageSelector variant={navAppearance} /> */}
 									<ThemeToggle variant={navAppearance} />
 								</div>
 
@@ -441,7 +440,6 @@ export function Navbar() {
 										isDarkNav ? "border-white/10" : "border-slate-200"
 									}`}
 								>
-									{/* <LanguageSelector variant={navAppearance} fullWidth /> */}
 									<ThemeToggle variant={navAppearance} fullWidth />
 								</div>
 							</nav>

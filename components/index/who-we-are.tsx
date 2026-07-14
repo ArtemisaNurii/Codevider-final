@@ -2,13 +2,13 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import {
 	sectionRevealItem,
 	sectionRevealStagger,
 	useSectionReveal,
 } from "@/hooks/use-section-reveal";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 const STAGGER = 0.1;
 
@@ -107,7 +107,7 @@ function StatCard({
 }
 
 export default function WhoWeAre() {
-	const t = useTranslations("home");
+	const t = useCopy("home");
 	const {
 		ref: sectionRef,
 		isRevealed,

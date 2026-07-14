@@ -2,9 +2,9 @@
 
 import { ArrowRight, Check } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 const SERVICE_IDS = [
 	"custom",
@@ -60,7 +60,7 @@ function ServiceBlock({
 	solutionsHeading: string;
 	outcomesHeading: string;
 }) {
-	const t = useTranslations(`services.capabilities.items.${id}`);
+	const t = useCopy(`services.capabilities.items.${id}`);
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-12% 0px" });
 	const shouldReduceMotion = useReducedMotion();
@@ -102,7 +102,7 @@ function ServiceBlock({
 }
 
 function ServiceCta() {
-	const t = useTranslations("services.capabilities");
+	const t = useCopy("services.capabilities");
 
 	return (
 		<div className="svc-cta">
@@ -122,8 +122,8 @@ function ServiceCta() {
 }
 
 export default function ServicesCapabilities() {
-	const t = useTranslations("services.capabilities");
-	const tItems = useTranslations("services.capabilities.items");
+	const t = useCopy("services.capabilities");
+	const tItems = useCopy("services.capabilities.items");
 	const [activeId, setActiveId] = useState<ServiceId>(SERVICE_IDS[0]);
 	const observerRef = useRef<IntersectionObserver | null>(null);
 

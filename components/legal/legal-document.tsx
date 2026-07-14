@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useEffect, useRef, useState } from "react";
 import LegalContentBlocks from "@/components/legal/legal-content-blocks";
 import { isLegalBlockArray } from "@/lib/legal-content";
@@ -18,8 +18,8 @@ export default function LegalDocument({
 	namespace,
 	sections,
 }: LegalDocumentProps) {
-	const t = useTranslations(namespace);
-	const tShared = useTranslations("legal.shared");
+	const t = useCopy(namespace);
+	const tShared = useCopy("legal.shared");
 	const ref = useRef<HTMLElement>(null);
 	const inView = useInView(ref, { once: true, margin: "-8% 0px" });
 	const shouldReduceMotion = useReducedMotion();

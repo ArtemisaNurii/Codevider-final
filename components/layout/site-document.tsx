@@ -18,21 +18,16 @@ const libreBaskerville = Libre_Baskerville({
 
 /** Props for SiteDocument. */
 type Props = {
-	locale: string;
 	children: ReactNode;
 };
 
 /**
  * Root document component that sets up fonts, theme, and scroll restoration.
- *
- * @param locale - Current locale
- * @param children - Child components
- * @returns Root document JSX
  */
-export function SiteDocument({ locale, children }: Props) {
+export function SiteDocument({ children }: Props) {
 	return (
 		<html
-			lang={locale}
+			lang="en"
 			data-scroll-behavior="smooth"
 			suppressHydrationWarning
 			className={`${alexandria.variable} ${libreBaskerville.variable} h-full antialiased`}

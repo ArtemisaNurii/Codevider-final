@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getCopy } from "@/lib/copy";
 import { Suspense } from "react";
 import CareerApply from "@/components/career/career-apply";
 import { StructuredData } from "@/components/seo/structured-data";
-import { routing } from "@/i18n/routing";
 import { createPageMetadata, getOgImageUrl, getPageUrl } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-	const t = await getTranslations();
+	const t = getCopy();
 
 	return createPageMetadata({
-		locale: routing.defaultLocale,
 		title: t("metadata.career_apply.title"),
 		description: t("metadata.career_apply.description"),
 		page: "career",
@@ -19,14 +17,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CareerApplyPage() {
-	const t = await getTranslations();
+	const t = getCopy();
 
 	return (
 		<div className="home-page">
 			<StructuredData
 				title={t("metadata.career_apply.title")}
 				description={t("metadata.career_apply.description")}
-				image={getOgImageUrl(routing.defaultLocale, "career")}
+				image={getOgImageUrl("career")}
 				url={getPageUrl("/career/apply")}
 			/>
 			<Suspense>

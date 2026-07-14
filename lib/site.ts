@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { routing } from "@/i18n/routing";
 
 /** Production fallback when NEXT_PUBLIC_SITE_URL is not set at build time. */
 export const SITE_URL = "https://www.codevider.com";
@@ -44,38 +43,6 @@ export const OG_PAGES = [
 /** Type representing a page that has a custom Open Graph image. */
 export type OgPage = (typeof OG_PAGES)[number];
 
-/** Maps internal locale codes to BCP47 Open Graph locale strings. */
-const LOCALE_TO_OG_BCP47: Record<(typeof routing.locales)[number], string> = {
-	en: "en_US",
-	de: "de_DE",
-	fr: "fr_FR",
-	es: "es_ES",
-	it: "it_IT",
-	sq: "sq_AL",
-	zh: "zh_CN",
-};
-
-/**
- * Converts an internal locale code to an Open Graph BCP47 locale string.
- */
-function getOpenGraphLocale(locale: string): string {
-	return (
-		LOCALE_TO_OG_BCP47[locale as (typeof routing.locales)[number]] ?? locale
-	);
-}
-
-/** Maps internal locale codes to English language names for OG image paths. */
-const LOCALE_TO_OG_LANGUAGE: Record<(typeof routing.locales)[number], string> =
-	{
-		en: "english",
-		de: "german",
-		fr: "french",
-		es: "spanish",
-		it: "italian",
-		sq: "albanian",
-		zh: "chinese",
-	};
-
 /** Maps OG page keys to their corresponding site routes. */
 const OG_PAGE_TO_ROUTE: Record<OgPage, (typeof SITE_ROUTES)[number]> = {
 	home: "",
@@ -87,7 +54,7 @@ const OG_PAGE_TO_ROUTE: Record<OgPage, (typeof SITE_ROUTES)[number]> = {
 };
 
 /**
- * Builds a fully qualified URL for a site path (no locale prefix).
+ * Builds a fully qualified URL for a site path.
  */
 export function getPageUrl(
 	path: (typeof SITE_ROUTES)[number] | string,
@@ -100,26 +67,21 @@ export function getPageUrl(
 }
 
 /**
- * Gets the path to the Open Graph image for a locale and page.
+ * Gets the path to the Open Graph image for a page.
  */
-export function getOgImagePath(locale: string, page: OgPage): string {
-	const language =
-		LOCALE_TO_OG_LANGUAGE[locale as (typeof routing.locales)[number]] ??
-		"english";
-
-	return `/images/og/${language}/${page}/og.png`;
+export function getOgImagePath(page: OgPage): string {
+	return `/images/og/english/${page}/og.png`;
 }
 
 /**
- * Gets the full URL to the Open Graph image for a locale and page.
+ * Gets the full URL to the Open Graph image for a page.
  */
-export function getOgImageUrl(locale: string, page: OgPage): string {
-	return `${getSiteUrl()}${getOgImagePath(locale, page)}`;
+export function getOgImageUrl(page: OgPage): string {
+	return `${getSiteUrl()}${getOgImagePath(page)}`;
 }
 
 /** Input options for creating page metadata. */
 type PageMetadataInput = {
-	locale?: string;
 	title: string;
 	description: string;
 	page: OgPage;
@@ -127,10 +89,9 @@ type PageMetadataInput = {
 };
 
 /**
- * Creates Next.js Metadata for a page (locale lives in localStorage, not the URL).
+ * Creates Next.js Metadata for a page.
  */
 export function createPageMetadata({
-	locale = routing.defaultLocale,
 	title,
 	description,
 	page,
@@ -140,7 +101,7 @@ export function createPageMetadata({
 	const canonical = pathOverride
 		? getPageUrl(pathOverride)
 		: getPageUrl(siteRoute);
-	const ogImageUrl = getOgImageUrl(locale, page);
+	const ogImageUrl = getOgImageUrl(page);
 
 	return {
 		title,
@@ -153,7 +114,7 @@ export function createPageMetadata({
 			description,
 			url: canonical,
 			siteName: "Codevider",
-			locale: getOpenGraphLocale(locale),
+			locale: "en_US",
 			type: "website",
 			images: [
 				{

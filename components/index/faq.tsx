@@ -2,7 +2,7 @@
 
 import { ChevronDown } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { useState } from "react";
 import {
 	applePanelEase,
@@ -132,7 +132,7 @@ function FaqItem({
 }
 
 export default function Faq() {
-	const t = useTranslations("home.faq");
+	const t = useCopy("home.faq");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 	const [openId, setOpenId] = useState<string | null>(null);

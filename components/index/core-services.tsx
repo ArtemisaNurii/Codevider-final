@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import dynamic from "next/dynamic";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import type { CSSProperties } from "react";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 
@@ -36,7 +36,7 @@ import {
 	sectionRevealStagger,
 	useSectionReveal,
 } from "@/hooks/use-section-reveal";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import SectionHead from "./section-head";
 
 const ENGINEERING_CODE_LANGUAGES = {
@@ -125,7 +125,7 @@ function FeatureCheckList({ items }: { items: string[] }) {
 }
 
 function AiDemo() {
-	const t = useTranslations("home.features.ai.demo");
+	const t = useCopy("home.features.ai.demo");
 	const chips = useRef([
 		{ id: "tickets" as const, qKey: "chip_tickets_q", aKey: "chip_tickets_a" },
 		{ id: "leads" as const, qKey: "chip_leads_q", aKey: "chip_leads_a" },
@@ -269,7 +269,7 @@ function AiDemo() {
 }
 
 function CodeDemo() {
-	const t = useTranslations("home.features.engineering.demo");
+	const t = useCopy("home.features.engineering.demo");
 	const tabs = Object.keys(ENGINEERING_DEMO_TABS) as EngineeringDemoTab[];
 	const [active, setActive] = useState<EngineeringDemoTab>("orders");
 	const shouldReduceMotion = useReducedMotion();
@@ -392,7 +392,7 @@ function PipelineStageIcon({
 }
 
 function PodDemo() {
-	const t = useTranslations("home.features.pod.demo");
+	const t = useCopy("home.features.pod.demo");
 	const [active, setActive] = useState<(typeof POD_ROLES)[number]>("frontend");
 	const shouldReduceMotion = useReducedMotion();
 
@@ -514,7 +514,7 @@ function PodDemo() {
 }
 
 function PipelineDemo() {
-	const t = useTranslations("home.features.devops.demo");
+	const t = useCopy("home.features.devops.demo");
 	const stages = ["build", "test", "deploy"] as const;
 	const stageIcons: Record<(typeof stages)[number], typeof Package> = {
 		build: Package,
@@ -701,7 +701,7 @@ function FeatureSection({
 	feature: FeatureConfig;
 	index: number;
 }) {
-	const t = useTranslations(`home.features.${feature.id}`);
+	const t = useCopy(`home.features.${feature.id}`);
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 
@@ -775,7 +775,7 @@ function FeatureSection({
 }
 
 export default function CoreServices() {
-	const t = useTranslations("home.core_services");
+	const t = useCopy("home.core_services");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 

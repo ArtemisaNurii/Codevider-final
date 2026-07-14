@@ -11,7 +11,7 @@ import {
 	Send,
 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useCopy } from "@/lib/copy";
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -76,7 +76,7 @@ function FieldError({ id, message }: { id?: string; message?: string }) {
 }
 
 export default function Contact() {
-	const t = useTranslations("home.contact");
+	const t = useCopy("home.contact");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
 	const [submitted, setSubmitted] = useState(false);

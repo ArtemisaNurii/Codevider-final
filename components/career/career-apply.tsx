@@ -3,10 +3,10 @@
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useSearchParams } from "next/navigation";
-import { useFormatter, useTranslations } from "next-intl";
+import { useCopy, type CopyTranslator } from "@/lib/copy";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import CareerApplyForm from "@/components/career/career-apply-form";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { fetchJobById } from "@/lib/api/recruit-jobs";
 import type { JobDetail } from "@/lib/types/recruit";
 
@@ -23,26 +23,19 @@ type DetailRow = {
 	value: string;
 };
 
-function formatPayPeriod(
-	t: ReturnType<typeof useTranslations<"career.apply">>,
-	period: string,
-) {
+function formatPayPeriod(t: CopyTranslator, period: string) {
 	const key = `pay_period_${period}` as const;
 	return t.has(key) ? t(key) : period;
 }
 
-function formatPayType(
-	t: ReturnType<typeof useTranslations<"career.apply">>,
-	payType: string,
-) {
+function formatPayType(t: CopyTranslator, payType: string) {
 	const key = `pay_type_${payType}` as const;
 	return t.has(key) ? t(key) : payType;
 }
 
 export default function CareerApply() {
-	const t = useTranslations("career.apply");
-	const metadataT = useTranslations("metadata.career_apply");
-	const format = useFormatter();
+	const t = useCopy("career.apply");
+	const metadataT = useCopy("metadata.career_apply");
 	const searchParams = useSearchParams();
 	const rawId = searchParams.get("id");
 	const jobId = rawId && /^\d+$/.test(rawId) ? Number(rawId) : null;
@@ -95,12 +88,12 @@ export default function CareerApply() {
 
 	const formatDate = useCallback(
 		(value: string) =>
-			format.dateTime(new Date(value), {
+			new Intl.DateTimeFormat("en-US", {
 				day: "numeric",
 				month: "long",
 				year: "numeric",
-			}),
-		[format],
+			}).format(new Date(value)),
+		[],
 	);
 
 	const detailRows = useMemo<DetailRow[]>(() => {
