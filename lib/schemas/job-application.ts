@@ -107,3 +107,61 @@ export function createJobApplicationSchema(
 export type JobApplicationFormValues = z.infer<
 	ReturnType<typeof createJobApplicationSchema>
 >;
+
+const optionalText = (max: number) =>
+	z
+		.string()
+		.trim()
+		.max(max)
+		.nullish()
+		.transform((value) => (value ? value : undefined));
+
+const uploadedFileSchema = z.object({
+	filename: z.string().min(1),
+	relativepath: z.string().min(1),
+	hashname: z.string().min(1),
+	size: z.number().nonnegative(),
+});
+
+const experienceSchema = z.object({
+	start_date: z.string().min(1),
+	end_date: z.string().nullable(),
+	company_name: z.string().min(1),
+	position: z.string().min(1),
+	description: z.string(),
+});
+
+const educationSchema = z.object({
+	start_date: z.string().min(1),
+	end_date: z.string().min(1),
+	institution_name: z.string().min(1),
+	degree: z.string().min(1),
+	field_of_study: z.string().min(1),
+});
+
+const projectSchema = z.object({
+	name: z.string().min(1),
+	repo: z.string(),
+	public_link: z.string(),
+});
+
+/** Server-side schema for career apply API requests (includes Turnstile token). */
+export const careerApiSchema = z.object({
+	full_name: z.string().trim().min(1).max(100),
+	email: z.string().trim().email().max(255),
+	job_id: z.number().int().positive(),
+	phone: optionalText(30),
+	date_of_birth: optionalText(32),
+	gender: optionalText(64),
+	photo: uploadedFileSchema,
+	resume: uploadedFileSchema,
+	bio: optionalText(2000),
+	cover_letter: optionalText(5000),
+	skills: z.array(z.string().trim().min(1)).max(50).optional(),
+	experiences: z.array(experienceSchema).default([]),
+	educations: z.array(educationSchema).default([]),
+	projects: z.array(projectSchema).default([]),
+	turnstileToken: z.string().min(1),
+});
+
+export type CareerApiBody = z.infer<typeof careerApiSchema>;

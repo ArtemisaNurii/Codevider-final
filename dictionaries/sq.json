@@ -62,7 +62,7 @@
 			"healthcare": "Kujdes Shëndetësor"
 		},
 		"base_currency": "ALL",
-		"base_currency_position": "after",
+		"base_currency_position": "before",
 		"features": {
 			"ai": {
 				"badge": "01 · Integrimi i AI",

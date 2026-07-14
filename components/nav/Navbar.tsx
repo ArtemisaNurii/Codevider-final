@@ -287,7 +287,7 @@ export function Navbar() {
 						animate={{
 							height: isScrolled ? 60 : 72,
 							borderRadius: isScrolled ? 20 : 0,
-							maxWidth: isScrolled ? 1310 : 10000,
+							maxWidth: isScrolled ? 1300 : 10000,
 						}}
 						transition={
 							shouldReduceMotion || !shouldAnimate
@@ -295,7 +295,7 @@ export function Navbar() {
 								: navTransition
 						}
 					>
-						<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 home-inline-x">
+						<div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between gap-4 px-4">
 							<Link
 								href="/"
 								aria-label="Codevider"

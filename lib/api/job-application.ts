@@ -50,7 +50,8 @@ export async function uploadJobApplicationFiles(
 }
 
 /**
- * Submits a complete job application to the backend.
+ * Submits a complete job application via `/api/career`.
+ * The API route verifies Turnstile and forwards to the backend without the token.
  *
  * @param payload - Full job application payload with uploaded file metadata
  * @param turnstileToken - Cloudflare Turnstile verification token
@@ -60,19 +61,16 @@ export async function submitJobApplication(
 	payload: JobApplicationPayload,
 	turnstileToken: string,
 ): Promise<void> {
-	const response = await fetch(
-		`${getBackendUrl()}/landing-page/recruit/candidate/job-application`,
-		{
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				...payload,
-				turnstileToken,
-			}),
+	const response = await fetch("/api/career", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
 		},
-	);
+		body: JSON.stringify({
+			...payload,
+			turnstileToken,
+		}),
+	});
 
 	if (!response.ok) {
 		throw new JobApplicationError("submit_failed", response.status);

@@ -1,9 +1,16 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { ArrowRight, Check, Loader2, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import {
+	type KeyboardEvent,
+	type ReactNode,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
 	TurnstileWidget,
@@ -69,6 +76,153 @@ function FieldError({ id, message }: { id?: string; message?: string }) {
 		<p id={id} className="mt-1.5 text-sm text-(--dash-warning)" role="alert">
 			{message}
 		</p>
+	);
+}
+
+function parseSkills(value: string) {
+	return value
+		.split(",")
+		.map((skill) => skill.trim())
+		.filter(Boolean);
+}
+
+function serializeSkills(skills: string[]) {
+	return skills.join(", ");
+}
+
+type SkillsBadgeInputProps = {
+	id: string;
+	value: string;
+	onChange: (value: string) => void;
+	onBlur: () => void;
+	placeholder: string;
+	removeLabel: string;
+	invalid?: boolean;
+	describedBy?: string;
+};
+
+function SkillsBadgeInput({
+	id,
+	value,
+	onChange,
+	onBlur,
+	placeholder,
+	removeLabel,
+	invalid,
+	describedBy,
+}: SkillsBadgeInputProps) {
+	const [draft, setDraft] = useState("");
+	const inputRef = useRef<HTMLInputElement>(null);
+	const skills = parseSkills(value);
+
+	const commitSkill = (raw: string) => {
+		const nextSkill = raw.trim().replace(/,+$/, "").trim();
+		if (!nextSkill) {
+			setDraft("");
+			return false;
+		}
+
+		const exists = skills.some(
+			(skill) => skill.toLowerCase() === nextSkill.toLowerCase(),
+		);
+		if (exists) {
+			setDraft("");
+			return true;
+		}
+
+		onChange(serializeSkills([...skills, nextSkill]));
+		setDraft("");
+		return true;
+	};
+
+	const removeSkill = (index: number) => {
+		onChange(serializeSkills(skills.filter((_, i) => i !== index)));
+		inputRef.current?.focus();
+	};
+
+	const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === "," || event.key === "Tab") {
+			if (!draft.trim()) {
+				return;
+			}
+
+			event.preventDefault();
+			commitSkill(draft);
+			return;
+		}
+
+		if (event.key === "Backspace" && !draft && skills.length > 0) {
+			event.preventDefault();
+			removeSkill(skills.length - 1);
+		}
+	};
+
+	return (
+		<div
+			className={`career-apply-form__skills${invalid ? " career-apply-form__skills--error" : ""}`}
+			onClick={() => inputRef.current?.focus()}
+		>
+			{skills.map((skill, index) => (
+				<span key={`${skill}-${index}`} className="career-apply-form__skill">
+					{skill}
+					<button
+						type="button"
+						className="career-apply-form__skill-remove"
+						aria-label={`${removeLabel} ${skill}`}
+						onClick={(event) => {
+							event.stopPropagation();
+							removeSkill(index);
+						}}
+					>
+						<X className="size-3" strokeWidth={2.5} aria-hidden />
+					</button>
+				</span>
+			))}
+			<input
+				ref={inputRef}
+				id={id}
+				type="text"
+				value={draft}
+				placeholder={skills.length === 0 ? placeholder : undefined}
+				className="career-apply-form__skills-input"
+				aria-invalid={invalid || undefined}
+				aria-describedby={describedBy}
+				onChange={(event) => {
+					const next = event.target.value;
+					if (!next.includes(",")) {
+						setDraft(next);
+						return;
+					}
+
+					const parts = next.split(",");
+					const pending = parts.slice(0, -1);
+					let nextSkills = skills;
+
+					for (const part of pending) {
+						const skill = part.trim();
+						if (!skill) continue;
+						if (
+							nextSkills.some(
+								(existing) => existing.toLowerCase() === skill.toLowerCase(),
+							)
+						) {
+							continue;
+						}
+						nextSkills = [...nextSkills, skill];
+					}
+
+					if (nextSkills !== skills) {
+						onChange(serializeSkills(nextSkills));
+					}
+					setDraft(parts[parts.length - 1]?.replace(/^\s+/, "") ?? "");
+				}}
+				onKeyDown={handleKeyDown}
+				onBlur={() => {
+					commitSkill(draft);
+					onBlur();
+				}}
+			/>
+		</div>
 	);
 }
 
@@ -172,10 +326,7 @@ export default function CareerApplyForm({ job }: CareerApplyFormProps) {
 				data.resume,
 			);
 
-			const skills = data.skills
-				?.split(",")
-				.map((skill) => skill.trim())
-				.filter(Boolean);
+			const skills = parseSkills(data.skills ?? "");
 
 			await submitJobApplication(
 				{
@@ -189,7 +340,7 @@ export default function CareerApplyForm({ job }: CareerApplyFormProps) {
 					resume: upload.resume,
 					bio: data.bio?.trim() || undefined,
 					cover_letter: data.cover_letter?.trim() || undefined,
-					skills: skills?.length ? skills : undefined,
+					skills: skills.length ? skills : undefined,
 					experiences: [],
 					educations: [],
 					projects: [],
@@ -407,15 +558,27 @@ export default function CareerApplyForm({ job }: CareerApplyFormProps) {
 				<FormLabel htmlFor="apply-skills" optional={t("optional")}>
 					{t("skills")}
 				</FormLabel>
-				<input
-					id="apply-skills"
-					type="text"
-					placeholder={t("skills_placeholder")}
-					className={`${inputClassName}${errors.skills ? ` ${inputErrorClassName}` : ""}`}
-					aria-invalid={errors.skills ? true : undefined}
-					aria-describedby={errors.skills ? "apply-skills-error" : undefined}
-					{...register("skills")}
+				<Controller
+					name="skills"
+					control={control}
+					render={({ field }) => (
+						<SkillsBadgeInput
+							id="apply-skills"
+							value={field.value ?? ""}
+							onChange={field.onChange}
+							onBlur={field.onBlur}
+							placeholder={t("skills_placeholder")}
+							removeLabel={t("skills_remove")}
+							invalid={Boolean(errors.skills)}
+							describedBy={
+								errors.skills ? "apply-skills-error" : "apply-skills-hint"
+							}
+						/>
+					)}
 				/>
+				<p id="apply-skills-hint" className="career-apply-form__hint">
+					{t("skills_hint")}
+				</p>
 				<FieldError id="apply-skills-error" message={errors.skills?.message} />
 			</div>
 

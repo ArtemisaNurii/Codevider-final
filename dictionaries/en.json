@@ -787,7 +787,6 @@
 			"pay_period_hour": "hour",
 			"pay_period_day": "day",
 			"apply_button": "Apply for this role",
-			"collapse_form": "Collapse application form",
 			"form": {
 				"intro": "Fill in your details below. We'll review your application and get back to you.",
 				"full_name": "Full name",
@@ -808,7 +807,9 @@
 				"resume": "Resume / CV",
 				"resume_hint": "PDF or Word document",
 				"skills": "Skills",
-				"skills_placeholder": "React, Node.js, TypeScript",
+				"skills_placeholder": "Type a skill…",
+				"skills_hint": "Press Tab or comma to add each skill as a badge",
+				"skills_remove": "Remove",
 				"bio": "Short bio",
 				"bio_placeholder": "A brief summary of your background and interests",
 				"cover_letter": "Cover letter",

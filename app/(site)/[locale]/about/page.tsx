@@ -32,7 +32,6 @@ export default async function AboutPage({ params }: Props) {
 
 	return (
 		<div className="home-page">
-
 			<AboutHero />
 			<AboutWhoWeAre />
 			<AboutCulture />
