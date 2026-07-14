@@ -38,13 +38,3 @@ export function createContactSchema(messages: ContactFormMessages) {
 
 /** Type representing validated contact form values. */
 export type ContactFormValues = z.infer<ReturnType<typeof createContactSchema>>;
-
-/** Server-side schema for contact API requests (includes Turnstile token). */
-export const contactApiSchema = z.object({
-	name: z.string().trim().min(1).max(100),
-	email: z.string().trim().email().max(255),
-	details: z.string().trim().min(1).max(1000),
-	turnstileToken: z.string().min(1),
-});
-
-export type ContactApiBody = z.infer<typeof contactApiSchema>;

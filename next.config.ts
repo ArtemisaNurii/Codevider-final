@@ -1,11 +1,8 @@
 import type { NextConfig } from "next";
 
-/**
- * Static export is used for Cloudflare Pages (`out/` + `functions/`).
- * API route handlers are stripped during that build (see scripts/build-static.mjs)
- * so production `/api/*` is served by Pages Functions instead.
- */
+/** Static export for S3 / Cloudflare Pages (`out/`). */
 const nextConfig: NextConfig = {
+	output: "export",
 	images: {
 		unoptimized: true,
 	},

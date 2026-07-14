@@ -328,25 +328,22 @@ export default function CareerApplyForm({ job }: CareerApplyFormProps) {
 
 			const skills = parseSkills(data.skills ?? "");
 
-			await submitJobApplication(
-				{
-					full_name: data.full_name,
-					email: data.email,
-					job_id: job.id,
-					phone: data.phone?.trim() || undefined,
-					date_of_birth: data.date_of_birth?.trim() || undefined,
-					gender: data.gender?.trim() || undefined,
-					photo: upload.profile_image,
-					resume: upload.resume,
-					bio: data.bio?.trim() || undefined,
-					cover_letter: data.cover_letter?.trim() || undefined,
-					skills: skills.length ? skills : undefined,
-					experiences: [],
-					educations: [],
-					projects: [],
-				},
-				turnstileToken,
-			);
+			await submitJobApplication({
+				full_name: data.full_name,
+				email: data.email,
+				job_id: job.id,
+				phone: data.phone?.trim() || undefined,
+				date_of_birth: data.date_of_birth?.trim() || undefined,
+				gender: data.gender?.trim() || undefined,
+				photo: upload.profile_image,
+				resume: upload.resume,
+				bio: data.bio?.trim() || undefined,
+				cover_letter: data.cover_letter?.trim() || undefined,
+				skills: skills.length ? skills : undefined,
+				experiences: [],
+				educations: [],
+				projects: [],
+			});
 
 			setSubmitted(true);
 			reset();

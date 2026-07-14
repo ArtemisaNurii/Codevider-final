@@ -125,7 +125,7 @@ export default function Contact() {
 		}
 
 		try {
-			await submitContactLead(data, turnstileToken);
+			await submitContactLead(data);
 			setSubmitted(true);
 			reset();
 			setTurnstileToken(null);

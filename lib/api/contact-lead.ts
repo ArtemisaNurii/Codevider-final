@@ -1,18 +1,15 @@
+import { getBackendUrl } from "@/lib/api/backend";
 import type { ContactFormValues } from "@/lib/schemas/contact";
 
 /**
- * Submits a contact form lead via `/api/contact`.
- * The API route verifies Turnstile and forwards to the backend without the token.
+ * Submits a contact form lead directly to the Nest backend.
+ * Validation is handled client-side with Zod + react-hook-form.
  *
  * @param data - Validated contact form values
- * @param turnstileToken - Cloudflare Turnstile verification token
  * @throws If submission fails
  */
-export async function submitContactLead(
-	data: ContactFormValues,
-	turnstileToken: string,
-): Promise<void> {
-	const response = await fetch("/api/contact", {
+export async function submitContactLead(data: ContactFormValues): Promise<void> {
+	const response = await fetch(`${getBackendUrl()}/landing-page/leads/contact`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -21,7 +18,6 @@ export async function submitContactLead(
 			name: data.name,
 			email: data.email,
 			details: data.details,
-			turnstileToken,
 		}),
 	});
 

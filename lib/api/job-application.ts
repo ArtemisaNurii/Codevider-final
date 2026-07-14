@@ -50,27 +50,25 @@ export async function uploadJobApplicationFiles(
 }
 
 /**
- * Submits a complete job application via `/api/career`.
- * The API route verifies Turnstile and forwards to the backend without the token.
+ * Submits a complete job application directly to the Nest backend.
+ * Validation is handled client-side with Zod + react-hook-form.
  *
  * @param payload - Full job application payload with uploaded file metadata
- * @param turnstileToken - Cloudflare Turnstile verification token
  * @throws JobApplicationError If submission fails
  */
 export async function submitJobApplication(
 	payload: JobApplicationPayload,
-	turnstileToken: string,
 ): Promise<void> {
-	const response = await fetch("/api/career", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
+	const response = await fetch(
+		`${getBackendUrl()}/landing-page/recruit/candidate/job-application`,
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(payload),
 		},
-		body: JSON.stringify({
-			...payload,
-			turnstileToken,
-		}),
-	});
+	);
 
 	if (!response.ok) {
 		throw new JobApplicationError("submit_failed", response.status);
