@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import SectionHead from "@/components/index/section-head";
 import { teamMembers } from "@/data/team-members";
 
@@ -72,8 +72,28 @@ export default function AboutMeetTeam() {
 	const t = useTranslations("about.team");
 	const sectionRef = useRef<HTMLElement>(null);
 	const carouselRef = useRef<HTMLDivElement>(null);
+	const [photoCenterY, setPhotoCenterY] = useState<number | null>(null);
 	const inView = useInView(sectionRef, { once: true, margin: "-8% 0px" });
 	const shouldReduceMotion = useReducedMotion();
+
+	useEffect(() => {
+		const root = carouselRef.current;
+		if (!root) return;
+
+		const photo = root.querySelector<HTMLElement>(
+			".about-team-carousel__photo",
+		);
+		if (!photo) return;
+
+		const update = () => {
+			setPhotoCenterY(photo.offsetHeight / 2);
+		};
+
+		update();
+		const observer = new ResizeObserver(update);
+		observer.observe(photo);
+		return () => observer.disconnect();
+	}, []);
 
 	const scroll = (direction: "left" | "right") => {
 		const el = carouselRef.current;
@@ -113,7 +133,10 @@ export default function AboutMeetTeam() {
 			</div>
 
 			<div className="relative mt-(--home-stack)">
-				<div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between home-inline-x">
+				<div
+					className="pointer-events-none absolute left-0 right-0 z-20 flex -translate-y-1/2 items-center justify-between home-inline-x"
+					style={{ top: photoCenterY ?? "35%" }}
+				>
 					<button
 						type="button"
 						onClick={() => scroll("left")}

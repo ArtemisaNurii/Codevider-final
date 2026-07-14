@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowLeft, ChevronUp, Loader2 } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import { useSearchParams } from "next/navigation";
 import { useFormatter, useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -11,7 +11,6 @@ import { fetchJobById } from "@/lib/api/recruit-jobs";
 import type { JobDetail } from "@/lib/types/recruit";
 
 const revealEase = [0.22, 1, 0.36, 1] as const;
-const morphExitEase = [0.4, 0, 1, 1] as const;
 
 type LoadState =
 	| { status: "loading" }
@@ -49,7 +48,6 @@ export default function CareerApply() {
 	const jobId = rawId && /^\d+$/.test(rawId) ? Number(rawId) : null;
 	const shouldReduceMotion = useReducedMotion();
 	const [loadState, setLoadState] = useState<LoadState>({ status: "loading" });
-	const [formOpen, setFormOpen] = useState(false);
 
 	const loadJob = useCallback(async (id: number) => {
 		setLoadState({ status: "loading" });
@@ -92,18 +90,6 @@ export default function CareerApply() {
 			? { duration: 0 }
 			: { duration: 0.45, ease: revealEase, delay },
 	});
-
-	const morphLayoutTransition = shouldReduceMotion
-		? { duration: 0 }
-		: { type: "spring" as const, duration: 0.609, bounce: 0 };
-
-	const morphContentEnter = shouldReduceMotion
-		? { duration: 0 }
-		: { type: "spring" as const, duration: 0.38, bounce: 0, delay: 0.06 };
-
-	const morphContentExit = shouldReduceMotion
-		? { duration: 0 }
-		: { duration: 0.231, ease: morphExitEase };
 
 	const job = loadState.status === "ready" ? loadState.job : null;
 
@@ -305,87 +291,19 @@ export default function CareerApply() {
 				</div>
 
 				{job ? (
-					<motion.div
-						className="career-apply-page__morph-wrap"
+					<motion.section
+						className="career-apply-page__form"
+						aria-labelledby="career-apply-form"
 						{...reveal(0.18)}
 					>
-						<motion.div
-							layout
-							className="career-apply-page__morph"
-							data-open={formOpen}
-							transition={{ layout: morphLayoutTransition }}
+						<h2
+							id="career-apply-form"
+							className="career-apply-page__form-title"
 						>
-							<AnimatePresence mode="popLayout" initial={false}>
-								{formOpen ? (
-									<motion.div
-										key="form"
-										layout="position"
-										className="career-apply-page__morph-card"
-										initial={
-											shouldReduceMotion
-												? false
-												: { opacity: 0, y: 10, filter: "blur(4px)" }
-										}
-										animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-										exit={
-											shouldReduceMotion
-												? undefined
-												: {
-														opacity: 0,
-														y: -8,
-														filter: "blur(4px)",
-														transition: morphContentExit,
-													}
-										}
-										transition={morphContentEnter}
-									>
-										<div className="career-apply-page__morph-header">
-											<h2 className="career-apply-page__morph-title">
-												{t("apply_button")}
-											</h2>
-											<button
-												type="button"
-												className="career-apply-page__morph-close"
-												onClick={() => setFormOpen(false)}
-												aria-label={t("collapse_form")}
-											>
-												<ChevronUp className="size-4" aria-hidden />
-											</button>
-										</div>
-										<CareerApplyForm job={job} />
-									</motion.div>
-								) : (
-									<motion.button
-										key="trigger"
-										type="button"
-										layout="position"
-										className="career-apply-page__morph-trigger"
-										onClick={() => setFormOpen(true)}
-										initial={
-											shouldReduceMotion
-												? false
-												: { opacity: 0, scale: 0.96, filter: "blur(4px)" }
-										}
-										animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-										exit={
-											shouldReduceMotion
-												? undefined
-												: {
-														opacity: 0,
-														scale: 0.96,
-														filter: "blur(4px)",
-														transition: morphContentExit,
-													}
-										}
-										transition={morphContentEnter}
-										whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
-									>
-										{t("apply_button")}
-									</motion.button>
-								)}
-							</AnimatePresence>
-						</motion.div>
-					</motion.div>
+							{t("apply_button")}
+						</h2>
+						<CareerApplyForm job={job} />
+					</motion.section>
 				) : null}
 			</div>
 		</section>

@@ -27,12 +27,12 @@ export const teamMembers: readonly TeamMember[] = [
 	},
 	{
 		name: "Genci Likaj",
-		role: "Senior Software engineer",
+		role: "Senior Software Engineer",
 		image: "/images/members/headshots/genci_likaj.png",
 	},
 	{
 		name: "Jul Kreshpaj",
-		role: "Senior Software engineer",
+		role: "Senior Software Engineer",
 		image: "/images/members/headshots/jul_kreshpaj.png",
 	},
 	{
@@ -76,13 +76,13 @@ export const teamMembers: readonly TeamMember[] = [
 		image: "/images/members/headshots/fjona_rira.png",
 	},
 	{
-		name: "Armando Muco",
+		name: "Armando Muço",
 		role: "Backend Developer",
 		image: "/images/members/headshots/armando_muco.png",
 	},
 	{
 		name: "Kejdi Balla",
-		role: "UIUX Designer",
+		role: "UI/UX Designer",
 		image: "/images/members/headshots/kejdi_balla.png",
 	},
 	{

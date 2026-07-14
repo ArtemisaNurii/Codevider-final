@@ -2789,130 +2789,21 @@ code {
 	background: var(--dash-brand);
 }
 
-.career-apply-page__morph-wrap {
+.career-apply-page__form {
 	margin-top: clamp(1rem, 2.5vw, 1.5rem);
-}
-
-.career-apply-page__morph {
-	overflow: hidden;
-	border: 1.5px solid transparent;
-	background: transparent;
-	box-shadow: none;
-	transition:
-		border-radius 0.58s cubic-bezier(0.22, 1, 0.36, 1),
-		padding 0.58s cubic-bezier(0.22, 1, 0.36, 1),
-		border-color 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-		background-color 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-		box-shadow 0.52s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.career-apply-page__morph:not([data-open="true"]) {
-	display: inline-flex;
-	width: fit-content;
-	border-radius: 999px;
-}
-
-.career-apply-page__morph[data-open="true"] {
-	width: 100%;
-	border-color: var(--border);
+	padding: clamp(1.25rem, 3vw, 1.75rem);
+	border: 1.5px solid var(--border);
 	border-radius: 16px;
 	background: var(--home-surface-muted);
 	box-shadow: var(--shadow-sm);
-	padding: clamp(1.25rem, 3vw, 1.75rem);
 }
 
-.career-apply-page__morph-trigger {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.75rem 1.375rem;
-	border: none;
-	border-radius: 999px;
-	font-family: var(--heading);
-	font-size: 0.9375rem;
-	font-weight: 600;
-	color: var(--on-brand);
-	background: linear-gradient(
-		135deg,
-		var(--dash-brand-solid) 0%,
-		var(--dash-brand-solid-end) 100%
-	);
-	white-space: nowrap;
-	cursor: pointer;
-	box-shadow: 0 4px 14px rgba(36, 105, 255, 0.28);
-	transition:
-		background 150ms ease,
-		box-shadow 150ms ease,
-		transform 150ms ease;
-}
-
-.career-apply-page__morph-trigger:hover {
-	background: linear-gradient(
-		135deg,
-		var(--dash-brand-solid) 0%,
-		var(--dash-brand-solid-hover) 100%
-	);
-	box-shadow: 0 8px 20px rgba(36, 105, 255, 0.34);
-}
-
-.dark .career-apply-page__morph-trigger {
-	box-shadow: 0 4px 14px rgba(36, 105, 255, 0.4);
-}
-
-.dark .career-apply-page__morph-trigger:hover {
-	box-shadow: 0 8px 20px rgba(36, 105, 255, 0.5);
-}
-
-.career-apply-page__morph-trigger:focus-visible {
-	outline: 2px solid var(--focus-ring);
-	outline-offset: 2px;
-}
-
-.career-apply-page__morph-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 1rem;
-	margin-bottom: 0.25rem;
-}
-
-.career-apply-page__morph-title {
-	margin: 0;
+.career-apply-page__form-title {
+	margin: 0 0 0.25rem;
 	font-family: var(--heading);
 	font-size: 1rem;
 	font-weight: 600;
 	color: var(--text-h);
-}
-
-.career-apply-page__morph-close {
-	display: grid;
-	place-items: center;
-	width: 2rem;
-	height: 2rem;
-	flex-shrink: 0;
-	border: 1.5px solid var(--border);
-	border-radius: 999px;
-	background: var(--bg);
-	color: var(--text);
-	cursor: pointer;
-	transition:
-		border-color 180ms ease,
-		color 180ms ease;
-}
-
-.career-apply-page__morph-close:hover {
-	border-color: var(--dash-brand);
-	color: var(--dash-brand);
-}
-.career-apply-page__morph-close:focus-visible {
-	outline: 2px solid var(--dash-brand);
-	outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.career-apply-page__morph {
-		transition: none;
-	}
 }
 
 .career-apply-form {
@@ -3496,6 +3387,8 @@ code {
 }
 
 .about-team-carousel {
+	/* Room for hover lift — overflow-x creates a clip edge on Y too */
+	padding-block: 6px 0;
 	padding-inline: var(--home-inline);
 	scroll-padding-inline: var(--home-inline);
 }
