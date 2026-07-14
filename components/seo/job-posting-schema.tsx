@@ -3,10 +3,9 @@ import type { JobDetail } from "@/lib/types/recruit";
 
 type Props = {
 	job: JobDetail;
-	locale: string;
 };
 
-export function JobPostingSchema({ job, locale }: Props) {
+export function JobPostingSchema({ job }: Props) {
 	const schema = {
 		"@context": "https://schema.org",
 		"@type": "JobPosting",
@@ -30,7 +29,7 @@ export function JobPostingSchema({ job, locale }: Props) {
 			},
 		},
 		employmentType: job.job_type?.job_type ?? "FULL_TIME",
-		url: `${getSiteUrl()}/${locale}/career/apply/${job.id}`,
+		url: `${getSiteUrl()}/career/apply?id=${job.id}`,
 	};
 
 	return (

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import Hero from "@/components/index/hero";
 import {
 	Contact,
@@ -12,28 +12,22 @@ import {
 	WhyOutsource,
 } from "@/components/index/home-below-fold";
 import { StructuredData } from "@/components/seo/structured-data";
-import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
+import { routing } from "@/i18n/routing";
+import { createPageMetadata, getOgImageUrl, getPageUrl } from "@/lib/site";
 
-type Props = {
-	params: Promise<{ locale: string }>;
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { locale } = await params;
-	const t = await getTranslations({ locale });
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations();
 
 	return createPageMetadata({
-		locale,
+		locale: routing.defaultLocale,
 		title: t("metadata.home.title"),
 		description: t("metadata.home.description"),
 		page: "home",
 	});
 }
 
-export default async function Home({ params }: Props) {
-	const { locale } = await params;
-	setRequestLocale(locale);
-	const t = await getTranslations({ locale });
+export default async function Home() {
+	const t = await getTranslations();
 
 	return (
 		<div className="home-page">
@@ -49,8 +43,8 @@ export default async function Home({ params }: Props) {
 			<StructuredData
 				title={t("metadata.home.title")}
 				description={t("metadata.home.description")}
-				image={getOgImageUrl(locale, "home")}
-				url={`${getSiteUrl()}/${locale}`}
+				image={getOgImageUrl(routing.defaultLocale, "home")}
+				url={getPageUrl("")}
 			/>
 		</div>
 	);

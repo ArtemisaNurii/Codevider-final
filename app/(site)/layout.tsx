@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { hasLocale } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages } from "next-intl/server";
 import { HashScrollHandler } from "@/components/layout/hash-scroll-handler";
 import { SiteDocument } from "@/components/layout/site-document";
 import Footer from "@/components/nav/Footer";
@@ -10,11 +8,6 @@ import { LocaleProvider } from "@/components/providers/LocaleProvider";
 import { DEFAULT_TIME_ZONE } from "@/dictionaries";
 import { routing } from "@/i18n/routing";
 import { getSiteUrl } from "@/lib/site";
-
-type Props = {
-	children: React.ReactNode;
-	params: Promise<{ locale: string }>;
-};
 
 export const metadata: Metadata = {
 	metadataBase: new URL(getSiteUrl()),
@@ -27,24 +20,17 @@ export const metadata: Metadata = {
 		: {}),
 };
 
-export function generateStaticParams() {
-	return routing.locales.map((locale) => ({ locale }));
-}
-
-export default async function LocaleLayout({ children, params }: Props) {
-	const { locale } = await params;
-
-	if (!hasLocale(routing.locales, locale)) {
-		notFound();
-	}
-
-	setRequestLocale(locale);
+export default async function SiteLayout({
+	children,
+}: Readonly<{
+	children: React.ReactNode;
+}>) {
 	const messages = await getMessages();
 
 	return (
-		<SiteDocument locale={locale}>
+		<SiteDocument locale={routing.defaultLocale}>
 			<LocaleProvider
-				locale={locale}
+				locale={routing.defaultLocale}
 				messages={messages}
 				timeZone={DEFAULT_TIME_ZONE}
 			>

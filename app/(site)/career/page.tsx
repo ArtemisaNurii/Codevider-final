@@ -1,40 +1,34 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import CareerHero from "@/components/career/career-hero";
 import CareerHiringProcess from "@/components/career/career-hiring-process";
 import CareerOpenings from "@/components/career/career-openings";
 import CareerWhyJoin from "@/components/career/career-why-join";
 import { StructuredData } from "@/components/seo/structured-data";
-import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
+import { routing } from "@/i18n/routing";
+import { createPageMetadata, getOgImageUrl, getPageUrl } from "@/lib/site";
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { locale } = await params;
-	const t = await getTranslations({ locale });
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations();
 
 	return createPageMetadata({
-		locale,
+		locale: routing.defaultLocale,
 		title: t("metadata.career.title"),
 		description: t("metadata.career.description"),
 		page: "career",
 	});
 }
 
-type Props = {
-	params: Promise<{ locale: string }>;
-};
-
-export default async function CareerPage({ params }: Props) {
-	const { locale } = await params;
-	setRequestLocale(locale);
-	const t = await getTranslations({ locale });
+export default async function CareerPage() {
+	const t = await getTranslations();
 
 	return (
 		<div className="home-page">
 			<StructuredData
 				title={t("metadata.career.title")}
 				description={t("metadata.career.description")}
-				image={getOgImageUrl(locale, "career")}
-				url={`${getSiteUrl()}/${locale}/career`}
+				image={getOgImageUrl(routing.defaultLocale, "career")}
+				url={getPageUrl("/career")}
 			/>
 			<CareerHero />
 			<CareerOpenings />

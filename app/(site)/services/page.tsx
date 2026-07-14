@@ -1,32 +1,26 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { StructuredData } from "@/components/seo/structured-data";
 import ServicesCapabilities from "@/components/services/services-capabilities";
 import ServicesHero from "@/components/services/services-hero";
 import ServicesProcess from "@/components/services/services-process";
 import ServicesTechStack from "@/components/services/services-tech-stack";
-import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
+import { routing } from "@/i18n/routing";
+import { createPageMetadata, getOgImageUrl, getPageUrl } from "@/lib/site";
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { locale } = await params;
-	const t = await getTranslations({ locale });
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations();
 
 	return createPageMetadata({
-		locale,
+		locale: routing.defaultLocale,
 		title: t("metadata.services.title"),
 		description: t("metadata.services.description"),
 		page: "services",
 	});
 }
 
-type Props = {
-	params: Promise<{ locale: string }>;
-};
-
-export default async function ServicesPage({ params }: Props) {
-	const { locale } = await params;
-	setRequestLocale(locale);
-	const t = await getTranslations({ locale });
+export default async function ServicesPage() {
+	const t = await getTranslations();
 
 	return (
 		<div className="home-page">
@@ -37,8 +31,8 @@ export default async function ServicesPage({ params }: Props) {
 			<StructuredData
 				title={t("metadata.services.title")}
 				description={t("metadata.services.description")}
-				image={getOgImageUrl(locale, "services")}
-				url={`${getSiteUrl()}/${locale}/services`}
+				image={getOgImageUrl(routing.defaultLocale, "services")}
+				url={getPageUrl("/services")}
 			/>
 		</div>
 	);

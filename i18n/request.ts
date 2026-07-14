@@ -1,4 +1,3 @@
-import { hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 import { DEFAULT_TIME_ZONE } from "@/dictionaries";
 import {
@@ -8,12 +7,9 @@ import {
 } from "./get-locale-messages";
 import { routing } from "./routing";
 
-export default getRequestConfig(async ({ requestLocale }) => {
-	const requested = await requestLocale;
-	const locale = hasLocale(routing.locales, requested)
-		? requested
-		: routing.defaultLocale;
-
+/** Server always serves the default locale; client LocaleProvider applies the user’s stored preference. */
+export default getRequestConfig(async () => {
+	const locale = routing.defaultLocale;
 	const messages = await getLocaleMessages(locale);
 
 	return {

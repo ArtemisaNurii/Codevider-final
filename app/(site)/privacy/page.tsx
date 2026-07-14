@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import LegalDocument from "@/components/legal/legal-document";
 import LegalHero from "@/components/legal/legal-hero";
 import { StructuredData } from "@/components/seo/structured-data";
-import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
+import { routing } from "@/i18n/routing";
+import { createPageMetadata, getOgImageUrl, getPageUrl } from "@/lib/site";
 
 const PRIVACY_SECTIONS = [
 	"collection",
@@ -14,34 +15,27 @@ const PRIVACY_SECTIONS = [
 	"contact",
 ] as const;
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { locale } = await params;
-	const t = await getTranslations({ locale });
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations();
 
 	return createPageMetadata({
-		locale,
+		locale: routing.defaultLocale,
 		title: t("metadata.privacy.title"),
 		description: t("metadata.privacy.description"),
 		page: "privacy",
 	});
 }
 
-type Props = {
-	params: Promise<{ locale: string }>;
-};
-
-export default async function PrivacyPage({ params }: Props) {
-	const { locale } = await params;
-	setRequestLocale(locale);
-	const t = await getTranslations({ locale });
+export default async function PrivacyPage() {
+	const t = await getTranslations();
 
 	return (
 		<div className="home-page">
 			<StructuredData
 				title={t("metadata.privacy.title")}
 				description={t("metadata.privacy.description")}
-				image={getOgImageUrl(locale, "privacy")}
-				url={`${getSiteUrl()}/${locale}/privacy`}
+				image={getOgImageUrl(routing.defaultLocale, "privacy")}
+				url={getPageUrl("/privacy")}
 			/>
 			<LegalHero namespace="legal.privacy" />
 			<LegalDocument namespace="legal.privacy" sections={PRIVACY_SECTIONS} />

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import LegalDocument from "@/components/legal/legal-document";
 import LegalHero from "@/components/legal/legal-hero";
 import { StructuredData } from "@/components/seo/structured-data";
-import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
+import { routing } from "@/i18n/routing";
+import { createPageMetadata, getOgImageUrl, getPageUrl } from "@/lib/site";
 
 const TERMS_SECTIONS = [
 	"scope",
@@ -14,34 +15,27 @@ const TERMS_SECTIONS = [
 	"contact",
 ] as const;
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { locale } = await params;
-	const t = await getTranslations({ locale });
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations();
 
 	return createPageMetadata({
-		locale,
+		locale: routing.defaultLocale,
 		title: t("metadata.terms.title"),
 		description: t("metadata.terms.description"),
 		page: "terms",
 	});
 }
 
-type Props = {
-	params: Promise<{ locale: string }>;
-};
-
-export default async function TermsPage({ params }: Props) {
-	const { locale } = await params;
-	setRequestLocale(locale);
-	const t = await getTranslations({ locale });
+export default async function TermsPage() {
+	const t = await getTranslations();
 
 	return (
 		<div className="home-page">
 			<StructuredData
 				title={t("metadata.terms.title")}
 				description={t("metadata.terms.description")}
-				image={getOgImageUrl(locale, "terms")}
-				url={`${getSiteUrl()}/${locale}/terms`}
+				image={getOgImageUrl(routing.defaultLocale, "terms")}
+				url={getPageUrl("/terms")}
 			/>
 			<LegalHero namespace="legal.terms" />
 			<LegalDocument namespace="legal.terms" sections={TERMS_SECTIONS} />

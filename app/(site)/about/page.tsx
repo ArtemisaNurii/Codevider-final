@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import AboutCulture from "@/components/about/about-culture";
 import AboutHero from "@/components/about/about-hero";
 import AboutJoinCta from "@/components/about/about-join-cta";
@@ -7,28 +7,22 @@ import AboutLifeGrid from "@/components/about/about-life-grid";
 import AboutMeetTeam from "@/components/about/about-meet-team";
 import AboutWhoWeAre from "@/components/about/about-who-we-are";
 import { StructuredData } from "@/components/seo/structured-data";
-import { createPageMetadata, getOgImageUrl, getSiteUrl } from "@/lib/site";
+import { routing } from "@/i18n/routing";
+import { createPageMetadata, getOgImageUrl, getPageUrl } from "@/lib/site";
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { locale } = await params;
-	const t = await getTranslations({ locale });
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations();
 
 	return createPageMetadata({
-		locale,
+		locale: routing.defaultLocale,
 		title: t("metadata.about.title"),
 		description: t("metadata.about.description"),
 		page: "about",
 	});
 }
 
-type Props = {
-	params: Promise<{ locale: string }>;
-};
-
-export default async function AboutPage({ params }: Props) {
-	const { locale } = await params;
-	setRequestLocale(locale);
-	const t = await getTranslations({ locale });
+export default async function AboutPage() {
+	const t = await getTranslations();
 
 	return (
 		<div className="home-page">
@@ -41,8 +35,8 @@ export default async function AboutPage({ params }: Props) {
 			<StructuredData
 				title={t("metadata.about.title")}
 				description={t("metadata.about.description")}
-				image={getOgImageUrl(locale, "about")}
-				url={`${getSiteUrl()}/${locale}/about`}
+				image={getOgImageUrl(routing.defaultLocale, "about")}
+				url={getPageUrl("/about")}
 			/>
 		</div>
 	);

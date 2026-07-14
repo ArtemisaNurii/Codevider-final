@@ -1,21 +1,12 @@
 /** Canonical production host — must match lib/site.ts SITE_URL. */
 const CANONICAL_HOST = "www.codevider.com";
-const DEFAULT_LOCALE = "en";
-
-const LOCALE_PREFIX_REDIRECTS = new Map([
-	["/", `/${DEFAULT_LOCALE}`],
-	["/about", `/${DEFAULT_LOCALE}/about`],
-	["/services", `/${DEFAULT_LOCALE}/services`],
-	["/career", `/${DEFAULT_LOCALE}/career`],
-	["/privacy", `/${DEFAULT_LOCALE}/privacy`],
-	["/terms", `/${DEFAULT_LOCALE}/terms`],
-]);
+const LOCALES = new Set(["en", "de", "fr", "es", "it", "zh", "sq"]);
 
 /**
  * Enforce a single canonical origin for SEO:
  * - apex (codevider.com) → www.codevider.com
  * - http → https
- * - unprefixed paths → /en/... (301 for crawlers)
+ * - legacy /en/... /sq/... paths → unprefixed URLs (locale is client-only)
  *
  * Serve the static apply shell for any numeric job ID so new roles work
  * without rebuilding the site.
@@ -39,9 +30,9 @@ export async function onRequest(context) {
 		}
 	}
 
-	const localeRedirect = getLocalePrefixRedirect(url.pathname);
-	if (localeRedirect) {
-		url.pathname = localeRedirect;
+	const stripped = stripLocalePrefix(url.pathname);
+	if (stripped !== null) {
+		url.pathname = stripped;
 		return Response.redirect(url.toString(), 301);
 	}
 
@@ -53,29 +44,25 @@ export async function onRequest(context) {
 	return context.next();
 }
 
-function getLocalePrefixRedirect(pathname) {
-	const normalized =
-		pathname.endsWith("/") && pathname.length > 1
-			? pathname.slice(0, -1)
-			: pathname;
+function normalizePathname(pathname) {
+	return pathname.endsWith("/") && pathname.length > 1
+		? pathname.slice(0, -1)
+		: pathname;
+}
 
-	const direct = LOCALE_PREFIX_REDIRECTS.get(normalized);
-	if (direct) {
-		return direct;
+/** Redirect /en, /en/about, /sq/services → /, /about, /services */
+function stripLocalePrefix(pathname) {
+	const normalized = normalizePathname(pathname);
+	const match = normalized.match(/^\/([a-z]{2})(\/.*)?$/);
+	if (!match || !LOCALES.has(match[1])) {
+		return null;
 	}
 
-	const applyMatch = normalized.match(/^\/career\/apply\/([^/]+)$/);
-	if (applyMatch) {
-		return `/${DEFAULT_LOCALE}/career/apply/${applyMatch[1]}`;
-	}
-
-	return null;
+	return match[2] ?? "/";
 }
 
 function redirectCareerApplyPath(url) {
-	const match = url.pathname.match(
-		/^((?:\/[a-z]{2})?\/career\/apply)\/(\d+)\/?$/,
-	);
+	const match = url.pathname.match(/^(\/career\/apply)\/(\d+)\/?$/);
 	if (!match) return null;
 	const target = new URL(url);
 	target.pathname = match[1];

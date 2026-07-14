@@ -3,14 +3,8 @@
 import { Check, ChevronDown } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
-import {
-	useCallback,
-	useEffect,
-	useLayoutEffect,
-	useRef,
-	useState,
-} from "react";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useSetLocale } from "@/components/providers/LocaleProvider";
 import { routing } from "@/i18n/routing";
 
 type LanguageSelectorProps = {
@@ -20,7 +14,6 @@ type LanguageSelectorProps = {
 };
 
 const instantTransition = { duration: 0 };
-const LOCALE_SWITCH_SCROLL_KEY = "locale-switch-scroll";
 
 const LOCALE_FLAGS: Record<(typeof routing.locales)[number], string> = {
 	en: "🇬🇧",
@@ -33,13 +26,7 @@ const LOCALE_FLAGS: Record<(typeof routing.locales)[number], string> = {
 };
 
 /**
- * Language selector dropdown for switching locales.
- *
- * @param props - Component props
- * @param props.variant - Button variant (light/dark)
- * @param props.fullWidth - Whether button should take full width
- * @param props.className - Additional CSS classes
- * @returns Language selector component
+ * Language selector dropdown for switching locales (stored in localStorage).
  */
 export function LanguageSelector({
 	variant = "light",
@@ -47,8 +34,7 @@ export function LanguageSelector({
 	className = "",
 }: LanguageSelectorProps) {
 	const locale = useLocale();
-	const router = useRouter();
-	const pathname = usePathname();
+	const setLocale = useSetLocale();
 	const t = useTranslations("navbar");
 	const shouldReduceMotion = useReducedMotion();
 	const [open, setOpen] = useState(false);
@@ -61,25 +47,11 @@ export function LanguageSelector({
 				return;
 			}
 
-			sessionStorage.setItem(LOCALE_SWITCH_SCROLL_KEY, String(window.scrollY));
-			router.replace(pathname, { locale: nextLocale, scroll: false });
+			setLocale(nextLocale);
 			setOpen(false);
 		},
-		[locale, pathname, router],
+		[locale, setLocale],
 	);
-
-	useLayoutEffect(() => {
-		const savedScroll = sessionStorage.getItem(LOCALE_SWITCH_SCROLL_KEY);
-		if (savedScroll === null) return;
-
-		sessionStorage.removeItem(LOCALE_SWITCH_SCROLL_KEY);
-		const scrollY = Number(savedScroll);
-
-		window.scrollTo(0, scrollY);
-		requestAnimationFrame(() => {
-			window.scrollTo(0, scrollY);
-		});
-	}, [locale]);
 
 	useEffect(() => {
 		if (!open) return;

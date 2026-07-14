@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import en from "@/dictionaries/en.json";
 import { routing } from "@/i18n/routing";
 
 /** Production fallback when NEXT_PUBLIC_SITE_URL is not set at build time. */
@@ -22,7 +21,7 @@ export function getSiteUrl(): string {
 	return SITE_URL;
 }
 
-/** List of all site routes available for localization. */
+/** List of all site routes. */
 export const SITE_ROUTES = [
 	"",
 	"/about",
@@ -58,28 +57,11 @@ const LOCALE_TO_OG_BCP47: Record<(typeof routing.locales)[number], string> = {
 
 /**
  * Converts an internal locale code to an Open Graph BCP47 locale string.
- *
- * @param locale - Internal locale code (e.g., "en", "de")
- * @returns Open Graph locale string (e.g., "en_US")
  */
 function getOpenGraphLocale(locale: string): string {
 	return (
 		LOCALE_TO_OG_BCP47[locale as (typeof routing.locales)[number]] ?? locale
 	);
-}
-
-/**
- * Gets list of alternate Open Graph locales for a given locale.
- *
- * @param locale - Current locale to exclude from alternates
- * @returns Array of alternate Open Graph locale strings
- */
-function getOpenGraphAlternateLocales(
-	locale: string,
-): NonNullable<Metadata["openGraph"]>["alternateLocale"] {
-	return routing.locales
-		.filter((entry) => entry !== locale)
-		.map((entry) => getOpenGraphLocale(entry));
 }
 
 /** Maps internal locale codes to English language names for OG image paths. */
@@ -105,59 +87,20 @@ const OG_PAGE_TO_ROUTE: Record<OgPage, (typeof SITE_ROUTES)[number]> = {
 };
 
 /**
- * Builds a fully qualified localized URL for a given locale and path.
- *
- * @param locale - Locale to use
- * @param path - Site route
- * @returns Full localized URL
+ * Builds a fully qualified URL for a site path (no locale prefix).
  */
-export function getLocalizedUrl(
-	locale: (typeof routing.locales)[number],
-	path: (typeof SITE_ROUTES)[number],
+export function getPageUrl(
+	path: (typeof SITE_ROUTES)[number] | string,
 ): string {
 	const base = getSiteUrl();
-	return path === "" ? `${base}/${locale}` : `${base}/${locale}${path}`;
-}
-
-/**
- * Gets language alternates for a specific site route.
- *
- * @param path - Site route
- * @returns Record of locale to full URL
- */
-export function getLanguageAlternates(
-	path: (typeof SITE_ROUTES)[number],
-): Record<string, string> {
-	return getPathLanguageAlternates(path);
-}
-
-/**
- * Gets language alternates for any given path string.
- *
- * @param path - Path string
- * @returns Record of locale to full URL
- */
-export function getPathLanguageAlternates(
-	path: string,
-): Record<string, string> {
-	const languages = Object.fromEntries(
-		routing.locales.map((locale) => [
-			locale,
-			`${getSiteUrl()}/${locale}${path}`,
-		]),
-	);
-
-	languages["x-default"] = `${getSiteUrl()}/${routing.defaultLocale}${path}`;
-
-	return languages;
+	if (path === "" || path === "/") {
+		return base;
+	}
+	return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
 /**
  * Gets the path to the Open Graph image for a locale and page.
- *
- * @param locale - Locale to use
- * @param page - Page key
- * @returns Path to OG image (e.g., /images/og/english/home/og.png)
  */
 export function getOgImagePath(locale: string, page: OgPage): string {
 	const language =
@@ -169,10 +112,6 @@ export function getOgImagePath(locale: string, page: OgPage): string {
 
 /**
  * Gets the full URL to the Open Graph image for a locale and page.
- *
- * @param locale - Locale to use
- * @param page - Page key
- * @returns Full URL to OG image
  */
 export function getOgImageUrl(locale: string, page: OgPage): string {
 	return `${getSiteUrl()}${getOgImagePath(locale, page)}`;
@@ -180,7 +119,7 @@ export function getOgImageUrl(locale: string, page: OgPage): string {
 
 /** Input options for creating page metadata. */
 type PageMetadataInput = {
-	locale: string;
+	locale?: string;
 	title: string;
 	description: string;
 	page: OgPage;
@@ -188,18 +127,10 @@ type PageMetadataInput = {
 };
 
 /**
- * Creates Next.js Metadata object for a localized page.
- *
- * @param options - Metadata options
- * @param options.locale - Page locale
- * @param options.title - Page title
- * @param options.description - Page description
- * @param options.page - OG page key
- * @param options.path - Optional path override
- * @returns Next.js Metadata object
+ * Creates Next.js Metadata for a page (locale lives in localStorage, not the URL).
  */
 export function createPageMetadata({
-	locale,
+	locale = routing.defaultLocale,
 	title,
 	description,
 	page,
@@ -207,34 +138,15 @@ export function createPageMetadata({
 }: PageMetadataInput): Metadata {
 	const siteRoute = OG_PAGE_TO_ROUTE[page];
 	const canonical = pathOverride
-		? `${getSiteUrl()}/${locale}${pathOverride}`
-		: getLocalizedUrl(locale as (typeof routing.locales)[number], siteRoute);
+		? getPageUrl(pathOverride)
+		: getPageUrl(siteRoute);
 	const ogImageUrl = getOgImageUrl(locale, page);
-	const languageAlternates = pathOverride
-		? Object.fromEntries(
-				routing.locales.map((entry) => [
-					entry,
-					`${getSiteUrl()}/${entry}${pathOverride}`,
-				]),
-			)
-		: getLanguageAlternates(siteRoute);
-
-	if (!pathOverride) {
-		languageAlternates["x-default"] = getLocalizedUrl(
-			routing.defaultLocale,
-			siteRoute,
-		);
-	} else {
-		languageAlternates["x-default"] =
-			`${getSiteUrl()}/${routing.defaultLocale}${pathOverride}`;
-	}
 
 	return {
 		title,
 		description,
 		alternates: {
 			canonical,
-			languages: languageAlternates,
 		},
 		openGraph: {
 			title,
@@ -242,7 +154,6 @@ export function createPageMetadata({
 			url: canonical,
 			siteName: "Codevider",
 			locale: getOpenGraphLocale(locale),
-			alternateLocale: getOpenGraphAlternateLocales(locale),
 			type: "website",
 			images: [
 				{
@@ -261,21 +172,4 @@ export function createPageMetadata({
 			images: [ogImageUrl],
 		},
 	};
-}
-
-/**
- * Creates metadata for a redirect page using default locale translations.
- *
- * @param page - OG page key
- * @returns Next.js Metadata object
- */
-export function createRedirectPageMetadata(page: OgPage): Metadata {
-	const meta = en.metadata[page];
-
-	return createPageMetadata({
-		locale: routing.defaultLocale,
-		title: meta.title,
-		description: meta.description,
-		page,
-	});
 }

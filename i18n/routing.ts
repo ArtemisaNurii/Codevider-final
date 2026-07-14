@@ -1,7 +1,5 @@
-import { defineRouting } from "next-intl/routing";
-
-export const routing = defineRouting({
-	locales: ["en", "de", "fr", "es", "it", "zh", "sq"],
-	defaultLocale: "en",
-	localePrefix: "always",
-});
+/** Supported locales — preference is stored in localStorage, not the URL. */
+export const routing = {
+	locales: ["en", "de", "fr", "es", "it", "zh", "sq"] as const,
+	defaultLocale: "en" as const,
+};
