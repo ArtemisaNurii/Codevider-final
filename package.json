@@ -6,14 +6,15 @@
 		"dev": "next dev",
 		"build": "next build",
 		"build:production": "NEXT_PUBLIC_SITE_URL=https://www.codevider.com next build",
-		"build-prod": "npm run clean && npm run build && npm run deploy-meta-prod && npm run deploy-prod",
-		"deploy-meta-prod": "s3-deploy './dist/meta.json' --cwd dist/ --profile codevider --region us-east-1 --bucket landing-codevier.com --noCache",
-		"deploy-prod": "s3-deploy './dist/**' --cwd dist/ --profile codevider --region us-east-1 --bucket landing-codevier.com",
+		"build:static": "node scripts/build-static.mjs",
+		"build-prod": "npm run clean && NEXT_PUBLIC_SITE_URL=https://www.codevider.com npm run build:static && npm run deploy-html-prod && npm run deploy-prod",
+		"deploy-html-prod": "s3-deploy './out/**/*.html' --cwd out/ --profile codevider --region us-east-1 --bucket landing-codevier.com --noCache",
+		"deploy-prod": "s3-deploy './out/**' --cwd out/ --profile codevider --region us-east-1 --bucket landing-codevier.com",
 		"start": "next start",
 		"lint": "biome lint .",
 		"format": "biome format --write .",
 		"check": "biome check --write .",
-		"clean": "rm -rf .next dist"
+		"clean": "rm -rf .next out"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.4.0",
@@ -29,6 +30,7 @@
 		"react-dom": "19.2.4",
 		"react-hook-form": "^7.80.0",
 		"react-syntax-highlighter": "^16.1.1",
+		"sst": "4.17.1",
 		"zod": "^4.4.3"
 	},
 	"devDependencies": {
