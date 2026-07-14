@@ -1,4 +1,4 @@
-import { getSiteUrl } from "@/lib/site";
+import { getLocalePathPrefix, getSiteUrl } from "@/lib/site";
 import type { JobDetail } from "@/lib/types/recruit";
 
 type Props = {
@@ -30,7 +30,7 @@ export function JobPostingSchema({ job, locale }: Props) {
 			},
 		},
 		employmentType: job.job_type?.job_type ?? "FULL_TIME",
-		url: `${getSiteUrl()}/${locale}/career/apply/${job.id}`,
+		url: `${getSiteUrl()}${getLocalePathPrefix(locale)}/career/apply/${job.id}`,
 	};
 
 	return (

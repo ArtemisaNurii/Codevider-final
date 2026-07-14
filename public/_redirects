@@ -1,7 +1,8 @@
-/ /en 301
-/about /en/about 301
-/services /en/services 301
-/career /en/career 301
-/career/apply/:id /en/career/apply/:id 301
-/privacy /en/privacy 301
-/terms /en/terms 301
+/en / 301
+/en/about /about 301
+/en/services /services 301
+/en/career /career 301
+/en/career/apply /career/apply 301
+/en/career/apply/:id /career/apply/:id 301
+/en/privacy /privacy 301
+/en/terms /terms 301

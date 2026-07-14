@@ -2,20 +2,11 @@
 const CANONICAL_HOST = "www.codevider.com";
 const DEFAULT_LOCALE = "en";
 
-const LOCALE_PREFIX_REDIRECTS = new Map([
-	["/", `/${DEFAULT_LOCALE}`],
-	["/about", `/${DEFAULT_LOCALE}/about`],
-	["/services", `/${DEFAULT_LOCALE}/services`],
-	["/career", `/${DEFAULT_LOCALE}/career`],
-	["/privacy", `/${DEFAULT_LOCALE}/privacy`],
-	["/terms", `/${DEFAULT_LOCALE}/terms`],
-]);
-
 /**
  * Enforce a single canonical origin for SEO:
  * - apex (codevider.com) → www.codevider.com
  * - http → https
- * - unprefixed paths → /en/... (301 for crawlers)
+ * - /en/... → unprefixed English paths (localePrefix: as-needed)
  *
  * Serve the static apply shell for any numeric job ID so new roles work
  * without rebuilding the site.
@@ -39,9 +30,9 @@ export async function onRequest(context) {
 		}
 	}
 
-	const localeRedirect = getLocalePrefixRedirect(url.pathname);
-	if (localeRedirect) {
-		url.pathname = localeRedirect;
+	const stripped = stripDefaultLocalePrefix(url.pathname);
+	if (stripped !== null) {
+		url.pathname = stripped;
 		return Response.redirect(url.toString(), 301);
 	}
 
@@ -53,20 +44,19 @@ export async function onRequest(context) {
 	return context.next();
 }
 
-function getLocalePrefixRedirect(pathname) {
+function stripDefaultLocalePrefix(pathname) {
 	const normalized =
 		pathname.endsWith("/") && pathname.length > 1
 			? pathname.slice(0, -1)
 			: pathname;
 
-	const direct = LOCALE_PREFIX_REDIRECTS.get(normalized);
-	if (direct) {
-		return direct;
+	if (normalized === `/${DEFAULT_LOCALE}`) {
+		return "/";
 	}
 
-	const applyMatch = normalized.match(/^\/career\/apply\/([^/]+)$/);
-	if (applyMatch) {
-		return `/${DEFAULT_LOCALE}/career/apply/${applyMatch[1]}`;
+	const prefix = `/${DEFAULT_LOCALE}/`;
+	if (normalized.startsWith(prefix)) {
+		return normalized.slice(DEFAULT_LOCALE.length + 1);
 	}
 
 	return null;
@@ -78,7 +68,11 @@ function redirectCareerApplyPath(url) {
 	);
 	if (!match) return null;
 	const target = new URL(url);
-	target.pathname = match[1];
+	let basePath = match[1];
+	if (basePath.startsWith(`/${DEFAULT_LOCALE}/`)) {
+		basePath = basePath.slice(DEFAULT_LOCALE.length + 1);
+	}
+	target.pathname = basePath;
 	target.searchParams.set("id", match[2]);
 	return target;
 }

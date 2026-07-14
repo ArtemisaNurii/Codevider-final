@@ -105,6 +105,22 @@ const OG_PAGE_TO_ROUTE: Record<OgPage, (typeof SITE_ROUTES)[number]> = {
 };
 
 /**
+ * Locale path prefix for URLs. Default locale (en) is unprefixed.
+ *
+ * @param locale - Locale to use
+ * @returns `""` for default locale, otherwise `"/{locale}"`
+ */
+export function getLocalePathPrefix(
+	locale: string,
+): "" | `/${(typeof routing.locales)[number]}` {
+	if (locale === routing.defaultLocale) {
+		return "";
+	}
+
+	return `/${locale as (typeof routing.locales)[number]}`;
+}
+
+/**
  * Builds a fully qualified localized URL for a given locale and path.
  *
  * @param locale - Locale to use
@@ -116,7 +132,13 @@ export function getLocalizedUrl(
 	path: (typeof SITE_ROUTES)[number],
 ): string {
 	const base = getSiteUrl();
-	return path === "" ? `${base}/${locale}` : `${base}/${locale}${path}`;
+	const prefix = getLocalePathPrefix(locale);
+
+	if (path === "") {
+		return prefix ? `${base}${prefix}` : base;
+	}
+
+	return `${base}${prefix}${path}`;
 }
 
 /**
@@ -141,13 +163,21 @@ export function getPathLanguageAlternates(
 	path: string,
 ): Record<string, string> {
 	const languages = Object.fromEntries(
-		routing.locales.map((locale) => [
-			locale,
-			`${getSiteUrl()}/${locale}${path}`,
-		]),
+		routing.locales.map((locale) => {
+			const prefix = getLocalePathPrefix(locale);
+			return [
+				locale,
+				path === "" && !prefix
+					? getSiteUrl()
+					: `${getSiteUrl()}${prefix}${path}`,
+			];
+		}),
 	);
 
-	languages["x-default"] = `${getSiteUrl()}/${routing.defaultLocale}${path}`;
+	languages["x-default"] =
+		path === ""
+			? getSiteUrl()
+			: `${getSiteUrl()}${getLocalePathPrefix(routing.defaultLocale)}${path}`;
 
 	return languages;
 }
@@ -206,15 +236,16 @@ export function createPageMetadata({
 	path: pathOverride,
 }: PageMetadataInput): Metadata {
 	const siteRoute = OG_PAGE_TO_ROUTE[page];
+	const prefix = getLocalePathPrefix(locale);
 	const canonical = pathOverride
-		? `${getSiteUrl()}/${locale}${pathOverride}`
+		? `${getSiteUrl()}${prefix}${pathOverride}`
 		: getLocalizedUrl(locale as (typeof routing.locales)[number], siteRoute);
 	const ogImageUrl = getOgImageUrl(locale, page);
 	const languageAlternates = pathOverride
 		? Object.fromEntries(
 				routing.locales.map((entry) => [
 					entry,
-					`${getSiteUrl()}/${entry}${pathOverride}`,
+					`${getSiteUrl()}${getLocalePathPrefix(entry)}${pathOverride}`,
 				]),
 			)
 		: getLanguageAlternates(siteRoute);
@@ -226,7 +257,7 @@ export function createPageMetadata({
 		);
 	} else {
 		languageAlternates["x-default"] =
-			`${getSiteUrl()}/${routing.defaultLocale}${pathOverride}`;
+			`${getSiteUrl()}${getLocalePathPrefix(routing.defaultLocale)}${pathOverride}`;
 	}
 
 	return {

@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import { CareerApplyLocaleRedirect } from "@/components/career/career-apply-locale-redirect";
-import { createRedirectPageMetadata } from "@/lib/site";
+import {
+	CareerApplyPage,
+	generateCareerApplyMetadata,
+} from "@/components/pages/career-apply-page";
+import { routing } from "@/i18n/routing";
 
-export const metadata: Metadata = createRedirectPageMetadata("career");
+const params = Promise.resolve({ locale: routing.defaultLocale });
 
-export default function CareerApplyRedirectPage() {
-	return (
-		<Suspense>
-			<CareerApplyLocaleRedirect />
-		</Suspense>
-	);
+export function generateMetadata() {
+	return generateCareerApplyMetadata({ params });
+}
+
+export default function CareerApplyPageDefault() {
+	return <CareerApplyPage params={params} />;
 }

@@ -1,9 +1,15 @@
-import type { Metadata } from "next";
-import { LocaleRedirect } from "@/components/locale-redirect";
-import { createRedirectPageMetadata } from "@/lib/site";
+import {
+	AboutPage,
+	generateAboutMetadata,
+} from "@/components/pages/about-page";
+import { routing } from "@/i18n/routing";
 
-export const metadata: Metadata = createRedirectPageMetadata("about");
+const params = Promise.resolve({ locale: routing.defaultLocale });
 
-export default function AboutRedirectPage() {
-	return <LocaleRedirect path="about" />;
+export function generateMetadata() {
+	return generateAboutMetadata({ params });
+}
+
+export default function AboutPageDefault() {
+	return <AboutPage params={params} />;
 }
