@@ -6,10 +6,14 @@
 		"dev": "next dev",
 		"build": "next build",
 		"build:production": "NEXT_PUBLIC_SITE_URL=https://www.codevider.com next build",
+		"build-prod": "npm run clean && npm run build && npm run deploy-meta-prod && npm run deploy-prod",
+		"deploy-meta-prod": "s3-deploy './dist/meta.json' --cwd dist/ --profile codevider --region us-east-1 --bucket landing-codevier.com --noCache",
+		"deploy-prod": "s3-deploy './dist/**' --cwd dist/ --profile codevider --region us-east-1 --bucket landing-codevier.com",
 		"start": "next start",
 		"lint": "biome lint .",
 		"format": "biome format --write .",
-		"check": "biome check --write ."
+		"check": "biome check --write .",
+		"clean": "rm -rf .next dist"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.4.0",
