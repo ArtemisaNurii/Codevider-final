@@ -4,8 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"build": "next build",
-		"build:production": "NEXT_PUBLIC_SITE_URL=https://www.codevider.com next build",
+		"build": "node scripts/build-static.mjs",
+		"build:production": "NEXT_PUBLIC_SITE_URL=https://www.codevider.com node scripts/build-static.mjs",
 		"start": "next start",
 		"lint": "biome lint .",
 		"format": "biome format --write .",

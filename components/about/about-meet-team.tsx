@@ -187,9 +187,7 @@ export default function AboutMeetTeam() {
 									<h3 className="text-[17px] font-semibold text-(--text-h)">
 										{member.name}
 									</h3>
-									<p className="mt-0.5 text-sm text-(--text)">
-										{member.role}
-									</p>
+									<p className="mt-0.5 text-sm text-(--text)">{member.role}</p>
 								</div>
 							</button>
 						</motion.div>

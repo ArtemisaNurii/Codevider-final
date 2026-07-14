@@ -108,7 +108,10 @@ const NAV_SCROLL_OFFSET = 88;
 /**
  * Scrolls to a hash target, accounting for the fixed navbar.
  */
-export function scrollToHashTarget(el: HTMLElement, behavior: ScrollBehavior = "smooth") {
+export function scrollToHashTarget(
+	el: HTMLElement,
+	behavior: ScrollBehavior = "smooth",
+) {
 	const top =
 		el.getBoundingClientRect().top + window.scrollY - NAV_SCROLL_OFFSET;
 
