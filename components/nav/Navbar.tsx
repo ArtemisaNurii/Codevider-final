@@ -312,7 +312,7 @@ export function Navbar() {
 
 							<div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3">
 								<div className="hidden items-center gap-2 navbar:flex">
-									<LanguageSelector variant={navAppearance} />
+									{/* <LanguageSelector variant={navAppearance} /> */}
 									<ThemeToggle variant={navAppearance} />
 								</div>
 
@@ -441,7 +441,7 @@ export function Navbar() {
 										isDarkNav ? "border-white/10" : "border-slate-200"
 									}`}
 								>
-									<LanguageSelector variant={navAppearance} fullWidth />
+									{/* <LanguageSelector variant={navAppearance} fullWidth /> */}
 									<ThemeToggle variant={navAppearance} fullWidth />
 								</div>
 							</nav>
