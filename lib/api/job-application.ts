@@ -54,10 +54,12 @@ export async function uploadJobApplicationFiles(
  * Validation is handled client-side with Zod + react-hook-form.
  *
  * @param payload - Full job application payload with uploaded file metadata
+ * @param turnstileToken - Cloudflare Turnstile verification token
  * @throws JobApplicationError If submission fails
  */
 export async function submitJobApplication(
 	payload: JobApplicationPayload,
+	turnstileToken: string,
 ): Promise<void> {
 	const response = await fetch(
 		`${getBackendUrl()}/landing-page/recruit/candidate/job-application`,
@@ -66,7 +68,10 @@ export async function submitJobApplication(
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(payload),
+			body: JSON.stringify({
+				...payload,
+				turnstileToken,
+			}),
 		},
 	);
 

@@ -6,20 +6,28 @@ import type { ContactFormValues } from "@/lib/schemas/contact";
  * Validation is handled client-side with Zod + react-hook-form.
  *
  * @param data - Validated contact form values
+ * @param turnstileToken - Cloudflare Turnstile verification token
  * @throws If submission fails
  */
-export async function submitContactLead(data: ContactFormValues): Promise<void> {
-	const response = await fetch(`${getBackendUrl()}/landing-page/leads/contact`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
+export async function submitContactLead(
+	data: ContactFormValues,
+	turnstileToken: string,
+): Promise<void> {
+	const response = await fetch(
+		`${getBackendUrl()}/landing-page/leads/contact`,
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				name: data.name,
+				email: data.email,
+				details: data.details,
+				turnstileToken,
+			}),
 		},
-		body: JSON.stringify({
-			name: data.name,
-			email: data.email,
-			details: data.details,
-		}),
-	});
+	);
 
 	if (!response.ok) {
 		throw new Error(`Contact lead submission failed (${response.status})`);
