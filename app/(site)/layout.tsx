@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { HashScrollHandler } from "@/components/layout/hash-scroll-handler";
-import { SiteDocument } from "@/components/layout/site-document";
 import Footer from "@/components/nav/Footer";
 import { Navbar } from "@/components/nav/Navbar";
 import { getSiteUrl } from "@/lib/site";
@@ -22,13 +21,13 @@ export default function SiteLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<SiteDocument>
+		<>
 			<Navbar />
 			<HashScrollHandler />
 			<div id="root" className="flex flex-1 flex-col">
 				<main className="flex-1">{children}</main>
 				<Footer />
 			</div>
-		</SiteDocument>
+		</>
 	);
 }
