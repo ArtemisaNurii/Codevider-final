@@ -39,11 +39,10 @@ export const appleRevealEase = [0.2, 0, 0, 1] as const;
 
 /** Motion variant for a single revealed item. */
 export const sectionRevealItem = {
-	hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
+	hidden: { opacity: 0, y: 12 },
 	visible: {
 		opacity: 1,
 		y: 0,
-		filter: "blur(0px)",
 		transition: { duration: 0.55, ease: appleRevealEase },
 	},
 } as const;
@@ -377,9 +376,7 @@ export function useHeroMountReveal() {
 
 	// Until mounted, initial=false so SSR HTML is fully visible.
 	// After mount, animate from the hidden state — no hydration mismatch.
-	const stagger = (index: number, y = 18, blur?: number) => {
-		const useBlur =
-			mounted && !shouldReduceMotion && blur !== undefined && blur > 0;
+	const stagger = (index: number, y = 18) => {
 		const animate = !mounted || shouldReduceMotion;
 
 		return {
@@ -388,12 +385,10 @@ export function useHeroMountReveal() {
 				: {
 						opacity: 0,
 						y,
-						...(useBlur ? { filter: `blur(${blur}px)` } : {}),
 					},
 			animate: {
 				opacity: 1,
 				y: 0,
-				...(useBlur ? { filter: "blur(0px)" } : {}),
 			} as const,
 			transition: animate
 				? instantRevealTransition

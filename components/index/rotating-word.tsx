@@ -25,9 +25,14 @@ const exitTransition = {
  */
 interface RotatingWordProps {
 	words: string[];
+	/** Skip rotation and motion — used on mobile / lite hero. */
+	staticMode?: boolean;
 }
 
-export default function RotatingWord({ words }: RotatingWordProps) {
+export default function RotatingWord({
+	words,
+	staticMode = false,
+}: RotatingWordProps) {
 	const [shuffled, setShuffled] = useState(words);
 	const [index, setIndex] = useState(0);
 	const mounted = useMounted();
@@ -44,16 +49,26 @@ export default function RotatingWord({ words }: RotatingWordProps) {
 	const shouldReduceMotion = useReducedMotion();
 
 	useEffect(() => {
-		if (shouldReduceMotion) return;
+		if (staticMode || shouldReduceMotion) return;
 
 		const interval = window.setInterval(() => {
 			setIndex((current) => (current + 1) % shuffled.length);
 		}, INTERVAL_MS);
 
 		return () => window.clearInterval(interval);
-	}, [shouldReduceMotion, shuffled]);
+	}, [staticMode, shouldReduceMotion, shuffled]);
 
 	const word = shuffled[index];
+
+	if (staticMode) {
+		return (
+			<span className="relative mt-1 inline-grid font-sans text-(--hero-accent-text)">
+				<span className="col-start-1 row-start-1 overflow-hidden py-1 px-2">
+					<span className="block italic font-serif font-bold">{words[0]}</span>
+				</span>
+			</span>
+		);
+	}
 
 	return (
 		<span
@@ -81,16 +96,15 @@ export default function RotatingWord({ words }: RotatingWordProps) {
 								? false
 								: index === 0
 									? false
-									: { y: "100%", opacity: 0, filter: "blur(8px)" }
+									: { y: "100%", opacity: 0 }
 						}
-						animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+						animate={{ y: 0, opacity: 1 }}
 						exit={
 							shouldReduceMotion
 								? { opacity: 0, transition: { duration: 0.15 } }
 								: {
 										y: "-100%",
 										opacity: 0,
-										filter: "blur(8px)",
 										transition: exitTransition,
 									}
 						}

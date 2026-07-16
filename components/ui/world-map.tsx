@@ -2,8 +2,8 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import { useTheme } from "next-themes";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { useTheme } from "@/components/providers/ThemeProvider";
 import { revealTransition, useSectionReveal } from "@/hooks/use-section-reveal";
 
 type MapDot = {
@@ -17,29 +17,25 @@ type WorldMapProps = {
 
 const MAP_STYLES = {
 	light: {
-		dots: "#1e3280",
 		line: "#2563eb",
-		dotRadius: 0.3,
 		strokeWidth: 2.6,
 		glowStrokeWidth: 5,
 		pointRadius: 4.5,
 	},
 	dark: {
-		dots: "#ffffffd9",
 		line: "#38d4ff",
-		dotRadius: 0.24,
 		strokeWidth: 2.2,
 		glowStrokeWidth: 4.5,
 		pointRadius: 4,
 	},
 } as const;
 
-const MAP_GRID_HEIGHT = {
-	compact: 55,
-	default: 100,
-} as const;
-
 const COMPACT_MAP_MEDIA_QUERY = "(max-width: 767px)";
+
+function mapSvgSrc(theme: "light" | "dark", isCompact: boolean) {
+	const size = isCompact ? "compact" : "default";
+	return `/maps/world-${size}-${theme}.svg`;
+}
 
 function useCompactViewport() {
 	const [isCompact, setIsCompact] = useState(false);
@@ -126,70 +122,23 @@ function AnimatedPath({
 }
 
 export default function WorldMap({ dots = [] }: WorldMapProps) {
-	const { resolvedTheme } = useTheme();
-	const theme = (resolvedTheme ?? "light") as "light" | "dark";
+	const { theme } = useTheme();
 	const isCompact = useCompactViewport();
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal<HTMLDivElement>({
 		margin: "0px",
 		amount: 0.3,
 	});
 	const shouldReduceMotion = useReducedMotion();
-	const [svgMaps, setSvgMaps] = useState<{
-		light: string;
-		dark: string;
-	} | null>(null);
 	const styles = MAP_STYLES[theme];
-	const svgMap = svgMaps?.[theme] ?? null;
-	const gridHeight = isCompact
-		? MAP_GRID_HEIGHT.compact
-		: MAP_GRID_HEIGHT.default;
-
-	useEffect(() => {
-		let cancelled = false;
-
-		void import("dotted-map").then(({ default: DottedMap }) => {
-			if (cancelled) return;
-
-			const map = new DottedMap({ height: gridHeight, grid: "diagonal" });
-			setSvgMaps({
-				light: map.getSVG({
-					radius: MAP_STYLES.light.dotRadius,
-					color: MAP_STYLES.light.dots,
-					shape: "circle",
-					backgroundColor: "transparent",
-				}),
-				dark: map.getSVG({
-					radius: MAP_STYLES.dark.dotRadius,
-					color: MAP_STYLES.dark.dots,
-					shape: "circle",
-					backgroundColor: "transparent",
-				}),
-			});
-		});
-
-		return () => {
-			cancelled = true;
-		};
-	}, [gridHeight]);
 
 	const mapShellClassName = isCompact
 		? "relative mx-auto w-full min-h-[clamp(70px,30vw,100px)] aspect-2/1 max-w-[min(100%,96rem)]"
 		: "relative mx-auto w-full min-h-[clamp(300px,44vw,560px)] aspect-2/1 max-w-[min(100%,96rem)]";
 
-	if (!svgMap) {
-		return (
-			<div
-				ref={ref}
-				aria-hidden
-				className={`${mapShellClassName} animate-pulse rounded-lg bg-black/5 dark:bg-white/8`}
-			/>
-		);
-	}
-
 	return (
 		<div ref={ref} className={mapShellClassName}>
 			<Image
-				src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
+				src={mapSvgSrc(theme, isCompact)}
 				className="pointer-events-none h-full w-full select-none object-contain"
 				alt=""
 				height={560}
@@ -253,7 +202,7 @@ export default function WorldMap({ dots = [] }: WorldMapProps) {
 								r={styles.pointRadius}
 								fill={styles.line}
 							/>
-							{glow ? (
+							{glow && !shouldReduceMotion && !isCompact ? (
 								<circle
 									cx={point.x}
 									cy={point.y}

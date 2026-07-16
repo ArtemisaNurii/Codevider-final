@@ -1,14 +1,19 @@
 "use client";
 
 import { useReducedMotion } from "motion/react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useCopy } from "@/lib/copy";
 import { useEffect, useState } from "react";
-import GradientBlinds from "@/components/ui/gradient-blinds";
 import HeroDashboard from "./hero-dashboard";
 import RotatingWord from "./rotating-word";
 
 const HERO_FINE_POINTER_QUERY = "(any-pointer: fine)";
+const HERO_DESKTOP_VIEWPORT_QUERY = "(min-width: 1024px)";
+
+const GradientBlinds = dynamic(() => import("@/components/ui/gradient-blinds"), {
+	ssr: false,
+});
 
 /**
  * Hero section for the home page.
@@ -18,36 +23,97 @@ const HERO_FINE_POINTER_QUERY = "(any-pointer: fine)";
  *
  * Background, veil, and copy stay on the dark hero palette regardless of site
  * theme — only the dashboard mockup follows light/dark mode.
+ *
+ * WebGL gradient blinds run on capable devices (desktop + mobile). Desktop uses
+ * pointer tracking; mobile uses auto drift at a lower FPS/DPR. Reduced-motion,
+ * Save-Data, and software-WebGL fallbacks stay on a static CSS gradient.
  */
 const HERO_GRADIENT: string[] = ["#0e1624", "#3a5278", "#8499be", "#78a99e"];
+
+function prefersSaveData(): boolean {
+	const connection = (
+		navigator as Navigator & { connection?: { saveData?: boolean } }
+	).connection;
+	return Boolean(connection?.saveData);
+}
+
+function hasHardwareWebGL(): boolean {
+	try {
+		const canvas = document.createElement("canvas");
+		const options: WebGLContextAttributes = {
+			failIfMajorPerformanceCaveat: true,
+			alpha: true,
+			antialias: false,
+			depth: false,
+			stencil: false,
+			powerPreference: "low-power",
+		};
+		const gl =
+			canvas.getContext("webgl", options) ||
+			canvas.getContext("experimental-webgl", options);
+		if (!gl || !(gl instanceof WebGLRenderingContext)) return false;
+		const lose = gl.getExtension("WEBGL_lose_context");
+		lose?.loseContext();
+		return true;
+	} catch {
+		return false;
+	}
+}
+
+function canUseWebGLHero(): boolean {
+	if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+		return false;
+	}
+	if (prefersSaveData()) return false;
+	return hasHardwareWebGL();
+}
 
 export default function Hero() {
 	const t = useCopy("home");
 	const reducedMotion = useReducedMotion();
 	const [mouseMotion, setMouseMotion] = useState(false);
+	const [useWebGL, setUseWebGL] = useState(false);
+	const [liteMotion, setLiteMotion] = useState(true);
+	const [mobileBlinds, setMobileBlinds] = useState(true);
 
 	useEffect(() => {
 		const finePointerMq = window.matchMedia(HERO_FINE_POINTER_QUERY);
+		const desktopMq = window.matchMedia(HERO_DESKTOP_VIEWPORT_QUERY);
 
-		const syncMotion = () => {
-			setMouseMotion(finePointerMq.matches);
+		const syncCapabilities = () => {
+			const webgl = canUseWebGLHero();
+			const desktop = desktopMq.matches;
+			setUseWebGL(webgl);
+			// Keep dashboard / rotating-word lite below desktop; blinds can still run.
+			setLiteMotion(!desktop);
+			setMobileBlinds(!desktop);
+			setMouseMotion(finePointerMq.matches && desktop && webgl);
 		};
 
 		const enableOnFirstMouseMove = () => {
-			setMouseMotion(true);
+			if (
+				canUseWebGLHero() &&
+				window.matchMedia(HERO_DESKTOP_VIEWPORT_QUERY).matches &&
+				window.matchMedia(HERO_FINE_POINTER_QUERY).matches
+			) {
+				setMouseMotion(true);
+			}
 		};
 
-		syncMotion();
-		finePointerMq.addEventListener("change", syncMotion);
+		syncCapabilities();
+		finePointerMq.addEventListener("change", syncCapabilities);
+		desktopMq.addEventListener("change", syncCapabilities);
 		window.addEventListener("mousemove", enableOnFirstMouseMove, {
 			once: true,
 		});
 
 		return () => {
-			finePointerMq.removeEventListener("change", syncMotion);
+			finePointerMq.removeEventListener("change", syncCapabilities);
+			desktopMq.removeEventListener("change", syncCapabilities);
 			window.removeEventListener("mousemove", enableOnFirstMouseMove);
 		};
 	}, []);
+
 	const yearsDelivering = new Date().getFullYear() - 2019;
 	const rotatingWords = [
 		t("rotating_word.saas"),
@@ -66,26 +132,43 @@ export default function Hero() {
 	return (
 		<section className="home-hero relative isolate min-h-dvh overflow-hidden">
 			<div className="home-hero__gradient-blinds" aria-hidden>
-				<GradientBlinds
-					className="home-hero__gradient-blinds-canvas"
-					gradientColors={HERO_GRADIENT}
-					spotlightMotion={mouseMotion ? "mouse" : "auto"}
-					trackPointer="section"
-					mouseDampening={0.24}
-					autoMotionSpeed={0.68}
-					angle={33}
-					noise={0.05}
-					blindCount={5}
-					blindMinWidth={14}
-					mirrorGradient
-					spotlightRadius={0.28}
-					spotlightSoftness={2}
-					spotlightOpacity={0.1}
-					distortAmount={0.2}
-					shineDirection="right"
-					mixBlendMode=""
-					paused={reducedMotion ?? false}
-				/>
+				{useWebGL ? (
+					<GradientBlinds
+						className="home-hero__gradient-blinds-canvas"
+						gradientColors={HERO_GRADIENT}
+						spotlightMotion={mouseMotion ? "mouse" : "auto"}
+						trackPointer="section"
+						mouseDampening={0.24}
+						autoMotionSpeed={mobileBlinds ? 0.55 : 0.68}
+						angle={33}
+						noise={mobileBlinds ? 0 : 0.05}
+						blindCount={5}
+						blindMinWidth={14}
+						mirrorGradient
+						spotlightRadius={0.28}
+						spotlightSoftness={2}
+						spotlightOpacity={0.1}
+						distortAmount={mobileBlinds ? 0 : 0.2}
+						shineDirection="right"
+						mixBlendMode=""
+						dpr={mobileBlinds ? 1 : undefined}
+						antialias={!mobileBlinds}
+						targetFps={mobileBlinds ? 28 : 60}
+						paused={reducedMotion ?? false}
+					/>
+				) : (
+					<div
+						className="home-hero__gradient-static home-hero__gradient-blinds-canvas"
+						style={
+							{
+								"--hero-static-c1": HERO_GRADIENT[0],
+								"--hero-static-c2": HERO_GRADIENT[1],
+								"--hero-static-c3": HERO_GRADIENT[2],
+								"--hero-static-c4": HERO_GRADIENT[3],
+							} as React.CSSProperties
+						}
+					/>
+				)}
 			</div>
 
 			<div className="home-hero__veil" aria-hidden />
@@ -97,7 +180,7 @@ export default function Hero() {
 							<span className="block font-sans">
 								{t("your_strategic_partner_in")}
 							</span>
-							<RotatingWord words={rotatingWords} />
+							<RotatingWord words={rotatingWords} staticMode={liteMotion} />
 						</h1>
 
 						<p className="hero-reveal hero-reveal-2 max-w-xl text-pretty text-center lg:text-left font-sans text-lg leading-relaxed text-(--hero-text-lead) sm:text-xl sm:leading-8">
@@ -137,7 +220,7 @@ export default function Hero() {
 					</div>
 
 					<div className="hero-reveal hero-reveal-5 hero-dash-bleed relative w-full min-w-0 lg:min-w-md xl:min-w-lg">
-						<HeroDashboard />
+						<HeroDashboard lite={liteMotion} />
 					</div>
 				</div>
 			</div>

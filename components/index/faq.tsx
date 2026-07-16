@@ -5,7 +5,6 @@ import { motion, useReducedMotion } from "motion/react";
 import { useCopy } from "@/lib/copy";
 import { useState } from "react";
 import {
-	applePanelEase,
 	appleRevealEase,
 	sectionItemTransition,
 	sectionRevealItem,
@@ -54,16 +53,6 @@ function FaqItem({
 	const panelId = `faq-panel-${id}`;
 	const triggerId = `faq-trigger-${id}`;
 
-	const panelTransition = shouldReduceMotion
-		? instantTransition
-		: applePanelEase;
-
-	const contentTransition = shouldReduceMotion
-		? instantTransition
-		: isOpen
-			? { ...applePanelEase, delay: 0.06 }
-			: { duration: 0.2, ease: appleRevealEase };
-
 	return (
 		<motion.div
 			className="home-faq-item"
@@ -104,29 +93,21 @@ function FaqItem({
 				</motion.span>
 			</motion.button>
 
-			<motion.div
+			<div
 				id={panelId}
 				role="region"
 				aria-labelledby={triggerId}
 				aria-hidden={!isOpen}
-				initial={false}
-				animate={{ height: isOpen ? "auto" : 0 }}
-				transition={panelTransition}
-				className="overflow-hidden"
+				className={`home-faq-panel${isOpen ? " home-faq-panel--open" : ""}${
+					shouldReduceMotion ? " home-faq-panel--instant" : ""
+				}`}
 			>
-				<motion.p
-					className="max-w-[58ch] px-1 pb-8 pt-0.5 text-base leading-relaxed text-(--text) text-pretty"
-					initial={false}
-					animate={
-						isOpen
-							? { opacity: 1, y: 0, filter: "blur(0px)" }
-							: { opacity: 0, y: -6, filter: "blur(4px)" }
-					}
-					transition={contentTransition}
-				>
-					{answer}
-				</motion.p>
-			</motion.div>
+				<div className="home-faq-panel__inner">
+					<p className="home-faq-a max-w-[58ch] px-1 pb-8 pt-0.5 text-base leading-relaxed text-(--text) text-pretty">
+						{answer}
+					</p>
+				</div>
+			</div>
 		</motion.div>
 	);
 }

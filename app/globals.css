@@ -466,6 +466,18 @@ code {
 	opacity: var(--hero-gradient-opacity);
 }
 
+.home-hero__gradient-static {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		33deg,
+		var(--hero-static-c1, #0e1624) 0%,
+		var(--hero-static-c2, #3a5278) 35%,
+		var(--hero-static-c3, #8499be) 65%,
+		var(--hero-static-c4, #78a99e) 100%
+	);
+}
+
 /* Veil only deepens the bottom edge — no top wash that used to blend into page --bg */
 .home-hero__veil {
 	pointer-events: none;
@@ -731,6 +743,12 @@ code {
 		margin-left: auto;
 		width: 100%;
 		max-width: 56rem;
+	}
+
+	/* Infinite filter/box-shadow animations are costly on mobile GPUs. */
+	.hero-dash-bar--latest,
+	.hero-dash-live-dot {
+		animation: none;
 	}
 }
 
@@ -1744,6 +1762,43 @@ code {
 	height: 28px;
 	color: var(--text);
 	transform-origin: center;
+}
+
+.home-faq-panel {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.45s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.home-faq-panel--open {
+	grid-template-rows: 1fr;
+}
+
+.home-faq-panel--instant {
+	transition: none;
+}
+
+.home-faq-panel__inner {
+	overflow: hidden;
+	min-height: 0;
+}
+
+.home-faq-a {
+	opacity: 0;
+	transform: translateY(-4px);
+	transition:
+		opacity 0.28s cubic-bezier(0.2, 0, 0, 1),
+		transform 0.28s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.home-faq-panel--open .home-faq-a {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.06s;
+}
+
+.home-faq-panel--instant .home-faq-a {
+	transition: none;
 }
 
 /* ============================================================

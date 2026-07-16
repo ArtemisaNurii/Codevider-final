@@ -113,7 +113,7 @@ function MetricCard({
  *
  * @returns The dashboard window component.
  */
-export default function HeroDashboard() {
+export default function HeroDashboard({ lite = false }: { lite?: boolean }) {
 	const t = useCopy("home.dashboard");
 	const tHome = useCopy("home");
 	const currency = tHome("base_currency");
@@ -123,7 +123,7 @@ export default function HeroDashboard() {
 	const mounted = useMounted();
 	const shouldReduceMotion = useReducedMotion();
 
-	const animate = mounted && !shouldReduceMotion;
+	const animate = mounted && !shouldReduceMotion && !lite;
 
 	const shellTransition = animate
 		? { duration: 0.65, ease: appleRevealEase, delay: 0.36 }
@@ -173,7 +173,6 @@ export default function HeroDashboard() {
 									initial={animate ? { opacity: 0 } : false}
 									animate={{ opacity: 1 }}
 									transition={cardTransition(index)}
-									style={{ willChange: "opacity" }}
 								>
 									<MetricCard
 										label={t(key)}
@@ -192,7 +191,6 @@ export default function HeroDashboard() {
 					initial={animate ? { opacity: 0, y: 12 } : false}
 					animate={{ opacity: 1, y: 0 }}
 					transition={chartTransition}
-					style={{ willChange: "opacity, transform" }}
 				>
 					<div className="mb-4 flex items-end justify-between gap-2">
 						<div>
@@ -232,7 +230,6 @@ export default function HeroDashboard() {
 										{
 											"--hero-dash-bar-h": `${barHeightPx(value)}px`,
 											"--hero-dash-bar-h-sm": `${barHeightPxSm(value)}px`,
-											willChange: "transform",
 										} as React.CSSProperties
 									}
 									initial={animate ? { scaleY: 0 } : false}

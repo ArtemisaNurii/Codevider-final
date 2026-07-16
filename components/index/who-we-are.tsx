@@ -15,11 +15,10 @@ const STAGGER = 0.1;
 const itemVariants = sectionRevealItem;
 
 const statDescVariants = {
-	hidden: { opacity: 0, y: 8, filter: "blur(4px)" },
+	hidden: { opacity: 0, y: 8 },
 	visible: {
 		opacity: 1,
 		y: 0,
-		filter: "blur(0px)",
 		transition: {
 			duration: 0.5,
 			ease: [0.2, 0, 0, 1] as const,

@@ -20,7 +20,7 @@ import type { CSSProperties } from "react";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 
 const SyntaxHighlighter = dynamic(
-	() => import("react-syntax-highlighter").then((mod) => mod.Prism),
+	() => import("@/components/ui/code-highlighter"),
 	{ ssr: false },
 );
 
@@ -364,15 +364,13 @@ function PipelineStageIcon({
 				key={state}
 				className="grid place-items-center"
 				initial={
-					shouldReduceMotion
-						? false
-						: { opacity: 0, scale: 0.25, filter: "blur(4px)" }
+					shouldReduceMotion ? false : { opacity: 0, scale: 0.25 }
 				}
-				animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+				animate={{ opacity: 1, scale: 1 }}
 				exit={
 					shouldReduceMotion
 						? undefined
-						: { opacity: 0, scale: 0.25, filter: "blur(4px)" }
+						: { opacity: 0, scale: 0.25 }
 				}
 				transition={APPLE_SPRING_FAST}
 			>

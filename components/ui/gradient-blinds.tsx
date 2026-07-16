@@ -26,6 +26,10 @@ export interface GradientBlindsProps {
 	trackPointer?: "canvas" | "section";
 	/** Scales auto-drift speed. Values below 1 slow the motion. */
 	autoMotionSpeed?: number;
+	/** Cap render rate. Lower values save battery on mobile auto-drift. */
+	targetFps?: number;
+	/** MSAA — leave off on mobile; expensive for little visual gain here. */
+	antialias?: boolean;
 }
 
 const MAX_COLORS = 8;
@@ -79,6 +83,8 @@ const GradientBlinds: React.FC<GradientBlindsProps> = ({
 	spotlightMotion = "mouse",
 	trackPointer = "canvas",
 	autoMotionSpeed = 1,
+	targetFps = 60,
+	antialias = true,
 }) => {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const rafRef = useRef<number | null>(null);
@@ -88,19 +94,39 @@ const GradientBlinds: React.FC<GradientBlindsProps> = ({
 	const rendererRef = useRef<Renderer | null>(null);
 	const mouseTargetRef = useRef<[number, number]>([0, 0]);
 	const lastTimeRef = useRef<number>(0);
+	const lastRenderRef = useRef<number>(0);
 	const elapsedRef = useRef<number>(0);
+	const pausedRef = useRef(paused);
+	const inViewRef = useRef(true);
+	const pageVisibleRef = useRef(true);
+	const startLoopRef = useRef<() => void>(() => {});
 	const colorKey = gradientColors?.join(",") ?? "";
+
+	pausedRef.current = paused;
+
+	useEffect(() => {
+		if (!paused) startLoopRef.current();
+	}, [paused]);
 
 	useEffect(() => {
 		const container = containerRef.current;
 		if (!container) return;
 
+		const resolvedDpr =
+			dpr ??
+			Math.min(
+				typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1,
+				1.5,
+			);
+		const frameIntervalMs = 1000 / Math.max(1, targetFps);
+
 		const renderer = new Renderer({
-			dpr:
-				dpr ??
-				(typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1),
+			dpr: resolvedDpr,
 			alpha: true,
-			antialias: true,
+			antialias,
+			depth: false,
+			stencil: false,
+			powerPreference: "low-power",
 		});
 		rendererRef.current = renderer;
 		const gl = renderer.gl;
@@ -222,7 +248,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec3 ran = vec3(stripe);
 
     vec3 col = cir + base - ran;
-    col += (rand(gl_FragCoord.xy + iTime) - 0.5) * uNoise;
+    if (uNoise > 0.001) {
+      col += (rand(gl_FragCoord.xy + iTime) - 0.5) * uNoise;
+    }
 
     fragColor = vec4(col, 1.0);
 }
@@ -374,24 +402,36 @@ void main() {
 			});
 		}
 
+		const shouldAnimateFrame = () =>
+			!pausedRef.current && inViewRef.current && pageVisibleRef.current;
+
 		const loop = (t: number) => {
+			if (!shouldAnimateFrame()) {
+				rafRef.current = null;
+				lastTimeRef.current = 0;
+				lastRenderRef.current = 0;
+				return;
+			}
+
 			rafRef.current = requestAnimationFrame(loop);
 
 			if (!lastTimeRef.current) lastTimeRef.current = t;
 			const dt = Math.min((t - lastTimeRef.current) / 1000, 0.05);
 			lastTimeRef.current = t;
 
-			if (!paused) {
-				elapsedRef.current += dt;
-			}
-
+			elapsedRef.current += dt;
 			const time = elapsedRef.current * 2;
 
-			if (!paused) {
-				uniforms.iTime.value = time;
+			if (
+				lastRenderRef.current &&
+				t - lastRenderRef.current < frameIntervalMs
+			) {
+				return;
 			}
+			lastRenderRef.current = t;
+			uniforms.iTime.value = time;
 
-			if (spotlightMotion === "auto" && !paused) {
+			if (spotlightMotion === "auto") {
 				const w = gl.drawingBufferWidth;
 				const h = gl.drawingBufferHeight;
 				if (w > 0 && h > 0) {
@@ -414,11 +454,42 @@ void main() {
 				}
 			}
 		};
-		rafRef.current = requestAnimationFrame(loop);
+
+		const startLoop = () => {
+			if (rafRef.current != null || !shouldAnimateFrame()) return;
+			lastTimeRef.current = 0;
+			lastRenderRef.current = 0;
+			rafRef.current = requestAnimationFrame(loop);
+		};
+		startLoopRef.current = startLoop;
+
+		inViewRef.current = true;
+		pageVisibleRef.current = document.visibilityState === "visible";
+
+		const intersectionObserver = new IntersectionObserver(
+			([entry]) => {
+				inViewRef.current = entry?.isIntersecting ?? false;
+				if (inViewRef.current) startLoop();
+			},
+			{ threshold: 0 },
+		);
+		intersectionObserver.observe(container);
+
+		const onVisibilityChange = () => {
+			pageVisibleRef.current = document.visibilityState === "visible";
+			if (pageVisibleRef.current) startLoop();
+		};
+		document.addEventListener("visibilitychange", onVisibilityChange);
+
+		startLoop();
 
 		return () => {
+			startLoopRef.current = () => {};
 			if (rafRef.current) cancelAnimationFrame(rafRef.current);
+			rafRef.current = null;
 			pointerTarget?.removeEventListener("pointermove", onPointerMove);
+			document.removeEventListener("visibilitychange", onVisibilityChange);
+			intersectionObserver.disconnect();
 			ro.disconnect();
 			if (canvas.parentElement === container) {
 				container.removeChild(canvas);
@@ -445,7 +516,6 @@ void main() {
 		};
 	}, [
 		dpr,
-		paused,
 		colorKey,
 		angle,
 		noise,
@@ -461,6 +531,8 @@ void main() {
 		spotlightMotion,
 		trackPointer,
 		autoMotionSpeed,
+		targetFps,
+		antialias,
 	]);
 
 	return (
