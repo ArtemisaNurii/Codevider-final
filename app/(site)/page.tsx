@@ -9,7 +9,6 @@ import {
 	WhoWeAre,
 	WhoWeEmpower,
 	WhyChooseUs,
-	WhyOutsource,
 } from "@/components/index/home-below-fold";
 import { StructuredData } from "@/components/seo/structured-data";
 import { createPageMetadata, getOgImageUrl, getPageUrl } from "@/lib/site";
@@ -33,7 +32,6 @@ export default async function Home() {
 			<WhoWeAre />
 			<CoreServices />
 			<WhoWeEmpower />
-			<WhyOutsource />
 			<WhyChooseUs />
 			<GlobalPartnerships />
 			<Faq />

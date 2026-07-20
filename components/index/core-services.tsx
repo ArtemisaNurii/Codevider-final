@@ -197,10 +197,7 @@ function AiDemo() {
 		chips.current.find((c) => c.id === active) ?? chips.current[0];
 
 	return (
-		<div
-			ref={ref}
-			className="home-demo home-demo--ai"
-		>
+		<div ref={ref} className="home-demo home-demo--ai">
 			<div className="home-demo-head home-demo-head--wrap min-w-0 overflow-hidden">
 				<div
 					className="home-demo-chip-list w-full min-w-0 max-w-full flex-nowrap overflow-x-auto overflow-y-hidden scrollbar-none [&::-webkit-scrollbar]:hidden"
@@ -363,15 +360,9 @@ function PipelineStageIcon({
 			<motion.span
 				key={state}
 				className="grid place-items-center"
-				initial={
-					shouldReduceMotion ? false : { opacity: 0, scale: 0.25 }
-				}
+				initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.25 }}
 				animate={{ opacity: 1, scale: 1 }}
-				exit={
-					shouldReduceMotion
-						? undefined
-						: { opacity: 0, scale: 0.25 }
-				}
+				exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.25 }}
 				transition={APPLE_SPRING_FAST}
 			>
 				{state === "done" ? (

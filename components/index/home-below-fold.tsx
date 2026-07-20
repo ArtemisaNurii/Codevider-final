@@ -17,11 +17,6 @@ export const WhoWeEmpower = createDeferredHomeSection(
 	"55vh",
 	"who-we-empower",
 );
-export const WhyOutsource = createDeferredHomeSection(
-	() => import("@/components/index/why-outsource"),
-	"50vh",
-	"why-outsource",
-);
 export const GlobalPartnerships = createDeferredHomeSection(
 	() => import("@/components/index/global-partnerships"),
 	"60vh",
@@ -29,7 +24,7 @@ export const GlobalPartnerships = createDeferredHomeSection(
 );
 export const WhyChooseUs = createDeferredHomeSection(
 	() => import("@/components/index/why-choose-us"),
-	"55vh",
+	"60vh",
 	"why-choose-us",
 );
 export const Faq = createDeferredHomeSection(

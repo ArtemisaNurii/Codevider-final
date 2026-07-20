@@ -3,170 +3,118 @@
 import {
 	Bot,
 	Building2,
-	ChevronLeft,
-	ChevronRight,
+	Cloud,
 	Code,
 	CreditCard,
 	Database,
 	MessageSquare,
-	PenLine,
 	Smartphone,
+	Workflow,
 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { useRef, type KeyboardEvent } from "react";
 import { useCopy } from "@/lib/copy";
 import {
 	sectionItemTransition,
 	sectionRevealItem,
 	useSectionReveal,
 } from "@/hooks/use-section-reveal";
+import BorderGlow from "@/components/ui/border-glow";
+import { useTheme } from "@/components/providers/ThemeProvider";
 import SectionHead from "./section-head";
 
-const CARDS = [
-	{ id: "ai", icon: Bot },
-	{ id: "startups", icon: PenLine },
-	{ id: "enterprise", icon: Building2 },
-	{ id: "crm", icon: MessageSquare },
-	{ id: "fintech", icon: CreditCard },
-	{ id: "data", icon: Database },
-	{ id: "mobile", icon: Smartphone },
-	{ id: "custom", icon: Code },
+const CELLS = [
+	{ id: "ai", icon: Bot, area: "ai", featured: true },
+	{ id: "automation", icon: Workflow, area: "automation", featured: false },
+	{ id: "cloud", icon: Cloud, area: "cloud", featured: false },
+	{ id: "mobile", icon: Smartphone, area: "mobile", featured: false },
+	{ id: "data", icon: Database, area: "data", featured: false },
+	{ id: "custom", icon: Code, area: "custom", featured: false },
+	{ id: "enterprise", icon: Building2, area: "enterprise", featured: false },
+	{ id: "fintech", icon: CreditCard, area: "fintech", featured: false },
+	{ id: "crm", icon: MessageSquare, area: "crm", featured: false },
 ] as const;
-
-function getCardStep(el: HTMLDivElement): number {
-	const first = el.children[0] as HTMLElement | undefined;
-	const second = el.children[1] as HTMLElement | undefined;
-
-	if (!first) return el.clientWidth;
-	if (!second) return first.offsetWidth;
-
-	return second.offsetLeft - first.offsetLeft;
-}
-
-function getPageSize(el: HTMLDivElement): number {
-	const cardStep = getCardStep(el);
-	if (cardStep <= 0) return 1;
-
-	// Round so a full row (e.g. 4 cards) isn't floored to 3 from sub-pixel gap math.
-	return Math.max(1, Math.round(el.clientWidth / cardStep));
-}
-
-function getPageCount(el: HTMLDivElement): number {
-	const pageSize = getPageSize(el);
-	const cardCount = el.children.length;
-	return Math.max(1, Math.ceil(cardCount / pageSize));
-}
-
-function scrollByPage(el: HTMLDivElement, direction: "left" | "right"): void {
-	const cardStep = getCardStep(el);
-	const pageSize = getPageSize(el);
-	const pageWidth = pageSize * cardStep;
-	const pageCount = getPageCount(el);
-	const currentPage = Math.round(el.scrollLeft / pageWidth);
-	const nextPage =
-		direction === "right"
-			? (currentPage + 1) % pageCount
-			: (currentPage - 1 + pageCount) % pageCount;
-
-	el.scrollTo({
-		left: nextPage * pageWidth,
-		behavior: "smooth",
-	});
-}
 
 export default function WhoWeEmpower() {
 	const t = useCopy("home.empower");
+	const { theme } = useTheme();
+	const isDark = theme === "dark";
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
-	const carouselRef = useRef<HTMLDivElement>(null);
 
-	const scroll = (direction: "left" | "right") => {
-		const el = carouselRef.current;
-		if (!el) return;
-		scrollByPage(el, direction);
-	};
-
-	const onCarouselKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-		if (event.key === "ArrowLeft") {
-			event.preventDefault();
-			scroll("left");
-		} else if (event.key === "ArrowRight") {
-			event.preventDefault();
-			scroll("right");
-		}
-	};
+	const motionProps = (delay: number) => ({
+		initial:
+			shouldReduceMotion || !shouldAnimate ? false : sectionRevealItem.hidden,
+		animate: isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden,
+		transition: sectionItemTransition(
+			shouldAnimate,
+			delay,
+			!!shouldReduceMotion,
+		),
+	});
 
 	return (
-		<section ref={ref} className="home-section home-section--tight home-feature-alt">
+		<section
+			ref={ref}
+			className="home-section home-section--tight home-feature-alt"
+		>
 			<div className="home-wrap">
-				<SectionHead
-					eyebrow={t("eyebrow")}
-					headline={t("headline")}
-					description={t("description")}
-					centered
-				/>
+				<motion.div {...motionProps(0)}>
+					<SectionHead
+						eyebrow={t("eyebrow")}
+						headline={t("headline")}
+						description={t("description")}
+						centered
+						className="max-sm:mx-0 max-sm:max-w-none max-sm:text-left [&_.home-eyebrow]:max-sm:justify-start [&_p]:max-sm:mx-0"
+						descriptionClassName="text-[0.9375rem] sm:text-base"
+					/>
+				</motion.div>
 
 				<div className="home-section-lead home-empower">
-					<div className="home-empower-nav">
-						<button
-							type="button"
-							onClick={() => scroll("left")}
-							aria-label={t("scroll_left")}
-							className="about-team-carousel__nav"
-						>
-							<ChevronLeft className="size-4" aria-hidden />
-						</button>
-						<button
-							type="button"
-							onClick={() => scroll("right")}
-							aria-label={t("scroll_right")}
-							className="about-team-carousel__nav"
-						>
-							<ChevronRight className="size-4" aria-hidden />
-						</button>
-					</div>
-
-					<div
-						ref={carouselRef}
-						className="home-empower-carousel"
-						role="region"
-						aria-label={t("carousel_aria")}
-						tabIndex={0}
-						onKeyDown={onCarouselKeyDown}
-					>
-						{CARDS.map(({ id, icon: Icon }, index) => (
-							<motion.article
-								key={id}
-								initial={
-									shouldReduceMotion || !shouldAnimate
-										? false
-										: sectionRevealItem.hidden
-								}
-								animate={
-									isRevealed
-										? sectionRevealItem.visible
-										: sectionRevealItem.hidden
-								}
-								transition={sectionItemTransition(
-									shouldAnimate,
-									index * 0.08,
-									!!shouldReduceMotion,
-								)}
-								className="home-ecard"
-							>
-								<div className="home-ecard-head">
-									<div className="home-ecard-icon">
-										<Icon
-											className="size-4"
-											strokeWidth={1.75}
-											aria-hidden
-										/>
+					<div className="home-empower-bento" role="list">
+						{CELLS.map(({ id, icon: Icon, area, featured }, index) => {
+							const body = (
+								<>
+									<div className="home-ecard-head">
+										<div className="home-ecard-icon">
+											<Icon
+												className={featured ? "size-4 md:size-5" : "size-4"}
+												strokeWidth={1.75}
+												aria-hidden
+											/>
+										</div>
+										<h3>{t(`cards.${id}.title`)}</h3>
 									</div>
-									<h3>{t(`cards.${id}.title`)}</h3>
-								</div>
-								<p>{t(`cards.${id}.description`)}</p>
-							</motion.article>
-						))}
+									<p>{t(`cards.${id}.description`)}</p>
+								</>
+							);
+
+							return (
+								<motion.div
+									key={id}
+									role="listitem"
+									{...motionProps(0.1 + index * 0.08)}
+									className="home-empower-cell"
+									style={{ gridArea: area }}
+								>
+									{featured ? (
+										<BorderGlow
+											className="home-ecard home-ecard--featured"
+											borderRadius={28}
+											backgroundColor="color-mix(in srgb, var(--dash-brand) 6%, var(--bg))"
+											glowColor="221 100 57"
+											colors={["#2469ff", "#32fcb6", "#6b9bff"]}
+											glowRadius={isDark ? 40 : 52}
+											glowIntensity={isDark ? 1 : 1.75}
+											fillOpacity={isDark ? 0.5 : 0.7}
+										>
+											{body}
+										</BorderGlow>
+									) : (
+										<article className="home-ecard">{body}</article>
+									)}
+								</motion.div>
+							);
+						})}
 					</div>
 				</div>
 			</div>

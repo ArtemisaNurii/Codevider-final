@@ -30,7 +30,7 @@ export default function GlobalPartnerships() {
 	return (
 		<section
 			ref={ref}
-			className="home-section relative overflow-visible"
+			className="home-section home-feature-alt relative overflow-visible"
 			style={{
 				paddingTop: "var(--home-section-y-tight)",
 				paddingBottom: "1.1rem",

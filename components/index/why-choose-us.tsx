@@ -1,6 +1,5 @@
 "use client";
 
-import { BadgeCheck, Gauge, Layers } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useCopy } from "@/lib/copy";
 import {
@@ -10,19 +9,12 @@ import {
 } from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
-const PILLARS = [
-	{ id: "efficiency", icon: Gauge },
-	{ id: "flexibility", icon: Layers },
-	{ id: "expertise", icon: BadgeCheck },
-] as const;
-
-const YEARS_SINCE = 2019;
+const PILLARS = ["collaboration", "efficiency", "expertise"] as const;
 
 export default function WhyChooseUs() {
 	const t = useCopy("home.why_choose");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
-	const yearsValue = `${new Date().getFullYear() - YEARS_SINCE}+`;
 
 	const motionProps = (delay: number) => ({
 		initial:
@@ -36,59 +28,45 @@ export default function WhyChooseUs() {
 	});
 
 	return (
-		<section ref={ref} className="home-section home-feature-alt">
+		<section ref={ref} className="home-section">
 			<div className="home-wrap">
 				<motion.div {...motionProps(0)}>
 					<SectionHead
 						eyebrow={t("eyebrow")}
 						headline={t("headline")}
 						description={t("description")}
-						centered
-						className="max-sm:mx-0 max-sm:max-w-none max-sm:text-left [&_.home-eyebrow]:max-sm:justify-start [&_p]:max-sm:mx-0"
-						descriptionClassName="text-[0.9375rem] sm:text-base"
+						className="max-w-160 max-sm:mx-0 max-sm:max-w-none [&_.home-eyebrow]:max-sm:justify-start"
+						descriptionClassName="mt-5 text-[0.9375rem] sm:text-base"
 					/>
 				</motion.div>
 
-				<div className="home-section-lead why-choose-pillars">
-					{PILLARS.map(({ id, icon: Icon }, index) => (
-						<motion.article
-							key={id}
-							{...motionProps(0.08 + index * 0.08)}
-							className="why-choose-pillar"
-						>
-							<div className="home-ecard-icon shrink-0">
-								<Icon className="size-[18px]" aria-hidden />
-							</div>
-							<div className="min-w-0">
-								<h3>{t(`pillars.${id}.title`)}</h3>
-								<p>{t(`pillars.${id}.description`)}</p>
-							</div>
-						</motion.article>
-					))}
-				</div>
+				<div className="home-section-lead why-choose">
+					<motion.aside
+						{...motionProps(0.08)}
+						className="why-choose-proof h-full"
+					>
+						<p className="why-choose-proof__label">{t("proof_label")}</p>
+						<p className="why-choose-proof__year font-(family-name:--mono) tabular-nums">
+							{t("proof_year")}
+						</p>
+						<p className="why-choose-proof__lede">{t("proof_description")}</p>
+						<p className="why-choose-proof__aside">{t("proof_aside")}</p>
+					</motion.aside>
 
-				<motion.div {...motionProps(0.36)} className="why-choose-foot">
-					<div className="why-choose-stat">
-						<span className="why-choose-stat__value font-(family-name:--mono) tabular-nums">
-							{yearsValue}
-						</span>
-						<div className="min-w-0">
-							<p className="why-choose-stat__title">{t("years_title")}</p>
-							<p className="why-choose-stat__desc">{t("years_description")}</p>
-						</div>
+					<div className="why-choose-pillars" role="list">
+						{PILLARS.map((id, index) => (
+							<motion.article
+								key={id}
+								role="listitem"
+								{...motionProps(0.16 + index * 0.08)}
+								className="why-choose-pillar"
+							>
+								<h3 className="text-balance">{t(`pillars.${id}.title`)}</h3>
+								<p className="text-pretty">{t(`pillars.${id}.description`)}</p>
+							</motion.article>
+						))}
 					</div>
-					<div className="why-choose-stat">
-						<span className="why-choose-stat__value font-(family-name:--mono) tabular-nums">
-							{t("projects_value")}
-						</span>
-						<div className="min-w-0">
-							<p className="why-choose-stat__title">{t("projects_title")}</p>
-							<p className="why-choose-stat__desc">
-								{t("projects_description")}
-							</p>
-						</div>
-					</div>
-				</motion.div>
+				</div>
 			</div>
 		</section>
 	);

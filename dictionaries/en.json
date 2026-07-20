@@ -147,63 +147,45 @@
 			}
 		},
 		"empower": {
-			"eyebrow": "Who we empower",
-			"headline": "We empower tech startups, SMEs & global brands",
-			"description": "From early-stage product teams to enterprise modernization. We match the right engineering model to your stage, stack, and growth goals.",
-			"carousel_aria": "Who we empower",
-			"scroll_left": "Previous cards",
-			"scroll_right": "Next cards",
+			"eyebrow": "What we build",
+			"headline": "We build software. AI where it earns its place.",
+			"description": "From mobile and custom platforms to data, fintech, CRM, and enterprise modernization — plus automation, cloud, and AI integrated wherever it creates real leverage.",
 			"cards": {
-				"startups": {
-					"title": "Series A/B Startups",
-					"description": "Agile teams and cloud-native builds — from MVP acceleration to core-system scale."
+				"automation": {
+					"title": "Workflow Automation",
+					"description": "Connect people, systems, and data through automated workflows that eliminate repetitive work."
+				},
+				"cloud": {
+					"title": "Cloud & Infrastructure",
+					"description": "Design, deploy, and scale secure cloud infrastructure that keeps your products fast and reliable."
+				},
+				"ai": {
+					"title": "AI Integration",
+					"description": "Embed intelligence wherever it helps — chat, workflows, search, analytics — so AI shows up in the product, not as a bolted-on feature."
+				},
+				"mobile": {
+					"title": "Mobile Apps",
+					"description": "High-performance iOS, Android, and cross-platform apps with seamless UX."
+				},
+				"custom": {
+					"title": "Custom Software",
+					"description": "Scalable systems built around your workflows — not off-the-shelf constraints."
+				},
+				"data": {
+					"title": "Data & BI",
+					"description": "Warehouses, dashboards, and real-time analytics that turn data into decisions."
 				},
 				"enterprise": {
 					"title": "Enterprise Modernization",
 					"description": "Modernize legacy systems, cut technical debt, and unlock room for new product work."
 				},
-				"crm": {
-					"title": "CRM-Centric Organizations",
-					"description": "HubSpot-centric CRM structures that centralize data and power smarter decisions."
-				},
-				"custom": {
-					"title": "Custom Software Solutions",
-					"description": "Scalable software built around your workflows — not off-the-shelf constraints."
-				},
 				"fintech": {
 					"title": "Fintech & Payments",
 					"description": "Secure, compliant banking and trading platforms with seamless UX at global scale."
 				},
-				"ai": {
-					"title": "AI & Automation",
-					"description": "Chatbots, predictive analytics, and automation that cut manual work and grow revenue."
-				},
-				"data": {
-					"title": "Data & Analytics",
-					"description": "BI dashboards, warehouses, and real-time analytics that turn data into decisions."
-				},
-				"mobile": {
-					"title": "Mobile App Development",
-					"description": "High-performance iOS, Android, and cross-platform apps with seamless UX."
-				}
-			}
-		},
-		"outsource": {
-			"eyebrow": "Why outsource with us",
-			"headline": "Outsource engineering, accelerate growth",
-			"description": "Achieve cost efficiency and expert accuracy. Scale with agile adaptability and concentrate on your core strengths.",
-			"pillars": {
-				"collaboration": {
-					"title": "Transparent Collaboration",
-					"description": "As your outsourced development partner, we integrate seamlessly with your in-house teams through open communication, shared roadmaps, and full visibility into every stage of our workflow."
-				},
-				"legal": {
-					"title": "Legal Protection",
-					"description": "Our developers build applications for clients only, you retain 100% of the intellectual property rights to your software. We also sign NDAs and non-competition agreements for full legal protection."
-				},
-				"cost": {
-					"title": "Cost-Effective Development",
-					"description": "Work without sacrificing code quality. Codevider is headquartered in Tirana, Albania, a well-known hub for top-tier web app developers at budget-friendly rates."
+				"crm": {
+					"title": "CRM & Sales Platforms",
+					"description": "HubSpot-centric CRM structures that centralize data and power smarter decisions."
 				}
 			}
 		},
@@ -218,25 +200,24 @@
 		},
 		"why_choose": {
 			"eyebrow": "Why clients choose us",
-			"headline": "A partnership built on three pillars",
-			"description": "Efficiency, flexibility, and deep expertise. The foundation of every engagement.",
-			"years_title": "Years of hands-on delivery",
-			"years_description": "Benefit from the innovative viewpoints our team brings to every engagement.",
-			"projects_value": "45+",
-			"projects_title": "Global projects",
-			"projects_description": "Shipped across industries and time zones — from startups to established product teams.",
+			"headline": "Senior partners, not extra hands",
+			"description": "We embed with your team, move at product pace, and leave you with full ownership of everything we ship.",
+			"proof_label": "Shipping since",
+			"proof_year": "2019",
+			"proof_description": "Mature process, sharp engineering, and a delivery model built for product teams under real deadline pressure.",
+			"proof_aside": "45+ projects across time zones. Full IP ownership — yours from day one.",
 			"pillars": {
-				"efficiency": {
-					"title": "Efficiency that compounds",
-					"description": "Skip expensive hiring cycles. Our process gets you to market faster, with less waste and clearer outcomes."
+				"collaboration": {
+					"title": "Seamless collaboration",
+					"description": "We plug into your stack and rituals — Slack, Jira, GitHub — with shared roadmaps and full visibility. No black-box agency handoffs."
 				},
-				"flexibility": {
-					"title": "Flexibility you control",
-					"description": "Scale the team on demand and keep the roadmap yours — collaborating in Slack, Jira, GitHub, and your tools."
+				"efficiency": {
+					"title": "Value-driven efficiency",
+					"description": "Skip slow hiring cycles. Based in Tirana, Albania — a strong European tech hub — we ship senior web engineering at optimized rates without cutting quality."
 				},
 				"expertise": {
 					"title": "Expertise on demand",
-					"description": "Inject fresh perspective when you need it. Motivated specialists who bring sharp solutions, not just extra hands."
+					"description": "Senior specialists who bring sharp, proactive solutions when your product needs them most — not just capacity to fill a roster."
 				}
 			}
 		},

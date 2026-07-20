@@ -12,9 +12,12 @@ import RotatingWord from "./rotating-word";
 const HERO_FINE_POINTER_QUERY = "(any-pointer: fine)";
 const HERO_DESKTOP_VIEWPORT_QUERY = "(min-width: 1024px)";
 
-const GradientBlinds = dynamic(() => import("@/components/ui/gradient-blinds"), {
-	ssr: false,
-});
+const GradientBlinds = dynamic(
+	() => import("@/components/ui/gradient-blinds"),
+	{
+		ssr: false,
+	},
+);
 
 /**
  * Hero section for the home page.

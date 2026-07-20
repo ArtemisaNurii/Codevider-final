@@ -345,9 +345,7 @@ export function Navbar() {
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						transition={
-							shouldReduceMotion
-								? instantTransition
-								: { duration: 0.25 }
+							shouldReduceMotion ? instantTransition : { duration: 0.25 }
 						}
 					>
 						<div
@@ -386,15 +384,11 @@ export function Navbar() {
 									<motion.div
 										key={href}
 										initial={
-											shouldReduceMotion
-												? false
-												: { opacity: 0, x: -24 }
+											shouldReduceMotion ? false : { opacity: 0, x: -24 }
 										}
 										animate={{ opacity: 1, x: 0 }}
 										transition={{
-											delay: shouldReduceMotion
-												? 0
-												: 0.08 + index * 0.06,
+											delay: shouldReduceMotion ? 0 : 0.08 + index * 0.06,
 											duration: shouldReduceMotion ? 0 : 0.45,
 											ease: [0.22, 1, 0.36, 1],
 										}}
@@ -417,9 +411,7 @@ export function Navbar() {
 
 							<motion.div
 								className="mt-auto mb-10"
-								initial={
-									shouldReduceMotion ? false : { opacity: 0, y: 16 }
-								}
+								initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{
 									delay: shouldReduceMotion ? 0 : 0.36,

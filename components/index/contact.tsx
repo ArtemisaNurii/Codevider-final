@@ -137,7 +137,7 @@ export default function Contact() {
 	};
 
 	return (
-		<section ref={ref} className="home-section">
+		<section ref={ref} className="home-section home-feature-alt">
 			<SectionHead
 				eyebrow={t("eyebrow")}
 				headline={t("headline")}
