@@ -99,7 +99,8 @@ export default function WhoWeEmpower() {
 									{featured ? (
 										<BorderGlow
 											className="home-ecard home-ecard--featured"
-											borderRadius={28}
+											alwaysOn
+											borderRadius={12}
 											backgroundColor="color-mix(in srgb, var(--dash-brand) 6%, var(--bg))"
 											glowColor="221 100 57"
 											colors={["#2469ff", "#32fcb6", "#6b9bff"]}

@@ -1826,9 +1826,8 @@ code {
 }
 
 .home-ecard {
-	/* concentric: icon 8px + pad 12px = card 20px */
-	--ecard-pad: 0.75rem;
-	--ecard-radius: 20px;
+	--ecard-pad: 1.5rem;
+	--ecard-radius: 12px;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -1968,9 +1967,6 @@ code {
 	}
 
 	.home-ecard--featured {
-		/* concentric: icon 10px + pad 18px = card 28px */
-		--ecard-pad: 1.125rem;
-		--ecard-radius: 28px;
 		justify-content: center;
 		gap: 0.875rem;
 		background: linear-gradient(
@@ -1986,7 +1982,7 @@ code {
 
 	.home-ecard--featured.border-glow {
 		place-items: center;
-		border-radius: 28px !important;
+		border-radius: var(--ecard-radius) !important;
 		background: color-mix(in srgb, var(--dash-brand) 6%, var(--bg)) !important;
 		/* inline backgroundColor drives the mask punch-out; keep elevation soft */
 		box-shadow:

@@ -24,6 +24,8 @@ interface BorderGlowProps {
 	coneSpread?: number;
 	colors?: string[];
 	fillOpacity?: number;
+	/** Keep the multicolor border + glow visible at rest (not only on hover). */
+	alwaysOn?: boolean;
 }
 
 function parseHSL(hslStr: string): { h: number; s: number; l: number } {
@@ -85,7 +87,31 @@ function buildMeshGradients(colors: string[]): string[] {
 	return gradients;
 }
 
+function conicBorderMask(angleDeg: string, coneSpread: number): string {
+	return `conic-gradient(from ${angleDeg} at center, black ${coneSpread}%, transparent ${coneSpread + 15}%, transparent ${100 - coneSpread - 15}%, black ${100 - coneSpread}%)`;
+}
+
+function conicFillMasks(angleDeg: string): string {
+	return [
+		"linear-gradient(to bottom, black, black)",
+		"radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%)",
+		"radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%)",
+		"radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%)",
+		"radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%)",
+		"radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%)",
+		`conic-gradient(from ${angleDeg} at center, transparent 5%, black 15%, black 85%, transparent 95%)`,
+	].join(", ");
+}
+
+function conicHaloMask(angleDeg: string): string {
+	return `conic-gradient(from ${angleDeg} at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%)`;
+}
+
 const BRAND_MESH = ["#2469ff", "#32fcb6", "#6b9bff"] as const;
+/** Resting edge proximity so always-on glow clears sensitivity thresholds. */
+const ALWAYS_ON_PROXIMITY = 0.92;
+/** Degrees per second for the idle orbit. */
+const IDLE_SWEEP_DEG_PER_SEC = 28;
 
 export default function BorderGlow({
 	children,
@@ -99,12 +125,46 @@ export default function BorderGlow({
 	coneSpread = 25,
 	colors = [...BRAND_MESH],
 	fillOpacity = 0.45,
+	alwaysOn = false,
 }: BorderGlowProps) {
 	const cardRef = useRef<HTMLDivElement>(null);
+	const borderRef = useRef<HTMLDivElement>(null);
+	const fillRef = useRef<HTMLDivElement>(null);
+	const haloRef = useRef<HTMLSpanElement>(null);
 	const shouldReduceMotion = useReducedMotion();
 	const [isHovered, setIsHovered] = useState(false);
 	const [cursorAngle, setCursorAngle] = useState(45);
-	const [edgeProximity, setEdgeProximity] = useState(0);
+	const [edgeProximity, setEdgeProximity] = useState(
+		alwaysOn ? ALWAYS_ON_PROXIMITY : 0,
+	);
+	const angleRef = useRef(45);
+	const isHoveredRef = useRef(false);
+	const coneSpreadRef = useRef(coneSpread);
+	coneSpreadRef.current = coneSpread;
+
+	const applyAngleMasks = useCallback((degrees: number) => {
+		const angleDeg = `${degrees.toFixed(3)}deg`;
+		const border = borderRef.current;
+		const fill = fillRef.current;
+		const halo = haloRef.current;
+		const spread = coneSpreadRef.current;
+		const borderMask = conicBorderMask(angleDeg, spread);
+		const fillMask = conicFillMasks(angleDeg);
+		const haloMask = conicHaloMask(angleDeg);
+
+		if (border) {
+			border.style.maskImage = borderMask;
+			border.style.webkitMaskImage = borderMask;
+		}
+		if (fill) {
+			fill.style.maskImage = fillMask;
+			fill.style.webkitMaskImage = fillMask;
+		}
+		if (halo) {
+			halo.style.maskImage = haloMask;
+			halo.style.webkitMaskImage = haloMask;
+		}
+	}, []);
 
 	const getCenterOfElement = useCallback((el: HTMLElement) => {
 		const { width, height } = el.getBoundingClientRect();
@@ -147,35 +207,73 @@ export default function BorderGlow({
 			const rect = card.getBoundingClientRect();
 			const x = e.clientX - rect.left;
 			const y = e.clientY - rect.top;
+			const nextAngle = getCursorAngle(card, x, y);
+			angleRef.current = nextAngle;
 			setEdgeProximity(getEdgeProximity(card, x, y));
-			setCursorAngle(getCursorAngle(card, x, y));
+			setCursorAngle(nextAngle);
+			applyAngleMasks(nextAngle);
 		},
-		[getEdgeProximity, getCursorAngle, shouldReduceMotion],
+		[getEdgeProximity, getCursorAngle, shouldReduceMotion, applyAngleMasks],
 	);
 
 	const handlePointerEnter = useCallback(() => {
+		isHoveredRef.current = true;
 		setIsHovered(true);
-		if (shouldReduceMotion) setEdgeProximity(0.72);
+		if (shouldReduceMotion) {
+			setEdgeProximity(ALWAYS_ON_PROXIMITY);
+		}
 	}, [shouldReduceMotion]);
 
 	const handlePointerLeave = useCallback(() => {
+		isHoveredRef.current = false;
 		setIsHovered(false);
-		setEdgeProximity(0);
-	}, []);
+		setCursorAngle(angleRef.current);
+		setEdgeProximity(alwaysOn ? ALWAYS_ON_PROXIMITY : 0);
+	}, [alwaysOn]);
+
+	useEffect(() => {
+		if (!alwaysOn) return;
+		setEdgeProximity(ALWAYS_ON_PROXIMITY);
+	}, [alwaysOn]);
 
 	useEffect(() => {
 		if (!shouldReduceMotion) return;
-		if (!isHovered) setEdgeProximity(0);
-	}, [shouldReduceMotion, isHovered]);
+		setEdgeProximity(alwaysOn || isHovered ? ALWAYS_ON_PROXIMITY : 0);
+	}, [shouldReduceMotion, alwaysOn, isHovered]);
+
+	// Idle orbit: drift the cone when always-on and not hovered (DOM-only, no React churn).
+	useEffect(() => {
+		if (!alwaysOn || shouldReduceMotion) return;
+
+		let frame = 0;
+		let last = performance.now();
+
+		const tick = (now: number) => {
+			const dt = Math.min((now - last) / 1000, 0.05);
+			last = now;
+
+			if (!isHoveredRef.current) {
+				angleRef.current =
+					(angleRef.current + IDLE_SWEEP_DEG_PER_SEC * dt) % 360;
+				applyAngleMasks(angleRef.current);
+			}
+
+			frame = requestAnimationFrame(tick);
+		};
+
+		frame = requestAnimationFrame(tick);
+		return () => cancelAnimationFrame(frame);
+	}, [alwaysOn, shouldReduceMotion, applyAngleMasks]);
 
 	const colorSensitivity = edgeSensitivity + 20;
-	const borderOpacity = isHovered
+	const isVisible = alwaysOn || isHovered;
+	const borderOpacity = isVisible
 		? Math.max(
 				0,
 				(edgeProximity * 100 - colorSensitivity) / (100 - colorSensitivity),
 			)
 		: 0;
-	const glowOpacity = isHovered
+	const glowOpacity = isVisible
 		? Math.max(
 				0,
 				(edgeProximity * 100 - edgeSensitivity) / (100 - edgeSensitivity),
@@ -186,7 +284,7 @@ export default function BorderGlow({
 	const borderBg = meshGradients.map((g) => `${g} border-box`);
 	const fillBg = meshGradients.map((g) => `${g} padding-box`);
 	const angleDeg = `${cursorAngle.toFixed(3)}deg`;
-	const fade = isHovered
+	const fade = isVisible
 		? "opacity 0.25s cubic-bezier(0.2, 0, 0, 1)"
 		: "opacity 0.75s cubic-bezier(0.2, 0, 0, 1)";
 
@@ -198,32 +296,16 @@ export default function BorderGlow({
 			...borderBg,
 		].join(", "),
 		opacity: borderOpacity,
-		maskImage: `conic-gradient(from ${angleDeg} at center, black ${coneSpread}%, transparent ${coneSpread + 15}%, transparent ${100 - coneSpread - 15}%, black ${100 - coneSpread}%)`,
-		WebkitMaskImage: `conic-gradient(from ${angleDeg} at center, black ${coneSpread}%, transparent ${coneSpread + 15}%, transparent ${100 - coneSpread - 15}%, black ${100 - coneSpread}%)`,
+		maskImage: conicBorderMask(angleDeg, coneSpread),
+		WebkitMaskImage: conicBorderMask(angleDeg, coneSpread),
 		transition: fade,
 	};
 
 	const fillLayerStyle: CSSProperties = {
 		border: "1px solid transparent",
 		background: fillBg.join(", "),
-		maskImage: [
-			"linear-gradient(to bottom, black, black)",
-			"radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%)",
-			"radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%)",
-			"radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%)",
-			"radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%)",
-			"radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%)",
-			`conic-gradient(from ${angleDeg} at center, transparent 5%, black 15%, black 85%, transparent 95%)`,
-		].join(", "),
-		WebkitMaskImage: [
-			"linear-gradient(to bottom, black, black)",
-			"radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%)",
-			"radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%)",
-			"radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%)",
-			"radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%)",
-			"radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%)",
-			`conic-gradient(from ${angleDeg} at center, transparent 5%, black 15%, black 85%, transparent 95%)`,
-		].join(", "),
+		maskImage: conicFillMasks(angleDeg),
+		WebkitMaskImage: conicFillMasks(angleDeg),
 		maskComposite: "subtract, add, add, add, add, add",
 		WebkitMaskComposite:
 			"source-out, source-over, source-over, source-over, source-over, source-over",
@@ -234,8 +316,8 @@ export default function BorderGlow({
 
 	const haloStyle: CSSProperties = {
 		inset: `${-glowRadius}px`,
-		maskImage: `conic-gradient(from ${angleDeg} at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%)`,
-		WebkitMaskImage: `conic-gradient(from ${angleDeg} at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%)`,
+		maskImage: conicHaloMask(angleDeg),
+		WebkitMaskImage: conicHaloMask(angleDeg),
 		opacity: glowOpacity,
 		transition: fade,
 	};
@@ -253,12 +335,23 @@ export default function BorderGlow({
 			}}
 		>
 			<div
+				ref={borderRef}
 				className="border-glow__border"
 				style={borderLayerStyle}
 				aria-hidden
 			/>
-			<div className="border-glow__fill" style={fillLayerStyle} aria-hidden />
-			<span className="border-glow__halo" style={haloStyle} aria-hidden>
+			<div
+				ref={fillRef}
+				className="border-glow__fill"
+				style={fillLayerStyle}
+				aria-hidden
+			/>
+			<span
+				ref={haloRef}
+				className="border-glow__halo"
+				style={haloStyle}
+				aria-hidden
+			>
 				<span
 					className="border-glow__halo-inner"
 					style={{
