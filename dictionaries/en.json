@@ -65,7 +65,7 @@
 		"base_currency_position": "before",
 		"features": {
 			"ai": {
-				"badge": "01 · AI Integration",
+				"badge": "01 – AI Integration",
 				"headline": "Ship AI features your users actually feel",
 				"description": "From custom LLM-powered apps and intelligent chatbots to workflow automation and actionable insights seamlessly embedded into your existing ecosystem.",
 				"bullet_1": "Custom LLM apps & assistants trained on your data",
@@ -87,7 +87,7 @@
 				}
 			},
 			"engineering": {
-				"badge": "02 · Product Engineering",
+				"badge": "02 – Product Engineering",
 				"headline": "Clean architecture, shipped on a cadence",
 				"description": "We design and develop scalable web applications and intuitive products with clean architecture and agile release cycles ensuring faster time-to-market and long-term maintainability.",
 				"bullet_1": "Modern, typed, well-tested codebases",
@@ -100,7 +100,7 @@
 				}
 			},
 			"pod": {
-				"badge": "03 · Dedicated Pod Teams",
+				"badge": "03 – Dedicated Pod Teams",
 				"headline": "A full squad, embedded in two weeks",
 				"description": "Quickly stand up cross-functional pods such as frontend, backend, and QA that plug into your process. Scale effortlessly with flexible, SLA-backed engagements tailored to your needs.",
 				"bullet_1": "Cross-functional from the first sprint",
@@ -122,7 +122,7 @@
 				}
 			},
 			"devops": {
-				"badge": "04 · Cloud & DevOps",
+				"badge": "04 – Cloud & DevOps",
 				"headline": "Ship to production with confidence",
 				"description": "Streamline deployments with CI/CD pipelines, containerization, and secure cloud infrastructure on AWS ensuring high availability and operational efficiency.",
 				"bullet_1": "Automated build, test & deploy pipelines",
@@ -150,39 +150,41 @@
 			"eyebrow": "Who we empower",
 			"headline": "We empower tech startups, SMEs & global brands",
 			"description": "From early-stage product teams to enterprise modernization. We match the right engineering model to your stage, stack, and growth goals.",
-			"featured_pin": "Core capability",
+			"carousel_aria": "Who we empower",
+			"scroll_left": "Previous cards",
+			"scroll_right": "Next cards",
 			"cards": {
 				"startups": {
 					"title": "Series A/B Startups",
-					"description": "We help fast-growing startups scale with agile teams and cloud-native solutions, from MVP acceleration to core-system growth."
+					"description": "Agile teams and cloud-native builds — from MVP acceleration to core-system scale."
 				},
 				"enterprise": {
 					"title": "Enterprise Modernization",
-					"description": "We modernize legacy systems with cloud-native solutions, reducing technical debt, improving performance, and unlocking innovation."
+					"description": "Modernize legacy systems, cut technical debt, and unlock room for new product work."
 				},
 				"crm": {
 					"title": "CRM-Centric Organizations",
-					"description": "We design tailored CRM and HubSpot-centric structures that centralize data, improve experiences, and power smarter decisions."
+					"description": "HubSpot-centric CRM structures that centralize data and power smarter decisions."
 				},
 				"custom": {
 					"title": "Custom Software Solutions",
-					"description": "Off-the-shelf tools don't fit every need. We build scalable, flexible software that evolves with your business and delivers measurable results."
+					"description": "Scalable software built around your workflows — not off-the-shelf constraints."
 				},
 				"fintech": {
 					"title": "Fintech & Payments",
-					"description": "From digital banking to trading platforms, we create secure, compliant fintech solutions that scale globally with seamless UX."
+					"description": "Secure, compliant banking and trading platforms with seamless UX at global scale."
 				},
 				"ai": {
 					"title": "AI & Automation",
-					"description": "We implement AI-powered chatbots, predictive analytics, and automation systems that cut manual work and drive new revenue."
+					"description": "Chatbots, predictive analytics, and automation that cut manual work and grow revenue."
 				},
 				"data": {
 					"title": "Data & Analytics",
-					"description": "We turn raw data into actionable insight with BI dashboards, data warehouses, and real-time analytics built for smarter decisions."
+					"description": "BI dashboards, warehouses, and real-time analytics that turn data into decisions."
 				},
 				"mobile": {
 					"title": "Mobile App Development",
-					"description": "We build high-performance iOS, Android, and cross-platform apps with seamless UX, keeping your brand connected anytime, anywhere."
+					"description": "High-performance iOS, Android, and cross-platform apps with seamless UX."
 				}
 			}
 		},
@@ -218,29 +220,23 @@
 			"eyebrow": "Why clients choose us",
 			"headline": "A partnership built on three pillars",
 			"description": "Efficiency, flexibility, and deep expertise. The foundation of every engagement.",
-			"value_badge": "Our value proposition",
-			"value_flow": "Efficiency → Flexibility → Expertise",
-			"value_description": "We deliver more than code, a strategic partnership designed for growth, where you stay in control at every step.",
-			"flex_value": "100%",
-			"flex_title": "Flexibility & control",
-			"flex_description": "Manage and stay in control of your own project at all times, your roadmap, your priorities.",
-			"years_title": "years of experience",
-			"years_description": "Benefit from the innovative viewpoints our team brings.",
-			"cards": {
-				"savings": {
-					"pin": "Avg. savings",
-					"title": "Significant cost & time savings",
-					"description": "Bypass expensive hiring and training. Our streamlined process gets you to market faster, saving crucial time and resources."
+			"years_title": "Years of hands-on delivery",
+			"years_description": "Benefit from the innovative viewpoints our team brings to every engagement.",
+			"projects_value": "45+",
+			"projects_title": "Global projects",
+			"projects_description": "Shipped across industries and time zones — from startups to established product teams.",
+			"pillars": {
+				"efficiency": {
+					"title": "Efficiency that compounds",
+					"description": "Skip expensive hiring cycles. Our process gets you to market faster, with less waste and clearer outcomes."
 				},
-				"control": {
-					"pin": "Control",
-					"title": "Total flexibility & control",
-					"description": "Scale your team on demand and stay in control across multiple projects, collaborating through Slack, Jira, GitHub, and your tools."
+				"flexibility": {
+					"title": "Flexibility you control",
+					"description": "Scale the team on demand and keep the roadmap yours — collaborating in Slack, Jira, GitHub, and your tools."
 				},
 				"expertise": {
-					"pin": "Perspective",
-					"title": "Creative expertise on demand",
-					"description": "Inject fresh creativity. Our highly-motivated professionals bring new perspectives and innovative solutions to the table."
+					"title": "Expertise on demand",
+					"description": "Inject fresh perspective when you need it. Motivated specialists who bring sharp solutions, not just extra hands."
 				}
 			}
 		},

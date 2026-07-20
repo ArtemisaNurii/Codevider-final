@@ -22,7 +22,7 @@ export default function WhyOutsource() {
 	const shouldReduceMotion = useReducedMotion();
 
 	return (
-		<section ref={ref} className="home-section home-feature-alt">
+		<section ref={ref} className="home-section">
 			<div className="home-wrap">
 				<motion.div
 					initial={

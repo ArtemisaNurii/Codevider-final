@@ -23,7 +23,7 @@ export function ThemeToggle({
 	const buttonClasses = `relative flex items-center rounded-full border active:scale-[0.96] disabled:pointer-events-none disabled:opacity-70 ${
 		fullWidth
 			? "min-w-0 w-full flex-1 justify-start gap-2 px-4 py-2.5"
-			: "size-9 justify-center"
+			: "size-10 justify-center"
 	} ${
 		variant === "dark"
 			? "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white"

@@ -34,8 +34,8 @@ export default async function Home() {
 			<CoreServices />
 			<WhoWeEmpower />
 			<WhyOutsource />
-			<GlobalPartnerships />
 			<WhyChooseUs />
+			<GlobalPartnerships />
 			<Faq />
 			<Contact />
 			<StructuredData

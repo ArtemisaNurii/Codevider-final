@@ -137,7 +137,7 @@ export default function Contact() {
 	};
 
 	return (
-		<section ref={ref} className="home-section home-feature-alt">
+		<section ref={ref} className="home-section">
 			<SectionHead
 				eyebrow={t("eyebrow")}
 				headline={t("headline")}
@@ -329,7 +329,7 @@ export default function Contact() {
 							<button
 								type="submit"
 								disabled={isSubmitting || (hasMounted && !turnstileToken)}
-								className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-(--dash-brand-solid) py-4 pl-7 pr-6 text-base font-semibold text-(--on-brand) transition-[background-color,transform] duration-150 ease-out hover:bg-(--dash-brand-solid-hover) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--focus-ring) active:scale-[0.96] motion-reduce:active:scale-100 disabled:cursor-not-allowed disabled:opacity-60"
+								className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-(--dash-brand-solid) py-3.5 pl-6 pr-5 text-base font-semibold text-(--on-brand) transition-[background-color,transform] duration-150 ease-out hover:bg-(--dash-brand-solid-hover) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--focus-ring) active:scale-[0.96] motion-reduce:active:scale-100 disabled:cursor-not-allowed disabled:opacity-60"
 							>
 								{isSubmitting ? t("form_submitting") : t("form_submit")}
 								<Send className="size-4" aria-hidden />

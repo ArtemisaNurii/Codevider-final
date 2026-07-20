@@ -4,6 +4,7 @@ type SectionHeadProps = {
 	description?: string;
 	centered?: boolean;
 	className?: string;
+	descriptionClassName?: string;
 };
 
 export default function SectionHead({
@@ -12,19 +13,22 @@ export default function SectionHead({
 	description,
 	centered = false,
 	className = "",
+	descriptionClassName = "",
 }: SectionHeadProps) {
 	return (
 		<div
-			className={`max-w-[680px] ${centered ? "mx-auto text-center" : ""} ${className}`}
+			className={`max-w-[36rem] ${centered ? "mx-auto text-center" : ""} ${className}`}
 		>
 			<p className={`home-eyebrow ${centered ? "home-eyebrow--center" : ""}`}>
 				{eyebrow}
 			</p>
-			<h2 className="mt-[clamp(1.125rem,2.5vw,1.5rem)] text-balance text-[clamp(1.75rem,4.6vw,3.125rem)] leading-[1.05] tracking-[-0.02em] text-(--text-h)">
+			<h2 className="mt-3.5 text-balance text-[clamp(1.75rem,4vw,2.6rem)] leading-[1.12] tracking-tight text-(--text-h)">
 				{headline}
 			</h2>
 			{description ? (
-				<p className="mt-[clamp(1rem,2vw,1.375rem)] text-pretty text-[clamp(1rem,1.4vw,1.1875rem)] leading-relaxed text-(--text)">
+				<p
+					className={`max-w-[70ch] text-pretty leading-relaxed text-(--text) ${centered ? "mx-auto" : ""} ${descriptionClassName || "mt-5 text-base"}`}
+				>
 					{description}
 				</p>
 			) : null}

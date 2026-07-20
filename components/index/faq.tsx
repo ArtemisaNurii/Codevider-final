@@ -119,7 +119,7 @@ export default function Faq() {
 	const [openId, setOpenId] = useState<string | null>(null);
 
 	return (
-		<section ref={ref} className="home-section home-section--tight">
+		<section ref={ref} className="home-section home-section--tight home-feature-alt">
 			<div className="home-wrap">
 				<SectionHead eyebrow={t("eyebrow")} headline={t("headline")} centered />
 

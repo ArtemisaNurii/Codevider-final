@@ -310,40 +310,22 @@ export function Navbar() {
 
 							<DesktopNavLinks appearance={navAppearance} />
 
-							<div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3">
-								<div className="hidden items-center gap-2 navbar:flex">
-									<ThemeToggle variant={navAppearance} />
-								</div>
+							<div className="flex shrink-0 items-center justify-end gap-2.5">
+								<ThemeToggle variant={navAppearance} />
 
 								<button
 									type="button"
-									className={`relative flex size-9 items-center justify-center rounded-full border transition-[background-color,color] active:scale-[0.96] navbar:hidden ${
+									className={`grid size-10 place-items-center rounded-full border transition-[background-color,color,border-color] active:scale-[0.96] navbar:hidden ${
 										isDarkNav
-											? "border-white/10 bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white"
-											: "border-slate-200 bg-slate-900/5 text-slate-600 hover:bg-slate-900/10 hover:text-slate-900"
+											? "border-white/10 bg-white/5 text-white hover:border-white/20 hover:bg-white/10"
+											: "border-slate-200 bg-slate-900/5 text-slate-900 hover:border-slate-300 hover:bg-slate-900/10"
 									}`}
 									aria-expanded={mobileMenuOpen}
 									aria-controls="mobile-nav-menu"
-									aria-label={mobileMenuOpen ? t("close_menu") : t("open_menu")}
-									onClick={() => setMobileMenuOpen((open) => !open)}
+									aria-label={t("open_menu")}
+									onClick={() => setMobileMenuOpen(true)}
 								>
-									<motion.span
-										key={mobileMenuOpen ? "close" : "open"}
-										initial={
-											shouldReduceMotion
-												? false
-												: { opacity: 0, scale: 0.25 }
-										}
-										animate={{ opacity: 1, scale: 1 }}
-										transition={{ type: "spring", duration: 0.3, bounce: 0 }}
-										className="absolute flex items-center justify-center"
-									>
-										{mobileMenuOpen ? (
-											<X className="size-5" aria-hidden />
-										) : (
-											<Menu className="size-5" aria-hidden />
-										)}
-									</motion.span>
+									<Menu className="size-[18px]" aria-hidden />
 								</button>
 							</div>
 						</div>
@@ -351,100 +333,111 @@ export function Navbar() {
 				</motion.div>
 			</div>
 
-			<AnimatePresence initial={false}>
+			<AnimatePresence>
 				{mobileMenuOpen ? (
-					<>
-						<motion.button
-							type="button"
-							aria-label={t("close_menu")}
-							className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm navbar:hidden"
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							transition={{ duration: 0.2 }}
-							onClick={closeMobileMenu}
+					<motion.div
+						id="mobile-nav-menu"
+						role="dialog"
+						aria-modal="true"
+						aria-label={t("open_menu")}
+						className="mobile-nav-overlay fixed inset-0 z-[60] navbar:hidden"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={
+							shouldReduceMotion
+								? instantTransition
+								: { duration: 0.25 }
+						}
+					>
+						<div
+							className="pattern-grid mobile-nav-overlay__grid absolute inset-0"
+							aria-hidden
 						/>
+						<div className="relative flex h-full flex-col px-6">
+							<div className="flex h-[72px] items-center justify-between">
+								<Link
+									href="/"
+									aria-label="Codevider"
+									className="shrink-0 transition-opacity hover:opacity-90 active:scale-[0.96]"
+									onClick={closeMobileMenu}
+								>
+									<CodeviderLogo
+										compact={false}
+										variant={theme === "dark" ? "dark" : "light"}
+										stableLayout
+									/>
+								</Link>
+								<button
+									type="button"
+									onClick={closeMobileMenu}
+									aria-label={t("close_menu")}
+									className="mobile-nav-overlay__close grid size-10 place-items-center rounded-full active:scale-[0.96]"
+								>
+									<X className="size-[18px]" aria-hidden />
+								</button>
+							</div>
 
-						<motion.div
-							id="mobile-nav-menu"
-							role="dialog"
-							aria-modal="true"
-							aria-label={t("open_menu")}
-							className={`fixed inset-x-0 top-[72px] z-40 flex min-h-[calc(100svh-72px)] flex-col home-inline-x pb-6 pt-6 backdrop-blur-xl navbar:hidden ${
-								mounted
-									? isDarkNav
-										? "border-t border-white/10 bg-slate-900/95 shadow-[0_12px_40px_rgba(0,0,0,0.28)]"
-										: "border-t border-slate-200 bg-white/95 shadow-[0_12px_40px_rgba(0,0,0,0.08)]"
-									: ""
-							}`}
-							initial={shouldReduceMotion ? false : { opacity: 0, y: -8 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0, y: -8 }}
-							transition={
-								shouldReduceMotion
-									? instantTransition
-									: { type: "spring", duration: 0.35, bounce: 0 }
-							}
-						>
 							<nav
 								aria-label="Mobile navigation"
-								className="flex w-full flex-1 flex-col overflow-visible"
+								className="mt-10 flex flex-col gap-2"
 							>
-								<ul className="flex flex-col gap-1">
-									{navLinks.map(({ href, key }, index) => (
-										<motion.li
-											key={href}
-											initial={
-												shouldReduceMotion ? false : { opacity: 0, y: 8 }
-											}
-											animate={{ opacity: 1, y: 0 }}
-											transition={{
-												delay: shouldReduceMotion ? 0 : index * 0.05,
-												duration: 0.25,
-											}}
-										>
-											<NavLink
-												href={href}
-												label={t(key)}
-												isActive={pathname === href}
-												appearance={navAppearance}
-												onClick={closeMobileMenu}
-												className="block w-full px-4 py-3 text-base"
-												showStaticPill
-											/>
-										</motion.li>
-									))}
-
-									<motion.li
-										key="book-a-call"
-										initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
-										animate={{ opacity: 1, y: 0 }}
+								{navLinks.map(({ href, key }, index) => (
+									<motion.div
+										key={href}
+										initial={
+											shouldReduceMotion
+												? false
+												: { opacity: 0, x: -24 }
+										}
+										animate={{ opacity: 1, x: 0 }}
 										transition={{
-											delay: shouldReduceMotion ? 0 : navLinks.length * 0.05,
-											duration: 0.25,
+											delay: shouldReduceMotion
+												? 0
+												: 0.08 + index * 0.06,
+											duration: shouldReduceMotion ? 0 : 0.45,
+											ease: [0.22, 1, 0.36, 1],
 										}}
 									>
 										<Link
-											href="https://calendly.com/codevider/pasho"
-											className="home-brand-btn gap-2 flex w-full items-center justify-center px-4 py-3 text-base"
+											href={href}
 											onClick={closeMobileMenu}
+											data-active={pathname === href}
+											className="mobile-nav-link"
 										>
-											{t("book_a_call")}
-											<ArrowUpRight className="size-4 shrink-0" aria-hidden />
+											{t(key)}
+											<ArrowUpRight
+												className="mobile-nav-link__icon size-[22px]"
+												aria-hidden
+											/>
 										</Link>
-									</motion.li>
-								</ul>
-
-								<div
-									className={`mt-auto flex items-stretch gap-2 overflow-visible border-t pt-4 ${
-										isDarkNav ? "border-white/10" : "border-slate-200"
-									}`}
-								>
-									<ThemeToggle variant={navAppearance} fullWidth />
-								</div>
+									</motion.div>
+								))}
 							</nav>
-						</motion.div>
-					</>
+
+							<motion.div
+								className="mt-auto mb-10"
+								initial={
+									shouldReduceMotion ? false : { opacity: 0, y: 16 }
+								}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{
+									delay: shouldReduceMotion ? 0 : 0.36,
+									duration: shouldReduceMotion ? 0 : 0.45,
+									ease: [0.22, 1, 0.36, 1],
+								}}
+							>
+								<Link
+									href="https://calendly.com/codevider/pasho"
+									onClick={closeMobileMenu}
+									className="home-brand-btn inline-flex w-full items-center justify-center gap-2 px-6 py-4 text-base"
+								>
+									{t("book_a_call")}
+									<ArrowUpRight className="size-[18px] shrink-0" aria-hidden />
+								</Link>
+							</motion.div>
+						</div>
+					</motion.div>
 				) : null}
 			</AnimatePresence>
 

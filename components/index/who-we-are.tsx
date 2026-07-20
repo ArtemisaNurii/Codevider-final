@@ -72,7 +72,7 @@ function StatCard({
 }) {
 	return (
 		<motion.div
-			className={`stat-card ${tone} flex h-full flex-col justify-center rounded-2xl p-7 sm:p-9 ${wide ? "sm:col-span-2" : ""}`}
+			className={`stat-card ${tone} flex h-full flex-col justify-center rounded-2xl p-5 sm:p-6 ${wide ? "sm:col-span-2" : ""}`}
 			initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
 			animate={isRevealed ? "visible" : "hidden"}
 			variants={{
@@ -86,10 +86,10 @@ function StatCard({
 			}}
 		>
 			<div
-				className={`flex flex-col gap-4 wrap-break-word ${wide ? "max-w-2xl" : ""}`}
+				className={`flex flex-col gap-2.5 wrap-break-word ${wide ? "max-w-2xl" : ""}`}
 			>
 				<motion.p
-					className="stat-card-value font-(family-name:--mono) text-[clamp(2rem,4vw,2.75rem)] font-medium tabular-nums tracking-tight"
+					className="stat-card-value font-(family-name:--mono) text-[clamp(1.875rem,3.5vw,2.5rem)] font-medium tabular-nums tracking-tight"
 					variants={itemVariants}
 				>
 					{value}
@@ -122,7 +122,7 @@ export default function WhoWeAre() {
 			aria-labelledby="who-we-are-heading"
 			className="home-section home-feature-alt"
 		>
-			<div className="home-wrap grid w-full gap-14 lg:grid-cols-2 lg:gap-20 xl:gap-24">
+			<div className="home-wrap grid w-full gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">
 				<motion.div
 					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
 					animate={isRevealed ? "visible" : "hidden"}
@@ -134,20 +134,20 @@ export default function WhoWeAre() {
 
 					<motion.h2
 						id="who-we-are-heading"
-						className="mt-[clamp(1.125rem,2.5vw,1.5rem)] max-w-xl text-balance text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[1.12] tracking-[-0.02em] text-(--text-h)"
+						className="mt-[clamp(1rem,2vw,1.25rem)] max-w-xl text-balance text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[1.12] tracking-[-0.02em] text-(--text-h)"
 						variants={itemVariants}
 					>
 						{t("who_we_are_headline")}
 					</motion.h2>
 
 					<motion.p
-						className="mt-8  text-pretty text-base leading-relaxed text-(--text) sm:mt-10 sm:text-lg"
+						className="mt-4 max-w-[70ch] text-pretty text-base leading-relaxed text-(--text)"
 						variants={itemVariants}
 					>
 						{t("who_we_are_description")}
 					</motion.p>
 
-					<motion.div variants={itemVariants} className="mt-10 sm:mt-12">
+					<motion.div variants={itemVariants} className="mt-6">
 						<Link href="/about" className="home-ghost-btn">
 							{t("read_more_about_us")}
 							<ArrowRight className="size-4" aria-hidden />
@@ -155,7 +155,7 @@ export default function WhoWeAre() {
 					</motion.div>
 				</motion.div>
 
-				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:pl-6">
+				<div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5 lg:pl-4">
 					{STATS.map(({ valueKey, labelKey, wide, tone, value }, index) => (
 						<StatCard
 							key={valueKey}

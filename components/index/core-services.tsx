@@ -107,15 +107,15 @@ const listReveal = {
 
 function FeatureCheckList({ items }: { items: string[] }) {
 	return (
-		<motion.ul className="grid gap-4" variants={listReveal}>
+		<motion.ul className="mt-6 grid gap-3" variants={listReveal}>
 			{items.map((item) => (
 				<motion.li
 					key={item}
 					variants={reveal}
-					className="flex items-start gap-3.5 text-pretty text-[15px] leading-relaxed text-(--text-h)/80"
+					className="flex items-start gap-3 text-pretty text-sm leading-relaxed text-(--text)"
 				>
-					<span className="home-check mt-0.5">
-						<Check className="size-3.5" strokeWidth={3} aria-hidden />
+					<span className="home-check home-check--sm mt-0.5">
+						<Check className="size-2.5" strokeWidth={3} aria-hidden />
 					</span>
 					{item}
 				</motion.li>
@@ -199,7 +199,7 @@ function AiDemo() {
 	return (
 		<div
 			ref={ref}
-			className="home-demo home-demo--ai min-h-[340px] sm:min-h-[420px]"
+			className="home-demo home-demo--ai"
 		>
 			<div className="home-demo-head home-demo-head--wrap min-w-0 overflow-hidden">
 				<div
@@ -446,7 +446,7 @@ function PodDemo() {
 				</span>
 			</div>
 			<div className="flex flex-col items-center gap-6 px-4 py-8 md:hidden">
-				<div className="grid size-[104px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-white shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)]">
+				<div className="grid size-[104px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-(--on-brand) shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)]">
 					{t("center")}
 				</div>
 				<div className="grid w-full max-w-[20rem] grid-cols-2 gap-2.5">
@@ -471,7 +471,7 @@ function PodDemo() {
 					<span className="home-pod-ring absolute inset-0 rounded-full border-[1.5px] border-dashed border-(--border)" />
 					<span className="home-pod-ring home-pod-ring--reverse absolute inset-[55px] rounded-full border-[1.5px] border-dashed border-(--border)" />
 					<div className="absolute inset-0 grid place-items-center">
-						<div className="relative z-2 grid size-[108px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-white shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)]">
+						<div className="relative z-2 grid size-[108px] place-items-center rounded-full bg-(--dash-brand-solid) text-center text-sm font-semibold leading-tight whitespace-pre-line text-(--on-brand) shadow-[0_12px_30px_color-mix(in_srgb,var(--dash-brand-solid)_40%,transparent)]">
 							{t("center")}
 						</div>
 					</div>
@@ -687,7 +687,6 @@ type FeatureConfig = {
 	id: FeatureId;
 	icon: React.ReactNode;
 	reverse?: boolean;
-	alt?: boolean;
 	demo: React.ReactNode;
 	href: string;
 };
@@ -705,70 +704,67 @@ function FeatureSection({
 
 	const bullets = [t("bullet_1"), t("bullet_2"), t("bullet_3")];
 	const headlineId = `${feature.id}-headline`;
-
 	const textDelay = index * 0.04;
 
 	return (
-		<section
+		<article
 			ref={ref}
 			aria-labelledby={headlineId}
-			className={`relative overflow-hidden py-[clamp(64px,9vw,112px)] ${feature.alt ? "home-feature-alt" : ""}`}
+			className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16 [&_.home-demo]:w-full"
 		>
-			<div className="home-wrap flex flex-col gap-[clamp(2.5rem,6vw,5.5rem)] lg:grid lg:grid-cols-2 lg:items-center">
-				<motion.div
-					className={`order-1 flex flex-col gap-7 sm:gap-8 ${feature.reverse ? "lg:order-2" : ""}`}
-					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
-					animate={isRevealed ? "visible" : "hidden"}
-					variants={sectionRevealStagger}
+			<motion.div
+				className={`flex flex-col ${feature.reverse ? "lg:order-2" : ""}`}
+				initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
+				animate={isRevealed ? "visible" : "hidden"}
+				variants={sectionRevealStagger}
+			>
+				<motion.span className="home-feature-badge" variants={reveal}>
+					<span className="home-feature-badge__icon">{feature.icon}</span>
+					{t("badge")}
+				</motion.span>
+				<motion.h3
+					id={headlineId}
+					variants={reveal}
+					className="mt-4 text-balance text-2xl font-semibold tracking-tight text-(--text-h) sm:text-3xl"
 				>
-					<motion.span className="home-feature-badge" variants={reveal}>
-						<span className="home-feature-badge__icon">{feature.icon}</span>
-						{t("badge")}
-					</motion.span>
-					<motion.h2
-						id={headlineId}
-						variants={reveal}
-						className="m-0 text-balance text-[clamp(2rem,4.4vw,3.25rem)] leading-[1.08] tracking-[-0.02em] text-(--text-h)"
-					>
-						{t("headline")}
-					</motion.h2>
-					<motion.p
-						variants={reveal}
-						className="max-w-[52ch] text-pretty text-[17px] leading-relaxed text-(--text)"
-					>
-						{t("description")}
-					</motion.p>
-					<FeatureCheckList items={bullets} />
-					<motion.div variants={reveal}>
-						<Link href={feature.href} className="home-link-arrow">
-							{t("link")}
-							<ArrowUpRight className="size-4" aria-hidden />
-						</Link>
-					</motion.div>
+					{t("headline")}
+				</motion.h3>
+				<motion.p
+					variants={reveal}
+					className="mt-7 max-w-[52ch] text-pretty text-sm leading-relaxed text-(--text) sm:mt-8"
+				>
+					{t("description")}
+				</motion.p>
+				<FeatureCheckList items={bullets} />
+				<motion.div variants={reveal} className="mt-6">
+					<Link href={feature.href} className="home-link-arrow text-sm">
+						{t("link")}
+						<ArrowUpRight className="size-[15px]" aria-hidden />
+					</Link>
 				</motion.div>
+			</motion.div>
 
-				<motion.div
-					className={`order-2 relative min-w-0 ${feature.reverse ? "lg:order-1" : ""}`}
-					initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
-					animate={isRevealed ? "visible" : "hidden"}
-					variants={{
-						...reveal,
-						visible: {
-							...reveal.visible,
-							transition: shouldAnimate
-								? {
-										duration: 0.55,
-										ease: appleRevealEase,
-										delay: 0.12 + textDelay,
-									}
-								: { duration: 0 },
-						},
-					}}
-				>
-					{feature.demo}
-				</motion.div>
-			</div>
-		</section>
+			<motion.div
+				className={`relative w-full min-w-0 ${feature.reverse ? "lg:order-1" : ""}`}
+				initial={shouldReduceMotion || !shouldAnimate ? false : "hidden"}
+				animate={isRevealed ? "visible" : "hidden"}
+				variants={{
+					...reveal,
+					visible: {
+						...reveal.visible,
+						transition: shouldAnimate
+							? {
+									duration: 0.55,
+									ease: appleRevealEase,
+									delay: 0.12 + textDelay,
+								}
+							: { duration: 0 },
+					},
+				}}
+			>
+				{feature.demo}
+			</motion.div>
+		</article>
 	);
 }
 
@@ -788,7 +784,6 @@ export default function CoreServices() {
 			id: "engineering",
 			icon: <Code2 className="size-[22px]" aria-hidden />,
 			reverse: true,
-			alt: true,
 			demo: <CodeDemo />,
 			href: "/services#custom",
 		},
@@ -802,48 +797,43 @@ export default function CoreServices() {
 			id: "devops",
 			icon: <Cloud className="size-[22px]" aria-hidden />,
 			reverse: true,
-			alt: true,
 			demo: <PipelineDemo />,
 			href: "/services#cloud",
 		},
 	];
 
 	return (
-		<>
-			<section
-				ref={ref}
-				id="services"
-				className="home-section--tight pt-[clamp(72px,10vw,120px)] pb-[clamp(40px,6vw,64px)]"
-			>
-				<div className="home-wrap">
-					<motion.div
-						initial={
-							shouldReduceMotion || !shouldAnimate
-								? false
-								: sectionRevealItem.hidden
-						}
-						animate={
-							isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
-						}
-						transition={sectionItemTransition(
-							shouldAnimate,
-							0,
-							!!shouldReduceMotion,
-						)}
-					>
-						<SectionHead
-							eyebrow={t("eyebrow")}
-							headline={t("headline")}
-							description={t("description")}
-							centered
-						/>
-					</motion.div>
-				</div>
-			</section>
+		<section ref={ref} id="services" className="home-section">
+			<div className="home-wrap">
+				<motion.div
+					initial={
+						shouldReduceMotion || !shouldAnimate
+							? false
+							: sectionRevealItem.hidden
+					}
+					animate={
+						isRevealed ? sectionRevealItem.visible : sectionRevealItem.hidden
+					}
+					transition={sectionItemTransition(
+						shouldAnimate,
+						0,
+						!!shouldReduceMotion,
+					)}
+				>
+					<SectionHead
+						eyebrow={t("eyebrow")}
+						headline={t("headline")}
+						description={t("description")}
+						descriptionClassName="mt-7 text-sm sm:mt-8"
+					/>
+				</motion.div>
 
-			{features.map((feature, index) => (
-				<FeatureSection key={feature.id} feature={feature} index={index} />
-			))}
-		</>
+				<div className="mt-14 space-y-20 lg:mt-20 lg:space-y-28">
+					{features.map((feature, index) => (
+						<FeatureSection key={feature.id} feature={feature} index={index} />
+					))}
+				</div>
+			</div>
+		</section>
 	);
 }

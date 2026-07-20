@@ -1,6 +1,6 @@
 "use client";
 
-import { Clock, Lightbulb, Percent, SlidersHorizontal } from "lucide-react";
+import { BadgeCheck, Gauge, Layers } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useCopy } from "@/lib/copy";
 import {
@@ -10,17 +10,19 @@ import {
 } from "@/hooks/use-section-reveal";
 import SectionHead from "./section-head";
 
-const BOTTOM_CARDS = [
-	{ id: "savings", icon: Clock },
-	{ id: "flex", icon: Percent, flexKeys: true },
-	{ id: "control", icon: SlidersHorizontal },
-	{ id: "expertise", icon: Lightbulb },
+const PILLARS = [
+	{ id: "efficiency", icon: Gauge },
+	{ id: "flexibility", icon: Layers },
+	{ id: "expertise", icon: BadgeCheck },
 ] as const;
+
+const YEARS_SINCE = 2019;
 
 export default function WhyChooseUs() {
 	const t = useCopy("home.why_choose");
 	const { ref, isRevealed, shouldAnimate } = useSectionReveal();
 	const shouldReduceMotion = useReducedMotion();
+	const yearsValue = `${new Date().getFullYear() - YEARS_SINCE}+`;
 
 	const motionProps = (delay: number) => ({
 		initial:
@@ -36,74 +38,57 @@ export default function WhyChooseUs() {
 	return (
 		<section ref={ref} className="home-section home-feature-alt">
 			<div className="home-wrap">
-				<SectionHead
-					eyebrow={t("eyebrow")}
-					headline={t("headline")}
-					description={t("description")}
-					centered
-				/>
+				<motion.div {...motionProps(0)}>
+					<SectionHead
+						eyebrow={t("eyebrow")}
+						headline={t("headline")}
+						description={t("description")}
+						centered
+						className="max-sm:mx-0 max-sm:max-w-none max-sm:text-left [&_.home-eyebrow]:max-sm:justify-start [&_p]:max-sm:mx-0"
+						descriptionClassName="text-[0.9375rem] sm:text-base"
+					/>
+				</motion.div>
 
-				<div className="home-section-lead grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4">
-					<motion.article
-						{...motionProps(0)}
-						className="home-vp-card home-vp-card--tint home-card-body order-1 sm:col-span-2 lg:order-0 lg:col-span-3"
-					>
-						<span className="inline-block w-fit rounded-full bg-(--text-h) px-3.5 py-1.5 text-[13px] font-semibold text-(--bg)">
-							{t("value_badge")}
-						</span>
-						<p className="text-balance text-[17px] font-semibold text-(--dash-brand)">
-							{t("value_flow")}
-						</p>
-						<p className="max-w-[58ch] text-pretty text-[15px] leading-relaxed text-(--text-h)/80">
-							{t("value_description")}
-						</p>
-					</motion.article>
-
-					<motion.article
-						{...motionProps(0.08)}
-						className="home-vp-card home-vp-card--dark home-card-body order-last sm:col-span-2 lg:order-0 lg:col-span-1"
-					>
-						<p className="font-(family-name:--mono) text-[clamp(2rem,4vw,2.75rem)] font-semibold tabular-nums tracking-[-0.03em] text-(--on-brand)">
-							{`${new Date().getFullYear() - 2019}+`}
-						</p>
-						<p className="font-semibold text-balance text-(--on-brand)">
-							{t("years_title")}
-						</p>
-						<p className="text-pretty text-sm leading-relaxed text-(--on-brand)/70">
-							{t("years_description")}
-						</p>
-					</motion.article>
-
-					{BOTTOM_CARDS.map(({ id, icon: Icon, ...rest }, index) => {
-						const flexKeys = "flexKeys" in rest;
-						const pin = flexKeys ? t("flex_value") : t(`cards.${id}.pin`);
-						const title = flexKeys ? t("flex_title") : t(`cards.${id}.title`);
-						const description = flexKeys
-							? t("flex_description")
-							: t(`cards.${id}.description`);
-
-						return (
-							<motion.article
-								key={id}
-								{...motionProps(0.16 + index * 0.08)}
-								className="home-ecard home-card-body order-2 lg:order-0"
-							>
-								<div className="home-ecard-icon">
-									<Icon className="size-5.5" aria-hidden />
-								</div>
-								<p className="text-xs font-semibold tabular-nums text-(--dash-brand)">
-									{pin}
-								</p>
-								<h3 className="text-xl font-semibold text-balance tracking-[-0.01em] text-(--text-h)">
-									{title}
-								</h3>
-								<p className="text-pretty text-sm leading-relaxed text-(--text)">
-									{description}
-								</p>
-							</motion.article>
-						);
-					})}
+				<div className="home-section-lead why-choose-pillars">
+					{PILLARS.map(({ id, icon: Icon }, index) => (
+						<motion.article
+							key={id}
+							{...motionProps(0.08 + index * 0.08)}
+							className="why-choose-pillar"
+						>
+							<div className="home-ecard-icon shrink-0">
+								<Icon className="size-[18px]" aria-hidden />
+							</div>
+							<div className="min-w-0">
+								<h3>{t(`pillars.${id}.title`)}</h3>
+								<p>{t(`pillars.${id}.description`)}</p>
+							</div>
+						</motion.article>
+					))}
 				</div>
+
+				<motion.div {...motionProps(0.36)} className="why-choose-foot">
+					<div className="why-choose-stat">
+						<span className="why-choose-stat__value font-(family-name:--mono) tabular-nums">
+							{yearsValue}
+						</span>
+						<div className="min-w-0">
+							<p className="why-choose-stat__title">{t("years_title")}</p>
+							<p className="why-choose-stat__desc">{t("years_description")}</p>
+						</div>
+					</div>
+					<div className="why-choose-stat">
+						<span className="why-choose-stat__value font-(family-name:--mono) tabular-nums">
+							{t("projects_value")}
+						</span>
+						<div className="min-w-0">
+							<p className="why-choose-stat__title">{t("projects_title")}</p>
+							<p className="why-choose-stat__desc">
+								{t("projects_description")}
+							</p>
+						</div>
+					</div>
+				</motion.div>
 			</div>
 		</section>
 	);

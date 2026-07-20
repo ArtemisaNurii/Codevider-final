@@ -62,8 +62,8 @@ export default function RotatingWord({
 
 	if (staticMode) {
 		return (
-			<span className="relative mt-1 inline-grid font-sans text-(--hero-accent-text)">
-				<span className="col-start-1 row-start-1 overflow-hidden py-1 px-2">
+			<span className="relative inline-grid align-bottom font-sans text-(--hero-accent-text)">
+				<span className="col-start-1 row-start-1 overflow-hidden">
 					<span className="block italic font-serif font-bold">{words[0]}</span>
 				</span>
 			</span>
@@ -72,10 +72,10 @@ export default function RotatingWord({
 
 	return (
 		<span
-			className="relative mt-1 inline-grid font-sans text-(--hero-accent-text)"
+			className="relative inline-grid align-bottom font-sans text-(--hero-accent-text)"
 			aria-live="polite"
 		>
-			<span className="col-start-1 row-start-1 inline-grid px-2" aria-hidden>
+			<span className="col-start-1 row-start-1 inline-grid" aria-hidden>
 				{shuffled.map((w) => (
 					<span
 						key={w}
@@ -86,7 +86,7 @@ export default function RotatingWord({
 				))}
 			</span>
 
-			<span className="col-start-1 row-start-1 overflow-hidden py-1 px-2">
+			<span className="col-start-1 row-start-1 overflow-hidden">
 				<AnimatePresence mode="wait" initial={false}>
 					<motion.span
 						key={word}
